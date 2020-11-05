@@ -1,4 +1,4 @@
-# User Microservice
+# Booking Microservice
 
 ## Running the Application
 

@@ -1,4 +1,4 @@
-# User Microservice
+# Notifications Microservice
 
 ## Running the Application
 

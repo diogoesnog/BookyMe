@@ -1,4 +1,4 @@
-# User Microservice
+# Stores Microservice
 
 ## Running the Application
 

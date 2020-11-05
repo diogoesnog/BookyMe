@@ -1,4 +1,4 @@
-# User Microservice
+# Gateway Microservice
 
 ## Running the Application
 
