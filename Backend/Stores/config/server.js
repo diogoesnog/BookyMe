@@ -14,6 +14,18 @@ const logger = require('morgan');
 const cors = require('cors');
 // Swagger API Documentation
 const swaggerUI = require('swagger-ui-express');
+// MongoDB
+const mongoose      = require('mongoose');
+
+mongoose.connect(process.env.MONGO_CONNECTION, {
+    useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
+    .then(() => {
+        console.log("Connection to MongoDB successfully established")
+    })
+    .catch(() => {
+        throw new Error("Could not establish connection to MongoDB");
+    });
+
 
 // Dev or Production
 const env = process.argv[2];
