@@ -10,6 +10,6 @@ module.exports.create = ({name, category, description}) => {
         category: category,
         description: description
     });
-    
+
     return newStore.save();
 }
