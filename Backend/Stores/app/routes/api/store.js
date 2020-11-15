@@ -3,15 +3,22 @@ const app = express.Router();
 const Stores = require('../../controllers/stores');
 const Response = require('rapid-status');
 
-app.get('/', (req, res) => {
 
-    Stores.get()
+
+app.get('/', async (req, res) => {
+
+    let response;
+
+    let query = req.query;
+    console.log(query);
+
+    Stores.get(query)
         .then(data => {
-            let response = Response.OK(data);
+            response = Response.OK(data);
 
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            let response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
             res.status(response.status).jsonp(response);
     });
 
@@ -19,7 +26,7 @@ app.get('/', (req, res) => {
 
 // TODO: protection middleware
 app.post('/', (req, res) => {
-
+    let response;
     const store = {
         name: req.body.name,
         category: req.body.category,
@@ -29,9 +36,11 @@ app.post('/', (req, res) => {
 
     Stores.create(store)
         .then(data => {
-            res.status(201).jsonp(data);
+            response = Response.CREATED(data);
+            res.status(response.status).jsonp(response);
         }).catch(err => {
-            res.status(500).jsonp(err);
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
         });
 });
 

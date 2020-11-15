@@ -37,7 +37,11 @@ const storeSchema = new mongoose.Schema({
         required: true,
         auto: true
     },
-
+    verified: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     logo: {
         type: image
     },
