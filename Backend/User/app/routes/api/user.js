@@ -7,7 +7,10 @@
 
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 const Users = require('../../controllers/users');
+const User = require('../../models/user');
+//const Response = require('../../models/response')
 
 // Os pedidos do tipo GET não têm body. Devem servir apenas para obter recursos
 router.get('/', (req, res) => {
@@ -27,18 +30,43 @@ router.get('/', (req, res) => {
 });
 
 // Os pedidos POST trazem um body no request. Devem servir apenas para criar novos recursos
-router.post('/', (req, res) => {
-    const user = req.body;
+/**
+ * Register a new username
+ */
+router.post('/register', (req, res) => {
 
-    res.status(201).jsonp(user);
-    // res.jsonp({title: "Titulo", message: "olá"});
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if (err) console.log(err);
+
+        const user = req.body;
+        user.password = hash;
+
+        Users.createUser(user)
+        .then(dataTemp => {
+            let data = dataTemp.toObject()
+            delete data.password
+            res.status(201).jsonp(data)
+        })
+        .catch( err => res.status(500).jsonp(err));
+    })
 });
 
+
+/**
+ * Returns all users in db
+ * Only for test purpose
+ */
+router.get('/findAll', (req, res) => {
+    Users.getUsers()
+        .then(data => {res.status(201).jsonp(data);})
+        .catch(err => {res.status(500).jsonp(err);})
+})
+
 // Os pedidos PUT trazem um body no request. Devem servir apenas para atualizar recursos
-/*router.put('/', (req, res) => { });*/
+/*router.put('/', (req, res) => { }); -> pass (antiga e nova), atualizar info -> tudoo que envolva a conta tem de ter middleware*/
 
 // Os pedidos PATCH trazem um body no request. Devem servir apenas para atualizar um recurso
-/*router.patch('/', (req, res) => { });*/
+/*router.patch('/', (req, res) => { }); -> faorites*/
 
 
 // Os pedidos PATCH trazem um body no request. Devem servir apenas para atualizar um recurso
