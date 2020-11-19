@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Users = require('../../controllers/users');
+const User = require('../../models/user');
+//const Response = require('../../models/response')
 
 
 router.get('/', (req, res) => {
@@ -42,6 +44,7 @@ router.post('/register', (req, res) => {
         .catch( err => res.status(500).jsonp(err));
     })
 });
+
 
 /**
  * Authenticate a user
@@ -86,6 +89,7 @@ router.post('/authentication', async (req, res) => {
         res.status(500).jsonp({title: "Authentication Failed", message: "Authentication has failed. Please verify whether user and/or password are correct", error: err});
     }
 })
+
 
 
 /**
