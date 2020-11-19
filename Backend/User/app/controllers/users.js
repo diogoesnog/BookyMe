@@ -8,6 +8,9 @@ module.exports.createUser = ({name, username, email, address, password, type}) =
     return user.save();
 }
 
+module.exports.searchWithEmail = (email) => {
+    return User.findOne({email: email });
+}
 /* 
 module.exports.login()
 
