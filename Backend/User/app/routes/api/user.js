@@ -1,18 +1,12 @@
-/**
- * Nota: é boa prática enviar sempre que possível o código do estado do pedido HTTP
- * podem consultar a seguinte cheat sheet em caso de dúvida
- * https://kapeli.com/cheat_sheets/HTTP_Status_Codes.docset/Contents/Resources/Documents/index
- * @type {e | (() => Express)}
- */
-
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Users = require('../../controllers/users');
 const User = require('../../models/user');
 //const Response = require('../../models/response')
 
-// Os pedidos do tipo GET não têm body. Devem servir apenas para obter recursos
+
 router.get('/', (req, res) => {
 
     /**
@@ -29,7 +23,7 @@ router.get('/', (req, res) => {
     res.status(200).json({title: "Title", message: "Some message...", queries: queries});
 });
 
-// Os pedidos POST trazem um body no request. Devem servir apenas para criar novos recursos
+
 /**
  * Register a new username
  */
@@ -50,6 +44,61 @@ router.post('/register', (req, res) => {
         .catch( err => res.status(500).jsonp(err));
     })
 });
+
+
+/**
+ * Authenticate a user
+ */
+router.post('/authentication', async (req, res) => {
+    
+    const userAuth = {
+        email: req.body.email,
+        password: req.body.password
+    };
+
+    try{
+        let user = await Users.searchWithEmail(userAuth.email);
+        
+        if(!user)
+            res.status(401).jsonp({title: "Error", message: `Email ${userAuth.email} does not exists`});
+        else {
+            let result = await bcrypt.compare(userAuth.password, user.password);
+
+            if (!result) res.status(401).jsonp( {title: "error", message: "Invalid password!"} );
+            else {
+                const token = jwt.sign({
+                    user: user._id
+                    },
+                    process.env.AUTH_SECRET,
+                    {expiresIn: process.env.AUTH_TOKEN_TIMETOLIVE},
+                    {algorithm: process.env.AUTH_TOKEN_ALGORITHM}
+                );
+
+                const cookieOptions = {
+                    httpOnly: true
+                };
+
+                res.cookie('userToken', token, cookieOptions);
+
+                res.status(201).jsonp( {title: "Success!", message: "User logged on successfully", user: {
+                    email: user.email,
+                    username: user.username,
+                    name: user.name,
+                    address: user.address,
+                    favorites: user.favorites,
+                    avatar: user.avatar,
+                    reviews: user.reviews,
+                    bookings: user.bookings,
+                    type: user.type,
+                    stores: user.stores
+                }});
+            }
+        }
+    } catch(err){
+        res.status(500).jsonp({title: "Authentication Failed", message: "Authentication has failed. Please verify whether user and/or password are correct", error: err});
+    }
+})
+
 
 
 /**
