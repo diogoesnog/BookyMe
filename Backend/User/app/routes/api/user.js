@@ -81,7 +81,16 @@ router.post('/authentication', async (req, res) => {
                 res.cookie('userToken', token, cookieOptions);
 
                 res.status(201).jsonp( {title: "Success!", message: "User logged on successfully", user: {
-                    email: user.email
+                    email: user.email,
+                    username: user.username,
+                    name: user.name,
+                    address: user.address,
+                    favorites: user.favorites,
+                    avatar: user.avatar,
+                    reviews: user.reviews,
+                    bookings: user.bookings,
+                    type: user.type,
+                    stores: user.stores
                 }});
             }
         }
