@@ -58,26 +58,21 @@ router.post('/authentication', async (req, res) => {
         password: req.body.password
     };
 
-    try{
+    try {
         let user = await Users.searchWithEmail(userAuth.email);
         
         if(!user) {
-            response = Response.UNAUTHORIZED(null, `${userAuth.email} does not match our records`);
-
-            res.status(response.status).jsonp(response);
+            response = Response.UNAUTHORIZED(undefined, `${userAuth.email} does not match our records`);
         }
         else {
             let result = await bcrypt.compare(userAuth.password, user.password);
 
-            if (!result) res.status(401).jsonp( {title: "error", message: "Invalid password!"} );
+            if (!result)
+                response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
             else {
-                const token = jwt.sign({
-                    user: user._id
-                    },
-                    process.env.AUTH_SECRET,
+                const token = jwt.sign({ user: user._id }, process.env.AUTH_SECRET,
                     {expiresIn: process.env.AUTH_TOKEN_TIMETOLIVE},
-                    {algorithm: process.env.AUTH_TOKEN_ALGORITHM}
-                );
+                    {algorithm: process.env.AUTH_TOKEN_ALGORITHM});
 
                 const cookieOptions = {
                     httpOnly: true
@@ -99,10 +94,10 @@ router.post('/authentication', async (req, res) => {
                         stores: user.stores
                     }
                 });
-
-                res.status(response.status).jsonp(response);
             }
         }
+
+        res.status(response.status).jsonp(response);
     } catch(err){
         response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
