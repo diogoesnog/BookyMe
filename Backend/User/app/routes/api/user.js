@@ -3,9 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Users = require('../../controllers/users');
-const User = require('../../models/user');
-//const Response = require('../../models/response')
-
+const Response = require('rapid-status');
 
 router.get('/', (req, res) => {
 
@@ -28,7 +26,7 @@ router.get('/', (req, res) => {
  * Register a new username
  */
 router.post('/register', (req, res) => {
-
+    let response;
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) console.log(err);
 
@@ -39,9 +37,13 @@ router.post('/register', (req, res) => {
         .then(dataTemp => {
             let data = dataTemp.toObject()
             delete data.password
-            res.status(201).jsonp(data)
+            response = Response.CREATED(data);
+            res.status(response.status).jsonp(response)
         })
-        .catch( err => res.status(500).jsonp(err));
+        .catch( err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response)
+        });
     })
 });
 
@@ -50,7 +52,7 @@ router.post('/register', (req, res) => {
  * Authenticate a user
  */
 router.post('/authentication', async (req, res) => {
-    
+    let response;
     const userAuth = {
         email: req.body.email,
         password: req.body.password
@@ -59,8 +61,11 @@ router.post('/authentication', async (req, res) => {
     try{
         let user = await Users.searchWithEmail(userAuth.email);
         
-        if(!user)
-            res.status(401).jsonp({title: "Error", message: `Email ${userAuth.email} does not exists`});
+        if(!user) {
+            response = Response.UNAUTHORIZED(null, `${userAuth.email} does not match our records`);
+
+            res.status(response.status).jsonp(response);
+        }
         else {
             let result = await bcrypt.compare(userAuth.password, user.password);
 
@@ -80,22 +85,27 @@ router.post('/authentication', async (req, res) => {
 
                 res.cookie('userToken', token, cookieOptions);
 
-                res.status(201).jsonp( {title: "Success!", message: "User logged on successfully", user: {
-                    email: user.email,
-                    username: user.username,
-                    name: user.name,
-                    address: user.address,
-                    favorites: user.favorites,
-                    avatar: user.avatar,
-                    reviews: user.reviews,
-                    bookings: user.bookings,
-                    type: user.type,
-                    stores: user.stores
-                }});
+                response = Response.CREATED({
+                    user: {
+                        email: user.email,
+                        username: user.username,
+                        name: user.name,
+                        address: user.address,
+                        favorites: user.favorites,
+                        avatar: user.avatar,
+                        reviews: user.reviews,
+                        bookings: user.bookings,
+                        type: user.type,
+                        stores: user.stores
+                    }
+                });
+
+                res.status(response.status).jsonp(response);
             }
         }
     } catch(err){
-        res.status(500).jsonp({title: "Authentication Failed", message: "Authentication has failed. Please verify whether user and/or password are correct", error: err});
+        response = Response.INTERNAL_ERROR(err);
+        res.status(response.status).jsonp(response);
     }
 })
 
