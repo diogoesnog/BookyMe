@@ -9,7 +9,7 @@ router.post('/register', validator([
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
 
-    fetch("http://localhost:5000/users/register", {
+    fetch(`${process.env.USER_SERVICE_ENDPOINT}/user/register`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
