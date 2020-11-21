@@ -29,7 +29,7 @@ router.post('/login', validator([
 
     User.login(body)
         .then(data => {
-            res.setHeader('Authentication', data.cookies[0]);
+            res.setHeader('Authorization', data.cookies[0]);
             res.status(data.response.status).jsonp(data.response);
         }).catch(err => {
 
