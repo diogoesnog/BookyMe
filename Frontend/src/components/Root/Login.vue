@@ -1,7 +1,7 @@
 <template>
   <div>
+    <h1>Login</h1>
     <q-form>
-
       <q-input label="E-mail Address" v-model="user.email" type="text"></q-input>
       <q-input label="Password" v-model="user.password" type="password"></q-input>
       <br/>
