@@ -2,6 +2,8 @@
   <div>
     <h1>Login</h1>
     <LoginForm/>
+    <br/>
+    <q-btn push color="primary" style="width: 100%">Register</q-btn>
   </div>
 </template>
 

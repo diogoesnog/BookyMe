@@ -4,8 +4,9 @@
 
       <q-input label="E-mail Address" v-model="user.email" type="text"></q-input>
       <q-input label="Password" v-model="user.password" type="password"></q-input>
+      <br/>
+      <q-btn push color="primary" @click="handleLogin" style="width: 100%">Login</q-btn>
 
-      <q-btn push color="primary" @click="handleLogin">Login</q-btn>
     </q-form>
   </div>
 </template>
@@ -13,7 +14,7 @@
 <script>
 import User from '../../models/User';
 import Service from '../../services/auth.service';
-
+import { Notify } from 'quasar';
 export default {
   name: "Login",
   data() {
@@ -29,16 +30,23 @@ export default {
       e.preventDefault();
 
       Service.login(this.user)
-        .then(response => {
+        .then(() => {
           // TODO: Emit Alert to maximum root
           console.group("Login successful");
-          console.log(response);
+
+          this.$q.notify('Message');
+
           console.groupEnd();
 
         }).catch(err => {
           // TODO: Emit Alert to maximum root
-          console.groupEnd("Login Error");
-          console.log(err);
+          console.group("Login Error");
+          // let data = err.response.data;
+
+          this.$q.notify({
+            type: 'negative',
+            message: 'Failed to Login'
+          });
           console.groupEnd();
       });
     }
