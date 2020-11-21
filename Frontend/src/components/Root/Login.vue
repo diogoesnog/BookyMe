@@ -3,7 +3,7 @@
     <q-form>
 
       <q-input label="E-mail Address" v-model="user.email" type="text"></q-input>
-      <q-input label="Password" v-model="user.username" type="password"></q-input>
+      <q-input label="Password" v-model="user.password" type="password"></q-input>
 
       <q-btn push color="primary" @click="handleLogin">Login</q-btn>
     </q-form>
