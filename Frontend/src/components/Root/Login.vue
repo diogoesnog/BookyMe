@@ -30,13 +30,13 @@ export default {
 
       Service.login(this.user)
         .then(response => {
-          // let data = response.data;
-
+          // TODO: Emit Alert to maximum root
           console.group("Login successful");
-          // console.log(data);
+          console.log(response);
           console.groupEnd();
 
         }).catch(err => {
+          // TODO: Emit Alert to maximum root
           console.groupEnd("Login Error");
           console.log(err);
           console.groupEnd();

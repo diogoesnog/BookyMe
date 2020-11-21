@@ -1,23 +1,24 @@
-import cookie from 'vue-cookies';
+import cookies from 'vue-cookies';
 import axios from 'axios';
 
 export default {
   login: (user) => {
     return axios.post(`${process.env.API_ENDPOINT}/users/login`, user)
       .then(response => {
-        // TODO: Check headers for Token
-        console.log(response.data);
+        let headers = response.headers;
+        let data = response.data;
 
-        console.log(response.headers);
-        // TODO: Save common data on local storage
-      }).catch(err => {
-        // TODO: Handle Error
-        console.log(err.response);
+        let cookie = headers.Authorization || headers.authorization;
+
+        cookies.set('Authorization', cookie);
+
+        localStorage.setItem('user', JSON.stringify(data));
+
       });
   },
 
   logout: () => {
-    cookie.remove('userToken');
+    cookies.remove('Authorization');
     // TODO: Redirect to login
   }
 }
