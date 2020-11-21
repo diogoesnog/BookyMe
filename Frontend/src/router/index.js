@@ -1,9 +1,11 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 
-import routes from './routes'
+import VueRouter from 'vue-router';
+import routes from './routes';
 
-Vue.use(VueRouter)
+import cookies from 'vue-cookies';
+
+Vue.use(VueRouter);
 
 /*
  * If not building with SSR mode, you can
@@ -18,12 +20,27 @@ export default function () {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes,
-
     // Leave these as they are and change in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
+  });
+
+  // Navigation Guards
+  Router.beforeEach((to, from, next) => {
+    console.log(to);
+
+    if(to.matched.some(record => record.meta.requiresAuth) &&
+        cookies.get('Authorization') == null) {
+
+          if(cookies.get('Authorization') === null) {
+            console.log("Unauthorized");
+            next('/');
+          }
+    } else {
+      next();
+    }
   });
 
   return Router;

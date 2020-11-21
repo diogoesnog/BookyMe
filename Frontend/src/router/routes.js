@@ -3,11 +3,17 @@ const routes = [
   {
     path: '/',
     component: () => import('../views/Login.vue'),
-    /*children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ]*/
+    meta: {
+      requiresAuth: false
+    }
   },
-
+  {
+    path: '/home',
+    component: () => import('../views/Home'),
+    meta: {
+      requiresAuth: true
+    }
+  }
   // Always leave this as last one,
   // but you can also remove it
   //{
