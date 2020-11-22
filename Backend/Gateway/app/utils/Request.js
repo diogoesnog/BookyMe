@@ -32,8 +32,6 @@ class Request {
 
     _request(method) {
         return new Promise((resolve, reject) => {
-            let bodyStr = JSON.stringify(this.body);
-            console.log(bodyStr);
             fetch(this.url, {
                 method: method,
                 headers: {

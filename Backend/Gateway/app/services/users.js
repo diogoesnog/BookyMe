@@ -1,5 +1,3 @@
-// TODO: Build a nodeJS fetch wrapper and replace axios
-// const axios = require('axios');
 const Request = require('../utils/Request');
 
 module.exports.login = (user) => {

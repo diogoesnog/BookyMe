@@ -20,15 +20,16 @@ router.post('/register', validator([
 router.post('/login', validator([
     'email', 'password'
 ]), (req, res) => {
-    let body = req.body;
+    let body = JSON.stringify(req.body);
 
     User.login(body)
-        .then(data => {
-            res.setHeader('Authorization', data.cookies[0]);
-            res.status(data.response.status).jsonp(data.response);
+        .then(response => {
+            console.log(response);
+            res.setHeader('Authorization', response.headers.get('authorization'));
+
+            res.status(response.status).jsonp(response.data);
         }).catch(err => {
-            let status = err.status || 500;
-            res.status(status).jsonp(err);
+            res.status(err.status).jsonp(err.data);
         });
 });
 
