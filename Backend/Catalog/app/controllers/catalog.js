@@ -1,1 +1,0 @@
-const catalog = require('../models/catalog');

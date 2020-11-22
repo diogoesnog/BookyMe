@@ -19,6 +19,28 @@ const image = new mongoose.Schema({
     }
 })
 
+const catalog = new mongoose.Schema({
+    _id: {
+        type: mongoose.ObjectId,
+        auto: true,
+        required: true
+    },
+    product: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number
+    },
+    description: {
+        type: String
+    },
+    image: {
+        type: image
+    }
+ 
+ });
+
 const plant = new mongoose.Schema({
     _id: {
         type: mongoose.ObjectId,
@@ -41,10 +63,10 @@ const day = new mongoose.Schema({
         type: String,
         required: true
     },
-    horaAbertura: {
+    openingHour: {
         type: Number
     },
-    horaFecho: {
+    closingHour: {
         type: Number
     }
 })
@@ -122,8 +144,11 @@ const storeSchema = new mongoose.Schema({
 
     reviews: {
         type: [review]
-    }
+    },
 
+    catalog: {
+        type: [catalog]
+    }
 
 });
 
