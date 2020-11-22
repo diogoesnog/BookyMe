@@ -78,7 +78,7 @@ router.post('/authentication', async (req, res) => {
                     httpOnly: true
                 };
 
-                res.cookie('userToken', token, cookieOptions);
+                res.cookie('Authentication', token, cookieOptions);
 
                 response = Response.CREATED({
                     user: {
