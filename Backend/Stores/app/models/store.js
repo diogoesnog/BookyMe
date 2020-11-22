@@ -31,6 +31,46 @@ const plant = new mongoose.Schema({
     }
 })
 
+const day = new mongoose.Schema({
+    _id: {
+        type: mongoose.ObjectId,
+        auto: true,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    horaAbertura: {
+        type: Number
+    },
+    horaFecho: {
+        type: Number
+    }
+})
+
+
+const review = new mongoose.Schema({
+    _id: {
+        type: mongoose.ObjectId,
+        auto: true,
+        required: true
+    },
+    user: {
+        type: String,
+        required: true
+    },
+    comment: {
+        type: String,
+        required: true
+    },
+    data: {
+        type: Date,
+        required: true
+    }
+})
+
+
 const storeSchema = new mongoose.Schema({
     _id: {
         type: mongoose.ObjectId,
@@ -68,7 +108,23 @@ const storeSchema = new mongoose.Schema({
         default: false
     },
 
-    plants: [plant]
+    plants: [plant],
+
+    horario: {
+        type: [day],
+        required: true
+    },
+
+    address: {
+        type: String,
+        required: true
+    },
+
+    reviews: {
+        type: [review]
+    }
+
+
 });
 
 const Store = mongoose.model('stores', storeSchema, 'stores');
