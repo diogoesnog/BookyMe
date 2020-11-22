@@ -74,11 +74,7 @@ router.post('/authentication', async (req, res) => {
                     {expiresIn: process.env.AUTH_TOKEN_TIMETOLIVE},
                     {algorithm: process.env.AUTH_TOKEN_ALGORITHM});
 
-                const cookieOptions = {
-                    httpOnly: true
-                };
-
-                res.cookie('userToken', token, cookieOptions);
+                res.setHeader('Authorization', token);
 
                 response = Response.CREATED({
                     user: {

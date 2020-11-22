@@ -1,18 +1,16 @@
-const axios = require('axios');
+const Request = require('../utils/Request');
 
+module.exports.login = (user) => {
 
-module.exports.login = async (user) => {
+    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/authentication`);
 
-    try {
-        let res = await axios.post(`${process.env.USER_SERVICE_ENDPOINT}/user/authentication`, user);
-        let cookies = res.headers['set-cookie'];
-        let response = res.data;
+    return request.post(user);
 
-        return {
-            cookies, response
-        }
-    } catch(err) {
-        throw err.response.data;
-    }
+}
 
+module.exports.register = (user) => {
+
+    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/register`);
+
+    return request.post(user);
 }
