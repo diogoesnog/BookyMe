@@ -28,27 +28,26 @@ export default {
   methods: {
     handleLogin(e) {
       e.preventDefault();
-
+      console.group("Login Operation");
       Service.login(this.user)
         .then(() => {
-          // TODO: Emit Alert to maximum root
-          console.group("Login successful");
+          console.log("Logged On");
+          this.$q.notify({
+            type: 'positive',
+            message: 'Login Successful'
+          });
 
-          this.$q.notify('Message');
-
-          console.groupEnd();
 
         }).catch(err => {
-          // TODO: Emit Alert to maximum root
-          console.group("Login Error");
-          // let data = err.response.data;
+          console.log("Login Error");
 
           this.$q.notify({
             type: 'negative',
             message: 'Failed to Login'
           });
-          console.groupEnd();
       });
+      console.groupEnd();
+
     }
   }
 }
