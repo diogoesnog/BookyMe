@@ -36,6 +36,7 @@ export default {
             message: 'Login Successful'
           });
 
+          this.$router.push({ name: 'Home' })
 
         }).catch(err => {
           console.log("Login Error");

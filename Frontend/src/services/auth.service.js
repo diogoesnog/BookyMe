@@ -1,4 +1,5 @@
 // TODO: Try take advantage of fetch instead of axios
+// TODO: Try use Vuex instead of localStorage for client memory persistence
 import cookies from 'vue-cookies';
 import axios from 'axios';
 
