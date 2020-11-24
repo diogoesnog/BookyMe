@@ -6,6 +6,9 @@
   "author": "",
   "private": true,
   "scripts": {
+    "dev-browser": "quasar dev",
+    "dev-ios": "quasar dev -m ios",
+    "dev-android": "quasar dev -m android",
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
