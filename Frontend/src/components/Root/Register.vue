@@ -33,9 +33,18 @@ export default {
         .then(response => {
           let data = response.data;
           console.log("Sucess");
-          console.table(data);
+          this.$q.notify({
+            type: 'positive',
+            message: `Regist Successful. New user created with id ${data.data._id}`
+          });
         })
-        .catch(err => console.log(`Error ${err}`))
+        .catch(err => {
+          console.log(`Error ${err}`);
+          this.$q.notify({
+            type: 'negative',
+            message: 'Failed to Regist'
+          });
+        })
       console.groupEnd();
     }
   }
