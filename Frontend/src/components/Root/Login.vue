@@ -14,7 +14,6 @@
 <script>
 import User from '../../models/User';
 import Service from '../../services/auth.service';
-import { Notify } from 'quasar';
 export default {
   name: "Login",
   data() {
