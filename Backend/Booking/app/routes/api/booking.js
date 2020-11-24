@@ -28,4 +28,12 @@ app.post('/', (req, res) => {
         });
 });
 
+app.delete('/:id', (req, res) => {
+    Booking.cancelBookings(req.params.id)
+        .then(data => {
+            res.status(200).jsonp(data);
+        })
+        .catch(err => res.status(400).jsonp(err));
+});
+
 module.exports = app;
