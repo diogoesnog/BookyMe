@@ -1,26 +1,79 @@
-# Frontend
+# Frontend - Client App
 
-A Quasar Framework app
+The Frontend App allows user to search for stores and perform booking operations. It can be targeted for different environments, bellow there's information on how to install and build.
 
-## Install the dependencies
+### Install the NodeJS dependencies
+
 ```bash
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Install Quasar CLI Globally
+
+Quasar CLI might be useful to add new available packages and build operations. To do such:
+
+```bash
+sudo npm install -g @quasar/cli
+```
+
+### Start as a Web App (hot-code reloading, error reporting, etc.)
+
+If the App has been successfully built, a new webpage will be opened with the Default Browser.
+
 ```bash
 quasar dev
 ```
 
-### Lint the files
+### Start App with Mobile Simulator
+
+In order to run the App targeted for a mobile simulator, Cordova and a Simulator must be installed
+
+#### Install Cordova Globally
+
 ```bash
-npm run lint
+sudo npm install -g cordova
 ```
 
-### Build the app for production
+### Run for iOS
+
+````bash
+quasar dev -m ios
+````
+
+### Run for Android
+
 ```bash
-quasar build
+quasar dev -m android
 ```
 
-### Customize the configuration
+
+
+### Build the App for Production
+
+* Browser
+
+```bash
+quasar build 
+```
+
+* iOS
+
+```bash
+quasar build -m ios
+```
+
+* Android
+
+```bash
+quasar build -m android
+```
+
+
+
+## Customize the Configuration
+
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+
+## Quasar Documentation
+
+See [Quasar Dev](https://quasar.dev/introduction-to-quasar)
