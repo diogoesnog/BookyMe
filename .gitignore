@@ -125,4 +125,4 @@ dist
 .DS_STORE
 
 # VS Code personal files
-.vscode
+# .vscode
