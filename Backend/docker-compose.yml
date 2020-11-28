@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+
+  # Server Interfaces
+  backend:
+    container_name: bookyme-gateway
+    restart: always
+    env_file: 
+      - ./Environment/Gateway.env
+    build: ./Gateway
+    ports: 
+      - "5000:5000"
+    volumes:
+      - /backend/gateway
+    depends_on: 
+      - userservice
+
+  userservice:
+    container_name: user-service
+    restart: always
+    env_file:
+      - ./Environment/UserService.env
+    build: ./User
+    volumes: 
+      - /backend/user
+    depends_on:
+      - mongo
+
+
+
+  # Databases
+  # TODO: Ideally, Docker should allocate one database server per server
+  mongo: 
+    container_name: user-mongo
+    image: mongo 
+    command: mongod --port 27017
+    volumes: 
+      - data-volume:/data-db
+    ports: 
+      - "27017:27017"
+
+volumes:
+  data-volume: 
