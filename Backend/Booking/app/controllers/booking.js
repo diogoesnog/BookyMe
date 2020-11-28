@@ -27,3 +27,7 @@ module.exports.cancelBookings = (id) => {
         */
     });
 };
+
+module.exports.reschedule = (id, bookingDate, serviceDate) => {
+    return Booking.findByIdAndUpdate(id,  {serviceDate: serviceDate, bookingDate: bookingDate, wasRescheduled: true});
+}

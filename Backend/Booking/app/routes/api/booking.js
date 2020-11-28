@@ -36,4 +36,16 @@ app.delete('/:id', (req, res) => {
         .catch(err => res.status(400).jsonp(err));
 });
 
+app.put('/', (req, res) => {
+    const id = req.body.id;
+    const bookingDate = new Date(Date.now());
+    const serviceDate = req.body.serviceDate;
+
+    Booking.reschedule(id, bookingDate, serviceDate)
+        .then(data => {
+            res.status(200).jsonp(data);
+        })
+        .catch(err => res.status(400).jsonp(err));
+});
+
 module.exports = app;

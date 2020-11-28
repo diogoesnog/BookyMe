@@ -10,6 +10,9 @@ const bookingSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    wasRescheduled: {
+        type: Boolean
+    },
     serviceDate: {
         type: Date,
         required: true
