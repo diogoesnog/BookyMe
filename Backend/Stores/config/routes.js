@@ -10,5 +10,6 @@ const swaggerUI = require('swagger-ui-express');
 app.use('/documentation', swaggerUI.serve, swaggerUI.setup(require('./swagger')));
 
 app.use('/stores', require('../app/routes/api/store'));
+app.use('/catalogs', require('../app/routes/api/catalog'));
 
 module.exports = app;

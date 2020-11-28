@@ -10,7 +10,7 @@ const image = new mongoose.Schema({
         type: String,
         required: true
     },
-    description: {
+    script: {
         type: String
     },
     url: {
@@ -19,27 +19,6 @@ const image = new mongoose.Schema({
     }
 })
 
-const catalog = new mongoose.Schema({
-    _id: {
-        type: mongoose.ObjectId,
-        auto: true,
-        required: true
-    },
-    product: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number
-    },
-    description: {
-        type: String
-    },
-    image: {
-        type: image
-    }
- 
- });
 
 const plant = new mongoose.Schema({
     _id: {
@@ -53,21 +32,20 @@ const plant = new mongoose.Schema({
     }
 })
 
-const day = new mongoose.Schema({
+const schedule = new mongoose.Schema({
     _id: {
         type: mongoose.ObjectId,
         auto: true,
         required: true
     },
-    name: {
-        type: String,
-        required: true
+    day: {
+        type: String
     },
     openingHour: {
-        type: Number
+        type: String
     },
     closingHour: {
-        type: Number
+        type: String
     }
 })
 
@@ -78,7 +56,7 @@ const review = new mongoose.Schema({
         auto: true,
         required: true
     },
-    user: {
+    username: {
         type: String,
         required: true
     },
@@ -86,7 +64,7 @@ const review = new mongoose.Schema({
         type: String,
         required: true
     },
-    data: {
+    date: {
         type: Date,
         required: true
     }
@@ -132,23 +110,16 @@ const storeSchema = new mongoose.Schema({
 
     plants: [plant],
 
-    horario: {
-        type: [day],
-        required: true
-    },
+    schedule: [schedule],
 
     address: {
-        type: String,
-        required: true
+        type: String
     },
 
     reviews: {
         type: [review]
     },
 
-    catalog: {
-        type: [catalog]
-    }
 
 });
 
