@@ -15,17 +15,22 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     const booking = {
         bookingDate: new Date(Date.now()),
-        serviceDate: req.body.serviceDate,
+        serviceDate: new Date(req.body.serviceDate),
         userId: req.body.userId,
         storeId: req.body.storeId
     };
 
-    Booking.createBooking(booking)
-        .then(data => {
-            res.status(200).jsonp(data);
-        }).catch(err => {
+    if (new Date(Date.now()) > booking.serviceDate) {
+        res.status(400).jsonp({msg: "Invalid Date"});
+    }
+    else {
+        Booking.createBooking(booking)
+            .then(data => {
+                res.status(200).jsonp(data);
+            }).catch(err => {
             res.status(500).jsonp(err);
         });
+    }
 });
 
 app.delete('/:id', (req, res) => {
@@ -39,13 +44,18 @@ app.delete('/:id', (req, res) => {
 app.put('/', (req, res) => {
     const id = req.body.id;
     const bookingDate = new Date(Date.now());
-    const serviceDate = req.body.serviceDate;
+    const serviceDate = new Date(req.body.serviceDate);
 
-    Booking.reschedule(id, bookingDate, serviceDate)
-        .then(data => {
-            res.status(200).jsonp(data);
-        })
-        .catch(err => res.status(400).jsonp(err));
+    if (new Date(Date.now()) > serviceDate) {
+        res.status(400).jsonp({msg: "Invalid Date"});
+    }
+    else {
+        Booking.reschedule(id, bookingDate, serviceDate)
+            .then(data => {
+                res.status(200).jsonp(data);
+            })
+            .catch(err => res.status(400).jsonp(err));
+    }
 });
 
 module.exports = app;
