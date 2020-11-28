@@ -15,7 +15,8 @@ const bookingSchema = new mongoose.Schema({
     },
     serviceDate: {
         type: Date,
-        required: true
+        required: true,
+        unique: true
     },
     userId: {
         type: String,
