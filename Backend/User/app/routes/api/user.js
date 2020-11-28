@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('../../controllers/users');
 const Response = require('rapid-status');
@@ -59,8 +59,7 @@ router.post('/authentication', async (req, res) => {
     };
 
     try {
-        let user = await Users.searchWithEmail(userAuth.email);
-        
+        let user = await Users.searchWithEmailOrUsername(userAuth.email);        
         if(!user) {
             response = Response.UNAUTHORIZED(undefined, `${userAuth.email} does not match our records`);
         }

@@ -13,12 +13,10 @@ module.exports.searchWithEmail = (email) => {
     return User.findOne({email: email });
 }
 
-/* 
-module.exports.login()
+module.exports.searchWithEmailOrUsername = (emailOrUsername) => {
+    return User.findOne({$or: [{username: emailOrUsername}, {email:emailOrUsername}]});
+}
 
-module.exports.addFavorite = ({favorite, id}) => {
-
-} */
 
 module.exports.getUsers = ( ()=> {
     return User.find();

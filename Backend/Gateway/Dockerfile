@@ -2,7 +2,7 @@
 FROM node:lts-alpine
 
 # App Directory
-WORKDIR /backend/userservice
+WORKDIR /backend/gateway
 
 # Install App dependencies
 COPY package*.json ./
@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Expose App Port
-EXPOSE 3000
+# EXPOSE 3000
 
 # Run App
-CMD [ "npm", "start" ]
+CMD [ "npm", "test" ]
