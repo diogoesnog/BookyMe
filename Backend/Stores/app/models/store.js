@@ -113,7 +113,8 @@ const storeSchema = new mongoose.Schema({
     schedule: [schedule],
 
     address: {
-        type: String
+        type: String,
+        required: true
     },
 
     reviews: {

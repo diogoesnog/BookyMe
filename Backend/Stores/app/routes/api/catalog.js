@@ -49,5 +49,37 @@ app.post('/:id', (req, res) => {
         });
 });
 
+app.delete('/store/:storeID', async (req, res) => {
+
+    
+    let response;
+    Catalogs.removeStoreCatalogs(req.params.storeID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+app.delete('/:id', async (req, res) => {
+
+    
+    let response;
+    Catalogs.removeCatalog(req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
 
 module.exports = app;

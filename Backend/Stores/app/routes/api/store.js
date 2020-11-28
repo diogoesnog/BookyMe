@@ -29,7 +29,8 @@ app.post('/', (req, res) => {
         
         name: req.body.name,
         category: req.body.category,
-        description: req.body.description
+        description: req.body.description,
+        address: req.body.address
         
     };
 
@@ -87,6 +88,54 @@ app.post('/:id/schedule', (req, res) => {
         });
 });
 
+
+
+app.post('/:id/description', async (req, res) => {
+    
+    des = req.body.description
+
+    Stores.editDescription(req.params.id,des)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+app.post('/:id/address', async (req, res) => {
+    
+    add = req.body.address
+
+    Stores.editAddress(req.params.id, add)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+
+app.delete('/:id', async (req, res) => {
+    
+    Stores.removeStore(req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
 
 
 module.exports = app;
