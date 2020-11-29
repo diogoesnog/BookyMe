@@ -10,7 +10,7 @@ const image = new mongoose.Schema({
         type: String,
         required: true
     },
-    script: {
+    subtitle: {
         type: String
     },
     url: {
@@ -19,18 +19,6 @@ const image = new mongoose.Schema({
     }
 })
 
-
-const plant = new mongoose.Schema({
-    _id: {
-        type: mongoose.ObjectId,
-        auto: true,
-        required: true
-    },
-    floor: {
-        type: Number,
-        required: true
-    }
-})
 
 const schedule = new mongoose.Schema({
     _id: {
@@ -49,26 +37,6 @@ const schedule = new mongoose.Schema({
     }
 })
 
-
-const review = new mongoose.Schema({
-    _id: {
-        type: mongoose.ObjectId,
-        auto: true,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    comment: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        required: true
-    }
-})
 
 
 const storeSchema = new mongoose.Schema({
@@ -100,15 +68,11 @@ const storeSchema = new mongoose.Schema({
         required: true
     },
 
-    images: [image],
-
     hasPlant: {
         type: Boolean,
         required: true,
         default: false
     },
-
-    plants: [plant],
 
     schedule: [schedule],
 
@@ -117,9 +81,7 @@ const storeSchema = new mongoose.Schema({
         required: true
     },
 
-    reviews: {
-        type: [review]
-    },
+    photos: [image],
 
 
 });

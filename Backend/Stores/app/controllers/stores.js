@@ -22,14 +22,17 @@ module.exports.editAddress = (id, add) => {
     return Store.updateOne({_id: id},{$set: {address: add}},{upsert: true})
 }
 
-module.exports.editLogo = (id, logo) => {
-    //return Store.updateOne({_id: id},{$set: add},{upsert: true})
+module.exports.editLogo = (id, l) => {
+    return Store.updateOne({_id: id},{$set: {logo: l}},{upsert: true})
 }
 
 module.exports.removeStore = (id) => {
     return Store.remove({_id: id})
 }
 
+module.exports.addPhoto = (id, photo) => {
+    return Store.updateOne({_id: id},{$push: {photos: photo}})
+}
 
 module.exports.create = (store) => {
     const newStore = new Store(store);

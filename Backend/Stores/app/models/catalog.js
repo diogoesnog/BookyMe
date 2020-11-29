@@ -1,21 +1,14 @@
 const mongoose = require('mongoose');
 
 const image = new mongoose.Schema({
-    _id: {
-        type: mongoose.ObjectId,
-        auto: true,
-        required: true
-    },
     title: {
-        type: String,
-        required: true
+        type: String
     },
-    script: {
+    subtitle: {
         type: String
     },
     url: {
-        type: String,
-        required: true
+        type: String
     }
 })
 
@@ -30,8 +23,7 @@ const catalogSchema = new mongoose.Schema({
         required: true
     },
     product: {
-        type: String,
-        required: true
+        type: String
     },
     price: {
         type: String

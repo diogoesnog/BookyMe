@@ -2,6 +2,9 @@ const express = require('express');
 const app = express.Router();
 const Stores = require('../../controllers/stores');
 const Response = require('rapid-status');
+const fs = require('fs');
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 
 
@@ -46,19 +49,23 @@ app.post('/', (req, res) => {
 });
 
 
-
-
-app.post('/:id/review', (req, res) => {
+app.post('/:id/logo', upload.single('logo'), async (req, res) => {
     let response;
 
-    const review = {
-        username: req.body.username,
-        comment: req.body.comment,
-        date: req.body.date
+    let oldPath = __dirname + '/../../../' + req.file.path
+    let newPath = __dirname + '/../../public/logos/' + req.params.id + req.file.originalname 
+
+    fs.rename(oldPath, newPath, function (err) {
+        if (err) throw err
+    })
+
+    const logo = {
+        title: req.body.title,
+        subtitle: req.body.subtitle,
+        url: newPath
     }
 
-
-    Stores.insertReview(req.params.id, review)
+    Stores.editLogo(req.params.id, logo)
         .then(data => {
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
@@ -68,6 +75,36 @@ app.post('/:id/review', (req, res) => {
         });
 });
 
+app.post('/:id/photos', upload.array('photo'), async (req, res) => {
+    let response;
+    var photos = []
+    for(let i=0; i < req.files.length; i++){
+        let oldPath = __dirname + '/../../../' + req.files[i].path
+        let newPath = __dirname + '/../../public/photos/' + req.params.id + req.files[i].originalname
+
+        fs.rename(oldPath, newPath, function (err) {
+            if (err) throw err
+        })
+        const photo = {
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            url: newPath
+        }
+
+        photos.push(photo)
+    }
+
+    for(i=0; i<photos.length; i++){
+        Stores.addPhoto(req.params.id, photos[i])
+            .then(data => {
+                response = Response.CREATED(data);
+                res.status(response.status).jsonp(response);
+            }).catch(err => {
+                response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            });
+    }
+});
 
 app.post('/:id/schedule', (req, res) => {
     let response;
@@ -137,5 +174,7 @@ app.delete('/:id', async (req, res) => {
 
 });
 
+
+ 
 
 module.exports = app;
