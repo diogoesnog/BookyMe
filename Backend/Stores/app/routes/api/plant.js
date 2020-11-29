@@ -32,7 +32,7 @@ app.post('/:storeID', upload.single('plant'), async (req,res) => {
     const plant = {
         storeID: req.params.storeID,
         title: req.body.title,
-        script: req.body.script,
+        subtitle: req.body.subtitle,
         url: newPath
     }
 
