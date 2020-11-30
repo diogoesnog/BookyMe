@@ -28,6 +28,18 @@ module.exports.cancelBookings = (id) => {
     });
 };
 
+module.exports.dateExists = (date, storeId) => {
+    return Booking.exists({serviceDate: date, storeId: storeId});
+};
+
+module.exports.getStoreFromID = (bookingID) => {
+    return Booking.findOne({_id: bookingID}, 'storeId')
+};
+
 module.exports.reschedule = (id, bookingDate, serviceDate) => {
-    return Booking.findByIdAndUpdate(id,  {serviceDate: serviceDate, bookingDate: bookingDate, wasRescheduled: true});
-}
+    return Booking.findByIdAndUpdate(id, {
+        serviceDate: serviceDate,
+        bookingDate: bookingDate,
+        wasRescheduled: true
+    });
+};
