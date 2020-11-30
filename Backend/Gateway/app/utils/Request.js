@@ -9,6 +9,7 @@ class Request {
         this.options = {};
         this.body = null;
         this.headers = {};
+        this.params = {};
     }
 
     get() {
@@ -29,9 +30,20 @@ class Request {
         this.headers = headers;
     }
 
+    setParams(obj) {
+        this.params = obj;
+    }
+
+    _getQueryString() {
+        return Object.keys(this.params)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(this.params[k]))
+            .join('&');
+    }
+
     _request(method) {
+        let url = `${this.url}${this._getQueryString()}`
         return new Promise((resolve, reject) => {
-            fetch(this.url, {
+            fetch(url, {
                 method: method,
                 headers: {
                     'Content-Type': 'application/json',
