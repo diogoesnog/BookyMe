@@ -1,16 +1,26 @@
 <template>
   <div>
+    <q-select
+      v-model="lang"
+      :options="langOptions"
+      :label="$t('settingsPage.language')">
+
+    </q-select>
+
     <div v-if="loginForm">
       <LoginForm/>
       <br/>
-      <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">Register</q-btn>
+      <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
+        {{ $t('authPage.register') }}
+      </q-btn>
     </div>
 
     <div v-else>
       <RegisterForm/>
-      <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">Cancel</q-btn>
+      <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
+        {{ $t('commonButtons.cancel')}}
+      </q-btn>
     </div>
-
   </div>
 </template>
 
@@ -22,7 +32,19 @@
     components: { LoginForm, RegisterForm },
     data() {
       return {
-        loginForm: true
+        loginForm: true,
+        lang: this.$i18n.locale,
+        langOptions: [
+          { value: 'en-us', label: this.$t('languages.english')},
+          { value: 'pt', label: this.$t('languages.portuguese')},
+          { value: 'fr', label: this.$t('languages.french')}
+        ]
+      }
+    },
+    watch: {
+      lang(lang) {
+        console.log("Language Change", lang);
+        this.$i18n.locale = lang.value;
       }
     }
   }

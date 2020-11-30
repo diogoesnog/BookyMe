@@ -26,9 +26,8 @@
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.6",
-    "rapid-status": "^1.0.0",
+    "rapid-status": "^1.0.2",
     "swagger-jsdoc": "^5.0.0",
-    "swagger-ui-express": "^4.1.4",
-    "wretch": "^1.7.4"
+    "swagger-ui-express": "^4.1.4"
   }
 }
