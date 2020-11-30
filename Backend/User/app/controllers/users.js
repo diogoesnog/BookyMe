@@ -16,17 +16,15 @@ module.exports.findById = (id) => {
     return User.findById(id);
 }
 
+
 module.exports.updateEmail = (id, email) =>  {
     return User.findByIdAndUpdate(id, {email: email}, {new: true});
-}
-
-module.exports.searchWithEmailOrUsername = (emailOrUsername) => {
-    return User.findOne({$or: [{username: emailOrUsername}, {email:emailOrUsername}]});
 }
 
 module.exports.updatePassword = (id, password) => {
     return User.findByIdAndUpdate(id, {password: password}, {new: true});
 }
+
 
 module.exports.getUsers = ( ()=> {
     return User.find();
