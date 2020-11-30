@@ -1,22 +1,32 @@
 const User = require('../models/user');
 
 
-// TODO:  login, atualizar infos, mudar de pass, addFavorites
+// TODO: atualizar infos, mudar de pass, addFavorites
 module.exports.createUser = ({name, username, email, address, password, type}) => {
     const user = new User({name : name, username: username, address : address, email: email, password : password, type: type});
     
     return user.save();
 }
 
+module.exports.updateNameAddress = (user,id) => {
+    return User.findByIdAndUpdate(id,user,{new:true});
+}
 
-module.exports.searchWithEmail = (email) => {
-    return User.findOne({email: email });
+module.exports.findById = (id) => {
+    return User.findById(id);
+}
+
+module.exports.updateEmail = (id, email) =>  {
+    return User.findByIdAndUpdate(id, {email: email}, {new: true});
 }
 
 module.exports.searchWithEmailOrUsername = (emailOrUsername) => {
     return User.findOne({$or: [{username: emailOrUsername}, {email:emailOrUsername}]});
 }
 
+module.exports.updatePassword = (id, password) => {
+    return User.findByIdAndUpdate(id, {password: password}, {new: true});
+}
 
 module.exports.getUsers = ( ()=> {
     return User.find();
