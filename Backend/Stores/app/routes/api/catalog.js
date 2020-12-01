@@ -44,34 +44,6 @@ app.post('/:storeID', async (req, res) => {
         });
 });
 
-app.post('/:catalogID/photo', upload.single('photo'), async (req, res) => {
-    let response;
-    
-    let oldPath = __dirname + '/../../../' + req.file.path
-    let newPath = __dirname + '/../../public/catalog/' + req.params.catalogID + req.file.originalname 
-
-    fs.rename(oldPath, newPath, function (err) {
-        if (err) throw err
-    })
-
-    const image = {
-        title: req.body.title,
-        subtitle: req.body.subtitle,
-        url: newPath
-    }
-    console.log(image)
-
-
-
-    Catalogs.editCatalogPhoto(req.params.catalogID, image)
-        .then(data => {
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        });
-});
 
 
 app.delete('/store/:storeID', async (req, res) => {

@@ -1,16 +1,5 @@
 const mongoose = require('mongoose');
 
-const image = new mongoose.Schema({
-    title: {
-        type: String
-    },
-    subtitle: {
-        type: String
-    },
-    url: {
-        type: String
-    }
-})
 
 const catalogSchema = new mongoose.Schema({
     _id: {
@@ -31,9 +20,6 @@ const catalogSchema = new mongoose.Schema({
     abstract: {
         type: String
     },
-    image: {
-        type: image
-    }
  
  });
  

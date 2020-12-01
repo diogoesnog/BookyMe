@@ -81,7 +81,23 @@ const storeSchema = new mongoose.Schema({
         required: true
     },
 
-    photos: [image],
+    latitude: {
+        type: Number,
+        default: 0.000000
+    },
+
+    longitude: {
+        type: Number,
+        default: 0.000000
+    },
+
+    rating: {
+        type: Number
+    },
+
+    picture: image,
+
+    photos: [image]
 
 
 });
