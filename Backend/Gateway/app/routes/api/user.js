@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../services/users');
 const { validator } = require('../../middlewares/checkBody');
-const swaggerDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
 
 
 /**
