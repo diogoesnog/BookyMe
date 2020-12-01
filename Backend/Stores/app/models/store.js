@@ -95,6 +95,10 @@ const storeSchema = new mongoose.Schema({
         type: Number
     },
 
+    number: {
+        type: Number
+    },
+
     picture: image,
 
     photos: [image]
