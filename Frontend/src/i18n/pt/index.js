@@ -13,7 +13,7 @@
   },
 
   // Register
-  registerPage {
+  registerPage: {
     title: "Vamos Começar!",
     description: "Cria uma conta AGORA para ter acesso a <b>Todas as Vantagens</b>",
 
