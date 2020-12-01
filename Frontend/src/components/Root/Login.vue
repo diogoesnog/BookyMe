@@ -7,11 +7,9 @@
       <q-input :label="$t('authPage.username')" v-model="user.email" type="text"></q-input>
       <q-input :label="$t('authPage.password')" v-model="user.password" type="password"></q-input>
       <br/>
-
       <q-btn push color="primary" @click="handleLogin" style="width: 100%">
         {{ $t('authPage.login') }}
       </q-btn>
-
     </q-form>
   </div>
 </template>
