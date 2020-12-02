@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        required: false
+    },
+    city: {
+        type: String
+    },
+    zipCode: {
+        type: String
     },
     password: {
         type: String,
@@ -34,7 +39,6 @@ const userSchema = new mongoose.Schema({
     },
     favorites: {
         type: [String],
-        required: false
     },
     avatar: {
         type: String,
