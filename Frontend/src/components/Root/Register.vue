@@ -5,7 +5,7 @@
     <q-form>
       <q-input :label="$t('registerPage.fullName')" v-model="user.name" type="text"></q-input>
       <q-input :label="$t('registerPage.username')" v-model="user.username" type="text"></q-input>
-      <q-input :label="$t('registerPage.emailAddress')" v-model="user.email" type="text"></q-input>
+      <q-input :label="$t('registerPage.email')" v-model="user.email" type="text"></q-input>
       <q-input :label="$t('registerPage.address')" v-model="user.address" type="text"></q-input>
       <q-input :label="$t('registerPage.city')" v-model="user.city" type="text"></q-input>
       <q-input :label="$t('registerPage.zipCode')" v-model="user.zipCode" type="text"></q-input>
