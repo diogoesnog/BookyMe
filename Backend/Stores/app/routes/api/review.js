@@ -14,7 +14,7 @@ app.get('/store/:storeID', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch store reviews');
             res.status(response.status).jsonp(response);
     });
 
@@ -39,7 +39,7 @@ app.post('/:storeID', (req, res) => {
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
+            response = Response.INTERNAL_ERROR(err, 'Could not post your review');
             res.status(response.status).jsonp(response);
         });
 });
@@ -53,7 +53,7 @@ app.delete('/store/:storeID', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete your store related reviews');
             res.status(response.status).jsonp(response);
     });
 
@@ -69,7 +69,7 @@ app.delete('/:id', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete your requested review');
             res.status(response.status).jsonp(response);
     });
 

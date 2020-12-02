@@ -21,11 +21,6 @@ const image = new mongoose.Schema({
 
 
 const schedule = new mongoose.Schema({
-    _id: {
-        type: mongoose.ObjectId,
-        auto: true,
-        required: true
-    },
     day: {
         type: String
     },

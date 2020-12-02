@@ -39,7 +39,7 @@ app.post('/:storeID', async (req, res) => {
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
+            response = Response.INTERNAL_ERROR(err, 'Could not update your store catalog');
             res.status(response.status).jsonp(response);
         });
 });
@@ -55,7 +55,7 @@ app.delete('/store/:storeID', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete your store catalog');
             res.status(response.status).jsonp(response);
     });
 
@@ -71,7 +71,7 @@ app.delete('/:id', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete your requested catalog');
             res.status(response.status).jsonp(response);
     });
 

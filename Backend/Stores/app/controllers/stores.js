@@ -10,8 +10,9 @@ module.exports.insertReview = (id, review) => {
 }
 
 
-module.exports.insertSchedule = (id, s) => {
-    return Store.updateOne({_id: id},{$push: {schedule: s}})
+module.exports.insertSchedule = (id, s) => {    
+    return Store.updateOne({_id: id, 'schedule.day': {$ne: s.day}},{$push: {schedule: s}})
+    
 }
 
 module.exports.editDescription = (id, des) => {
@@ -29,10 +30,18 @@ module.exports.editLogo = (id, l) => {
 module.exports.removeStore = (id) => {
     return Store.remove({_id: id})
 }
-
-module.exports.addPhoto = (id, photo) => {
-    return Store.updateOne({_id: id},{$push: {photos: photo}})
+module.exports.editPicture = (id, pic) => {
+    return Store.updateOne({_id: id},{$set: {picture: pic}})
 }
+
+module.exports.addPhoto = (id, photos) => {
+    return Store.updateOne({_id: id},{$push: {photos: photos}})
+}
+
+module.exports.removeStorePhoto = (id, pId) => {
+    return Store.updateOne({_id: id},{$pull: {photos: {'_id': pId}}})
+}
+
 
 module.exports.create = (store) => {
     const newStore = new Store(store);

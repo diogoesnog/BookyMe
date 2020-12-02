@@ -43,7 +43,7 @@ app.post('/', (req, res) => {
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
+            response = Response.INTERNAL_ERROR(err, 'Could not create your store!');
             res.status(response.status).jsonp(response);
         });
 });
@@ -70,9 +70,35 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
+            response = Response.INTERNAL_ERROR(err, 'Could not update your logo');
             res.status(response.status).jsonp(response);
         });
+});
+
+app.post('/:id/picture', upload.single('picture'), async (req, res) => {
+    let response;
+    let oldPath = __dirname + '/../../../' + req.file.path
+    let newPath = __dirname + '/../../public/pictures/' + req.params.id + req.file.originalname
+
+        fs.rename(oldPath, newPath, function (err) {
+            if (err) throw err
+        })
+
+        const picture = {
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            url: newPath
+        }
+
+        Stores.editPicture(req.params.id, picture)
+            .then(data => {
+                response = Response.CREATED(data);
+                res.status(response.status).jsonp(response);
+            }).catch(err => {
+                response = Response.INTERNAL_ERROR(err, 'Could not add the uploaded picture');
+                res.status(response.status).jsonp(response);
+            });
+    
 });
 
 app.post('/:id/photos', upload.array('photo'), async (req, res) => {
@@ -94,16 +120,14 @@ app.post('/:id/photos', upload.array('photo'), async (req, res) => {
         photos.push(photo)
     }
 
-    for(i=0; i<photos.length; i++){
-        Stores.addPhoto(req.params.id, photos[i])
+        Stores.addPhoto(req.params.id, photos)
             .then(data => {
                 response = Response.CREATED(data);
                 res.status(response.status).jsonp(response);
             }).catch(err => {
-                response = Response.INTERNAL_ERROR(err);
+                response = Response.INTERNAL_ERROR(err, 'Could not add the uploaded photos');
                 res.status(response.status).jsonp(response);
             });
-    }
 });
 
 app.post('/:id/schedule', (req, res) => {
@@ -120,7 +144,7 @@ app.post('/:id/schedule', (req, res) => {
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
+            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested schedule');
             res.status(response.status).jsonp(response);
         });
 });
@@ -136,7 +160,7 @@ app.post('/:id/description', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested description');
             res.status(response.status).jsonp(response);
     });
 
@@ -152,7 +176,7 @@ app.post('/:id/address', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested address');
             res.status(response.status).jsonp(response);
     });
 
@@ -167,7 +191,21 @@ app.delete('/:id', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete the requested store');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+app.delete('/:id/photos/:photoID', async (req, res) => {
+    
+    Stores.removeStorePhoto(req.params.id, req.params.photoID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not delete the requested photo');
             res.status(response.status).jsonp(response);
     });
 

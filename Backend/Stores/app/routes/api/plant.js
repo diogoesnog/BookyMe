@@ -41,7 +41,7 @@ app.post('/:storeID', upload.single('plant'), async (req,res) => {
         response = Response.CREATED(data);
         res.status(response.status).jsonp(response);
     }).catch(err => {
-        response = Response.INTERNAL_ERROR(err);
+        response = Response.INTERNAL_ERROR(err, 'Could not register your store plant');
         res.status(response.status).jsonp(response);
     });
 })
@@ -55,14 +55,12 @@ app.delete('/store/:storeID', async (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store catalog');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete your store plant');
             res.status(response.status).jsonp(response);
     });
 
 
 });
 
-// var dir = __dirname + '/../data/profiles/' + req.params.ficheiro;
- // res.sendFile(path.resolve(dir));
 
 module.exports = app;
