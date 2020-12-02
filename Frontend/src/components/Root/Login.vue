@@ -1,16 +1,18 @@
 <template>
   <div>
     <h1>
-      {{ $t('authPage.login') }}
+      {{ $t('loginPage.title') }}
     </h1>
+    <p>{{$t('loginPage.description')}}</p>
     <q-form>
-      <q-input :label="$t('authPage.username')" v-model="user.email" type="text"></q-input>
-      <q-input :label="$t('authPage.password')" v-model="user.password" type="password"></q-input>
+      <q-input :label="$t('loginPage.username')" v-model="user.email" type="text"></q-input>
+      <q-input :label="$t('loginPage.password')" v-model="user.password" type="password"></q-input>
       <br/>
       <q-btn push color="primary" @click="handleLogin" style="width: 100%">
-        {{ $t('authPage.login') }}
+        {{ $t('loginPage.login') }}
       </q-btn>
     </q-form>
+    <p>{{$t('loginPage.noAccount')}}</p>
   </div>
 </template>
 

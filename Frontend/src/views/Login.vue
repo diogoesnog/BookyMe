@@ -10,9 +10,8 @@
     <div v-if="loginForm">
       <LoginForm/>
       <br/>
-      <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
-        {{ $t('authPage.register') }}
-      </q-btn>
+      <p>{{$t('loginPage.noAccount')}}</p>
+      <span @click="loginForm = !loginForm"><b>{{$t('loginPage.createAccount')}}</b></span>
     </div>
 
     <div v-else>
@@ -20,6 +19,8 @@
       <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
         {{ $t('commonButtons.cancel')}}
       </q-btn>
+      <p>{{$t('registerPage.alreadyHasAccount')}}</p>
+      <span> <b>{{$t('registerPage.login')}}</b></span>
     </div>
   </div>
 </template>

@@ -58,7 +58,8 @@ router.post('/authentication', async (req, res) => {
     };
 
     try {
-        let user = await Users.searchWithEmailOrUsername(userAuth.email);        
+        let user = await Users.searchWithEmailOrUsername(userAuth.email);
+
         if(!user) {
             response = Response.UNAUTHORIZED(undefined, `${userAuth.email} does not match our records`);
         }
@@ -108,14 +109,17 @@ router.get('/test',checkAuth, (req, res) => {
 /**
  *  Rota que testa se o token esta valido -> get
  *  Resposta -> user -> tudo menos a pass
+ *  token -> headers
  */
 router.get('/validateToken', (req, res) => {
+
 })
 
 /**
  * Update user's address and name
+ * TODO: update email and username
  */
-router.put('/updateNameAddress', checkAuth, (req, res) => {
+router.put('/account', checkAuth, (req, res) => {
     let response;
     let user = req.decodedUser;
 
@@ -141,7 +145,7 @@ router.put('/updateNameAddress', checkAuth, (req, res) => {
 /**
  * Update user's password
  */
-router.patch('/updatePassword', checkAuth, async (req, res) => {
+router.patch('/password', checkAuth, async (req, res) => {
     let response;
 
     let userAuth = {
@@ -160,7 +164,7 @@ router.patch('/updatePassword', checkAuth, async (req, res) => {
             bcrypt.hash(userAuth.newPassword, 10, (err, hash) => {
                 if (err) console.log(err);
 
-                Users.updatePassword(id, hash).
+                Users.updatePassword(userAuth.id, hash).
                     then(dataTemp => {
                         let data = dataTemp.toObject();
                         delete data.password;
