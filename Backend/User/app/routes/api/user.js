@@ -146,8 +146,8 @@ router.patch('/updatePassword', checkAuth, async (req, res) => {
 
     let userAuth = {
         id: req.decodedUser.id,
-        oldPassword: req.body.password,
-        newPassword: req.body.new_pass
+        oldPassword: req.body.oldPassword,
+        newPassword: req.body.newPassword
     };
 
     try{
@@ -218,6 +218,7 @@ router.patch('/updateEmail', checkAuth, async (req, res) => {
 /**
  * Returns all users in db
  * Only for test purpose
+ * TODO: delete this route after development
  */
 router.get('/findAll', (req, res) => {
     Users.getUsers()
