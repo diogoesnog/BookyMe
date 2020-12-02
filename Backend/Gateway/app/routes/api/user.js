@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../services/users');
 const { validator } = require('../../middlewares/checkBody');
-const swaggerDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
 
 
 /**
@@ -25,6 +23,9 @@ const swaggerUI = require('swagger-ui-express');
  *                  - name
  *                  - username
  *                  - email
+ *                  - address
+ *                  - city
+ *                  - zipCode
  *                  - password
  *              properties:
  *                  name:
@@ -33,8 +34,14 @@ const swaggerUI = require('swagger-ui-express');
  *                      type: string
  *                  email:
  *                      type: string
- *                  password:
+ *                  address:
  *                      type: string
+ *                  city:
+ *                      type: string
+ *                  zipCode:
+ *                      type: String
+ *                  password:
+ *                      type: String
  *     responses:
  *        '201':
  *           description: Account created successfully
@@ -45,7 +52,7 @@ const swaggerUI = require('swagger-ui-express');
  *
  */
 router.post('/register', validator([
-    "name", "username", "email", "password"
+    "name", "username", "email", "address", "city", "zipCode", "password"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
 
