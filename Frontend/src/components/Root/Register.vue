@@ -1,15 +1,16 @@
 <template>
   <div>
-    <h1>Register</h1>
+    <h1>{{ $t('authPage.register') }}</h1>
     <q-form>
-      <q-input label="Nome" v-model="user.name" type="text"></q-input>
-      <q-input label="Username" v-model="user.username" type="text"></q-input>
-      <q-input label="Email" v-model="user.email" type="text"></q-input>
-      <q-input label="Address" v-model="user.address" type="text"></q-input>
-      <q-input label="Password" v-model="user.password" type="password"></q-input>
-      <!-- <q-input label="Type" v-model="user.type" type="text"></q-input> -->
+      <q-input :label="$t('authPage.fullName')" v-model="user.name" type="text"></q-input>
+      <q-input :label="$t('authPage.username')" v-model="user.username" type="text"></q-input>
+      <q-input :label="$t('authPage.emailAddress')" v-model="user.email" type="text"></q-input>
+      <q-input :label="$t('authPage.address')" v-model="user.address" type="text"></q-input>
+      <q-input :label="$t('authPage.password')" v-model="user.password" type="password"></q-input>
       <br/>
-      <q-btn push color="primary" @click="handleRegister" style="width: 100%">Sign up</q-btn>
+      <q-btn push color="primary" @click="handleRegister" style="width: 100%">
+        {{ $t('authPage.register') }}
+      </q-btn>
     </q-form>
   </div>
 </template>
