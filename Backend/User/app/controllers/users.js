@@ -4,7 +4,7 @@ const User = require('../models/user');
 // TODO: addFavorites, addPicture, password
 module.exports.createUser = ({name, username, email, address, city,zipCode, password, type}) => {
     const user = new User({name : name, username: username, address : address, city: city, zipCode: zipCode, email: email, password : password, type: type});
-    
+
     return user.save();
 }
 
@@ -19,7 +19,7 @@ module.exports.findById = (id) => {
 
 module.exports.updateEmail = (id, email) =>  {
     return User.findByIdAndUpdate(id, {email: email}, {new: true});
-}
+
 
 module.exports.updatePassword = (id, password) => {
     return User.findByIdAndUpdate(id, {password: password}, {new: true});

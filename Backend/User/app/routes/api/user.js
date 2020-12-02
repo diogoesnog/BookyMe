@@ -104,12 +104,12 @@ router.get('/test',checkAuth, (req, res) => {
     res.json(user);
 });
 
+
 /**
  *  Rota que testa se o token esta valido -> get
  *  Resposta -> user -> tudo menos a pass
  */
 router.get('/validateToken', (req, res) => {
-
 })
 
 /**
