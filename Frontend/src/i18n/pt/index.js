@@ -39,9 +39,8 @@
 
     categories: "Categorias",
     seeAll: "Ver Todas",
-    recommended: "Recomendações",
+    recommended: "Recomendações"
 
-    search: "Pesquisar..."
   },
 
   // Favorites
@@ -135,9 +134,6 @@
     description: 'A Mostrar {count} Resultados para "{query}"',
   },
 
-  tollbar: {
-    moreIcons: "Restantes Ícones"
-  },
   settingsPage: {
     language: "Idioma da Interface"
   },
@@ -149,6 +145,8 @@
   },
 
   commonButtons: {
+    moreIcons: "Restantes Ícones",
+    search: "Pesquisar...",
     cancel: "Cancelar",
     submit: "Submeter",
     close: "Fechar",
