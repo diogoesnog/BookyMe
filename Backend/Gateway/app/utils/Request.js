@@ -44,6 +44,11 @@ class Request {
         return this._request("PUT");
     }
 
+    patch(body) {
+        this.body = body;
+        return this._request("PATCH");
+    }
+
     delete() {
         return this._request("DELETE");
     }
