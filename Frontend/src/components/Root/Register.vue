@@ -6,6 +6,8 @@
       <q-input :label="$t('authPage.username')" v-model="user.username" type="text"></q-input>
       <q-input :label="$t('authPage.emailAddress')" v-model="user.email" type="text"></q-input>
       <q-input :label="$t('authPage.address')" v-model="user.address" type="text"></q-input>
+      <q-input :label="$t('authPage.city')" v-model="user.city" type="text"></q-input>
+      <q-input :label="$t('authPage.zipCode')" v-model="user.zipCode" type="text"></q-input>
       <q-input :label="$t('authPage.password')" v-model="user.password" type="password"></q-input>
       <br/>
       <q-btn push color="primary" @click="handleRegister" style="width: 100%">

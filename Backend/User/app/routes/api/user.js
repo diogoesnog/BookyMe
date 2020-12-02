@@ -80,6 +80,8 @@ router.post('/authentication', async (req, res) => {
                         username: user.username,
                         name: user.name,
                         address: user.address,
+                        city: user.city,
+                        zipCode: user.zipCode,
                         favorites: user.favorites,
                         avatar: user.avatar,
                         reviews: user.reviews,
@@ -90,7 +92,6 @@ router.post('/authentication', async (req, res) => {
                 });
             }
         }
-
         res.status(response.status).jsonp(response);
     } catch(err){
         response = Response.INTERNAL_ERROR(err);
@@ -223,5 +224,11 @@ router.get('/findAll', (req, res) => {
         .then(data => {res.status(201).jsonp(data);})
         .catch(err => {res.status(500).jsonp(err);})
 });
+
+router.get('/deleteAll', (req,res) => {
+    Users.deleteAll()
+        .then(data => {res.status(201).jsonp(data);})
+        .catch(err => {res.status(500).jsonp(err);})
+})
 
 module.exports = router;

@@ -8,6 +8,8 @@ export default {
     emailAddress: "E-mail Address",
     password: "Password",
     address: 'Address',
+    city: 'City',
+    zipCode: 'Zip Code',
 
     emailOrUsername: "E-mail Address or Username"
   },
