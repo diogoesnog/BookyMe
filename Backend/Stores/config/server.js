@@ -12,8 +12,6 @@ const createError = require('http-errors');
 const logger = require('morgan');
 // CORS Middleware
 const cors = require('cors');
-// Swagger API Documentation
-const swaggerUI = require('swagger-ui-express');
 // MongoDB
 const mongoose      = require('mongoose');
 
@@ -54,8 +52,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Documentation
-app.use('/v1/api/documentation', swaggerUI.serve, swaggerUI.setup(require('./swagger'), { explorer: true } ));
+
 // Register Different Versions of API Routes
 app.use('/v1/api', require('./routes'));
 
