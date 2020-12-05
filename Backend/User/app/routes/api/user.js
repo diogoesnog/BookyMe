@@ -58,7 +58,8 @@ router.post('/authentication', async (req, res) => {
     };
 
     try {
-        let user = await Users.searchWithEmailOrUsername(userAuth.email);        
+        let user = await Users.searchWithEmailOrUsername(userAuth.email);
+
         if(!user) {
             response = Response.UNAUTHORIZED(undefined, `${userAuth.email} does not match our records`);
             res.status(response.status).jsonp(response);
@@ -102,17 +103,19 @@ router.post('/authentication', async (req, res) => {
     }
 })
 
+
 /**
  *  TODO: validateToken
  *  Rota que testa se o token esta valido -> get
  *  Resposta -> user -> tudo menos a pass
+ *  token -> headers
  */
 router.get('/validateToken', (req, res) => {
 })
 
 
-router.put('/account',checkAuth, async (req, res) => {
 
+router.put('/account',checkAuth, async (req, res) => {
     let response;
     let userAuth = {
         id: req.decodedUser.id,
