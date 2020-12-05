@@ -21,7 +21,7 @@ module.exports.editDescription = (id, des) => {
 
 module.exports.editPhone = (phone, id) => {
     return Store.updateOne({_id: id},{$set: {phone: phone}})
-
+}
 
 module.exports.editLogo = (id, l) => {
     return Store.updateOne({_id: id},{$set: {logo: l}})
