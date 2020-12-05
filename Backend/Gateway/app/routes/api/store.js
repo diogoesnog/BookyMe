@@ -4,6 +4,19 @@ const Store = require('../../services/stores');
 const { validator } = require('../../middlewares/checkBody');
 
 
+/**
+ * @swagger
+ * /stores:
+ *  get:
+ *      description: Endpoint to fetch all stores
+ *      tags:
+ *          - Stores
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *
+ */
 router.get('/', (req, res) => {
     Store.getAll()
         .then(response => {
@@ -13,6 +26,39 @@ router.get('/', (req, res) => {
         })
 });
 
+/**
+ * @swagger
+ * /stores:
+ *  post:
+ *      description: Endpoint to create new stores. Blocked from regular users.
+ *      tags:
+ *          - Stores
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *      parameters:
+ *        - in: body
+ *          name: Store
+ *          description: New Store Information's
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - name
+ *                  - category
+ *                  - description
+ *                  - address
+ *              properties:
+ *                  name:
+ *                      type: string
+ *                  category:
+ *                      type: string
+ *                  description:
+ *                      type: string
+ *                  address:
+ *                      type: string
+ *
+ */
 router.post('/', validator([
     "name", "category", "description", "address"
 ]),(req, res) => {

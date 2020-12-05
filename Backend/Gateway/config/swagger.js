@@ -11,11 +11,9 @@ const swaggerOptions = {
             },
             servers: ["http://localhost:5000"]
         }
-        /*host: `${process.env.APP_HOST}:${process.env.APP_PORT}/v1/api`,
-        basePath: '/'*/
     },
 
-    apis: [ "./app/routes/api/user.js" ]
+    apis: [ "./app/routes/api/*.js" ]
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
