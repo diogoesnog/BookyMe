@@ -35,23 +35,24 @@ services:
     networks: 
       - bookyme-network
     depends_on:
-      - mongo
+      - mongo-users
 
 
 
   # Databases
-  # TODO: Ideally, Docker should allocate one database server per node server
-  mongo: 
-    container_name: bookyme-mongo
+  # User Service
+  mongo-users:
+    container_name: mongo-users
     restart: on-failure
     image: mongo 
-    command: mongod --port 27017
+    command: mongod --port 3220
     volumes: 
+      - ./seed/Users/init.js:/docker-entrypoint-initdb.d/init.js:ro
       - data-volume:/data-db
     networks: 
       - bookyme-network
     ports: 
-      - "27017:27017"
+      - "3220:3220"
 
 volumes:
   data-volume: 
