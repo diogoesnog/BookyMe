@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Store = require('../../services/stores');
 const { validator } = require('../../middlewares/checkBody');
+const MulterFiles = require('../../utils/MulterFiles');
+const uploader = new MulterFiles('stores');
+const upload = uploader.getUploader();
 
 
 /**
@@ -74,5 +77,11 @@ router.post('/', validator([
         });
 });
 
+// TODO: change to put
+router.post('/:id/logo', upload.single('file'),(req, res) => {
+
+    throw new Error("Oops");
+
+});
 
 module.exports = router;
