@@ -3,8 +3,8 @@ const app = express.Router();
 const Plants = require('../../controllers/plants');
 const Response = require('rapid-status');
 const fs = require('fs');
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 app.get('/store/:storeID', async (req,res) =>{
     let response;

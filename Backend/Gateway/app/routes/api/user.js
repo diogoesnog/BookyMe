@@ -1,56 +1,112 @@
-/**
- * Nota: é boa prática enviar sempre que possível o código do estado do pedido HTTP
- * podem consultar a seguinte cheat sheet em caso de dúvida
- * https://kapeli.com/cheat_sheets/HTTP_Status_Codes.docset/Contents/Resources/Documents/index
- * @type {e | (() => Express)}
- */
-
 const express = require('express');
 const router = express.Router();
-const Users = require('../../controllers/users');
-
-// Os pedidos do tipo GET não têm body. Devem servir apenas para obter recursos
-router.get('/', (req, res) => {
-
-    /**
-     * Uma API REST pode apresentar recursos sobre formas de filtros. Para não criar novas
-     * rotas num endpoint devemos, sempre que possível, fazer uso de query strings.
-     * Estas queries strings vêm sempre após o ponto de interrogação e separadas entre &
-     * Um exemplo prático, listar os utilizadores ordenados pelo username ascendente
-     * http://localhost:3000/v1/api/user?username=asc
-     * Podemos aceder a esta query string no request (req), na property query
-     */
-
-    const queries = req.query;
-
-    res.status(200).json({title: "Title", message: "Some message...", queries: queries});
-});
-
-// Os pedidos POST trazem um body no request. Devem servir apenas para criar novos recursos
-router.post('/', (req, res) => {
-    const user = req.body;
-
-    res.status(201).jsonp(user);
-    // res.jsonp({title: "Titulo", message: "olá"});
-});
-
-// Os pedidos PUT trazem um body no request. Devem servir apenas para atualizar recursos
-/*router.put('/', (req, res) => { });*/
-
-// Os pedidos PATCH trazem um body no request. Devem servir apenas para atualizar um recurso
-/*router.patch('/', (req, res) => { });*/
-
-
-// Os pedidos PATCH trazem um body no request. Devem servir apenas para atualizar um recurso
-/*router.delete('/', (req, res) => { });*/
+const User = require('../../services/users');
+const { validator } = require('../../middlewares/checkBody');
+const swaggerDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 
 
 /**
- * Os URLs podem ainda ser dinâmicos. Por exemplo, pode ser útil aceder à página de uma
- * loja, listando informações sobre a mesma. Podemos passar um id da loja no URL do método (GET).
+ * @swagger
+ * /users/register:
+ *   post:
+ *     description: Use to create a new account
+ *     consumes:
+ *        - "application/json"
+ *     produces:
+ *        - "application/json"
+ *     parameters:
+ *        - in: body
+ *          name: user
+ *          description: User information's
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - name
+ *                  - username
+ *                  - email
+ *                  - password
+ *              properties:
+ *                  name:
+ *                      type: string
+ *                  username:
+ *                      type: string
+ *                  email:
+ *                      type: string
+ *                  password:
+ *                      type: string
+ *     responses:
+ *        '201':
+ *           description: Account created successfully
+ *           content:
+ *              application/json
+ *        '5XX':
+ *            description: Server Error
+ *
  */
-router.get('/:id', (req, res) => {
-    res.status(200).json(req.params);
+router.post('/register', validator([
+    "name", "username", "email", "password"
+]), (req, res) => {
+    let body = JSON.stringify(req.body);
+
+    User.register(body)
+        .then(response => {
+            res.status(response.status).jsonp(response.data);
+        }).catch(err => {
+            res.status(err.status).jsonp(err.data);
+        });
+});
+
+/**
+ * @swagger
+ * /users/login:
+ *   post:
+ *     description: Endpoint for User Authentication
+ *     consumes:
+ *        - "application/json"
+ *     produces:
+ *        - "application/json"
+ *     parameters:
+ *        - in: body
+ *          name: user
+ *          description: User information's
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - email
+ *                  - password
+ *              properties:
+ *                  email:
+ *                      type: string
+ *                  password:
+ *                      type: string
+ *     responses:
+ *        '201':
+ *           description: Successfully authenticated. A User token has been passed over headers
+ *           content:
+ *              application/json
+ *           headers:
+ *              Authentication:
+ *                 schema:
+ *                    type: string
+ *        '5XX':
+ *            description: Server Error
+ *
+ */
+router.post('/login', validator([
+    'email', 'password'
+]), (req, res) => {
+    let body = JSON.stringify(req.body);
+
+    User.login(body)
+        .then(response => {
+            console.log(response);
+            res.setHeader('Authorization', response.headers.get('authorization'));
+
+            res.status(response.status).jsonp(response.data);
+        }).catch(err => {
+            res.status(err.status).jsonp(err.data);
+        });
 });
 
 module.exports = router;

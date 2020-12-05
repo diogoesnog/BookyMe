@@ -3,8 +3,8 @@ const app = express.Router();
 const Catalogs = require('../../controllers/catalogs');
 const Response = require('rapid-status');
 const fs = require('fs');
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 app.get('/store/:storeID', async (req, res) => {
 
@@ -24,8 +24,6 @@ app.get('/store/:storeID', async (req, res) => {
 
 app.post('/:storeID', async (req, res) => {
     let response;
-    
-    
 
     const catalog = {
         storeID: req.params.storeID,
