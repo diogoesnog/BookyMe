@@ -8,21 +8,22 @@ module.exports.createUser = ({name, username, email, address, city,zipCode, pass
     return user.save();
 }
 
-module.exports.updateNameAddress = (user,id) => {
+
+module.exports.searchWithEmailOrUsername = (emailOrUsername) =>{
+    return User.findOne({$or: [{email: emailOrUsername}, {username: emailOrUsername}]});
+}
+
+module.exports.updateUserInfo = (user,id) => {
     return User.findByIdAndUpdate(id,user,{new:true});
 }
-
-module.exports.findById = (id) => {
-    return User.findById(id);
-}
-
-
-module.exports.updateEmail = (id, email) =>  {
-    return User.findByIdAndUpdate(id, {email: email}, {new: true});
 
 
 module.exports.updatePassword = (id, password) => {
     return User.findByIdAndUpdate(id, {password: password}, {new: true});
+}
+
+module.exports.findById = (id) => {
+    return User.findById(id);
 }
 
 module.exports.deleteAll = () => {
