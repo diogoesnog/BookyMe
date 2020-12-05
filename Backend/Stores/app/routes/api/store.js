@@ -6,6 +6,9 @@ const fs = require('fs');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
+/**
+ * Get Stores
+ */
 app.get('/', async (req, res) => {
     let response;
     let query = req.query;
@@ -20,6 +23,14 @@ app.get('/', async (req, res) => {
 });
 
 // TODO: protection middleware
+/**
+ * Create a store
+ * name: String,
+ * category: String,
+ * description: String,
+ * address: String
+ * TODO: não era melhor colocar as coordinates já nesta rota baseado no endereço? Sem ser o cliente a especificar...
+ */
 app.post('/', (req, res) => {
     let response;
     const store = {
@@ -192,8 +203,7 @@ app.post('/:id/phone', async (req, res) => {
 
 app.post('/:id/coordinates', async (req, res) => {
     
-    let lat = req.body.lat
-    let long = req.body.long    
+    let { lat, long } = req.body;
 
     Stores.setCoordinates(lat, long, req.params.id)
         .then(data => {
