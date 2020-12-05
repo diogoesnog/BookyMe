@@ -3,14 +3,10 @@ const app = express.Router();
 const Stores = require('../../controllers/stores');
 const Response = require('rapid-status');
 const fs = require('fs');
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
-
-
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 app.get('/', async (req, res) => {
-
-    
     let response;
     let query = req.query;
     Stores.get(query)
@@ -21,22 +17,17 @@ app.get('/', async (req, res) => {
             response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
             res.status(response.status).jsonp(response);
     });
-
-
 });
 
 // TODO: protection middleware
 app.post('/', (req, res) => {
     let response;
     const store = {
-        
         name: req.body.name,
         category: req.body.category,
         description: req.body.description,
         address: req.body.address
-        
     };
-
 
     Stores.create(store)
         .then(data => {
@@ -103,7 +94,7 @@ app.post('/:id/picture', upload.single('picture'), async (req, res) => {
 
 app.post('/:id/photos', upload.array('photo'), async (req, res) => {
     let response;
-    var photos = []
+    let photos = []
     for(let i=0; i < req.files.length; i++){
         let oldPath = __dirname + '/../../../' + req.files[i].path
         let newPath = __dirname + '/../../public/photos/' + req.params.id + req.files[i].originalname
