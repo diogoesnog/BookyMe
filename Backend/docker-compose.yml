@@ -47,19 +47,12 @@ services:
     image: mongo 
     command: mongod --port 3220
     volumes: 
+      - ./seed/Users/init.js:/docker-entrypoint-initdb.d/init.js:ro
       - data-volume:/data-db
     networks: 
       - bookyme-network
     ports: 
       - "3220:3220"
-      
-  # Database Population
-  # Users
-  seed-users:
-    build: ./seed/Users
-    links:
-        - mongo-users
-  # TODO: Stores, Booking
 
 volumes:
   data-volume: 
