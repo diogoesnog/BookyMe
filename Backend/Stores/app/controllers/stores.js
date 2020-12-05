@@ -16,19 +16,19 @@ module.exports.insertSchedule = (id, s) => {
 }
 
 module.exports.editDescription = (id, des) => {
-    return Store.updateOne({_id: id},{$set: {description: des}},{upsert: true})
+    return Store.updateOne({_id: id},{$set: {description: des}})
 }
 
 module.exports.editPhone = (id, phone) => {
-    return Store.updateOne({_id: id},{$set: {phone: phone}},{upsert: true})
+    return Store.updateOne({_id: id},{$set: {phone: phone}})
 }
 
 module.exports.editAddress = (id, add) => {
-    return Store.updateOne({_id: id},{$set: {address: add}},{upsert: true})
+    return Store.updateOne({_id: id},{$set: {address: add}})
 }
 
 module.exports.editLogo = (id, l) => {
-    return Store.updateOne({_id: id},{$set: {logo: l}},{upsert: true})
+    return Store.updateOne({_id: id},{$set: {logo: l}})
 }
 
 module.exports.removeStore = (id) => {
