@@ -1,0 +1,5 @@
+// GET Stores
+GET http://localhost:3000/v1/api/stores
+Content-Type: application/json
+
+###
