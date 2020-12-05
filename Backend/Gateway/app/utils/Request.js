@@ -11,7 +11,7 @@ class Request {
         this.url =      url;
         this.method =   "";
         this.options =  {};
-        this.body =     {};
+        this.body =     null;
         this.headers =  {};
         this.params =   {};
     }

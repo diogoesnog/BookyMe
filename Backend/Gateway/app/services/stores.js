@@ -12,3 +12,9 @@ module.exports.insertCatalog = (store, catalog) => {
 
     return request.post(catalog);
 }
+
+module.exports.create = (store) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
+
+    return request.post(store);
+}
