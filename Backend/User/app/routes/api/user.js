@@ -61,12 +61,15 @@ router.post('/authentication', async (req, res) => {
         let user = await Users.searchWithEmailOrUsername(userAuth.email);        
         if(!user) {
             response = Response.UNAUTHORIZED(undefined, `${userAuth.email} does not match our records`);
+            res.status(response.status).jsonp(response);
         }
         else {
             let result = await bcrypt.compare(userAuth.password, user.password);
 
-            if (!result)
+            if (!result){
                 response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
+                res.status(response.status).jsonp(response);
+            }
             else {
                 const token = jwt.sign({ user: user._id }, process.env.AUTH_SECRET,
                     {expiresIn: process.env.AUTH_TOKEN_TIMETOLIVE},
@@ -99,58 +102,55 @@ router.post('/authentication', async (req, res) => {
     }
 })
 
-router.get('/test',checkAuth, (req, res) => {
-    let user = req.decodedUser;
-    res.json(user);
-});
-
 /**
+ *  TODO: validateToken
  *  Rota que testa se o token esta valido -> get
  *  Resposta -> user -> tudo menos a pass
  */
 router.get('/validateToken', (req, res) => {
 })
 
-/**
- * Update user's address and name
- */
-router.put('/account', checkAuth, async (req, res) => {
+
+router.put('/account',checkAuth, async (req, res) => {
+
     let response;
     let userAuth = {
         id: req.decodedUser.id,
         password: req.body.password
     };
 
+
     let newInfo = {
         name: req.body.name,
-        address: req.body.address,
-        city: req.body.city,
-        zipCode: req.body.zipCode,
         username: req.body.username,
+        address: req.body.address,
         email: req.body.email,
+        city: req.body.city,
+        zipCode: req.body.zipCode
     }
-    try {
+    try{
         let user = await Users.findById(userAuth.id);
 
         let result = await bcrypt.compare(userAuth.password, user.password);
 
-        if (!result) response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
+        if (!result){
+            response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
+            res.status(response.status).jsonp(response);
+        }
         else {
-            Users.updateUserInfo(newInfo, userAuth.id).
-                then( dataTemp => {
-                        let data = dataTemp.toObject();
-                        delete data.password;
-                        response = Response.ACCEPTED(data);
-                        res.status(response.status).jsonp(response);
-
-                    }
-                ).catch(err => {
+            Users.updateInfo(newInfo, userAuth.id).
+                then(dataTemp => {
+                    let data = dataTemp.toObject();
+                    delete data.password;
+                    response = Response.ACCEPTED(data);
+                    res.status(response.status).jsonp(response);
+                }).
+                catch(err => {
                     response = Response.INTERNAL_ERROR(err);
                     res.status(response.status).jsonp(response);
                 });
         }
-    } catch(err){
-        console.log(err);
+    } catch (err) {
         response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
     }
@@ -173,7 +173,10 @@ router.patch('/password', checkAuth, async (req, res) => {
 
         let result = await bcrypt.compare(userAuth.password, user.password);
 
-        if (!result) response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
+        if (!result) {
+            response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
+            res.status(response.status).jsonp(response);
+        }
         else {
             bcrypt.hash(userAuth.newPassword, 10, (err, hash) => {
                 if (err) console.log(err);
@@ -190,7 +193,7 @@ router.patch('/password', checkAuth, async (req, res) => {
                     })
             })
         }
-    }catch(err){
+    } catch(err){
         response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
     }
@@ -207,7 +210,7 @@ router.get('/findAll', (req, res) => {
         .catch(err => {res.status(500).jsonp(err);})
 });
 
-router.get('/deleteAll', (req,res) => {
+router.delete('/users', (req,res) => {
     Users.deleteAll()
         .then(data => {res.status(201).jsonp(data);})
         .catch(err => {res.status(500).jsonp(err);})

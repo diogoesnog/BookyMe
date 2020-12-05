@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 
-// TODO: addFavorites, addPicture, password
+// TODO: addFavorites, addPicture
 module.exports.createUser = ({name, username, email, address, city,zipCode, password, type}) => {
     const user = new User({name : name, username: username, address : address, city: city, zipCode: zipCode, email: email, password : password, type: type});
 
@@ -13,10 +13,9 @@ module.exports.searchWithEmailOrUsername = (emailOrUsername) =>{
     return User.findOne({$or: [{email: emailOrUsername}, {username: emailOrUsername}]});
 }
 
-module.exports.updateUserInfo = (user,id) => {
+module.exports.updateInfo = (user,id) => {
     return User.findByIdAndUpdate(id,user,{new:true});
 }
-
 
 module.exports.updatePassword = (id, password) => {
     return User.findByIdAndUpdate(id, {password: password}, {new: true});
