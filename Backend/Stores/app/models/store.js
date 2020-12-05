@@ -90,7 +90,7 @@ const storeSchema = new mongoose.Schema({
         type: Number
     },
 
-    number: {
+    phone: {
         type: Number
     },
 

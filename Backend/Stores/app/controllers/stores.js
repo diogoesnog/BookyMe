@@ -19,6 +19,10 @@ module.exports.editDescription = (id, des) => {
     return Store.updateOne({_id: id},{$set: {description: des}},{upsert: true})
 }
 
+module.exports.editPhone = (id, phone) => {
+    return Store.updateOne({_id: id},{$set: {phone: phone}},{upsert: true})
+}
+
 module.exports.editAddress = (id, add) => {
     return Store.updateOne({_id: id},{$set: {address: add}},{upsert: true})
 }
