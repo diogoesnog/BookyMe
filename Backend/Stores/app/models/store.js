@@ -87,7 +87,8 @@ const storeSchema = new mongoose.Schema({
     },
 
     rating: {
-        type: Number
+        type: Number,
+        default: 0
     },
 
     phone: {

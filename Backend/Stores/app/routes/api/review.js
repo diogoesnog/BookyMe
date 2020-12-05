@@ -24,16 +24,17 @@ app.get('/store/:storeID', async (req, res) => {
 app.post('/:storeID', (req, res) => {
     let response;
 
-    let data = new Date()
+    let date = new Date()
 
     const review = {
         storeID: req.params.storeID,
         username: req.body.username,
         comment: req.body.comment,
-        date: data.toISOString()
+        rating: req.body.rating,
+        date: date.toISOString()
     }
 
-
+   
     Reviews.insertReview(review)
         .then(data => {
             response = Response.CREATED(data);
