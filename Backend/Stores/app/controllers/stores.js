@@ -38,6 +38,10 @@ module.exports.addPhoto = (id, photos) => {
     return Store.updateOne({_id: id},{$push: {photos: photos}})
 }
 
+module.exports.setCoordinates = (lat, long, id) => {
+    return Store.updateOne({_id: id},{$set: {latitude: lat, longitude: long}})
+}
+
 module.exports.removeStorePhoto = (id, pId) => {
     return Store.updateOne({_id: id},{$pull: {photos: {'_id': pId}}})
 }

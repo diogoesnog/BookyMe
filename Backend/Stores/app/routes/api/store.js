@@ -183,6 +183,24 @@ app.post('/:id/address', async (req, res) => {
 
 });
 
+app.post('/:id/coordinates', async (req, res) => {
+    
+    let lat = req.body.lat
+    let long = req.body.long    
+
+    Stores.setCoordinates(lat, long, req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested address');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+
 
 app.delete('/:id', async (req, res) => {
     
