@@ -123,3 +123,6 @@ dist
 
 # macOS temporary files
 .DS_STORE
+
+# VS Code personal files
+# .vscode

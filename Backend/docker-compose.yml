@@ -1,0 +1,57 @@
+version: "3"
+
+networks: 
+  bookyme-network:
+    driver: bridge
+
+services:
+
+  # Server Interfaces
+  backend:
+    container_name: bookyme-gateway
+    restart: always
+    env_file: 
+      - ./Environment/Gateway.env
+    build: ./Gateway
+    ports: 
+      - "5000:5000"
+    volumes:
+      - /backend/gateway
+    networks: 
+      - bookyme-network
+    depends_on: 
+      - userservice
+
+  userservice:
+    container_name: user-service
+    restart: always
+    env_file:
+      - ./Environment/UserService.env
+    build: ./User
+    ports: 
+      - "5200:5200"
+    volumes: 
+      - /backend/user
+    networks: 
+      - bookyme-network
+    depends_on:
+      - mongo
+
+
+
+  # Databases
+  # TODO: Ideally, Docker should allocate one database server per node server
+  mongo: 
+    container_name: bookyme-mongo
+    restart: on-failure
+    image: mongo 
+    command: mongod --port 27017
+    volumes: 
+      - data-volume:/data-db
+    networks: 
+      - bookyme-network
+    ports: 
+      - "27017:27017"
+
+volumes:
+  data-volume: 
