@@ -1,7 +1,7 @@
 const Catalog = require('../models/catalog');
 
 module.exports.getCatalog = (id) => {
-    return Catalog.findAll({storeID: id});
+    return Catalog.find({storeID: id});
 }
 
 module.exports.removeStoreCatalogs = (id) => {

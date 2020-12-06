@@ -33,11 +33,19 @@ app.get('/', async (req, res) => {
  */
 app.post('/', (req, res) => {
     let response;
+
+    const address = {
+        place: req.body.place,
+        zipcode: req.body.zipcode,
+        city: req.body.city,
+        country: req.body.country
+    }
+
     const store = {
         name: req.body.name,
         category: req.body.category,
         description: req.body.description,
-        address: req.body.address
+        address: address
     };
 
     Stores.create(store)
@@ -169,21 +177,6 @@ app.put('/:id/description', async (req, res) => {
 
 });
 
-app.put('/:id/address', async (req, res) => {
-    
-    add = req.body.address
-
-    Stores.editAddress(req.params.id, add)
-        .then(data => {
-            response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested address');
-            res.status(response.status).jsonp(response);
-    });
-
-
-});
 
 app.put('/:id/phone', async (req, res) => {
     
