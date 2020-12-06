@@ -1,20 +1,29 @@
 const multer = require('multer');
+const {v4 : uuid} = require('uuid')
+const path = require('path');
 
 class MulterFiles {
-    constructor(route) {
+    constructor(route, customPath) {
         this.route = route;
         this.upload = null;
+        this.customPath = customPath;
         this._init();
     }
 
     _init() {
         this.upload = multer({
+            dest: this.customPath !== undefined ? `./app/uploads/${this.route}/${this.customPath}` : `./app/uploads/${this.route}`,
             storage: multer.diskStorage({
                 destination: (req, file, cb) => {
-                    cb(null, `./app/temp/${this.route}`)
+                    let path = this.customPath !== undefined ? `./app/uploads/${this.route}/${this.customPath}` : `./app/uploads/${this.route}`
+                    cb(null, path);
                 },
                 filename: (req, file, cb) => {
-                    cb(null, `${file.originalname}`);
+                    let newName =  uuid();
+                    let extension = path.extname(file.originalname);
+                    console.log("Extension Name", path.extname(file.originalname));
+                    console.log("Renaming For", newName);
+                    cb(null, `${newName}${extension}`);
                 }
             }),
             fileFilter: (req, file, cb) => {

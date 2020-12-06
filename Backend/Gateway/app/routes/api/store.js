@@ -5,6 +5,7 @@ const { validator } = require('../../middlewares/checkBody');
 const MulterFiles = require('../../utils/MulterFiles');
 const uploader = new MulterFiles('stores');
 const upload = uploader.getUploader();
+const fs = require('fs');
 
 
 /**
@@ -25,7 +26,7 @@ router.get('/', (req, res) => {
         .then(response => {
             res.status(response.status).jsonp(response.data);
         }).catch(err => {
-            res.status(err.status).jsonp(err);
+            res.status(err.status).jsonp(err.data);
         })
 });
 
@@ -78,10 +79,13 @@ router.post('/', validator([
 });
 
 // TODO: change to put
-router.post('/:id/logo', upload.single('file'),(req, res) => {
+router.post('/:id/logo', upload.single('file'), async (req, res) => {
 
-    throw new Error("Oops");
+    let response = await Store.uploadLogo(req.params.id, req.file);
 
+    console.log("Unlink File", req.file.path);
+
+    res.status(response.status).jsonp(response.data);
 });
 
 module.exports = router;
