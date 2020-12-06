@@ -9,6 +9,45 @@ const upload = multer({ dest: 'uploads/' })
 /**
  * Get Stores
  */
+
+app.get('/categories', async (req, res) => {
+
+    Stores.getCategories()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+app.get('/search', async (req, res) => {
+
+    Stores.getResults(req.body.search)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+
+app.get('/ratings', async (req, res) => {
+
+    console.log('Entrei aqui!')
+    Stores.getRecommended()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
 app.get('/', async (req, res) => {
     let response;
     let query = req.query;
@@ -21,6 +60,22 @@ app.get('/', async (req, res) => {
             res.status(response.status).jsonp(response);
     });
 });
+
+app.get('/:id', async (req, res) => {
+
+    Stores.getStore(req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+
+
+
 
 // TODO: protection middleware
 /**

@@ -9,7 +9,7 @@ app.get('/store/:storeID', async (req, res) => {
 
     
     let response;
-    Reviews.getReview(req.params.storeID)
+    Reviews.getReviews(req.params.storeID)
         .then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);

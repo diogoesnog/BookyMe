@@ -1,7 +1,7 @@
 const Review = require('../models/review');
 const Store = require ('../models/store')
 
-module.exports.getReview = (id) => {
+module.exports.getReviews = (id) => {
     return Review.find({storeID: id});
 }
 
