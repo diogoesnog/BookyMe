@@ -153,7 +153,7 @@ app.post('/:id/schedule', (req, res) => {
 
 
 
-app.post('/:id/description', async (req, res) => {
+app.put('/:id/description', async (req, res) => {
     
     des = req.body.description
 
@@ -169,7 +169,7 @@ app.post('/:id/description', async (req, res) => {
 
 });
 
-app.post('/:id/address', async (req, res) => {
+app.put('/:id/address', async (req, res) => {
     
     add = req.body.address
 
@@ -185,7 +185,7 @@ app.post('/:id/address', async (req, res) => {
 
 });
 
-app.post('/:id/phone', async (req, res) => {
+app.put('/:id/phone', async (req, res) => {
     
     let phone = req.body.phone 
 
@@ -201,7 +201,7 @@ app.post('/:id/phone', async (req, res) => {
 
 });
 
-app.post('/:id/coordinates', async (req, res) => {
+app.put('/:id/coordinates', async (req, res) => {
     
     let { lat, long } = req.body;
 

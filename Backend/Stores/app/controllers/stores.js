@@ -5,10 +5,6 @@ module.exports.get = (query, projection) => {
     return Store.find(query, projection);
 }
 
-module.exports.insertReview = (id, review) => {
-    return Store.updateOne({_id: id},{$push: {reviews: review}});
-}
-
 
 module.exports.insertSchedule = (id, s) => {    
     return Store.updateOne({_id: id, 'schedule.day': {$ne: s.day}},{$push: {schedule: s}})
