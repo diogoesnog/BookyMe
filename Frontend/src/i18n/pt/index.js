@@ -18,8 +18,8 @@
     description: "Cria uma conta AGORA para ter acesso a <b>Todas as Vantagens</b>",
 
     fullName: "Nome Completo",
-    username: "Nome de Utilizador",
-    email: "Endereço de E-mil",
+    username: " # Nome de Utilizador",
+    email: "@ E-mail",
     address: "Morada",
     city: "Cidade",
     postalCode: "Cód. Postal",
