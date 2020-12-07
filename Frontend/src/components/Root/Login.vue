@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h1>
-      {{ $t('loginPage.title') }}
-    </h1>
+  <div> 
+    <h3>
+      {{$t('loginPage.title')}}
+    </h3>
     <p>{{$t('loginPage.description')}}</p>
     <q-form>
       <q-input :label="$t('loginPage.username')" v-model="user.email" type="text"></q-input>
@@ -59,5 +59,13 @@ export default {
 </script>
 
 <style scoped>
+
+  .circle{
+    width:100%;
+    height: 200px;
+    border-radius: 0 0 100% 100%;
+    background-color: yellow;
+    margin-top:-130px;
+  }
 
 </style>

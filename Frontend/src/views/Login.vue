@@ -7,7 +7,7 @@
 
     </q-select>
 
-    <div v-if="loginForm">
+    <div v-if="loginForm" class="centerDiv">
       <LoginForm/>
       <br/>
       <p>{{$t('loginPage.noAccount')}}</p>
@@ -52,5 +52,14 @@
 </script>
 
 <style scoped>
+
+.centerDiv {
+  width: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 
 </style>
