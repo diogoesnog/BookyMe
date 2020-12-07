@@ -16,9 +16,9 @@
 
     <div v-else>
       <RegisterForm/>
-      <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
+      <!-- <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
         {{ $t('commonButtons.cancel')}}
-      </q-btn>
+      </q-btn> -->
       <p>{{$t('registerPage.alreadyHasAccount')}}</p>
       <span> <b>{{$t('registerPage.login')}}</b></span>
     </div>
