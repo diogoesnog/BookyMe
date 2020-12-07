@@ -11,7 +11,7 @@
       <q-input  rounded outlined :label="$t('registerPage.postalCode')" v-model="user.zipCode" type="text"></q-input>
       <q-input  rounded outlined :label="$t('registerPage.password')" v-model="user.password" type="password"></q-input>
       <br/>
-      <q-btn rounded standout push color="light-blue-7" @click="handleRegister" style="width: 35%" >
+      <q-btn class="absolute-center" rounded standout push color="light-blue-7" @click="handleRegister" style="width: 35%; margin-top:53%" >
         {{ $t('registerPage.registerAccount') }}
       </q-btn>
     </q-form>
