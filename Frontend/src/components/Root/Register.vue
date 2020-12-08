@@ -1,13 +1,15 @@
 <template>
   <div>
+    <br>
+    <q-btn class="glossy" round color="red-6" icon="fas fa-angle-left" />
     <h4  class="text-center" style="font-weight: bold;">{{ $t('registerPage.title') }}</h4>
     <p class="text-center" v-html="$t('registerPage.description')"></p>
     <q-form>
       <div class="row">
-        <div class="col-6">
-          <q-input rounded outlined :label="$t('registerPage.fullName')" v-model="user.name" type="text" style="width: 90%;">
+        <div class="col-6 " >
+          <q-input  rounded outlined  :label="$t('registerPage.fullName')" v-model="user.name" type="text" style="width: 90%;"  >
             <template v-slot:prepend>
-              <q-icon name="fas fa-user" />
+              <q-icon name="fas fa-user"  color="grey-5" />
             </template>
           </q-input>
         </div>
@@ -15,7 +17,7 @@
         <div class="col-6">
           <q-input  rounded outlined :label="$t('registerPage.username')" v-model="user.username" type="text" style="width: 90%;">
             <template v-slot:prepend>
-              <q-icon name="fas fa-hashtag" />
+              <q-icon name="fas fa-hashtag" color="grey-5" />
             </template>
           </q-input>
           <br>
@@ -23,7 +25,7 @@
         <div class="col-12">
           <q-input  rounded outlined :label="$t('registerPage.email')" v-model="user.email" type="text" style="width: 95%;">
             <template v-slot:prepend>
-              <q-icon name="fas fa-at" />
+              <q-icon name="fas fa-at" color="grey-5"/>
             </template>
           </q-input>
           <br>
@@ -31,7 +33,7 @@
           <div class="col-12">
             <q-input  rounded outlined :label="$t('registerPage.address')" v-model="user.address" type="text" style="width: 95%;">
               <template v-slot:prepend>
-                <q-icon name="fas fa-home" />
+                <q-icon name="fas fa-home" color="grey-5" />
               </template>
               <br>
             </q-input>
@@ -40,7 +42,7 @@
         <div class="col-6">
           <q-input  rounded outlined :label="$t('registerPage.city')" v-model="user.city" type="text" style="width: 90%;">
             <template v-slot:prepend>
-              <q-icon name="fas fa-home" />
+              <q-icon name="fas fa-home" color="grey-5" />
             </template>
           </q-input>
           <br>
@@ -48,23 +50,25 @@
         <div class="col-6">
           <q-input  rounded outlined :label="$t('registerPage.postalCode')" v-model="user.zipCode" type="text" style="width: 90%;">
             <template v-slot:prepend>
-              <q-icon name="fas fa-home" />
+              <q-icon name="fas fa-home" color="grey-5" />
             </template>
           </q-input>
         </div>
         <div class="col-6">
           <q-input  rounded outlined :label="$t('registerPage.password')" v-model="user.password" type="password" style="width: 90%;">
             <template v-slot:prepend>
-              <q-icon name="fas fa-lock" />
+              <q-icon name="fas fa-lock"  color="grey-5"/>
             </template>
           </q-input>
         </div>
         <div class="col-6">
           <q-input  rounded outlined :label="$t('registerPage.confirmPassword')" v-model="user.password" type="confirmpassword" style="width: 90%;">
             <template v-slot:prepend>
-              <q-icon name="fas fa-lock" />
+              <q-icon name="fas fa-lock" color="grey-5" />
             </template>
           </q-input>
+          <br>
+          <br>
           <br>
         </div>
           <br/>

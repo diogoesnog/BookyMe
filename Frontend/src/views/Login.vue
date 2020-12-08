@@ -19,8 +19,8 @@
       <!-- <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
         {{ $t('commonButtons.cancel')}}
       </q-btn> -->
-      <p class="text-center" style="margin-top:45px">{{$t('registerPage.alreadyHasAccount')}}</p>
-      <span class="absolute-center" style="margin-top:70%" @click="loginForm = !loginForm"> <b>{{$t('registerPage.login')}}</b></span>
+      <p class="text-center" style="margin-top:35px">{{$t('registerPage.alreadyHasAccount')}}</p>
+      <span class="absolute-center" style="margin-top:95%" @click="loginForm = !loginForm"> <b>{{$t('registerPage.login')}}</b></span>
       
     </div>
   </div>
