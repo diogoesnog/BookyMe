@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1>
-      {{ $t('loginPage.title') }}
-    </h1>
-    <p>{{$t('loginPage.description')}}</p>
+    <h3>
+      {{$t('loginPage.title')}}
+    </h3>
+
+    <h4>{{$t('loginPage.description')}}</h4>
+
     <q-form>
       <q-input :label="$t('loginPage.username')" v-model="user.email" type="text"></q-input>
       <q-input :label="$t('loginPage.password')" v-model="user.password" type="password"></q-input>
@@ -12,7 +14,6 @@
         {{ $t('loginPage.login') }}
       </q-btn>
     </q-form>
-    <p>{{$t('loginPage.noAccount')}}</p>
   </div>
 </template>
 
@@ -59,5 +60,13 @@ export default {
 </script>
 
 <style scoped>
+
+/*  .circle{
+    width:100%;
+    height: 200px;
+    border-radius: 0 0 100% 100%;
+    background-color: yellow;
+    margin-top:-130px;
+  }*/
 
 </style>
