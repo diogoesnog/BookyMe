@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <q-select
       v-model="lang"
       :options="langOptions"
@@ -7,7 +7,7 @@
 
     </q-select>
 
-    <div v-if="loginForm" class="centerDiv">
+    <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
       <br/>
       <p>{{$t('loginPage.noAccount')}}</p>
@@ -15,13 +15,19 @@
     </div>
 
     <div v-else>
+      <q-btn class="glossy" round color="red-6" icon="fas fa-angle-left" style="margin-left:20px;margin-top:10px; position: absolute; z-index:999" @click="loginForm = !loginForm" />
       <RegisterForm/>
       <!-- <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
         {{ $t('commonButtons.cancel')}}
       </q-btn> -->
-      <p class="text-center" style="margin-top:35px">{{$t('registerPage.alreadyHasAccount')}}</p>
-      <span class="absolute-center" style="margin-top:95%" @click="loginForm = !loginForm"> <b>{{$t('registerPage.login')}}</b></span>
-      
+        <div class="row" style="margin-top:10px">
+          <div class="col-6">
+            <p class="text-right">{{$t('registerPage.alreadyHasAccount')}}</p>
+          </div>
+          <div class="col-6">
+            <span style="margin-left:10px"  @click="loginForm = !loginForm"> <b>{{$t('registerPage.login')}}</b></span>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -54,13 +60,6 @@
 
 <style scoped>
 
-.centerDiv {
-  width: 75%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+
 
 </style>
