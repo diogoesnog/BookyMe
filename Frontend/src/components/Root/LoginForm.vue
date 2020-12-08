@@ -1,4 +1,5 @@
 <template>
+<<<<<<< Updated upstream:Frontend/src/components/Root/LoginForm.vue
   <div>
     <h3>
       {{$t('loginPage.title')}}
@@ -14,6 +15,36 @@
         {{ $t('loginPage.login') }}
       </q-btn>
     </q-form>
+=======
+  <div> 
+    <div>
+      <h3 align-center>
+        {{$t('loginPage.title')}}
+      </h3>
+      <p>{{$t('loginPage.description')}}</p>
+    </div>
+    <div>
+      <q-form>
+        <q-input class="shadow" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text">
+          <template v-slot:prepend>
+            <q-icon name="fas fa-hashtag" color="grey-5" />
+          </template>
+        </q-input>
+        <br/>
+        <q-input class="shadow" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password">
+          <template v-slot:prepend>
+            <q-icon name="fas fa-lock"  color="grey-5"/>
+          </template>
+        </q-input>
+        <br/>
+        <q-btn class="gradient" rounded push @click="handleLogin" style="width: 100%">
+          <p style="font-size:120%;" class="font-weight-bold button">
+            {{ $t('loginPage.login') }}
+          </p>
+        </q-btn>
+      </q-form>
+    </div>
+>>>>>>> Stashed changes:Frontend/src/components/Root/Login.vue
   </div>
 </template>
 
@@ -61,12 +92,33 @@ export default {
 
 <style scoped>
 
+<<<<<<< Updated upstream:Frontend/src/components/Root/LoginForm.vue
 /*  .circle{
+=======
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+    border-radius: 28px;
+  }
+
+  .circle{
+>>>>>>> Stashed changes:Frontend/src/components/Root/Login.vue
     width:100%;
     height: 200px;
     border-radius: 0 0 100% 100%;
     background-color: yellow;
     margin-top:-130px;
   }*/
+
+  .button {
+    font: bold 12px;
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+  }
+
+  .gradient {
+      background-image: linear-gradient(#e9685b, #e03459);
+  }
 
 </style>
