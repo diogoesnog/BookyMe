@@ -10,8 +10,7 @@
     <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
       <br/>
-      <p>{{$t('loginPage.noAccount')}}</p>
-      <span @click="loginForm = !loginForm"><b>{{$t('loginPage.createAccount')}}</b></span>
+      <span @click="loginForm = !loginForm"><q-btn color="secondary" icon="how_to_reg" :label="$t('loginPage.noAccount')"></q-btn></span>
     </div>
 
     <div v-else>
@@ -33,8 +32,8 @@
 </template>
 
 <script>
-  import LoginForm from '../components/Root/Login'
-  import RegisterForm from '../components/Root/Register';
+  import LoginForm from 'components/Root/LoginForm'
+  import RegisterForm from 'components/Root/RegisterForm';
   export default {
     name: "Login",
     components: { LoginForm, RegisterForm },

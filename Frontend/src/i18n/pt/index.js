@@ -1,15 +1,14 @@
  export default {
   // Login
   loginPage: {
-    title: "Bem Vindo!",
+    title: "Bem Vindo ao BookyMe!",
     description: "Inicie Sessão para ver todas as suas Reservas",
 
     username: "Username",
     password: "Password",
     login: "Iniciar Sessão",
 
-    noAccount: "Ainda não possui uma conta?",
-    createAccount: "Criar Conta"
+    noAccount: "Não possui uma conta? Crie agora"
   },
 
   // Register
