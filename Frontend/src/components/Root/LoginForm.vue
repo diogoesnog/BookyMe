@@ -1,5 +1,5 @@
 <template>
-  <div> 
+  <div>
     <h3>
       {{$t('loginPage.title')}}
     </h3>
