@@ -22,7 +22,7 @@ export default {
     email: "E-mail Address",
     address: "Address",
     city: "State",
-    zipCode: "Zip Code",
+    postalCode: "Zip Code",
     password: "Password",
     confirmPassword: "Confirm Password",
 
