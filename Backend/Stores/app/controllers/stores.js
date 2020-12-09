@@ -9,6 +9,10 @@ module.exports.getStore = (id) => {
     return Store.findOne({_id: id});
 }
 
+module.exports.getCategoryRatings = (cat) => {
+    return Store.find({category: cat}).sort({rating: -1}).exec();
+}
+
 module.exports.getResults = (term) => {
     return Store.find({
         "$or": [

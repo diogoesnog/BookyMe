@@ -10,6 +10,19 @@ const upload = multer({ dest: 'uploads/' })
  * Get Stores
  */
 
+
+app.get('/:category/ratings', async (req, res) => {
+
+    Stores.getCategoryRatings(req.params.category)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
 app.get('/categories', async (req, res) => {
 
     Stores.getCategories()
@@ -120,7 +133,6 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
     let oldPath = __dirname + '/../../../' + req.file.path
     let newPath = __dirname + '/../../public/logos/' + req.params.id + req.file.originalname 
 
-    console.log(newPath);
     fs.rename(oldPath, newPath, function (err) {
         if (err) throw err
     })
