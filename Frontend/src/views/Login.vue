@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> 
     <q-select
       v-model="lang"
       :options="langOptions"
@@ -7,20 +7,25 @@
 
     </q-select>
 
-    <div v-if="loginForm" class="centerDiv">
+    <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
       <br/>
-      <span @click="loginForm = !loginForm"><q-btn color="secondary" icon="how_to_reg" :label="$t('loginPage.noAccount')"></q-btn></span>
+      <p>
+        {{$t('loginPage.noAccount')}}
+        <span @click="loginForm = !loginForm">
+          <b>{{$t('loginPage.createAccount')}}</b>
+        </span>
+      </p>
     </div>
 
     <div v-else>
+      <q-btn class="glossy" round color="red-6" icon="fas fa-angle-left" style="margin-left:20px;margin-top:10px; position: absolute; z-index:999" @click="loginForm = !loginForm" />
       <RegisterForm/>
       <!-- <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
         {{ $t('commonButtons.cancel')}}
       </q-btn> -->
       <p class="text-center" style="margin-top:35px">{{$t('registerPage.alreadyHasAccount')}}</p>
       <span class="absolute-center" style="margin-top:95%" @click="loginForm = !loginForm"> <b>{{$t('registerPage.login')}}</b></span>
-
     </div>
   </div>
 </template>
@@ -53,13 +58,14 @@
 
 <style scoped>
 
-.centerDiv {
-  width: 75%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+  .centerDiv {
+    width: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 
 </style>
