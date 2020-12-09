@@ -23,11 +23,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log("Going to ", to);
-  this.$cookies.set('test', 'value');
+  window.$cookies.set('test', 'value');
   if(to.matched.some(record => record.meta.requiresAuth) &&
-      this.$cookies.get('Authorization') == null) {
+      window.$cookies.get('Authorization') == null) {
 
-    if(this.$cookies.get('Authorization') === null) {
+    if(window.$cookies.get('Authorization') === null) {
       console.log("Unauthorized");
       next('/');
     }
