@@ -1,21 +1,4 @@
 <template>
-<<<<<<< Updated upstream:Frontend/src/components/Root/LoginForm.vue
-  <div>
-    <h3>
-      {{$t('loginPage.title')}}
-    </h3>
-
-    <h4>{{$t('loginPage.description')}}</h4>
-
-    <q-form>
-      <q-input :label="$t('loginPage.username')" v-model="user.email" type="text"></q-input>
-      <q-input :label="$t('loginPage.password')" v-model="user.password" type="password"></q-input>
-      <br/>
-      <q-btn push color="primary" @click="handleLogin" style="width: 100%">
-        {{ $t('loginPage.login') }}
-      </q-btn>
-    </q-form>
-=======
   <div> 
     <div>
       <h3 align-center>
@@ -44,7 +27,6 @@
         </q-btn>
       </q-form>
     </div>
->>>>>>> Stashed changes:Frontend/src/components/Root/Login.vue
   </div>
 </template>
 
