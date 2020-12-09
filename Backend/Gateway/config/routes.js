@@ -7,6 +7,7 @@ const docs = require('./swagger');
 
 // API v1 Routes
 app.use('/users', require('../app/routes/api/user'));
+app.use('/stores', require('../app/routes/api/store'));
 
 // Documentation
 app.use('/documentation', swaggerUI.serve, swaggerUI.setup(docs));

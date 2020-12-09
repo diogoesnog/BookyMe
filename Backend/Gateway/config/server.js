@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 
+const Response = require('rapid-status');
+
 // Server Addons
 // Parsers
 const cookieParser = require('cookie-parser');
@@ -51,13 +53,14 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    console.log("Error Handler");
+    console.log(err.message);
 
-    // render the error page
-    res.status(err.status || 500);
-    res.jsonp({title: "Error!", message: err.message});
+    let response = Response.INTERNAL_ERROR(env === "dev" ? err : null, err.message);
+
+    res.status(response.status);
+    res.json(response);
+
 });
 
 module.exports = app;

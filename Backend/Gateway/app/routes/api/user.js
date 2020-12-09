@@ -9,6 +9,8 @@ const { validator } = require('../../middlewares/checkBody');
  * /users/register:
  *   post:
  *     description: Use to create a new account
+ *     tags:
+ *        - User
  *     consumes:
  *        - "application/json"
  *     produces:
@@ -69,6 +71,8 @@ router.post('/register', validator([
  * /users/login:
  *   post:
  *     description: Endpoint for User Authentication
+ *     tags:
+ *        - User
  *     consumes:
  *        - "application/json"
  *     produces:
@@ -114,7 +118,33 @@ router.post('/login', validator([
         }).catch(err => res.status(err.status).jsonp(err.data));
 });
 
-
+/**
+ * @swagger
+ * /users/account:
+ *  put:
+ *      description: Endpoint to update users information
+ *      tags:
+ *          - User
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          description: Update user full name and address
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - name
+ *                  - address
+ *              properties:
+ *                  name:
+ *                      type: string
+ *                  address:
+ *                      type: string
+ *
+ */
 router.put('/account', validator([
     'name', 'address'
 ]), (req, res) => {
