@@ -120,6 +120,7 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
     let oldPath = __dirname + '/../../../' + req.file.path
     let newPath = __dirname + '/../../public/logos/' + req.params.id + req.file.originalname 
 
+    console.log(newPath);
     fs.rename(oldPath, newPath, function (err) {
         if (err) throw err
     })
