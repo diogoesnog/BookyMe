@@ -1,4 +1,4 @@
-import Requests from '../utils/Request';
+import Request from '../utils/Request';
 
 export default class Services {
 
