@@ -74,9 +74,6 @@ export default {
 
 <style scoped>
 
-<<<<<<< Updated upstream:Frontend/src/components/Root/LoginForm.vue
-/*  .circle{
-=======
   .shadow {
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
@@ -84,13 +81,12 @@ export default {
   }
 
   .circle{
->>>>>>> Stashed changes:Frontend/src/components/Root/Login.vue
     width:100%;
     height: 200px;
     border-radius: 0 0 100% 100%;
     background-color: yellow;
     margin-top:-130px;
-  }*/
+  }
 
   .button {
     font: bold 12px;
