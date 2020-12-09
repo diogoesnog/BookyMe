@@ -5,6 +5,23 @@ const Response = require('rapid-status');
 
 
 
+app.get('/:storeID/ratings', async (req, res) => {
+
+    
+    let response;
+    Reviews.getRatings(req.params.storeID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch store ratings');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+
 app.get('/store/:storeID', async (req, res) => {
 
     
