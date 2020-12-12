@@ -1,6 +1,9 @@
 "use strict";
 
 const fetch = require('node-fetch');
+const FormData = require('form-data');
+const fs = require('fs');
+const path = require('path');
 
 class Request {
     /**
@@ -11,9 +14,38 @@ class Request {
         this.url =      url;
         this.method =   "";
         this.options =  {};
-        this.body =     {};
+        this.body =     null;
         this.headers =  {};
         this.params =   {};
+        this.contentType = null;
+    }
+
+    // Content Types
+    isJson() {
+        this.contentType = "application/json";
+    }
+
+    isPlainText() {
+        this.contentType = "text/plain";
+    }
+
+    isUrlencoded() {
+        this.contentType = "application/x-www-form-urlencoded";
+    }
+
+    isMultipart() {
+        this.contentType = "multipart/form-data";
+    }
+
+    // TODO: come out with a better solution for file uploads
+    uploadMedia(field, file) {
+        this.isMultipart();
+        let form = new FormData();
+        let filePath = path.resolve(file.path);
+        form.append(field, fs.createReadStream(filePath));
+        this.body = form;
+
+        return this._request("POST");
     }
 
     /**
@@ -42,6 +74,11 @@ class Request {
     put(body) {
         this.body = body;
         return this._request("PUT");
+    }
+
+    patch(body) {
+        this.body = body;
+        return this._request("PATCH");
     }
 
     delete() {
@@ -118,8 +155,8 @@ class Request {
             fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
+                    // 'Content-Type': this.contentType,
+                    //'Accept': 'application/json',
                     ...this.headers
                 },
                 body: this.body
@@ -138,6 +175,11 @@ class Request {
                             reject(resObj);
                         }
                     });
+            }).catch(err => {
+                reject({
+                    status: 500,
+                    data: err
+                });
             });
         });
     }

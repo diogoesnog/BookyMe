@@ -2,15 +2,15 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../services/users');
 const { validator } = require('../../middlewares/checkBody');
-const swaggerDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
-
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * @swagger
  * /users/register:
  *   post:
  *     description: Use to create a new account
+ *     tags:
+ *        - User
  *     consumes:
  *        - "application/json"
  *     produces:
@@ -25,6 +25,9 @@ const swaggerUI = require('swagger-ui-express');
  *                  - name
  *                  - username
  *                  - email
+ *                  - address
+ *                  - city
+ *                  - zipCode
  *                  - password
  *              properties:
  *                  name:
@@ -32,6 +35,12 @@ const swaggerUI = require('swagger-ui-express');
  *                  username:
  *                      type: string
  *                  email:
+ *                      type: string
+ *                  address:
+ *                      type: string
+ *                  city:
+ *                      type: string
+ *                  zipCode:
  *                      type: string
  *                  password:
  *                      type: string
@@ -45,7 +54,7 @@ const swaggerUI = require('swagger-ui-express');
  *
  */
 router.post('/register', validator([
-    "name", "username", "email", "password"
+    "name", "username", "email", "address", "city", "zipCode", "password"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
 
@@ -62,6 +71,8 @@ router.post('/register', validator([
  * /users/login:
  *   post:
  *     description: Endpoint for User Authentication
+ *     tags:
+ *        - User
  *     consumes:
  *        - "application/json"
  *     produces:
@@ -104,9 +115,61 @@ router.post('/login', validator([
             res.setHeader('Authorization', response.headers.get('authorization'));
 
             res.status(response.status).jsonp(response.data);
-        }).catch(err => {
-            res.status(err.status).jsonp(err.data);
-        });
+        }).catch(err => res.status(err.status).jsonp(err.data));
+});
+
+/**
+ * @swagger
+ * /users/account:
+ *  put:
+ *      description: Endpoint to update users information
+ *      tags:
+ *          - User
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          description: Update user full name and address
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - name
+ *                  - address
+ *              properties:
+ *                  name:
+ *                      type: string
+ *                  address:
+ *                      type: string
+ *
+ */
+router.put('/account', checkAuth, validator([
+    'name', 'address'
+]), (req, res) => {
+    let body = JSON.stringify(req.body);
+    let header = {
+        Authorization: req.headers.authorization || req.headers.Authorization
+    }
+
+    User.updateAccount(header, body)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status).jsonp(err.data));
+});
+
+router.patch('/password', checkAuth, validator([
+    'oldPassword', 'newPassword'
+]), (req, res) => {
+
+    let body = JSON.stringify(req.body);
+    let header = {
+        Authorization: req.headers.authorization || req.headers.Authorization
+    }
+
+    User.updatePassword(header, body)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status).jsonp(err.data));
 });
 
 module.exports = router;
