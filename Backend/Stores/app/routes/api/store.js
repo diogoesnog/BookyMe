@@ -11,11 +11,6 @@ const checkAuth = require('../../middlewares/checkAuth');
  * Get Stores
  */
 
-app.get('/test', checkAuth, (req, res) => {
-
-    res.jsonp(req.user);
-});
-
 app.get('/:category/ratings', async (req, res) => {
 
     Stores.getCategoryRatings(req.params.category)
