@@ -5,11 +5,16 @@ const Response = require('rapid-status');
 const fs = require('fs');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * Get Stores
  */
 
+app.get('/test', checkAuth, (req, res) => {
+
+    res.jsonp(req.user);
+});
 
 app.get('/:category/ratings', async (req, res) => {
 
@@ -307,7 +312,6 @@ app.delete('/:id/photos/:photoID', async (req, res) => {
 
 
 });
-
 
  
 
