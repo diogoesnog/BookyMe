@@ -1,20 +1,31 @@
 const Response = require('rapid-status');
+const User     = require('../services/users');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
 
-    let authorization = req.headers.authorization || req.headers.Authorization;
-    let response;
-    if(authorization) {
-        // TODO: Get User ID from AuthServer
+    try {
+        let authorization = req.headers.authorization || req.headers.Authorization;
+        let response;
 
-        // TODO: Check Token validation
+        if(authorization) {
+            let response = await User.validateToken(authorization);
 
-        // TODO: Next
-        next();
-    } else {
-        // Authorization header not provided
-        response = Response.TOKEN_REQUIRED(null, "An Authorization token must be provided to access this endpoint.");
+            if(response.status === 200) {
+                req.user = response.data["data"];
+                next();
 
-        res.status(response.status).jsonp(response);
+            } else {
+                res.status(response.status || 500).jsonp(response);
+            }
+
+        } else {
+            // Authorization header not provided
+            response = Response.TOKEN_REQUIRED(null, "An Authorization token must be provided to access this endpoint.");
+
+            res.status(response.status).jsonp(response);
+        }
+    } catch (err) {
+        res.status(err.status || 500).jsonp(err);
     }
+
 }

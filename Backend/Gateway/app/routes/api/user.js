@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../services/users');
 const { validator } = require('../../middlewares/checkBody');
-
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * @swagger
@@ -172,5 +172,10 @@ router.patch('/password', validator([
         .catch(err => res.status(err.status).jsonp(err.data));
 });
 
+
+router.get('/', checkAuth, (req, res) => {
+    console.log(req.user);
+    res.jsonp(req.user);
+})
 
 module.exports = router;

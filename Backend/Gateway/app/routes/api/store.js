@@ -6,6 +6,7 @@ const MulterFiles = require('../../utils/MulterFiles');
 const uploader = new MulterFiles('stores');
 const upload = uploader.getUploader();
 const fs = require('fs');
+const checkAuth = require("../../middlewares/checkAuth");
 
 
 /**
@@ -21,7 +22,7 @@ const fs = require('fs');
  *          - "application/json"
  *
  */
-router.get('/', (req, res) => {
+router.get('/', checkAuth, (req, res) => {
     Store.getAll()
         .then(response => {
             res.status(response.status).jsonp(response.data);

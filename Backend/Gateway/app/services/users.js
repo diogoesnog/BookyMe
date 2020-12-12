@@ -30,3 +30,13 @@ module.exports.updatePassword = (headers, info) => {
 
     return request.patch(info);
 }
+
+module.exports.validateToken = (token) => {
+    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
+
+    request.setHeaders({
+        authorization: token
+    });
+
+    return request.get();
+}
