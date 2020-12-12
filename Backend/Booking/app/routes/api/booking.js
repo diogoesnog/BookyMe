@@ -2,8 +2,10 @@ const express = require('express');
 const app = express.Router();
 const Booking = require('../../controllers/booking');
 
+/**
+ * Get list of reservations
+ */
 app.get('/', (req, res) => {
-    const queries = req.query;
     Booking.getBookings()
         .then(data => {
             res.status(200).jsonp(data);
@@ -12,6 +14,18 @@ app.get('/', (req, res) => {
     });
 });
 
+/**
+ * Create a reservation
+ * body {array} with the following object
+ * {serviceDate}: Date,
+ * {userId}: String,
+ * {storeId}: String,
+ * {Schedule}: [
+ *      {day}: String, Monday/Tuesday/...
+ *      {openingHour}: String, HH:MM
+ *      {closingHour}: String, HH:MM
+ * ]
+ */
 app.post('/', async (req, res) => {
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
@@ -42,6 +56,10 @@ app.post('/', async (req, res) => {
     }
 });
 
+/**
+ * Delete a reservation by id
+ * URL param: id
+ */
 app.delete('/:id', (req, res) => {
     Booking.cancelBookings(req.params.id)
         .then(data => {
@@ -50,6 +68,17 @@ app.delete('/:id', (req, res) => {
         .catch(err => res.status(400).jsonp(err));
 });
 
+/**
+ * Reschedule booking reservation
+ * body {array} with the following object
+ * {id}: ObjectId,
+ * {serviceDate}: Date,
+ * {Schedule}: [
+ *      {day}: String, Monday/Tuesday/...
+ *      {openingHour}: String, HH:MM
+ *      {closingHour}: String, HH:MM
+ * ]
+ */
 app.put('/', async (req, res) => {
     const id = req.body.id;
     const bookingDate = new Date(Date.now()).toISOString();
