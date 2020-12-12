@@ -37,9 +37,9 @@ app.post('/', async (req, res) => {
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
         res.status(400).jsonp({msg: "Invalid Date"});
     }
-    else if (await Booking.dateExists(booking.serviceDate, booking.storeId)) {
-        res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
-    }
+    // else if (await Booking.dateExists(booking.serviceDate, booking.storeId)) {
+    //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
+    // }
     else {
         serviceOpen = isOpen(new Date(booking.serviceDate), req.body.schedule);
 
@@ -88,9 +88,9 @@ app.put('/', async (req, res) => {
     if (new Date(Date.now()) > new Date(serviceDate)) {
         res.status(400).jsonp({msg: "Invalid Date"});
     }
-    else if (await Booking.dateExists(serviceDate, storeId)) {
-        res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
-    }
+    // else if (await Booking.dateExists(serviceDate, storeId)) {
+    //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
+    // }
     else {
         serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
 
