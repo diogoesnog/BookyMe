@@ -1,15 +1,14 @@
 export default {
   // Login
   loginPage: {
-    title: "Welcome!",
+    title: "Welcome to BookyMe!",
     description: "Sign-In to view all your bookings",
 
     username: "Username",
     password: "Password",
     login: "Sign-In",
 
-    noAccount: "Still have no account?",
-    createAccount: "Sign-Up"
+    noAccount: "No account? Create one now"
   },
 
   // Register
@@ -22,7 +21,7 @@ export default {
     email: "E-mail Address",
     address: "Address",
     city: "State",
-    zipCode: "Zip Code",
+    postalCode: "Zip Code",
     password: "Password",
     confirmPassword: "Confirm Password",
 

@@ -119,7 +119,6 @@ router.get('/validation', checkAuth, (req, res) => {
 });
 
 
-
 router.put('/account',checkAuth, async (req, res) => {
     let response;
     let userAuth = {
