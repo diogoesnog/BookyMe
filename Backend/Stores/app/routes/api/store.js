@@ -9,7 +9,7 @@ const upload = multer({ dest: 'uploads/' })
 /**
  * Get Stores
  */
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     let response;
     let query = req.query;
     Stores.get(query)

@@ -14,7 +14,7 @@ class Request {
         this.url =          url;
         this.method =       "";
         this.options =      {};
-        this.body =         {};
+        this.body =         null;
         this.headers =      {};
         this.params =       {};
         this.contentType =  null;
@@ -38,6 +38,18 @@ class Request {
     isMultipart() {
         this.contentType = "multipart/form-data";
     }
+
+    // Accepts
+    acceptJson() {
+        this.accept = "application/json";
+    }
+    acceptPlainText() {
+        this.accept = "text/plain";
+    }
+    acceptXml() {
+        this.accept = "application/xml";
+    }
+
 
     // TODO: come out with a better solution for file uploads
     uploadMedia(field, file) {
