@@ -36,6 +36,7 @@ services:
       - bookyme-network
     depends_on:
       - mongo-users
+
   storeservice:
     container_name: store-service
     restart: always
@@ -67,19 +68,20 @@ services:
       - bookyme-network
     ports: 
       - "3220:3220"
+
   # Stores
   mongo-stores:
-    container: mongo-stores
+    container_name: mongo-stores
     restart: on-failure
     image: mongo
-    command: mongod 3221
+    command: mongod --port 3221
     volumes:
-      - ./seed/Users/init.js:/docker-entrypoint-initdb.d/init.js:ro
+      - ./seed/Stores/init.js:/docker-entrypoint-initdb.d/init.js:ro
       - data-volume:/data-db
     networks:
       - bookyme-network
     ports:
-      "3221:3221"
+      - "3221:3221"
 
 volumes:
   data-volume: 

@@ -1,4 +1,8 @@
-[{
+db = db.getSiblingDB("BookymeStores");
+
+db.createCollection("stores");
+
+db.stores.insertMany([{
   "_id": "5fcbe79eacd2bb2326ca7a19",
   "verified": false,
   "hasPlant": false,
@@ -213,4 +217,4 @@
   "photos": [],
   "__v": 0,
   "phone": 253220230
-}]
+}]);
