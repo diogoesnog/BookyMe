@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express.Router();
 const Booking = require('../../controllers/booking');
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * Get list of reservations
