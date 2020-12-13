@@ -11,18 +11,20 @@ class Request {
      * @param url base endpoint
      */
     constructor(url) {
-        this.url =      url;
-        this.method =   "";
-        this.options =  {};
-        this.body =     null;
-        this.headers =  {};
-        this.params =   {};
-        this.contentType = null;
+        this.url =          url;
+        this.method =       "";
+        this.options =      {};
+        this.body =         {};
+        this.headers =      {};
+        this.params =       {};
+        this.contentType =  null;
+        this.accept =       null
     }
 
     // Content Types
     isJson() {
         this.contentType = "application/json";
+        this.accept = "application/json";
     }
 
     isPlainText() {
@@ -151,15 +153,19 @@ class Request {
 
     _request(method) {
         let url = `${this.url}${this._getQueryString()}`
+        let self = this;
+        let body = self.body;
         return new Promise((resolve, reject) => {
             fetch(url, {
                 method: method,
                 headers: {
                     // 'Content-Type': this.contentType,
                     //'Accept': 'application/json',
-                    ...this.headers
+                    "Content-Type": self.contentType,
+                    "Accept": self.accept,
+                    ...self.headers
                 },
-                body: this.body
+                body: self.body
             }).then(response => {
                 return response.json()
                     .then(json => {
