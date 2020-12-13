@@ -4,6 +4,7 @@ const Request = require('../utils/Request');
 module.exports.getAll = () => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
     request.isJson();
+
     return request.get();
 }
 
@@ -35,30 +36,35 @@ module.exports.uploadPicture = (store, picture) => {
 
 module.exports.insertSchedule = (store, schedule) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/schedule`);
+    request.isJson();
 
     return request.post(schedule);
 }
 
 module.exports.updateDescription = (store, description) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/description`);
+    request.isJson();
     // TODO: change from post to patch on service
     return request.post(description);
 }
 
 module.exports.updateAddress = (store, address) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/address`);
+    request.isJson();
     // TODO: change from post to patch on service
     return request.post(address);
 }
 
 module.exports.updatePhone = (store, phone) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/phone`);
+    request.isJson();
     // TODO: change from post to patch on service
     return request.post(phone);
 }
 
 module.exports.addCoordinates = (store, coordinates) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/coordinates`);
+    request.isJson();
 
     return request.post(coordinates);
 }

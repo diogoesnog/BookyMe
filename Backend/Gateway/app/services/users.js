@@ -19,22 +19,22 @@ module.exports.register = (user) => {
 }
 
 
-module.exports.updateAccount = (headers, info) => {
+module.exports.updateAccount = (token, info) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/account`);
 
     request.isJson();
 
-    request.setHeaders(headers);
+    request.appendHeader("Authorization", token);
 
     return request.put(info);
 }
 
-module.exports.updatePassword = (headers, info) => {
+module.exports.updatePassword = (token, info) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/password`);
 
     request.isJson();
 
-    request.setHeaders(headers);
+    request.appendHeader("Authorization", token);
 
     return request.patch(info);
 }
@@ -43,10 +43,7 @@ module.exports.validateToken = (token) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
 
     request.isJson();
-
-    request.setHeaders({
-        authorization: token
-    });
+    request.appendHeader("Authorization", token);
 
     return request.get();
 }

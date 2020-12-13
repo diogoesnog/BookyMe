@@ -23,37 +23,36 @@ class Request {
 
     // Content Types
     isJson() {
-        this.contentType = "application/json";
-        this.accept = "application/json";
+        this.headers["Content-Type"] = "application/json";
     }
 
     isPlainText() {
-        this.contentType = "text/plain";
+        this.headers["Content-Type"] = "text/plain";
     }
 
     isUrlencoded() {
-        this.contentType = "application/x-www-form-urlencoded";
+        this.headers["Content-Type"] = "application/x-www-form-urlencoded";
     }
 
     isMultipart() {
-        this.contentType = "multipart/form-data";
+        this.headers["Content-Type"] = "multipart/form-data";
     }
 
     // Accepts
     acceptJson() {
-        this.accept = "application/json";
+        this.headers["Accept"] = "application/json"
     }
     acceptPlainText() {
-        this.accept = "text/plain";
+        this.headers["Accept"] = "text/plain";
     }
     acceptXml() {
-        this.accept = "application/xml";
+        this.headers["Accept"] = "application/xml";
     }
 
 
     // TODO: come out with a better solution for file uploads
     uploadMedia(field, file) {
-        // this.isMultipart();
+        this.removeHeader("Content-Type");
 
         let form = new FormData();
 
@@ -163,18 +162,22 @@ class Request {
         this.headers[id] = value;
     }
 
+    removeHeader(id) {
+        delete this.headers[id];
+    }
+
 
 
     _request(method) {
         let url = `${this.url}${this._getQueryString()}`
         let self = this;
-        let headers: {}
+
         return new Promise((resolve, reject) => {
             fetch(url, {
                 method: method,
                 headers: {
                     // "Content-Type": self.contentType,
-                    "Accept": self.accept,
+                    // "Accept": self.accept,
                     ...self.headers
                 },
                 body: self.body
