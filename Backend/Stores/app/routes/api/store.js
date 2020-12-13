@@ -27,7 +27,14 @@ app.get('/favourites/:userId', async (req, res) => {
 
 app.get('/categories/results', async (req, res) => {
 
-    
+    Stores.getCategoriesResults()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
 
 });
 
@@ -131,6 +138,7 @@ app.post('/', (req, res) => {
 
     const store = {
         name: req.body.name,
+        verified: true,
         category: req.body.category,
         description: req.body.description,
         address: address

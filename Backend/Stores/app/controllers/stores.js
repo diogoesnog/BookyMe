@@ -13,6 +13,12 @@ module.exports.getCategoryRatings = (cat) => {
     return Store.find({category: cat}).sort({rating: -1}).exec();
 }
 
+module.exports.getCategoriesResults = () => {
+    return Store
+                .aggregate([{$group: {_id: "$category", count: {$sum: 1} }}])
+                .exec()
+}
+
 module.exports.getResults = (term) => {
     return Store.find({
         "$or": [
