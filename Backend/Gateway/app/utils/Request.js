@@ -1,6 +1,9 @@
 "use strict";
 
 const fetch = require('node-fetch');
+const FormData = require('form-data');
+const fs = require('fs');
+const path = require('path');
 
 class Request {
     /**
@@ -8,12 +11,43 @@ class Request {
      * @param url base endpoint
      */
     constructor(url) {
-        this.url =      url;
-        this.method =   "";
-        this.options =  {};
-        this.body =     {};
-        this.headers =  {};
-        this.params =   {};
+        this.url =          url;
+        this.method =       "";
+        this.options =      {};
+        this.body =         {};
+        this.headers =      {};
+        this.params =       {};
+        this.contentType =  null;
+        this.accept =       null
+    }
+
+    // Content Types
+    isJson() {
+        this.contentType = "application/json";
+        this.accept = "application/json";
+    }
+
+    isPlainText() {
+        this.contentType = "text/plain";
+    }
+
+    isUrlencoded() {
+        this.contentType = "application/x-www-form-urlencoded";
+    }
+
+    isMultipart() {
+        this.contentType = "multipart/form-data";
+    }
+
+    // TODO: come out with a better solution for file uploads
+    uploadMedia(field, file) {
+        this.isMultipart();
+        let form = new FormData();
+        let filePath = path.resolve(file.path);
+        form.append(field, fs.createReadStream(filePath));
+        this.body = form;
+
+        return this._request("POST");
     }
 
     /**
@@ -119,15 +153,19 @@ class Request {
 
     _request(method) {
         let url = `${this.url}${this._getQueryString()}`
+        let self = this;
+        let body = self.body;
         return new Promise((resolve, reject) => {
             fetch(url, {
                 method: method,
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    ...this.headers
+                    // 'Content-Type': this.contentType,
+                    //'Accept': 'application/json',
+                    "Content-Type": self.contentType,
+                    "Accept": self.accept,
+                    ...self.headers
                 },
-                body: this.body
+                body: self.body
             }).then(response => {
                 return response.json()
                     .then(json => {
@@ -143,6 +181,11 @@ class Request {
                             reject(resObj);
                         }
                     });
+            }).catch(err => {
+                reject({
+                    status: 500,
+                    data: err
+                });
             });
         });
     }

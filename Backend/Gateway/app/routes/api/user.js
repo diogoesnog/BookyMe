@@ -2,13 +2,15 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../services/users');
 const { validator } = require('../../middlewares/checkBody');
-
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * @swagger
  * /users/register:
  *   post:
  *     description: Use to create a new account
+ *     tags:
+ *        - User
  *     consumes:
  *        - "application/json"
  *     produces:
@@ -69,6 +71,8 @@ router.post('/register', validator([
  * /users/login:
  *   post:
  *     description: Endpoint for User Authentication
+ *     tags:
+ *        - User
  *     consumes:
  *        - "application/json"
  *     produces:
@@ -114,8 +118,34 @@ router.post('/login', validator([
         }).catch(err => res.status(err.status).jsonp(err.data));
 });
 
-
-router.put('/account', validator([
+/**
+ * @swagger
+ * /users/account:
+ *  put:
+ *      description: Endpoint to update users information
+ *      tags:
+ *          - User
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          description: Update user full name and address
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - name
+ *                  - address
+ *              properties:
+ *                  name:
+ *                      type: string
+ *                  address:
+ *                      type: string
+ *
+ */
+router.put('/account', checkAuth, validator([
     'name', 'address'
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
@@ -128,7 +158,7 @@ router.put('/account', validator([
         .catch(err => res.status(err.status).jsonp(err.data));
 });
 
-router.patch('/password', validator([
+router.patch('/password', checkAuth, validator([
     'oldPassword', 'newPassword'
 ]), (req, res) => {
 
@@ -141,6 +171,5 @@ router.patch('/password', validator([
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status).jsonp(err.data));
 });
-
 
 module.exports = router;
