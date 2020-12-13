@@ -6,10 +6,6 @@ module.exports.getReviews = (id) => {
     return Review.find({storeID: id});
 }
 
-module.exports.getPopular = () => {
-    //on the making
-    return Review.aggregate();
-}
 
 module.exports.getRatings = (id) => {
     return Review

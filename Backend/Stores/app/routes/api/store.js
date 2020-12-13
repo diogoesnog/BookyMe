@@ -11,6 +11,26 @@ const checkAuth = require('../../middlewares/checkAuth');
  * Get Stores
  */
 
+
+app.get('/popular', async (req, res) => {
+
+    // Node fetch to booking for the most reserved stores
+
+});
+
+
+app.get('/favourites/:userId', async (req, res) => {
+
+    // Node fetch to users for storeId lists
+
+});
+
+app.get('/categories/results', async (req, res) => {
+
+    
+
+});
+
 app.get('/:category/ratings', async (req, res) => {
 
     Stores.getCategoryRatings(req.params.category)
