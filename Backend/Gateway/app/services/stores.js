@@ -26,3 +26,51 @@ module.exports.uploadLogo = (store, logo) => {
 
     return request.uploadMedia("logo", logo);
 }
+
+module.exports.uploadPicture = (store, picture) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/picture`);
+
+    return request.uploadMedia("picture", picture);
+}
+
+module.exports.insertSchedule = (store, schedule) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/schedule`);
+
+    return request.post(schedule);
+}
+
+module.exports.updateDescription = (store, description) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/description`);
+    // TODO: change from post to patch on service
+    return request.post(description);
+}
+
+module.exports.updateAddress = (store, address) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/address`);
+    // TODO: change from post to patch on service
+    return request.post(address);
+}
+
+module.exports.updatePhone = (store, phone) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/phone`);
+    // TODO: change from post to patch on service
+    return request.post(phone);
+}
+
+module.exports.addCoordinates = (store, coordinates) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/coordinates`);
+
+    return request.post(coordinates);
+}
+
+module.exports.deleteOne = (store) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}`);
+
+    return request.delete();
+}
+
+module.exports.deletePhoto = (store, photo) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photos/${photo}`);
+
+    return request.delete();
+}
