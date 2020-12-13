@@ -164,8 +164,7 @@ router.patch('/:id/phone', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 })
 
-// TODO: test this endpoint
-router.post(`/:id/coordinates`, validator([
+router.post('/:id/coordinates', validator([
     "lat", "long"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
@@ -175,7 +174,6 @@ router.post(`/:id/coordinates`, validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: test this endpoint
 router.delete('/:id', (req, res) => {
 
     Store.deleteOne(req.params.id)
