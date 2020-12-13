@@ -5,10 +5,32 @@ module.exports.get = (query, projection) => {
     return Store.find(query, projection);
 }
 
-module.exports.insertReview = (id, review) => {
-    return Store.updateOne({_id: id},{$push: {reviews: review}});
+module.exports.getStore = (id) => {
+    return Store.findOne({_id: id});
 }
 
+module.exports.getCategoryRatings = (cat) => {
+    return Store.find({category: cat}).sort({rating: -1}).exec();
+}
+
+module.exports.getResults = (term) => {
+    return Store.find({
+        "$or": [
+            { name: { '$regex': term, '$options': 'i' } },
+            { description: { '$regex': term, '$options': 'i' } }
+        ]
+    })
+}
+
+module.exports.getCategories = async () => {
+    return Store.schema.path('category').enumValues
+    
+}
+
+module.exports.getRecommended = async () => {
+    return Store.find().sort({category: -1})   
+    
+}
 
 module.exports.insertSchedule = (id, s) => {    
     return Store.updateOne({_id: id, 'schedule.day': {$ne: s.day}},{$push: {schedule: s}})

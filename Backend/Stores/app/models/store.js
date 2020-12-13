@@ -32,6 +32,20 @@ const schedule = new mongoose.Schema({
     }
 })
 
+const address = new mongoose.Schema({
+    place: {
+        type: String
+    },
+    zipcode: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    country: {
+        type: String
+    }
+})
 
 
 const storeSchema = new mongoose.Schema({
@@ -60,6 +74,7 @@ const storeSchema = new mongoose.Schema({
 
     category: {
         type: String,
+        enum: ['Restaurante', 'Cabeleireiro', 'Spa', 'Estética', 'Ginásio'],
         required: true
     },
 
@@ -71,10 +86,7 @@ const storeSchema = new mongoose.Schema({
 
     schedule: [schedule],
 
-    address: {
-        type: String,
-        required: true
-    },
+    address: address,
 
     latitude: {
         type: Number,
