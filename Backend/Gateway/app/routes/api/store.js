@@ -90,7 +90,8 @@ router.post('/:id/logo', upload.single('file'), async (req, res) => {
         res.status(response.status).jsonp(response);
 
     } catch (err) {
-        res.status(response.status || 500).jsonp(err);
+
+        res.status(err.status || 500).jsonp(err);
     }
 });
 

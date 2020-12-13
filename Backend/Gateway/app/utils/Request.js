@@ -53,8 +53,10 @@ class Request {
 
     // TODO: come out with a better solution for file uploads
     uploadMedia(field, file) {
-        this.isMultipart();
+        // this.isMultipart();
+
         let form = new FormData();
+
         let filePath = path.resolve(file.path);
         form.append(field, fs.createReadStream(filePath));
         this.body = form;
@@ -166,14 +168,12 @@ class Request {
     _request(method) {
         let url = `${this.url}${this._getQueryString()}`
         let self = this;
-        let body = self.body;
+        let headers: {}
         return new Promise((resolve, reject) => {
             fetch(url, {
                 method: method,
                 headers: {
-                    // 'Content-Type': this.contentType,
-                    //'Accept': 'application/json',
-                    "Content-Type": self.contentType,
+                    // "Content-Type": self.contentType,
                     "Accept": self.accept,
                     ...self.headers
                 },
