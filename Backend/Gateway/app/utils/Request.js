@@ -11,36 +11,51 @@ class Request {
      * @param url base endpoint
      */
     constructor(url) {
-        this.url =      url;
-        this.method =   "";
-        this.options =  {};
-        this.body =     null;
-        this.headers =  {};
-        this.params =   {};
-        this.contentType = null;
+        this.url =          url;
+        this.method =       "";
+        this.options =      {};
+        this.body =         null;
+        this.headers =      {};
+        this.params =       {};
+        this.contentType =  null;
+        this.accept =       null
     }
 
     // Content Types
     isJson() {
-        this.contentType = "application/json";
+        this.headers["Content-Type"] = "application/json";
     }
 
     isPlainText() {
-        this.contentType = "text/plain";
+        this.headers["Content-Type"] = "text/plain";
     }
 
     isUrlencoded() {
-        this.contentType = "application/x-www-form-urlencoded";
+        this.headers["Content-Type"] = "application/x-www-form-urlencoded";
     }
 
     isMultipart() {
-        this.contentType = "multipart/form-data";
+        this.headers["Content-Type"] = "multipart/form-data";
     }
+
+    // Accepts
+    acceptJson() {
+        this.headers["Accept"] = "application/json"
+    }
+    acceptPlainText() {
+        this.headers["Accept"] = "text/plain";
+    }
+    acceptXml() {
+        this.headers["Accept"] = "application/xml";
+    }
+
 
     // TODO: come out with a better solution for file uploads
     uploadMedia(field, file) {
-        this.isMultipart();
+        this.removeHeader("Content-Type");
+
         let form = new FormData();
+
         let filePath = path.resolve(file.path);
         form.append(field, fs.createReadStream(filePath));
         this.body = form;
@@ -147,19 +162,25 @@ class Request {
         this.headers[id] = value;
     }
 
+    removeHeader(id) {
+        delete this.headers[id];
+    }
+
 
 
     _request(method) {
         let url = `${this.url}${this._getQueryString()}`
+        let self = this;
+
         return new Promise((resolve, reject) => {
             fetch(url, {
                 method: method,
                 headers: {
-                    // 'Content-Type': this.contentType,
-                    //'Accept': 'application/json',
-                    ...this.headers
+                    // "Content-Type": self.contentType,
+                    // "Accept": self.accept,
+                    ...self.headers
                 },
-                body: this.body
+                body: self.body
             }).then(response => {
                 return response.json()
                     .then(json => {
