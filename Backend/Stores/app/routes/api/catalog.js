@@ -2,9 +2,7 @@ const express = require('express');
 const app = express.Router();
 const Catalogs = require('../../controllers/catalogs');
 const Response = require('rapid-status');
-const fs = require('fs');
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+
 
 app.get('/store/:storeID', async (req, res) => {
 
