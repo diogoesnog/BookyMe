@@ -5,6 +5,7 @@ const Response = require('rapid-status');
 const fs = require('fs');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
+const fetch = require('node-fetch');
 const checkAuth = require('../../middlewares/checkAuth');
 
 /**

@@ -1,5 +1,6 @@
 const Store = require('../models/store');
-
+const Plant = require ('../models/plant')
+const Review = require('../models/review')
 
 module.exports.get = (query, projection) => {
     return Store.find(query, projection);
@@ -55,7 +56,9 @@ module.exports.editLogo = (id, l) => {
     return Store.updateOne({_id: id},{$set: {logo: l}})
 }
 
-module.exports.removeStore = (id) => {
+module.exports.removeStore = async (id) => {
+    await Review.remove({storeID: id})
+    await Plant.remove({storeID: id})
     return Store.remove({_id: id})
 }
 module.exports.editPicture = (id, pic) => {
