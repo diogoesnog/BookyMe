@@ -165,7 +165,7 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
         if (err) throw err
     })
 
-    imagePath = '/app/public/logos/' + req.params.id + req.file.originalname 
+    let imagePath = '/app/public/logos/' + req.params.id + req.file.originalname
 
     const logo = {
         title: req.body.title,

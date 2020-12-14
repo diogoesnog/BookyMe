@@ -1,19 +1,19 @@
 // Express Server Framework
 const express = require('express');
 const app = express();
-
 // Server Addons
 // Parsers
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const cookieParser  = require('cookie-parser');
+const bodyParser    = require('body-parser');
 // HTTP Errors
-const createError = require('http-errors');
+const createError   = require('http-errors');
 // Request Logger
-const logger = require('morgan');
+const logger        = require('morgan');
 // CORS Middleware
-const cors = require('cors');
+const cors          = require('cors');
 // MongoDB
 const mongoose      = require('mongoose');
+const path          = require('path');
 
 mongoose.connect(process.env.MONGO_CONNECTION, {
     useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
@@ -42,7 +42,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Public Files location
-app.use(express.static('./app/public'));
+// console.log(__dirname);
+console.log();
+let publicPath = path.join(__dirname, '../app/public')
+app.use('/public', express.static(publicPath) );
 
 // Configure CORS middleware
 const corsOptions = {
