@@ -4,6 +4,8 @@ module.exports.login = (user) => {
 
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/authentication`);
 
+    request.isJson();
+
     return request.post(user);
 }
 
@@ -11,22 +13,28 @@ module.exports.register = (user) => {
 
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/register`);
 
+    request.isJson();
+
     return request.post(user);
 }
 
 
-module.exports.updateAccount = (headers, info) => {
+module.exports.updateAccount = (token, info) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/account`);
 
-    request.setHeaders(headers);
+    request.isJson();
+
+    request.appendHeader("Authorization", token);
 
     return request.put(info);
 }
 
-module.exports.updatePassword = (headers, info) => {
+module.exports.updatePassword = (token, info) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/password`);
 
-    request.setHeaders(headers);
+    request.isJson();
+
+    request.appendHeader("Authorization", token);
 
     return request.patch(info);
 }
@@ -34,9 +42,8 @@ module.exports.updatePassword = (headers, info) => {
 module.exports.validateToken = (token) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
 
-    request.setHeaders({
-        authorization: token
-    });
+    request.isJson();
+    request.appendHeader("Authorization", token);
 
     return request.get();
 }

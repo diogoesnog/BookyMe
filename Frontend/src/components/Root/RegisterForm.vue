@@ -4,9 +4,9 @@
     <h4  class="text-center" style="font-weight: bold;">{{ $t('registerPage.title') }}</h4>
     <p class="text-center" v-html="$t('registerPage.description')"></p>
     <q-form>
-      <div class="row">
-        <div class="col-6">
-          <q-input rounded outlined :label="$t('registerPage.fullName')" v-model="user.name" type="text" style="width: 90%;" >
+      <div class="row" style="padding:15px">
+        <div class="col-6 " >
+          <q-input  rounded outlined  :label="$t('registerPage.fullName')" v-model="user.name" type="text" style="width: 90%;" color="light-blue-7" >
             <template v-slot:prepend>
               <q-icon name="fas fa-user"  color="grey-5" />
             </template>
@@ -14,7 +14,7 @@
         </div>
         <br>
         <div class="col-6">
-          <q-input rounded outlined :label="$t('registerPage.username')" v-model="user.username" type="text" style="width: 90%;">
+          <q-input  rounded outlined :label="$t('registerPage.username')" v-model="user.username" type="text" style="width: 90%;" color="light-blue-7" >
             <template v-slot:prepend>
               <q-icon name="fas fa-hashtag" color="grey-5" />
             </template>
@@ -84,7 +84,6 @@
 <script>
 import User from '../../models/User';
 import Service from '../../services/user.service';
-
 export default {
   name: "Register",
   data() {
@@ -119,5 +118,4 @@ export default {
 </script>
 
 <style scoped> 
-
 </style>
