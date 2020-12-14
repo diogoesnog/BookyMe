@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema({
         type: mongoose.ObjectId,
         required: true
     },
-    username: {
+    userId: {
         type: String,
         required: true
     },
