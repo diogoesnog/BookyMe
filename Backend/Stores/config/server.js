@@ -42,8 +42,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Public Files location
-// console.log(__dirname);
-console.log();
 let publicPath = path.join(__dirname, '../app/public')
 app.use('/public', express.static(publicPath) );
 

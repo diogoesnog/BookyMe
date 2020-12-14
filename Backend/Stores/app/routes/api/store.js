@@ -165,7 +165,7 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
         if (err) throw err
     })
 
-    let imagePath = '/app/public/logos/' + req.params.id + req.file.originalname
+    let imagePath = '/public/logos/' + req.params.id + req.file.originalname
 
     const logo = {
         title: req.body.title,
@@ -191,11 +191,12 @@ app.post('/:id/picture', upload.single('picture'), async (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
-
+    
+        let imagePath = '/public/pictures/' + req.params.id + req.file.originalname
         const picture = {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            url: newPath
+            url: imagePath
         }
 
         Stores.editPicture(req.params.id, picture)
@@ -219,10 +220,11 @@ app.post('/:id/photos', upload.array('photo'), async (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
+        let imagePath = '/public/photos/' + req.params.id + req.files[i].originalname
         const photo = {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            url: newPath
+            url: imagePath
         }
 
         photos.push(photo)
