@@ -36,7 +36,7 @@ app.post('/:storeID', upload.single('plant'), async (req,res) => {
         url: newPath
     }
 
-    Plants.insertPlant(plant)
+    Plants.insertPlant(plant, req.params.storeID)
     .then(data => {
         response = Response.CREATED(data);
         res.status(response.status).jsonp(response);

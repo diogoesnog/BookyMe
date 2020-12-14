@@ -165,10 +165,12 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
         if (err) throw err
     })
 
+    imagePath = '/app/public/logos/' + req.params.id + req.file.originalname 
+
     const logo = {
         title: req.body.title,
         subtitle: req.body.subtitle,
-        url: newPath
+        url: imagePath
     }
 
     Stores.editLogo(req.params.id, logo)
