@@ -1,10 +1,18 @@
 const Review = require('../models/review');
 const Store = require ('../models/store')
+const mongoose = require('mongoose');
 
-module.exports.getReview = (id) => {
+
+module.exports.getReviews = (id) => {
     return Review.find({storeID: id});
 }
 
+
+module.exports.getRatings = (id) => {
+    return Review
+                .aggregate([{$match: {storeID: mongoose.Types.ObjectId(id)}},{$group: {_id: "$rating", count: {$sum: 1} }}])
+                .exec()
+}
 
 module.exports.insertReview = async (review) => {
     

@@ -5,10 +5,90 @@ const Response = require('rapid-status');
 const fs = require('fs');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
+const fetch = require('node-fetch');
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * Get Stores
  */
+
+
+app.get('/popular', async (req, res) => {
+
+    // Node fetch to booking for the most reserved stores
+
+});
+
+
+app.get('/favourites/:userId', async (req, res) => {
+
+    // Node fetch to users for storeId lists
+
+});
+
+app.get('/categories/results', async (req, res) => {
+
+    Stores.getCategoriesResults()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+
+});
+
+app.get('/:category/ratings', async (req, res) => {
+
+    Stores.getCategoryRatings(req.params.category)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+app.get('/categories', async (req, res) => {
+
+    Stores.getCategories()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+app.get('/search', async (req, res) => {
+
+    Stores.getResults(req.body.search)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+
+app.get('/ratings', async (req, res) => {
+
+    console.log('Entrei aqui!')
+    Stores.getRecommended()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+});
+
 app.get('/', async (req, res) => {
     let response;
     let query = req.query;
@@ -22,6 +102,22 @@ app.get('/', async (req, res) => {
     });
 });
 
+app.get('/:id', async (req, res) => {
+
+    Stores.getStore(req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch stores');
+            res.status(response.status).jsonp(response);
+    });
+});
+
+
+
+
+
 // TODO: protection middleware
 /**
  * Create a store
@@ -33,11 +129,20 @@ app.get('/', async (req, res) => {
  */
 app.post('/', (req, res) => {
     let response;
+
+    const address = {
+        place: req.body.place,
+        zipcode: req.body.zipcode,
+        city: req.body.city,
+        country: req.body.country
+    }
+
     const store = {
         name: req.body.name,
+        verified: true,
         category: req.body.category,
         description: req.body.description,
-        address: req.body.address
+        address: address
     };
 
     Stores.create(store)
@@ -61,10 +166,12 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
         if (err) throw err
     })
 
+    let imagePath = '/public/logos/' + req.params.id + req.file.originalname
+
     const logo = {
         title: req.body.title,
         subtitle: req.body.subtitle,
-        url: newPath
+        url: imagePath
     }
 
     Stores.editLogo(req.params.id, logo)
@@ -85,11 +192,12 @@ app.post('/:id/picture', upload.single('picture'), async (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
-
+    
+        let imagePath = '/public/pictures/' + req.params.id + req.file.originalname
         const picture = {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            url: newPath
+            url: imagePath
         }
 
         Stores.editPicture(req.params.id, picture)
@@ -113,10 +221,11 @@ app.post('/:id/photos', upload.array('photo'), async (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
+        let imagePath = '/public/photos/' + req.params.id + req.files[i].originalname
         const photo = {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            url: newPath
+            url: imagePath
         }
 
         photos.push(photo)
@@ -153,7 +262,7 @@ app.post('/:id/schedule', (req, res) => {
 
 
 
-app.post('/:id/description', async (req, res) => {
+app.put('/:id/description', async (req, res) => {
     
     des = req.body.description
 
@@ -169,23 +278,8 @@ app.post('/:id/description', async (req, res) => {
 
 });
 
-app.post('/:id/address', async (req, res) => {
-    
-    add = req.body.address
 
-    Stores.editAddress(req.params.id, add)
-        .then(data => {
-            response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested address');
-            res.status(response.status).jsonp(response);
-    });
-
-
-});
-
-app.post('/:id/phone', async (req, res) => {
+app.put('/:id/phone', async (req, res) => {
     
     let phone = req.body.phone 
 
@@ -201,7 +295,7 @@ app.post('/:id/phone', async (req, res) => {
 
 });
 
-app.post('/:id/coordinates', async (req, res) => {
+app.put('/:id/coordinates', async (req, res) => {
     
     let { lat, long } = req.body;
 
@@ -246,7 +340,6 @@ app.delete('/:id/photos/:photoID', async (req, res) => {
 
 
 });
-
 
  
 

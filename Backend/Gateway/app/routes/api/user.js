@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../services/users');
 const { validator } = require('../../middlewares/checkBody');
-
+const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * @swagger
@@ -145,32 +145,27 @@ router.post('/login', validator([
  *                      type: string
  *
  */
-router.put('/account', validator([
+router.put('/account', checkAuth, validator([
     'name', 'address'
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
-    let header = {
-        Authorization: req.headers.authorization || req.headers.Authorization
-    }
+    let token =  req.headers.authorization || req.headers.Authorization;
 
-    User.updateAccount(header, body)
+    User.updateAccount(token, body)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status).jsonp(err.data));
 });
 
-router.patch('/password', validator([
+router.patch('/password', checkAuth, validator([
     'oldPassword', 'newPassword'
 ]), (req, res) => {
 
     let body = JSON.stringify(req.body);
-    let header = {
-        Authorization: req.headers.authorization || req.headers.Authorization
-    }
+    let token = req.headers.authorization || req.headers.Authorization;
 
-    User.updatePassword(header, body)
+    User.updatePassword(token, body)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status).jsonp(err.data));
 });
-
 
 module.exports = router;

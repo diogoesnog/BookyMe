@@ -110,9 +110,13 @@ router.post('/authentication', async (req, res) => {
  *  Resposta -> user -> tudo menos a pass
  *  token -> headers
  */
-router.get('/validateToken', (req, res) => {
-})
+router.get('/validation', checkAuth, (req, res) => {
 
+    let response = Response.OK(req.decodedUser, "Authorized");
+
+    res.status(response.status).jsonp(response);
+
+});
 
 
 router.put('/account',checkAuth, async (req, res) => {

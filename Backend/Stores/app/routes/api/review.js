@@ -5,11 +5,29 @@ const Response = require('rapid-status');
 
 
 
+
+app.get('/:storeID/ratings', async (req, res) => {
+
+    
+    let response;
+    Reviews.getRatings(req.params.storeID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch store ratings');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+
 app.get('/store/:storeID', async (req, res) => {
 
     
     let response;
-    Reviews.getReview(req.params.storeID)
+    Reviews.getReviews(req.params.storeID)
         .then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
@@ -28,7 +46,7 @@ app.post('/:storeID', (req, res) => {
 
     const review = {
         storeID: req.params.storeID,
-        username: req.body.username,
+        userId: req.body.userId,
         comment: req.body.comment,
         rating: req.body.rating,
         date: date.toISOString()
