@@ -38,7 +38,7 @@ services:
       - mongo-users
 
   storeservice:
-    container_name: store-service
+    container_name: stores-service
     restart: always
     env_file:
       - ./Environment/StoreService.env
