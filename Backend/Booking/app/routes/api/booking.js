@@ -16,10 +16,35 @@ app.get('/', (req, res) => {
 });
 
 /**
+ * Get all the reservations of a store
+ * URL param: /store/${id}
+ */
+app.get('/store/:id', (req, res) => {
+    Booking.getBookingsByStore(req.params.id)
+        .then(data => {
+            res.status(200).jsonp(data);
+        }).catch(err => {
+        res.status(500).jsonp(err);
+    });
+});
+
+/**
+ * Get all the reservations of the authenticated user
+ * URL param: /user
+ */
+app.get('/user/', checkAuth, (req, res) => {
+    Booking.getBookingsByUser(req.user.id)
+        .then(data => {
+            res.status(200).jsonp(data);
+        }).catch(err => {
+        res.status(500).jsonp(err);
+    });
+});
+
+/**
  * Create a reservation
  * body {array} with the following object
  * {serviceDate}: Date,
- * {userId}: String,
  * {storeId}: String,
  * {Schedule}: [
  *      {day}: String, Monday/Tuesday/...
@@ -27,11 +52,11 @@ app.get('/', (req, res) => {
  *      {closingHour}: String, HH:MM
  * ]
  */
-app.post('/', async (req, res) => {
+app.post('/', checkAuth, async (req, res) => {
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
         serviceDate: new Date(req.body.serviceDate).toISOString(),
-        userId: req.body.userId,
+        userId: req.user.id,
         storeId: req.body.storeId
     };
 
@@ -61,12 +86,18 @@ app.post('/', async (req, res) => {
  * Delete a reservation by id
  * URL param: id
  */
-app.delete('/:id', (req, res) => {
-    Booking.cancelBookings(req.params.id)
-        .then(data => {
-            res.status(200).jsonp(data);
-        })
-        .catch(err => res.status(400).jsonp(err));
+app.delete('/:id', checkAuth, async (req, res) => {
+    const ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
+
+    if (ReservationUserId === req.user.id) {
+        Booking.cancelBookings(req.params.id)
+            .then(data => {
+                res.status(200).jsonp(data);
+            })
+            .catch(err => res.status(400).jsonp(err));
+    } else {
+        res.status(400).jsonp({msg: "The reservation doesn't belong to the authenticated user"});
+    }
 });
 
 /**
@@ -80,30 +111,35 @@ app.delete('/:id', (req, res) => {
  *      {closingHour}: String, HH:MM
  * ]
  */
-app.put('/', async (req, res) => {
+app.put('/', checkAuth, async (req, res) => {
     const id = req.body.id;
     const bookingDate = new Date(Date.now()).toISOString();
     const serviceDate = new Date(req.body.serviceDate).toISOString();
-    const storeId = (await Booking.getStoreFromID(id)).storeId;
+    // const storeId = (await Booking.getStoreFromID(id)).storeId;
+    const ReservationUserId = (await Booking.getUserFromID(id)).userId;
 
-    if (new Date(Date.now()) > new Date(serviceDate)) {
-        res.status(400).jsonp({msg: "Invalid Date"});
-    }
-    // else if (await Booking.dateExists(serviceDate, storeId)) {
-    //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
-    // }
-    else {
-        serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
-
-        if (serviceOpen) {
-            Booking.reschedule(id, bookingDate, serviceDate)
-                .then(data => {
-                    res.status(200).jsonp(data);
-                })
-                .catch(err => res.status(400).jsonp(err));
-        } else {
-            res.status(500).jsonp({msg: "The service is closed"});
+    if (ReservationUserId === req.user.id) {
+        if (new Date(Date.now()) > new Date(serviceDate)) {
+            res.status(400).jsonp({msg: "Invalid Date"});
         }
+        // else if (await Booking.dateExists(serviceDate, storeId)) {
+        //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
+        // }
+        else {
+            serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
+
+            if (serviceOpen) {
+                Booking.reschedule(id, bookingDate, serviceDate)
+                    .then(data => {
+                        res.status(200).jsonp(data);
+                    })
+                    .catch(err => res.status(400).jsonp(err));
+            } else {
+                res.status(500).jsonp({msg: "The service is closed"});
+            }
+        }
+    } else {
+        res.status(400).jsonp({msg: "The reservation doesn't belong to the authenticated user"});
     }
 });
 
