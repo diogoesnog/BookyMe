@@ -80,3 +80,20 @@ module.exports.deletePhoto = (store, photo) => {
 
     return request.delete();
 }
+
+
+module.exports.getPopular = () => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/popular`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+module.exports.userFavorites = (user) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${user}`);
+
+    request.isJson();
+
+    return request.get();
+}

@@ -8,6 +8,11 @@ const upload = uploader.getUploader();
 const fs = require('fs');
 const checkAuth = require("../../middlewares/checkAuth");
 
+router.get('/popular', checkAuth, (req, res) => {
+    Store.getPopular()
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
 
 /**
  * @swagger
