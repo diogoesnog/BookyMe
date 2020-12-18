@@ -67,7 +67,7 @@ app.post('/', checkAuth, async (req, res) => {
     //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
     // }
     else {
-        serviceOpen = isOpen(new Date(booking.serviceDate), req.body.schedule);
+        const serviceOpen = isOpen(new Date(booking.serviceDate), req.body.schedule);
 
         if (serviceOpen) {
             Booking.createBooking(booking)
@@ -126,7 +126,7 @@ app.put('/', checkAuth, async (req, res) => {
         //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
         // }
         else {
-            serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
+            const serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
 
             if (serviceOpen) {
                 Booking.reschedule(id, bookingDate, serviceDate)
