@@ -1,4 +1,4 @@
-const Request = require('../utils/Request');
+const Request = require('../../utils/Request');
 
 
 module.exports.getAll = () => {
@@ -90,8 +90,17 @@ module.exports.getPopular = () => {
     return request.get();
 }
 
+// TODO: move to user endpoint services
 module.exports.userFavorites = (user) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${user}`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+module.exports.getCategories = () => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/`);
 
     request.isJson();
 
