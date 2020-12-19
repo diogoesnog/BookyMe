@@ -13,7 +13,7 @@ module.exports = async (req,res,next) => {
         let user = await Users.findById(decodedToken.user);
 
         if (!user) {
-            response = Response.FORBIDDEN();
+            response = Response.FORBIDDEN("user doesn't exists!");
             res.status(response.status).jsonp(response);
         }
         else{
@@ -25,8 +25,8 @@ module.exports = async (req,res,next) => {
                 address: user.address,
                 type: user.type
             }
-            next();
         }
+        next();
     } catch (err) {
             response = Response.TOKEN_REQUIRED(err, "Authorization header missing or invalid");
             res.status(response.status).jsonp(response);

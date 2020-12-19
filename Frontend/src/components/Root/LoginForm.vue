@@ -20,7 +20,7 @@
           </template>
         </q-input>
         <br/>
-        <q-btn class="gradient" rounded push @click="handleLogin" style="width: 100%">
+        <q-btn class="gradientRed" rounded push @click="handleLogin" style="width: 100%">
           <p style="font-size:120%;" class="font-weight-bold button">
             {{ $t('loginPage.login') }}
           </p>
@@ -95,7 +95,7 @@ export default {
     color: #fff;
   }
 
-  .gradient {
+  .gradientRed {
       background-image: linear-gradient(#e9685b, #e03459);
   }
 

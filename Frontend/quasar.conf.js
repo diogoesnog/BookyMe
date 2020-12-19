@@ -125,7 +125,7 @@ cfg.module.rules.push({
         description: `A Quasar Framework app`,
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#fffff',
+        background_color: '#fdfdff',
         theme_color: '#027be3',
         icons: [
           {
