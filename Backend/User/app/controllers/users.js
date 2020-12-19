@@ -43,8 +43,28 @@ module.exports.findById = (id) => {
     return User.findById(id);
 }
 
-module.exports.findUserStore = (id, storeId) => {
-    return User.findOne( {$and : [{_id: id}, {stores: storeId}]} );
+module.exports.findUserStore = (id, store) => {
+    return User.findOne( {$and : [{_id: id}, {stores: store}]} );
+}
+
+module.exports.deleteReview = (id, review) => {
+    return User.findByIdAndUpdate(id, {$pull : {reviews: review}}, {new: true});
+}
+
+module.exports.deleteBooking = (id, booking) => {
+    return User.findByIdAndUpdate(id, {$pull : {bookings: booking}}, {new: true});
+}
+
+module.exports.deleteFavorite = (id, favorite) => {
+    return User.findByIdAndUpdate(id, {$pull : {favorites: favorite}}, {new: true});
+}
+
+module.exports.deleteStore = (id, store) => {
+    return User.findByIdAndUpdate(id, {$pull : {stores: store}}, {new: true});
+}
+
+module.exports.deleteFavoriteUsers = (favorite) => {
+    return User.updateMany({$pull: {favorites: favorite}})
 }
 
 module.exports.deleteAll = () => {
