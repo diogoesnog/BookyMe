@@ -43,6 +43,7 @@ module.exports.findById = (id) => {
     return User.findById(id);
 }
 
+
 module.exports.findUserStore = (id, store) => {
     return User.findOne( {$and : [{_id: id}, {stores: store}]} );
 }

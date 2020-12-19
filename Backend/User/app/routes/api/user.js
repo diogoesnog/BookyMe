@@ -248,7 +248,9 @@ router.get('/validation', checkAuth, (req, res) => {
 });
 
 
+
 ////////////////////////////////////////////////////////////////TESTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 // TODO: delete findALL and users endpoint after development
 /**
  * Finds and retrieves all users
