@@ -17,7 +17,7 @@
     description: "Cria uma conta AGORA para ter acesso a <b>Todas as Vantagens</b>",
 
     fullName: "Nome Completo",
-    username: "Nome de Utilizador",
+    username: "Username",
     email: "E-mail",
     address: "Morada",
     city: "Cidade",
