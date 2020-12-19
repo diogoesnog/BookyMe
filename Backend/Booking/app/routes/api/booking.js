@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const Booking = require('../../controllers/booking');
 const checkAuth = require('../../middlewares/checkAuth');
+const { isOpen } = require('../../utils/isOpen');
 
 /**
  * Get list of reservations
@@ -52,20 +53,18 @@ app.get('/user', checkAuth, (req, res) => {
  *      {closingHour}: String, HH:MM
  * ]
  */
-app.post('/', checkAuth, async (req, res) => {
+app.post('/:storeId', checkAuth, (req, res) => {
+
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
         serviceDate: new Date(req.body.serviceDate).toISOString(),
         userId: req.user.id,
-        storeId: req.body.storeId
+        storeId: req.params.storeId
     };
 
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
         res.status(400).jsonp({msg: "Invalid Date"});
     }
-    // else if (await Booking.dateExists(booking.serviceDate, booking.storeId)) {
-    //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
-    // }
     else {
         const serviceOpen = isOpen(new Date(booking.serviceDate), req.body.schedule);
 
@@ -142,25 +141,5 @@ app.put('/', checkAuth, async (req, res) => {
         res.status(400).jsonp({msg: "The reservation doesn't belong to the authenticated user"});
     }
 });
-
-function isOpen (serviceDate, schedule) {
-    const weekService = serviceDate.toLocaleTimeString('en-us', {weekday: 'long'}).split(' ')[0];
-
-    for (let item of schedule) {
-        if (item.day === weekService) {
-            const closingHour = item.closingHour.split(':');
-            const openingHour = item.openingHour.split(':');
-            const serviceHour = [serviceDate.getUTCHours(), serviceDate.getUTCMinutes()];
-
-            if (serviceHour[0] > openingHour[0] && serviceHour[0] < closingHour[0])
-                return true;
-            else if (serviceHour[0] == openingHour[0] && serviceHour[1] > openingHour[1])
-                return true;
-            else if (serviceHour[0] == closingHour[0] && serviceHour[1] < closingHour[1])
-                return true;
-        }
-    }
-    return false;
-}
 
 module.exports = app;
