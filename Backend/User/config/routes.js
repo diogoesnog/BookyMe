@@ -7,6 +7,7 @@ app.use('/user', require('../app/routes/api/user'));
 app.use('/user', require('../app/routes/api/review'));
 app.use('/user', require('../app/routes/api/favorite'));
 app.use('/user', require('../app/routes/api/booking'));
+app.use('/user', require('../app/routes/api/store'));
 
 
 module.exports = app;
