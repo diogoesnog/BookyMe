@@ -20,6 +20,20 @@ app.get('/popular',  (req, res) => {
 });
 
 
+app.get('/schedule', (req,res) => {
+    
+    let day = req.query.day
+    let storeID = req.query.storeId
+    Stores.getSchedule(storeID, day)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch schedule for the desired day');
+            res.status(response.status).jsonp(response);
+    });
+})
+
 app.get('/categories/results',  (req, res) => {
 
     Stores.getCategoriesResults()
