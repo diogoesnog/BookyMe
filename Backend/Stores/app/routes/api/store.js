@@ -21,9 +21,10 @@ app.get('/popular',  (req, res) => {
 
 
 app.get('/schedule', (req,res) => {
-    
+
     let day = req.query.day
     let storeID = req.query.storeId
+    
     Stores.getSchedule(storeID, day)
         .then(data => {
             response = Response.OK(data);
