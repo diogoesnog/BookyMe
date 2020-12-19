@@ -15,6 +15,14 @@ module.exports.getBookings = (query, projection) => {
     return Booking.find(query, projection);
 };
 
+module.exports.getBookingsByStore = (id) => {
+    return Booking.find({storeId: id});
+};
+
+module.exports.getBookingsByUser = (id) => {
+    return Booking.find({userId: id});
+};
+
 module.exports.cancelBookings = (id) => {
     return Booking.findByIdAndDelete(id, function (err, docs) {
         /*
@@ -34,6 +42,10 @@ module.exports.dateExists = (date, storeId) => {
 
 module.exports.getStoreFromID = (bookingID) => {
     return Booking.findOne({_id: bookingID}, 'storeId')
+};
+
+module.exports.getUserFromID = (bookingID) => {
+    return Booking.findOne({_id: bookingID}, 'userId')
 };
 
 module.exports.reschedule = (id, bookingDate, serviceDate) => {
