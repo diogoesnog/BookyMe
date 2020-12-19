@@ -19,7 +19,6 @@ module.exports.addCatalog = (store, body) => {
 
 }
 
-// TODO: Too confusing, ask for further explanations
 module.exports.deleteCatalog = (store) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/catalogs/store/${store}`);
 
@@ -28,3 +27,12 @@ module.exports.deleteCatalog = (store) => {
     return request.delete();
 }
 
+// Delete Single Item
+// TODO: expose with endpoint
+module.exports.deleteCatalogItem = (item) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/catalogs/${item}`);
+
+    request.isJson();
+
+    return request.delete();
+}
