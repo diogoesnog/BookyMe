@@ -22,8 +22,9 @@
   "bookings": [],
   "type": "User",
   "stores": [],
-  "name": "Administrator User",
+  "name": "Administrator",
   "username": "adminbookyme",
   "email": "admin@bookyme.com",
-  "password": "$2a$10$l1cL6wPxamWUiwBXmK91qexBkpSyB4/HWZfOVH92OxQwh6hTxWF6u"
+  "password": "$2a$10$l1cL6wPxamWUiwBXmK91qexBkpSyB4/HWZfOVH92OxQwh6hTxWF6u",
+  "address": "Random Address"
 }]

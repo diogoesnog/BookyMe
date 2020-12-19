@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Store = require('../../services/stores');
+const Store = require('../../services/Stores/stores');
 const { validator } = require('../../middlewares/checkBody');
 const MulterFiles = require('../../utils/MulterFiles');
 const uploader = new MulterFiles('stores');
@@ -8,6 +8,27 @@ const upload = uploader.getUploader();
 const fs = require('fs');
 const checkAuth = require("../../middlewares/checkAuth");
 
+router.get('/popular', checkAuth, (req, res) => {
+    Store.getPopular()
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+// TODO: move this endpoint to user endpoint
+// 1. By User Id
+// 2. Fetch favorites array
+// 3. Per entry, get stores information
+router.get('/favourtes/:id', (req, res) => {
+    Store.userFavorites(req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/categories', (req, res) => {
+    Store.getCategories()
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
 
 /**
  * @swagger
@@ -164,8 +185,7 @@ router.patch('/:id/phone', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 })
 
-// TODO: test this endpoint
-router.post(`/:id/coordinates`, validator([
+router.post('/:id/coordinates', validator([
     "lat", "long"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
@@ -175,7 +195,6 @@ router.post(`/:id/coordinates`, validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: test this endpoint
 router.delete('/:id', (req, res) => {
 
     Store.deleteOne(req.params.id)

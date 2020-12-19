@@ -241,6 +241,7 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
  * {header.Authorization} : TOKEN
  */
 router.post('/favorite', checkAuth, (req, res) => {
+
     let userId = req.decodedUser.id;
     let favorite = req.body.favorite;
 
@@ -413,7 +414,6 @@ router.get('/storeOwner', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
     let storeId = req.body.store;
 
-    console.log(userID, storeId);
     Users.findUserStore(userID, storeId).
         then(dataTemp => {
             let data = {
