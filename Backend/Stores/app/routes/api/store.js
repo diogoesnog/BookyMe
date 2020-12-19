@@ -5,11 +5,39 @@ const Response = require('rapid-status');
 const fs = require('fs');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
+const fetch = require('node-fetch');
 const checkAuth = require('../../middlewares/checkAuth');
 
 /**
  * Get Stores
  */
+
+
+app.get('/popular', async (req, res) => {
+
+    // Node fetch to booking for the most reserved stores
+
+});
+
+
+app.get('/favourites/:userId', async (req, res) => {
+
+    // Node fetch to users for storeId lists
+
+});
+
+app.get('/categories/results', async (req, res) => {
+
+    Stores.getCategoriesResults()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
+            res.status(response.status).jsonp(response);
+    });
+
+});
 
 app.get('/:category/ratings', async (req, res) => {
 
@@ -111,6 +139,7 @@ app.post('/', (req, res) => {
 
     const store = {
         name: req.body.name,
+        verified: true,
         category: req.body.category,
         description: req.body.description,
         address: address
@@ -137,10 +166,12 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
         if (err) throw err
     })
 
+    let imagePath = '/public/logos/' + req.params.id + req.file.originalname
+
     const logo = {
         title: req.body.title,
         subtitle: req.body.subtitle,
-        url: newPath
+        url: imagePath
     }
 
     Stores.editLogo(req.params.id, logo)
@@ -161,11 +192,12 @@ app.post('/:id/picture', upload.single('picture'), async (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
-
+    
+        let imagePath = '/public/pictures/' + req.params.id + req.file.originalname
         const picture = {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            url: newPath
+            url: imagePath
         }
 
         Stores.editPicture(req.params.id, picture)
@@ -189,10 +221,11 @@ app.post('/:id/photos', upload.array('photo'), async (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
+        let imagePath = '/public/photos/' + req.params.id + req.files[i].originalname
         const photo = {
             title: req.body.title,
             subtitle: req.body.subtitle,
-            url: newPath
+            url: imagePath
         }
 
         photos.push(photo)

@@ -28,15 +28,15 @@ app.post('/:storeID', upload.single('plant'), async (req,res) => {
         if (err) throw err
     })
 
-
+    let imagePath = '/public/plants/' + req.params.storeID + req.file.originalname
     const plant = {
         storeID: req.params.storeID,
         title: req.body.title,
         subtitle: req.body.subtitle,
-        url: newPath
+        url: imagePath
     }
 
-    Plants.insertPlant(plant)
+    Plants.insertPlant(plant, req.params.storeID)
     .then(data => {
         response = Response.CREATED(data);
         res.status(response.status).jsonp(response);

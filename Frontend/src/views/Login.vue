@@ -1,15 +1,15 @@
 <template>
-  <div> 
+  <div>
+
     <q-select
       v-model="lang"
       :options="langOptions"
       :label="$t('settingsPage.language')">
-
     </q-select>
 
+    <!-- Form Login -->
     <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
-      <br/>
       <p>
         {{$t('loginPage.noAccount')}}
         <span @click="loginForm = !loginForm">
@@ -18,15 +18,18 @@
       </p>
     </div>
 
-    <div v-else>
-      <q-btn class="glossy" round color="red-6" icon="fas fa-angle-left" style="margin-left:20px;margin-top:10px; position: absolute; z-index:999" @click="loginForm = !loginForm" />
+    <!-- Form Register -->
+    <div class="centerDiv" v-else>
+      <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm = !loginForm" />
       <RegisterForm/>
-      <!-- <q-btn push color="primary" style="width: 100%" @click="loginForm = !loginForm">
-        {{ $t('commonButtons.cancel')}}
-      </q-btn> -->
-      <p class="text-center" style="margin-top:35px">{{$t('registerPage.alreadyHasAccount')}}</p>
-      <span class="absolute-center" style="margin-top:95%" @click="loginForm = !loginForm"> <b>{{$t('registerPage.login')}}</b></span>
+      <p class="bottomInfo">
+        {{$t('registerPage.alreadyHasAccount')}}
+          <span @click="loginForm = !loginForm"> 
+           <b>{{$t('registerPage.login')}}</b>
+          </span>
+      </p>
     </div>
+
   </div>
 </template>
 
@@ -59,13 +62,22 @@
 <style scoped>
 
   .centerDiv {
-    width: 75%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
+    padding: 15px;
+    margin-top: 10px;
+  }
+
+  .gradientOne {
+    margin-left: 10px;
+    margin-top: 0px; 
+    position: absolute; 
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
+
+  .bottomInfo {
+    margin-top: -75px;
+    position: relative;
+    text-align: center; 
   }
 
 </style>

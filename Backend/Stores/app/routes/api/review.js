@@ -4,21 +4,7 @@ const Reviews = require('../../controllers/reviews');
 const Response = require('rapid-status');
 
 
-app.get('/popular', async (req, res) => {
 
-    
-    let response;
-    Reviews.getPopular()
-        .then(data => {
-            response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store ratings');
-            res.status(response.status).jsonp(response);
-    });
-
-
-});
 
 app.get('/:storeID/ratings', async (req, res) => {
 
@@ -60,7 +46,7 @@ app.post('/:storeID', (req, res) => {
 
     const review = {
         storeID: req.params.storeID,
-        username: req.body.username,
+        userId: req.body.userId,
         comment: req.body.comment,
         rating: req.body.rating,
         date: date.toISOString()
