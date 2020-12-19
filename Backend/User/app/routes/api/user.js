@@ -240,7 +240,7 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
  * {body.favorite} : STRING
  * {header.Authorization} : TOKEN
  */
-router.post('/favorite', checkAuth, async (req, res) => {
+router.post('/favorite', checkAuth, (req, res) => {
     let userId = req.decodedUser.id;
     let favorite = req.body.favorite;
 
@@ -264,7 +264,7 @@ router.post('/favorite', checkAuth, async (req, res) => {
  * Retrieves all user's favorites
  * {header.Authorization}: TOKEN
  */
-router.get('/favorites', checkAuth, async (req, res) => {
+router.get('/favorites', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
 
     Users.findById(userID)
@@ -290,7 +290,7 @@ router.get('/favorites', checkAuth, async (req, res) => {
  * {body.review} : STRING,
  * {header.Authorization} : TOKEN
  */
-router.post('/review', checkAuth, async (req, res) => {
+router.post('/review', checkAuth, (req, res) => {
     let userId = req.decodedUser.id;
     let review = req.body.review;
 
@@ -413,8 +413,12 @@ router.get('/storeOwner', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
     let storeId = req.body.store;
 
+    console.log(userID, storeId);
     Users.findUserStore(userID, storeId).
-        then(data => {
+        then(dataTemp => {
+            let data = {
+               isAdmin: dataTemp ? true: false
+            }
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {

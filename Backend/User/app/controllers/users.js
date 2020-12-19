@@ -44,7 +44,7 @@ module.exports.findById = (id) => {
 }
 
 module.exports.findUserStore = (id, storeId) => {
-    return User.findById(id, {stores: storeId});
+    return User.findOne( {$and : [{_id: id}, {stores: storeId}]} );
 }
 
 module.exports.deleteAll = () => {
