@@ -1,21 +1,19 @@
 // Express Server Framework
 const express = require('express');
 const app = express();
-
 // Server Addons
 // Parsers
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const cookieParser  = require('cookie-parser');
+const bodyParser    = require('body-parser');
 // HTTP Errors
-const createError = require('http-errors');
+const createError   = require('http-errors');
 // Request Logger
-const logger = require('morgan');
+const logger        = require('morgan');
 // CORS Middleware
-const cors = require('cors');
-// Swagger API Documentation
-const swaggerUI = require('swagger-ui-express');
+const cors          = require('cors');
 // MongoDB
 const mongoose      = require('mongoose');
+const path          = require('path');
 
 mongoose.connect(process.env.MONGO_CONNECTION, {
     useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
@@ -44,7 +42,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Public Files location
-app.use(express.static('./app/public'));
+let publicPath = path.join(__dirname, '../app/public')
+app.use('/public', express.static(publicPath) );
 
 // Configure CORS middleware
 const corsOptions = {
@@ -54,8 +53,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Documentation
-app.use('/v1/api/documentation', swaggerUI.serve, swaggerUI.setup(require('./swagger'), { explorer: true } ));
+
 // Register Different Versions of API Routes
 app.use('/v1/api', require('./routes'));
 

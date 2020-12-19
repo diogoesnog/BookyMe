@@ -1,0 +1,115 @@
+version: "3"
+
+networks: 
+  bookyme-network:
+    driver: bridge
+
+services:
+
+  # Server Interfaces
+  backend:
+    container_name: bookyme-gateway
+    restart: always
+    env_file: 
+      - ./Environment/Gateway.env
+    build: ./Gateway
+    ports: 
+      - "5000:5000"
+    volumes:
+      - /backend/gateway
+    networks: 
+      - bookyme-network
+    depends_on: 
+      - userservice
+
+  userservice:
+    container_name: user-service
+    restart: always
+    env_file:
+      - ./Environment/UserService.env
+    build: ./User
+    ports: 
+      - "5200:5200"
+    volumes: 
+      - /backend/user
+    networks: 
+      - bookyme-network
+    depends_on:
+      - mongo-users
+
+  storeservice:
+    container_name: stores-service
+    restart: always
+    env_file:
+      - ./Environment/StoreService.env
+    build: ./Stores
+    ports: 
+      - "5100:5100"
+    volumes:
+      - /backend/store
+    networks:
+      - bookyme-network
+    depends_on:
+      - mongo-stores
+
+  # Databases
+  # User Service
+  mongo-users:
+    container_name: mongo-users
+    restart: on-failure
+    image: mongo 
+    command: mongod --port 3220
+    volumes:
+      - ./seed/Users/init.js:/docker-entrypoint-initdb.d/init.js:ro
+      - data-volume:/data-db
+    networks:
+      - bookyme-network
+    ports:
+      - "3220:3220"
+
+  # Stores
+  mongo-stores:
+    container_name: mongo-stores
+    restart: on-failure
+    image: mongo
+    command: mongod --port 3221
+    volumes:
+      - data-volume:/data-db
+    networks:
+      - bookyme-network
+    ports:
+      - "3221:3221"
+
+  # Mongo Seeders
+  users-seed:
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: users-seed
+    environment:
+      - MONGO_HOST=mongo-users
+      - MONGO_PORT=3220
+    depends_on:
+      - mongo-users
+    volumes:
+      - ./seed/users.json:/data/users.json:ro
+    command:
+      "mongoimport --host mongo-users --port 3220 --db BookymeUsers --type json --file /data/users.json --jsonArray"
+
+  stores-seed:
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: stores-seed
+    environment:
+      - MONGO_HOST=mongo-stores
+      - MONGO_PORT=3221
+    depends_on:
+      - mongo-stores
+    volumes:
+      - ./seed/stores.json:/data/stores.json:ro
+    command:
+        "mongoimport --host mongo-stores --port 3221 --db BookymeStores --type json --file /data/stores.json --jsonArray"
+
+volumes:
+  data-volume: 

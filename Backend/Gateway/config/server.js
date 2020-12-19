@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 
+const Response = require('rapid-status');
+
 // Server Addons
 // Parsers
 const cookieParser = require('cookie-parser');
@@ -12,19 +14,6 @@ const createError = require('http-errors');
 const logger = require('morgan');
 // CORS Middleware
 const cors = require('cors');
-// Swagger API Documentation
-const swaggerUI = require('swagger-ui-express');
-// MongoDB
-const mongoose      = require('mongoose');
-
-mongoose.connect(process.env.MONGO_CONNECTION, {
-    useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
-    .then(() => {
-        console.log("Connection to MongoDB successfully established")
-    })
-    .catch(() => {
-        throw new Error("Could not establish connection to MongoDB");
-    });
 
 // Dev or Production
 const env = process.argv[2];
@@ -48,15 +37,14 @@ app.use(express.static('./app/public'));
 // Configure CORS middleware
 const corsOptions = {
     origin: process.env.FRONTEND_SERVER,
-    credentials: true
+    credentials: true,
+    exposedHeaders: 'Authorization',
 };
 
 app.use(cors(corsOptions));
 
-// Documentation
-app.use('/v1/api/documentation', swaggerUI.serve, swaggerUI.setup(require('./swagger'), { explorer: true } ));
 // Register Different Versions of API Routes
-app.use('/v1/api', require('./routes'));
+app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -65,13 +53,14 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    console.log("Error Handler");
+    console.log(err.message);
 
-    // render the error page
-    res.status(err.status || 500);
-    res.jsonp({title: "Error!", message: err.message});
+    let response = Response.INTERNAL_ERROR(env === "dev" ? err : null, err.message);
+
+    res.status(response.status);
+    res.json(response);
+
 });
 
 module.exports = app;

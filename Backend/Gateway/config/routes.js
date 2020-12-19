@@ -1,8 +1,15 @@
+
 const express = require('express');
 const app = express.Router();
+// Swagger API Documentation
+const swaggerUI = require('swagger-ui-express');
+const docs = require('./swagger');
 
-// Index Route
-app.use('/', require('../app/routes/api/index'));
-app.use('/user', require('../app/routes/api/user'));
+// API v1 Routes
+app.use('/users', require('../app/routes/api/user'));
+app.use('/stores', require('../app/routes/api/store'));
+
+// Documentation
+app.use('/documentation', swaggerUI.serve, swaggerUI.setup(docs));
 
 module.exports = app;
