@@ -6,7 +6,7 @@ const fs = require('fs');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
-app.get('/store/:storeID', async (req,res) =>{
+app.get('/store/:storeID',  (req,res) =>{
     let response;
     Plants.getPlant(req.params.storeID)
         .then(data => {
@@ -18,7 +18,7 @@ app.get('/store/:storeID', async (req,res) =>{
     });
 })
 
-app.post('/:storeID', upload.single('plant'), async (req,res) => {
+app.post('/:storeID', upload.single('plant'),  (req,res) => {
 
     
     let oldPath = __dirname + '/../../../' + req.file.path
@@ -46,7 +46,7 @@ app.post('/:storeID', upload.single('plant'), async (req,res) => {
     });
 })
 
-app.delete('/store/:storeID', async (req, res) => {
+app.delete('/store/:storeID',  (req, res) => {
 
     
     let response;
