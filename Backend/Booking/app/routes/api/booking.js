@@ -32,7 +32,7 @@ app.get('/store/:id', (req, res) => {
  * Get all the reservations of the authenticated user
  * URL param: /user
  */
-app.get('/user/', checkAuth, (req, res) => {
+app.get('/user', checkAuth, (req, res) => {
     Booking.getBookingsByUser(req.user.id)
         .then(data => {
             res.status(200).jsonp(data);
