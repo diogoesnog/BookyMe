@@ -22,7 +22,8 @@ const image = new mongoose.Schema({
 
 const schedule = new mongoose.Schema({
     day: {
-        type: String
+        type: String,
+        enum: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira','Sexta-feira','Sábado','Domingo']
     },
     openingHour: {
         type: String

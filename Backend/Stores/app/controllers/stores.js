@@ -6,6 +6,10 @@ module.exports.get = (query, projection) => {
     return Store.find(query, projection);
 }
 
+module.exports.getSchedule = (storeId, day) => {
+    return Store.findOne({_id: storeId},{ schedule: {$elemMatch: {day: day}}})
+}
+
 module.exports.getStore = (id) => {
     return Store.findOne({_id: id});
 }
@@ -16,7 +20,7 @@ module.exports.getCategoryRatings = (cat) => {
 
 module.exports.getCategoriesResults = () => {
     return Store
-                .aggregate([{$group: {_id: "$category", count: {$sum: 1} }}])
+                .aggregate([{$group: {title: "$category", count: {$sum: 1} }}])
                 .exec()
 }
 

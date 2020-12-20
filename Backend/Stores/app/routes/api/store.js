@@ -13,20 +13,29 @@ const checkAuth = require('../../middlewares/checkAuth');
  */
 
 
-app.get('/popular', async (req, res) => {
+app.get('/popular',  (req, res) => {
 
     // Node fetch to booking for the most reserved stores
 
 });
 
 
-app.get('/favourites/:userId', async (req, res) => {
+app.get('/schedule', (req,res) => {
 
-    // Node fetch to users for storeId lists
+    let day = req.query.day
+    let storeID = req.query.storeId
+    
+    Stores.getSchedule(storeID, day)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch schedule for the desired day');
+            res.status(response.status).jsonp(response);
+    });
+})
 
-});
-
-app.get('/categories/results', async (req, res) => {
+app.get('/categories/results',  (req, res) => {
 
     Stores.getCategoriesResults()
         .then(data => {
@@ -39,7 +48,7 @@ app.get('/categories/results', async (req, res) => {
 
 });
 
-app.get('/:category/ratings', async (req, res) => {
+app.get('/:category/ratings',  (req, res) => {
 
     Stores.getCategoryRatings(req.params.category)
         .then(data => {
@@ -51,7 +60,7 @@ app.get('/:category/ratings', async (req, res) => {
     });
 });
 
-app.get('/categories', async (req, res) => {
+app.get('/categories',  (req, res) => {
 
     Stores.getCategories()
         .then(data => {
@@ -63,7 +72,7 @@ app.get('/categories', async (req, res) => {
     });
 });
 
-app.get('/search', async (req, res) => {
+app.get('/search',  (req, res) => {
 
     Stores.getResults(req.body.search)
         .then(data => {
@@ -76,7 +85,7 @@ app.get('/search', async (req, res) => {
 });
 
 
-app.get('/ratings', async (req, res) => {
+app.get('/ratings',  (req, res) => {
 
     console.log('Entrei aqui!')
     Stores.getRecommended()
@@ -89,7 +98,7 @@ app.get('/ratings', async (req, res) => {
     });
 });
 
-app.get('/', async (req, res) => {
+app.get('/',  (req, res) => {
     let response;
     let query = req.query;
     Stores.get(query)
@@ -102,7 +111,7 @@ app.get('/', async (req, res) => {
     });
 });
 
-app.get('/:id', async (req, res) => {
+app.get('/:id',  (req, res) => {
 
     Stores.getStore(req.params.id)
         .then(data => {
@@ -156,7 +165,7 @@ app.post('/', (req, res) => {
 });
 
 
-app.post('/:id/logo', upload.single('logo'), async (req, res) => {
+app.post('/:id/logo', upload.single('logo'),  (req, res) => {
     let response;
 
     let oldPath = __dirname + '/../../../' + req.file.path
@@ -184,7 +193,7 @@ app.post('/:id/logo', upload.single('logo'), async (req, res) => {
         });
 });
 
-app.post('/:id/picture', upload.single('picture'), async (req, res) => {
+app.post('/:id/picture', upload.single('picture'),  (req, res) => {
     let response;
     let oldPath = __dirname + '/../../../' + req.file.path
     let newPath = __dirname + '/../../public/pictures/' + req.params.id + req.file.originalname
@@ -211,7 +220,7 @@ app.post('/:id/picture', upload.single('picture'), async (req, res) => {
     
 });
 
-app.post('/:id/photos', upload.array('photo'), async (req, res) => {
+app.post('/:id/photos', upload.array('photo'),  (req, res) => {
     let response;
     let photos = []
     for(let i=0; i < req.files.length; i++){
@@ -262,7 +271,7 @@ app.post('/:id/schedule', (req, res) => {
 
 
 
-app.put('/:id/description', async (req, res) => {
+app.put('/:id/description',  (req, res) => {
     
     des = req.body.description
 
@@ -279,7 +288,7 @@ app.put('/:id/description', async (req, res) => {
 });
 
 
-app.put('/:id/phone', async (req, res) => {
+app.put('/:id/phone',  (req, res) => {
     
     let phone = req.body.phone 
 
@@ -295,7 +304,7 @@ app.put('/:id/phone', async (req, res) => {
 
 });
 
-app.put('/:id/coordinates', async (req, res) => {
+app.put('/:id/coordinates',  (req, res) => {
     
     let { lat, long } = req.body;
 
@@ -313,7 +322,7 @@ app.put('/:id/coordinates', async (req, res) => {
 
 
 
-app.delete('/:id', async (req, res) => {
+app.delete('/:id',  (req, res) => {
     
     Stores.removeStore(req.params.id)
         .then(data => {
@@ -327,7 +336,7 @@ app.delete('/:id', async (req, res) => {
 
 });
 
-app.delete('/:id/photos/:photoID', async (req, res) => {
+app.delete('/:id/photos/:photoID',  (req, res) => {
     
     Stores.removeStorePhoto(req.params.id, req.params.photoID)
         .then(data => {
