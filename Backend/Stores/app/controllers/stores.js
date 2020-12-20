@@ -19,9 +19,24 @@ module.exports.getCategoryRatings = (cat) => {
 }
 
 module.exports.getCategoriesResults = () => {
-    return Store
-                .aggregate([{$group: {_id: "$category", count: {$sum: 1} }}])
-                .exec()
+    return Store.aggregate([
+        {
+            '$group': {
+                '_id': '$category',
+                'count': {
+                    '$sum': 1
+                }
+            }
+        }, {
+            '$addFields': {
+                'title': '$_id'
+            }
+        }, {
+            '$project': {
+                '_id': false
+            }
+        }
+    ])
 }
 
 module.exports.getResults = (query,term) => {
