@@ -101,6 +101,30 @@ router.post('/', validator([
 });
 
 // TODO: change to put
+/**
+ * @swagger
+ * /stores/{id}/logo:
+ *  post:
+ *      description: Add a logo to a given Store ID
+ *      tags:
+ *          - Stores
+ *      consumes:
+ *          - "multipart/form-data"
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: Store ID
+ *      requestBody:
+ *          content:
+ *              image/png:
+ *                  schema:
+ *                      type: string
+ *                      format: binary
+ *
+ */
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
     let response;
     try {
