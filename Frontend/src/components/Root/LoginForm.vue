@@ -33,7 +33,7 @@
         </q-form>
       </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -61,7 +61,7 @@ export default {
             message: 'Login Successful'
           });
 
-          this.$router.push({ name: 'Home' })
+          this.$router.push({ name: 'Homepage' })
 
         }).catch(err => {
           console.log("Login Error");
