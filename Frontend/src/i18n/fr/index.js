@@ -4,7 +4,7 @@ export default {
     title: "Bienvenue!",
     description: "Connecter pour voir votre Réservations",
 
-    username: "Nom d'utilisateur",
+    username: "Nom d'utilisateur/E-mail",
     password: "Mot de passe",
     login: "Connecter",
 

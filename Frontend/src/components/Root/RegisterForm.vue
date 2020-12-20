@@ -136,7 +136,7 @@ export default {
   }
 
   .gradientBlue {
-      background-image: linear-gradient(#13c1e0, #2897e3);
+    background-image: linear-gradient(#13c1e0, #2897e3);
   }
 
   .button {

@@ -1,12 +1,5 @@
 <template>
   <div>
-
-    <q-select
-      v-model="lang"
-      :options="langOptions"
-      :label="$t('settingsPage.language')">
-    </q-select>
-
     <!-- Form Login -->
     <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
@@ -20,7 +13,21 @@
 
     <!-- Form Register -->
     <div class="centerDiv" v-else>
-      <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm = !loginForm" />
+      <div class="row">
+        <div class="col-6">
+          <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm = !loginForm"/>
+        </div>
+        <div class="col-6">
+          <q-select
+            class="selectLanguage"
+            rounded
+            outlined
+            v-model="lang"
+            :options="langOptions"
+            :label="$t('settingsPage.language')">
+          </q-select>
+        </div>
+      </div>
       <RegisterForm/>
       <p class="bottomInfo">
         {{$t('registerPage.alreadyHasAccount')}}
@@ -29,7 +36,6 @@
           </span>
       </p>
     </div>
-
   </div>
 </template>
 
@@ -78,6 +84,11 @@
     margin-top: -75px;
     position: relative;
     text-align: center; 
+  }
+
+  .selectLanguage {
+    width: 90%;
+    position: relative;
   }
 
 </style>
