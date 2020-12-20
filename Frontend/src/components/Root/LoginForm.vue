@@ -1,12 +1,16 @@
-<template>
-  <div> 
-    <div>
+<template class="divMajor">
+  <!-- Div Principal -->
+  <div>
+    <!-- Div Cima -->
+    <div class="">
       <h3 align-center>
         {{$t('loginPage.title')}}
       </h3>
       <p>{{$t('loginPage.description')}}</p>
     </div>
-    <div>
+    <br/>
+    <!-- Div Baixo -->
+    <div class="divBottom">
       <q-form>
         <q-input class="shadow" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text">
           <template v-slot:prepend>
@@ -27,7 +31,7 @@
         </q-btn>
       </q-form>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script>
@@ -80,12 +84,28 @@ export default {
     border-radius: 28px;
   }
 
-  .circle{
-    width:100%;
-    height: 200px;
-    border-radius: 0 0 100% 100%;
-    background-color: yellow;
-    margin-top:-130px;
+  .divMajor {
+    background-image: linear-gradient(#13c1e0, #2897e3);
+  }
+
+  .divTop{
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    padding: 80px;
+    border-radius: 20% 20% 0 0;
+    background-image: linear-gradient(#03181b, #0d0f11);
+  }
+
+  .divBottom{
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    padding: 80px;
+    border-radius: 20% 20% 0 0;
+    background-image: linear-gradient(#13c1e0, #2897e3);
   }
 
   .button {

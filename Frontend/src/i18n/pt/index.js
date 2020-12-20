@@ -134,7 +134,7 @@
   },
 
   settingsPage: {
-    language: "Idioma da Interface"
+    language: "Idioma"
   },
 
   languages: {

@@ -1,11 +1,5 @@
 <template>
   <div>
-    <q-select
-      v-model="lang"
-      :options="langOptions"
-      :label="$t('settingsPage.language')">
-    </q-select>
-
     <!-- Form Login -->
     <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
@@ -19,7 +13,21 @@
 
     <!-- Form Register -->
     <div class="centerDiv" v-else>
-      <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm = !loginForm" />
+      <div class="row">
+        <div class="col-6">
+          <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm = !loginForm"/>
+        </div>
+        <div class="col-6">
+          <q-select
+            class="selectLanguage"
+            rounded
+            outlined
+            v-model="lang"
+            :options="langOptions"
+            :label="$t('settingsPage.language')">
+          </q-select>
+        </div>
+      </div>
       <RegisterForm/>
       <p class="bottomInfo">
         {{$t('registerPage.alreadyHasAccount')}}
@@ -42,9 +50,9 @@
         loginForm: true,
         lang: this.$i18n.locale,
         langOptions: [
-          { value: 'en-us', label: this.$t('languages.english')},
-          { value: 'pt', label: this.$t('languages.portuguese')},
-          { value: 'fr', label: this.$t('languages.french')}
+          { value: 'English', label: this.$t('languages.english')},
+          { value: 'Português', label: this.$t('languages.portuguese')},
+          { value: 'French', label: this.$t('languages.french')}
         ]
       }
     },
@@ -76,6 +84,11 @@
     margin-top: -75px;
     position: relative;
     text-align: center; 
+  }
+
+  .selectLanguage {
+    width: 90%;
+    position: relative;
   }
 
 </style>
