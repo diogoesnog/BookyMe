@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../services/User/users');
+
+// Services
+const { Booking, Favorite, Review, Store, User } = require('../../services/User');
+
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
 
@@ -195,7 +198,7 @@ router.patch('/password', checkAuth, validator([
 router.get('/favorites', checkAuth, (req, res) => {
     let token = req.headers.authorization || req.headers.Authorization;
 
-    User.getFavorites(token)
+    Favorite.getFavorites(token)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
