@@ -6,52 +6,10 @@ const checkAuth = require('../../middlewares/checkAuth');
 
 
 /**
- * Deletes store
- * {param.store}: STRING,
- * {header.Authorization}: TOKEN
- */
-router.delete('/store', checkAuth, (req, res) => {
-    let userID = req.decodedUser.id;
-    let store = req.body.store;
-
-    Users.deleteStore(userID, store)
-        .then(data => {
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        })
-        .catch(err => {
-            response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        })
-})
-
-
-/**
- * Adds new store to user's stores
- * {body.store} : STRING
- * {header.Authorization} : TOKEN
- */
-router.post('/store', checkAuth, (req, res) => {
-    let userId = req.decodedUser.id;
-    let store = req.body.store;
-
-    Users.addStore(userId, store).
-    then(data => {
-        response = Response.CREATED(data);
-        res.status(response.status).jsonp(response);
-    }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, "Enable to add new favorite!");
-        res.status(response.status).jsonp(response);
-    });
-
-});
-
-
-/**
  * Retrieves all user's stores
  * {header.Authorization}: TOKEN
  */
-router.get('/stores', checkAuth, (req, res) => {
+router.get('/', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
 
     Users.findById(userID)
@@ -64,13 +22,12 @@ router.get('/stores', checkAuth, (req, res) => {
     })
 });
 
-
 /**
  * Verifies if the user is the owner of the given storeID
  * {body.store}: STRING.
  * {header.Authorization}: TOKEN
  */
-router.get('/storeOwner', checkAuth, (req, res) => {
+router.get('/owner', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
     let storeId = req.body.store;
 
@@ -87,5 +44,48 @@ router.get('/storeOwner', checkAuth, (req, res) => {
         res.status(response.status).jsonp(response);
     });
 });
+
+/**
+ * Adds new store to user's stores
+ * {body.store} : STRING
+ * {header.Authorization} : TOKEN
+ */
+router.post('/', checkAuth, (req, res) => {
+    let userId = req.decodedUser.id;
+    let store = req.body.store;
+
+    Users.addStore(userId, store).
+    then(data => {
+        response = Response.CREATED(data);
+        res.status(response.status).jsonp(response);
+    }).catch(err => {
+        response = Response.INTERNAL_ERROR(err, "Enable to add new favorite!");
+        res.status(response.status).jsonp(response);
+    });
+
+});
+
+/**
+ * Deletes store
+ * {param.store}: STRING,
+ * {header.Authorization}: TOKEN
+ */
+router.delete('/', checkAuth, (req, res) => {
+    let userID = req.decodedUser.id;
+    let store = req.body.store;
+
+    Users.deleteStore(userID, store)
+        .then(data => {
+            response = Response.CREATED(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+
+
 
 module.exports = router;
