@@ -11,7 +11,7 @@ const routes = [
   {
     name: "Home",
     path: '/home',
-    component: () => import('../views/Homepage.vue'),
+    component: () => import('../views/Homepage'),
     meta: {
       requiresAuth: true
     }
