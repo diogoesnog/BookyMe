@@ -20,6 +20,19 @@ app.get('/popular',  (req, res) => {
 });
 
 
+app.get('/calendar', (req,res) => {
+
+    Stores.getCalendar()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch working days...');
+            res.status(response.status).jsonp(response);
+    });
+
+})
+
 app.get('/schedule', (req,res) => {
 
     let day = req.query.day
@@ -85,9 +98,8 @@ app.get('/search',  (req, res) => {
 });
 
 
-app.get('/ratings',  (req, res) => {
+app.get('/recommended',  (req, res) => {
 
-    console.log('Entrei aqui!')
     Stores.getRecommended()
         .then(data => {
             response = Response.OK(data);

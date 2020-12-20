@@ -34,8 +34,12 @@ module.exports.getResults = (term) => {
 }
 
 module.exports.getCategories = async () => {
-    return Store.schema.path('category').enumValues
+    return await Store.schema.path('category').enumValues
     
+}
+
+module.exports.getCalendar = async () => {
+    return await Store.schema.path('schedule').schema.path('day').enumValues
 }
 
 module.exports.getRecommended = async () => {
