@@ -13,7 +13,7 @@ router.get('/', checkAuth, (req, res) => {
 
     Users.findById(userID)
         .then(data => {
-            response = Response.CREATED(data.favorites);
+            response = Response.OK(data.favorites);
             res.status(response.status).jsonp(response);
         }).catch(err => {
         response = Response.INTERNAL_ERROR(err);
@@ -46,13 +46,13 @@ router.post('/', checkAuth, (req, res) => {
  * {param.favorite}: STRING,
  * {header.Authorization}: TOKEN
  */
-router.delete('/', checkAuth, (req, res) => {
+router.delete('/:id', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
-    let favorite = req.body.favorite;
+    let favorite = req.params.id;
 
     Users.deleteFavorite(userID, favorite)
         .then(data => {
-            response = Response.CREATED(data);
+            response = Response.OK(data);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
@@ -66,12 +66,12 @@ router.delete('/', checkAuth, (req, res) => {
  * Deletes all occurrences of given favorite for all users.
  * {body.favorite}: STRING
  */
-router.delete('/many', checkAuth, (req, res) => {
-    let favorite = req.body.favorite;
+router.delete('/many/:id', checkAuth, (req, res) => {
+    let favorite = req.params.id;
 
     Users.deleteFavoriteUsers(favorite)
         .then(data => {
-            response = Response.CREATED(data);
+            response = Response.OK(data);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {

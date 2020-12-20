@@ -14,7 +14,7 @@ router.get('/', checkAuth, async (req, res) => {
 
     Users.findById(userID)
         .then(data => {
-            response = Response.CREATED(data.reviews);
+            response = Response.OK(data.reviews);
             res.status(response.status).jsonp(response);
         }).catch(err => {
             response = Response.INTERNAL_ERROR(err);
@@ -46,13 +46,13 @@ router.post('/', checkAuth, (req, res) => {
  * {param.review}: STRING,
  * {header.Authorization}: TOKEN
  */
-router.delete('/', checkAuth, (req, res) => {
+router.delete('/:id', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
-    let review = req.body.review;
+    let review = req.params.review;
 
     Users.deleteReview(userID, review)
         .then(data => {
-            response = Response.CREATED(data);
+            response = Response.OK(data);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {

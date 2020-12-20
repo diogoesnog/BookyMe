@@ -13,7 +13,7 @@ router.get('/', checkAuth, (req, res) => {
 
     Users.findById(userID)
         .then(data => {
-            response = Response.CREATED(data.bookings);
+            response = Response.OK(data.bookings);
             res.status(response.status).jsonp(response);
         }).catch(err => {
         response = Response.INTERNAL_ERROR(err);
@@ -46,13 +46,13 @@ router.post('/', checkAuth,  (req, res) => {
  * {param.booking}: STRING,
  * {header.Authorization}: TOKEN
  */
-router.delete('/', checkAuth, (req, res) => {
+router.delete('/:id', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
-    let booking = req.body.booking;
+    let booking = req.params.id;
 
     Users.deleteBooking(userID, booking)
         .then(data => {
-            response = Response.CREATED(data);
+            response = Response.OK(data);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {

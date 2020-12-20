@@ -37,7 +37,7 @@ router.get('/admin/:id', checkAuth, (req, res) => {
         let data = {
             isAdmin: dataTemp ? true: false
         }
-        response = Response.CREATED(data);
+        response = Response.OK(data);
         res.status(response.status).jsonp(response);
     }).catch(err => {
         response = Response.INTERNAL_ERROR(err);
@@ -70,13 +70,13 @@ router.post('/', checkAuth, (req, res) => {
  * {param.store}: STRING,
  * {header.Authorization}: TOKEN
  */
-router.delete('/', checkAuth, (req, res) => {
+router.delete('/:id', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
-    let store = req.body.store;
+    let store = req.params.id;
 
     Users.deleteStore(userID, store)
         .then(data => {
-            response = Response.CREATED(data);
+            response = Response.OK(data);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
