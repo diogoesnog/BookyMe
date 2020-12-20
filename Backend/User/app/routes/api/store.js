@@ -27,9 +27,9 @@ router.get('/', checkAuth, (req, res) => {
  * {body.store}: STRING.
  * {header.Authorization}: TOKEN
  */
-router.get('/owner', checkAuth, (req, res) => {
+router.get('/admin/:id', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
-    let storeId = req.body.store;
+    let storeId = req.params.id;
 
     console.log(userID, storeId);
     Users.findUserStore(userID, storeId).
