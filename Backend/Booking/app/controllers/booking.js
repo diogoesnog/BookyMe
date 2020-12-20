@@ -23,16 +23,25 @@ module.exports.getBookingsByUser = (id) => {
     return Booking.find({userId: id});
 };
 
+module.exports.getPopularStoreList = () => {
+    return Booking.aggregate([
+        {
+            '$group': {
+                '_id': '$storeId',
+                'number_reservations': {$sum: 1}
+            }
+        }, {
+            '$sort': {
+                'number_reservations': -1
+            }
+        }, {
+            '$limit': 10
+        }
+    ]);
+}
+
 module.exports.cancelBookings = (id) => {
     return Booking.findByIdAndDelete(id, function (err, docs) {
-        /*
-        if (err){
-            console.log(err);
-        }
-        else{
-            console.log("Deleted : ", docs);
-        }
-        */
     });
 };
 

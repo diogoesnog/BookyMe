@@ -53,6 +53,22 @@ app.get('/user', checkAuth, (req, res) => {
 });
 
 /**
+ * Get Number of reservations for each store
+ * URL: /popular
+ */
+app.get('/popular', (req, res) => {
+    Booking.getPopularStoreList()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+/**
  * Create a reservation
  * URL param: /${storeId}
  * body {array} with the following object
