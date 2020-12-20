@@ -50,9 +50,9 @@
         loginForm: true,
         lang: this.$i18n.locale,
         langOptions: [
-          { value: 'English', label: this.$t('languages.english')},
-          { value: 'Português', label: this.$t('languages.portuguese')},
-          { value: 'French', label: this.$t('languages.french')}
+          { value: 'en-us', label: this.$t('languages.english')},
+          { value: 'pt', label: this.$t('languages.portuguese')},
+          { value: 'fr', label: this.$t('languages.french')}
         ]
       }
     },

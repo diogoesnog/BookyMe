@@ -1,8 +1,8 @@
-<template class="divMajor">
+<template>
   <!-- Div Principal -->
   <div>
     <!-- Div Cima -->
-    <div class="">
+    <div class="divTop">
       <h3 align-center>
         {{$t('loginPage.title')}}
       </h3>
@@ -10,26 +10,28 @@
     </div>
     <br/>
     <!-- Div Baixo -->
-    <div class="divBottom">
-      <q-form>
-        <q-input class="shadow" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text">
-          <template v-slot:prepend>
-            <q-icon name="fas fa-hashtag" color="grey-5" />
-          </template>
-        </q-input>
-        <br/>
-        <q-input class="shadow" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password">
-          <template v-slot:prepend>
-            <q-icon name="fas fa-lock"  color="grey-5"/>
-          </template>
-        </q-input>
-        <br/>
-        <q-btn class="gradientRed" rounded push @click="handleLogin" style="width: 100%">
-          <p style="font-size:120%;" class="font-weight-bold button">
-            {{ $t('loginPage.login') }}
-          </p>
-        </q-btn>
-      </q-form>
+    <div class="divBottom1">
+      <div class="divBottom2">
+        <q-form>
+          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-hashtag" color="grey-5" />
+            </template>
+          </q-input>
+          <br/>
+          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-lock" color="grey-5"/>
+            </template>
+          </q-input>
+          <br/>
+          <q-btn class="gradientRed" rounded @click="handleLogin" style="width: 100%">
+            <p style="font-size:120%;" class="font-weight-bold button">
+              {{ $t('loginPage.login') }}
+            </p>
+          </q-btn>
+        </q-form>
+      </div>
     </div>
   </div>  
 </template>
@@ -85,27 +87,35 @@ export default {
   }
 
   .divMajor {
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    padding-bottom: 800px;
     background-image: linear-gradient(#13c1e0, #2897e3);
   }
 
   .divTop{
     position: fixed;
-    left: 0px;
-    bottom: 0px;
-    width: 100%;
-    padding: 80px;
-    border-radius: 20% 20% 0 0;
-    background-image: linear-gradient(#03181b, #0d0f11);
   }
 
-  .divBottom{
+  .divBottom1{
     position: fixed;
-    left: 0px;
-    bottom: 0px;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    padding: 80px;
-    border-radius: 20% 20% 0 0;
-    background-image: linear-gradient(#13c1e0, #2897e3);
+    padding: 100px;
+    height: 500px;
+    background-size: cover;
+    background-position: center top;
+    background-image: url('../../assets/Other/LoginFrame.png');
+  }
+
+  .divBottom2{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px;
   }
 
   .button {
@@ -113,6 +123,10 @@ export default {
     margin: 0px;
     padding: 10px;
     color: #fff;
+  }
+
+  .inputWhite {
+      background: white;
   }
 
   .gradientRed {
