@@ -6,32 +6,28 @@ const checkAuth = require('../../middlewares/checkAuth');
 
 
 /**
- * Deletes review
- * {param.review}: STRING,
+ * Retrieves all user's reviews
  * {header.Authorization}: TOKEN
  */
-router.delete('/review', checkAuth, (req, res) => {
+router.get('/', checkAuth, async (req, res) => {
     let userID = req.decodedUser.id;
-    let review = req.body.review;
 
-    Users.deleteReview(userID, review)
+    Users.findById(userID)
         .then(data => {
-            response = Response.CREATED(data);
+            response = Response.CREATED(data.reviews);
             res.status(response.status).jsonp(response);
-        })
-        .catch(err => {
+        }).catch(err => {
             response = Response.INTERNAL_ERROR(err);
             res.status(response.status).jsonp(response);
-        })
-})
-
+    });
+});
 
 /*
  * Adds new review to user's reviews
  * {body.review} : STRING,
  * {header.Authorization} : TOKEN
  */
-router.post('/review', checkAuth, (req, res) => {
+router.post('/', checkAuth, (req, res) => {
     let userId = req.decodedUser.id;
     let review = req.body.review;
 
@@ -45,23 +41,28 @@ router.post('/review', checkAuth, (req, res) => {
     });
 });
 
-
 /**
- * Retrieves all user's reviews
+ * Deletes review
+ * {param.review}: STRING,
  * {header.Authorization}: TOKEN
  */
-router.get('/reviews', checkAuth, async (req, res) => {
+router.delete('/', checkAuth, (req, res) => {
     let userID = req.decodedUser.id;
+    let review = req.body.review;
 
-    Users.findById(userID)
+    Users.deleteReview(userID, review)
         .then(data => {
-            response = Response.CREATED(data.reviews);
+            response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
-        }).catch(err => {
-        response = Response.INTERNAL_ERROR(err);
-        res.status(response.status).jsonp(response);
-    })
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
 });
+
+
+
 
 
 module.exports = router;
