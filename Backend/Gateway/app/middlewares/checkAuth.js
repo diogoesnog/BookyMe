@@ -1,5 +1,5 @@
 const Response = require('rapid-status');
-const User     = require('../services/users');
+const User     = require('../services/User/users');
 
 module.exports = async (req, res, next) => {
 

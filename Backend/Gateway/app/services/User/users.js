@@ -1,4 +1,4 @@
-const Request = require('../utils/Request');
+const Request = require('../../utils/Request');
 
 module.exports.login = (user) => {
 
