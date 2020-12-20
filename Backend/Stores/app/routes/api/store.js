@@ -98,7 +98,7 @@ app.get('/recommended',  (req, res) => {
     });
 });
 
-app.get('/', checkAuth, (req, res) => {
+app.get('/', (req, res) => {
 
     let response;
     let term = req.query.search
