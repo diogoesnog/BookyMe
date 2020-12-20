@@ -152,6 +152,33 @@ router.put('/account', checkAuth, validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+/**
+ * @swagger
+ * /users/password:
+ *  patch:
+ *      description: Update user's account password
+ *      tags:
+ *          - User
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          description: Update User Password
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - oldPassword
+ *                  - newPassword
+ *              properties:
+ *                  oldPassword:
+ *                      type: string
+ *                  newPassword:
+ *                      type: string
+ *
+ */
 router.patch('/password', checkAuth, validator([
     'oldPassword', 'newPassword'
 ]), (req, res) => {
