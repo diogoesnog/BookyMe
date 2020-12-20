@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <q-select
       v-model="lang"
       :options="langOptions"
@@ -29,7 +28,6 @@
           </span>
       </p>
     </div>
-
   </div>
 </template>
 
