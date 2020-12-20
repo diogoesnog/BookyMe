@@ -43,6 +43,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// app.use((req, res, next) => setTimeout(next, Math.floor( ( Math.random() * 2000 ) + 100 ) ));
+
 // Register Different Versions of API Routes
 app.use('/', require('./routes'));
 
