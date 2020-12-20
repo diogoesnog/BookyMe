@@ -3,7 +3,7 @@ const routes = [
   {
     name: "Login",
     path: '/',
-    component: () => import('../views/Login.vue'),
+    component: () => import('../views/LoginAndRegister.vue'),
     meta: {
       requiresAuth: false
     }
@@ -11,7 +11,7 @@ const routes = [
   {
     name: "Home",
     path: '/home',
-    component: () => import('../views/Home'),
+    component: () => import('../views/Homepage.vue'),
     meta: {
       requiresAuth: true
     }
