@@ -1,10 +1,11 @@
 const Request = require('../../utils/Request');
 
 
-module.exports.storeBookings = (store) => {
+module.exports.storeBookings = (token, store) => {
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/store/${store}`);
 
     request.isJson();
+    request.appendHeader("Authorization", token);
     request.acceptJson();
 
     return request.get();
@@ -31,4 +32,15 @@ module.exports.createBooking = (token, body) => {
     request.acceptJson();
 
     return request.post(body);
+}
+
+// TODO: notify with notifications
+module.exports.deleteBooking = (token, id) => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/${id}`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.delete();
 }

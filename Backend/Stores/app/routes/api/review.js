@@ -6,7 +6,7 @@ const Response = require('rapid-status');
 
 
 
-app.get('/:storeID/ratings', async (req, res) => {
+app.get('/:storeID/ratings',  (req, res) => {
 
     
     let response;
@@ -23,7 +23,7 @@ app.get('/:storeID/ratings', async (req, res) => {
 });
 
 
-app.get('/store/:storeID', async (req, res) => {
+app.get('/store/:storeID',  (req, res) => {
 
     
     let response;
@@ -63,7 +63,7 @@ app.post('/:storeID', (req, res) => {
         });
 });
 
-app.delete('/store/:storeID', async (req, res) => {
+app.delete('/store/:storeID',  (req, res) => {
 
     
     let response;
@@ -79,7 +79,7 @@ app.delete('/store/:storeID', async (req, res) => {
 
 });
 
-app.delete('/:id', async (req, res) => {
+app.delete('/:id',  (req, res) => {
 
     
     let response;

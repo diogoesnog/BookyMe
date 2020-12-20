@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../services/users');
+const User = require('../../services/User/users');
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
 
@@ -173,4 +173,9 @@ router.get('/favorites', checkAuth, (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+router.post('/favorite', checkAuth, validator([
+
+]), (req, res) => {
+
+});
 module.exports = router;
