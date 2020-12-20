@@ -6,9 +6,10 @@ module.exports = async (req, res, next) => {
     try {
         let authorization = req.headers.authorization || req.headers.Authorization;
         let response;
+        let store = req.params.id;
 
-        if(authorization) {
-            let response = await User.validateToken(authorization);
+        if(authorization && store) {
+            let response = await User.isAdmin(authorization, store);
 
             if(response.status === 200) {
                 req.user = response.data["data"];
@@ -20,7 +21,7 @@ module.exports = async (req, res, next) => {
 
         } else {
             // Authorization header not provided
-            response = Response.TOKEN_REQUIRED(null, "An Authorization token must be provided to access this endpoint.");
+            response = Response.FORBIDDEN(null, "You don't have enough permissions to access this endpoint.");
 
             res.status(response.status).jsonp(response);
         }

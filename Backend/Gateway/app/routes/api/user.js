@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../services/users');
+const User = require('../../services/User/users');
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
 
@@ -59,11 +59,8 @@ router.post('/register', validator([
     let body = JSON.stringify(req.body);
 
     User.register(body)
-        .then(response => {
-            res.status(response.status).jsonp(response.data);
-        }).catch(err => {
-            res.status(err.status).jsonp(err.data);
-        });
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 /**
@@ -113,9 +110,8 @@ router.post('/login', validator([
         .then(response => {
             console.log(response);
             res.setHeader('Authorization', response.headers.get('authorization'));
-
-            res.status(response.status).jsonp(response.data);
-        }).catch(err => res.status(err.status).jsonp(err.data));
+            res.status(response.status).jsonp(response.data)
+        }).catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 /**
@@ -149,11 +145,11 @@ router.put('/account', checkAuth, validator([
     'name', 'address'
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
-    let token =  req.headers.authorization || req.headers.Authorization;
+    let token = req.headers.authorization || req.headers.Authorization;
 
     User.updateAccount(token, body)
         .then(response => res.status(response.status).jsonp(response.data))
-        .catch(err => res.status(err.status).jsonp(err.data));
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 router.patch('/password', checkAuth, validator([
@@ -165,7 +161,21 @@ router.patch('/password', checkAuth, validator([
 
     User.updatePassword(token, body)
         .then(response => res.status(response.status).jsonp(response.data))
-        .catch(err => res.status(err.status).jsonp(err.data));
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+// Receives an array
+router.get('/favorites', checkAuth, (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+
+    User.getFavorites(token)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.post('/favorite', checkAuth, validator([
+
+]), (req, res) => {
+
+});
 module.exports = router;

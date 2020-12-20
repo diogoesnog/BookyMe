@@ -2,28 +2,23 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+var multer  = require('multer');
+var upload = multer({ dest: './app/public/avatar' });
+const fs = require('fs');
 const Users = require('../../controllers/users');
 const Response = require('rapid-status');
 const checkAuth = require('../../middlewares/checkAuth');
 
-router.get('/', (req, res) => {
-
-    /**
-     * Uma API REST pode apresentar recursos sobre formas de filtros. Para não criar novas
-     * rotas num endpoint devemos, sempre que possível, fazer uso de query strings.
-     * Estas queries strings vêm sempre após o ponto de interrogação e separadas entre &
-     * Um exemplo prático, listar os utilizadores ordenados pelo username ascendente
-     * http://localhost:3000/v1/api/user?username=asc
-     * Podemos aceder a esta query string no request (req), na property query
-     */
-
-    const queries = req.query;
-
-    res.status(200).json({title: "Title", message: "Some message...", queries: queries});
-});
 
 /**
- * Register a new username
+ * Registers a new username
+ * {body.name}: STRING,
+ * {body.username}: STRING,
+ * {body.email}: STRING,
+ * {body.address}: STRING,
+ * {body.city}: STRING,
+ * {body.zipCode}: STRING,
+ * {body.password}: STRING
  */
 router.post('/register', (req, res) => {
     let response;
@@ -47,8 +42,11 @@ router.post('/register', (req, res) => {
     })
 });
 
+
 /**
- * Authenticate a user
+ * Authenticates a user
+ * {body.email}: STRING,
+ * {body.password}: STRING
  */
 router.post('/authentication', async (req, res) => {
     let response;
@@ -105,27 +103,21 @@ router.post('/authentication', async (req, res) => {
 
 
 /**
- *  TODO: validateToken
- *  Rota que testa se o token esta valido -> get
- *  Resposta -> user -> tudo menos a pass
- *  token -> headers
+ * Updates user's information
+ * {body.name}: STRING,
+ * {body.username}: STRING,
+ * {body.email}: STRING,
+ * {body.address}: STRING,
+ * {body.city}: STRING,
+ * {body.zipCode}: STRING,
+ * {header.Authorization}: TOKEN
  */
-router.get('/validation', checkAuth, (req, res) => {
-
-    let response = Response.OK(req.decodedUser, "Authorized");
-
-    res.status(response.status).jsonp(response);
-
-});
-
-
 router.put('/account',checkAuth, async (req, res) => {
     let response;
     let userAuth = {
         id: req.decodedUser.id,
         password: req.body.password
     };
-
 
     let newInfo = {
         name: req.body.name,
@@ -137,7 +129,6 @@ router.put('/account',checkAuth, async (req, res) => {
     }
     try{
         let user = await Users.findById(userAuth.id);
-
         let result = await bcrypt.compare(userAuth.password, user.password);
 
         if (!result){
@@ -163,8 +154,12 @@ router.put('/account',checkAuth, async (req, res) => {
     }
 })
 
+
 /**
- * Update user's password
+ * Updates user's password
+ * {body.password}: STRING,
+ * {body.newPassword}: STRING
+ * {header.Authorization}: TOKEN
  */
 router.patch('/password', checkAuth, async (req, res) => {
     let response;
@@ -206,10 +201,59 @@ router.patch('/password', checkAuth, async (req, res) => {
     }
 })
 
+
+// TODO: check path
 /**
- * Returns all users in db
- * Only for test purpose
- * TODO: delete this endpoint after development
+ * Uploads user's avatar
+ * {file.avatar} : FILE,
+ * {header.Authorization} : TOKEN
+ */
+router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
+       let userID = req.decodedUser.id;
+       let path = req.file.path.replace("",'/');
+        console.log(path);
+        // let oldPath = __dirname + req.file.path;
+       let newPath = __dirname + "uploads\\\\" + userID + req.file.originalname;
+        console.log(req.file);
+       /*
+       fs.rename(oldPath,newPath, (err)=>{
+           if (err) {
+               response = Response.INTERNAL_ERROR(err, "Enable to rename file");
+               res.status(response.status).jsonp(response);
+           }
+       })
+   */
+
+    Users.updatePhoto(userID, newPath).
+        then(data => {
+            response = Response.CREATED(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+
+/**
+ *  Tests if Authorization Token is correct
+ *  {header.Authorization}: TOKEN
+ */
+router.get('/validation', checkAuth, (req, res) => {
+
+    let response = Response.OK(req.decodedUser, "Authorized");
+
+    res.status(response.status).jsonp(response);
+
+});
+
+
+
+////////////////////////////////////////////////////////////////TESTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+// TODO: delete findALL and users endpoint after development
+/**
+ * Finds and retrieves all users
  */
 router.get('/findAll', (req, res) => {
     Users.getUsers()
@@ -217,10 +261,16 @@ router.get('/findAll', (req, res) => {
         .catch(err => {res.status(500).jsonp(err);})
 });
 
+
+/**
+ * Deletes all user's documents
+ */
 router.delete('/users', (req,res) => {
     Users.deleteAll()
         .then(data => {res.status(201).jsonp(data);})
         .catch(err => {res.status(500).jsonp(err);})
-})
+});
+
+
 
 module.exports = router;

@@ -4,7 +4,7 @@ const Catalogs = require('../../controllers/catalogs');
 const Response = require('rapid-status');
 
 
-app.get('/store/:storeID', async (req, res) => {
+app.get('/store/:storeID',  (req, res) => {
 
     
     let response;
@@ -20,7 +20,7 @@ app.get('/store/:storeID', async (req, res) => {
 
 });
 
-app.post('/:storeID', async (req, res) => {
+app.post('/:storeID',  (req, res) => {
     let response;
 
     const catalog = {
@@ -42,7 +42,7 @@ app.post('/:storeID', async (req, res) => {
 
 
 
-app.delete('/store/:storeID', async (req, res) => {
+app.delete('/store/:storeID',  (req, res) => {
 
     
     let response;
@@ -58,7 +58,7 @@ app.delete('/store/:storeID', async (req, res) => {
 
 });
 
-app.delete('/:id', async (req, res) => {
+app.delete('/:id',  (req, res) => {
 
     
     let response;

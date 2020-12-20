@@ -2,6 +2,8 @@ const express = require('express');
 const app = express.Router();
 const Booking = require('../../controllers/booking');
 const checkAuth = require('../../middlewares/checkAuth');
+const { isOpen } = require('../../utils/isOpen');
+const Response = require('rapid-status');
 
 /**
  * Get list of reservations
@@ -9,10 +11,13 @@ const checkAuth = require('../../middlewares/checkAuth');
 app.get('/', (req, res) => {
     Booking.getBookings()
         .then(data => {
-            res.status(200).jsonp(data);
-        }).catch(err => {
-        res.status(500).jsonp(err);
-    });
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
 });
 
 /**
@@ -22,62 +27,87 @@ app.get('/', (req, res) => {
 app.get('/store/:id', (req, res) => {
     Booking.getBookingsByStore(req.params.id)
         .then(data => {
-            res.status(200).jsonp(data);
-        }).catch(err => {
-        res.status(500).jsonp(err);
-    });
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
 });
 
 /**
  * Get all the reservations of the authenticated user
  * URL param: /user
  */
-app.get('/user/', checkAuth, (req, res) => {
+app.get('/user', checkAuth, (req, res) => {
     Booking.getBookingsByUser(req.user.id)
         .then(data => {
-            res.status(200).jsonp(data);
-        }).catch(err => {
-        res.status(500).jsonp(err);
-    });
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+/**
+ * Get Number of reservations for each store
+ * URL: /popular
+ */
+app.get('/popular', (req, res) => {
+    Booking.getPopularStoreList()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
 });
 
 /**
  * Create a reservation
+ * URL param: /${storeId}
  * body {array} with the following object
  * {serviceDate}: Date,
- * {storeId}: String,
  * {Schedule}: [
  *      {day}: String, Monday/Tuesday/...
  *      {openingHour}: String, HH:MM
  *      {closingHour}: String, HH:MM
  * ]
  */
-app.post('/', checkAuth, async (req, res) => {
+app.post('/:storeId', checkAuth, (req, res) => {
+
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
         serviceDate: new Date(req.body.serviceDate).toISOString(),
         userId: req.user.id,
-        storeId: req.body.storeId
+        storeId: req.params.storeId
     };
 
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
-        res.status(400).jsonp({msg: "Invalid Date"});
+        response = Response.BAD_REQUEST("Invalid Date");
+        res.status(response.status).jsonp(response);
     }
-    // else if (await Booking.dateExists(booking.serviceDate, booking.storeId)) {
-    //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
-    // }
     else {
         const serviceOpen = isOpen(new Date(booking.serviceDate), req.body.schedule);
 
         if (serviceOpen) {
             Booking.createBooking(booking)
                 .then(data => {
-                    res.status(200).jsonp(data);
-                }).catch(err => {
-                res.status(500).jsonp(err);
+                    response = Response.OK(data);
+                    res.status(response.status).jsonp(response);
+                })
+                .catch(err => {
+                    response = Response.INTERNAL_ERROR(err);
+                    res.status(response.status).jsonp(response);
             });
         } else {
-            res.status(500).jsonp({msg: "The service is closed"});
+            response = Response.BAD_REQUEST("The service is closed");
+            res.status(response.status).jsonp(response);
         }
     }
 });
@@ -87,16 +117,26 @@ app.post('/', checkAuth, async (req, res) => {
  * URL param: id
  */
 app.delete('/:id', checkAuth, async (req, res) => {
-    const ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
+    try {
+        const ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
 
-    if (ReservationUserId === req.user.id) {
-        Booking.cancelBookings(req.params.id)
-            .then(data => {
-                res.status(200).jsonp(data);
-            })
-            .catch(err => res.status(400).jsonp(err));
-    } else {
-        res.status(400).jsonp({msg: "The reservation doesn't belong to the authenticated user"});
+        if (ReservationUserId === req.user.id) {
+            Booking.cancelBookings(req.params.id)
+                .then(data => {
+                    response = Response.OK(data);
+                    res.status(response.status).jsonp(response);
+                })
+                .catch(err => {
+                    response = Response.INTERNAL_ERROR(err);
+                    res.status(response.status).jsonp(response);
+                });
+        } else {
+            response = Response.UNAUTHORIZED("The reservation doesn't belong to the authenticated user");
+            res.status(response.status).jsonp(response);
+        }
+    } catch {
+        response = Response.INTERNAL_ERROR("Can't find userID. Does the reservation exist?");
+        res.status(response.status).jsonp(response);
     }
 });
 
@@ -115,52 +155,41 @@ app.put('/', checkAuth, async (req, res) => {
     const id = req.body.id;
     const bookingDate = new Date(Date.now()).toISOString();
     const serviceDate = new Date(req.body.serviceDate).toISOString();
-    // const storeId = (await Booking.getStoreFromID(id)).storeId;
-    const ReservationUserId = (await Booking.getUserFromID(id)).userId;
 
-    if (ReservationUserId === req.user.id) {
-        if (new Date(Date.now()) > new Date(serviceDate)) {
-            res.status(400).jsonp({msg: "Invalid Date"});
-        }
-        // else if (await Booking.dateExists(serviceDate, storeId)) {
-        //     res.status(400).jsonp({msg: "There is already a service scheduled for that time"});
-        // }
-        else {
-            const serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
+    try {
+        const ReservationUserId = (await Booking.getUserFromID(id)).userId;
 
-            if (serviceOpen) {
-                Booking.reschedule(id, bookingDate, serviceDate)
-                    .then(data => {
-                        res.status(200).jsonp(data);
-                    })
-                    .catch(err => res.status(400).jsonp(err));
+        if (ReservationUserId === req.user.id) {
+            if (new Date(Date.now()) > new Date(serviceDate)) {
+                response = Response.BAD_REQUEST("Invalid Date");
+                res.status(response.status).jsonp(response);
             } else {
-                res.status(500).jsonp({msg: "The service is closed"});
+                const serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
+
+                if (serviceOpen) {
+                    Booking.reschedule(id, bookingDate, serviceDate)
+                        .then(data => {
+                            response = Response.OK(data);
+                            res.status(response.status).jsonp(response);
+                        })
+                        .catch(err => {
+                            response = Response.INTERNAL_ERROR(err);
+                            res.status(response.status).jsonp(response);
+                        });
+                } else {
+                    response = Response.BAD_REQUEST("The service is closed");
+                    res.status(response.status).jsonp(response);
+                }
             }
+        } else {
+            response = Response.UNAUTHORIZED("The reservation doesn't belong to the authenticated user");
+            res.status(response.status).jsonp(response);
         }
-    } else {
-        res.status(400).jsonp({msg: "The reservation doesn't belong to the authenticated user"});
+    }
+    catch {
+        response = Response.INTERNAL_ERROR("Can't find userID. Does the reservation exist?");
+        res.status(response.status).jsonp(response);
     }
 });
-
-function isOpen (serviceDate, schedule) {
-    const weekService = serviceDate.toLocaleTimeString('en-us', {weekday: 'long'}).split(' ')[0];
-
-    for (let item of schedule) {
-        if (item.day === weekService) {
-            const closingHour = item.closingHour.split(':');
-            const openingHour = item.openingHour.split(':');
-            const serviceHour = [serviceDate.getUTCHours(), serviceDate.getUTCMinutes()];
-
-            if (serviceHour[0] > openingHour[0] && serviceHour[0] < closingHour[0])
-                return true;
-            else if (serviceHour[0] == openingHour[0] && serviceHour[1] > openingHour[1])
-                return true;
-            else if (serviceHour[0] == closingHour[0] && serviceHour[1] < closingHour[1])
-                return true;
-        }
-    }
-    return false;
-}
 
 module.exports = app;

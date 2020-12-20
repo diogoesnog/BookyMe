@@ -100,7 +100,7 @@ module.exports.userFavorites = (user) => {
 }
 
 module.exports.getCategories = () => {
-    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/`);
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/categories/results`);
 
     request.isJson();
 
