@@ -24,13 +24,13 @@ module.exports.getCategoriesResults = () => {
                 .exec()
 }
 
-module.exports.getResults = (term) => {
-    return Store.find({
-        "$or": [
-            { name: { '$regex': term, '$options': 'i' } },
-            { description: { '$regex': term, '$options': 'i' } }
-        ]
-    })
+module.exports.getResults = (query,term) => {
+
+    query["$or"] = [
+        { name: { '$regex': term, '$options': 'i' } },
+        { description: { '$regex': term, '$options': 'i' } },
+    ]
+    return Store.find(query)
 }
 
 module.exports.getCategories = async () => {

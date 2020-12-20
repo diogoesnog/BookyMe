@@ -85,18 +85,6 @@ app.get('/categories',  (req, res) => {
     });
 });
 
-app.get('/search',  (req, res) => {
-
-    Stores.getResults(req.body.search)
-        .then(data => {
-            response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
-            res.status(response.status).jsonp(response);
-    });
-});
-
 
 app.get('/recommended',  (req, res) => {
 
@@ -111,9 +99,19 @@ app.get('/recommended',  (req, res) => {
 });
 
 app.get('/',  (req, res) => {
+
     let response;
-    let query = req.query;
-    Stores.get(query)
+    let term = req.query.search
+    filters = {}
+
+    for (var propName in req.query) {
+        if (req.query.hasOwnProperty(propName)) {
+            if (propName != 'search'){
+                filters[propName] = req.query[propName]
+            }
+        }
+    }
+    Stores.getResults(filters, term)
         .then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
