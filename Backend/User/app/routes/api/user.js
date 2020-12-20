@@ -11,7 +11,7 @@ const checkAuth = require('../../middlewares/checkAuth');
 
 
 /**
- * Register a new username
+ * Registers a new username
  * {body.name}: STRING,
  * {body.username}: STRING,
  * {body.email}: STRING,
@@ -44,7 +44,7 @@ router.post('/register', (req, res) => {
 
 
 /**
- * Authenticate a user
+ * Authenticates a user
  * {body.email}: STRING,
  * {body.password}: STRING
  */
@@ -204,7 +204,7 @@ router.patch('/password', checkAuth, async (req, res) => {
 
 // TODO: check path
 /**
- * Upload user's avatar
+ * Uploads user's avatar
  * {file.avatar} : FILE,
  * {header.Authorization} : TOKEN
  */
@@ -234,200 +234,23 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
         });
 });
 
-///////////////////////////////////////////////////Favorites\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/**
- * Add new favorite to user's favorites version 1
- * {body.favorite} : STRING
- * {header.Authorization} : TOKEN
- */
-router.post('/favorite', checkAuth, (req, res) => {
-
-    let userId = req.decodedUser.id;
-    let favorite = req.body.favorite;
-
-    Users.addFavorite(userId, favorite).
-    then(data => {
-        response = Response.CREATED(data);
-        res.status(response.status).jsonp(response);
-    }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, "Enable to add new favorite!");
-        res.status(response.status).jsonp(response);
-    });
-});
 
 /**
- * Delete favorite de todos os users
- * {param.idLoja}
+ *  Tests if Authorization Token is correct
+ *  {header.Authorization}: TOKEN
  */
+router.get('/validation', checkAuth, (req, res) => {
 
+    let response = Response.OK(req.decodedUser, "Authorized");
 
-/**
- * Retrieves all user's favorites
- * {header.Authorization}: TOKEN
- */
-router.get('/favorites', checkAuth, (req, res) => {
-    let userID = req.decodedUser.id;
+    res.status(response.status).jsonp(response);
 
-    Users.findById(userID)
-        .then(data => {
-            response = Response.CREATED(data.favorites);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        })
 });
 
 
 
-///////////////////////////////////////////////////Reviews\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/**
- * Delete review
- * {param.idLoja}
- */
+////////////////////////////////////////////////////////////////TESTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-/*
- * Add new review to user's reviews version 1
- * {body.review} : STRING,
- * {header.Authorization} : TOKEN
- */
-router.post('/review', checkAuth, (req, res) => {
-    let userId = req.decodedUser.id;
-    let review = req.body.review;
-
-    Users.addReview(userId, review).
-    then(data => {
-        response = Response.CREATED(data);
-        res.status(response.status).jsonp(response);
-    }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, "Enable to add new favorite!");
-        res.status(response.status).jsonp(response);
-    });
-});
-
-
-/**
- * Retrieves all user's reviews
- * {header.Authorization}: TOKEN
- */
-router.get('/reviews', checkAuth, async (req, res) => {
-    let userID = req.decodedUser.id;
-
-    Users.findById(userID)
-        .then(data => {
-            response = Response.CREATED(data.reviews);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-        response = Response.INTERNAL_ERROR(err);
-        res.status(response.status).jsonp(response);
-    })
-});
-
-
-///////////////////////////////////////////////////Bookings\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/**
- * Add new booking to user's bookings
- * {body.booking} : STRING
- * {header.Authorization} : TOKEN
- */
-router.post('/booking', checkAuth,  (req, res) => {
-    let userId = req.decodedUser.id;
-    let booking = req.body.booking;
-
-    Users.addBooking(userId, booking).
-    then(data => {
-        response = Response.CREATED(data);
-        res.status(response.status).jsonp(response);
-    }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, "Enable to add new favorite!");
-        res.status(response.status).jsonp(response);
-    });
-
-});
-
-
-/**
- * Retrieves all user's bookings
- * {header.Authorization}: TOKEN
- */
-router.get('/bookings', checkAuth, (req, res) => {
-    let userID = req.decodedUser.id;
-
-    Users.findById(userID)
-        .then(data => {
-            response = Response.CREATED(data.bookings);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-        response = Response.INTERNAL_ERROR(err);
-        res.status(response.status).jsonp(response);
-    })
-});
-
-
-
-///////////////////////////////////////////////////Stores\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-/**
- * Add new store to user's stores
- * {body.store} : STRING
- * {header.Authorization} : TOKEN
- */
-router.post('/store', checkAuth, (req, res) => {
-    let userId = req.decodedUser.id;
-    let store = req.body.store;
-
-    Users.addStore(userId, store).
-    then(data => {
-        response = Response.CREATED(data);
-        res.status(response.status).jsonp(response);
-    }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, "Enable to add new favorite!");
-        res.status(response.status).jsonp(response);
-    });
-
-});
-
-
-/**
- * Retrieves all user's bookings
- * {header.Authorization}: TOKEN
- */
-router.get('/stores', checkAuth, (req, res) => {
-    let userID = req.decodedUser.id;
-
-    Users.findById(userID)
-        .then(data => {
-            response = Response.CREATED(data.stores);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-        response = Response.INTERNAL_ERROR(err);
-        res.status(response.status).jsonp(response);
-    })
-});
-
-
-/**
- * Verify if the user is the owner of the given store
- * {body.store}: STRING.
- * {header.Authorization}: TOKEN
- */
-router.get('/storeOwner', checkAuth, (req, res) => {
-    let userID = req.decodedUser.id;
-    let storeId = req.body.store;
-
-    Users.findUserStore(userID, storeId).
-        then(dataTemp => {
-            let data = {
-               isAdmin: dataTemp ? true: false
-            }
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        });
-});
-
-/************************************************************************************************/
 // TODO: delete findALL and users endpoint after development
 /**
  * Finds and retrieves all users
@@ -440,7 +263,7 @@ router.get('/findAll', (req, res) => {
 
 
 /**
- * Delete all user's documents
+ * Deletes all user's documents
  */
 router.delete('/users', (req,res) => {
     Users.deleteAll()
@@ -449,20 +272,5 @@ router.delete('/users', (req,res) => {
 });
 
 
-/**
- *  Test if Authorization Token is correct
- *  {header.Authorization}: TOKEN
- */
-router.get('/validation', checkAuth, (req, res) => {
-
-    let response = Response.OK(req.decodedUser, "Authorized");
-
-    res.status(response.status).jsonp(response);
-
-});
-
-/**
- * Verifica se utilizador é dono da store
- */
 
 module.exports = router;
