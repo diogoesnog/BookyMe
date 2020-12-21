@@ -8,7 +8,7 @@
     password: "Password",
     login: "Iniciar Sessão",
 
-    noAccount: "Ainda não possui uma Conta",
+    noAccount: "Ainda não possui uma Conta?",
     createAccount: "Criar Conta"
   },
 
