@@ -5,7 +5,7 @@
     <div class="divTop">
       <img src="../../assets/Other/Layers.png" style="width: 50%; height: auto;"/>
       <div style="position: relative; bottom: 50px;">
-        <h4 style="font-weight: 950; font-size: 45px;">{{$t('loginPage.title')}}</h4>
+        <h4 style="font-weight: 950; font-size: 40px;">{{$t('loginPage.title')}}</h4>
         <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
           <p v-html="$t('loginPage.description')"></p>
         </div>    
@@ -98,7 +98,7 @@ export default {
   }
 
   .divTop{
-    top: 90px;
+    top: 70px;
     position: relative;
   }
 
@@ -108,7 +108,7 @@ export default {
     left: 0;
     width: 100%;
     padding: 100px;
-    height: 500px;
+    height: 505px;
     background-size: cover;
     background-position: center top;
     background-image: url('../../assets/Other/LoginFrame.svg');
