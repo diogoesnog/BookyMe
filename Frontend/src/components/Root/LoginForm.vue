@@ -98,7 +98,7 @@ export default {
   }
 
   .divTop{
-    top: 90px;
+    top: 70px;
     position: relative;
   }
 
@@ -108,7 +108,7 @@ export default {
     left: 0;
     width: 100%;
     padding: 100px;
-    height: 500px;
+    height: 505px;
     background-size: cover;
     background-position: center top;
     background-image: url('../../assets/Other/LoginFrame.svg');
