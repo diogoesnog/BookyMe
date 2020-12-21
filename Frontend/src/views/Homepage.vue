@@ -5,7 +5,7 @@
 </template>
 
 <script>
-//import "@/components/Homepage/Categories"
+import "@/components/Homepage/Categories"
 export default {
   name: "Homepage",
 
