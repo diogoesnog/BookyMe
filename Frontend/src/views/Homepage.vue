@@ -1,17 +1,26 @@
 <template>
   <div>
     <p>User logged on</p>
+
+    <Categories v-for="(category, index) in categories" :key="index" v-bind="category"/>
   </div>
 </template>
 
 <script>
-import "@/components/Homepage/Categories"
+import Service from '../services/user.service';
+import Categories from '../components/Homepage/Categories';
 export default {
   name: "Homepage",
 
   // Os Dados Utilizados pelo componente ou view
   data() {
-    return {}
+    return {
+      categories: Array
+    }
+  },
+
+  components: {
+    Categories
   },
 
   // Lifecycle
@@ -46,6 +55,7 @@ export default {
    */
   mounted() {
     console.log("Mounted: View has been rendered");
+    this.fetchCategories();
   },
 
   /**
@@ -80,6 +90,22 @@ export default {
   // Métodos do Componente
   methods: {
 
+    fetchCategories() {
+      this.$q.loading.show({ delay: 400});
+
+      Service.getCategories()
+        .then(response => {
+          let data = response.data["data"];
+
+          this.categories = data;
+
+          console.log(this.categories);
+        }).catch(err => {
+
+        }).finally(() => {
+          this.$q.loading.hide();
+        })
+    }
   }
 }
 </script>
