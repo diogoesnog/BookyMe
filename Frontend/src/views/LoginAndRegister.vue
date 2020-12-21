@@ -3,7 +3,7 @@
     <!-- Form Login -->
     <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
-      <p>
+      <p class="bottomInfoLogin">
         {{$t('loginPage.noAccount')}}
         <span @click="loginForm = !loginForm">
           <b>{{$t('loginPage.createAccount')}}</b>
@@ -29,10 +29,10 @@
         </div>
       </div>
       <RegisterForm/>
-      <p class="bottomInfo">
+      <p class="bottomInfoRegister">
         {{$t('registerPage.alreadyHasAccount')}}
           <span @click="loginForm = !loginForm"> 
-           <b>{{$t('registerPage.login')}}</b>
+            <b>{{$t('registerPage.login')}}</b>
           </span>
       </p>
     </div>
@@ -80,10 +80,20 @@
     color: white;
   }
 
-  .bottomInfo {
+  .bottomInfoRegister {
     margin-top: -75px;
     position: relative;
     text-align: center; 
+  }
+
+  .bottomInfoLogin {
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    padding: 35px;
   }
 
   .selectLanguage {

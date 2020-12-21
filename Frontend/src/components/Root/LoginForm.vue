@@ -1,12 +1,15 @@
 <template>
   <!-- Div Principal -->
-  <div>
+  <div class="text-center" style="color: #434343">
     <!-- Div Cima -->
     <div class="divTop">
-      <h3 align-center>
-        {{$t('loginPage.title')}}
-      </h3>
-      <p>{{$t('loginPage.description')}}</p>
+      <img src="../../assets/Other/Layers.png" style="width: 50%; height: auto;"/>
+      <div style="position: relative; bottom: 50px;">
+        <h4 style="font-weight: 950; font-size: 45px;">{{$t('loginPage.title')}}</h4>
+        <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
+          <p v-html="$t('loginPage.description')"></p>
+        </div>    
+      </div>
     </div>
     <br/>
     <!-- Div Baixo -->
@@ -95,7 +98,8 @@ export default {
   }
 
   .divTop{
-    position: fixed;
+    top: 90px;
+    position: relative;
   }
 
   .divBottom1{
@@ -112,7 +116,7 @@ export default {
 
   .divBottom2{
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     width: 100%;
     padding: 60px;
@@ -130,7 +134,7 @@ export default {
   }
 
   .gradientRed {
-      background-image: linear-gradient(#e9685b, #e03459);
+      background-image: linear-gradient(#e9695c, #e03459);
   }
 
 </style>
