@@ -107,7 +107,7 @@ export default {
     height: 500px;
     background-size: cover;
     background-position: center top;
-    background-image: url('../../assets/Other/LoginFrame.png');
+    background-image: url('../../assets/Other/LoginFrame.svg');
   }
 
   .divBottom2{
