@@ -25,8 +25,8 @@ module.exports = async (req,res,next) => {
                 address: user.address,
                 type: user.type
             }
+            next();
         }
-        next();
     } catch (err) {
             response = Response.TOKEN_REQUIRED(err, "Authorization header missing or invalid");
             res.status(response.status).jsonp(response);
