@@ -2,13 +2,13 @@
   <div>
     <p>User logged on</p>
 
-    <Categories v-for="(category, index) in categories" :key="index" v-bind="category"/>
+    <CategoriesList v-for="(category, index) in categories" :key="index" v-bind="category"/>
   </div>
 </template>
 
 <script>
 import Service from '../services/user.service';
-import Categories from '../components/Homepage/Categories';
+import CategoriesList from '../components/Homepage/CategoriesList';
 export default {
   name: "Homepage",
 
@@ -20,7 +20,7 @@ export default {
   },
 
   components: {
-    Categories
+    CategoriesList
   },
 
   // Lifecycle

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "Categories",
+  name: "CategoriesList",
 
   props: {
     title: String,
