@@ -107,3 +107,11 @@ module.exports.create = (store) => {
     const newStore = new Store(store);
     return newStore.save();
 }
+
+
+/*
+ * Find Stores by Array of Values
+ */
+module.exports.findByArrayId = (array) => {
+    return Store.find({ _id: { $in: array }});
+}

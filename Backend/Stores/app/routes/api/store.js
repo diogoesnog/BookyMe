@@ -360,6 +360,16 @@ app.delete('/:id/photos/:photoID',  (req, res) => {
 
 });
 
- 
+app.post('/favorites', (req, res) => {
+
+    Stores.findByArrayId(req.body.favorites)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+        response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
+        res.status(response.status).jsonp(response);
+    });
+});
 
 module.exports = app;
