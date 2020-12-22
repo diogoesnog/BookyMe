@@ -23,7 +23,8 @@ module.exports = async (req,res,next) => {
                 email: user.email,
                 name: user.name,
                 address: user.address,
-                type: user.type
+                type: user.type,
+                favorites: user.favorites
             }
             next();
         }
