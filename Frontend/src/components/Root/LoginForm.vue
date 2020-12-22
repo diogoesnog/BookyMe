@@ -16,13 +16,13 @@
     <div class="divBottom1">
       <div class="divBottom2">
         <q-form>
-          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
+          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
             <template v-slot:prepend>
               <q-icon name="fas fa-hashtag" color="grey-5" />
             </template>
           </q-input>
           <br/>
-          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
+          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
             <template v-slot:prepend>
               <q-icon name="fas fa-lock" color="grey-5"/>
             </template>
