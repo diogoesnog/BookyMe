@@ -39,18 +39,24 @@ module.exports.getCategoriesResults = () => {
     ])
 }
 
-module.exports.getResults = (term) => {
-    return Store.find({
-        "$or": [
+module.exports.getResults = (query,term) => {
+
+    if(term){
+        query["$or"] = [
             { name: { '$regex': term, '$options': 'i' } },
-            { description: { '$regex': term, '$options': 'i' } }
+            { description: { '$regex': term, '$options': 'i' } },
         ]
-    })
+    }
+    return Store.find(query)
 }
 
 module.exports.getCategories = async () => {
-    return Store.schema.path('category').enumValues
+    return await Store.schema.path('category').enumValues
     
+}
+
+module.exports.getCalendar = async () => {
+    return await Store.schema.path('schedule').schema.path('day').enumValues
 }
 
 module.exports.getRecommended = async () => {
@@ -100,4 +106,12 @@ module.exports.removeStorePhoto = (id, pId) => {
 module.exports.create = (store) => {
     const newStore = new Store(store);
     return newStore.save();
+}
+
+
+/*
+ * Find Stores by Array of Values
+ */
+module.exports.findByArrayId = (array) => {
+    return Store.find({ _id: { $in: array }});
 }
