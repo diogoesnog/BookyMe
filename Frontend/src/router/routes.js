@@ -15,7 +15,23 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    name: "Categories",
+    path: '/categories',
+    component: () => import('../views/Categories'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "Favorites",
+    path: '/favorites',
+    component: () => import('../views/Favorites'),
+    meta: {
+      requiresAuth: true
+    }
+  } 
   // Always leave this as last one,
   // but you can also remove it
   //{
