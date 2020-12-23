@@ -16,7 +16,11 @@
   "_id": {
     "$oid": "5fc6b3364b1974397a8a41d8"
   },
-  "favorites": [],
+  "favorites": [
+    "5fcbe818acd2bb2326ca7a1a",
+    "5fd653de6c110bb40443a624",
+    "5fd654a86c110bb40443a637"
+  ],
   "avatar": "User.jpg",
   "reviews": [],
   "bookings": [],

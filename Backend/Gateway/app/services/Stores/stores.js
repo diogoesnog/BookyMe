@@ -100,9 +100,19 @@ module.exports.userFavorites = (user) => {
 }
 
 module.exports.getCategories = () => {
-    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/`);
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/categories/results`);
 
     request.isJson();
+
+    return request.get();
+}
+
+module.exports.getFavorites = (token) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/favorites`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
 
     return request.get();
 }

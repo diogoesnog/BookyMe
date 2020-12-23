@@ -13,7 +13,7 @@ module.exports = async (req,res,next) => {
         let user = await Users.findById(decodedToken.user);
 
         if (!user) {
-            response = Response.FORBIDDEN();
+            response = Response.FORBIDDEN("user doesn't exists!");
             res.status(response.status).jsonp(response);
         }
         else{
@@ -23,7 +23,8 @@ module.exports = async (req,res,next) => {
                 email: user.email,
                 name: user.name,
                 address: user.address,
-                type: user.type
+                type: user.type,
+                favorites: user.favorites
             }
             next();
         }

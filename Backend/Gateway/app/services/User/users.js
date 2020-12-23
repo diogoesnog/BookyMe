@@ -1,10 +1,11 @@
-const Request = require('../utils/Request');
+const Request = require('../../utils/Request');
 
 module.exports.login = (user) => {
 
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/authentication`);
 
     request.isJson();
+    request.acceptJson();
     request.acceptJson();
 
     return request.post(user);
@@ -15,6 +16,7 @@ module.exports.register = (user) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/register`);
 
     request.isJson();
+    request.acceptJson();
     request.acceptJson();
 
     return request.post(user);
@@ -41,29 +43,10 @@ module.exports.updatePassword = (token, info) => {
     return request.patch(info);
 }
 
+// TODO: Upload Avatar
+
 module.exports.validateToken = (token) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
-
-    request.isJson();
-    request.appendHeader("Authorization", token);
-    request.acceptJson();
-
-    return request.get();
-}
-
-module.exports.getFavorites = (token) => {
-    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/favorites`);
-
-    request.isJson();
-    request.appendHeader("Authorization", token);
-    request.acceptJson();
-
-
-    return request.get();
-}
-
-module.exports.isAdmin = (token, id) => {
-    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/admin/${id}`);
 
     request.isJson();
     request.appendHeader("Authorization", token);

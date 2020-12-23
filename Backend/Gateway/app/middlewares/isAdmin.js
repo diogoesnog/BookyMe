@@ -1,14 +1,15 @@
 const Response = require('rapid-status');
-const User     = require('../services/users');
+const User     = require('../services/User/users');
 
 module.exports = async (req, res, next) => {
 
     try {
         let authorization = req.headers.authorization || req.headers.Authorization;
         let response;
+        let store = req.params.id;
 
-        if(authorization) {
-            let response = await User.validateToken(authorization);
+        if(authorization && store) {
+            let response = await User.isAdmin(authorization, store);
 
             if(response.status === 200) {
                 req.user = response.data["data"];
