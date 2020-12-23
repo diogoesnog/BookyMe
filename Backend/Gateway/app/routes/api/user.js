@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../services/users');
+
+// Services
+const { Booking, Favorite, Review, Store, User } = require('../../services/User');
+
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
 
@@ -59,11 +62,8 @@ router.post('/register', validator([
     let body = JSON.stringify(req.body);
 
     User.register(body)
-        .then(response => {
-            res.status(response.status).jsonp(response.data);
-        }).catch(err => {
-            res.status(err.status).jsonp(err.data);
-        });
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 /**
@@ -113,9 +113,8 @@ router.post('/login', validator([
         .then(response => {
             console.log(response);
             res.setHeader('Authorization', response.headers.get('authorization'));
-
-            res.status(response.status).jsonp(response.data);
-        }).catch(err => res.status(err.status).jsonp(err.data));
+            res.status(response.status).jsonp(response.data)
+        }).catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 /**
@@ -149,13 +148,40 @@ router.put('/account', checkAuth, validator([
     'name', 'address'
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
-    let token =  req.headers.authorization || req.headers.Authorization;
+    let token = req.headers.authorization || req.headers.Authorization;
 
     User.updateAccount(token, body)
         .then(response => res.status(response.status).jsonp(response.data))
-        .catch(err => res.status(err.status).jsonp(err.data));
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+/**
+ * @swagger
+ * /users/password:
+ *  patch:
+ *      description: Update user's account password
+ *      tags:
+ *          - User
+ *      consumes:
+ *          - "application/json"
+ *      produces:
+ *          - "application/json"
+ *      parameters:
+ *        - in: body
+ *          name: User
+ *          description: Update User Password
+ *          schema:
+ *              type: Object
+ *              required:
+ *                  - oldPassword
+ *                  - newPassword
+ *              properties:
+ *                  oldPassword:
+ *                      type: string
+ *                  newPassword:
+ *                      type: string
+ *
+ */
 router.patch('/password', checkAuth, validator([
     'oldPassword', 'newPassword'
 ]), (req, res) => {
@@ -165,7 +191,21 @@ router.patch('/password', checkAuth, validator([
 
     User.updatePassword(token, body)
         .then(response => res.status(response.status).jsonp(response.data))
-        .catch(err => res.status(err.status).jsonp(err.data));
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+// Receives an array
+router.get('/favorites', checkAuth, (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+
+    Favorite.getFavorites(token)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.post('/favorite', checkAuth, validator([
+
+]), (req, res) => {
+
+});
 module.exports = router;

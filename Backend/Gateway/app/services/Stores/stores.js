@@ -1,4 +1,4 @@
-const Request = require('../utils/Request');
+const Request = require('../../utils/Request');
 
 
 module.exports.getAll = () => {
@@ -79,4 +79,40 @@ module.exports.deletePhoto = (store, photo) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photos/${photo}`);
 
     return request.delete();
+}
+
+
+module.exports.getPopular = () => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/popular`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+// TODO: move to user endpoint services
+module.exports.userFavorites = (user) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${user}`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+module.exports.getCategories = () => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/categories/results`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+module.exports.getFavorites = (token) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/favorites`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
 }

@@ -4,7 +4,7 @@ export default {
     title: "Welcome to BookyMe!",
     description: "Sign-In to view all your bookings",
 
-    username: "Username",
+    username: "Username/E-mail",
     password: "Password",
     login: "Sign-In",
 

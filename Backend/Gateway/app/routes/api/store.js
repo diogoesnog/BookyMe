@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Store = require('../../services/stores');
+const Store = require('../../services/Stores/stores');
 const { validator } = require('../../middlewares/checkBody');
 const MulterFiles = require('../../utils/MulterFiles');
 const uploader = new MulterFiles('stores');
@@ -8,6 +8,36 @@ const upload = uploader.getUploader();
 const fs = require('fs');
 const checkAuth = require("../../middlewares/checkAuth");
 
+router.get('/popular', checkAuth, (req, res) => {
+    Store.getPopular()
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+// TODO: move this endpoint to user endpoint
+// 1. By User Id
+// 2. Fetch favorites array
+// 3. Per entry, get stores information
+router.get('/favourtes/:id', (req, res) => {
+    Store.userFavorites(req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/categories', (req, res) => {
+    Store.getCategories()
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/favorites', checkAuth, (req, res) => {
+    let body = JSON.stringify(req.body);
+    let token = req.headers.authorization || req.headers.Authorization;
+
+    Store.getFavorites(token)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
 
 /**
  * @swagger
@@ -80,6 +110,30 @@ router.post('/', validator([
 });
 
 // TODO: change to put
+/**
+ * @swagger
+ * /stores/{id}/logo:
+ *  post:
+ *      description: Add a logo to a given Store ID
+ *      tags:
+ *          - Stores
+ *      consumes:
+ *          - "multipart/form-data"
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: Store ID
+ *      requestBody:
+ *          content:
+ *              image/png:
+ *                  schema:
+ *                      type: string
+ *                      format: binary
+ *
+ */
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
     let response;
     try {

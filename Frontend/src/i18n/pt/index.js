@@ -4,7 +4,7 @@
     title: "Bem Vindo ao BookyMe!",
     description: "Inicie Sessão para ver todas as suas Reservas",
 
-    username: "Username",
+    username: "Username/E-mail",
     password: "Password",
     login: "Iniciar Sessão",
 
@@ -17,7 +17,7 @@
     description: "Cria uma conta AGORA para ter acesso a <b>Todas as Vantagens</b>",
 
     fullName: "Nome Completo",
-    username: "Nome de Utilizador",
+    username: "Username",
     email: "E-mail",
     address: "Morada",
     city: "Cidade",
@@ -134,7 +134,7 @@
   },
 
   settingsPage: {
-    language: "Idioma da Interface"
+    language: "Idioma"
   },
 
   languages: {

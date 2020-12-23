@@ -1,33 +1,39 @@
 <template>
-  <div> 
-    <div>
+  <!-- Div Principal -->
+  <div>
+    <!-- Div Cima -->
+    <div class="divTop">
       <h3 align-center>
         {{$t('loginPage.title')}}
       </h3>
       <p>{{$t('loginPage.description')}}</p>
     </div>
-    <div>
-      <q-form>
-        <q-input class="shadow" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text">
-          <template v-slot:prepend>
-            <q-icon name="fas fa-hashtag" color="grey-5" />
-          </template>
-        </q-input>
-        <br/>
-        <q-input class="shadow" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password">
-          <template v-slot:prepend>
-            <q-icon name="fas fa-lock"  color="grey-5"/>
-          </template>
-        </q-input>
-        <br/>
-        <q-btn class="gradient" rounded push @click="handleLogin" style="width: 100%">
-          <p style="font-size:120%;" class="font-weight-bold button">
-            {{ $t('loginPage.login') }}
-          </p>
-        </q-btn>
-      </q-form>
+    <br/>
+    <!-- Div Baixo -->
+    <div class="divBottom1">
+      <div class="divBottom2">
+        <q-form>
+          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-hashtag" color="grey-5" />
+            </template>
+          </q-input>
+          <br/>
+          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
+            <template v-slot:prepend>
+              <q-icon name="fas fa-lock" color="grey-5"/>
+            </template>
+          </q-input>
+          <br/>
+          <q-btn class="gradientRed" rounded @click="handleLogin" style="width: 100%">
+            <p style="font-size:120%;" class="font-weight-bold button">
+              {{ $t('loginPage.login') }}
+            </p>
+          </q-btn>
+        </q-form>
+      </div>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script>
@@ -80,12 +86,36 @@ export default {
     border-radius: 28px;
   }
 
-  .circle{
-    width:100%;
-    height: 200px;
-    border-radius: 0 0 100% 100%;
-    background-color: yellow;
-    margin-top:-130px;
+  .divMajor {
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    padding-bottom: 800px;
+    background-image: linear-gradient(#13c1e0, #2897e3);
+  }
+
+  .divTop{
+    position: fixed;
+  }
+
+  .divBottom1{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 100px;
+    height: 500px;
+    background-size: cover;
+    background-position: center top;
+    background-image: url('../../assets/Other/LoginFrame.png');
+  }
+
+  .divBottom2{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px;
   }
 
   .button {
@@ -95,7 +125,11 @@ export default {
     color: #fff;
   }
 
-  .gradient {
+  .inputWhite {
+      background: white;
+  }
+
+  .gradientRed {
       background-image: linear-gradient(#e9685b, #e03459);
   }
 
