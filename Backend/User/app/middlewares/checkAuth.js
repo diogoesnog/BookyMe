@@ -23,10 +23,11 @@ module.exports = async (req,res,next) => {
                 email: user.email,
                 name: user.name,
                 address: user.address,
-                type: user.type
+                type: user.type,
+                favorites: user.favorites
             }
+            next();
         }
-        next();
     } catch (err) {
             response = Response.TOKEN_REQUIRED(err, "Authorization header missing or invalid");
             res.status(response.status).jsonp(response);
