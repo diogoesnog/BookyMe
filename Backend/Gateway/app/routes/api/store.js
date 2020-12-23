@@ -30,6 +30,15 @@ router.get('/categories', (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+router.get('/favorites', checkAuth, (req, res) => {
+    let body = JSON.stringify(req.body);
+    let token = req.headers.authorization || req.headers.Authorization;
+
+    Store.getFavorites(token)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
 /**
  * @swagger
  * /stores:
@@ -101,6 +110,30 @@ router.post('/', validator([
 });
 
 // TODO: change to put
+/**
+ * @swagger
+ * /stores/{id}/logo:
+ *  post:
+ *      description: Add a logo to a given Store ID
+ *      tags:
+ *          - Stores
+ *      consumes:
+ *          - "multipart/form-data"
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: string
+ *          required: true
+ *          description: Store ID
+ *      requestBody:
+ *          content:
+ *              image/png:
+ *                  schema:
+ *                      type: string
+ *                      format: binary
+ *
+ */
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
     let response;
     try {

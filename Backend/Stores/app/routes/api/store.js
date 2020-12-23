@@ -20,6 +20,31 @@ app.get('/popular',  (req, res) => {
 });
 
 
+app.get('/calendar', (req,res) => {
+
+    Stores.getCalendar()
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch working days...');
+            res.status(response.status).jsonp(response);
+    });
+
+})
+
+app.get('/favorites', checkAuth, (req, res) => {
+    console.log("req.user");
+    Stores.findByArrayId(req.user.favorites)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+        response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
+        res.status(response.status).jsonp(response);
+    });
+});
+
 app.get('/schedule', (req,res) => {
 
     let day = req.query.day
@@ -72,22 +97,9 @@ app.get('/categories',  (req, res) => {
     });
 });
 
-app.get('/search',  (req, res) => {
 
-    Stores.getResults(req.body.search)
-        .then(data => {
-            response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch categories');
-            res.status(response.status).jsonp(response);
-    });
-});
+app.get('/recommended',  (req, res) => {
 
-
-app.get('/ratings',  (req, res) => {
-
-    console.log('Entrei aqui!')
     Stores.getRecommended()
         .then(data => {
             response = Response.OK(data);
@@ -98,10 +110,20 @@ app.get('/ratings',  (req, res) => {
     });
 });
 
-app.get('/',  (req, res) => {
+app.get('/', (req, res) => {
+
     let response;
-    let query = req.query;
-    Stores.get(query)
+    let term = req.query.search
+    filters = {}
+
+    for (var propName in req.query) {
+        if (req.query.hasOwnProperty(propName)) {
+            if (propName != 'search'){
+                filters[propName] = req.query[propName]
+            }
+        }
+    }
+    Stores.getResults(filters, term)
         .then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
@@ -349,7 +371,5 @@ app.delete('/:id/photos/:photoID',  (req, res) => {
 
 
 });
-
- 
 
 module.exports = app;

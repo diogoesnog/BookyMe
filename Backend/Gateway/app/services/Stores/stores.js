@@ -106,3 +106,13 @@ module.exports.getCategories = () => {
 
     return request.get();
 }
+
+module.exports.getFavorites = (token) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/favorites`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}
