@@ -33,6 +33,18 @@ app.get('/calendar', (req,res) => {
 
 })
 
+app.get('/favorites', checkAuth, (req, res) => {
+    console.log("req.user");
+    Stores.findByArrayId(req.user.favorites)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+        response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
+        res.status(response.status).jsonp(response);
+    });
+});
+
 app.get('/schedule', (req,res) => {
 
     let day = req.query.day
@@ -358,18 +370,6 @@ app.delete('/:id/photos/:photoID',  (req, res) => {
     });
 
 
-});
-
-app.post('/favorites', (req, res) => {
-
-    Stores.findByArrayId(req.body.favorites)
-        .then(data => {
-            response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
-        res.status(response.status).jsonp(response);
-    });
 });
 
 module.exports = app;

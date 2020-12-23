@@ -112,6 +112,4 @@ module.exports.create = (store) => {
 /*
  * Find Stores by Array of Values
  */
-module.exports.findByArrayId = (array) => {
-    return Store.find({ _id: { $in: array }});
-}
+module.exports.findByArrayId = (array) => Store.find({ _id: { $in: array }});
