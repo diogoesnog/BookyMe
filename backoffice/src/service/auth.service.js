@@ -1,12 +1,11 @@
-import Request from '../utils/Request';
+import axios from 'axios';
+
 export default {
     login: (user) => {
-        let request = new Request(`${process.env.API_ENDPOINT}/users/login`);
-
-        return request.post(user)
+        return axios.post(`${process.env.API_ENDPOINT}/users/login`, user)
             .then(response => {
                 let headers = response.headers;
-                let data = response.data;
+                let data = response.data.data;
                 console.log("Auth Service - Setting Cookies");
                 console.log(data);
                 let cookie = headers.Authorization || headers.authorization;

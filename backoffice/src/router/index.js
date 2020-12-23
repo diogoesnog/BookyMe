@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter);
 
@@ -8,11 +7,20 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('../views/Home'),
     meta: {
       requiresAuth: false
     }
   },
+  {
+    path: '/register/store',
+    name: "RegisterStore",
+    component: () => import('../views/RegisterStore'),
+    meta: {
+      // TODO: Change to true
+      requiresAuth: false
+    }
+  }
 ];
 
 const router = new VueRouter({
