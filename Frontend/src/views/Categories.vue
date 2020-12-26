@@ -1,6 +1,13 @@
 <template>
     <div>
-        <CategoriesList v-for="(category, index) in categories" :key="index" v-bind="category"/>
+      <div class="row">
+        <div class="col-6">
+          <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left"/>
+        </div>
+        <div class="col-6">
+        </div>
+      </div>
+      <CategoriesList v-for="(category, index) in categories" :key="index" v-bind="category"/>
     </div>
 </template>
 
@@ -49,3 +56,15 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+  .gradientOne {
+    margin-left: 10px;
+    margin-top: 0px; 
+    position: relative; 
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  } 
+
+</style>
