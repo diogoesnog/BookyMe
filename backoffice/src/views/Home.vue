@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <img src="../assets/Logo.png" class="logo-header"/>
     <div v-if="loginForm">
       <Login/>
       <v-btn color="primary" @click="loginForm=!loginForm">
@@ -33,3 +34,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.logo-header {
+  width: 250px
+}
+
+.home {
+  background-color: aliceblue;
+}
+</style>

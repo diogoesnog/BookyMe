@@ -4,13 +4,13 @@ class Services {
     // TODO: Login
 
     register(user) {
-        return axios.post(`${process.env.API_ENDPOINT}/users/login`, user);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/login`, user);
     }
 
     registerStore(store) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores`);
 
-        return axios.post(`${process.env.API_ENDPOINT}/stores`, store);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store);
     }
 
 
@@ -18,7 +18,7 @@ class Services {
     updateDescription(id, description) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores/${id}`);
 
-        return axios.patch(`${process.env.API_ENDPOINT}/stores/${id}/description`, {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
             description: description
         });
     }

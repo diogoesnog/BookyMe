@@ -10,6 +10,8 @@
       <v-text-field label="Endereço" type="text" v-model="user.address"></v-text-field>
       <v-text-field label="Cidade" type="text" v-model="user.city"></v-text-field>
       <v-text-field label="Código Postal" type="text" v-model="user.zipCode"></v-text-field>
+
+      <v-btn @click="handleSubmit">Register</v-btn>
     </v-form>
   </div>
 </template>

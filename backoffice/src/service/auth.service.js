@@ -1,8 +1,9 @@
 import axios from 'axios';
+import cookies from 'vue-cookies'
 
 export default {
     login: (user) => {
-        return axios.post(`${process.env.API_ENDPOINT}/users/login`, user)
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/login`, user)
             .then(response => {
                 let headers = response.headers;
                 let data = response.data.data;
@@ -10,7 +11,7 @@ export default {
                 console.log(data);
                 let cookie = headers.Authorization || headers.authorization;
 
-                this.$cookies.set('Authorization', cookie);
+                cookies.set('Authorization', cookie);
 
                 localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -18,7 +19,7 @@ export default {
     },
 
     logout: () => {
-        this.$cookies.remove('Authorization');
+        cookies.remove('Authorization');
         // TODO: Redirect to login
     }
 }

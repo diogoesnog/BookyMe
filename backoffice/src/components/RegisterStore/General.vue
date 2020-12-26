@@ -5,6 +5,8 @@
       <v-text-field label="Category" type="text" v-model="store.category"></v-text-field>
       <v-text-field label="Descrição" type="text" v-model="store.description"></v-text-field>
       <v-text-field label="Endereço" type="text" v-model="store.address"></v-text-field>
+
+      <v-btn @click="handleSubmit">Register</v-btn>
     </v-form>
   </div>
 </template>
@@ -27,18 +29,18 @@ export default {
 
       Services.registerStore(this.store)
         .then(response => {
-          // TODO: What's next?
-          console.log(response.data);
+          // this.store = new Store(...response.data);
+          let newStore = response.data[ "data" ];
+          console.log("New Store", newStore);
+          this.$emit("storeCreated", newStore);
+
         }).catch(err => {
           console.error(err);
           // TODO: emit error
         }).finally( () => {
           console.log("Finished");
         });
-      // this.name = name;
-      // this.category = category;
-      // this.description = description;
-      // this.address = address;
+
     }
   }
 }
