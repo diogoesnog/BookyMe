@@ -92,9 +92,9 @@ router.post('/authentication', async (req, res) => {
                         stores: user.stores
                     }
                 });
+                res.status(response.status).jsonp(response);
             }
         }
-        res.status(response.status).jsonp(response);
     } catch(err){
         response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
