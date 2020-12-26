@@ -1,13 +1,29 @@
 <template>
-    <div>
+    <div style="color: #434343">
       <div class="row">
         <div class="col-6">
-          <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left"/>
+          <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
         <div class="col-6">
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/img/avatar.png">
+          </q-avatar>
         </div>
       </div>
-      <CategoriesList v-for="(category, index) in categories" :key="index" v-bind="category"/>
+      <p style="font-weight: 670; font-size: 45px;">{{$t('categoriesPage.title')}}</p>
+      <div>
+        <div class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
+          <div class="col-10 roundedDiv shadow">
+            {{ category.title }}
+            {{ category.count }} Resultado(s)
+          </div>
+          <div class="col-2">
+            <q-avatar>
+              <img src="https://cdn.quasar.dev/img/avatar.png">
+            </q-avatar>
+          </div>
+        </div>
+      </div>	
     </div>
 </template>
 
@@ -24,10 +40,6 @@ export default {
     return {
       categories: Array
     }
-  },
-
-  components: {
-    CategoriesList
   },
 
   mounted() {
@@ -66,5 +78,19 @@ export default {
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   } 
+
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+    border-radius: 28px;
+  }
+
+  .roundedDiv {
+    border-radius: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
 
 </style>
