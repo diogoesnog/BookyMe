@@ -12,7 +12,7 @@
       </div>
       <p style="font-weight: 670; font-size: 45px;">{{$t('categoriesPage.title')}}</p>
       <div>
-        <div class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
+        <div style="margin: 30px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow">
             {{ category.title }}
             {{ category.count }} Resultado(s)
