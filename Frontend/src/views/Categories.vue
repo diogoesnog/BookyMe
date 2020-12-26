@@ -14,8 +14,12 @@
       <div>
         <div style="margin: 30px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow">
-            {{ category.title }}
-            {{ category.count }} Resultado(s)
+            <h7 style="font-weight: 600">
+              {{ category.title }} 
+              </h7>
+            <h7 style="font-weight: 400;">
+              {{ category.count }} Resultados(s)
+            </h7>
           </div>
           <div class="col-2">
             <q-avatar>
