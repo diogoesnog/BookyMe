@@ -1,22 +1,26 @@
       
 <template>     
-    <div class="q-pa-md" >  
-      <q-layout >
-        <q-footer reveal elevated >
-                <q-tabs v-model="tab" align="justify" class="bg-white text-grey-5 shadow-2" indicator-color="blue" active-color= "blue" >
-                    <q-tab flat @click="HomePage" >
-                        <q-icon name="fas fa-home"  style="font-size:25px" />
-                    </q-tab>
-                    <q-tab flat @click="Booking" >
-                        <q-icon name="fas fa-bookmark" style="font-size: 25px"/>
-                    </q-tab>
-                    <q-tab flat @click="Favorites"  >
-                        <q-icon name="fas fa-heart" style ="font-size: 25px"/>
-                    </q-tab>
-                    <q-tab flat @click="User" >
-                        <q-icon name="fas fa-user"  style="font-size: 25px"/>
-                    </q-tab>
-                </q-tabs>   
+    <div class="q-pa-md">  
+      <q-layout>
+        <q-footer reveal >
+          <q-tabs align="justify" class="bg-white text-grey-5 shadow-2" indicator-color="blue" active-color="blue" >
+              <q-tab flat @click="HomePage">
+                <q-icon name="fas fa-home"  style="font-size:25px" />
+                <span>Home</span>
+              </q-tab>
+              <q-tab flat @click="Booking">
+                <q-icon name="fas fa-bookmark" style="font-size: 25px"/>
+                <span>Booking</span>
+              </q-tab>
+              <q-tab flat @click="Favorites">
+                <q-icon name="fas fa-heart" style ="font-size: 25px"/>
+                <span>Favorites</span>
+              </q-tab>
+              <q-tab flat @click="User">
+                <q-icon name="fas fa-user"  style="font-size: 25px"/>
+                <span>Profile</span>           
+              </q-tab>
+          </q-tabs>   
         </q-footer>
       </q-layout>
    </div>

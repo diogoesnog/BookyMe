@@ -27,7 +27,8 @@
             </q-avatar>
           </div>
         </div>
-      </div>	
+      </div>
+      <Toolbar/>	
     </div>
 </template>
 
@@ -35,10 +36,12 @@
 
 import Service from '../services/user.service';
 import CategoriesList from '../components/Homepage/CategoriesList';
+import Toolbar from '../components/Root/Toolbar';
 
 export default {
 
   name: "Categories",
+  components: { Toolbar },
 
   data() {
     return {

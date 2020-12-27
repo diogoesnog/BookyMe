@@ -6,7 +6,7 @@
     <CategoriesList v-for="(category, index) in categories" :key="index" v-bind="category"/>
   </div>
   <div>
-     <Navbar/>
+     <Toolbar/>
   </div>
  </div> 
 </template>
@@ -14,7 +14,7 @@
 <script>
 import Service from '../services/user.service';
 import CategoriesList from '../components/Homepage/CategoriesList';
-import Navbar from '../components/Root/Navbar';
+import Toolbar from '../components/Root/Toolbar';
 export default {
   name: "Homepage",
 
@@ -27,7 +27,7 @@ export default {
 
   components: {
     CategoriesList,
-    Navbar
+    Toolbar
   },
 
   // Lifecycle
