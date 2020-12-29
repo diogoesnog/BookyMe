@@ -15,10 +15,10 @@
         <div style="margin: 30px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow">
             <h7 style="font-weight: 600">
-              {{ category.title }} 
+              {{ category.title }}
               </h7>
             <h7 style="font-weight: 400;">
-              {{ category.count }} Resultados(s)
+              {{ category.count }} Resultado(s)
             </h7>
           </div>
           <div class="col-2">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <Toolbar/>	
+      <Toolbar/>
     </div>
 </template>
 
@@ -80,11 +80,11 @@ export default {
 
   .gradientOne {
     margin-left: 10px;
-    margin-top: 0px; 
-    position: relative; 
+    margin-top: 0px;
+    position: relative;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
-  } 
+  }
 
   .shadow {
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
