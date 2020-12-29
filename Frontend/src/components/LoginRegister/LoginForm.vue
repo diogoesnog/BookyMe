@@ -8,7 +8,7 @@
         <h4 style="font-weight: 950; font-size: 40px;">{{$t('loginPage.title')}}</h4>
         <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
           <p v-html="$t('loginPage.description')"></p>
-        </div>    
+        </div>
       </div>
     </div>
     <br/>
@@ -64,14 +64,14 @@ export default {
             message: 'Login Successful'
           });
 
-          this.$router.push({ name: 'Homepage' })
+          this.$router.push({ name: 'Categories' })
 
         }).catch(err => {
           console.log("Login Error");
 
           this.$q.notify({
             type: 'negative',
-            message: 'Failed to Login'
+            message: 'Failed to Login. Try Again.'
           });
       });
       console.groupEnd();

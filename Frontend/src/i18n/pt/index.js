@@ -9,7 +9,8 @@
     login: "Iniciar Sessão",
 
     noAccount: "Ainda não possui uma Conta?",
-    createAccount: "Criar Conta"
+    createAccount: "Criar Conta",
+    loginSucceded: "Login bem sucedido"
   },
 
   // Register

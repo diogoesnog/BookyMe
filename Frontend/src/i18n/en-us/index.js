@@ -29,7 +29,8 @@ export default {
     registerAccount: "Sign-Up",
 
     alreadyHasAccount: "Already have an account?",
-    login: "Sign-In"
+    login: "Sign-In",
+    loginSucceded: "Login completed"
   },
 
   // Homepage
