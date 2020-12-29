@@ -31,7 +31,7 @@
       <RegisterForm/>
       <p class="bottomInfoRegister">
         {{$t('registerPage.alreadyHasAccount')}}
-          <span @click="loginForm = !loginForm"> 
+          <span @click="loginForm = !loginForm">
             <b>{{$t('registerPage.login')}}</b>
           </span>
       </p>
@@ -40,8 +40,8 @@
 </template>
 
 <script>
-  import LoginForm from 'components/Root/LoginForm'
-  import RegisterForm from 'components/Root/RegisterForm';
+  import LoginForm from 'components/LoginRegister/LoginForm'
+  import RegisterForm from 'components/LoginRegister/RegisterForm';
   export default {
     name: "Login",
     components: { LoginForm, RegisterForm },
@@ -74,8 +74,8 @@
 
   .gradientOne {
     margin-left: 10px;
-    margin-top: 0px; 
-    position: absolute; 
+    margin-top: 0px;
+    position: absolute;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   }
@@ -83,7 +83,7 @@
   .bottomInfoRegister {
     margin-top: -75px;
     position: relative;
-    text-align: center; 
+    text-align: center;
   }
 
   .bottomInfoLogin {

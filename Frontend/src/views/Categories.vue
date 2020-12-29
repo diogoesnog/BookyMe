@@ -35,6 +35,7 @@
 <script>
 
 import Service from '../services/user.service';
+// TODO: Não se está a utilizar a lista como componente.
 import CategoriesList from '../components/Homepage/CategoriesList';
 import Toolbar from '../components/Root/Toolbar';
 
