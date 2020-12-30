@@ -49,6 +49,9 @@ class Request {
         this.headers["Accept"] = "application/xml";
     }
 
+    setParams(params) {
+        this.params = params;
+    }
 
     // TODO: come out with a better solution for file uploads
     uploadMedia(field, file) {

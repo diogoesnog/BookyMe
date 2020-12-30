@@ -39,19 +39,7 @@ router.get('/favorites', checkAuth, (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-/**
- * @swagger
- * /stores:
- *  get:
- *      description: Endpoint to fetch all stores
- *      tags:
- *          - Stores
- *      consumes:
- *          - "application/json"
- *      produces:
- *          - "application/json"
- *
- */
+
 router.get('/', checkAuth, (req, res) => {
     Store.getAll()
         .then(response => {
@@ -61,39 +49,7 @@ router.get('/', checkAuth, (req, res) => {
         })
 });
 
-/**
- * @swagger
- * /stores:
- *  post:
- *      description: Endpoint to create new stores. Blocked from regular users.
- *      tags:
- *          - Stores
- *      consumes:
- *          - "application/json"
- *      produces:
- *          - "application/json"
- *      parameters:
- *        - in: body
- *          name: Store
- *          description: New Store Information's
- *          schema:
- *              type: Object
- *              required:
- *                  - name
- *                  - category
- *                  - description
- *                  - address
- *              properties:
- *                  name:
- *                      type: string
- *                  category:
- *                      type: string
- *                  description:
- *                      type: string
- *                  address:
- *                      type: string
- *
- */
+
 router.post('/', validator([
     "name", "category", "description", "address"
 ]),(req, res) => {
@@ -110,30 +66,7 @@ router.post('/', validator([
 });
 
 // TODO: change to put
-/**
- * @swagger
- * /stores/{id}/logo:
- *  post:
- *      description: Add a logo to a given Store ID
- *      tags:
- *          - Stores
- *      consumes:
- *          - "multipart/form-data"
- *      parameters:
- *        - in: path
- *          name: id
- *          schema:
- *              type: string
- *          required: true
- *          description: Store ID
- *      requestBody:
- *          content:
- *              image/png:
- *                  schema:
- *                      type: string
- *                      format: binary
- *
- */
+
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
     let response;
     try {
