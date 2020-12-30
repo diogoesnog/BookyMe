@@ -41,7 +41,10 @@ router.get('/favorites', checkAuth, (req, res) => {
 
 
 router.get('/', checkAuth, (req, res) => {
-    Store.getAll()
+    // let query = req.query;
+    let { query } = req;
+    console.log("Query String", query);
+    Store.getAll(query)
         .then(response => {
             res.status(response.status).jsonp(response.data);
         }).catch(err => {

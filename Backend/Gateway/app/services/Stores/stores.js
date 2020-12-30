@@ -1,9 +1,12 @@
 const Request = require('../../utils/Request');
 
 
-module.exports.getAll = () => {
+module.exports.getAll = (params) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
+
+    request.setParams(params);
     request.isJson();
+    request.acceptJson();
 
     return request.get();
 }
