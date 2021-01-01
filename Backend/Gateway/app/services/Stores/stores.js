@@ -1,9 +1,12 @@
 const Request = require('../../utils/Request');
 
 
-module.exports.getAll = () => {
+module.exports.getAll = (params) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
+
+    request.setParams(params);
     request.isJson();
+    request.acceptJson();
 
     return request.get();
 }
@@ -103,6 +106,16 @@ module.exports.getCategories = () => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/categories/results`);
 
     request.isJson();
+
+    return request.get();
+}
+
+module.exports.getFavorites = (token) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/favorites`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
 
     return request.get();
 }
