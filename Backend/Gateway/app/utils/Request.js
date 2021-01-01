@@ -165,10 +165,17 @@ class Request {
         delete this.headers[id];
     }
 
-
-
     _request(method) {
-        let url = `${this.url}?${this._getQueryString()}`
+        let numberOfQuery = Object.keys(this.params).length;
+        let url = "";
+
+        if(numberOfQuery > 0) {
+            console.log(numberOfQuery);
+            url = `${this.url}${this._getQueryString()}`;
+        } else {
+            url = this.url;
+        }
+
         let self = this;
 
         console.log(`${method}: ${url}`);
