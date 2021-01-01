@@ -75,7 +75,7 @@ const storeSchema = new mongoose.Schema({
 
     category: {
         type: String,
-        enum: ['Restaurante', 'Cabeleireiro', 'Spa', 'Estética', 'Ginásio'],
+        enum: ['Restaurante', 'Cabeleireiro', 'Spa', 'Estética', 'Ginásio','Clínica','Clínica Dentária','Clínica Veterinária','Loja de Animais','Sapataria','Vestuário','Comércio Tradicional','Instrumentos Músicais'],
         required: true
     },
 

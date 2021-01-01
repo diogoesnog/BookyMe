@@ -156,7 +156,6 @@ app.get('/:id',  (req, res) => {
  * category: String,
  * description: String,
  * address: String
- * TODO: não era melhor colocar as coordinates já nesta rota baseado no endereço? Sem ser o cliente a especificar...
  */
 app.post('/', (req, res) => {
     let response;
@@ -223,7 +222,7 @@ app.post('/:id/picture', upload.single('picture'),  (req, res) => {
         fs.rename(oldPath, newPath, function (err) {
             if (err) throw err
         })
-    
+
         let imagePath = '/public/pictures/' + req.params.id + req.file.originalname
         const picture = {
             title: req.body.title,
@@ -242,34 +241,31 @@ app.post('/:id/picture', upload.single('picture'),  (req, res) => {
     
 });
 
-app.post('/:id/photos', upload.array('photo'),  (req, res) => {
+app.post('/:id/photo', upload.single('photo'),  (req, res) => {
     let response;
-    let photos = []
-    for(let i=0; i < req.files.length; i++){
-        let oldPath = __dirname + '/../../../' + req.files[i].path
-        let newPath = __dirname + '/../../public/photos/' + req.params.id + req.files[i].originalname
 
-        fs.rename(oldPath, newPath, function (err) {
-            if (err) throw err
-        })
-        let imagePath = '/public/photos/' + req.params.id + req.files[i].originalname
-        const photo = {
-            title: req.body.title,
-            subtitle: req.body.subtitle,
-            url: imagePath
-        }
+    let oldPath = __dirname + '/../../../' + req.file.path
+    let newPath = __dirname + '/../../public/photos/' + req.params.id + req.file.originalname
 
-        photos.push(photo)
+    fs.rename(oldPath, newPath, function (err) {
+        if (err) throw err
+    })
+
+    let imagePath = '/public/photos/' + req.params.id + req.file.originalname
+    const photo = {
+        title: req.body.title,
+        subtitle: req.body.subtitle,
+        url: imagePath
     }
 
-        Stores.addPhoto(req.params.id, photos)
-            .then(data => {
-                response = Response.CREATED(data);
-                res.status(response.status).jsonp(response);
-            }).catch(err => {
-                response = Response.INTERNAL_ERROR(err, 'Could not add the uploaded photos');
-                res.status(response.status).jsonp(response);
-            });
+    Stores.addPhoto(req.params.id, photo)
+        .then(data => {
+            response = Response.CREATED(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not add the uploaded photos');
+            res.status(response.status).jsonp(response);
+        });
 });
 
 app.post('/:id/schedule', (req, res) => {
