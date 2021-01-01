@@ -90,8 +90,8 @@ module.exports.editPicture = (id, pic) => {
     return Store.updateOne({_id: id},{$set: {picture: pic}})
 }
 
-module.exports.addPhoto = (id, photos) => {
-    return Store.updateOne({_id: id},{$push: {photos: photos}})
+module.exports.addPhoto = (id, photo) => {
+    return Store.updateOne({_id: id},{$push: {photos: photo}})
 }
 
 module.exports.setCoordinates = (lat, long, id) => {
