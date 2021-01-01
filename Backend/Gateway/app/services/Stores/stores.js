@@ -37,6 +37,14 @@ module.exports.uploadPicture = (store, picture) => {
     return request.uploadMedia("picture", picture);
 }
 
+module.exports.uploadPhoto = (store, photo) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photo`);
+
+    request.acceptJson();
+
+    return request.uploadMedia("photo", photo);
+}
+
 module.exports.insertSchedule = (store, schedule) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/schedule`);
     request.isJson();

@@ -18,7 +18,7 @@ router.get('/popular', checkAuth, (req, res) => {
 // 1. By User Id
 // 2. Fetch favorites array
 // 3. Per entry, get stores information
-router.get('/favourtes/:id', (req, res) => {
+router.get('/favorites/:id', (req, res) => {
     Store.userFavorites(req.params.id)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
@@ -31,7 +31,6 @@ router.get('/categories', (req, res) => {
 });
 
 router.get('/favorites', checkAuth, (req, res) => {
-    let body = JSON.stringify(req.body);
     let token = req.headers.authorization || req.headers.Authorization;
 
     Store.getFavorites(token)
@@ -68,7 +67,6 @@ router.post('/', validator([
         });
 });
 
-// TODO: change to put
 
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
     let response;
@@ -85,7 +83,18 @@ router.post('/:id/logo', upload.single('file'), async (req, res) => {
     }
 });
 
-// TODO: test this endpoint
+router.post('/:id/photo', upload.single('file'), async (req, res) => {
+    let response;
+
+    try {
+        response = await Store.uploadPhoto(req.params.id, req.file);
+
+        res.status(response.status).jsonp(response);
+    } catch (err) {
+        res.status(err.status || 500).jsonp(err);
+    }
+});
+
 router.post('/:id/picture', upload.single('file'), async (req, res) => {
     let response
     try {
@@ -99,13 +108,6 @@ router.post('/:id/picture', upload.single('file'), async (req, res) => {
         res.status(response.status || 500).jsonp(err);
     }
 
-});
-
-
-// TODO: finish this endpoint
-router.post('/:id/photos', upload.array('files'), async (req, res) => {
-
-    res.status(501).send("Yet to be implemented");
 });
 
 // TODO: test this endpoint
