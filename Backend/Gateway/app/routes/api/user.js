@@ -3,59 +3,11 @@ const router = express.Router();
 
 // Services
 const { Booking, Favorite, Review, Store, User } = require('../../services/User');
+const Stores = require('../../services/Stores/stores');
 
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
 
-/**
- * @swagger
- * /users/register:
- *   post:
- *     description: Use to create a new account
- *     tags:
- *        - User
- *     consumes:
- *        - "application/json"
- *     produces:
- *        - "application/json"
- *     parameters:
- *        - in: body
- *          name: user
- *          description: User information's
- *          schema:
- *              type: Object
- *              required:
- *                  - name
- *                  - username
- *                  - email
- *                  - address
- *                  - city
- *                  - zipCode
- *                  - password
- *              properties:
- *                  name:
- *                      type: string
- *                  username:
- *                      type: string
- *                  email:
- *                      type: string
- *                  address:
- *                      type: string
- *                  city:
- *                      type: string
- *                  zipCode:
- *                      type: string
- *                  password:
- *                      type: string
- *     responses:
- *        '201':
- *           description: Account created successfully
- *           content:
- *              application/json
- *        '5XX':
- *            description: Server Error
- *
- */
 router.post('/register', validator([
     "name", "username", "email", "address", "city", "zipCode", "password"
 ]), (req, res) => {
@@ -66,44 +18,6 @@ router.post('/register', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-/**
- * @swagger
- * /users/login:
- *   post:
- *     description: Endpoint for User Authentication
- *     tags:
- *        - User
- *     consumes:
- *        - "application/json"
- *     produces:
- *        - "application/json"
- *     parameters:
- *        - in: body
- *          name: user
- *          description: User information's
- *          schema:
- *              type: Object
- *              required:
- *                  - email
- *                  - password
- *              properties:
- *                  email:
- *                      type: string
- *                  password:
- *                      type: string
- *     responses:
- *        '201':
- *           description: Successfully authenticated. A User token has been passed over headers
- *           content:
- *              application/json
- *           headers:
- *              Authentication:
- *                 schema:
- *                    type: string
- *        '5XX':
- *            description: Server Error
- *
- */
 router.post('/login', validator([
     'email', 'password'
 ]), (req, res) => {
@@ -117,33 +31,6 @@ router.post('/login', validator([
         }).catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-/**
- * @swagger
- * /users/account:
- *  put:
- *      description: Endpoint to update users information
- *      tags:
- *          - User
- *      consumes:
- *          - "application/json"
- *      produces:
- *          - "application/json"
- *      parameters:
- *        - in: body
- *          name: User
- *          description: Update user full name and address
- *          schema:
- *              type: Object
- *              required:
- *                  - name
- *                  - address
- *              properties:
- *                  name:
- *                      type: string
- *                  address:
- *                      type: string
- *
- */
 router.put('/account', checkAuth, validator([
     'name', 'address'
 ]), (req, res) => {
@@ -155,33 +42,6 @@ router.put('/account', checkAuth, validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-/**
- * @swagger
- * /users/password:
- *  patch:
- *      description: Update user's account password
- *      tags:
- *          - User
- *      consumes:
- *          - "application/json"
- *      produces:
- *          - "application/json"
- *      parameters:
- *        - in: body
- *          name: User
- *          description: Update User Password
- *          schema:
- *              type: Object
- *              required:
- *                  - oldPassword
- *                  - newPassword
- *              properties:
- *                  oldPassword:
- *                      type: string
- *                  newPassword:
- *                      type: string
- *
- */
 router.patch('/password', checkAuth, validator([
     'oldPassword', 'newPassword'
 ]), (req, res) => {
@@ -195,17 +55,32 @@ router.patch('/password', checkAuth, validator([
 });
 
 // Receives an array
-router.get('/favorites', checkAuth, (req, res) => {
+router.get('/favorite', checkAuth, async (req, res) => {
     let token = req.headers.authorization || req.headers.Authorization;
 
-    Favorite.getFavorites(token)
+    Stores.getFavorites(token)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 router.post('/favorite', checkAuth, validator([
-
+    "favorite"
 ]), (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+    let body = JSON.stringify(req.body);
 
+    Favorite.addFavorite(token, body)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
+
+router.delete('/favorite/:id', checkAuth, (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+    let id = req.params.id
+
+    Favorite.removeFavorite(token, id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
 module.exports = router;

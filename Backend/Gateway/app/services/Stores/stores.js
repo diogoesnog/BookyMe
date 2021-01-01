@@ -1,9 +1,12 @@
 const Request = require('../../utils/Request');
 
 
-module.exports.getAll = () => {
+module.exports.getAll = (params) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
+
+    request.setParams(params);
     request.isJson();
+    request.acceptJson();
 
     return request.get();
 }
@@ -32,6 +35,14 @@ module.exports.uploadPicture = (store, picture) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/picture`);
 
     return request.uploadMedia("picture", picture);
+}
+
+module.exports.uploadPhoto = (store, photo) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photo`);
+
+    request.acceptJson();
+
+    return request.uploadMedia("photo", photo);
 }
 
 module.exports.insertSchedule = (store, schedule) => {

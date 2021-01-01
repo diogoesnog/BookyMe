@@ -12,7 +12,7 @@ module.exports.getFavorites = (token) => {
 }
 
 module.exports.addFavorite = (token, favorite) => {
-    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/favorite/${favorite}`);
+    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/favorite`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
