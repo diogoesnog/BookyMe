@@ -170,8 +170,8 @@ class Request {
         let url = "";
 
         if(numberOfQuery > 0) {
-            console.log(numberOfQuery);
-            url = `${this.url}${this._getQueryString()}`;
+            console.log("Query Counter", numberOfQuery);
+            url = `${this.url}?${this._getQueryString()}`;
         } else {
             url = this.url;
         }
