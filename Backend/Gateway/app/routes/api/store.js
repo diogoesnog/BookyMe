@@ -110,13 +110,6 @@ router.post('/:id/picture', upload.single('file'), async (req, res) => {
 
 });
 
-
-// TODO: finish this endpoint
-router.post('/:id/photos', upload.array('files'), async (req, res) => {
-
-    res.status(501).send("Yet to be implemented");
-});
-
 // TODO: test this endpoint
 router.post('/:id/schedule', validator([
     "day", "openingHour", "closingHour"
