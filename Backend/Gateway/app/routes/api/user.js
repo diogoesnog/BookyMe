@@ -3,6 +3,7 @@ const router = express.Router();
 
 // Services
 const { Booking, Favorite, Review, Store, User } = require('../../services/User');
+const Stores = require('../../services/Stores/stores');
 
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
@@ -54,17 +55,32 @@ router.patch('/password', checkAuth, validator([
 });
 
 // Receives an array
-router.get('/favorites', checkAuth, (req, res) => {
+router.get('/favorite', checkAuth, async (req, res) => {
     let token = req.headers.authorization || req.headers.Authorization;
 
-    Favorite.getFavorites(token)
+    Stores.getFavorites(token)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 router.post('/favorite', checkAuth, validator([
-
+    "favorite"
 ]), (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+    let body = JSON.stringify(req.body);
 
+    Favorite.addFavorite(token, body)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
+
+router.delete('/favorite/:id', checkAuth, (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+    let id = req.params.id
+
+    Favorite.removeFavorite(token, id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
 module.exports = router;
