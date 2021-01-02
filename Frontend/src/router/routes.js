@@ -9,6 +9,14 @@ const routes = [
     }
   },
   {
+    name: "Profile",
+    path: '/users/login',
+    component: () => import('../views/Profile.vue'),
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
     name: "Home",
     path: '/home',
     component: () => import('../views/Homepage'),
@@ -41,6 +49,7 @@ const routes = [
     },
 
   } 
+  
   // Always leave this as last one,
   // but you can also remove it
   //{

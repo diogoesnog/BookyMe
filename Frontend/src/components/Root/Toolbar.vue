@@ -16,7 +16,7 @@
                 <q-icon name="fas fa-heart" style ="font-size: 25px"/>
                 <span>Favorites</span>
               </q-route-tab >
-              <q-route-tab  to="/profile" exact >
+              <q-route-tab  to="/users/login" exact >
                 <q-icon name="fas fa-user"  style="font-size: 25px"/>
                 <span>Profile</span>           
               </q-route-tab >

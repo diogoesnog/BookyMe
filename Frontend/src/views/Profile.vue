@@ -1,45 +1,19 @@
 <template>
-    
+    <div>
+     <Toolbar/>
+    </div>
 </template>
 
 <script>
 
 import Service from '../services/user.service';
-import FavoritesList from '../components/Favorites/FavoritesList';
 import Toolbar from '../components/Root/Toolbar';
 
 export default {
 
-  name: "Favorites",
-  components: { FavoritesList },
+  name: "Profile",
+  components: { Toolbar },
 
-  data() {
-    return {
-      favorites: Array
-    }
-  },
-
-  mounted() {
-    console.log("Mounted: View has been rendered");
-    this.fetchFavorites();
-  },
-  methods: {
-
-    fetchFavorites() {
-      console.log("Fetch Favorites");
-      Service.getFavorites()
-        .then(response => {
-          console.log("Got Response");
-          let data = response.data["data"];
-
-          this.favorites = data;
-
-          console.log(data);
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-  }
 }
 
 </script>
