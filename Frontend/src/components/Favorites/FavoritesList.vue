@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md" style="padding:15px">
+  <div class="q-pa-md" style="padding:35px">
       <q-img
       src="https://cdn.quasar.dev/img/parallax2.jpg"
       spinner-color="white"
@@ -8,7 +8,7 @@
       class="rounded-borders"
       >
       <div class="absolute-bottom text-subtitle1 text-center">
-          Caption
+          {{this.name}}
           <p>jhh</p>
       </div>
       </q-img>
@@ -20,6 +20,10 @@ export default {
   name: "FavoritesList",
 
   props: {
+    _id: String,
+    name: String,
+    rating: Number,
+    photos: Array
   }
 }
 </script>

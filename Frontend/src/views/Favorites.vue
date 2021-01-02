@@ -8,8 +8,9 @@
         </div>
       </div>
       <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('favoritesPage.title')}}</p>
-      <h6 style="padding:15px; margin-top:0px">{{$t('favoritesPage.description')}}</h6>
-      <FavoritesList/>
+      <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('favoritesPage.description')}}</h6>
+      <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
+
     </div>
 </template>
 
