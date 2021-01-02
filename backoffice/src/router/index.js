@@ -25,7 +25,19 @@ const routes = [
   {
     path: '/store/:id',
     name: "Store",
-    component: () => import('../views/private/Store'),
+    component: () => import('../views/private/EmptyRouter'),
+    children: [
+      {
+        name: "HomeStore",
+        path: "",
+        component: () => import('../views/private/subpages/Store'),
+      },
+      {
+        name: "EditStore",
+        path: "/edit",
+        component: () => import('../views/private/subpages/EditStore')
+      }
+    ],
     meta: {
       requiresStores: true,
       requiresAuth: true

@@ -1,24 +1,14 @@
 <template>
   <div>
-    <v-row no-gutters>
-      <v-col>
-        <Navbar/>
-      </v-col>
-      <v-col>
-        Content
-      </v-col>
-    </v-row>
-
+    General Store Information
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
-import Service from "../../service/user.service"
+import Service from "../../../service/user.service"
 export default {
   name: "Store",
   components:  {
-    Navbar
   },
   data() {
     return {

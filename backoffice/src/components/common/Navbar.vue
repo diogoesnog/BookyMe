@@ -4,24 +4,20 @@
       width="256"
       height="100%"
   >
-    <v-navigation-drawer
-        class="deep-purple accent-4"
-        dark
-        permanent
-    >
+    <v-navigation-drawer dark permanent>
       <v-list>
         <!-- Home Link -->
-        <v-list-item>
+        <v-list-item link>
           <v-list-item-icon>
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            Home
+            <router-link :to="{name: 'HomeStore', params: {id: $route.params.id}}">Home</router-link>
           </v-list-item-content>
         </v-list-item>
 
         <!-- Bookings Link -->
-        <v-list-item>
+        <v-list-item link>
           <v-list-item-icon>
             <v-icon></v-icon>
           </v-list-item-icon>
@@ -31,17 +27,17 @@
         </v-list-item>
 
         <!-- Store Settings Link -->
-        <v-list-item>
+        <v-list-item link>
           <v-list-item-icon>
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            Store Settings
+            <router-link :to="{name: 'EditStore', params: {id: $route.params.id}}">Store Settings</router-link>
           </v-list-item-content>
         </v-list-item>
 
         <!-- Account Settings Link -->
-        <v-list-item>
+        <v-list-item link>
           <v-list-item-icon>
             <v-icon></v-icon>
           </v-list-item-icon>
@@ -50,6 +46,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <div class="split"></div>
       <template v-slot:append>
         <div class="pa-2">
           <v-btn block>
@@ -63,10 +60,15 @@
 
 <script>
 export default {
-name: "Navbar"
+  name: "Navbar",
+  methods: {
+
+  }
 }
 </script>
 
 <style scoped>
-
+.split {
+  margin-top: 100%;
+}
 </style>
