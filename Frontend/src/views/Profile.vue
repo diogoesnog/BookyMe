@@ -1,22 +1,5 @@
 <template>
-  <div>
-    <div style="color: #434343">
-      <div class="row">
-        <div class="col-6">
-          <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
-        </div>
-        <div class="col-6">
-        </div>
-      </div>
-      <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('favoritesPage.title')}}</p>
-      <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('favoritesPage.description')}}</h6>
-      <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
-
-    </div>
-    <div>
-     <Toolbar/>
-    </div>
-  </div>  
+    
 </template>
 
 <script>
@@ -28,19 +11,13 @@ import Toolbar from '../components/Root/Toolbar';
 export default {
 
   name: "Favorites",
+  components: { FavoritesList },
 
-   data() {
+  data() {
     return {
       favorites: Array
     }
   },
-
-  components: {
-    FavoritesList,
-    Toolbar
-  },
-
- 
 
   mounted() {
     console.log("Mounted: View has been rendered");
