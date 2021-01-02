@@ -1,14 +1,15 @@
 export default {
   // Login
   loginPage: {
-    title: "Welcome to BookyMe!",
+    title: "Welcome!",
     description: "Sign-In to view all your bookings",
 
     username: "Username/E-mail",
     password: "Password",
     login: "Sign-In",
 
-    noAccount: "No account? Create one now"
+    noAccount: "No Account Yet?",
+    createAccount: "Create Account"
   },
 
   // Register
@@ -28,7 +29,8 @@ export default {
     registerAccount: "Sign-Up",
 
     alreadyHasAccount: "Already have an account?",
-    login: "Sign-In"
+    login: "Sign-In",
+    loginSucceded: "Login completed"
   },
 
   // Homepage
@@ -43,7 +45,7 @@ export default {
   },
 
   // Favorites
-  favoitesPage: {
+  favoritesPage: {
     title: "Favorites",
     description: "List of Favorite Stores"
   },
