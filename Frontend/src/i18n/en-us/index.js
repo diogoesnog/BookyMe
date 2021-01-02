@@ -45,7 +45,7 @@ export default {
   },
 
   // Favorites
-  favoitesPage: {
+  favoritesPage: {
     title: "Favorites",
     description: "List of Favorite Stores"
   },

@@ -45,7 +45,7 @@
   },
 
   // Favorites
-  favoitesPage: {
+  favoritesPage: {
     title: "Favoritos",
     description: "Lista de Estabelecimentos Favoritos"
   },

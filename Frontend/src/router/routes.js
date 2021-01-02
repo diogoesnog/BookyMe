@@ -31,6 +31,15 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    name: "Settings",
+    path: '/settings',
+    component: () => import('../views/Settings'),
+    meta: {
+      requiresAuth: true
+    },
+
   } 
   // Always leave this as last one,
   // but you can also remove it

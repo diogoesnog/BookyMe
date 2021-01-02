@@ -11,6 +11,10 @@ class UserService {
     return axios.get(`${process.env.API_ENDPOINT}/stores/categories`);
   }
 
+  getFavorites() {
+    return axios.get(`${process.env.API_ENDPOINT}/users/favorite`);
+  }
+
   postWithHeaders(data) {
     return axios.post('url', data, {
       headers: authHeader()
