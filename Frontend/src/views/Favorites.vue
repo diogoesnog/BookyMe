@@ -16,13 +16,12 @@
 <script>
 
 import Service from '../services/user.service';
-// TODO: Não se está a utilizar a lista como componente.
 import FavoritesList from '../components/Favorites/FavoritesList';
 
 export default {
 
   name: "Favorites",
-  components: { FavoritesList},
+  components: { FavoritesList },
 
   data() {
     return {
@@ -37,16 +36,17 @@ export default {
   methods: {
 
     fetchFavorites() {
-
+      console.log("Fetch Favorites");
       Service.getFavorites()
         .then(response => {
+          console.log("Got Response");
           let data = response.data["data"];
 
           this.favorites = data;
 
           console.log(data);
         }).catch(err => {
-            console.log(err.data)
+            console.log(err)
         })
     }
   }

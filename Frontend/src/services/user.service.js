@@ -12,7 +12,10 @@ class UserService {
   }
 
   getFavorites() {
-    return axios.get(`${process.env.API_ENDPOINT}/users/favorite`);
+    console.log(authHeader());
+    return axios.get(`${process.env.API_ENDPOINT}/users/favorite`, {
+      headers: authHeader()
+    });
   }
 
   postWithHeaders(data) {
