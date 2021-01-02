@@ -3,7 +3,7 @@
     <!-- Form Login -->
     <div v-if="loginForm" style="padding-left:30px; padding-right:30px">
       <LoginForm/>
-      <p>
+      <p class="bottomInfoLogin">
         {{$t('loginPage.noAccount')}}
         <span @click="loginForm = !loginForm">
           <b>{{$t('loginPage.createAccount')}}</b>
@@ -29,10 +29,10 @@
         </div>
       </div>
       <RegisterForm/>
-      <p class="bottomInfo">
+      <p class="bottomInfoRegister">
         {{$t('registerPage.alreadyHasAccount')}}
-          <span @click="loginForm = !loginForm"> 
-           <b>{{$t('registerPage.login')}}</b>
+          <span @click="loginForm = !loginForm">
+            <b>{{$t('registerPage.login')}}</b>
           </span>
       </p>
     </div>
@@ -40,8 +40,8 @@
 </template>
 
 <script>
-  import LoginForm from 'components/Root/LoginForm'
-  import RegisterForm from 'components/Root/RegisterForm';
+  import LoginForm from 'components/LoginRegister/LoginForm'
+  import RegisterForm from 'components/LoginRegister/RegisterForm';
   export default {
     name: "Login",
     components: { LoginForm, RegisterForm },
@@ -74,16 +74,26 @@
 
   .gradientOne {
     margin-left: 10px;
-    margin-top: 0px; 
-    position: absolute; 
+    margin-top: 0px;
+    position: absolute;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   }
 
-  .bottomInfo {
+  .bottomInfoRegister {
     margin-top: -75px;
     position: relative;
-    text-align: center; 
+    text-align: center;
+  }
+
+  .bottomInfoLogin {
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    padding: 35px;
   }
 
   .selectLanguage {

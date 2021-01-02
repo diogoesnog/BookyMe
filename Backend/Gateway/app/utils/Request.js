@@ -49,7 +49,6 @@ class Request {
         this.headers["Accept"] = "application/xml";
     }
 
-
     // TODO: come out with a better solution for file uploads
     uploadMedia(field, file) {
         this.removeHeader("Content-Type");
@@ -130,7 +129,7 @@ class Request {
      * @param obj
      */
     setParams(obj) {
-        this.params = obj;
+        this.params = obj || {};
     }
 
     /**
@@ -166,11 +165,20 @@ class Request {
         delete this.headers[id];
     }
 
-
-
     _request(method) {
-        let url = `${this.url}${this._getQueryString()}`
+        let numberOfQuery = Object.keys(this.params).length;
+        let url = "";
+
+        if(numberOfQuery > 0) {
+            console.log("Query Counter", numberOfQuery);
+            url = `${this.url}?${this._getQueryString()}`;
+        } else {
+            url = this.url;
+        }
+
         let self = this;
+
+        console.log(`${method}: ${url}`);
 
         return new Promise((resolve, reject) => {
             fetch(url, {

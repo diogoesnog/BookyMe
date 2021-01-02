@@ -1,14 +1,16 @@
  export default {
   // Login
   loginPage: {
-    title: "Bem Vindo ao BookyMe!",
+    title: "Bem Vindo!",
     description: "Inicie Sessão para ver todas as suas Reservas",
 
     username: "Username/E-mail",
     password: "Password",
     login: "Iniciar Sessão",
 
-    noAccount: "Não possui uma conta? Crie agora"
+    noAccount: "Ainda não possui uma Conta?",
+    createAccount: "Criar Conta",
+    loginSucceded: "Login bem sucedido"
   },
 
   // Register
@@ -43,7 +45,7 @@
   },
 
   // Favorites
-  favoitesPage: {
+  favoritesPage: {
     title: "Favoritos",
     description: "Lista de Estabelecimentos Favoritos"
   },
