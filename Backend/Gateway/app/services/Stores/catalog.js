@@ -19,6 +19,7 @@ module.exports.addCatalog = (store, body) => {
 
 }
 
+
 module.exports.deleteCatalog = (store) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/catalogs/store/${store}`);
 

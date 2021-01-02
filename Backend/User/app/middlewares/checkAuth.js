@@ -24,7 +24,8 @@ module.exports = async (req,res,next) => {
                 name: user.name,
                 address: user.address,
                 type: user.type,
-                favorites: user.favorites
+                favorites: user.favorites,
+                stores: user.stores
             }
             next();
         }

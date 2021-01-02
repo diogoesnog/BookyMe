@@ -40,8 +40,21 @@ app.get('/favorites', checkAuth, (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-        response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
-        res.status(response.status).jsonp(response);
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
+            res.status(response.status).jsonp(response);
+        });
+});
+
+app.get('/admin', checkAuth, (req, res) => {
+    console.log(req.user);
+
+    Stores.findByArrayId(req.user.stores)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch favorites.');
+            res.status(response.status).jsonp(response);
     });
 });
 
