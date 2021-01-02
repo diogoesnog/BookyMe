@@ -1,8 +1,13 @@
 <template>
   <div>
-    <h1>Welcome Admin!</h1>
-    <p>Choose your store</p>
-    <Store v-for="(store, index) in stores" :key="index" v-bind="store"></Store>
+    <img src="../../assets/Logo.png" alt="BookyMe Logo" height="150px">
+
+    <h2 class="text-center">Choose The Store</h2>
+
+    <div class="horizontal-stack">
+      <Store v-for="(store, index) in stores" :key="index" v-bind="store" class="store-container"></Store>
+    </div>
+
   </div>
 </template>
 
@@ -42,5 +47,11 @@ export default {
 </script>
 
 <style scoped>
-
+.horizontal-stack {
+  display: flex;
+  overflow-x: auto;
+}
+.store-container {
+  padding: 15px;
+}
 </style>
