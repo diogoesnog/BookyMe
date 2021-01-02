@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from "@/service/auth-header";
 
 class Services {
     // TODO: Login
@@ -20,6 +21,18 @@ class Services {
 
         return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
             description: description
+        });
+    }
+
+    getStores() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/admin`, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreById(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores?_id=${id}`, {
+            headers: authHeader()
         });
     }
 
