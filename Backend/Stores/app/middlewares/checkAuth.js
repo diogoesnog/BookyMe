@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
     const token = req.headers.authorization || req.headers.Authorization;
 
 
-    let request = new Request(`${process.env.AUTH_SERVICE}/user/validation`);
+    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
 
     request.setHeaders({
         authorization: token
@@ -20,14 +20,10 @@ module.exports = async (req, res, next) => {
             next();
         } else {
             console.log("Check HTTP Status");
+            res.status(response.status || 500).jsonp(response);
         }
     } catch(err) {
         console.log(err);
         res.status(err.status || 500).jsonp(err);
     }
-
-    // TODO: Validation endpoint on user service, return User Info
-    // request.post
-
-    // Pass
 }

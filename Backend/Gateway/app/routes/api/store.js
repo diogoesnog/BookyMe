@@ -18,7 +18,7 @@ router.get('/popular', checkAuth, (req, res) => {
 // 1. By User Id
 // 2. Fetch favorites array
 // 3. Per entry, get stores information
-router.get('/favourtes/:id', (req, res) => {
+router.get('/favorites/:id', (req, res) => {
     Store.userFavorites(req.params.id)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
@@ -31,7 +31,6 @@ router.get('/categories', (req, res) => {
 });
 
 router.get('/favorites', checkAuth, (req, res) => {
-    let body = JSON.stringify(req.body);
     let token = req.headers.authorization || req.headers.Authorization;
 
     Store.getFavorites(token)
@@ -39,21 +38,12 @@ router.get('/favorites', checkAuth, (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-/**
- * @swagger
- * /stores:
- *  get:
- *      description: Endpoint to fetch all stores
- *      tags:
- *          - Stores
- *      consumes:
- *          - "application/json"
- *      produces:
- *          - "application/json"
- *
- */
+
 router.get('/', checkAuth, (req, res) => {
-    Store.getAll()
+    // let query = req.query;
+    let { query } = req;
+    console.log("Query String", query);
+    Store.getAll(query)
         .then(response => {
             res.status(response.status).jsonp(response.data);
         }).catch(err => {
@@ -61,39 +51,7 @@ router.get('/', checkAuth, (req, res) => {
         })
 });
 
-/**
- * @swagger
- * /stores:
- *  post:
- *      description: Endpoint to create new stores. Blocked from regular users.
- *      tags:
- *          - Stores
- *      consumes:
- *          - "application/json"
- *      produces:
- *          - "application/json"
- *      parameters:
- *        - in: body
- *          name: Store
- *          description: New Store Information's
- *          schema:
- *              type: Object
- *              required:
- *                  - name
- *                  - category
- *                  - description
- *                  - address
- *              properties:
- *                  name:
- *                      type: string
- *                  category:
- *                      type: string
- *                  description:
- *                      type: string
- *                  address:
- *                      type: string
- *
- */
+
 router.post('/', validator([
     "name", "category", "description", "address"
 ]),(req, res) => {
@@ -109,31 +67,7 @@ router.post('/', validator([
         });
 });
 
-// TODO: change to put
-/**
- * @swagger
- * /stores/{id}/logo:
- *  post:
- *      description: Add a logo to a given Store ID
- *      tags:
- *          - Stores
- *      consumes:
- *          - "multipart/form-data"
- *      parameters:
- *        - in: path
- *          name: id
- *          schema:
- *              type: string
- *          required: true
- *          description: Store ID
- *      requestBody:
- *          content:
- *              image/png:
- *                  schema:
- *                      type: string
- *                      format: binary
- *
- */
+
 router.post('/:id/logo', upload.single('file'), async (req, res) => {
     let response;
     try {
@@ -149,7 +83,18 @@ router.post('/:id/logo', upload.single('file'), async (req, res) => {
     }
 });
 
-// TODO: test this endpoint
+router.post('/:id/photo', upload.single('file'), async (req, res) => {
+    let response;
+
+    try {
+        response = await Store.uploadPhoto(req.params.id, req.file);
+
+        res.status(response.status).jsonp(response);
+    } catch (err) {
+        res.status(err.status || 500).jsonp(err);
+    }
+});
+
 router.post('/:id/picture', upload.single('file'), async (req, res) => {
     let response
     try {
@@ -163,13 +108,6 @@ router.post('/:id/picture', upload.single('file'), async (req, res) => {
         res.status(response.status || 500).jsonp(err);
     }
 
-});
-
-
-// TODO: finish this endpoint
-router.post('/:id/photos', upload.array('files'), async (req, res) => {
-
-    res.status(501).send("Yet to be implemented");
 });
 
 // TODO: test this endpoint
