@@ -16,31 +16,21 @@ const routes = [
   {
     path: '/home',
     name: "Home",
+    component: () => import('../views/private/Home'),
     meta: {
       requiresAuth: true,
       requiresStores: true
     }
   },
-  /*{
-    path: '/home',
-    name: "Dashboard",
+  {
+    path: '/store/:id',
+    name: "Store",
+    component: () => import('../views/private/Store'),
     meta: {
+      requiresStores: true,
       requiresAuth: true
-    },
-    get component() {
-      let user = getUser();
-      if( user ) {
-        // console.log("User Stores = ", user.stores.length);
-        if(user.stores.length > 0) {
-          return import('../views/private/Home');
-        } else {
-          return import ('../views/private/RegisterStore');
-        }
-      }
-      this.$router.push("Login");
-      return false;
     }
-  },*/
+  },
   {
     path: '/register/store',
     name: "RegisterStore",
@@ -60,30 +50,31 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log("Going to ", to);
-  // window.$cookies.set('test', 'value');
   let user = getUser(),
       cookie = getCookie();
-  if(to.matched.some(record => record.meta.requiresAuth) &&
-      cookie == null && user == null) {
-
-    if(getCookie()) {
-      console.log("Unauthorized");
+  console.log("user", user);
+  console.log("Cookie", cookie);
+  // Route Requires Auth
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(user != null && cookie != null) {
+      if(to.matched.some(record => record.meta.requiresStores)) {
+        if(user.stores.length > 0) {
+          // window.alert("User Stores > 0");
+          next();
+        } else {
+          // If user is not owner of stores, create one...
+          next('/register/store');
+        }
+      } else {
+        next();
+      }
+    } else {
       next('/');
     }
+    // Route Requires Stores
+
   } else {
-
-    if( to.name === "Home" ) {
-        let stores = user.stores;
-
-        if( stores.length === 0 ) {
-          console.log("No Stores");
-          next('/register/store');
-        } else {
-          next();
-        }
-    } else {
-      next();
-    }
+    next();
   }
 });
 
