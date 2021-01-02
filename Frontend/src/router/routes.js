@@ -11,11 +11,36 @@ const routes = [
   {
     name: "Home",
     path: '/home',
-    component: () => import('../views/Homepage.vue'),
+    component: () => import('../views/Homepage'),
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    name: "Categories",
+    path: '/categories',
+    component: () => import('../views/Categories'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "Favorites",
+    path: '/favorites',
+    component: () => import('../views/Favorites'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "Settings",
+    path: '/settings',
+    component: () => import('../views/Settings'),
+    meta: {
+      requiresAuth: true
+    },
+
+  } 
   // Always leave this as last one,
   // but you can also remove it
   //{

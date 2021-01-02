@@ -1,25 +1,28 @@
 <template>
   <!-- Div Principal -->
-  <div>
+  <div class="text-center" style="color: #434343">
     <!-- Div Cima -->
     <div class="divTop">
-      <h3 align-center>
-        {{$t('loginPage.title')}}
-      </h3>
-      <p>{{$t('loginPage.description')}}</p>
+      <img src="../../assets/Other/Layers.png" style="width: 50%; height: auto;"/>
+      <div style="position: relative; bottom: 50px;">
+        <h4 style="font-weight: 950; font-size: 40px;">{{$t('loginPage.title')}}</h4>
+        <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
+          <p v-html="$t('loginPage.description')"></p>
+        </div>
+      </div>
     </div>
     <br/>
     <!-- Div Baixo -->
     <div class="divBottom1">
       <div class="divBottom2">
         <q-form>
-          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
+          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
             <template v-slot:prepend>
               <q-icon name="fas fa-hashtag" color="grey-5" />
             </template>
           </q-input>
           <br/>
-          <q-input class="shadow inputWhite" rounded outlined :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
+          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
             <template v-slot:prepend>
               <q-icon name="fas fa-lock" color="grey-5"/>
             </template>
@@ -33,7 +36,7 @@
         </q-form>
       </div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -61,14 +64,14 @@ export default {
             message: 'Login Successful'
           });
 
-          this.$router.push({ name: 'Home' })
+          this.$router.push({ name: 'Categories' })
 
         }).catch(err => {
           console.log("Login Error");
 
           this.$q.notify({
             type: 'negative',
-            message: 'Failed to Login'
+            message: 'Failed to Login. Try Again.'
           });
       });
       console.groupEnd();
@@ -95,7 +98,8 @@ export default {
   }
 
   .divTop{
-    position: fixed;
+    top: 70px;
+    position: relative;
   }
 
   .divBottom1{
@@ -104,15 +108,15 @@ export default {
     left: 0;
     width: 100%;
     padding: 100px;
-    height: 500px;
+    height: 505px;
     background-size: cover;
     background-position: center top;
-    background-image: url('../../assets/Other/LoginFrame.png');
+    background-image: url('../../assets/Other/LoginFrame.svg');
   }
 
   .divBottom2{
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     width: 100%;
     padding: 60px;
@@ -130,7 +134,7 @@ export default {
   }
 
   .gradientRed {
-      background-image: linear-gradient(#e9685b, #e03459);
+      background-image: linear-gradient(#e9695c, #e03459);
   }
 
 </style>
