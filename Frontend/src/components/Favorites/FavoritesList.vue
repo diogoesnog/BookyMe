@@ -17,14 +17,20 @@
 
 <script>
 export default {
-  name: "FavoritesList",
 
+  name: "FavoritesList",
   props: {
     _id: String,
     name: String,
     rating: Number,
     photos: Array
-  }
+  },
+  
+  data() {
+    return {
+      favorites: Array
+    }
+  },
 }
 </script>
 
