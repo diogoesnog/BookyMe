@@ -54,8 +54,7 @@ router.patch('/password', checkAuth, validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// Receives an array
-router.get('/favorite', checkAuth, async (req, res) => {
+router.get('/favorite', checkAuth, (req, res) => {
     let token = req.headers.authorization || req.headers.Authorization;
 
     Stores.getFavorites(token)

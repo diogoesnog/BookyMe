@@ -20,14 +20,10 @@ module.exports = async (req, res, next) => {
             next();
         } else {
             console.log("Check HTTP Status");
+            res.status(response.status || 500).jsonp(response);
         }
     } catch(err) {
         console.log(err);
         res.status(err.status || 500).jsonp(err);
     }
-
-    // TODO: Validation endpoint on user service, return User Info
-    // request.post
-
-    // Pass
 }
