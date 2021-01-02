@@ -1,7 +1,8 @@
 const Request = require('../../utils/Request');
 
 
-module.exports.storeBookings = (token, store) => {
+// Needs to be admin
+module.exports.getStoreReservations = (token, store) => {
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/store/${store}`);
 
     request.isJson();
@@ -11,7 +12,7 @@ module.exports.storeBookings = (token, store) => {
     return request.get();
 }
 
-module.exports.getUserBooking = (token) => {
+module.exports.getUserReservations = (token) => {
 
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/user`);
 
@@ -22,10 +23,20 @@ module.exports.getUserBooking = (token) => {
     return request.get();
 }
 
+module.exports.getPopularStores = () => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/popular`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}
 
 // Create Booking
+// TODO: a ser alterado
 module.exports.createBooking = (token, body) => {
-    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/`);
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
@@ -35,7 +46,7 @@ module.exports.createBooking = (token, body) => {
 }
 
 // TODO: notify with notifications
-module.exports.deleteBooking = (token, id) => {
+module.exports.deleteReservation = (token, id) => {
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/${id}`);
 
     request.isJson();
@@ -43,4 +54,9 @@ module.exports.deleteBooking = (token, id) => {
     request.acceptJson();
 
     return request.delete();
+}
+
+// TODO: irá ser alterado
+module.exports.changeReservation = () => {
+
 }
