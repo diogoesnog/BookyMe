@@ -19,6 +19,7 @@ module.exports.validator = (fields) => {
 
         } else {
             response = Response.BAD_REQUEST(missing, "Bad Request. Missing expected body fields.");
+            console.log(missing);
             res.status(response.status).jsonp(response)
         }
     }
