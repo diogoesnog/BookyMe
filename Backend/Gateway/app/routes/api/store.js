@@ -51,9 +51,17 @@ router.get('/', checkAuth, (req, res) => {
         })
 });
 
+router.get('/admin', checkAuth, (req, res) => {
+   let token = req.headers.authorization || req.headers.Authorization;
+
+   Store.adminStores(token)
+       .then(response => res.status(response.status).jsonp(response.data))
+       .catch(err => res.status(err.status || 500).jsonp(err.data || {}));
+});
+
 
 router.post('/', validator([
-    "name", "category", "description", "address"
+    "name", "category", "description", "place", "zipcode", "city", "country"
 ]),(req, res) => {
     let body = JSON.stringify(req.body);
 
