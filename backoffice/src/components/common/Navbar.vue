@@ -26,6 +26,16 @@
           </v-list-item-content>
         </v-list-item>
 
+        <!-- Catalog Link -->
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon></v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            Catalog
+          </v-list-item-content>
+        </v-list-item>
+
         <!-- Store Settings Link -->
         <v-list-item link>
           <v-list-item-icon>
