@@ -11,13 +11,14 @@
         </div>
       </div>
       <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
-      <div style="padding-top: 10;">
+      <div style="padding-top: 5px;">
         <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
-            <h7 style="font-weight: 600">
+            <h7 style="font-weight: 600; font-size: 15px;">
               {{ category.title }}
-              </h7>
-            <h7 style="font-weight: 400;">
+            </h7>
+            <span style="display:inline-block; width: 4px;"/>
+            <h7 style="font-weight: 400; font-size: 15px;">
               {{ category.count }} Resultado(s)
             </h7>
           </div>
