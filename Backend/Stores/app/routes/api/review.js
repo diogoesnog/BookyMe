@@ -46,7 +46,7 @@ app.post('/:storeID', checkAuth, (req, res) => {
 
     const review = {
         storeID: req.params.storeID,
-        userId: req.user.userId,
+        userId: req.decodedUser.id,
         comment: req.body.comment,
         rating: req.body.rating,
         date: date.toISOString()
