@@ -2,7 +2,7 @@ const express = require('express');
 const app = express.Router();
 const Reviews = require('../../controllers/reviews');
 const Response = require('rapid-status');
-
+const checkAuth = require('../../middlewares/checkAuth');
 
 
 
@@ -39,14 +39,14 @@ app.get('/store/:storeID',  (req, res) => {
 
 });
 
-app.post('/:storeID', (req, res) => {
+app.post('/:storeID', checkAuth, (req, res) => {
     let response;
 
     let date = new Date()
 
     const review = {
         storeID: req.params.storeID,
-        userId: req.body.userId,
+        userId: req.user.userId,
         comment: req.body.comment,
         rating: req.body.rating,
         date: date.toISOString()
