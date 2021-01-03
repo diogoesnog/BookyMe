@@ -1,19 +1,19 @@
 <template>
-    <div style="color: #434343" class="centerDiv">
-      <div class="row centerDiv2">
-        <div class="col-10" style="padding-right: 5px;">
+    <div style="color: #434343;" class="centerDiv">
+      <div class="row" style="margin: 20px;">
+        <div class="col-10" style="display: flex; align-items: center;">
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
-        <div class="col-2" style="padding-left: 5px;"> 
+        <div class="col-2" style="text-align: right;"> 
           <q-avatar class="shadow">
             <img src="https://cdn.quasar.dev/img/avatar.png">
           </q-avatar>
         </div>
       </div>
-      <p style="font-weight: 670; font-size: 45px; padding-left: 25px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
-      <div style="padding-top: 5px;">
+      <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
+      <div style="padding-top: 10;">
         <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
-          <div class="col-10 roundedDiv shadow">
+          <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
             <h7 style="font-weight: 600">
               {{ category.title }}
               </h7>
@@ -21,7 +21,7 @@
               {{ category.count }} Resultado(s)
             </h7>
           </div>
-          <div class="col-2" style="padding-left: 10px;">
+          <div class="col-2" style="text-align: right;">
             <q-avatar>
               <img src="https://cdn.quasar.dev/img/avatar.png">
             </q-avatar>
@@ -83,15 +83,8 @@ export default {
     padding: 15px;
     margin-top: 10px;
   }
-
-  .centerDiv2 {
-    margin: 15px;
-  }
   
   .gradientOne {
-    margin-left: 10px;
-    margin-top: 0px;
-    position: relative;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   }
