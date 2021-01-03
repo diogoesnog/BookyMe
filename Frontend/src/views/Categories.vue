@@ -4,7 +4,7 @@
         <div class="col-10" style="display: flex; align-items: center;">
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
-        <div class="col-2" style="text-align: right;"> 
+        <div class="col-2" style="text-align: right;">
           <q-avatar class="shadow">
             <img src="https://cdn.quasar.dev/img/avatar.png">
           </q-avatar>
@@ -23,9 +23,7 @@
             </h7>
           </div>
           <div class="col-2" style="text-align: right;">
-            <q-avatar>
-              <img src="https://cdn.quasar.dev/img/avatar.png">
-            </q-avatar>
+              <q-btn to="stores" size='20px' padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-right"/>
           </div>
         </div>
       </div>
@@ -84,7 +82,7 @@ export default {
     padding: 15px;
     margin-top: 10px;
   }
-  
+
   .gradientOne {
     background: linear-gradient(#e9695c, #e03459);
     color: white;
