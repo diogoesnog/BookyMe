@@ -61,7 +61,7 @@ router.get('/admin', checkAuth, (req, res) => {
 
 
 router.post('/', validator([
-    "name", "category", "description", "address"
+    "name", "category", "description", "place", "zipcode", "city", "country"
 ]),(req, res) => {
     let body = JSON.stringify(req.body);
 
