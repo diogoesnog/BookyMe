@@ -1,17 +1,17 @@
 <template>
     <div style="color: #434343" class="centerDiv">
       <div class="row centerDiv2">
-        <div class="col-10">
+        <div class="col-10" style="padding-right: 5px;">
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
-        <div class="col-2">
+        <div class="col-2" style="padding-left: 5px;"> 
           <q-avatar class="shadow">
             <img src="https://cdn.quasar.dev/img/avatar.png">
           </q-avatar>
         </div>
       </div>
       <p style="font-weight: 670; font-size: 45px; padding-left: 25px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
-      <div>
+      <div style="padding-top: 5px;">
         <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow">
             <h7 style="font-weight: 600">
@@ -21,7 +21,7 @@
               {{ category.count }} Resultado(s)
             </h7>
           </div>
-          <div class="col-2">
+          <div class="col-2" style="padding-left: 10px;">
             <q-avatar>
               <img src="https://cdn.quasar.dev/img/avatar.png">
             </q-avatar>
