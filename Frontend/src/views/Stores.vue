@@ -72,6 +72,14 @@ export default {
       }).finally(() => {
         this.$q.loading.hide();
       })
+    },
+
+    fetchStoresByCat(){
+
+      /*Service.getStoreByCategory("Comércio Tradicional")
+      .then(response =>  console.log(response))
+      .catch(err => console.log(err))*/
+
     }
   }
 }

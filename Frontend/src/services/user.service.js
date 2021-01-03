@@ -1,39 +1,62 @@
-import axios from 'axios';
 import authHeader from './auth-header'
+import Request from '../utils/Request'
 
 class UserService {
 
   registerUser(user) {
-    return axios.post(`${process.env.API_ENDPOINT}/users/register`, user);
+    let body = JSON.stringify(user);
+    console.log(body)
+    let request = new Request(`${process.env.API_ENDPOINT}/users/register`)
+
+    request.acceptJson()
+    request.isJson()
+    return request.post(body)
   }
 
   getCategories() {
-    return axios.get(`${process.env.API_ENDPOINT}/stores/categories`);
+    let request = new Request(`${process.env.API_ENDPOINT}/stores/categories`)
+
+    request.isJson()
+    request.acceptJson()
+
+    return request.get()
+
+
   }
 
   getFavorites() {
-    console.log(authHeader());
-    return axios.get(`${process.env.API_ENDPOINT}/users/favorite`, {
-      headers: authHeader()
-    });
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.get()
   }
 
   getStores() {
-    return axios.get(`${process.env.API_ENDPOINT}/stores/`, {
-      header: authHeader()
-    })
+
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    console.log("Token ", authHeader())
+    request.appendHeader("Authorization", authHeader())
+
+
+    return request.get()
   }
 
-  postWithHeaders(data) {
-    return axios.post('url', data, {
-      headers: authHeader()
-    });
-  }
+  getStoreByCategory(category) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
-  getWithHeaders() {
-    return axios.get('url', {
-      headers: authHeader()
-    })
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("category", category)
+
+    return request.get()
   }
 }
 
