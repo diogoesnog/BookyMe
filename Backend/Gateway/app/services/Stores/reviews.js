@@ -17,10 +17,12 @@ module.exports.getReviews = (store) => {
     return request.get();
 }
 
-module.exports.addReview = (store, body) => {
+module.exports.addReview = (token, store, body) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/reviews/${store}`);
 
     request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
 
     return request.post(body);
 }
