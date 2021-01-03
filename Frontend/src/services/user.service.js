@@ -18,6 +18,12 @@ class UserService {
     });
   }
 
+  getStores() {
+    return axios.get(`${process.env.API_ENDPOINT}/stores/`, {
+      header: authHeader()
+    })
+  }
+
   postWithHeaders(data) {
     return axios.post('url', data, {
       headers: authHeader()

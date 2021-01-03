@@ -56,6 +56,11 @@
     results: "Sem Resultados | 1 Resultado | {count} Resultados"
   },
 
+  storesPage: {
+    // TODO: Este título será dinâmico logo está provisório de momento com internacionalização
+    title: "Barber"
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notificações"

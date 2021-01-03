@@ -56,6 +56,11 @@ export default {
     results: "No Results | 1 Result | {count} Results"
   },
 
+  storesPage: {
+    // TODO: Este título será dinâmico logo está provisório de momento com internacionalização
+    title: "Barber"
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notifications"
