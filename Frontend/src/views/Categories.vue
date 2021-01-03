@@ -1,18 +1,18 @@
 <template>
-    <div style="color: #434343">
-      <div class="row">
-        <div class="col-6">
+    <div style="color: #434343" class="centerDiv">
+      <div class="row centerDiv2">
+        <div class="col-10">
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
-        <div class="col-6">
-          <q-avatar>
+        <div class="col-2">
+          <q-avatar class="shadow">
             <img src="https://cdn.quasar.dev/img/avatar.png">
           </q-avatar>
         </div>
       </div>
-      <p style="font-weight: 670; font-size: 45px;">{{$t('categoriesPage.title')}}</p>
+      <p style="font-weight: 670; font-size: 45px; padding-left: 25px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
       <div>
-        <div style="margin: 30px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
+        <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow">
             <h7 style="font-weight: 600">
               {{ category.title }}
@@ -79,6 +79,15 @@ export default {
 
 <style scoped>
 
+  .centerDiv {
+    padding: 15px;
+    margin-top: 10px;
+  }
+
+  .centerDiv2 {
+    margin: 15px;
+  }
+  
   .gradientOne {
     margin-left: 10px;
     margin-top: 0px;
