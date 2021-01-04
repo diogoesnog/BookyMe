@@ -14,6 +14,12 @@ class Services {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store);
     }
 
+    currentUser() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/user/validation`, {
+            headers: authHeader()
+        });
+    }
+
 
     // TODO: Add Store Description
     updateDescription(id, description) {
