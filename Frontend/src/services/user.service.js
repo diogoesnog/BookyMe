@@ -5,7 +5,7 @@ class UserService {
 
   registerUser(user) {
     let body = JSON.stringify(user);
-    console.log(body)
+
     let request = new Request(`${process.env.API_ENDPOINT}/users/register`)
 
     request.acceptJson()
@@ -41,7 +41,7 @@ class UserService {
 
     request.isJson()
     request.acceptJson()
-    console.log("Token ", authHeader())
+
     request.appendHeader("Authorization", authHeader())
 
 

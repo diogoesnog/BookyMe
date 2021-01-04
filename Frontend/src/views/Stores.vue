@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{$t('storesPage.title')}}</p>
+    <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{this.category}}</p>
 
 <!--    <div style="padding-top: 5px;">
       <div style="margin: 20px;" class="row" v-for="(store, index) in stores" :key="index" v-bind="stores">
@@ -50,12 +50,14 @@ export default {
 
   data() {
     return {
+      category: this.$route.params.category,
       stores: Array
     }
   },
 
   mounted() {
     console.log("Mounted: View has been rendered");
+    console.log(this.category)
     this.fetchStores();
   },
   methods: {

@@ -34,7 +34,7 @@ const routes = [
   },
   {
     name: "Stores",
-    path: '/stores',
+    path: '/stores/:category',
     component: () => import('../views/Stores'),
     meta: {
       requiresAuth: true
