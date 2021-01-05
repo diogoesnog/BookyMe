@@ -5,10 +5,8 @@ export default function authHeader() {
   let token = cookie.get('Authorization');
 
   if(token && user) {
-    return {
-      'Authorization': token
-    }
+    return token
   } else {
-    return { };
+    return "";
   }
 }
