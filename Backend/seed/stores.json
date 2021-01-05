@@ -1,246 +1,604 @@
 [{
   "_id": {
-    "$oid": "5fcbe79eacd2bb2326ca7a19"
+    "$oid": "5ff4a6e77df75e2ace11b036"
   },
-  "verified": false,
+  "verified": true,
   "hasPlant": false,
-  "latitude": 41.5547235,
-  "longitude": -8.4276264,
+  "latitude": 41.3988155,
+  "longitude": -8.5167904,
   "rating": 0,
-  "name": "Armazém Viegas (Novidadextra LDA)",
-  "category": "Comércio Tradicional",
-  "description": "A Loja Armazém Viegas é das mais antigas lojas da cidade de Braga a vender variadíssimos tipos de produtos, entre sacos pláticos, círios, roupas interiores, texteis para lar, retrosaria, papelaria, destacando-se dos demais por ser um comércio de atendimento tipico tradicional.",
-  "address": "Praça do Comércio, nº 83, 4700-370 Braga",
-  "schedule": [],
-  "photos": [],
-  "phone": 253277185
-},{
-  "_id": {
-    "$oid": "5fcbe818acd2bb2326ca7a1a"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.4071301,
-  "longitude": -8.5218362,
-  "rating": 0,
-  "name": "Salão 2000",
-  "category": "Barbeiro",
-  "description": "A empresa Salão 2000 Cabeleireiro tem a sua sede localizada na freguesia de União das Freguesias de Vila Nova de Famalicão e Calendário , concelho de Vila Nova de Famalicão, distrito de Braga. Para correspondência postal deverá utilizar a morada Rua Barão Trovisqueira C.C. - Lj. 21, Vila Nova de Famalicão, 4760-126 VILA NOVA DE FAMALICÃO.",
-  "address": "Rua Barão Trovisqueira C.C. - Lj. 21, 4760-126 Vila Nova de Famalicão",
-  "schedule": [],
-  "photos": [],
-  "phone": 252374876
-},{
-  "_id": {
-    "$oid": "5fcbfbddacd2bb2326ca7a1b"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.5027587,
-  "longitude": -8.4344443,
-  "rating": 0,
-  "name": "Casa Livita",
-  "category": "Restauração",
-  "description": "",
-  "address": "Rua de Sandins 6 Perto Da Moto Veiga, Braga 4705-480 Portugal",
-  "schedule": [],
-  "photos": [],
-  "logo": {
+  "name": "Mikado",
+  "category": "Restaurante",
+  "description": "COM PAUZINHOS. O Restaurante Mikado surge com um novo espaço, onde encontra sabores diferentes, através da gastronomia asiática moderna.",
+  "address": {
     "_id": {
-      "$oid": "5fd652456c110bb40443a61b"
+      "$oid": "5ff4a6e77df75e2ace11b037"
     },
-    "url": "/public/logos/5fcbfbddacd2bb2326ca7a1bddf092ff-6bd5-4f07-8880-b040de124a52.png"
+    "place": "Av. dos Descobrimentos 840",
+    "zipcode": "4760-011",
+    "city": "Vila Nova de Famalicão",
+    "country": "Portugal"
   },
-  "phone": 253681714
+  "schedule": [
+    {
+      "_id": {
+        "$oid": "5ff4e699f4cffc04869eb9dc"
+      },
+      "day": "Segunda-feira",
+      "openingHour": "9:30",
+      "closingHour": "23:00"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4e69ef4cffc04869eb9dd"
+      },
+      "day": "Terça-feira",
+      "openingHour": "9:30",
+      "closingHour": "23:00"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4e6a1f4cffc04869eb9de"
+      },
+      "day": "Quarta-feira",
+      "openingHour": "9:30",
+      "closingHour": "23:00"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4e6a5f4cffc04869eb9df"
+      },
+      "day": "Quinta-feira",
+      "openingHour": "9:30",
+      "closingHour": "23:00"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4e6a8f4cffc04869eb9e0"
+      },
+      "day": "Sexta-feira",
+      "openingHour": "9:30",
+      "closingHour": "23:00"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4e713f4cffc04869eb9e2"
+      },
+      "day": "Sábado",
+      "openingHour": "9:30",
+      "closingHour": "16:00"
+    }
+  ],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d5c6e0f7af31ad8c499c"
+      },
+      "url": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d5dfe0f7af31ad8c499d"
+      },
+      "url": "/public/photos/5ff4a6e77df75e2ace11b0366737bf22-7f4e-475e-b817-2e3160fd98fe.jpeg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d5e3e0f7af31ad8c499e"
+      },
+      "url": "/public/photos/5ff4a6e77df75e2ace11b0360e5a36cf-fad5-4632-9060-ea683857b8bf.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 912503308
 },{
   "_id": {
-    "$oid": "5fcbfd3cacd2bb2326ca7a1c"
+    "$oid": "5ff4a74e7df75e2ace11b038"
   },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.5631348,
-  "longitude": -8.4203976,
-  "rating": 0,
-  "name": "Taberna Belga",
-  "category": "Restauração",
-  "description": "A francesinha, a famosa sandes regada com um delicioso molho, até pode ter origem no Porto, mas no resto do país já há locais que a confecionam de forma divinal. Um deles está, sem dúvida, em Braga, na Taberna Belga, um restaurante que é já conhecido pelas francesinhas que saem da sua cozinha. \n\n Neste estabelecimento, a grande estrela do menu é obviamente o prato portuense. Todos os dias, a diferentes horas, há uma fila interminável de pessoas que se deslocam até à Taberna Belga para provar ou comer pela milésima vez a famosa francesinha da casa. No entanto, há mais pratos deliciosos para provar neste restaurante, tais como pregos, cachorros, hambúrgueres e bifes confecionados de diferentes formas. E tudo isto pode ser regado com as melhores cervejas, cuja variedade vai tornar a sua escolha de bebida muito difícil. \n\n Os espaços da Taberna Belga são muito acolhedores e confortáveis e fazem sentir-nos à vontade, com uma esplanada perfeita para almoços e jantares de verão com os amigos. Pode contar com um ambiente sempre descontraído e um atendimento muito atencioso e simpático. \n\n Se é amante de francesinhas, este é um local de paragem obrigatória para si.",
-  "address": "Rua Conego Luciano Afonso dos Santos Loja 1A 4700-371, Braga 4700-371 Portugal",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd64e7f6c110bb40443a60d"
-    },
-    "url": "/public/logos/5fcbfd3cacd2bb2326ca7a1cd0038593-b372-4032-8071-799cb2564135.jpg"
-  },
-  "phone": 253042708
-},{
-  "_id": {
-    "$oid": "5fcbfdc1acd2bb2326ca7a1d"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.5278458,
-  "longitude": -8.4497986,
-  "rating": 0,
-  "name": "Fogo de Chão ",
-  "category": "Restauração",
-  "description": "Rede brasileira de churrascarias com carne à vontade cortada à mesa, além de um grande buffet de saladas.",
-  "address": "Rua Professor Henrique de Barros Centro Empresarial de Braga Ferreiros, Braga 4705-319 Portugal",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd651366c110bb40443a616"
-    },
-    "url": "/public/logos/5fcbfdc1acd2bb2326ca7a1d2c11b11f-9e1b-4557-8c7c-33174f267974.png"
-  },
-  "phone": 253670900
-},{
-  "_id": {
-    "$oid": "5fd651f16c110bb40443a619"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.5584321,
-  "longitude": -8.4062177,
-  "rating": 0,
-  "name": "Boutique Nespresso",
-  "category": "Café",
-  "description": "Nespresso é uma marca da Nestlé Nespresso S. A., uma unidade operacional do Grupo Nestlé, com sede em Lausanne, Suíça. As máquinas da Nespresso preparam café espresso em cápsulas de café, ou pods em máquinas de bar, um tipo de recipiente de uso único contendo grãos de café moídos pré-porcionados com adição de aromas.",
-  "address": "Braga Parque, loja 139, Quinta dos Congregados, 4710-427 Braga",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd652016c110bb40443a61a"
-    },
-    "url": "/public/logos/5fd651f16c110bb40443a619ea9c3090-f8e3-4e99-a590-e869214b4b53.jpg"
-  }
-},{
-  "_id": {
-    "$oid": "5fd652a16c110bb40443a620"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.1417399,
-  "longitude": -8.6151203,
-  "rating": 0,
-  "name": "Hard Club",
-  "category": "Sala de Espetáculo",
-  "description": "Hard Club - Centro de Animação Cultural, é um centro cultural de Portugal, inaugurado a 18 de Dezembro de 1997, no Porto. Durante nove anos fez história com uma sala de concertos, recebendo entre 1997 e 2006 mais de 500 mil espectadores em 1300 espectáculos, num total de mais de 5 mil artistas vindos de 34 países.",
-  "address": "Mercado Ferreira Borges, 4050-252 Porto",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd652de6c110bb40443a621"
-    },
-    "url": "/public/logos/5fd652a16c110bb40443a6200eeb00b3-f700-41a7-82d6-7ae326549b65.png"
-  },
-  "phone": 220101194
-},{
-  "_id": {
-    "$oid": "5fd653226c110bb40443a622"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.4109266,
-  "longitude": -8.5193095,
-  "rating": 0,
-  "name": "Faminho - Instrumentos Musicais, Lda",
-  "category": "Instrumentos Musicais",
-  "description": "Loja de Instrumentos Musicais, equipamentos de som e luz profissional.",
-  "address": "R. Conselheiro Santos Viegas 48, 4760-129 Vila Nova de Famalicão",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd6544c6c110bb40443a636"
-    },
-    "url": "/public/logos/5fd653226c110bb40443a6221ee2a1a3-40d9-44e2-8fca-0f8f4059a10c.jpg"
-  },
-  "phone": 252375482
-},{
-  "_id": {
-    "$oid": "5fd653de6c110bb40443a624"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.3820431,
-  "longitude": -8.7418796,
-  "rating": 0,
-  "name": "Timberland Outlet",
-  "category": "Vestuário e Calçado",
-  "description": "Na Timberland temos uma enorme variedade de Calado, Vesturio e Roupa para Homem, Mulher e Criana. Entrega e devoluo gratuita.",
-  "address": "Avenida Fonte Cova 400, 4485-592 Vila do Conde",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd654026c110bb40443a62f"
-    },
-    "url": "/public/logos/5fd653de6c110bb40443a624f7d91fba-027f-4c8a-a3e2-8e84165a7ecf.png"
-  },
-  "phone": 220028093
-},{
-  "_id": {
-    "$oid": "5fd654a86c110bb40443a637"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.5447936,
-  "longitude": -8.4188293,
-  "rating": 0,
-  "name": "Salão Mozart",
-  "category": "Instrumentos Musicais",
-  "description": "Quando queres comprar um Instrumento Musical e aparece esta página! :) Temos o que precisas.",
-  "address": "Avenida da Liberdade, 72 4710-250 Braga, Portugal",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd654d06c110bb40443a638"
-    },
-    "url": "/public/logos/5fd654a86c110bb40443a63779b6a549-35a3-43c1-9fce-3cd4d4765a00.jpg"
-  },
-  "phone": 253273547
-},{
-  "_id": {
-    "$oid": "5fd65b0a6c110bb40443a6e9"
-  },
-  "verified": false,
-  "hasPlant": false,
-  "latitude": 41.4854364,
-  "longitude": -8.4759697,
-  "rating": 0,
-  "name": "Clínica Veterinária Tebosa",
-  "category": "Clínica Veterinária",
-  "description": "Consultas | Cirurgia geral | Domicílios | Pet shop | Banhos e tosquias | Escola canina | Hotel canino | Urgências 24h - 960367985",
-  "address": "Rua Santo António Nº47 4705-630 Tebosa, Portugal",
-  "schedule": [],
-  "photos": [],
-  "logo": {
-    "_id": {
-      "$oid": "5fd65b2d6c110bb40443a6ea"
-    },
-    "url": "/public/logos/5fd65b0a6c110bb40443a6e99953b002-d830-44a2-b22f-6f783d66a3a4.png"
-  },
-  "phone": 960367985
-},{
-  "_id": {
-    "$oid": "5fd65cb96c110bb40443a6f4"
-  },
-  "verified": false,
+  "verified": true,
   "hasPlant": false,
   "latitude": 41.552441,
   "longitude": -8.4237196,
   "rating": 0,
   "name": "Clinibraga - Clínica Dentária",
-  "category": "Clínica Dentária",
+  "category": "Dentista",
   "description": "A Clinibraga tem uma equipa de profissionais especializados nas mais diversas áreas da Dentária, com procedimentos inovadores e materiais de qualidade para cuidar do seu sorriso.",
-  "address": "R. dos Chãos 23 4º andar, 4710-230 Braga",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a74e7df75e2ace11b039"
+    },
+    "place": "Rua dos Chãos 23 4º andar",
+    "zipcode": "4710-230",
+    "city": "Braga",
+    "country": "Portugal"
+  },
   "schedule": [],
-  "photos": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d68ce0f7af31ad8c49a9"
+      },
+      "url": "/public/photos/5ff4a74e7df75e2ace11b038c3051847-746e-457f-975c-0ea7245a1da1.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d693e0f7af31ad8c49aa"
+      },
+      "url": "/public/photos/5ff4a74e7df75e2ace11b0384e9863b7-e7a7-4ff4-8c5c-c242069f823a.jpg"
+    }
+  ],
+  "__v": 0,
   "phone": 253220230
+},{
+  "_id": {
+    "$oid": "5ff4a7887df75e2ace11b03c"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.5483894,
+  "longitude": -8.4282197,
+  "rating": 0,
+  "name": "Michizaki",
+  "category": "Restaurante",
+  "description": "Restaurante de petiscos tradicionais japoneses - estilo izakaya - no centro de Braga. Aliando a tradição à inovação, traz o Japão até à cidade de Braga.",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a7887df75e2ace11b03d"
+    },
+    "place": "R. Dom Frei Caetano Brandão 172-218",
+    "zipcode": "4700-031",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d6cfe0f7af31ad8c49ae"
+      },
+      "url": "/public/photos/5ff4a7887df75e2ace11b03ce80fae3d-49b7-44b0-96fb-060a929755fc.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6d6e0f7af31ad8c49af"
+      },
+      "url": "/public/photos/5ff4a7887df75e2ace11b03c97a42df3-8246-4629-94e4-ce562bca9eb3.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6dde0f7af31ad8c49b0"
+      },
+      "url": "/public/photos/5ff4a7887df75e2ace11b03c0ede48b0-c7ce-4b40-9100-279513d63a67.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6e0e0f7af31ad8c49b1"
+      },
+      "url": "/public/photos/5ff4a7887df75e2ace11b03c1cb02881-6a6e-4e0c-8ef3-27de795b8b3d.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 253086587
+},{
+  "_id": {
+    "$oid": "5ff4a80f7df75e2ace11b03e"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.5631348,
+  "longitude": -8.4225916,
+  "rating": 0,
+  "name": "Taberna Belga",
+  "category": "Restaurante",
+  "description": "A francesinha, a famosa sandes regada com um delicioso molho, até pode ter origem no Porto, mas no resto do país já há locais que a confecionam de forma divinal. Um deles está, sem dúvida, em Braga, na Taberna Belga, um restaurante que é já conhecido pelas francesinhas que saem da sua cozinha. \n\n Neste estabelecimento, a grande estrela do menu é obviamente o prato portuense. Todos os dias, a diferentes horas, há uma fila interminável de pessoas que se deslocam até à Taberna Belga para provar ou comer pela milésima vez a famosa francesinha da casa. No entanto, há mais pratos deliciosos para provar neste restaurante, tais como pregos, cachorros, hambúrgueres e bifes confecionados de diferentes formas. E tudo isto pode ser regado com as melhores cervejas, cuja variedade vai tornar a sua escolha de bebida muito difícil. \n\n Os espaços da Taberna Belga são muito acolhedores e confortáveis e fazem sentir-nos à vontade, com uma esplanada perfeita para almoços e jantares de verão com os amigos. Pode contar com um ambiente sempre descontraído e um atendimento muito atencioso e simpático. \n\n Se é amante de francesinhas, este é um local de paragem obrigatória para si.",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a80f7df75e2ace11b03f"
+    },
+    "place": "R. Cónego Luciano Afonso dos Santos loja 2",
+    "zipcode": "4700-371",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d6ade0f7af31ad8c49ab"
+      },
+      "url": "/public/photos/5ff4a80f7df75e2ace11b03e05abe67f-d283-45b5-9f6a-ea8aa0e42c28.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6b2e0f7af31ad8c49ac"
+      },
+      "url": "/public/photos/5ff4a80f7df75e2ace11b03e35116aa1-59fc-46b9-8ac1-4129a6d63c32.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6b6e0f7af31ad8c49ad"
+      },
+      "url": "/public/photos/5ff4a80f7df75e2ace11b03e9839b12e-a2f8-443e-b80d-36b003f5e811.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 253042708
+},{
+  "_id": {
+    "$oid": "5ff4a8aa7df75e2ace11b040"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.5584354,
+  "longitude": -8.5462904,
+  "rating": 0,
+  "name": "Boutique Nespresso",
+  "category": "Café",
+  "description": "Nespresso é uma marca da Nestlé Nespresso S. A., uma unidade operacional do Grupo Nestlé, com sede em Lausanne, Suíça. As máquinas da Nespresso preparam café espresso em cápsulas de café, ou pods em máquinas de bar, um tipo de recipiente de uso único contendo grãos de café moídos pré-porcionados com adição de aromas.",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a8aa7df75e2ace11b041"
+    },
+    "place": "Braga Parque, loja 139, Quinta dos Congregados",
+    "zipcode": "4700-427",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d5fbe0f7af31ad8c499f"
+      },
+      "url": "/public/photos/5ff4a8aa7df75e2ace11b040118e7988-29b7-413c-85cf-319c2dd5d658.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d602e0f7af31ad8c49a0"
+      },
+      "url": "/public/photos/5ff4a8aa7df75e2ace11b040912aae0f-7d9a-4c83-88d3-b8322a716566.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d606e0f7af31ad8c49a1"
+      },
+      "url": "/public/photos/5ff4a8aa7df75e2ace11b040ecec8143-7c75-496b-91f0-e867336a8c82.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 800260260
+},{
+  "_id": {
+    "$oid": "5ff4a8bd7df75e2ace11b042"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.4745172,
+  "longitude": -8.528947,
+  "rating": 0,
+  "name": "Centro Estética TISCHA ",
+  "category": "Beleza",
+  "description": "Saúde, Beleza e Bem-Estar 30 anos de Garantia e Confiança <3",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a8bd7df75e2ace11b043"
+    },
+    "place": "Centro Estética Tischa Braga, Av. Alfredo Barros 50",
+    "zipcode": "4715-213",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d627e0f7af31ad8c49a2"
+      },
+      "url": "/public/photos/5ff4a8bd7df75e2ace11b04234bb454c-2180-4e97-9b0f-841981b49472.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d62ce0f7af31ad8c49a3"
+      },
+      "url": "/public/photos/5ff4a8bd7df75e2ace11b0424a9184f4-e794-4157-b1bf-b78d21eb6c30.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d62fe0f7af31ad8c49a4"
+      },
+      "url": "/public/photos/5ff4a8bd7df75e2ace11b042dbed5f2a-8b1d-4577-baee-0118a67de5aa.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 252375065
+},{
+  "_id": {
+    "$oid": "5ff4a8dd7df75e2ace11b044"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.5454417,
+  "longitude": -8.4157117,
+  "rating": 0,
+  "name": "Studio 387 ",
+  "category": "Beleza",
+  "description": "No Studio 387 encontra a solução perfeita para si. Temos serviço de Cabeleireiro, Visagista e Estética. Aguardamos a sua visita, Cumprimentos de toda a equipa do Studio 387.",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a8dd7df75e2ace11b045"
+    },
+    "place": "R. dos Barbosas 25-9",
+    "zipcode": "4715-213",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d645e0f7af31ad8c49a5"
+      },
+      "url": "/public/photos/5ff4a8dd7df75e2ace11b044f949a9c1-057d-4977-829b-43d0dddc90e5.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d64be0f7af31ad8c49a6"
+      },
+      "url": "/public/photos/5ff4a8dd7df75e2ace11b04430cf6ff2-fcab-4776-b7fb-90d77f1a7918.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 253612142
+},{
+  "_id": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.4109266,
+  "longitude": -8.5215035,
+  "rating": 0,
+  "name": "Faminho - Instrumentos Musicais, Lda",
+  "category": "Música",
+  "description": "Loja de Instrumentos Musicais, equipamentos de som e luz profissional",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a9597df75e2ace11b047"
+    },
+    "place": "Rua Conselheiro Santos Viegas 48",
+    "zipcode": "4760-129",
+    "city": "Vila Nova de Famalicão",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d6f1e0f7af31ad8c49b2"
+      },
+      "url": "/public/photos/5ff4a9597df75e2ace11b046e4029bf9-b762-48b8-b9db-8ae8d15e6cf1.png"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6f6e0f7af31ad8c49b3"
+      },
+      "url": "/public/photos/5ff4a9597df75e2ace11b046c64d6cb8-cbc8-4ccb-b263-62494fd544c2.png"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d6fae0f7af31ad8c49b4"
+      },
+      "url": "/public/photos/5ff4a9597df75e2ace11b0465f18967b-06ea-49f6-a4d0-2f06aabd1691.png"
+    }
+  ],
+  "__v": 0,
+  "phone": 252375482
+},{
+  "_id": {
+    "$oid": "5ff4a9647df75e2ace11b048"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.5949084,
+  "longitude": -8.2207232,
+  "rating": 0,
+  "name": "DiverLanhoso",
+  "category": "Aventura",
+  "description": "Um dos maiores Parques de Aventura da Europa!",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a9647df75e2ace11b049"
+    },
+    "place": "Restaurante Panorâmico DiverLanhoso, Lugar de Porto de Bois",
+    "zipcode": "4830-602",
+    "city": "Oliveira",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d70ee0f7af31ad8c49b5"
+      },
+      "url": "/public/photos/5ff4a9647df75e2ace11b048869fd77b-3d22-474c-ab81-f95c7778526f.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d714e0f7af31ad8c49b6"
+      },
+      "url": "/public/photos/5ff4a9647df75e2ace11b048e2bcb222-374d-4165-b5c6-af62c211d539.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d717e0f7af31ad8c49b7"
+      },
+      "url": "/public/photos/5ff4a9647df75e2ace11b048fda7b79f-874c-4cd5-af75-0c5c02e8ea9d.png"
+    }
+  ],
+  "__v": 0,
+  "phone": 253635763
+},{
+  "_id": {
+    "$oid": "5ff4a9c57df75e2ace11b053"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.4854364,
+  "longitude": -8.4781637,
+  "rating": 0,
+  "name": "Clínica Veterinária Tebosa",
+  "category": "Veterinário",
+  "description": "Consultas | Cirurgia geral | Domicílios | Pet shop | Banhos e tosquias | Escola canina | Hotel canino | Urgências 24h - 960367985",
+  "address": {
+    "_id": {
+      "$oid": "5ff4a9c57df75e2ace11b054"
+    },
+    "place": "Rua de Santo António",
+    "zipcode": "4705-630",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d660e0f7af31ad8c49a7"
+      },
+      "url": "/public/photos/5ff4a9c57df75e2ace11b05377fa3cf2-f905-4e62-ad16-f21a74ab522b.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d673e0f7af31ad8c49a8"
+      },
+      "url": "/public/photos/5ff4a9c57df75e2ace11b053c35c138b-da5e-424e-bb78-4f7eb1c8d999.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 960367985
+},{
+  "_id": {
+    "$oid": "5ff4aa347df75e2ace11b069"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.4290545,
+  "longitude": -8.4784188,
+  "rating": 0,
+  "name": "Kasablanca",
+  "category": "Bar",
+  "description": "",
+  "address": {
+    "_id": {
+      "$oid": "5ff4aa347df75e2ace11b06a"
+    },
+    "place": "Rua Adriana Pinto Basto 131",
+    "zipcode": "4760-111",
+    "city": "Vila Nova de Famalicão",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d782e0f7af31ad8c49bb"
+      },
+      "url": "/public/photos/5ff4aa347df75e2ace11b069e3b78352-6e8b-49a7-8cd5-bf08c855e62b.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d78be0f7af31ad8c49bc"
+      },
+      "url": "/public/photos/5ff4aa347df75e2ace11b06974500e65-d60f-4ca2-a64c-f6691460b2c1.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 916339195
+},{
+  "_id": {
+    "$oid": "5ff4aa487df75e2ace11b06b"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.5479758,
+  "longitude": -8.4299683,
+  "rating": 0,
+  "name": "Biblioteca Lúcio Craveiro da Silva",
+  "category": "Biblioteca",
+  "description": "A Biblioteca Lúcio Craveiro da Silva é uma Biblioteca Pública em Braga, Portugal. Abriu oficialmente as suas portas ao público em 21 de Dezembro de 2004.",
+  "address": {
+    "_id": {
+      "$oid": "5ff4aa487df75e2ace11b06c"
+    },
+    "place": "R. de Sao Paulo 1",
+    "zipcode": "4700-042 ",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d7a1e0f7af31ad8c49bd"
+      },
+      "url": "/public/photos/5ff4aa487df75e2ace11b06b9832d563-35df-4160-9110-30a64a44a649.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d7a7e0f7af31ad8c49be"
+      },
+      "url": "/public/photos/5ff4aa487df75e2ace11b06b5a7de666-273b-4a89-b8f6-9c5b4272ed72.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d7abe0f7af31ad8c49bf"
+      },
+      "url": "/public/photos/5ff4aa487df75e2ace11b06b8f0c59c9-69dd-46b4-8763-05e50ce7f8b2.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 253205970
+},{
+  "_id": {
+    "$oid": "5ff4aa8f7df75e2ace11b06d"
+  },
+  "verified": true,
+  "hasPlant": false,
+  "latitude": 41.576569,
+  "longitude": -8.405452,
+  "rating": 0,
+  "name": "Insparedes - Centro de Inspecções de Veículos Automóveis - Braga",
+  "category": "Automóvel",
+  "description": "",
+  "address": {
+    "_id": {
+      "$oid": "5ff4aa8f7df75e2ace11b06e"
+    },
+    "place": " Parque Industrial das Sete Fontes 20",
+    "zipcode": "4700-123 ",
+    "city": "Braga",
+    "country": "Portugal"
+  },
+  "schedule": [],
+  "photos": [
+    {
+      "_id": {
+        "$oid": "5ff4d734e0f7af31ad8c49b8"
+      },
+      "url": "/public/photos/5ff4aa8f7df75e2ace11b06d0fc72a69-0e3d-4765-9773-15b842707314.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d737e0f7af31ad8c49b9"
+      },
+      "url": "/public/photos/5ff4aa8f7df75e2ace11b06d302a4bc9-fdc8-4ed2-aefb-e34d672b55b6.jpg"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4d73be0f7af31ad8c49ba"
+      },
+      "url": "/public/photos/5ff4aa8f7df75e2ace11b06dd53d3fd7-a13a-45d8-bae9-8bcad85fe935.jpg"
+    }
+  ],
+  "__v": 0,
+  "phone": 253215321
 }]

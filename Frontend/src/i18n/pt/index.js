@@ -56,6 +56,10 @@
     results: "Sem Resultados | 1 Resultado | {count} Resultados"
   },
 
+  storesPage: {
+    error: "Não foi possível encontrar estabelecimentos da categoria escolhida."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notificações"
