@@ -56,6 +56,10 @@ export default {
     results: "No Results | 1 Result | {count} Results"
   },
 
+  storesPage: {
+    error: "Failed to find services of the category chosen."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notifications"
