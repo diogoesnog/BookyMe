@@ -57,8 +57,7 @@
   },
 
   storesPage: {
-    // TODO: Este título será dinâmico logo está provisório de momento com internacionalização
-    title: "Barber"
+    error: "Não foi possível encontrar estabelecimentos da categoria escolhida."
   },
 
   // Notifications

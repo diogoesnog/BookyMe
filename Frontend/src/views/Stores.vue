@@ -16,6 +16,22 @@
 
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{this.category}}</p>
 
+    <div class="q-pt-xl">
+      <q-banner v-if="error" rounded class="bg-primary text-white">
+
+        {{ $t('storesPage.error') }}
+
+        <template v-slot:action>
+          <q-btn push to="../home" color="primary" round icon="home" />
+        </template>
+
+        <template v-slot:avatar>
+          <q-icon name="error"/>
+        </template>
+      </q-banner>
+    </div>
+
+
 <!--    <div style="padding-top: 5px;">
       <div style="margin: 20px;" class="row" v-for="(store, index) in stores" :key="index" v-bind="stores">
         <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
@@ -51,38 +67,34 @@ export default {
   data() {
     return {
       category: this.$route.params.category,
-      stores: Array
+      stores: Array,
+      error: 0
     }
   },
 
   mounted() {
     console.log("Mounted: View has been rendered");
     console.log(this.category)
-    this.fetchStores();
+    this.fetchStoresByCat(this.category);
   },
   methods: {
 
-    fetchStores() {
+    fetchStoresByCat(category){
+
       this.$q.loading.show({ delay: 400});
 
-      Service.getStores()
+      Service.getStoresByCategory(category)
         .then(response => {
           this.stores = response.data["data"];
-          console.log(this.stores);
-        }).catch(err => {
-
-      }).finally(() => {
-        this.$q.loading.hide();
-      })
-    },
-
-    fetchStoresByCat(){
-
-      /*Service.getStoreByCategory("Comércio Tradicional")
-      .then(response =>  console.log(response))
-      .catch(err => console.log(err))*/
-
+          console.log(this.stores)
+          if (this.stores.length === 0) {
+            this.error = 1
+          }
+        }).catch(err => console.log(err))
+        .finally(() => {this.$q.loading.hide();
+        })
     }
+
   }
 }
 

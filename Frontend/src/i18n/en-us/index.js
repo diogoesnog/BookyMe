@@ -57,8 +57,7 @@ export default {
   },
 
   storesPage: {
-    // TODO: Este título será dinâmico logo está provisório de momento com internacionalização
-    title: "Barber"
+    error: "Failed to find services of the category chosen."
   },
 
   // Notifications

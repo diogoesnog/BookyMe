@@ -48,7 +48,7 @@ class UserService {
     return request.get()
   }
 
-  getStoreByCategory(category) {
+  getStoresByCategory(category) {
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
     request.isJson()
