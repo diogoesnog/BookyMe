@@ -4,6 +4,7 @@ module.exports.getRatings = (store) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/reviews/${store}/ratings`);
 
     request.isJson();
+    request.acceptJson();
 
     return request.get();
 }
