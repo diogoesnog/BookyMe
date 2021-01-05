@@ -2,7 +2,7 @@
   <div style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px;">
       <div class="col-2" style="display: flex; align-items: center;">
-        <q-btn to="categories" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
+        <q-btn to="../categories" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
       </div>
 
       <div class="col-10">
