@@ -6,6 +6,7 @@ const isAdmin = require('../../middlewares/isAdmin');
 const getStoreId = require('../../middlewares/getStoreId');
 const { isOpen } = require('../../utils/isOpen');
 const Response = require('rapid-status');
+const Store = require('../../services/Stores/stores');
 
 /**
  * Get list of reservations
@@ -75,19 +76,13 @@ app.get('/popular', checkAuth, (req, res) => {
         });
 });
 
-/** Irá ser simplificado **/
 /**
  * Create a reservation
  * URL param: /${storeId}
  * body {array} with the following object
- * {serviceDate}: Date,
- * {Schedule}: [
- *      {day}: String, Monday/Tuesday/...
- *      {openingHour}: String, HH:MM
- *      {closingHour}: String, HH:MM
- * ]
+ * {serviceDate}: Date
  */
-app.post('/:storeId', checkAuth, (req, res) => {
+app.post('/:storeId', checkAuth, async (req, res) => {
 
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
@@ -97,26 +92,34 @@ app.post('/:storeId', checkAuth, (req, res) => {
     };
 
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
-        const response = Response.BAD_REQUEST("Invalid Date");
+        const response = Response.BAD_REQUEST("The date is from the past!");
         res.status(response.status).jsonp(response);
     }
-    else {
-        const serviceOpen = isOpen(new Date(booking.serviceDate), req.body.schedule);
 
-        if (serviceOpen) {
-            Booking.createBooking(booking)
-                .then(data => {
-                    const response = Response.OK(data);
-                    res.status(response.status).jsonp(response);
-                })
-                .catch(err => {
-                    const response = Response.INTERNAL_ERROR(err);
-                    res.status(response.status).jsonp(response);
-            });
-        } else {
-            const response = Response.BAD_REQUEST("The service is closed");
-            res.status(response.status).jsonp(response);
-        }
+    let schedule;
+    let weekService = new Date(booking.serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
+    weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
+    try {
+        schedule = (await Store.getSchedule(req.storeId, weekService)).data.data.schedule["0"];
+    } catch {
+        const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
+        res.status(response.status).jsonp(response);
+    }
+
+    const serviceOpen = isOpen(new Date(booking.serviceDate), schedule);
+    if (serviceOpen) {
+        Booking.createBooking(booking)
+            .then(data => {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+        });
+    } else {
+        const response = Response.BAD_REQUEST("The service is closed");
+        res.status(response.status).jsonp(response);
     }
 });
 
@@ -148,55 +151,61 @@ app.delete('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
     }
 });
 
-/** Irá ser simplificado **/
 /**
  * Reschedule booking reservation
  * URL param: id
  * body {array} with the following object
- * {serviceDate}: Date,
- * {Schedule}: [
- *      {day}: String, Monday/Tuesday/...
- *      {openingHour}: String, HH:MM
- *      {closingHour}: String, HH:MM
- * ]
+ * {serviceDate}: Date
  */
 app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
-    const id = req.params.id;
     const bookingDate = new Date(Date.now()).toISOString();
     const serviceDate = new Date(req.body.serviceDate).toISOString();
+    let schedule, ReservationUserId;
+
+    let weekService = new Date(serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
+    weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
 
     try {
-        const ReservationUserId = (await Booking.getUserFromID(id)).userId;
+        schedule = (await Store.getSchedule(req.storeId, weekService)).data.data.schedule["0"];
+    } catch {
+        const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
+        res.status(response.status).jsonp(response);
+    }
 
-        if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
-            if (new Date(Date.now()) > new Date(serviceDate)) {
-                const response = Response.BAD_REQUEST("Invalid Date");
-                res.status(response.status).jsonp(response);
-            } else {
-                const serviceOpen = isOpen(new Date(serviceDate), req.body.schedule);
-
-                if (serviceOpen) {
-                    Booking.reschedule(id, bookingDate, serviceDate)
-                        .then(data => {
-                            const response = Response.OK(data);
-                            res.status(response.status).jsonp(response);
-                        })
-                        .catch(err => {
-                            const response = Response.INTERNAL_ERROR(err);
-                            res.status(response.status).jsonp(response);
-                        });
-                } else {
-                    const response = Response.BAD_REQUEST("The service is closed");
-                    res.status(response.status).jsonp(response);
-                }
-            }
-        } else {
-            const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to delete this reservation");
-            res.status(response.status).jsonp(response);
-        }
+    try {
+        ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
     }
     catch {
         const response = Response.INTERNAL_ERROR("Can't find userID. Does the reservation exist?");
+        res.status(response.status).jsonp(response);
+    }
+
+    if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
+
+        if (new Date(Date.now()) > new Date(serviceDate)) {
+            const response = Response.BAD_REQUEST("Invalid Date");
+            res.status(response.status).jsonp(response);
+        } else {
+            const serviceOpen = isOpen(new Date(serviceDate), schedule);
+
+            if (serviceOpen) {
+                Booking.reschedule(req.params.id, bookingDate, serviceDate)
+                    .then(data => {
+                        const response = Response.OK(data);
+                        res.status(response.status).jsonp(response);
+                    })
+                    .catch(err => {
+                        const response = Response.INTERNAL_ERROR(err);
+                        res.status(response.status).jsonp(response);
+                    });
+            } else {
+                const response = Response.BAD_REQUEST("The service is closed");
+                res.status(response.status).jsonp(response);
+            }
+        }
+
+    } else {
+        const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to reschedule this reservation");
         res.status(response.status).jsonp(response);
     }
 });

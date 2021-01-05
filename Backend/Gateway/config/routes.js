@@ -9,6 +9,8 @@ app.use('/catalog', require('../app/routes/api/catalog'));
 
 app.use('/booking', require('../app/routes/api/booking'));
 
+app.use('/review', require('../app/routes/api/review'));
+
 // Documentation
 app.get('/documentation', (req, res) => res.jsonp({title: "Deprecated", message: "Use Insomnia JSON file instead."}));
 

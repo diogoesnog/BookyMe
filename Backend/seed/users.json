@@ -1,34 +1,52 @@
 [{
   "_id": {
-    "$oid": "5fc6b3294b1974397a8a41d7"
+    "$oid": "5ff4a53709404a2ade1fbd4a"
   },
   "favorites": [],
   "avatar": "User.jpg",
   "reviews": [],
   "bookings": [],
   "type": "User",
-  "stores": [],
-  "name": "Regular User",
-  "username": "userbookyme",
-  "email": "user@bookyme.com",
-  "password": "$2a$10$2R1sjaIa3LzV37.bsnbfJOOgZ52t0AZykCDXebHhe7096OCWLpS/S"
+  "stores": [
+    "5ff4a6e77df75e2ace11b036",
+    "5ff4a74e7df75e2ace11b038",
+    "5ff4a7887df75e2ace11b03c",
+    "5ff4a80f7df75e2ace11b03e",
+    "5ff4a9597df75e2ace11b046",
+    "5ff4a9647df75e2ace11b048",
+    "5ff4aa347df75e2ace11b069",
+    "5ff4aa8f7df75e2ace11b06d"
+  ],
+  "name": "Administrator",
+  "username": "adminbookyme",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "admin@bookyme.com",
+  "password": "$2a$10$PdnRtvXIUx8gy8jA1uzpAe2XaqHYouaCeYJ6TaWQH8N6u0OjD/9JG",
+  "__v": 0
 },{
   "_id": {
-    "$oid": "5fc6b3364b1974397a8a41d8"
+    "$oid": "5ff4a58a09404a2ade1fbd4b"
   },
   "favorites": [
-    "5fcbe818acd2bb2326ca7a1a",
-    "5fd653de6c110bb40443a624",
-    "5fd654a86c110bb40443a637"
+    "5ff4a6e77df75e2ace11b036",
+    "5ff4aa347df75e2ace11b069",
+    "5ff4a9c57df75e2ace11b053",
+    "5ff4a9597df75e2ace11b046",
+    "5ff4a80f7df75e2ace11b03e"
   ],
   "avatar": "User.jpg",
   "reviews": [],
   "bookings": [],
   "type": "User",
   "stores": [],
-  "name": "Administrator",
-  "username": "adminbookyme",
-  "email": "admin@bookyme.com",
-  "password": "$2a$10$l1cL6wPxamWUiwBXmK91qexBkpSyB4/HWZfOVH92OxQwh6hTxWF6u",
-  "address": "Random Address"
+  "name": "User",
+  "username": "userbookyme",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "user@bookyme.com",
+  "password": "$2a$10$QoDd9xdgoISOFIfTBefWXuJ6rk9DW8C5mjXmSvxJkbJhtmH/NAtE.",
+  "__v": 0
 }]

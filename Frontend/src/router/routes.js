@@ -33,6 +33,14 @@ const routes = [
     }
   },
   {
+    name: "Stores",
+    path: '/stores/:category',
+    component: () => import('../views/Stores'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     name: "Favorites",
     path: '/favorites',
     component: () => import('../views/Favorites'),
@@ -48,8 +56,8 @@ const routes = [
       requiresAuth: true
     },
 
-  } 
-  
+  }
+
   // Always leave this as last one,
   // but you can also remove it
   //{
