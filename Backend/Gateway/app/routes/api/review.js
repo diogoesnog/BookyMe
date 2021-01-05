@@ -38,7 +38,7 @@ router.post('/store/:id', validator([
     let body = JSON.stringify(req.body);
     let token = req.headers.Authorization || req.headers.authorization;
 
-    Review.getRatings(token, req.params.id, body)
+    Review.addReview(token, req.params.id, body)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
