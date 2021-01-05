@@ -153,6 +153,15 @@ class Request {
     }
 
     /**
+     * Get Domain Hostname of the Request without Subdomain and Query String
+     * @returns {string}
+     * @private
+     */
+    _getDomain() {
+        return this.url.match(/^https?:\/\/[^#?\/]+/)[0];
+    }
+
+    /**
      * Add a single header to Request
      * @param id
      * @param value
@@ -195,7 +204,10 @@ class Request {
                         let resObj = {
                             status: response.status,
                             headers: response.headers,
-                            data: json
+                            data: {
+                                ...json,
+                                base: `${this._getDomain()}`
+                            }
                         };
 
                         if(response.ok) {

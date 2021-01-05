@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "5ff4eccd0ea3ec084c4fd75c"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "userId": "5ff4a53709404a2ade1fbd4a",
+  "comment": "A sangria estava óptima! Mas o gelado frito era melhor... 😋😋",
+  "rating": 4.5,
+  "date": {
+    "$date": "2021-01-05T22:48:45.858Z"
+  },
+  "__v": 0
+}]

@@ -61,7 +61,7 @@ router.get('/admin', checkAuth, (req, res) => {
 
 
 router.post('/', validator([
-    "name", "category", "description", "address"
+    "name", "category", "description", "place", "zipcode", "city", "country"
 ]),(req, res) => {
     let body = JSON.stringify(req.body);
 
@@ -164,7 +164,7 @@ router.patch('/:id/phone', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 })
 
-router.post('/:id/coordinates', validator([
+router.put('/:id/coordinates', validator([
     "lat", "long"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);

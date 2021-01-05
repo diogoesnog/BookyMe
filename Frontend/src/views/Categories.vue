@@ -1,30 +1,29 @@
 <template>
-    <div style="color: #434343">
-      <div class="row">
-        <div class="col-6">
+    <div style="color: #434343;" class="centerDiv">
+      <div class="row" style="margin: 20px;">
+        <div class="col-10" style="display: flex; align-items: center;">
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
-        <div class="col-6">
-          <q-avatar>
+        <div class="col-2" style="text-align: right;">
+          <q-avatar class="shadow">
             <img src="https://cdn.quasar.dev/img/avatar.png">
           </q-avatar>
         </div>
       </div>
-      <p style="font-weight: 670; font-size: 45px;">{{$t('categoriesPage.title')}}</p>
-      <div>
-        <div style="margin: 30px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
-          <div class="col-10 roundedDiv shadow">
-            <h7 style="font-weight: 600">
+      <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
+      <div style="padding-top: 5px;">
+        <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
+          <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
+            <h7 style="font-weight: 600; font-size: 15px;">
               {{ category.title }}
-              </h7>
-            <h7 style="font-weight: 400;">
+            </h7>
+            <span style="display:inline-block; width: 4px;"/>
+            <h7 style="font-weight: 400; font-size: 15px;">
               {{ category.count }} Resultado(s)
             </h7>
           </div>
-          <div class="col-2">
-            <q-avatar>
-              <img src="https://cdn.quasar.dev/img/avatar.png">
-            </q-avatar>
+          <div class="col-2" style="text-align: right;">
+              <q-btn to="stores" size='20px' padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-right"/>
           </div>
         </div>
       </div>
@@ -79,10 +78,12 @@ export default {
 
 <style scoped>
 
+  .centerDiv {
+    padding: 15px;
+    margin-top: 10px;
+  }
+
   .gradientOne {
-    margin-left: 10px;
-    margin-top: 0px;
-    position: relative;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   }

@@ -1,0 +1,210 @@
+[{
+  "_id": {
+    "$oid": "5ff4e77cf4cffc04869eb9fd"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Crepe Chinês de Legumes",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e786f4cffc04869eb9fe"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "4x Gyosa",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e791f4cffc04869eb9ff"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "4x Camarão Crocante",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e797f4cffc04869eba00"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Wantan Frango",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e79ff4cffc04869eba01"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Camarão Panado",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e7a5f4cffc04869eba02"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Ebi Furai",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e7b8f4cffc04869eba03"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Japonesinha (Panqueca de legumes com camarão e ovo estrelado)",
+  "price": 2,
+  "abstract": "Entradas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e7e0f4cffc04869eba04"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Sunomono",
+  "price": 2,
+  "abstract": "Entradas Frias",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e7e5f4cffc04869eba05"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Ceviche",
+  "price": 2,
+  "abstract": "Entradas Frias",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e7eaf4cffc04869eba06"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Tataki Atum",
+  "price": 2,
+  "abstract": "Entradas Frias",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e7f1f4cffc04869eba07"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Tartaro de Salmão",
+  "price": 2,
+  "abstract": "Entradas Frias",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e807f4cffc04869eba08"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Hot Mikado",
+  "price": 2,
+  "abstract": "Sushi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e80df4cffc04869eba09"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Sake",
+  "price": 2,
+  "abstract": "Sushi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e818f4cffc04869eba0a"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Suzuki",
+  "price": 2,
+  "abstract": "Sushi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e81ef4cffc04869eba0b"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Lírio",
+  "price": 2,
+  "abstract": "Sushi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e822f4cffc04869eba0c"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Vieira",
+  "price": 2,
+  "abstract": "Sushi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e82bf4cffc04869eba0d"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "2x Foie Gras",
+  "price": 2,
+  "abstract": "Sushi",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e83cf4cffc04869eba0e"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Gelado de Baunilha Frito",
+  "price": 2,
+  "abstract": "Sobremesa",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ff4e844f4cffc04869eba0f"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "product": "Café",
+  "price": 2,
+  "abstract": "Sobremesa",
+  "__v": 0
+}]
