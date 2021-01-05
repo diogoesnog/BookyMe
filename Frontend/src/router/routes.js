@@ -9,6 +9,14 @@ const routes = [
     }
   },
   {
+    name: "Profile",
+    path: '/users/login',
+    component: () => import('../views/Profile.vue'),
+    meta: {
+      requiresAuth: false
+    }
+  },
+  {
     name: "Home",
     path: '/home',
     component: () => import('../views/Homepage'),
@@ -20,6 +28,14 @@ const routes = [
     name: "Categories",
     path: '/categories',
     component: () => import('../views/Categories'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "Stores",
+    path: '/stores/:category',
+    component: () => import('../views/Stores'),
     meta: {
       requiresAuth: true
     }
@@ -40,7 +56,8 @@ const routes = [
       requiresAuth: true
     },
 
-  } 
+  }
+
   // Always leave this as last one,
   // but you can also remove it
   //{
