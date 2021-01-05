@@ -206,7 +206,7 @@ class Request {
                             headers: response.headers,
                             data: {
                                 ...json,
-                                publicUrl: `${this._getDomain()}/public`
+                                base: `${this._getDomain()}`
                             }
                         };
 
