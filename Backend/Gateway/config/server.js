@@ -41,7 +41,7 @@ const corsOptions = {
     exposedHeaders: 'Authorization',
 };
 
-app.use( cors() );
+app.use( cors(corsOptions) );
 // app.use(cors(corsOptions));
 
 // app.use((req, res, next) => setTimeout(next, Math.floor( ( Math.random() * 2000 ) + 100 ) ));
