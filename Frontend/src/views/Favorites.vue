@@ -18,7 +18,7 @@
           </p>
         </div>
         <div class="col-2" style="text-align: right;">
-          <q-avatar
+          <q-btn
             class="filterAvatar"
             size="lg" 
             icon="fas fa-filter"

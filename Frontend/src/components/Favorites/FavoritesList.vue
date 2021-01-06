@@ -4,16 +4,23 @@
       :src="getImage()"
       class="roundBorder"
     >
-     <q-btn @click="deleteFavorite" icon="fas fa-trash" style="margin-left:230px" color="red"></q-btn>
-      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:95px">
+      <q-btn class="clearIcon" round @click="deleteFavorite" icon="clear" style="float: right" size="md"></q-btn>
+      <div class="cardBackground absolute-bottom text-center" style="height:70px">
         <div class="row">
-          <div class="col-9">
-            <p style="font-size:1.4em">{{ this.name }}</p>
-            <p>{{ this.address.city }}</p>
+          <div class="col-9" style="text-align: left;">
+            <p>
+              <span style="font-weight: 670; font-size: 22px;">
+                {{ this.name }}              
+              </span>
+              <br/>
+              <span style="font-weight: 300; font-size: 18px;">
+                {{ this.address.city }}
+              </span>
+            </p>
           </div>
-          <div class="col-3" style="margin-top:20px;font-size:1.2em">
+          <div class="col-3" style="text-align: right;">
             {{this.rating}}
-            <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
+            <q-icon roudned class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
           </div>
         </div>
       </div>
@@ -64,6 +71,16 @@ export default {
 </script>
 
 <style scoped>
+  
+  .cardBackground {
+    background-color: rgba(40,151,227, 0.9);
+  }
+
+  .clearIcon {
+    font-size: 0.85em!important;
+    margin: 15px;
+    background-color: white;
+  }
 
   .roundBorder {
     border-radius: 25px;
