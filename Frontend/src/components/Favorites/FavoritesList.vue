@@ -1,40 +1,35 @@
 <template>
-  <div class="q-pa-md" style="padding:35px">
+  <div style="padding-top: 25px; margin: 15px;">
     <q-img
-    :src="getImage()"
-    spinner-color="white"
-    style="height: 170px; max-width: 300px"
-    img-class="my-custom-image"
-    class="rounded-borders"
+      style="height: 200px"
+      :src="getImage()"
+      class="roundBorder shadow"
     >
-     <q-btn @click="deleteFavorite" icon="fas fa-trash" style="margin-left:230px" color="red"></q-btn>
-      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:95px">
+      <q-btn class="clearIcon" round @click="deleteFavorite" icon="clear" style="float: right" size="md"></q-btn>
+      <div class="cardBackground absolute-bottom text-center" style="height:70px">
         <div class="row">
-          <div class="col-9">
-            <p style="font-size:1.4em">{{ this.name }}</p>
-            <p>{{ this.address.city }}</p>
+          <div class="col-9" style="text-align: left; padding-top: 10px;">
+            <p style="font-weight: 670; font-size: 22px; line-height:0%;">
+              {{ this.name }}              
+            </p>
+            <p style="font-weight: 300; font-size: 18px; line-height:50%;">
+              {{ this.address.city }}
+            </p>
           </div>
-          <div class="col-3" style="margin-top:20px;font-size:1.2em">
-            {{this.rating}}
-            <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
+          <div class="col-3" style="text-align: right;">
+            <div class="divRating">
+              <p>
+                <span style="font-weight: 670; font-size: 18px;">
+                  {{this.rating}}
+                </span>
+                <span style="font-weight: 300; font-size: 18px;">
+                  /5
+                </span>
+                <q-icon roudned class="fas fa-star" style="font-size: 1.2em;" />
+              </p>  
+            </div>
           </div>
         </div>
-
-
-        <!--<div class="col-6">
-          <div class="row" style="font-size:1.4em">
-            {{this.name}}
-          </div>
-          <div class="row" >
-            {{this.name}}
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row">
-            {{this.rating}}
-            <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
-          </div>
-        </div>-->
       </div>
       </q-img>
   </div>
@@ -83,12 +78,33 @@ export default {
 </script>
 
 <style scoped>
-.absolute-bottom.text-subtitle1.text-center.backgroundColor {
-  background: linear-gradient(#13c1e0, #2897e3);
-  opacity:85%;
-}
+  
+  .divRating {
+    text-align: center;
+    height: 30px;
+    border-radius: 20px;
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
 
-.rounded-borders.q-img.overflow-hidden {
-  border-radius: 15px;
-}
+  .cardBackground {
+    background-color: rgba(40,151,227, 0.9);
+  }
+
+  .clearIcon {
+    font-size: 0.85em!important;
+    margin: 15px;
+    background-color: white;
+  }
+
+  .roundBorder {
+    border-radius: 25px;
+  }
+
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+    border-radius: 28px;
+  }
+
 </style>
