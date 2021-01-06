@@ -47,6 +47,12 @@ export default {
     this.fetchFavorites();
   },
   methods: {
+    
+    // TODO: criar uma função de remoção de um favorito do teu favorites na função data()
+    // tip, este método vai passar para o componente como uma espécie de prop.
+    favoriteRemoved(id) {
+      this.favorites = this.favorites.filter((item) => item !== id);
+    },
 
     fetchFavorites() {
       console.log("Fetch Favorites");
