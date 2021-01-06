@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md" style="padding:35px">
-    <q-btn @click="deleteFavorite"></q-btn>
+      <q-btn @click="deleteFavorite"></q-btn>
       <q-img
       :src="getImage()"
       spinner-color="white"
@@ -8,9 +8,8 @@
       img-class="my-custom-image"
       class="rounded-borders"
       >
-      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" > 
+      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:65px"> 
           {{this.name}}
-          <p>jhh</p>
       </div>
       </q-img>
   </div>
@@ -60,5 +59,6 @@ export default {
 <style scoped>
 .absolute-bottom.text-subtitle1.text-center.backgroundColor { 
   background: linear-gradient(#13c1e0, #2897e3);
+  opacity: 85%;
 }
 </style>
