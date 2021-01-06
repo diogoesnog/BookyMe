@@ -1,18 +1,28 @@
 <template>
   <div class="q-pa-md" style="padding:35px">
-      <q-btn @click="deleteFavorite"></q-btn>
-      <q-img
-      :src="getImage()"
-      spinner-color="white"
-      style="height: 170px; max-width: 300px"
-      img-class="my-custom-image"
-      class="rounded-borders"
-      >
-      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:65px"> 
-          {{this.name}}
-      </div>
-      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:65px"> 
-          {{this.name}}
+    <q-btn @click="deleteFavorite" icon="fas fa-trash"></q-btn>
+    <q-img
+    :src="getImage()"
+    spinner-color="white"
+    style="height: 170px; max-width: 300px"
+    img-class="my-custom-image"
+    class="rounded-borders"
+    >
+      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:95px"> 
+        <div class="col-6">
+          <div class="row" style="font-size:1.4em">
+            {{this.name}}
+          </div>
+          <div class="row" >
+            {{this.name}}
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            {{this.rating}}
+            <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
+          </div>
+        </div>
       </div>
       </q-img>
   </div>
@@ -27,7 +37,8 @@ export default {
     _id: String,
     name: String,
     rating: Number,
-    photos: Array
+    photos: Array,
+    city: String
   },
   
   data() {
@@ -62,6 +73,10 @@ export default {
 <style scoped>
 .absolute-bottom.text-subtitle1.text-center.backgroundColor { 
   background: linear-gradient(#13c1e0, #2897e3);
-  opacity: 85%;
+  opacity:85%;
+}
+
+.rounded-borders.q-img.overflow-hidden {
+  border-radius: 15px;
 }
 </style>
