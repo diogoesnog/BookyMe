@@ -1,7 +1,7 @@
 <template>
   <div style="padding-top: 25px; margin: 15px;">
     <q-img
-      style="height: 210px"
+      style="height: 200px"
       :src="getImage()"
       class="roundBorder shadow"
     >
