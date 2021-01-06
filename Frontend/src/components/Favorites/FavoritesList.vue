@@ -11,6 +11,9 @@
       <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:65px"> 
           {{this.name}}
       </div>
+      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:65px"> 
+          {{this.name}}
+      </div>
       </q-img>
   </div>
 </template>
