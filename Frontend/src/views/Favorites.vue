@@ -19,8 +19,9 @@
         </div>
         <div class="col-2" style="text-align: right;">
           <q-btn
+            round
             class="filterAvatar"
-            size="lg" 
+            size="md" 
             icon="fas fa-filter"
           />
         </div>
@@ -89,8 +90,8 @@ export default {
 <style scoped>
 
   .filterAvatar {
-    padding-top: 2px;
-    color: white;
+    font-size: 1em!important;
+      color: white;
     background-color: #434343;
   }
 
