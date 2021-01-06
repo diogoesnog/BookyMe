@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md" style="padding:35px">
-    <q-btn @click="deleteFavorite" icon="fas fa-trash"></q-btn>
     <q-img
     :src="getImage()"
     spinner-color="white"
@@ -8,8 +7,21 @@
     img-class="my-custom-image"
     class="rounded-borders"
     >
-      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:95px"> 
-        <div class="col-6">
+     <q-btn @click="deleteFavorite" icon="fas fa-trash" style="margin-left:230px" color="red"></q-btn>
+      <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:95px">
+        <div class="row">
+          <div class="col-9">
+            <p style="font-size:1.4em">{{ this.name }}</p>
+            <p>{{ this.address.city }}</p>
+          </div>
+          <div class="col-3" style="margin-top:20px;font-size:1.2em">
+            {{this.rating}}
+            <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
+          </div>
+        </div>
+
+
+        <!--<div class="col-6">
           <div class="row" style="font-size:1.4em">
             {{this.name}}
           </div>
@@ -22,7 +34,7 @@
             {{this.rating}}
             <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
           </div>
-        </div>
+        </div>-->
       </div>
       </q-img>
   </div>
@@ -38,7 +50,7 @@ export default {
     name: String,
     rating: Number,
     photos: Array,
-    city: String
+    address: Object
   },
   
   data() {

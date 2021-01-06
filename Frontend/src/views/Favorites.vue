@@ -12,7 +12,7 @@
           <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('favoritesPage.title')}}</p>
         </div>
         <div class="col" style="margin-right:5px">
-          <q-btn  style="margin-left:100px; margin-top:45px; font-size: 1em" icon="fas fa-filter" />
+          <q-btn  style="margin-left:100px; margin-top:45px; font-size: 1em; border-style: solid;" icon="fas fa-filter" />
         </div>
       </div>
       <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('favoritesPage.description')}}</h6>
