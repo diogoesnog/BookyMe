@@ -5,10 +5,17 @@
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
       </div> 
-      <div class="row" style="margin: 20px; padding-top:5px;">
+      <div class="row" style="margin: 20px; padding-top:10px;">
         <div class="col-10" style="text-align: left;">
-          <p style="font-weight: 670; font-size: 45px;">{{$t('favoritesPage.title')}}</p>
-          <p style="font-weight: 300; font-size: 20px;">{{$t('favoritesPage.description')}}</p>
+          <p>
+            <span style="font-weight: 670; font-size: 45px;">
+              {{$t('favoritesPage.title')}}
+            </span>
+            <br/>
+            <span style="font-weight: 300; font-size: 20px;">
+              {{$t('favoritesPage.description')}}
+            </span>
+          </p>
         </div>
         <div class="col-2" style="text-align: right;">
           <q-avatar

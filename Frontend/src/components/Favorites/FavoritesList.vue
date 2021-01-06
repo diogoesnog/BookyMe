@@ -1,11 +1,8 @@
 <template>
-  <div class="q-pa-md" style="padding:35px">
+  <div style="padding-top: 25px; margin: 15px;">
     <q-img
-    :src="getImage()"
-    spinner-color="white"
-    style="height: 170px; max-width: 300px"
-    img-class="my-custom-image"
-    class="rounded-borders"
+      :src="getImage()"
+      class="roundBorder"
     >
      <q-btn @click="deleteFavorite" icon="fas fa-trash" style="margin-left:230px" color="red"></q-btn>
       <div class="absolute-bottom text-subtitle1 text-center backgroundColor" style="height:95px">
@@ -19,22 +16,6 @@
             <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
           </div>
         </div>
-
-
-        <!--<div class="col-6">
-          <div class="row" style="font-size:1.4em">
-            {{this.name}}
-          </div>
-          <div class="row" >
-            {{this.name}}
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row">
-            {{this.rating}}
-            <q-icon class="fas fa-star" style="font-size: 1.4em; margin-left:5px" />
-          </div>
-        </div>-->
       </div>
       </q-img>
   </div>
@@ -83,12 +64,9 @@ export default {
 </script>
 
 <style scoped>
-.absolute-bottom.text-subtitle1.text-center.backgroundColor {
-  background: linear-gradient(#13c1e0, #2897e3);
-  opacity:85%;
-}
 
-.rounded-borders.q-img.overflow-hidden {
-  border-radius: 15px;
-}
+  .roundBorder {
+    border-radius: 25px;
+  }
+
 </style>
