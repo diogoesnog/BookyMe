@@ -36,13 +36,21 @@ app.use(express.static('./app/public'));
 
 // Configure CORS middleware
 const corsOptions = {
-    origin: process.env.FRONTEND_SERVER,
+    // origin: process.env.FRONTEND_SERVER,
     credentials: true,
     exposedHeaders: 'Authorization',
 };
 
 app.use( cors(corsOptions) );
-// app.use(cors(corsOptions));
+
+// TODO
+/*const backofficeCorsOptions = {
+    origin: process.env.BACKOFFICE_SERVER,
+    credentials: true,
+    exposedHeaders: 'Authorization'
+}
+
+app.use( cors(backofficeCorsOptions) );*/
 
 // app.use((req, res, next) => setTimeout(next, Math.floor( ( Math.random() * 2000 ) + 100 ) ));
 

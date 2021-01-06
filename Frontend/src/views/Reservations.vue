@@ -9,15 +9,13 @@
       </div>
       <div class="row">
         <div class="col">
-          <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('favoritesPage.title')}}</p>
+          <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('bookingsPage.title')}}</p>
         </div>
         <div class="col" style="margin-right:5px">
-          <!--<q-btn  class="no-shadow" style="margin-left:100px; margin-top:45px; font-size: 1em; border-style: solid;" icon="fas fa-filter" />-->
-          <i class="fas fa-filter" @click="filterButtonTaped"></i>
+          <q-btn  style="margin-left:100px; margin-top:45px; font-size: 1em; border-style: solid;" icon="fas fa-filter" />
         </div>
       </div>
-      <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('favoritesPage.description')}}</h6>
-      <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
+      <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('bookingsPage.description')}}</h6>
 
     </div>
     <div>
@@ -29,21 +27,19 @@
 <script>
 
 import Service from '../services/user.service';
-import FavoritesList from '../components/Favorites/FavoritesList';
 import Toolbar from '../components/Root/Toolbar';
 
 export default {
 
-  name: "Favorites",
+  name: "Reservations",
 
    data() {
     return {
-      favorites: Array
+      reservations: Array
     }
   },
 
   components: {
-    FavoritesList,
     Toolbar
   },
 
@@ -51,20 +47,18 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.fetchFavorites();
+    //this.fetchFavorites();
   },
   methods: {
-    filterButtonTaped() {
-      window.alert("Filter Pressed");
-    },
+    
     // TODO: criar uma função de remoção de um favorito do teu favorites na função data()
     // tip, este método vai passar para o componente como uma espécie de prop.
-    favoriteRemoved(id) {
-      this.favorites = this.favorites.filter((item) => item !== id);
-    },
+    //favoriteRemoved(id) {
+     // this.favorites = this.favorites.filter((item) => item !== id);
+    //},
 
-    fetchFavorites() {
-      console.log("Fetch Favorites");
+    /*fetchReservations() {
+      console.log("Fetch Reservations");
       Service.getFavorites()
         .then(response => {
           console.log("Got Response");
@@ -76,7 +70,7 @@ export default {
         }).catch(err => {
             console.log(err)
         })
-    }
+    }*/
   }
 }
 
