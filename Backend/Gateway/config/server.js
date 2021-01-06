@@ -35,21 +35,22 @@ app.use(cookieParser());
 app.use(express.static('./app/public'));
 
 // Configure CORS middleware
-const frontendCorsOptions = {
-    origin: process.env.FRONTEND_SERVER,
+const corsOptions = {
+    // origin: process.env.FRONTEND_SERVER,
     credentials: true,
     exposedHeaders: 'Authorization',
 };
 
-app.use( cors(frontendCorsOptions) );
+app.use( cors(corsOptions) );
 
 // TODO
-const backofficeCorsOptions = {
+/*const backofficeCorsOptions = {
     origin: process.env.BACKOFFICE_SERVER,
     credentials: true,
     exposedHeaders: 'Authorization'
 }
-app.use( cors(backofficeCorsOptions) );
+
+app.use( cors(backofficeCorsOptions) );*/
 
 // app.use((req, res, next) => setTimeout(next, Math.floor( ( Math.random() * 2000 ) + 100 ) ));
 
