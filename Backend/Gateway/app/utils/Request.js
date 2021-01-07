@@ -162,6 +162,16 @@ class Request {
     }
 
     /**
+     * Get Binding Port
+     * @param url
+     * @returns {*}
+     * @private
+     */
+    _getBindingPort(url) {
+        return url.replace(/\D/g, "");
+    }
+
+    /**
      * Add a single header to Request
      * @param id
      * @param value
@@ -206,7 +216,8 @@ class Request {
                             headers: response.headers,
                             data: {
                                 ...json,
-                                base: `${this._getDomain()}`
+                                baseNetwork: `${this._getDomain()}`,
+                                base: `http://localhost:${this._getBindingPort(this._getDomain())}`
                             }
                         };
 
