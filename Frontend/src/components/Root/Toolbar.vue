@@ -35,7 +35,7 @@
   }
 
   .text-blue {
-    color: #2897e3 !important;
+    color: #e03459 !important;
   }
 
 </style>
