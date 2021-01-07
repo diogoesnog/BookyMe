@@ -94,7 +94,7 @@ services:
     volumes:
       - ./seed/users.json:/data/users.json:ro
     command:
-      "mongoimport --host mongo-users --port 3220 --db BookymeUsers --type json --file /data/users.json --jsonArray"
+      - "mongoimport --host mongo-users --port 3220 --db BookymeUsers --type json --file /data/users.json --jsonArray"
 
   stores-seed:
     image: fvilers/mongo-seed
@@ -110,6 +110,37 @@ services:
       - ./seed/stores.json:/data/stores.json:ro
     command:
         "mongoimport --host mongo-stores --port 3221 --db BookymeStores --type json --file /data/stores.json --jsonArray"
+        
+  catalogs-seed:
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: catalogs-seed
+    environment:
+        - MONGO_HOST=mongo-stores
+        - MONGO_PORT=3221
+    depends_on:
+        - mongo-stores
+    volumes:
+        - ./seed/catalogs.json:/data/catalogs.json:ro
+    command:
+        "mongoimport --host mongo-stores --port 3221 --db BookymeStores --type json --file /data/catalogs.json --jsonArray"
+    
+  reviews-seed:
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: reviews-seed
+    environment:
+      - MONGO_HOST=mongo-stores
+      - MONGO_PORT=3221
+    depends_on:
+      - mongo-stores
+    volumes:
+      - ./seed/reviews.json:/data/reviews.json:ro
+    command:
+        "mongoimport --host mongo-stores --port 3221 --db BookymeStores --type json --file /data/reviews.json --jsonArray"
+
 
 volumes:
   data-volume: 

@@ -69,15 +69,14 @@ module.exports.updateAddress = (store, address) => {
 module.exports.updatePhone = (store, phone) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/phone`);
     request.isJson();
-    // TODO: change from post to patch on service
-    return request.post(phone);
+    return request.put(phone);
 }
 
 module.exports.addCoordinates = (store, coordinates) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/coordinates`);
     request.isJson();
 
-    return request.post(coordinates);
+    return request.put(coordinates);
 }
 
 module.exports.deleteOne = (store) => {
