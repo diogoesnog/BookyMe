@@ -1,7 +1,14 @@
 <template>
-    <div>
-     <Toolbar/>
-    </div>
+  <div style="color: #434343;" class="centerDiv">
+      <div class="q-pa-md q-gutter-sm">
+          <q-avatar size="100px" font-size="52px" color="teal" text-color="white" style="text-align: center;">
+            <img src="https://cdn.quasar.dev/img/avatar.png">
+          </q-avatar>
+      </div>
+      <div>
+          <Toolbar/>
+      </div>
+  </div> 
 </template>
 
 <script>

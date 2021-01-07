@@ -35,6 +35,16 @@ class UserService {
     return request.get()
   }
 
+  deleteFavorite(id) {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite/${id}`);
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.delete()
+  }
+
   getStores() {
 
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)

@@ -7,5 +7,36 @@ export default class User {
         this.address = address;
         this.city = city;
         this.zipCode = zipCode;
+        this._id = null;
+        this.stores = [];
+        this.favorites = [];
+    }
+
+    setId(id) {
+        this._id = id;
+    }
+
+    setStores(stores) {
+        this.stores = stores;
+    }
+
+    setFavorites(favorites) {
+        this.favorites = favorites;
+    }
+
+    addFavorite(id) {
+        this.favorites.push(id);
+    }
+
+    addStore(id) {
+        this.stores.push(id);
+    }
+
+    removeFavorite(id) {
+        this.favorites = this.favorites.filter((item) => item !== id);
+    }
+
+    removeStore(id) {
+        this.stores = this.stores.filter((item) => item !== id);
     }
 }

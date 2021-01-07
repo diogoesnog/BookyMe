@@ -15,6 +15,7 @@ export default {
 
                 localStorage.setItem('user', JSON.stringify(data.user));
 
+                return data.user;
             });
     },
 

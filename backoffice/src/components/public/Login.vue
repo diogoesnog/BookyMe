@@ -31,8 +31,9 @@ export default {
       e.preventDefault();
 
       AuthService.login(this.user)
-        .then(response => {
-          console.log("Logged On", response);
+        .then((data) => {
+          console.log("Logged On", data);
+          this.$store.dispatch("setCurrentUser", data);
           this.$router.push('/home');
         })
         .catch(err => console.error(err))
