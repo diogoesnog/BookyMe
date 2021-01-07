@@ -1,25 +1,32 @@
 <template>
-  <div>
-    <br>
-    <div style="color: #434343">
-      <div class="row">
-        <div class="col-6">
+  <div style="color: #434343;" class="centerDiv">
+      <div class="row" style="margin: 20px;">
+        <div class="col-12" style="display: flex; align-items: center;">
           <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('favoritesPage.title')}}</p>
+      </div> 
+      <div class="row" style="margin: 20px; padding-top:10px;">
+        <div class="col-10" style="text-align: left;">
+          <p>
+            <span style="font-weight: 670; font-size: 45px;">
+              {{$t('favoritesPage.title')}}
+            </span>
+            <br/>
+            <span style="font-weight: 300; font-size: 20px;">
+              {{$t('favoritesPage.description')}}
+            </span>
+          </p>
         </div>
-        <div class="col" style="margin-right:5px">
-          <!--<q-btn  class="no-shadow" style="margin-left:100px; margin-top:45px; font-size: 1em; border-style: solid;" icon="fas fa-filter" />-->
-          <i class="fas fa-filter" @click="filterButtonTaped"></i>
+        <div class="col-2" style="text-align: right;">
+          <q-btn
+            round
+            class="filterAvatar"
+            size="md" 
+            icon="fas fa-filter"
+          />
         </div>
       </div>
-      <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('favoritesPage.description')}}</h6>
       <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
-
-    </div>
     <div>
      <Toolbar/>
     </div>
@@ -46,8 +53,6 @@ export default {
     FavoritesList,
     Toolbar
   },
-
- 
 
   mounted() {
     console.log("Mounted: View has been rendered");
@@ -84,10 +89,18 @@ export default {
 
 <style scoped>
 
+  .filterAvatar {
+    font-size: 1em!important;
+      color: white;
+    background-color: #434343;
+  }
+
+  .centerDiv {
+    padding: 15px;
+    margin-top: 10px;
+  }
+
   .gradientOne {
-    margin-left: 10px;
-    margin-top: 0px;
-    position: relative;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   }
