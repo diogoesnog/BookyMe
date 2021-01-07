@@ -8,6 +8,11 @@ const Stores = require('../../services/Stores/stores');
 const { validator } = require('../../middlewares/checkBody');
 const checkAuth = require('../../middlewares/checkAuth');
 
+const MulterFiles = require('../../utils/MulterFiles');
+const uploader = new MulterFiles('users');
+const upload = uploader.getUploader();
+
+
 router.post('/register', validator([
     "name", "username", "email", "address", "city", "zipCode", "password"
 ]), (req, res) => {
@@ -82,6 +87,22 @@ router.delete('/favorite/:id', checkAuth, (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+router.post('/avatar', checkAuth, upload.single('file'), async (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+    let response;
+
+    try {
+        response = await User.uploadPicture(token, req.file);
+
+        console.log("Unlink File", req.file.path);
+
+        res.status(response.status).jsonp(response);
+
+    } catch (err) {
+
+        res.status(err.status || 500).jsonp(err);
+    }
+});
 
 router.get('/validation', checkAuth, (req, res) => {
     let token = req.headers.authorization || req.headers.Authorization;
