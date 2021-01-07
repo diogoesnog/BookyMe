@@ -23,6 +23,7 @@
             </h7>
           </div>
           <div class="col-2" style="text-align: right;">
+            <!-- TODO: Fazer os ícones consoante a categoria -->
               <q-btn v-bind:to="'stores/' + category.title" size='20px' padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-right"/>
           </div>
         </div>
