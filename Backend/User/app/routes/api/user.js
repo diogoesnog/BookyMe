@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer  = require('multer');
-const upload = multer({ dest: './app/public/avatar' });
+const upload = multer({ dest: 'uploads/' })
 const fs = require('fs');
 const Users = require('../../controllers/users');
 const Response = require('rapid-status');
@@ -29,15 +29,21 @@ router.post('/register', (req, res) => {
         user.password = hash;
 
         Users.createUser(user)
-        .then(dataTemp => {
-            let data = dataTemp.toObject()
-            delete data.password
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        })
-        .catch( err => {
-            response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
+            .then(dataTemp => {
+                let data = dataTemp.toObject();
+                delete data.password;
+                response = Response.CREATED(data);
+
+                let path = `${__dirname}/../../public/${data._id}`;
+                console.log(__dirname);
+
+                fs.mkdirSync(path);
+
+                res.status(response.status).jsonp(response);
+            })
+            .catch( err => {
+                response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
         });
     })
 });
@@ -202,35 +208,33 @@ router.patch('/password', checkAuth, async (req, res) => {
 })
 
 
-// TODO: check path
 /**
  * Uploads user's avatar
  * {file.avatar} : FILE,
  * {header.Authorization} : TOKEN
  */
 router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
-       let userID = req.decodedUser.id;
-       let path = req.file.path.replace("",'/');
-        console.log(path);
-        // let oldPath = __dirname + req.file.path;
-       let newPath = __dirname + "uploads\\\\" + userID + req.file.originalname;
-        console.log(req.file);
-       /*
-       fs.rename(oldPath,newPath, (err)=>{
-           if (err) {
-               response = Response.INTERNAL_ERROR(err, "Enable to rename file");
-               res.status(response.status).jsonp(response);
-           }
-       })
-   */
+    let userId = req.decodedUser.id;
+    // let oldPath = __dirname + '/../../../' + req.file.path;
+    // let newPath = __dirname + '/../../public/' + req.params.id + req.file.originalname;
+    let oldPath = `${__dirname}/../../../${req.file.path}`;
+    let newPath = `${__dirname}/../../public/${userId}/${req.file.originalname}`;
 
-    Users.updatePhoto(userID, newPath).
-        then(data => {
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
+    fs.rename(oldPath, newPath, function(err) {
+        if(err) {
             response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
+            res.status(response.status).json(response);
+        }
+    });
+    let imagePath = `/public/photos/${userId}/${req.file.originalname}`;
+
+    Users.updatePhoto(userId, imagePath)
+        .then(data => {
+            response = Response.CREATED(data);
+            res.status(response.status).json(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(data);
+            res.status(response.status).json(err);
         });
 });
 
@@ -246,31 +250,6 @@ router.get('/validation', checkAuth, (req, res) => {
     res.status(response.status).jsonp(response);
 
 });
-
-
-
-////////////////////////////////////////////////////////////////TESTS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-// TODO: delete findALL and users endpoint after development
-/**
- * Finds and retrieves all users
- */
-router.get('/findAll', (req, res) => {
-    Users.getUsers()
-        .then(data => {res.status(201).jsonp(data);})
-        .catch(err => {res.status(500).jsonp(err);})
-});
-
-
-/**
- * Deletes all user's documents
- */
-router.delete('/users', (req,res) => {
-    Users.deleteAll()
-        .then(data => {res.status(201).jsonp(data);})
-        .catch(err => {res.status(500).jsonp(err);})
-});
-
 
 
 module.exports = router;

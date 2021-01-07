@@ -16,6 +16,9 @@
 
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{this.category}}</p>
 
+    <Store v-for="(store, index) in stores" :key="index" v-bind="store"/>
+
+
     <div class="q-pt-xl">
       <q-banner v-if="error" rounded class="bg-primary text-white">
 
@@ -30,26 +33,6 @@
         </template>
       </q-banner>
     </div>
-
-
-<!--    <div style="padding-top: 5px;">
-      <div style="margin: 20px;" class="row" v-for="(store, index) in stores" :key="index" v-bind="stores">
-        <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
-          <h7 style="font-weight: 600; font-size: 15px;">
-            {{ stores.title }}
-          </h7>
-          <span style="display:inline-block; width: 4px;"/>
-          <h7 style="font-weight: 400; font-size: 15px;">
-            {{ stores.count }} Resultado(s)
-          </h7>
-        </div>
-        <div class="col-2" style="text-align: right;">
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/avatar.png">
-          </q-avatar>
-        </div>
-      </div>
-    </div> -->
     <Toolbar/>
   </div>
 </template>
@@ -58,11 +41,12 @@
 
 import Service from '../services/user.service';
 import Toolbar from '../components/Root/Toolbar';
+import Store from "../components/common/Store";
 
 export default {
 
   name: "Stores",
-  components: { Toolbar },
+  components: { Toolbar, Store },
 
   data() {
     return {
