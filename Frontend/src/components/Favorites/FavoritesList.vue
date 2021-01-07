@@ -9,10 +9,15 @@
       <div class="cardBackground absolute-bottom text-center" style="height:70px">
         <div class="row">
           <div class="col-9" style="text-align: left; padding-top: 8px;">
-            <p style="font-weight: 670; font-size: 22px; line-height:0%;">
-              {{ this.name }}              
-            </p>
-            <p style="font-weight: 300; font-size: 18px; line-height:50%;">
+            <p style="font-weight: 670;
+    font-size: 22px;
+    /* line-height: 0%; */
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;">
+              {{ this.name }}     
+              <br/>         
               {{ this.address.city }}
             </p>
           </div>
