@@ -8,7 +8,7 @@
       <q-btn class="clearIcon" round @click="deleteFavorite" icon="clear" style="float: right" size="md"></q-btn>
       <div class="cardBackground absolute-bottom text-center" style="height:70px">
         <div class="row">
-          <div class="col-9" style="text-align: left; padding-top: 10px;">
+          <div class="col-9" style="text-align: left; padding-top: 8px;">
             <p style="font-weight: 670; font-size: 22px; line-height:0%;">
               {{ this.name }}              
             </p>
@@ -23,9 +23,8 @@
                   {{this.rating}}
                 </span>
                 <span style="font-weight: 300; font-size: 18px;">
-                  /5
+                /5
                 </span>
-                <q-icon roudned class="fas fa-star" style="font-size: 1.2em;" />
               </p>  
             </div>
           </div>
