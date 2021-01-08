@@ -21,7 +21,9 @@ export default {
   },
 
   logout: () => {
+    
     cookies.remove('Authorization');
     // TODO: Redirect to login
+    
   }
 }

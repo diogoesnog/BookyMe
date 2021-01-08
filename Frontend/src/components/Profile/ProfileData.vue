@@ -7,11 +7,11 @@
         <div style="position: relative; display: flex; justify-content: center">
           <div style="position: absolute">
             <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-              <img src="https://cdn.quasar.dev/img/avatar.png">
+              <img :src="`${base}${avatar}`"> 
             </q-avatar>
           </div>
           <div style="position: absolute; top: 125px">
-            <q-btn style=";" size="md" class="gradientRed" round @click="handleLogout">
+            <q-btn style=";" size="md" class="gradientRed" round @click="edit">
               <q-icon name="fas fa-camera" color="white"/>
             </q-btn>
           </div>
@@ -38,32 +38,71 @@
         </p> 
       </div>
       <!-- Primeira Box - Dados Pessoais -->
-      <div class="roundedDiv shadow" style="display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left;"> 
-        <div style="margin-left: 10px; margin-top: 25px;">
-          <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.name }}
+      <div class="roundedDiv shadow" style="display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; "> 
+        
+        <!-- Nome -->
+        <div style="margin-left: 10px; margin-top: 15px;" >
+          <q-input borderless  v-model="this.name " style="height: 30px;" disable>
+             <template v-slot:prepend>
+                 <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px;"/>
+             </template>
+            
+          </q-input>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          <q-icon name="fas fa-hashtag" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.username }} 
+        
+        <!-- Nome de Utilizador -->
+        <div style="margin-left: 10px;">
+          <q-form  class="q-gutter-md">
+          <q-input borderless  v-model="this.username " style="height: 30px;" >
+            <template v-slot:prepend>
+                <q-icon name="fas fa-hashtag" color="grey-5" style="font-size: 20px; "/>
+            </template>
+          </q-input>
+          </q-form>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          <q-icon name="fas fa-at" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.email }} 
+
+        <!-- Email -->
+        <div style="margin-left: 10px;">
+          <q-input borderless v-model="this.email " style="height: 30px;">
+            <template v-slot:prepend>
+                 <q-icon name="fas fa-at" color="grey-5" style="font-size: 20px; "/>
+             </template>
+          </q-input>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.address }} 
+
+        <!-- Morada -->
+        <div style="margin-left: 10px; ">
+          <q-input borderless v-model="this.address " style="height: 30px;">
+            <template v-slot:prepend>
+               <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px;"/>
+            </template>
+          </q-input>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          {{ this.zipCode }} {{ this.city }} 
+        
+        <!-- Morada -->
+        <div class = "row"  style="padding: 5px">
+            <div class= "col-6" style="margin-left: 40px; ">
+              <q-input borderless v-model="this.zipCode" style="height: 30px;"/> 
+            </div>
+            <div class= "col-12" style="margin-left: 40px; ">
+              <q-input borderless v-model=" this.city  " style="height: 30px;"/>
+            </div>
+        </div>
+
+        
+        <!-- Botão editar info -->
+        <div>
+          <q-btn style=";" size="md" class="gradientRed" round @click="edit">
+              <q-icon name="fas fa-edit" color="white"/>
+          </q-btn> 
         </div>
       </div>
       <!-- Box Vermelha - Segurança -->
       <div class="col-10 roundedDivRedBottom shadow">
           <p style="font-weight: 500; font-size:130%;  margin: 20px;" class="font-weight-bold button ">
             {{ $t('profilePage.security') }}
-        </p>
+          </p>
+          
       </div>
       <!-- Segunda Box - password -->
       <div class="roundedDiv shadow" style="display: flex; align-items: center; border-radius: 20px; margin-top: 40px;">
@@ -78,6 +117,7 @@
             {{ $t('profilePage.signout') }}  
         </p>
         <q-icon name="fas fa-sign-out-alt" color="white" style="font-size: 20px; margin-left: 10px;"/>
+        
       </q-btn>      
     </div>
   </div>
@@ -85,8 +125,9 @@
 
 <script>
 
-import Service from '../../services/user.service'
+import Service from '../../services/auth.service'
 import User from '../../models/User';
+
 
 export default {
 
@@ -98,7 +139,9 @@ export default {
     email: String,
     address: String,
     zipCode: String,
-    city: String
+    city: String,
+    avatar: String,
+    base: String
   },
 
   mounted() {
@@ -107,23 +150,16 @@ export default {
 
   methods: {
     //TODO: método que edita a info e a pass e handleLogout
-    handleLogout(e) {
-      e.preventDefault();
-      console.group("Login Operation");
+    handleLogout() {
+      console.log("hello")
       Service.logout(this.user)
-        .then(() => {
-          console.log("Logged Out");
-          this.$q.notify({
-            type: 'positive',
-            message: 'Logout Successful'
-          });
+      this.$router.push({ name: 'Home' })
+    },
 
-          this.$router.push({ name: 'Home' })
-
-        }).catch();
-      console.groupEnd();
-
+    edit(v){
+        
     }
+    
   }
 }
 </script>

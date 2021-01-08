@@ -16,7 +16,7 @@
       
     </div>
     <div>
-      <ProfileData v-bind="profileData" />
+      <ProfileData v-bind="profileData" :base="base" />
     </div>  
     <div>
       <Toolbar/>
@@ -43,7 +43,8 @@ export default {
   
   data() {
     return {
-      profileData: Object,
+      profileData: Object, 
+      base: String,
       lang: this.$i18n.locale,
         langOptions: [
           { value: 'en-us', label: this.$t('languages.english')},
@@ -74,7 +75,7 @@ export default {
       Service.getProfileData()
         .then(response => {
           let data = response.data["data"];
-
+          this.base=response.data["base"];
           this.profileData= data;
 
           console.log(this.profileData);

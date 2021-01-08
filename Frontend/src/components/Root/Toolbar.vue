@@ -7,7 +7,7 @@
                 <q-icon name="fas fa-home" style="font-size: 23px"/>
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Home</span>
               </q-route-tab>
-              <q-route-tab  to="/categories" exact>
+              <q-route-tab  to="/reservations" exact>
                 <q-icon name="fas fa-bookmark" style="font-size: 23px"/>
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Booking</span>
               </q-route-tab >
