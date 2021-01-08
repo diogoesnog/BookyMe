@@ -226,7 +226,7 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
             res.status(response.status).json(response);
         }
     });
-    let imagePath = `/public/photos/${userId}/${req.file.originalname}`;
+    let imagePath = `/public/${userId}/${req.file.originalname}`;
 
     Users.updatePhoto(userId, imagePath)
         .then(data => {
