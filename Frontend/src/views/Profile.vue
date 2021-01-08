@@ -1,15 +1,8 @@
 <template>
-  <div > 
-    <div>
-      <ProfileData v-bind="profileData" />
-    </div>  
-    <div>
-      <Toolbar/>
-    </div>
+  <div >  
     <div class="centerDiv" >
-      <div class="row">
-        
-        <div class="col-6">
+      <!-- <div class="row">
+        <div class="col-4">
           <q-select
             class="selectLanguage"
             rounded
@@ -19,8 +12,14 @@
             :label="$t('settingsPage.language')">
           </q-select>
         </div>
-      </div>
+      </div>-->
       
+    </div>
+    <div>
+      <ProfileData v-bind="profileData" />
+    </div>  
+    <div>
+      <Toolbar/>
     </div>
   </div> 
   
@@ -92,11 +91,11 @@ export default {
 
 </script>
 
-<style scoped>
-
+<style scoped>   
+  
   .centerDiv {
-    padding: 15px;
-    margin-top: 10px;
+    padding: 5px;
+    margin-top: 5px;
   }
 
   .gradientOne {
