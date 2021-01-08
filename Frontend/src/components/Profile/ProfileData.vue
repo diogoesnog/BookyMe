@@ -4,21 +4,28 @@
     <!-- Div Cima -->
     <div class="divTop1">
       <div class="divTop2">
-        <div>
-          <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-            <img src="https://cdn.quasar.dev/img/avatar.png">
-          </q-avatar>
-        </div> 
-        <div>
-          <p>
-            <span style="font-weight: 600; font-size: 30px;">
-              {{ this.name }}
-            </span>
-            <br/>
-            <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
-              {{ this.username }}
-            </span>
-          </p>
+        <div style="position: relative; display: flex; justify-content: center">
+          <div style="position: absolute">
+            <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
+              <img src="https://cdn.quasar.dev/img/avatar.png">
+            </q-avatar>
+          </div>
+          <div style="position: absolute; top: 125px">
+            <q-btn style=";" size="md" class="gradientRed" round @click="handleLogout">
+              <q-icon name="fas fa-camera" color="white"/>
+            </q-btn>
+          </div>
+          <div style="position: absolute; top: 175px">
+            <p>
+              <span style="font-weight: 600; font-size: 30px;">
+                {{ this.name }}
+              </span>
+              <br/>
+              <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
+                {{ this.username }}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -137,14 +144,14 @@ export default {
   .divTop2{
     position: fixed;
     left: 0;
-    top: 35px;
+    top: 30px;
     width: 100%;
     color: white;
   }
 
   .divBottom {
     position: fixed; 
-    bottom: 35px; 
+    bottom: 45px; 
     width: 100%; 
     padding: 30px;
   }
