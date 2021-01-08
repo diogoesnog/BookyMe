@@ -29,7 +29,10 @@
         </div>
       </div>
     </div>
+    
     <!-- Div Baixo -->
+
+    
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
       <div class="roundedDivRedTop shadow">
@@ -42,11 +45,10 @@
         
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
-          <q-input borderless  v-model="this.name " style="height: 30px;" disable>
+          <q-input borderless  v-model="this.name " style="height: 30px;" dense="dense" type="text"  disable >
              <template v-slot:prepend>
                  <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px;"/>
              </template>
-            
           </q-input>
         </div>
         
@@ -63,7 +65,7 @@
 
         <!-- Email -->
         <div style="margin-left: 10px;">
-          <q-input borderless v-model="this.email " style="height: 30px;">
+          <q-input borderless v-model="this.email" style="height: 30px;">
             <template v-slot:prepend>
                  <q-icon name="fas fa-at" color="grey-5" style="font-size: 20px; "/>
              </template>
@@ -79,12 +81,12 @@
           </q-input>
         </div>
         
-        <!-- Morada -->
+        <!-- Código postal e Cidade -->
         <div class = "row"  style="padding: 5px">
             <div class= "col-6" style="margin-left: 40px; ">
               <q-input borderless v-model="this.zipCode" style="height: 30px;"/> 
             </div>
-            <div class= "col-12" style="margin-left: 40px; ">
+            <div class= "col-6" style="margin-left: 40px; ">
               <q-input borderless v-model=" this.city  " style="height: 30px;"/>
             </div>
         </div>
@@ -92,7 +94,7 @@
         
         <!-- Botão editar info -->
         <div>
-          <q-btn style=";" size="md" class="gradientRed" round @click="edit">
+          <q-btn style=";" size="md" class="gradientRed" round @click="editavel = !editavel">
               <q-icon name="fas fa-edit" color="white"/>
           </q-btn> 
         </div>
@@ -142,7 +144,14 @@ export default {
     city: String,
     avatar: String,
     base: String
+    
   },
+
+  data () {
+    return {
+      editavel: false
+    }
+  }, 
 
   mounted() {
     console.log("LoginForm Mounted");
@@ -156,9 +165,7 @@ export default {
       this.$router.push({ name: 'Home' })
     },
 
-    edit(v){
-        
-    }
+    
     
   }
 }
@@ -186,10 +193,11 @@ export default {
   }
 
   .divBottom {
+    z-index: 1000;
     position: fixed; 
     bottom: 45px; 
     width: 100%; 
-    padding: 30px;
+    padding: 30px; 
   }
 
   .button {
