@@ -6,7 +6,24 @@
     <div>
       <Toolbar/>
     </div>
+    <div class="centerDiv" >
+      <div class="row">
+        
+        <div class="col-6">
+          <q-select
+            class="selectLanguage"
+            rounded
+            outlined
+            v-model="lang"
+            :options="langOptions"
+            :label="$t('settingsPage.language')">
+          </q-select>
+        </div>
+      </div>
+      
+    </div>
   </div> 
+  
 </template>
 
 <script>
@@ -27,10 +44,23 @@ export default {
   
   data() {
     return {
-      profileData: Object
+      profileData: Object,
+      lang: this.$i18n.locale,
+        langOptions: [
+          { value: 'en-us', label: this.$t('languages.english')},
+          { value: 'pt', label: this.$t('languages.portuguese')},
+          { value: 'fr', label: this.$t('languages.french')}
+      ]
     }
   },
-  
+
+  watch: {
+      lang(lang) {
+        console.log("Language Change", lang);
+        this.$i18n.locale = lang.value;
+      }
+    
+  },
   
   mounted() {
     console.log("Mounted: View has been rendered");

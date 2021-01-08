@@ -1,7 +1,7 @@
 <template>
   <!-- Div Principal -->
   <div class="text-center" style="color: #434343">
-
+    
     <div class="divTop">
       <div class="q-pa-md q-gutter-sm" align="center">
           <q-avatar size="150px" font-size="52px" color="teal" text-color="white" >
@@ -91,7 +91,7 @@
 
               <!-- Botão logout -->
               <span style="display:block;  width: 100px; height: 30px; padding: 5px;"/>
-              <q-btn class="gradientBlue" rounded @click="handleLogin" style="width: 200px; height: 35px ">
+              <q-btn class="gradientBlue" rounded @click="handleLogout" style="width: 200px; height: 35px ">
                 <p style="font-size:120%;" class="font-weight-bold button">
                     {{ $t('profilePage.signout') }}
                     
@@ -123,11 +123,29 @@ export default {
     city: String
   },
 
-  
+  mounted() {
+    console.log("LoginForm Mounted");
+  },
 
   methods: {
     //TODO: método que edita a info e a pass e handleLogout
-    
+    handleLogout(e) {
+      e.preventDefault();
+      console.group("Login Operation");
+      Service.logout(this.user)
+        .then(() => {
+          console.log("Logged Out");
+          this.$q.notify({
+            type: 'positive',
+            message: 'Logout Successful'
+          });
+
+          this.$router.push({ name: 'Home' })
+
+        }).catch();
+      console.groupEnd();
+
+    }
   }
 }
 </script>
