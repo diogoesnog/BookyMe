@@ -3,7 +3,7 @@
     <v-card class="mx-auto">
       <v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
       <v-card-title>
-        {{ this.name }}
+        {{ this.name}}
       </v-card-title>
       <v-card-text>
         <v-row

@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-row no-gutters>
-      <v-col>
+      <v-col cols="2">
         <Navbar/>
       </v-col>
-      <v-col>
+      <v-col cols="10">
         <router-view/>
       </v-col>
     </v-row>
@@ -16,7 +16,8 @@
 import Navbar from "@/components/common/Navbar";
 export default {
   name: "EmptyRouter",
-  components: { Navbar }
+  components: { Navbar },
+
 }
 </script>
 
