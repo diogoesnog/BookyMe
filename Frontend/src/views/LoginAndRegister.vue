@@ -15,7 +15,7 @@
     <div class="centerDiv" v-else>
       <div class="row">
         <div class="col-6">
-          <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm = !loginForm"/>
+          <q-btn padding="6px 6px" class="gradientOne" round icon="fas fa-angle-left" @click="loginForm =!loginForm"/>
         </div>
         <div class="col-6">
           <q-select
