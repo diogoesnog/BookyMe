@@ -1,7 +1,7 @@
 <template>
   <!-- Div Principal -->
   <div class="text-center" style="color: #434343">
-    
+    <!-- Div Cima -->
     <div class="divTop">
       <div class="q-pa-md q-gutter-sm" align="center">
           <q-avatar size="150px" font-size="52px" color="teal" text-color="white" >
@@ -18,22 +18,17 @@
                   {{ this.username }}
       </h7>
       </div>
-      
     </div>
     <!-- Div Baixo -->
-    <div class="divBottom1">
-      
-      <div class="divBottom2">
-        <div style="padding-top: 100px;">
+    <div style="padding-top: 100px;">
             <div style="margin: 10px;">
-              
                <!-- Primeira box - dados pessoais -->
-              <div class="col-10 roundedDivRed shadow" style="display: flex; align-items: center; width: 173px; height: 37px">
+              <div class="roundedDivRed shadow" style="display: flex; align-items: center; width: 173px; height: 37px">
                  <p style="font-weight: 500; font-size:130%; align-items: center; " class="font-weight-bold button">
                     {{ $t('profilePage.personalDetails') }}
                  </p> 
               </div>
-              <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
+              <div class="roundedDiv shadow" style="display: flex; align-items: center;">
                  
                 <h7 style="font-weight: 280; font-size: 13px; text-align: left;">
                  
@@ -68,7 +63,7 @@
               
               <span style="display:block;  width: 100px; height: 20px; padding: 5px;"/>
               
-              
+
               
               <!-- Segunda box - password -->
               <div class="col-10 roundedDivRed shadow " style="display: flex; align-items: center; width:40%; height: 37px">
@@ -76,6 +71,7 @@
                     {{ $t('profilePage.security') }}
                 </p>
               </div>
+              <!-- Segunda box - password -->
               <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
                
                 <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
@@ -96,10 +92,7 @@
                     {{ $t('profilePage.signout') }}
                     
                 </p>
-              </q-btn>
-              
-           </div>
-        </div>
+              </q-btn>      
       </div>
     </div>
   </div>
@@ -176,7 +169,6 @@ export default {
     height: 505px;
     background-size: cover;
     background-position: center top;
-    background-image: url('../../assets/Other/LoginFrame.svg');
   }
 
   .divBottom2{
@@ -219,7 +211,15 @@ export default {
     border-radius: 200px;
     background: linear-gradient(#e9695c, #e03459);
     display: flex;
-    text-align: center;
+    width: 173px;
+    height: 37px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 85px;
+    margin-top: -5px;
+    -webkit-transform: translate(-50%, -50%);
   }
 
   .shadow {
