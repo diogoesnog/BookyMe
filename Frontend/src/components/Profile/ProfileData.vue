@@ -1,0 +1,189 @@
+<template>
+  <!-- Div Principal -->
+  <div class="text-center" style="color: #434343">
+
+    <div class="divTop">
+      <div class="q-pa-md q-gutter-sm" align="center">
+          <q-avatar size="150px" font-size="52px" color="teal" text-color="white" >
+            <img src="https://cdn.quasar.dev/img/avatar.png">
+          </q-avatar>
+          
+      </div> 
+      <div>
+      <h7 style="font-weight: 600; font-size: 30px;">
+                  {{ this.name }}
+      </h7>
+      </div>
+      <div>
+      <h7 style="font-weight: 300; font-size: 20px;">
+                  {{ this.username }}
+      </h7>
+      </div>
+    </div>
+    <!-- Div Baixo -->
+    <div class="divBottom1">
+      
+      <div class="divBottom2">
+        <div style="padding-top: 100px;">
+            <div style="margin: 10px;">
+              
+               <!-- Primeira box - dados pessoais -->
+              <div class="col-10 roundedDivRed shadow" style="display: flex; align-items: left; width: 194px; height: 37px">
+                
+                 <p style="font-size:145%; " class="font-weight-bold button">
+                    {{ $t('profilePage.personalDetails') }}
+                 </p>
+                 
+              </div>
+              <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
+                
+                <h7 style="font-weight: 300; font-size: 15px; text-align: left;">
+                  {{ this.name }}
+                  <br/>
+                  {{ this.username }} 
+                  <br/>
+                  {{ this.email }} 
+                  <br/>
+                  {{ this.address }} 
+                  <br/>
+                  {{ this.zipCode }} {{ this.city }} 
+                </h7>
+              </div>
+              
+              <span style="display:block;  width: 100px; height: 20px; padding: 5px;"/>
+              
+              
+              
+              <!-- Segunda box - password -->
+              <div class="col-10 roundedDivRed shadow" style="display: flex; align-items: center; width: 130px; height: 37px">
+                 <p style="font-size:150%;" class="font-weight-bold button">
+                    {{ $t('profilePage.security') }}
+                </p>
+              </div>
+              <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
+                <h7 style="font-weight: 600; font-size: 15px;">
+                   *************
+                </h7>
+                
+                <span style="display:block;  width: 100px; height: 70px; padding: 5px;"/>
+                
+              </div>
+
+
+              <!-- Botão logout -->
+              <span style="display:block;  width: 100px; height: 40px; padding: 5px;"/>
+              <q-btn class="gradientRed" rounded @click="handleLogin" style="width: 200px">
+                <p style="font-size:120%;" class="font-weight-bold button">
+                    {{ $t('profilePage.signout') }}
+                </p>
+              </q-btn>
+              
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import Service from '../../services/user.service'
+import User from '../../models/User';
+
+export default {
+
+  name: "ProfileData",
+  props: {
+    _id: String,
+    name: String,
+    username: String,
+    email: String,
+    address: String,
+    zipCode: String,
+    city: String
+  },
+
+  
+
+  methods: {
+    //TODO: método que edita a info e a pass e handleLogout
+    
+  }
+}
+</script>
+
+<style scoped>
+
+  
+
+  .divMajor {
+    position: fixed;
+    left: 0px;
+    width: 100%;
+    padding-bottom: 800px;
+    background-image: linear-gradient(#13c1e0, #2897e3);
+  }
+
+  .divTop{
+    top: 25px;
+    position: relative;
+  }
+
+  .divBottom1{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 100px;
+    height: 505px;
+    background-size: cover;
+    background-position: center top;
+    background-image: url('../../assets/Other/LoginFrame.svg');
+  }
+
+  .divBottom2{
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .button {
+    font: bold 12px;
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+  }
+
+  .inputWhite {
+      background: white;
+  }
+
+  .gradientRed {
+      background-image: linear-gradient(#e9695c, #e03459);
+  }
+
+  .roundedDiv {
+    border-radius: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .roundedDivRed {
+    border-radius: 200px;
+    background: linear-gradient(#e9695c, #e03459);
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+    border-radius: 28px;
+  }
+
+</style>
