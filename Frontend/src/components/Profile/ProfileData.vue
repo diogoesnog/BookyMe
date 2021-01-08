@@ -13,12 +13,12 @@
       <h7 style="font-weight: 600; font-size: 30px;">
                   {{ this.name }}
       </h7>
-      </div>
-      <div>
+      <br/>
       <h7 style="font-weight: 300; font-size: 20px;">
                   {{ this.username }}
       </h7>
       </div>
+      
     </div>
     <!-- Div Baixo -->
     <div class="divBottom1">
@@ -28,26 +28,42 @@
             <div style="margin: 10px;">
               
                <!-- Primeira box - dados pessoais -->
-              <div class="col-10 roundedDivRed shadow" style="display: flex; align-items: left; width: 194px; height: 37px">
-                
-                 <p style="font-size:145%; " class="font-weight-bold button">
+              <div class="col-10 roundedDivRed shadow" style="display: flex; align-items: center; width: 173px; height: 37px">
+                 <p style="font-weight: 500; font-size:130%; align-items: center; " class="font-weight-bold button">
                     {{ $t('profilePage.personalDetails') }}
-                 </p>
-                 
+                 </p> 
               </div>
               <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
-                
-                <h7 style="font-weight: 300; font-size: 15px; text-align: left;">
+                 
+                <h7 style="font-weight: 280; font-size: 13px; text-align: left;">
+                 
+                  <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px"/>
+                  <span style="display:inline;  width: 100px; height: 10px; padding: 3px; " />
                   {{ this.name }}
                   <br/>
+
+                  <span style="display:block;  width: 100px; height: 10px; padding: 5px; " />
+                  <q-icon name="fas fa-hashtag" color="grey-5" style="font-size: 20px"/>
+                  <span style="display:inline;  width: 100px; height: 10px; padding: 3px; " />
                   {{ this.username }} 
                   <br/>
+
+                  <span style="display:block;  width: 100px; height: 10px; padding: 5px; " />
+                  <q-icon name="fas fa-at" color="grey-5" style="font-size: 20px"/>
+                  <span style="display:inline;  width: 100px; height: 10px; padding: 3px; " />
                   {{ this.email }} 
                   <br/>
+
+                  <span style="display:block;  width: 100px; height: 10px; padding: 5px; " />
+                  <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px"/>
+                  <span style="display:inline;  width: 100px; height: 10px; padding: 3px; " />
                   {{ this.address }} 
                   <br/>
+
+                  <span style="display:inline;  width: 100px; height: 150px; padding: 14px; " />
                   {{ this.zipCode }} {{ this.city }} 
                 </h7>
+                <span style="display:block;  width: 100px; height: 170px; padding: 5px; " />
               </div>
               
               <span style="display:block;  width: 100px; height: 20px; padding: 5px;"/>
@@ -55,12 +71,15 @@
               
               
               <!-- Segunda box - password -->
-              <div class="col-10 roundedDivRed shadow" style="display: flex; align-items: center; width: 130px; height: 37px">
-                 <p style="font-size:150%;" class="font-weight-bold button">
+              <div class="col-10 roundedDivRed shadow " style="display: flex; align-items: center; width:40%; height: 37px">
+                 <p style="font-weight: 500; font-size:130%; text-align: center; align-items: justify; " class="font-weight-bold button ">
                     {{ $t('profilePage.security') }}
                 </p>
               </div>
               <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
+               
+                <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
+                <span style="display:inline;  width: 10px; height: 10px; padding: 3px; " />
                 <h7 style="font-weight: 600; font-size: 15px;">
                    *************
                 </h7>
@@ -71,10 +90,11 @@
 
 
               <!-- Botão logout -->
-              <span style="display:block;  width: 100px; height: 40px; padding: 5px;"/>
-              <q-btn class="gradientRed" rounded @click="handleLogin" style="width: 200px">
+              <span style="display:block;  width: 100px; height: 30px; padding: 5px;"/>
+              <q-btn class="gradientBlue" rounded @click="handleLogin" style="width: 200px; height: 35px ">
                 <p style="font-size:120%;" class="font-weight-bold button">
                     {{ $t('profilePage.signout') }}
+                    
                 </p>
               </q-btn>
               
@@ -152,7 +172,7 @@ export default {
   .button {
     font: bold 12px;
     margin: 0px;
-    padding: 10px;
+    align-items: center;
     color: #fff;
   }
 
@@ -164,20 +184,24 @@ export default {
       background-image: linear-gradient(#e9695c, #e03459);
   }
 
+  .gradientBlue {
+     background-image: linear-gradient(#13c1e0, #2897e3);
+  }
+
+
   .roundedDiv {
     border-radius: 200px;
     background: white;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 30px;
   }
 
   .roundedDivRed {
     border-radius: 200px;
     background: linear-gradient(#e9695c, #e03459);
     display: flex;
-    align-items: center;
-    padding-left: 20px;
+    text-align: center;
   }
 
   .shadow {
