@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import User from '../models/user';
-//import Service from '../service/user.service';
+
 
 export default new Vuex.Store({
     state: {
