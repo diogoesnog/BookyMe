@@ -5,19 +5,13 @@
       :src="getImage()"
       class="roundBorder shadow"
     >
-      <q-btn class="clearIcon" round @click="deleteFavorite" icon="clear" style="float: right" size="md"></q-btn>
       <div class="cardBackground absolute-bottom text-center" style="height:70px">
         <div class="row">
           <div class="col-9" style="text-align: left; padding-top: 8px;">
-            <p style="font-weight: 670;
-    font-size: 22px;
-    /* line-height: 0%; */
-    width: 220px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;">
-              {{ this.name }}     
-              <br/>         
+            <p style="font-weight: 670; font-size: 22px; line-height:0%;">
+              {{ this.name }}
+            </p>
+            <p style="font-weight: 300; font-size: 18px; line-height:50%;">
               {{ this.address.city }}
             </p>
           </div>
@@ -30,12 +24,12 @@
                 <span style="font-weight: 300; font-size: 18px;">
                 /5
                 </span>
-              </p>  
+              </p>
             </div>
           </div>
         </div>
       </div>
-      </q-img>
+    </q-img>
   </div>
 </template>
 
@@ -43,7 +37,7 @@
 import Service from '../../services/user.service'
 export default {
 
-  name: "FavoritesList",
+  name: "StoreList",
   props: {
     _id: String,
     name: String,
@@ -54,7 +48,7 @@ export default {
 
   data() {
     return {
-      favorites: Array
+      stores: Array
     }
   },
 
@@ -66,49 +60,39 @@ export default {
         return `http://localhost:5100${this.photos[0].url}`
       }
       return "";
-    },
-
-    deleteFavorite() {
-      Service.deleteFavorite(this._id)
-        .then(response => {
-          let data = response.data[ "data" ];
-          // TODO: emitir um evento para o parent (a tua view) com o ID do favorito eliminado
-          console.log(data);
-        })
-        .catch(err => console.log(err));
     }
   }
 }
 </script>
 
 <style scoped>
-  
-  .divRating {
-    text-align: center;
-    height: 30px;
-    border-radius: 20px;
-    background: linear-gradient(#e9695c, #e03459);
-    color: white;
-  }
 
-  .cardBackground {
-    background-color: rgba(40,151,227, 0.9);
-  }
+.divRating {
+  text-align: center;
+  height: 30px;
+  border-radius: 20px;
+  background: linear-gradient(#e9695c, #e03459);
+  color: white;
+}
 
-  .clearIcon {
-    font-size: 0.85em!important;
-    margin: 15px;
-    background-color: white;
-  }
+.cardBackground {
+  background-color: rgba(40,151,227, 0.9);
+}
 
-  .roundBorder {
-    border-radius: 25px;
-  }
+.clearIcon {
+  font-size: 0.85em!important;
+  margin: 15px;
+  background-color: white;
+}
 
-  .shadow {
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 28px;
-    border-radius: 28px;
-  }
+.roundBorder {
+  border-radius: 25px;
+}
+
+.shadow {
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 28px;
+  border-radius: 28px;
+}
 
 </style>

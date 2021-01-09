@@ -12,12 +12,18 @@
           <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('bookingsPage.title')}}</p>
         </div>
         <div class="col" style="margin-right:5px">
-          <q-btn  style="margin-left:100px; margin-top:45px; font-size: 1em; border-style: solid;" icon="fas fa-filter" />
+          <q-btn
+            round
+            class="filterAvatar"
+            size="md" 
+            icon="fas fa-filter"
+            style="margin-left:110px; margin-top:30px"
+          />
         </div>
       </div>
       <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('bookingsPage.description')}}</h6>
-
     </div>
+      <ReservationsList/>
     <div>
      <Toolbar/>
     </div>
@@ -28,6 +34,7 @@
 
 import Service from '../services/user.service';
 import Toolbar from '../components/Root/Toolbar';
+import ReservationsList from '../components/Reservations/ReservationsList.vue';
 
 export default {
 
@@ -40,7 +47,8 @@ export default {
   },
 
   components: {
-    Toolbar
+    Toolbar,
+    ReservationsList
   },
 
  
