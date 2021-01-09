@@ -31,8 +31,6 @@
     </div>
     
     <!-- Div Baixo -->
-
-    
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
       <div class="roundedDivRedTop shadow">
@@ -41,70 +39,62 @@
         </p> 
       </div>
       <!-- Primeira Box - Dados Pessoais -->
-      <div class="roundedDiv shadow" style="display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; "> 
-        
+      <div class="roundedDiv shadow" style="padding:12px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; "> 
+        <!-- editar info -->
+        <div style="text-align: right; padding-left: 235px; position: absolute;">
+          <q-btn flat size="md" class="" @click="editavel = !editavel" style="text-transform: capitalize; font-size: 15px; font-weight: 350;">
+            {{ $t('profilePage.editData') }}
+          </q-btn> 
+        </div>
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
-          <q-input borderless  v-model="this.name " style="height: 30px;" dense="dense" type="text"  disable >
+          <q-input borderless v-model="this.name" style="height: 32px;" type="text">
              <template v-slot:prepend>
-                 <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px;"/>
+                <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
              </template>
           </q-input>
         </div>
-        
         <!-- Nome de Utilizador -->
         <div style="margin-left: 10px;">
           <q-form  class="q-gutter-md">
-          <q-input borderless  v-model="this.username " style="height: 30px;" >
+          <q-input borderless v-model="this.username" style="height: 32px;">
             <template v-slot:prepend>
-                <q-icon name="fas fa-hashtag" color="grey-5" style="font-size: 20px; "/>
+              <span style="font-size: 28px; font-weight:350">#</span>
             </template>
           </q-input>
           </q-form>
         </div>
-
         <!-- Email -->
         <div style="margin-left: 10px;">
           <q-input borderless v-model="this.email" style="height: 30px;">
             <template v-slot:prepend>
-                 <q-icon name="fas fa-at" color="grey-5" style="font-size: 20px; "/>
-             </template>
-          </q-input>
-        </div>
-
-        <!-- Morada -->
-        <div style="margin-left: 10px; ">
-          <q-input borderless v-model="this.address " style="height: 30px;">
-            <template v-slot:prepend>
-               <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px;"/>
+              <span style="font-size: 20px; font-weight:350">@</span>
             </template>
           </q-input>
         </div>
-        
-        <!-- Código postal e Cidade -->
-        <div class = "row"  style="padding: 5px">
-            <div class= "col-6" style="margin-left: 40px; ">
-              <q-input borderless v-model="this.zipCode" style="height: 30px;"/> 
+        <!-- Morada -->
+        <div class="row">
+          <div class="col-1" style="display: flex; justify-content: left; align-items: center; padding: 10px;">
+            <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; font-weight:350"/>
+          </div>
+          <div class="col-11" style="padding-left: 15px">
+            <q-input borderless v-model="this.address" style="height: 30px;"/>
+            <div class = "row" style="margin-top: -10px;">
+              <div class= "col-3">
+                <q-input borderless v-model="this.zipCode" style="height: 30px;"/> 
+              </div>
+              <div class= "col-9">
+                <q-input borderless v-model=" this.city" style="height: 30px;"/>
+              </div>  
             </div>
-            <div class= "col-6" style="margin-left: 40px; ">
-              <q-input borderless v-model=" this.city  " style="height: 30px;"/>
-            </div>
-        </div>
-
-        
-        <!-- Botão editar info -->
-        <div>
-          <q-btn style=";" size="md" class="gradientRed" round @click="editavel = !editavel">
-              <q-icon name="fas fa-edit" color="white"/>
-          </q-btn> 
+          </div>
         </div>
       </div>
       <!-- Box Vermelha - Segurança -->
       <div class="col-10 roundedDivRedBottom shadow">
-          <p style="font-weight: 500; font-size:130%;  margin: 20px;" class="font-weight-bold button ">
+          <p style="font-weight: 500; font-size:130%;  margin: 20px;" class="font-weight-bold button">
             {{ $t('profilePage.security') }}
           </p>
-          
       </div>
       <!-- Segunda Box - password -->
       <div class="roundedDiv shadow" style="display: flex; align-items: center; border-radius: 20px; margin-top: 40px;">
@@ -119,7 +109,6 @@
             {{ $t('profilePage.signout') }}  
         </p>
         <q-icon name="fas fa-sign-out-alt" color="white" style="font-size: 20px; margin-left: 10px;"/>
-        
       </q-btn>      
     </div>
   </div>
@@ -195,7 +184,7 @@ export default {
   .divBottom {
     z-index: 1000;
     position: fixed; 
-    bottom: 45px; 
+    bottom: 35px; 
     width: 100%; 
     padding: 30px; 
   }
