@@ -148,7 +148,7 @@ export default {
 <style scoped>
 
   .shadow {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
   }
 
