@@ -7,11 +7,11 @@
         <div style="position: relative; display: flex; justify-content: center">
           <div style="position: absolute">
             <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-              <img :src="`${base}${avatar}`"> 
+              <img :src="`${base}${avatar}`">
             </q-avatar>
           </div>
           <div style="position: absolute; top: 125px">
-            <q-btn style=";" size="md" class="gradientRed" round @click="edit">
+            <q-btn style=";" size="md" class="gradientRed" round >
               <q-icon name="fas fa-camera" color="white"/>
             </q-btn>
           </div>
@@ -29,36 +29,51 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Div Baixo -->
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
       <div class="roundedDivRedTop shadow">
         <p style="font-weight: 500; font-size: 130%; align-items: center; text-align: left; margin: 20px;" class="font-weight-bold button">
           {{ $t('profilePage.personalDetails') }}
-        </p> 
+        </p>
       </div>
       <!-- Primeira Box - Dados Pessoais -->
-      <div class="roundedDiv shadow" style="padding:12px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; "> 
+      <div class="roundedDiv shadow" style="padding:12px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; ">
         <!-- editar info -->
         <div style="text-align: right; padding-left: 235px; position: absolute;">
-          <q-btn flat size="md" class="" @click="editavel = !editavel" style="text-transform: capitalize; font-size: 15px; font-weight: 350;">
+          <q-btn flat size="md" class="" @click="bottomEdit" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" :hidden= "!esconde"  >
             {{ $t('profilePage.editData') }}
-          </q-btn> 
+          </q-btn>
         </div>
+        
+        
         
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
-          <q-input borderless v-model="name" style="height: 30px;" type="text" :disable = "editavel">
-             <template v-slot:prepend>
-                <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
-             </template>
-          </q-input>
+          <q-form @submit="editData" class="q-gutter-md">
+              <q-input borderless v-model="name" style="height: 30px;" type="text" :disable = "!editavel">
+                <template v-slot:prepend>
+                    <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
+                </template>
+              </q-input>
+              <div>
+                    <q-btn label="Save" color="primary" :invisible= "!esconde"/>
+              </div>
+            </q-form>
         </div>
+
+
+
+        
+
+
+
+
         <!-- Nome de Utilizador -->
         <div style="margin-left: 10px;">
           <q-form  class="q-gutter-md">
-          <q-input borderless v-model="username" style="height: 30px;" :disable = "editavel">
+          <q-input borderless v-model="username" style="height: 30px;" :disable = "!editavel">
             <template v-slot:prepend>
               <span style="font-size: 28px; font-weight:350">#</span>
             </template>
@@ -67,7 +82,7 @@
         </div>
         <!-- Email -->
         <div style="margin-left: 10px;">
-          <q-input borderless v-model="email" style="height: 30px;" :disable = "editavel" >
+          <q-input borderless v-model="email" style="height: 30px;" :disable = "!editavel" >
             <template v-slot:prepend>
               <span style="font-size: 20px; font-weight:350">@</span>
             </template>
@@ -79,13 +94,13 @@
             <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; "/>
           </div>
           <div class="col-11" style="padding-left: 15px">
-            <q-input borderless v-model="address" style="height: 30px;" :disable = "editavel"/>
+            <q-input borderless v-model="address" style="height: 30px;" :disable = "!editavel"/>
             <div class = "row" style="margin-top: -10px;">
               <div class= "col-3">
-                <q-input borderless v-model="zipCode" style="height: 30px;" :disable = "editavel"/> 
+                <q-input borderless v-model="zipCode" style="height: 30px;" :disable = "!editavel"/> 
               </div>
               <div class= "col-9">
-                <q-input borderless v-model="city" style="height: 30px;" :disable = "editavel"/>
+                <q-input borderless v-model="city" style="height: 30px;" :disable = "!editavel"/>
               </div>  
             </div>
           </div>
@@ -107,10 +122,10 @@
       <!-- Botão Logout -->
       <q-btn class="gradientBlue" rounded @click="handleLogout" style="width: 200px; height: 35px; margin: 40px; bottom:10px;">
         <p style="font-size:130%; text-transform: capitalize;" class="font-weight-bold button">
-            {{ $t('profilePage.signout') }}  
+            {{ $t('profilePage.signout') }}
         </p>
         <q-icon name="fas fa-sign-out-alt" color="white" style="font-size: 20px; margin-left: 10px;"/>
-      </q-btn>      
+      </q-btn>
     </div>
   </div>
 </template>
@@ -134,32 +149,56 @@ export default {
     city: String,
     avatar: String,
     base: String
-    
+
   },
 
   data () {
     return {
-      editavel: false
+      editavel: false,
+      esconde:false,
+      atualizados: []
     }
-  }, 
+  },
 
   mounted() {
     console.log("LoginForm Mounted");
   },
 
   methods: {
-    //TODO: método que edita a info e a pass e handleLogout
+    //TODO: método que edita a info e a pass 
     handleLogout() {
       console.log("hello")
       Service.logout(this.user)
       this.$router.push({ name: 'Home' })
     },
 
+
+    editData(evt) {
+      const formData = new FormData(evt.target)
+      const atualizados = []
+
+      for (const [ name, value ] of formData.entries()) {
+        atualizados.push({
+          name,
+          value
+        })
+      }
+
+      this.atualizados = atualizados
+    },
+
+    bottomEdit(){
+      this.editavel = true;
+      this.esconde =true;
+    }
+
     
     
   }
 }
 </script>
+
+
 
 <style scoped>
 
@@ -184,10 +223,10 @@ export default {
 
   .divBottom {
     z-index: 1000;
-    position: fixed; 
-    bottom: 35px; 
-    width: 100%; 
-    padding: 30px; 
+    position: fixed;
+    bottom: 35px;
+    width: 100%;
+    padding: 30px;
   }
 
   .button {
@@ -225,9 +264,9 @@ export default {
     margin-left: 100px;
     margin-top: -5px;
     -webkit-transform: translate(-50%, -50%);
-    width: 200px; 
-    height: 35px; 
-    border-radius: 30px; 
+    width: 200px;
+    height: 35px;
+    border-radius: 30px;
   }
 
   .roundedDivRedBottom {
@@ -240,7 +279,7 @@ export default {
     margin-top: 40px;
     -webkit-transform: translate(-50%, -50%);
     width:120px;
-    height: 35px; 
+    height: 35px;
     border-radius: 30px;
   }
 

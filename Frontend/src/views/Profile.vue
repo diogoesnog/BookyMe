@@ -16,7 +16,7 @@
       
     </div>
     <div>
-      <ProfileData v-bind="profileData" :base = "base"  />
+      <ProfileData v-bind="profileData" :base="base"  />
     </div>  
     <div>
       <Toolbar/>
@@ -43,8 +43,8 @@ export default {
   
   data() {
     return {
-      profileData: Object, 
-      // base: String,
+      profileData: {}, 
+      base: '',
       lang: this.$i18n.locale,
         langOptions: [
           { value: 'en-us', label: this.$t('languages.english')},
