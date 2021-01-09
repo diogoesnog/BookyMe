@@ -7,29 +7,22 @@
     >
       <q-btn class="clearIcon" round @click="deleteFavorite" icon="clear" style="float: right" size="md"></q-btn>
       <div class="cardBackground absolute-bottom text-center" style="height:70px">
-        <div class="row">
-          <div class="col-9" style="text-align: left; padding-top: 8px;">
-            <p style="font-weight: 670;
-    font-size: 22px;
-    /* line-height: 0%; */
-    width: 220px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;">
+        <div class="row" style="margin-top: -2px;">
+          <div class="col-9" style="text-align: left; margin-top: -5px; display: inline-grid; line-height: 25px;">
+            <span style="font-weight: 670; display: inline-block; width: 220px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 22px;">
               {{ this.name }}     
-              <br/>         
+            </span>
+            <span>
               {{ this.address.city }}
-            </p>
+            </span>
           </div>
-          <div class="col-3" style="text-align: right;">
-            <div class="divRating">
-              <p>
-                <span style="font-weight: 670; font-size: 18px;">
-                  {{this.rating}}
+          <div class="col-3" style="padding-top: 4px">
+            <div class="divRating shadow">
+              <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
+                <span style="font-weight: 670; font-size: 18px; display: inline-block; vertical-align: middle;">
+                  {{roundRating(this.rating)}}<span style="font-weight: 200; font-size: 18px;">/5</span>  
                 </span>
-                <span style="font-weight: 300; font-size: 18px;">
-                /5
-                </span>
+                <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
               </p>  
             </div>
           </div>
@@ -76,7 +69,12 @@ export default {
           console.log(data);
         })
         .catch(err => console.log(err));
+    },
+
+    roundRating: function(rating) {
+      return Math.round(rating*10)/10;
     }
+    
   }
 }
 </script>
@@ -106,7 +104,7 @@ export default {
   }
 
   .shadow {
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
     border-radius: 28px;
     border-radius: 28px;
   }

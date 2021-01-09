@@ -37,7 +37,7 @@ router.post('/login', validator([
 });
 
 router.put('/account', checkAuth, validator([
-    'name', 'address'
+    'name', 'username', 'email', 'address', 'city', 'zipCode'
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
     let token = req.headers.authorization || req.headers.Authorization;

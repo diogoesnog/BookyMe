@@ -23,7 +23,7 @@ module.exports.getUserReservations = (token) => {
     return request.get();
 }
 
-module.exports.getPopularStores = () => {
+module.exports.getPopularStores = (token) => {
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/popular`);
 
     request.isJson();
@@ -35,8 +35,8 @@ module.exports.getPopularStores = () => {
 
 // Create Booking
 // TODO: a ser alterado
-module.exports.createBooking = (token, body) => {
-    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking`);
+module.exports.createBooking = (token, body, id) => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/${id}`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
@@ -57,6 +57,12 @@ module.exports.deleteReservation = (token, id) => {
 }
 
 // TODO: irá ser alterado
-module.exports.changeReservation = () => {
+module.exports.changeReservation = (token, body, id) => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/${id}`);
 
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.put(body);
 }
