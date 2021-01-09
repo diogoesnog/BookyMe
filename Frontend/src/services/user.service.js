@@ -12,6 +12,27 @@ class UserService {
     request.isJson()
     return request.post(body)
   }
+  
+  updateAccount(user) {
+    let body = JSON.stringify(user);
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/account`)
+
+    request.acceptJson()
+    request.isJson()
+    return request.post(body)
+  }
+  
+  updatePassword(user) {
+    let body = JSON.stringify(user);
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/password`)
+
+    request.acceptJson()
+    request.isJson()
+    return request.post(body)
+  }
+
 
   getCategories() {
     let request = new Request(`${process.env.API_ENDPOINT}/stores/categories`)
