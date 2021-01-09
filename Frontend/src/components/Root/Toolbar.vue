@@ -7,24 +7,69 @@
                 <q-icon name="fas fa-home" style="font-size: 23px"/>
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Home</span>
               </q-route-tab>
-              <q-route-tab  to="/reservations" exact>
+              <q-route-tab to="/reservations" exact>
                 <q-icon name="fas fa-bookmark" style="font-size: 23px"/>
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Booking</span>
-              </q-route-tab >
-              <q-route-tab  to="/favorites" exact>
+              </q-route-tab>
+              <q-route-tab to="/favorites" exact>
                 <q-icon name="fas fa-heart" style="font-size: 23px"/>
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Favorites</span>
-              </q-route-tab >
-              <q-route-tab  to="/users/login" exact>
+              </q-route-tab>
+              <q-route-tab to="/users/login" exact>
                 <q-icon name="fas fa-user" style="font-size: 23px"/>
+                <img :src="getImage()"> 
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Profile</span>
-              </q-route-tab >
+              </q-route-tab>
           </q-tabs>   
         </q-footer>
       </q-layout>
    </div>
 </template>
+
 <script>
+
+import Service from '../../services/auth.service';
+
+export default {
+  
+  name: "Profile",
+
+  data() {
+
+    return {
+      profileData: Object,
+      base: String,
+      avatar: String
+    }
+  },
+
+  mounted() {
+    this.fetchProfileData();
+
+  },
+
+  methods: {
+
+    fetchProfileData() {
+      this.$q.loading.show({ delay: 400});
+      Service.getProfileData()
+        .then(response => {
+          let data = response.data["data"];
+          this.base = response.data["base"];
+          this.profileData = data;
+          this.avatar = this.profileData.avatar;
+          console.log("OLA" + typeof this.avatar);
+        }).catch(err => {
+        }).finally(() => {
+          this.$q.loading.hide();
+        })
+    },
+    getImage() {
+      return `http://localhost:5100${this.avatar}`
+    }
+
+  }
+} 
 
 </script>
 
