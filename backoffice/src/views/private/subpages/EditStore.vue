@@ -2,6 +2,7 @@
   <div>
     Edit Store information
     <!-- Update Phone -->
+    
 
     <!-- Update Coordinates -->
     

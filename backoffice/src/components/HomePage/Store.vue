@@ -28,7 +28,7 @@
           {{  this.category }}
         </div>
 
-        <div>{{ this.description }}</div>
+        <div class="break-text">{{ this.description }}</div>
       </v-card-text>
       <v-card-actions>
         <v-btn color="teal accent-4" text @click="open">
@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     open() {
-      // :to="{ name: 'process', params: { id: process._id } }"
       this.$router.push({
         name: "Store",
         params: {
@@ -63,8 +62,10 @@ export default {
     },
 
     getRandomPhoto() {
-      if(this.photos.length > 0) {
-        return `${this.base}${this.photos[0].url}`
+      let numberOfPhotos = this.photos.length;
+      if(numberOfPhotos > 0) {
+        let index = Math.floor(Math.random() * numberOfPhotos);
+        return `${this.base}${this.photos[index].url}`;
       }
     }
   }
@@ -72,5 +73,11 @@ export default {
 </script>
 
 <style scoped>
-
+.break-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 </style>
