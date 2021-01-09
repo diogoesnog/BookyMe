@@ -26,7 +26,7 @@ export default {
     password: "Password",
     confirmPassword: "Confirm Password",
     passwordFail: "The passwords don't match",
-
+    required: "This is mandatory",
     registerAccount: "Sign-Up",
 
     alreadyHasAccount: "Already have an account?",

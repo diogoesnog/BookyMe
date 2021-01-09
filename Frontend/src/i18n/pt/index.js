@@ -27,7 +27,7 @@
     password: "Password",
     confirmPassword: "Confirmar Password",
     passwordFail: "Palavras-passe diferentes",
-
+    required: "Password é obrigatória",
     registerAccount: "Criar Conta",
 
     alreadyHasAccount: "Já possui uma conta?",
