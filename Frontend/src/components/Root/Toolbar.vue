@@ -16,8 +16,8 @@
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Favorites</span>
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
-                <q-icon name="fas fa-user" style="font-size: 23px"/>
-                <img :src="getImage()">
+                <q-icon name="img:getImage()" style="font-size: 23px"/>
+                
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Profile</span>
               </q-route-tab>
           </q-tabs>
