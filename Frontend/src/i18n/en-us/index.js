@@ -71,7 +71,10 @@ export default {
     editData: "Edit Data",
     security: "Security",
     changePassword: "Change Password",
-    signout: "Sign-Out"
+    signout: "Sign-Out",
+    cancel: "Cancel",
+    save: "Save",
+    passwordTest: "Different Passwords"
   },
 
   // Reservations

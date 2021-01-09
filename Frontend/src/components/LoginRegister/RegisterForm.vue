@@ -64,20 +64,20 @@
 
         <!-- Quinta Linha Tabela (Password e Confirmar Password) -->
         <div class="col-6" style="padding: 10px">
-          <q-input class="shadow" rounded outlined :label="$t('registerPage.password')" v-model="user.password" type="password" color="#2897e3">
-            <template v-slot:prepend>
-              <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
+          <q-input class="shadow" rounded outlined :label="$t('registerPage.password')"  v-model="confirmpassword"  :type="isPwd ? 'password' : 'text'" color="#2897e3">
+            <template v-slot:append>
+              <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
             </template>
           </q-input>
         </div>
         <div class="col-6" style="padding: 10px">
-          <q-input class="shadow" rounded outlined :label="$t('registerPage.confirmPassword')" v-model="user.password" type="confirmpassword" color="#2897e3">
+          <q-input class="shadow" rounded outlined :label="$t('registerPage.confirmPassword')" v-model="user.password" type="password" color="#2897e3" :rules="[val=> val == confirmpassword ]">
             <template v-slot:prepend>
               <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
             </template>
           </q-input>
         </div>
-
+       
         <!-- Sexta Linha Tabela (Botão Criar Conta) -->
         <div class="col-12" style="margin-left: auto; margin-right: auto; padding: 10px;">
           <q-btn size="17px" class="shadow gradientBlue button" rounded @click="handleRegister">
@@ -98,6 +98,8 @@ export default {
   name: "Register",
   data() {
     return {
+      isPwd: true,
+      confirmpassword: '',
       user: new User()
     }
   },
@@ -111,7 +113,7 @@ export default {
           console.log("Sucess");
           this.$q.notify({
             type: 'positive',
-            message: `Regist Successful. New user created with id ${data.data._id}`
+            message: `Regist Successful.`
           });
         })
         .catch(err => {

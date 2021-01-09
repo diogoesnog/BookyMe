@@ -71,7 +71,10 @@
     editData: "Editar Dados",
     security: "Segurança",
     changePassword: "Alterar Password",
-    signout: "Terminar Sessão"
+    signout: "Terminar Sessão",
+    cancel: "Cancelar",
+    save: "Salvar",
+    passwordTest: "Passwords Diferentes"
   },
 
   // Reservations
