@@ -1,13 +1,8 @@
 <template>
     <div style="color: #434343;" class="centerDiv">
       <div class="row" style="margin: 20px;">
-        <div class="col-10" style="display: flex; align-items: center;">
+        <div class="col-12" style="display: flex; align-items: center;">
           <q-btn to="../home" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
-        </div>
-        <div class="col-2" style="text-align: right;">
-          <q-avatar class="shadow">
-            <img src="https://cdn.quasar.dev/img/avatar.png">
-          </q-avatar>
         </div>
       </div>
       <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{$t('categoriesPage.title')}}</p>
@@ -23,8 +18,11 @@
             </div>
           </div>
           <div class="col-2" style="text-align: right;">
-            <!-- TODO: Fazer os ícones consoante a categoria -->
-              <q-btn v-bind:to="'stores/' + category.title" size='20px' padding="6px 6px" class="gradientOne shadow" round :icon="nameIcon(category.title)"/>
+            <q-avatar class="shadow gradientOne">
+              <router-link v-bind:to="'stores/' + category.title">
+                <img style="height: 30px" :src="nameIcon(category.title)"/>
+              </router-link>
+          </q-avatar>
           </div>
         </div>
       </div>
@@ -68,7 +66,7 @@ export default {
     },
 
     nameIcon(category) {
-      return "img:icons/categories/" + category + ".svg";
+      return "../../../icons/categories/" + category + ".svg";
     }
   }
 }
