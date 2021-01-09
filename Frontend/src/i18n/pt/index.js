@@ -26,6 +26,7 @@
     postalCode: "Cód. Postal",
     password: "Password",
     confirmPassword: "Confirmar Password",
+    passwordFail: "Palavras-passe diferentes",
 
     registerAccount: "Criar Conta",
 

@@ -25,6 +25,7 @@ export default {
     postalCode: "Zip Code",
     password: "Password",
     confirmPassword: "Confirm Password",
+    passwordFail: "The passwords don't match",
 
     registerAccount: "Sign-Up",
 
