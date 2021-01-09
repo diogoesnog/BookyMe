@@ -12,7 +12,7 @@
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'HomeStore', params: {id: $route.params.id}}">Home</router-link>
+            <router-link :to="{name: 'HomeStore', params: {id: this.$route.params.id}}">Home</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -42,7 +42,7 @@
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'EditStore', params: {id: $route.params.id}}">Store Settings</router-link>
+            <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">Store Settings</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -59,7 +59,7 @@
       <div class="split"></div>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block>
+          <v-btn @click="logout" block>
             Logout
           </v-btn>
         </div>
@@ -69,10 +69,18 @@
 </template>
 
 <script>
+import AuthService from '../../service/auth.service';
 export default {
   name: "Navbar",
+  data() {
+    return {
+      id: this.$route.params.id,
+    }
+  },
   methods: {
-
+    logout() {
+      AuthService.logout();
+    }
   }
 }
 </script>

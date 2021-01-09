@@ -25,9 +25,17 @@ class Services {
     updateDescription(id, description) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores/${id}`);
 
-        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/description`, {
             description: description
         });
+    }
+    updatePhone(id, phone) {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/phone`, {
+            phone: phone
+        });
+    }
+    updateAddress(id, address) {
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/address`, address);
     }
 
     getStores() {

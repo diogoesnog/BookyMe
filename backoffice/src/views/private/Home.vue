@@ -5,7 +5,7 @@
     <h2 class="text-center">Choose The Store</h2>
 
     <div class="horizontal-stack">
-      <Store v-for="(store, index) in stores" :key="index" v-bind="store" class="store-container"></Store>
+      <Store v-for="(store, index) in stores" :key="index" v-bind="store" :base="base" class="store-container"></Store>
     </div>
 
   </div>
@@ -22,7 +22,8 @@ export default {
   },
   data() {
     return {
-      stores: Array
+      stores: Array,
+      base: String
     }
   },
 
@@ -36,6 +37,7 @@ export default {
       Service.getStores()
         .then(response => {
           this.stores = response.data["data"];
+          this.base = response.data.base;
 
           console.log(this.stores);
         }).catch(err => {
