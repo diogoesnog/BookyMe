@@ -9,12 +9,12 @@
       <div style="padding-top: 5px;">
         <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
-            <div style="font-weight: 600; font-size: 15px;">
+            <div style="font-weight: 600; font-size: 18px;">
               {{ category.title }}
             </div>
-            <span style="display:inline-block; width: 4px;"/>
-            <div style="font-weight: 400; font-size: 15px;">
-              {{ category.count }} Resultado(s)
+            <span style="display:inline-block; width: 5px;"/>
+            <div style="font-weight: 350; font-size: 17px;">
+              {{ resultsText(category.count) }}
             </div>
           </div>
           <div class="col-2" style="text-align: right;">
@@ -67,6 +67,11 @@ export default {
 
     nameIcon(category) {
       return "../../../icons/categories/" + category + ".svg";
+    },
+
+    resultsText(numberResults) {
+      if(numberResults == 1) return numberResults + " Resultado";
+      else return numberResults + " Resultados";
     }
   }
 }
