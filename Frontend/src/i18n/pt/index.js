@@ -26,7 +26,8 @@
     postalCode: "Cód. Postal",
     password: "Password",
     confirmPassword: "Confirmar Password",
-
+    passwordFail: "Palavras-passe diferentes",
+    required: "Password é obrigatória",
     registerAccount: "Criar Conta",
 
     alreadyHasAccount: "Já possui uma conta?",
@@ -71,7 +72,10 @@
     editData: "Editar Dados",
     security: "Segurança",
     changePassword: "Alterar Password",
-    signout: "Terminar Sessão"
+    signout: "Terminar Sessão",
+    cancel: "Cancelar",
+    save: "Salvar",
+    passwordTest: "Passwords Diferentes"
   },
 
   // Reservations

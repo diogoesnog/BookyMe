@@ -1,12 +1,7 @@
 <template>
   <div style="color: #434343;" class="centerDiv">
-      <div class="row" style="margin: 20px;">
-        <div class="col-12" style="display: flex; align-items: center;">
-          <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
-        </div>
-      </div> 
       <div class="row" style="margin: 20px; padding-top:10px;">
-        <div class="col-10" style="text-align: left;">
+        <div class="col-10" style="">
           <p>
             <span style="font-weight: 670; font-size: 45px;">
               {{$t('favoritesPage.title')}}
@@ -17,7 +12,7 @@
             </span>
           </p>
         </div>
-        <div class="col-2" style="text-align: right;">
+        <div class="col-2" style="padding-left: 15px; display: flex; align-items: center; justify-content: center;">
           <q-btn
             round
             class="filterAvatar"

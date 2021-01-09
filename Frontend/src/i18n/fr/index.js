@@ -66,7 +66,10 @@ export default {
     editData: "Modifier Information",
     security: "Sécurité",
     changePassword: "Changer Mot de Passe",
-    signout: "Se Déconnecter"
+    signout: "Se Déconnecter",
+    cancel: "Annuler",
+    save: "Enregistrer",
+    passwordTest: "Mots de Passe Différents"
   },
 
   // Reservations
