@@ -1,9 +1,9 @@
-<template>     
-    <div>  
+<template>
+    <div>
       <q-layout>
         <q-footer reveal>
           <q-tabs style="padding: 5px;" align="justify" class="bg-white shadow-2 qTab" indicator-color="transparent" active-color="blue">
-              <q-route-tab to="/home" exact>   
+              <q-route-tab to="/home" exact>
                 <q-icon name="fas fa-home" style="font-size: 23px"/>
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Home</span>
               </q-route-tab>
@@ -17,10 +17,10 @@
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
                 <q-icon name="fas fa-user" style="font-size: 23px"/>
-                <img :src="getImage()"> 
+                <img :src="getImage()">
                 <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Profile</span>
               </q-route-tab>
-          </q-tabs>   
+          </q-tabs>
         </q-footer>
       </q-layout>
    </div>
@@ -28,10 +28,10 @@
 
 <script>
 
-import Service from '../../services/auth.service';
+import UserService from '../../services/user.service.js';
 
 export default {
-  
+
   name: "Profile",
 
   data() {
@@ -51,25 +51,24 @@ export default {
   methods: {
 
     fetchProfileData() {
-      this.$q.loading.show({ delay: 400});
-      Service.getProfileData()
+      //this.$q.loading.show({ delay: 400});
+      UserService.getProfileData()
         .then(response => {
           let data = response.data["data"];
           this.base = response.data["base"];
           this.profileData = data;
-          this.avatar = this.profileData.avatar;
-          console.log("OLA" + typeof this.avatar);
+          this.avatar = this.profileData["avatar"];
         }).catch(err => {
         }).finally(() => {
           this.$q.loading.hide();
         })
     },
     getImage() {
-      return `http://localhost:5100${this.avatar}`
+      return `http://localhost:5200${this.avatar}`
     }
 
   }
-} 
+}
 
 </script>
 

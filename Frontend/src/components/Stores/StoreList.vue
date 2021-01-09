@@ -9,7 +9,7 @@
         <div class="row" style="margin-top: -2px;">
           <div class="col-9" style="text-align: left; margin-top: -5px; display: inline-grid; line-height: 25px;">
             <span style="font-weight: 670; display: inline-block; width: 220px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 22px;">
-              {{ this.name }}     
+              {{ this.name }}
             </span>
             <span>
               {{ this.address.city }}
@@ -19,10 +19,10 @@
             <div class="divRating shadow">
               <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
                 <span style="font-weight: 670; font-size: 18px; display: inline-block; vertical-align: middle;">
-                  {{roundRating(this.rating)}}<span style="font-weight: 200; font-size: 18px;">/5</span>  
+                  {{roundRating(this.rating)}}<span style="font-weight: 200; font-size: 18px;">/5</span>
                 </span>
                 <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
-              </p>  
+              </p>
             </div>
           </div>
         </div>
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import Service from '../../services/user.service'
 export default {
 
   name: "StoreList",
@@ -91,8 +90,7 @@ export default {
 }
 
 .shadow {
-  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 28px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 28px;
 }
 
