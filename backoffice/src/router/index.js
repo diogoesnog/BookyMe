@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import user from '../store/user';
 
 Vue.use(VueRouter);
 
@@ -61,40 +60,18 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-
-  /*console.log("Going To", to);
-  let hasFavorites = user.getters.hasFavorites,
-      hasStores = user.getters.hasStores;
-
-  let cookie = getCookie();
-
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-    if(cookie == null) {
-      next('/');
-    } else {
-      if( hasStores ) {
-        next();
-      } else {
-        next('/register/store');
-      }
-    }
-  } else {
-    next();
-  }*/
   console.log("Going to ", to);
-  let user = getUser(),
-      cookie = getCookie();
-  console.log("user", user);
+  let cookie = getCookie();
   console.log("Cookie", cookie);
   // Route Requires Auth
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    if(user != null && cookie != null) {
+    if(cookie != null) {
       if(to.matched.some(record => record.meta.requiresStores)) {
-        if(user.stores.length > 0) {
-          // window.alert("User Stores > 0");
+        let hasStores = getStores() > 0;
+        console.log("Has Stores: ", hasStores);
+        if(hasStores) {
           next();
         } else {
-          // If user is not owner of stores, create one...
           next('/register/store');
         }
       } else {
@@ -110,8 +87,8 @@ router.beforeEach((to, from, next) => {
 });
 
 
-function getUser() {
-  return JSON.parse(localStorage.getItem("user"));
+function getStores() {
+  return JSON.parse(localStorage.getItem("stores"));
 }
 
 function getCookie() {

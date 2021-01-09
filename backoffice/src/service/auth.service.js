@@ -13,7 +13,7 @@ export default {
 
                 cookies.set('Authorization', cookie);
 
-                localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.setItem('stores', JSON.stringify(data.user.stores.length));
 
                 return data.user;
             });
