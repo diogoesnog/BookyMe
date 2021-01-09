@@ -67,7 +67,7 @@
           <q-input class="shadow" rounded outlined :label="$t('registerPage.password')"
                    v-model="firstPassword"
                    :type="isPwd ? 'password' : 'text'"
-                   color="#2897e3">
+                   color="#2897e3" :rules="Required">
             <template v-slot:append>
               <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
             </template>
@@ -77,7 +77,7 @@
         <div class="col-6" style="padding: 10px">
           <q-input class="shadow" rounded outlined :label="$t('registerPage.confirmPassword')"
                    type="password" color="#2897e3" v-model="user.password"
-                   :rules="[val => val === firstPassword || $t('registerPage.passwordFail')]">
+                   :rules="ConfirmPassword">
             <template v-slot:prepend>
               <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
             </template>
@@ -128,6 +128,18 @@ export default {
           });
         })
       console.groupEnd();
+    }
+  },
+
+  computed: {
+    ConfirmPassword() {
+      return [
+        v => !!v || this.$t('registerPage.required'),
+        v => v === this.firstPassword || this.$t('registerPage.passwordFail')
+      ]
+    },
+    Required() {
+      return [v => !!v || this.$t('registerPage.required')]
     }
   }
 }
