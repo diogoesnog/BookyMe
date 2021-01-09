@@ -7,8 +7,6 @@
     <v-container grid-list-lg>
       <Calendar></Calendar>
     </v-container>
-
-
   </div>
 </template>
 
