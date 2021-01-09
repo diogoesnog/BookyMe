@@ -12,8 +12,8 @@
                 <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Book.svg">
               </q-route-tab>
               <q-route-tab to="/favorites" exact>
-                <img v-if="checkPage('/favorites') == 1" style="height: 29px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
-                <img v-else style="height: 29px;" src="../../assets/Icons/Toolbar/Favorites.svg">
+                <img v-if="checkPage('/favorites') == 1" style="height: 30px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
+                <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
                 <div >
