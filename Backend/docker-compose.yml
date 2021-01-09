@@ -51,6 +51,21 @@ services:
       - bookyme-network
     depends_on:
       - mongo-stores
+      
+  bookingservice:
+    container_name: booking-service
+    restart: always
+    env_file:
+      - ./Environment/BookingService.env
+    build: ./Booking
+    ports: 
+      - "5400:5400"
+    volumes:
+      - /backend/booking
+    networks:
+      - bookyme-network
+    depends_on:
+      - mongo-booking
 
   # Databases
   # User Service
@@ -79,6 +94,18 @@ services:
       - bookyme-network
     ports:
       - "3221:3221"
+      
+  mongo-booking:
+    container_name: mongo-booking
+    restart: on-failure
+    image: mongo
+    command: mongod --port 3222
+    volumes:
+      - data-volume:/data-db
+    networks:
+      - bookyme-network
+    ports:
+      - "3222:3222"
 
   # Mongo Seeders
   users-seed:
@@ -140,6 +167,21 @@ services:
       - ./seed/reviews.json:/data/reviews.json:ro
     command:
         "mongoimport --host mongo-stores --port 3221 --db BookymeStores --type json --file /data/reviews.json --jsonArray"
+        
+  #booking-seed:
+    #image: fvilers/mongo-seed
+    #networks:
+      #- bookyme-network
+    #container_name: booking-seed
+    #environment:
+      #- MONGO_HOST=mongo-booking
+      #- MONGO_PORT=3222
+    #depends_on:
+      #- mongo-booking
+    #volumes:
+      #- ./seed/booking.json:/data/booking.json:ro
+    #command:
+        #"mongoimport --host mongo-booking --port 3222 --db BookymeBooking --type json --file /data/booking.json --jsonArray"
 
 
 volumes:
