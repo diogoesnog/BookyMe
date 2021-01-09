@@ -91,7 +91,7 @@ export default {
 }
 
 .shadow {
-  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
   border-radius: 28px;
   border-radius: 28px;
 }
