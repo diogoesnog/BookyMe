@@ -10,7 +10,7 @@
         >
           <v-card-title
           >
-            <span class="title">Reservas 1</span>
+            <span class="title">Reservas Atuais</span>
           </v-card-title>
         </v-card>
       </v-col>
@@ -22,7 +22,7 @@
             tile
         >
           <v-card-title>
-            <span class="title">Reservas 2</span>
+            <span class="title">Reservas Concluídas</span>
           </v-card-title>
         </v-card>
       </v-col>
@@ -34,7 +34,7 @@
             tile
         >
           <v-card-title>
-            <span class="title">Reservas 3</span>
+            <span class="title">Reservas Canceladas</span>
           </v-card-title>
         </v-card>
       </v-col>
@@ -46,7 +46,7 @@
             tile
         >
           <v-card-title>
-            <span class="title">Reservas 4</span>
+            <span class="title">Média Total de Reservas por dia</span>
           </v-card-title>
         </v-card>
       </v-col>
@@ -59,6 +59,12 @@ export default {
   name: "Cards"
 
 }
-
 </script>
 
+
+<style scoped>
+  .title{
+    color: ghostwhite;
+
+  }
+</style>
