@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card class="mx-auto">
-      <v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
+      <v-img height="300" width="500" :src="getRandomPhoto()"></v-img>
       <v-card-title>
         {{ this.name }}
       </v-card-title>
@@ -47,8 +47,9 @@ export default {
     name: String,
     category: String,
     description: String,
-    rating: Number
-    /*logo: String*/
+    rating: Number,
+    base: String,
+    photos: Array
   },
   methods: {
     open() {
@@ -59,6 +60,12 @@ export default {
           id: this._id
         }
       })
+    },
+
+    getRandomPhoto() {
+      if(this.photos.length > 0) {
+        return `${this.base}${this.photos[0].url}`
+      }
     }
   }
 }

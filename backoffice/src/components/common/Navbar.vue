@@ -59,7 +59,7 @@
       <div class="split"></div>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block>
+          <v-btn @click="logout" block>
             Logout
           </v-btn>
         </div>
@@ -69,10 +69,13 @@
 </template>
 
 <script>
+import AuthService from '../../service/auth.service';
 export default {
   name: "Navbar",
   methods: {
-
+    logout() {
+      AuthService.logout();
+    }
   }
 }
 </script>

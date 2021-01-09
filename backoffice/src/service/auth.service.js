@@ -6,9 +6,8 @@ export default {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/login`, user)
             .then(response => {
                 let headers = response.headers;
-                let data = response.data.data;
-                console.log("Auth Service - Setting Cookies");
-                console.log(data);
+                let data = response.data[ "data" ];
+
                 let cookie = headers.Authorization || headers.authorization;
 
                 cookies.set('Authorization', cookie);
@@ -21,6 +20,6 @@ export default {
 
     logout: () => {
         cookies.remove('Authorization');
-        // TODO: Redirect to login
+        localStorage.removeItem("stores");
     }
 }
