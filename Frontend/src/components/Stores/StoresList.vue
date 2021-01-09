@@ -5,7 +5,7 @@
       :src="getImage()"
       class="roundBorder shadow"
     >
-      <div class="cardBackground absolute-bottom text-center" @click="redirect(this._id)" style="height:70px">
+      <div class="cardBackground absolute-bottom text-center" @click="redirect()" style="height:70px">
         <div class="row" style="margin-top: -2px;">
           <div class="col-9" style="text-align: left; margin-top: -5px; display: inline-grid; line-height: 25px;">
             <span style="font-weight: 670; display: inline-block; width: 220px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 22px;">
@@ -60,8 +60,8 @@ export default {
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
     },
-    redirect(id) {
-      this.$router.push({name: 'Store', params:{id:id}})
+    redirect() {
+      this.$router.push({name: 'Store', params:{id:this._id}})
     }
   }
 }

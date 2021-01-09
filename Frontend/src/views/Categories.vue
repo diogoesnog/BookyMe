@@ -14,17 +14,17 @@
       <div style="padding-top: 5px;">
         <div style="margin: 20px;" class="row" v-for="(category, index) in categories" :key="index" v-bind="category">
           <div class="col-10 roundedDiv shadow" style="display: flex; align-items: center;">
-            <h7 style="font-weight: 600; font-size: 15px;">
+            <div style="font-weight: 600; font-size: 15px;">
               {{ category.title }}
-            </h7>
+            </div>
             <span style="display:inline-block; width: 4px;"/>
-            <h7 style="font-weight: 400; font-size: 15px;">
+            <div style="font-weight: 400; font-size: 15px;">
               {{ category.count }} Resultado(s)
-            </h7>
+            </div>
           </div>
           <div class="col-2" style="text-align: right;">
             <!-- TODO: Fazer os ícones consoante a categoria -->
-              <q-btn v-bind:to="'stores/' + category.title" size='20px' padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-right"/>
+              <q-btn v-bind:to="'stores/' + category.title" size='20px' padding="6px 6px" class="gradientOne shadow" round :icon="nameIcon(category.title)"/>
           </div>
         </div>
       </div>
@@ -35,8 +35,6 @@
 <script>
 
 import Service from '../services/user.service';
-// TODO: Não se está a utilizar a lista como componente.
-import CategoriesList from '../components/Homepage/CategoriesList';
 import Toolbar from '../components/Root/Toolbar';
 
 export default {
@@ -61,16 +59,16 @@ export default {
 
       Service.getCategories()
         .then(response => {
-          let data = response.data["data"];
-
-          this.categories = data;
-
+          this.categories = response.data["data"];
           console.log(this.categories);
-        }).catch(err => {
-
-        }).finally(() => {
+        }).catch(err => console.log(err)
+        ).finally(() => {
           this.$q.loading.hide();
         })
+    },
+
+    nameIcon(category) {
+      return "img:icons/categories/" + category + ".svg";
     }
   }
 }
@@ -90,8 +88,7 @@ export default {
   }
 
   .shadow {
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 28px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
   }
 
