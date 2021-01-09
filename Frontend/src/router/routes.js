@@ -49,6 +49,14 @@ const routes = [
     }
   },
   {
+    name: "Store",
+    path: '/store',
+    component: () => import('../views/Store'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     name: "Favorites",
     path: '/favorites',
     component: () => import('../views/Favorites'),
