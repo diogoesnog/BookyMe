@@ -56,7 +56,7 @@
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
           <q-form  class="q-gutter-md">
-              <q-input borderless v-model="name" style="height: 30px;" type="text" :disable="readOnly">
+              <q-input borderless v-model="editUser.name" style="height: 30px;" type="text" :disable ="!editavel">
                 <template v-slot:prepend>
                     <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
                 </template>
@@ -66,7 +66,7 @@
         <!-- Nome de Utilizador -->
         <div style="margin-left: 10px;">
           <q-form  class="q-gutter-md">
-          <q-input borderless v-model="username" style="height: 30px;" :disable = "!editavel">
+          <q-input borderless v-model="editUser.username" style="height: 30px;" :disable ="!editavel">
             <template v-slot:prepend>
               <span style="font-size: 28px; font-weight:350">#</span>
             </template>
@@ -75,7 +75,7 @@
         </div>
         <!-- Email -->
         <div style="margin-left: 10px;">
-          <q-input borderless v-model="email" style="height: 30px;" :disable = "!editavel" >
+          <q-input borderless v-model="editUser.email" style="height: 30px;" :disable ="!editavel" >
             <template v-slot:prepend>
               <span style="font-size: 20px; font-weight:350">@</span>
             </template>
@@ -87,13 +87,13 @@
             <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; "/>
           </div>
           <div class="col-11" style="padding-left: 15px">
-            <q-input borderless v-model="address" style="height: 30px;" :disable = "editavel"/>
+            <q-input borderless v-model="editUser.address" style="height: 30px;" :disable ="!editavel"/>
             <div class = "row" style="margin-top: -10px;">
               <div class= "col-3">
-                <q-input borderless v-model="zipCode" style="height: 30px;" :disabled = "editavel"/> 
+                <q-input borderless v-model="editUser.zipCode" style="height: 30px;" :disable ="!editavel"/> 
               </div>
               <div class= "col-9">
-                <q-input borderless v-model="city" style="height: 30px;" :disabled = "editavel"/>
+                <q-input borderless v-model="editUser.city" style="height: 30px;" :disable ="!editavel"/>
               </div>  
             </div>
           </div>
@@ -145,22 +145,27 @@ export default {
 
   data () {
     return {
-      readOnly: true,
       texto: '',
-      editavel: true,
+      editavel: false,
       esconde:false,
       atualizados: [],
       editUser: new User(),
     }
   },
 
-  mounted() {
+ /*  mounted() {
     console.log("LoginForm Mounted");
-      
-    this.editUser = new User(this.user);
+ 
+    this.editUser = new User(this.name, this.username, this.email, this.address, this.city, this.zipCode);
                          
 
+  }, */
+
+  created(){
+     this.editUser = new User();
   },
+
+
 
   methods: {
     //TODO: método que edita a info e a pass 
@@ -187,6 +192,7 @@ export default {
       Service.updateAccount(this.user)
         .then(response => {
           let data = response.data;
+         
           console.log("Sucess");
           this.$q.notify({
             type: 'positive',
