@@ -48,7 +48,7 @@
         </div>
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
-          <q-input borderless v-model="this.name" style="height: 32px;" type="text">
+          <q-input borderless v-model="this.name" style="height: 30px;" type="text">
              <template v-slot:prepend>
                 <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
              </template>
@@ -57,7 +57,7 @@
         <!-- Nome de Utilizador -->
         <div style="margin-left: 10px;">
           <q-form  class="q-gutter-md">
-          <q-input borderless v-model="this.username" style="height: 32px;">
+          <q-input borderless v-model="this.username" style="height: 30px;">
             <template v-slot:prepend>
               <span style="font-size: 28px; font-weight:350">#</span>
             </template>
@@ -75,7 +75,7 @@
         <!-- Morada -->
         <div class="row">
           <div class="col-1" style="display: flex; justify-content: left; align-items: center; padding: 10px;">
-            <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; font-weight:350"/>
+            <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; "/>
           </div>
           <div class="col-11" style="padding-left: 15px">
             <q-input borderless v-model="this.address" style="height: 30px;"/>
