@@ -16,12 +16,10 @@
                 <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
-                <div >
-                  <q-avatar class="shadow" size="lg">
-                    <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3;" :src="getImage()">
-                    <img v-else style="border: 3px solid #434343;" :src="getImage()">
-                  </q-avatar>
-                </div>
+                <q-avatar class="shadow" size="lg">
+                  <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3;" :src="getImage()">
+                  <img v-else style="border: 3px solid #434343;" :src="getImage()">
+                </q-avatar>
               </q-route-tab>
           </q-tabs>
         </q-footer>
