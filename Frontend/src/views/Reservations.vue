@@ -60,8 +60,8 @@ export default {
       Service.getBookingUser()
         .then(response => {
           let data = response.data["data"];
-
           this.reservations = data;
+          console.log("IO");
           console.log(data);
         }).catch(err => {
           console.log(err)

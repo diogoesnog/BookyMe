@@ -70,6 +70,10 @@
 export default {
   name: "StoreRatings",
 
+  data() {
+
+  },
+  
   props: {
     rating: Number
   },

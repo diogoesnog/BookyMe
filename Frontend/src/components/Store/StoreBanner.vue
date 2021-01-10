@@ -79,6 +79,7 @@ export default {
         .then(response => {
           let data = response.data["data"];
           this.reservationsUser = data;
+          console.log(this.reservationsUser);
         }).catch(err => {
           console.log(err)
         }).finally(() => {

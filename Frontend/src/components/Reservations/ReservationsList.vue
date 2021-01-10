@@ -38,7 +38,6 @@ export default {
 
   data() {
     return {
-      reservations: Array
     }
   }
 }
