@@ -25,7 +25,8 @@ export default {
     postalCode: "Zip Code",
     password: "Password",
     confirmPassword: "Confirm Password",
-
+    passwordFail: "The passwords don't match",
+    required: "This is mandatory",
     registerAccount: "Sign-Up",
 
     alreadyHasAccount: "Already have an account?",
@@ -71,7 +72,10 @@ export default {
     editData: "Edit Data",
     security: "Security",
     changePassword: "Change Password",
-    signout: "Sign-Out"
+    signout: "Sign-Out",
+    cancel: "Cancel",
+    save: "Save",
+    passwordTest: "Different Passwords"
   },
 
   // Reservations

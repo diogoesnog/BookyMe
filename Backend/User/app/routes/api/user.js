@@ -216,7 +216,9 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
     let imagePath = `/public/${userId}/${req.file.originalname}`;
 
     Users.updatePhoto(userId, imagePath)
-        .then(data => {
+        .then(dataTemp => {
+            let data = dataTemp.toObject();
+            delete data.password;
             response = Response.CREATED(data);
             res.status(response.status).json(response);
         }).catch(err => {

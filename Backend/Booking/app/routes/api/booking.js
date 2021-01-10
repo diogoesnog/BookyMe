@@ -100,7 +100,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     let weekService = new Date(booking.serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
     weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
     try {
-        schedule = (await Store.getSchedule(req.storeId, weekService)).data.data.schedule["0"];
+        schedule = (await Store.getSchedule(booking.storeId, weekService)).data.data.schedule["0"];
     } catch {
         const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
         res.status(response.status).jsonp(response);
