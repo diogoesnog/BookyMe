@@ -174,7 +174,7 @@ app.post('/', (req, res) => {
 
     const store = {
         name: req.body.name,
-        verified: true,
+        verified: false,
         category: req.body.category,
         description: req.body.description,
         address: address
