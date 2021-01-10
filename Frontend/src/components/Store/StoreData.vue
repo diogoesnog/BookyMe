@@ -103,10 +103,10 @@ export default {
   .divTop1{
     position: absolute;
     width: 100%;
-    height: 35%;
+    height: 30%;
     top: 0;
-    border-bottom-left-radius: 60%;
-    border-bottom-right-radius: 60%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
     background-size: cover;
     background-position: center top;
   }
@@ -116,8 +116,8 @@ export default {
     width: 100%;
     height: 100%;
     top: 0;
-    border-bottom-left-radius: 60%;
-    border-bottom-right-radius: 60%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
     background-image: linear-gradient(#1ba0d4, #1b9fd4ab, #168ab80e);
   }
 
@@ -141,7 +141,7 @@ export default {
     border-radius: 100px;
     position: absolute;
     left: 50%;
-    top: 85%;
+    top: 100%;
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translate(-50%,-50%);
