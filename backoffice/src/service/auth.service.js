@@ -10,7 +10,7 @@ export default {
 
                 let cookie = headers.Authorization || headers.authorization;
 
-                cookies.set('Authorization', cookie);
+                cookies.set('Authorization', cookie, "1h");
 
                 localStorage.setItem('stores', JSON.stringify(data.user.stores.length));
 
