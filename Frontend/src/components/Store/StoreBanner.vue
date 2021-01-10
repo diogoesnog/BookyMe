@@ -1,5 +1,4 @@
 <template>
-  <!-- Div Cima (Photo + Info Base) -->
   <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
     <div class="divTop2">
       <div class="infoName">
@@ -43,7 +42,7 @@ import Service from '../../services/user.service';
 
 export default {
   name: "StoreBanner",
-  
+
   data() {
     return {
       reservationsUser: Array,

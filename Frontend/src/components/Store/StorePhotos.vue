@@ -1,5 +1,4 @@
 <template>
-  <!-- Scrolling Div Photos -->
   <div class="col-12" style="padding-left: 30px">
     <p class="titles">{{$t('storePage.photos')}}</p>
     <div class="wrapper">
