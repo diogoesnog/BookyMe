@@ -1,11 +1,12 @@
 const Booking = require('../models/booking.js');
 
-module.exports.createBooking = ({bookingDate, serviceDate, userId, storeId}) => {
+module.exports.createBooking = ({bookingDate, serviceDate, userId, storeId, city}) => {
     const newBooking = new Booking({
         bookingDate : bookingDate,
         serviceDate : serviceDate,
         userId : userId,
-        storeId : storeId
+        storeId : storeId,
+        city: city
     });
 
     return newBooking.save();
@@ -20,7 +21,14 @@ module.exports.getBookingsByStore = (id) => {
 };
 
 module.exports.getBookingsByUser = (id) => {
-    return Booking.find({userId: id});
+    return Booking.aggregate([
+        {
+            $match : { "userId": id }
+        },
+        {
+            $group : { _id : "$city", booking: { $push: "$$ROOT" } }
+        }
+    ])
 };
 
 module.exports.getPopularStoreList = () => {

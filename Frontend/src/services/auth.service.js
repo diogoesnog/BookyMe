@@ -13,7 +13,7 @@ export default {
         console.log(data);
         let cookie = headers.Authorization || headers.authorization;
 
-        cookies.set('Authorization', cookie);
+        cookies.set('Authorization', cookie, "1h");
 
         localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -21,7 +21,9 @@ export default {
   },
 
   logout: () => {
+    
     cookies.remove('Authorization');
     // TODO: Redirect to login
+    
   }
 }

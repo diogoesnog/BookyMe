@@ -83,12 +83,21 @@ app.get('/popular', checkAuth, (req, res) => {
  * {serviceDate}: Date
  */
 app.post('/:storeId', checkAuth, async (req, res) => {
+    let city;
+    try {
+        city = (await Store.getStore(req.params.storeId)).data.data.category;
+        console.log(city);
+    } catch (err) {
+        const response = Response.INTERNAL_ERROR(err, "Error Getting Store's City");
+        res.status(response.status).jsonp(response);
+    }
 
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
         serviceDate: new Date(req.body.serviceDate).toISOString(),
         userId: req.user.id,
-        storeId: req.params.storeId
+        storeId: req.params.storeId,
+        city: "Lisboa"
     };
 
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
@@ -100,8 +109,13 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     let weekService = new Date(booking.serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
     weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
     try {
-        schedule = (await Store.getSchedule(req.storeId, weekService)).data.data.schedule["0"];
-    } catch {
+        schedule = (await Store.getSchedule(booking.storeId, weekService)).data.data.schedule["0"];
+    } catch (err) {
+        const response = Response.INTERNAL_ERROR(err);
+        res.status(response.status).jsonp(response);
+    }
+
+    if (schedule == null) {
         const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
         res.status(response.status).jsonp(response);
     }

@@ -54,21 +54,26 @@ module.exports.insertSchedule = (store, schedule) => {
 
 module.exports.updateDescription = (store, description) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/description`);
+
     request.isJson();
-    // TODO: change from post to patch on service
-    return request.post(description);
+    request.acceptJson();
+
+    return request.put(description);
 }
 
 module.exports.updateAddress = (store, address) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/address`);
+
     request.isJson();
-    // TODO: change from post to patch on service
+    request.acceptJson();
+
     return request.post(address);
 }
 
 module.exports.updatePhone = (store, phone) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/phone`);
     request.isJson();
+    request.acceptJson();
     return request.put(phone);
 }
 

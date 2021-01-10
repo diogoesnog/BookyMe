@@ -1,6 +1,7 @@
 // Express Server Framework
 const express = require('express');
 const app = express();
+const path = require('path');
 
 // Server Addons
 // Parsers
@@ -43,7 +44,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Public Files location
-app.use(express.static('./app/public'));
+let publicPath = path.join(__dirname, '../app/public')
+app.use('/public', express.static(publicPath) );
 
 // Configure CORS middleware
 const corsOptions = {

@@ -36,15 +36,19 @@ router.get('/user', checkAuth, (req, res) => {
 router.get('/popular', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
-    Booking.getPopularStores(token, req.params.id)
+    Booking.getPopularStores(token)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 // Store ID
-// TODO: Reserva da loja, a ser alterado
 router.post('/:id', (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+    let body = JSON.stringify(req.body);
 
+    Booking.createBooking(token, body, req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 
@@ -56,9 +60,13 @@ router.delete('/:id', (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: Alteração da reserva, a ser alterado
 router.put('/:id', (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+    let body = JSON.stringify(req.body);
 
+    Booking.changeReservation(token, body, req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
 module.exports = router;

@@ -17,6 +17,9 @@ const bookingSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    city: {
+        type: String,
+    },
     userId: {
         type: String,
         required: true

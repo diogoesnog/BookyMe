@@ -64,9 +64,12 @@ export default {
   profilePage: {
     personalDetails: "Détails Personnels",
     editData: "Modifier Information",
-    security: "Segurança",
+    security: "Sécurité",
     changePassword: "Changer Mot de Passe",
-    signout: "Se Déconnecter"
+    signout: "Se Déconnecter",
+    cancel: "Annuler",
+    save: "Enregistrer",
+    passwordTest: "Mots de Passe Différents"
   },
 
   // Reservations
