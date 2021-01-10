@@ -1,8 +1,7 @@
 <template>
   <div class="col-12" >
-    <p class="titles" style="padding-top: 40px; padding-left: 30px">{{$t('storePage.utilInfo')}}</p>
-
-    <l-map style="height: 200px" :zoom="zoom" :center="center">
+    <p class="titles" style="padding-top: 20px; padding-left: 30px">{{$t('storePage.utilInfo')}}</p>
+    <l-map style="height: 200px; margin-bottom: 35px;" :zoom="zoom" :center="center">
       <l-tile-layer :url="urlOM"></l-tile-layer>
       <l-marker :lat-lng="markerLatLng"/>
     </l-map>
