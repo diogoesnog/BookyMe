@@ -6,7 +6,7 @@
       <div class="col-5" style="padding-right: 15px;">
         <div class="row">
           <div class="col-12 ratingTotal1">
-            {{ this.rating }}
+            {{ roundRating(this.rating) }}
           </div>
           <div class="col-12 ratingTotal2">
             <span style="font-weight: 700">Total</span><br/>50
@@ -77,6 +77,9 @@ export default {
   methods: {
     getWidthStars: function(string) {
       return string + "%";
+    },
+    roundRating: function(rating) {
+      return Math.round(rating*10)/10;
     }
   }
 }

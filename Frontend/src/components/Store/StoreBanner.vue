@@ -8,8 +8,8 @@
           </span>
         <br/>
         <span style="font-weight: 300; font-size: 20px;">
-            {{ getReservations() }}
-          </span>
+          {{ getNumberReservations() }}
+        </span>
       </div>
       <div class="infoExtra">
         <div class="row rowStyle">
@@ -46,7 +46,7 @@ export default {
   
   data() {
     return {
-      numberReservations: String
+      reservationsUser: Array,
     }
   },
 
@@ -57,11 +57,11 @@ export default {
     address: Object,
     rating: Number,
     photos: Array,
-    
   },
 
   mounted() {
     console.log("Mounted: View has been rendered");
+    this.getReservations();
   },
 
   methods: {
@@ -76,28 +76,23 @@ export default {
       else return string.substring(0, 15) + "...";
     },
     getReservations() {
-
       Service.getBookingUser()
         .then(response => {
           let data = response.data["data"];
-
-          console.log(data);
-          // Correr Todo o Array
-          var i;
-          for (i = 0; i < data.length; i++) {
-            if(data[i].storeId == this._id) this.numberReservations = (i+1);
-          }
+          this.reservationsUser = data;
         }).catch(err => {
           console.log(err)
         }).finally(() => {
         })
-        
-        if(this.numberReservations == 1) return "1 Reserva"
-        else return this.numberReservations + "Reservas";
     },
-    getName: function(string) {
-      if(string == 1) return "Reserva";
-      else return "Reservas";
+    getNumberReservations() {
+      var numberReservations = "0 ";
+      var i;
+      for (i = 0; i < this.reservationsUser.length; i++) {
+        if(this.reservationsUser[i].storeId == this._id) numberReservations = (i+1);
+      }
+      if(numberReservations == 1) return "1 Reserva"
+      else return numberReservations + "Reservas";
     }
   }
 }
