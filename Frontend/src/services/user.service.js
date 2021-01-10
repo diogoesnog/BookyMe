@@ -54,6 +54,18 @@ class UserService {
     return request.get()
   }
 
+  getBookingUser(){
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/user`)
+    
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.get()
+
+  }
+
   deleteFavorite(id) {
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite/${id}`);
 

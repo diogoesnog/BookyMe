@@ -24,12 +24,22 @@
 </template>
 
 <script>
+
 export default {
   name: "ReservationsList",
 
   props: {
-    title: String,
-    count: Number
+    _id: String,
+    bookingDate: Date,
+    serviceDate: Date,
+    userId: String,
+    storeId: String
+  },
+
+  data() {
+    return {
+      reservations: Array
+    }
   }
 }
 </script>
