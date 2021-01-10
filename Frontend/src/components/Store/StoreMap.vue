@@ -1,12 +1,23 @@
 <template>
   <div class="col-12" >
     <p class="titles" style="padding-top: 20px; padding-left: 30px">{{$t('storePage.utilInfo')}}</p>
-    <l-map style="height: 200px; margin-bottom: 35px;" :zoom="zoom" :center="center">
-      <l-tile-layer :url="urlOM"></l-tile-layer>
-      <l-marker :lat-lng="markerLatLng"/>
-    </l-map>
+    <div>
+      <l-map style="height: 200px; margin-bottom: 35px; position: relative" :zoom="zoom" :center="center">
+        <l-tile-layer :url="urlOM"></l-tile-layer>
+        <l-marker :lat-lng="markerLatLng"/>
+      </l-map>
+      <div class="infoAddress">
+        <span style="font-weight: 670; font-size: 14px; display: inline-block; vertical-align: middle;">
+          {{ this.address.place }}
+        </span>
+        <span style="font-weight: 350; font-size: 14px; display: inline-block; vertical-align: middle;">
+          {{ this.address.zipcode }}, {{ this.address.city }}
+        </span>
+      </div>
+      <div class="infoPhone">
+      </div>
+    </div>
   </div>
-
 </template>
 
 <script>
@@ -18,7 +29,8 @@ export default {
   name: 'StoreMap',
   props: {
     latitude: Number,
-    longitude: Number
+    longitude: Number,
+    address: Object
   },
   components: {
     LMap,
@@ -57,10 +69,35 @@ export default {
 
 <style scoped>
 
-.titles {
-  color: #434343;
-  font-weight: 700;
-  font-size: 30px;
-}
+  .infoAddress {
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    top: 20px;
+    height: 70px;
+    width: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 100px;
+    color: #434343;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+  }
 
-</style>
+  .infoPhone {
+    background: linear-gradient(#e9695c, #e03459);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);   
+    text-align: center;
+    height: 35px;
+    border-radius: 20px; 
+  }
+
+  .titles {
+    color: #434343;
+    font-weight: 700;
+    font-size: 30px;
+  }
+
+  </style>
