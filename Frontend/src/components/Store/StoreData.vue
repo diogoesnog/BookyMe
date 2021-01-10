@@ -39,9 +39,9 @@
     <!-- Div Restante -->
     <div class="divBottom">
       <div class="row">
+        <!-- Scrolling Div Photos -->
         <div class="col-12">
           <p class="titles">{{$t('storePage.photos')}}</p>
-          <!-- Scrolling Div Photos -->
           <div class="wrapper">
             <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
               <div class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
@@ -49,15 +49,38 @@
             <div class="empty"></div>
           </div>
         </div>
+        <!-- Description -->
         <div class="col-12" style="padding-top: 40px;">
           <p class="titles">{{$t('storePage.description')}}</p>
           <p class="text"> {{ this.description }} </p>
         </div>
+        <!-- Mapa -->
         <div class="col-12" style="padding-top: 25px;">
           <p class="titles">{{$t('storePage.utilInfo')}}</p>
         </div>
+        <!-- Ratings -->
+        <div class="col-12" style="padding-top: 25px;">
+          <p class="titles">{{$t('storePage.ratings')}}</p>
+          <div class="row">
+            <!-- Rating Total -->
+            <div class="col-5">
+              <div class="row">
+                <div class="col-12 ratingTotal1">
+                  {{ this.rating }}
+                </div>
+                <div class="col-12 ratingTotal2">
+                  Baseado em <br/> 50 Avaliações
+                </div>
+              </div>
+            </div>
+            <!-- Rating Distributions -->
+            <div class="col-7 allRatings">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -118,7 +141,7 @@ export default {
     top: 0;
     border-bottom-left-radius: 0%;
     border-bottom-right-radius: 0%;
-    background-image: linear-gradient(#1ba0d4, #1b9fd4ab, #168ab80e);
+    background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
   }
 
   .divBottom {
@@ -130,7 +153,7 @@ export default {
   .infoName {
     color: white;
     text-align: center;
-    padding-top: 70px;
+    padding-top: 80px;
   }
 
   .infoExtra {
@@ -183,6 +206,33 @@ export default {
     font-size: 18px;
     text-align: justify;
     width: 93%;
+  }
+
+  .ratingTotal1 {
+    background: linear-gradient(#e9695c, #e03459);
+    height: 95px;
+    width: 95px;
+    border-radius: 150px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 800;
+    font-size: 50px;
+    margin: auto;
+  }
+
+  .ratingTotal2 {
+    color: #434343;
+    font-weight: 300;
+    font-size: 16px;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .allRatings {
+    
   }
 
   .wrapper {
