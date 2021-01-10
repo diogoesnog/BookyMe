@@ -21,7 +21,7 @@
         />
       </div>
     </div>
-      <ReservationsList/>
+      <ReservationsList v-for="(reservation, index) in reservations" :key="index" v-bind="reservation"/>
     <div>
      <Toolbar/>
     </div>
@@ -51,9 +51,22 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
+    this.getBookings();
   },
+
   methods: {
 
+    getBookings() {
+      Service.getBookingUser()
+        .then(response => {
+          let data = response.data["data"];
+
+          this.reservations = data;
+          console.log(data);
+        }).catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 
