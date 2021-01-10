@@ -7,3 +7,11 @@ module.exports.getSchedule = (storeId, day) => {
 
     return request.get();
 }
+
+module.exports.getStore = (storeId) => {
+    let request = new Request(`${process.env.STORE_SERVICE}/stores/${storeId}`);
+
+    request.isJson();
+
+    return request.get();
+}
