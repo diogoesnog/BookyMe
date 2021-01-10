@@ -1,58 +1,58 @@
 <template>
-  <div class="col-12" style="padding-top: 25px;">
-    <p class="titles">{{$t('storePage.ratings')}}</p>
-    <div class="row">
+  <div class="col-12">
+    <p class="titles" style="padding-left: 30px">{{$t('storePage.ratings')}}</p>
+    <div class="row" style="margin: 15px; padding-top: 10px; padding-right: 20px;">
       <!-- Rating Total -->
-      <div class="col-5">
+      <div class="col-5" style="padding-right: 15px;">
         <div class="row">
           <div class="col-12 ratingTotal1">
             {{ this.rating }}
           </div>
           <div class="col-12 ratingTotal2">
-            Baseado em <br/> 50 Avaliações
+            <span style="font-weight: 700">Total</span><br/>50
           </div>
         </div>
       </div>
       <!-- Rating Distributions -->
-      <div class="col-7 allRatings">
+      <div class="col-7 allRatings" style="line-height: 190%;">
         <!-- 5 Stars -->
-        <div class="row">
-          <div class="col-4 numberStars">
-            5 Estrelas
+        <div class="row" style="padding-bottom: 5px;">
+          <div class="col-2 numberStars">
+            5
           </div>
-          <div class="col-8 countStars">
+          <div class="col-10 countStars">
           </div>
         </div>
         <!-- 4 Stars -->
-        <div class="row">
-          <div class="col-4 numberStars">
-            4 Estrelas
+        <div class="row" style="padding-bottom: 5px;">
+          <div class="col-2 numberStars">
+            4
           </div>
-          <div class="col-8 countStars">
+          <div class="col-10 countStars">
           </div>
         </div>
         <!-- 3 Stars -->
-        <div class="row">
-          <div class="col-4 numberStars">
-            3 Estrelas
+        <div class="row" style="padding-bottom: 5px;">
+          <div class="col-2 numberStars">
+            3
           </div>
-          <div class="col-8 countStars">
+          <div class="col-10 countStars">
           </div>
         </div>
         <!-- 2 Stars -->
-        <div class="row">
-          <div class="col-4 numberStars">
-            2 Estrelas
+        <div class="row" style="padding-bottom: 5px;">
+          <div class="col-2 numberStars">
+            2
           </div>
-          <div class="col-8 countStars">
+          <div class="col-10 countStars">
           </div>
         </div>
         <!-- 1 Star -->
         <div class="row">
-          <div class="col-4 numberStars">
-            1 Estrela
+          <div class="col-2 numberStars">
+            1
           </div>
-          <div class="col-8 countStars">
+          <div class="col-10 countStars">
           </div>
         </div>
       </div>

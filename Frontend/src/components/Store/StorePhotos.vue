@@ -1,6 +1,6 @@
 <template>
   <!-- Scrolling Div Photos -->
-  <div class="col-12">
+  <div class="col-12" style="padding-left: 30px">
     <p class="titles">{{$t('storePage.photos')}}</p>
     <div class="wrapper">
       <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">

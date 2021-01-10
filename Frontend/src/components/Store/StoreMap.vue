@@ -1,6 +1,6 @@
 <template>
   <!-- Mapa -->
-  <div class="col-12" style="padding-top: 25px;">
+  <div class="col-12" style="padding-top: 25px; padding-left: 30px">
     <p class="titles">{{$t('storePage.utilInfo')}}</p>
   </div>
 

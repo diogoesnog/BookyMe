@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12" style="padding-top: 40px;">
+  <div class="col-12" style="padding-top: 40px; padding-left: 30px">
     <p class="titles">{{$t('storePage.description')}}</p>
     <p class="text"> {{ this.description }} </p>
   </div>
