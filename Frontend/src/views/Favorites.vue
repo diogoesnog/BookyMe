@@ -1,27 +1,27 @@
 <template>
   <div style="color: #434343;" class="centerDiv">
-      <div class="row" style="margin: 20px; padding-top:10px;">
-        <div class="col-10" style="">
-          <p>
-            <span style="font-weight: 670; font-size: 45px;">
-              {{$t('favoritesPage.title')}}
-            </span>
-            <br/>
-            <span style="font-weight: 300; font-size: 20px;">
-              {{$t('favoritesPage.description')}}
-            </span>
-          </p>
-        </div>
-        <div class="col-2" style="padding-left: 15px; display: flex; align-items: center; justify-content: center;">
-          <q-btn
-            round
-            class="filterAvatar"
-            size="md" 
-            icon="fas fa-filter"
-          />
-        </div>
+    <div class="row" style="margin: 20px; padding-top:10px;">
+      <div class="col-10" style="">
+        <p>
+          <span style="font-weight: 670; font-size: 45px;">
+            {{$t('favoritesPage.title')}}
+          </span>
+          <br/>
+          <span style="font-weight: 300; font-size: 20px;">
+            {{$t('favoritesPage.description')}}
+          </span>
+        </p>
       </div>
-      <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
+      <div class="col-2" style="padding-left: 15px; display: flex; align-items: center; justify-content: center;">
+        <q-btn
+          round
+          class="filterAvatar"
+          size="md" 
+          icon="fas fa-filter"
+        />
+      </div>
+    </div>
+    <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
     <div>
      <Toolbar/>
     </div>
@@ -53,6 +53,7 @@ export default {
     console.log("Mounted: View has been rendered");
     this.fetchFavorites();
   },
+  
   methods: {
     filterButtonTaped() {
       window.alert("Filter Pressed");
@@ -86,7 +87,7 @@ export default {
 
   .filterAvatar {
     font-size: 1em!important;
-      color: white;
+    color: white;
     background-color: #434343;
   }
 

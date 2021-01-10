@@ -16,7 +16,7 @@
 
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{this.category}}</p>
 
-    <StoreList v-for="(store, index) in stores" :key="index" v-bind="store"/>
+    <StoresList v-for="(store, index) in stores" :key="index" v-bind="store"/>
 
 
     <div class="q-pt-xl">
@@ -41,12 +41,12 @@
 
 import Service from '../services/user.service';
 import Toolbar from '../components/Root/Toolbar';
-import StoreList from "components/Stores/StoreList";
+import StoresList from "components/Stores/StoresList";
 
 export default {
 
   name: "Stores",
-  components: { Toolbar, StoreList },
+  components: { Toolbar, StoresList },
 
   data() {
     return {
@@ -97,17 +97,8 @@ export default {
 }
 
 .shadow {
-  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 28px;
-  border-radius: 28px;
-}
-
-.roundedDiv {
-  border-radius: 200px;
-  background: white;
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
 }
 
 </style>

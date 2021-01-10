@@ -12,6 +12,27 @@ class UserService {
     request.isJson()
     return request.post(body)
   }
+  
+  updateAccount(user) {
+    let body = JSON.stringify(user);
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/account`)
+
+    request.acceptJson()
+    request.isJson()
+    return request.post(body)
+  }
+  
+  updatePassword(user) {
+    let body = JSON.stringify(user);
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/password`)
+
+    request.acceptJson()
+    request.isJson()
+    return request.post(body)
+  }
+
 
   getCategories() {
     let request = new Request(`${process.env.API_ENDPOINT}/stores/categories`)
@@ -20,8 +41,6 @@ class UserService {
     request.acceptJson()
 
     return request.get()
-
-
   }
 
   getFavorites() {
@@ -45,19 +64,6 @@ class UserService {
     return request.delete()
   }
 
-  getStores() {
-
-    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
-
-    request.isJson()
-    request.acceptJson()
-
-    request.appendHeader("Authorization", authHeader())
-
-
-    return request.get()
-  }
-
   getStoresByCategory(category) {
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
@@ -68,7 +74,18 @@ class UserService {
 
     return request.get()
   }
-  
+
+  getStoreData(id) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("_id", id)
+
+    return request.get()
+  }
+
   getProfileData() {
 
     let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
