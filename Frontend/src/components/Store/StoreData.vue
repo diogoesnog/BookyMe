@@ -38,13 +38,24 @@
     </div>
     <!-- Div Restante -->
     <div class="divBottom">
-      <span class="titles">Fotos</span>
-      <!-- Scrolling Div Photos -->
-      <div class="wrapper">
-	      <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
-          <div class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
+      <div class="row">
+        <div class="col-12">
+          <p class="titles">{{$t('storePage.photos')}}</p>
+          <!-- Scrolling Div Photos -->
+          <div class="wrapper">
+            <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
+              <div class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
+            </div>
+            <div class="empty"></div>
+          </div>
         </div>
-        <div class="empty"></div>
+        <div class="col-12" style="padding-top: 40px;">
+          <p class="titles">{{$t('storePage.description')}}</p>
+          <p class="text"> {{ this.description }} </p>
+        </div>
+        <div class="col-12" style="padding-top: 25px;">
+          <p class="titles">{{$t('storePage.utilInfo')}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -166,13 +177,20 @@ export default {
     font-size: 30px;
   }
 
+  .text {
+    color: #434343;
+    font-weight: 300; 
+    font-size: 18px;
+    text-align: justify;
+    width: 93%;
+  }
+
   .wrapper {
     overflow-x: scroll;
     overflow-y: hidden;
     display: grid;
     grid-template-columns: repeat(6, auto);
     grid-gap: 0 30px;
-    padding-top: 15px;
   }
 
   .item {
