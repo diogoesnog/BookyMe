@@ -92,7 +92,7 @@ export default {
 .divBottom {
   position: relative;
   padding-top: 315px;
-  padding-left: 5px;
+  padding-left: 0px;
 }
 
 </style>
