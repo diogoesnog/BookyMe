@@ -7,11 +7,11 @@
         <div style="position: relative; display: flex; justify-content: center">
           <div style="position: absolute">
             <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-              <img src="https://cdn.quasar.dev/img/avatar.png">
+              <img :src="`${base}${avatar}`">
             </q-avatar>
           </div>
           <div style="position: absolute; top: 125px">
-            <q-btn style=";" size="md" class="gradientRed" round @click="handleLogout">
+            <q-btn style=";" size="md" class="gradientRed" round >
               <q-icon name="fas fa-camera" color="white"/>
             </q-btn>
           </div>
@@ -29,41 +29,81 @@
         </div>
       </div>
     </div>
+
     <!-- Div Baixo -->
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
       <div class="roundedDivRedTop shadow">
         <p style="font-weight: 500; font-size: 130%; align-items: center; text-align: left; margin: 20px;" class="font-weight-bold button">
           {{ $t('profilePage.personalDetails') }}
-        </p> 
+        </p>
       </div>
       <!-- Primeira Box - Dados Pessoais -->
-      <div class="roundedDiv shadow" style="display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left;"> 
-        <div style="margin-left: 10px; margin-top: 25px;">
-          <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.name }}
+      <div class="roundedDiv shadow" style="padding:12px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; ">
+         <!-- Botões -->
+        <div style="text-align: right; padding-left: 235px; position: absolute;">
+          <q-btn flat size="md" class="" @click="bottomEdit" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" :hidden= "!esconde"  >
+            {{ $t('profilePage.editData') }}
+          </q-btn>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          <q-icon name="fas fa-hashtag" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.username }} 
+        <div>
+           <q-btn @click="bottomSave" label="Save" color="primary" :invisible= "!esconde"/>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          <q-icon name="fas fa-at" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.email }} 
+        <div >
+          <q-btn @click="bottomCancel" label="Cancel" color="primary" :invisible= "!esconde"/>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-          {{ this.address }} 
+      
+        <!-- Nome -->
+        <div style="margin-left: 10px; margin-top: 15px;" >
+          <q-form  class="q-gutter-md">
+              <q-input borderless v-model="editUser.name" style="height: 30px;" type="text" :disable ="!editavel">
+                <template v-slot:prepend>
+                    <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
+                </template>
+              </q-input>
+            </q-form>
         </div>
-        <div style="margin-left: 10px; margin-top: 10px;">
-          {{ this.zipCode }} {{ this.city }} 
+        <!-- Nome de Utilizador -->
+        <div style="margin-left: 10px;">
+          <q-form  class="q-gutter-md">
+          <q-input borderless v-model="editUser.username" style="height: 30px;" :disable ="!editavel">
+            <template v-slot:prepend>
+              <span style="font-size: 28px; font-weight:350">#</span>
+            </template>
+          </q-input>
+          </q-form>
+        </div>
+        <!-- Email -->
+        <div style="margin-left: 10px;">
+          <q-input borderless v-model="editUser.email" style="height: 30px;" :disable ="!editavel" >
+            <template v-slot:prepend>
+              <span style="font-size: 20px; font-weight:350">@</span>
+            </template>
+          </q-input>
+        </div>
+        <!-- Morada -->
+        <div class="row">
+          <div class="col-1" style="display: flex; justify-content: left; align-items: center; padding: 10px;">
+            <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; "/>
+          </div>
+          <div class="col-11" style="padding-left: 15px">
+            <q-input borderless v-model="editUser.address" style="height: 30px;" :disable ="!editavel"/>
+            <div class = "row" style="margin-top: -10px;">
+              <div class= "col-3">
+                <q-input borderless v-model="editUser.zipCode" style="height: 30px;" :disable ="!editavel"/> 
+              </div>
+              <div class= "col-9">
+                <q-input borderless v-model="editUser.city" style="height: 30px;" :disable ="!editavel"/>
+              </div>  
+            </div>
+          </div>
         </div>
       </div>
       <!-- Box Vermelha - Segurança -->
       <div class="col-10 roundedDivRedBottom shadow">
-          <p style="font-weight: 500; font-size:130%;  margin: 20px;" class="font-weight-bold button ">
+          <p style="font-weight: 500; font-size:130%;  margin: 20px;" class="font-weight-bold button">
             {{ $t('profilePage.security') }}
-        </p>
+          </p>
       </div>
       <!-- Segunda Box - password -->
       <div class="roundedDiv shadow" style="display: flex; align-items: center; border-radius: 20px; margin-top: 40px;">
@@ -75,17 +115,17 @@
       <!-- Botão Logout -->
       <q-btn class="gradientBlue" rounded @click="handleLogout" style="width: 200px; height: 35px; margin: 40px; bottom:10px;">
         <p style="font-size:130%; text-transform: capitalize;" class="font-weight-bold button">
-            {{ $t('profilePage.signout') }}  
+            {{ $t('profilePage.signout') }}
         </p>
         <q-icon name="fas fa-sign-out-alt" color="white" style="font-size: 20px; margin-left: 10px;"/>
-      </q-btn>      
+      </q-btn>
     </div>
   </div>
 </template>
 
 <script>
 
-import Service from '../../services/user.service'
+import Service from '../../services/auth.service'
 import User from '../../models/User';
 
 export default {
@@ -98,35 +138,88 @@ export default {
     email: String,
     address: String,
     zipCode: String,
-    city: String
+    city: String,
+    avatar: String,
+    base: String
   },
 
-  mounted() {
-    console.log("LoginForm Mounted");
+  data () {
+    return {
+      texto: '',
+      editavel: false,
+      esconde:false,
+      atualizados: [],
+      editUser: new User(),
+    }
   },
+
+ /*  mounted() {
+    console.log("LoginForm Mounted");
+ 
+    this.editUser = new User(this.name, this.username, this.email, this.address, this.city, this.zipCode);
+                         
+
+  }, */
+
+  created(){
+     this.editUser = new User();
+  },
+
+
 
   methods: {
-    //TODO: método que edita a info e a pass e handleLogout
-    handleLogout(e) {
-      e.preventDefault();
-      console.group("Login Operation");
+    //TODO: método que edita a info e a pass 
+    handleSubmit(e) {
+        e.preventDefault();
+
+    },
+
+    handleLogout() {
+      console.log("hello")
       Service.logout(this.user)
-        .then(() => {
-          console.log("Logged Out");
+      this.$router.push({ name: 'Home' })
+    },
+
+    bottomEdit(){
+      this.editavel = true;
+      this.esconde = true;
+      
+    },
+    
+    bottomSave(e){
+      e.preventDefault();
+      console.group("UserUpdateInformation");
+      Service.updateAccount(this.user)
+        .then(response => {
+          let data = response.data;
+         
+          console.log("Sucess");
           this.$q.notify({
             type: 'positive',
-            message: 'Logout Successful'
+            message: `Update Successful.`
           });
-
-          this.$router.push({ name: 'Home' })
-
-        }).catch();
+        })
+        .catch(err => {
+          console.log(`Error ${err}`);
+          this.$q.notify({
+            type: 'negative',
+            message: 'Failed to Update'
+          });
+        })
       console.groupEnd();
+      this.editavel = false;
+      this.esconde = false;
+    },
 
-    }
+    bottomCancel(){
+      this.editavel = false;
+      this.esconde = false;
+    }    
   }
 }
 </script>
+
+
 
 <style scoped>
 
@@ -150,9 +243,10 @@ export default {
   }
 
   .divBottom {
-    position: fixed; 
-    bottom: 45px; 
-    width: 100%; 
+    z-index: 1000;
+    position: fixed;
+    bottom: 35px;
+    width: 100%;
     padding: 30px;
   }
 
@@ -191,9 +285,9 @@ export default {
     margin-left: 100px;
     margin-top: -5px;
     -webkit-transform: translate(-50%, -50%);
-    width: 200px; 
-    height: 35px; 
-    border-radius: 30px; 
+    width: 200px;
+    height: 35px;
+    border-radius: 30px;
   }
 
   .roundedDivRedBottom {
@@ -206,7 +300,7 @@ export default {
     margin-top: 40px;
     -webkit-transform: translate(-50%, -50%);
     width:120px;
-    height: 35px; 
+    height: 35px;
     border-radius: 30px;
   }
 

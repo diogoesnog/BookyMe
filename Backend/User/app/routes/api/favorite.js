@@ -31,7 +31,9 @@ router.post('/', checkAuth, (req, res) => {
     let favorite = req.body.favorite;
 
     Users.addFavorite(userId, favorite).
-    then(data => {
+    then(dataTemp => {
+        let data = dataTemp.toObject();
+        delete data.password;
         response = Response.CREATED(data);
         res.status(response.status).jsonp(response);
     }).catch(err => {

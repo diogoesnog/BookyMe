@@ -1,41 +1,98 @@
-<template>     
-    <div>  
+<template>
+    <div>
       <q-layout>
         <q-footer reveal>
           <q-tabs style="padding: 5px;" align="justify" class="bg-white shadow-2 qTab" indicator-color="transparent" active-color="blue">
-              <q-route-tab to="/home" exact>   
-                <q-icon name="fas fa-home" style="font-size: 23px"/>
-                <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Home</span>
+              <q-route-tab to="/home" exact>
+                <img v-if="checkPage('/home') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/HomeHover.svg">
+                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Home.svg">
               </q-route-tab>
-              <q-route-tab  to="/categories" exact>
-                <q-icon name="fas fa-bookmark" style="font-size: 23px"/>
-                <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Booking</span>
-              </q-route-tab >
-              <q-route-tab  to="/favorites" exact>
-                <q-icon name="fas fa-heart" style="font-size: 23px"/>
-                <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Favorites</span>
-              </q-route-tab >
-              <q-route-tab  to="/users/login" exact>
-                <q-icon name="fas fa-user" style="font-size: 23px"/>
-                <span style="font-size:16px; font-weight: 420; text-transform: capitalize;">Profile</span>
-              </q-route-tab >
-          </q-tabs>   
+              <q-route-tab to="/reservations" exact>
+                <img v-if="checkPage('/reservations') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/BookHover.svg">
+                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Book.svg">
+              </q-route-tab>
+              <q-route-tab to="/favorites" exact>
+                <img v-if="checkPage('/favorites') == 1" style="height: 30px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
+                <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
+              </q-route-tab>
+              <q-route-tab to="/users/login" exact>
+                <q-avatar class="shadow" size="lg">
+                  <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3;" :src="getImage()">
+                  <img v-else style="border: 3px solid #434343;" :src="getImage()">
+                </q-avatar>
+              </q-route-tab>
+          </q-tabs>
         </q-footer>
       </q-layout>
    </div>
 </template>
+
 <script>
+
+import UserService from '../../services/user.service.js';
+
+export default {
+
+  name: "Profile",
+
+  data() {
+
+    return {
+      profileData: Object,
+      base: String,
+      avatar: String
+    }
+  },
+
+  mounted() {
+    this.fetchProfileData();
+    this.checkPageProfile();
+    this.checkPage();
+  },
+
+  methods: {
+    fetchProfileData() {
+      UserService.getProfileData()
+        .then(response => {
+          let data = response.data["data"];
+          this.base = response.data["base"];
+          this.profileData = data;
+          this.avatar = this.profileData["avatar"];
+        }).catch(err => {
+        }).finally(() => {
+          this.$q.loading.hide();
+        })
+    },
+    getImage() {
+      return `${this.base}${this.avatar}`
+    },
+    checkPage: function(string) {
+      var currentLocation = window.location.pathname;
+      if(currentLocation == string) return 1;
+      else return 0;
+    },
+    checkPageProfile() {
+      var currentLocation = window.location.pathname;
+      if(currentLocation == '/users/login') return 1;
+      else return 0;
+    }
+  }
+}
 
 </script>
 
 <style scoped>
+
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  }
 
   .qTab {
     color: #434343;
   }
 
   .text-blue {
-    color: #e03459 !important;
+    color: #2897e3 !important;
   }
 
 </style>

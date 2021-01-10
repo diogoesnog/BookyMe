@@ -1,5 +1,5 @@
 <template>
-  <div >  
+  <div >
     <div class="centerDiv" >
       <!-- <div class="row">
         <div class="col-4">
@@ -13,16 +13,16 @@
           </q-select>
         </div>
       </div>-->
-      
+
     </div>
     <div>
-      <ProfileData v-bind="profileData" />
+      <ProfileData v-bind="profileData" :base="base"  />
     </div>  
     <div>
       <Toolbar/>
     </div>
-  </div> 
-  
+  </div>
+
 </template>
 
 <script>
@@ -36,14 +36,15 @@ import ProfileData from '../components/Profile/ProfileData';
 export default {
 
   name: "Profile",
-  components: { 
-    ProfileData, 
-    Toolbar 
+  components: {
+    ProfileData,
+    Toolbar
   },
-  
+
   data() {
     return {
-      profileData: Object,
+      profileData: {}, 
+      base: '',
       lang: this.$i18n.locale,
         langOptions: [
           { value: 'en-us', label: this.$t('languages.english')},
@@ -58,14 +59,14 @@ export default {
         console.log("Language Change", lang);
         this.$i18n.locale = lang.value;
       }
-    
+
   },
-  
+
   mounted() {
     console.log("Mounted: View has been rendered");
     this.fetchProfileData();
   },
-  
+
   methods: {
 
     fetchProfileData() {
@@ -74,8 +75,8 @@ export default {
       Service.getProfileData()
         .then(response => {
           let data = response.data["data"];
-
-          this.profileData= data;
+          this.base=response.data["base"];
+          this.profileData=data;
 
           console.log(this.profileData);
         }).catch(err => {
@@ -91,8 +92,8 @@ export default {
 
 </script>
 
-<style scoped>   
-  
+<style scoped>
+
   .centerDiv {
     padding: 5px;
     margin-top: 5px;

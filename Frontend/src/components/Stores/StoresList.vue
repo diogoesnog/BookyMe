@@ -5,7 +5,6 @@
       :src="getImage()"
       class="roundBorder shadow"
     >
-      <q-btn class="clearIcon" round @click="deleteFavorite" icon="clear" style="float: right" size="md"></q-btn>
       <div class="cardBackground absolute-bottom text-center" @click="redirect()" style="height:70px">
         <div class="row" style="margin-top: -2px;">
           <div class="col-9" style="text-align: left; margin-top: -5px; display: inline-grid; line-height: 25px;">
@@ -28,15 +27,14 @@
           </div>
         </div>
       </div>
-      </q-img>
+    </q-img>
   </div>
 </template>
 
 <script>
-import Service from '../../services/user.service'
 export default {
 
-  name: "FavoritesList",
+  name: "StoreList",
   props: {
     _id: String,
     name: String,
@@ -47,7 +45,7 @@ export default {
 
   data() {
     return {
-      favorites: Array
+      stores: Array
     }
   },
 
@@ -59,56 +57,37 @@ export default {
       }
       return "";
     },
-
-    deleteFavorite() {
-      Service.deleteFavorite(this._id)
-        .then(response => {
-          let data = response.data[ "data" ];
-          // TODO: emitir um evento para o parent (a tua view) com o ID do favorito eliminado
-          console.log(data);
-        })
-        .catch(err => console.log(err));
-    },
-
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
     },
-
     redirect() {
       this.$router.push({name: 'Store', params:{id:this._id}})
     }
-
   }
 }
 </script>
 
 <style scoped>
 
-  .divRating {
-    text-align: center;
-    height: 30px;
-    border-radius: 20px;
-    background: linear-gradient(#e9695c, #e03459);
-    color: white;
-  }
+.divRating {
+  text-align: center;
+  height: 30px;
+  border-radius: 20px;
+  background: linear-gradient(#e9695c, #e03459);
+  color: white;
+}
 
-  .cardBackground {
-    background-color: rgba(40,151,227, 0.9);
-  }
+.cardBackground {
+  background-color: rgba(40,151,227, 0.9);
+}
 
-  .clearIcon {
-    font-size: 0.85em!important;
-    margin: 15px;
-    background-color: white;
-  }
+.roundBorder {
+  border-radius: 25px;
+}
 
-  .roundBorder {
-    border-radius: 25px;
-  }
-
-  .shadow {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 28px;
-  }
+.shadow {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 28px;
+}
 
 </style>

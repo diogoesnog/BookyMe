@@ -16,7 +16,7 @@ module.exports.updateInfo = (user,id) => {
 }
 
 module.exports.updatePhoto = (id, url) => {
-    return User.findByIdAndUpdate(id, {avatar: url, hasAvatar: true}, {new: true});
+    return User.findByIdAndUpdate(id,{avatar: url, hasAvatar: true}, {new: true});
 }
 
 module.exports.updatePassword = (id, password) => {
