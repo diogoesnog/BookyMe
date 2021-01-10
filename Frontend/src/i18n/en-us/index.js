@@ -127,11 +127,11 @@ export default {
     description: "Description",
     readMore: "Read More",
 
-    utilInfo: "Information's",
+    utilInfo: "Useful Info",
     servicesCatalog: "Catalog of Services",
     seeAll: "See All",
 
-    ratings: "Evaluations",
+    ratings: "Ratings",
     seeAllRatings: "See All",
     stars: "0 Stars | 1 Star | {count} Stars",
     basedOn: "Based on 1 Evaluation | Based on {count} Evaluations"

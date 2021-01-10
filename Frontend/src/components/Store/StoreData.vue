@@ -120,7 +120,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -128,7 +128,7 @@
 export default {
   name: "StoreData",
 
-    data () {
+  data () {
     return {
       slide: 1
     }
@@ -154,7 +154,7 @@ export default {
       return Math.round(rating*10)/10;
     },
     getCutName: function(string) {
-      if(string.substring(0,15) == string) return string;
+      if(string.substring(0,15) === string) return string;
       else return string.substring(0, 15) + "...";
     }
   }
@@ -168,8 +168,8 @@ export default {
     width: 100%;
     height: 30%;
     top: 0;
-    border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     background-size: cover;
     background-position: center top;
   }
@@ -179,8 +179,8 @@ export default {
     width: 100%;
     height: 100%;
     top: 0;
-    border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 0%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
   }
 
@@ -205,7 +205,7 @@ export default {
     position: absolute;
     left: 50%;
     top: 100%;
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     -ms-transform: translateX(-50%) translateY(-50%);
     transform: translate(-50%,-50%);
   }
@@ -236,13 +236,13 @@ export default {
 
   .titles {
     color: #434343;
-    font-weight: 700; 
+    font-weight: 700;
     font-size: 30px;
   }
 
   .text {
     color: #434343;
-    font-weight: 300; 
+    font-weight: 300;
     font-size: 18px;
     text-align: justify;
     width: 93%;
@@ -272,13 +272,13 @@ export default {
   }
 
   .allRatings {
-    
+
   }
 
   .numberStars {
     color: #434343;
     font-weight: 300;
-    font-size: 16px; 
+    font-size: 16px;
   }
 
   .countStars {
@@ -299,7 +299,7 @@ export default {
     height: 120px;
     width: 120px;
     border-radius: 200px;
-    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
 
   .empty {
