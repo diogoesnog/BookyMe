@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import user from '../store/user';
 
 Vue.use(VueRouter);
 
@@ -48,7 +49,6 @@ const routes = [
     name: "RegisterStore",
     component: () => import('../views/private/RegisterStore'),
     meta: {
-      // TODO: Change to true
       requiresAuth: true
     }
   }
@@ -61,6 +61,26 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
+  /*console.log("Going To", to);
+  let hasFavorites = user.getters.hasFavorites,
+      hasStores = user.getters.hasStores;
+
+  let cookie = getCookie();
+
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(cookie == null) {
+      next('/');
+    } else {
+      if( hasStores ) {
+        next();
+      } else {
+        next('/register/store');
+      }
+    }
+  } else {
+    next();
+  }*/
   console.log("Going to ", to);
   let user = getUser(),
       cookie = getCookie();
@@ -83,11 +103,10 @@ router.beforeEach((to, from, next) => {
     } else {
       next('/');
     }
-    // Route Requires Stores
-
   } else {
     next();
   }
+
 });
 
 

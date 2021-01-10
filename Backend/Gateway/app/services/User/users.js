@@ -43,7 +43,15 @@ module.exports.updatePassword = (token, info) => {
     return request.patch(info);
 }
 
-// TODO: Upload Avatar
+module.exports.uploadPicture = (token, picture) => {
+    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/avatar`);
+
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.uploadMedia("avatar", picture);
+}
+
 
 module.exports.validateToken = (token) => {
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
