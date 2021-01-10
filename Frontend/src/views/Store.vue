@@ -79,7 +79,7 @@ export default {
       ).finally(() => {
         this.$q.loading.hide();
       })
-    }
+    },
   }
 
 }

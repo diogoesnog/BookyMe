@@ -51,12 +51,12 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.getBookings();
+    this.getReservations();
   },
 
   methods: {
 
-    getBookings() {
+    getReservations() {
       Service.getBookingUser()
         .then(response => {
           let data = response.data["data"];

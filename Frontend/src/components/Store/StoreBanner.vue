@@ -8,7 +8,7 @@
           </span>
         <br/>
         <span style="font-weight: 300; font-size: 20px;">
-            X Reservas
+            {{ getReservations() }}
           </span>
       </div>
       <div class="infoExtra">
@@ -38,8 +38,17 @@
 </template>
 
 <script>
+
+import Service from '../../services/user.service';
+
 export default {
   name: "StoreBanner",
+  
+  data() {
+    return {
+      numberReservations: String
+    }
+  },
 
   props: {
     _id: String,
@@ -47,7 +56,12 @@ export default {
     category: String,
     address: Object,
     rating: Number,
-    photos: Array
+    photos: Array,
+    
+  },
+
+  mounted() {
+    console.log("Mounted: View has been rendered");
   },
 
   methods: {
@@ -60,6 +74,30 @@ export default {
     getCutName: function(string) {
       if(string.substring(0,15) === string) return string;
       else return string.substring(0, 15) + "...";
+    },
+    getReservations() {
+
+      Service.getBookingUser()
+        .then(response => {
+          let data = response.data["data"];
+
+          console.log(data);
+          // Correr Todo o Array
+          var i;
+          for (i = 0; i < data.length; i++) {
+            if(data[i].storeId == this._id) this.numberReservations = (i+1);
+          }
+        }).catch(err => {
+          console.log(err)
+        }).finally(() => {
+        })
+        
+        if(this.numberReservations == 1) return "1 Reserva"
+        else return this.numberReservations + "Reservas";
+    },
+    getName: function(string) {
+      if(string == 1) return "Reserva";
+      else return "Reservas";
     }
   }
 }
