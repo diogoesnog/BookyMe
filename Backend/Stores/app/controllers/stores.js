@@ -65,7 +65,7 @@ module.exports.getRecommended = async () => {
 }
 
 module.exports.insertSchedule = (id, s) => {    
-    return Store.updateOne({_id: id, 'schedule.day': {$ne: s.day}},{$push: {schedule: s}})
+    return Store.updateOne({_id: id, 'schedule.day': {$ne: s.day}},{$push: {schedule: s}, $set:{verified: true}})
     
 }
 

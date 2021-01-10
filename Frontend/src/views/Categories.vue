@@ -54,11 +54,9 @@ export default {
 
     fetchCategories() {
       this.$q.loading.show({ delay: 400});
-
       Service.getCategories()
         .then(response => {
           this.categories = response.data["data"];
-          console.log(this.categories);
         }).catch(err => console.log(err)
         ).finally(() => {
           this.$q.loading.hide();

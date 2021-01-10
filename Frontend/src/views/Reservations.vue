@@ -45,38 +45,15 @@ export default {
   },
 
   components: {
-    Toolbar,
-    ReservationsList
+    ReservationsList,
+    Toolbar
   },
-
- 
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    //this.fetchFavorites();
   },
   methods: {
-    
-    // TODO: criar uma função de remoção de um favorito do teu favorites na função data()
-    // tip, este método vai passar para o componente como uma espécie de prop.
-    //favoriteRemoved(id) {
-     // this.favorites = this.favorites.filter((item) => item !== id);
-    //},
 
-    /*fetchReservations() {
-      console.log("Fetch Reservations");
-      Service.getFavorites()
-        .then(response => {
-          console.log("Got Response");
-          let data = response.data["data"];
-
-          this.favorites = data;
-
-          console.log(data);
-        }).catch(err => {
-            console.log(err)
-        })
-    }*/
   }
 }
 
