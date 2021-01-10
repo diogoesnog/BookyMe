@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Div Cima (Photo + Info Base) -->
-    <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'>
+    <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
       <div class="divTop2">
         <div class="infoName">
           <span style="font-weight: 670; font-size: 40px;">
@@ -39,7 +39,13 @@
     <!-- Div Restante -->
     <div class="divBottom">
       <span class="titles">Fotos</span>
-
+      <!-- Scrolling Div Photos -->
+      <div class="wrapper">
+	      <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
+          <div class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
+        </div>
+        <div class="empty"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -64,21 +70,11 @@ export default {
     rating: Number,
     photos: Array,
     schedule: Array,
-    urlMainPhoto: String,
-    urlPhotos: Array
   },
 
   methods: {
-    getImage() {
-      // Iterar o Array das Photos
-      var allUrl = [];
-      var i;
-      for (i = 0; i < this.photos.length; i++) {
-        allUrl[i] = `http://localhost:5100${this.photos[i].url}`;
-      }
-      this.urlPhotos = allUrl;
-      console.log(this.urlPhotos);
-      return this.urlMainPhoto = `http://localhost:5100${this.photos[0].url}`;
+    getImage(index) {
+      return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
     },
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
@@ -94,7 +90,7 @@ export default {
 <style scoped>
 
   .divTop1{
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 35%;
     top: 0;
@@ -105,9 +101,9 @@ export default {
   }
 
   .divTop2{
-    position: fixed;
+    position: absolute;
     width: 100%;
-    height: 35%;
+    height: 100%;
     top: 0;
     border-bottom-left-radius: 60%;
     border-bottom-right-radius: 60%;
@@ -115,8 +111,8 @@ export default {
   }
 
   .divBottom {
-    position: absolute;
-    top: 38%;
+    position: relative;
+    padding-top: 290px;
     padding-left: 35px;
   }
 
@@ -168,6 +164,36 @@ export default {
     color: #434343;
     font-weight: 700; 
     font-size: 30px;
+  }
+
+  .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 0 30px;
+    padding-top: 15px;
+  }
+
+  .item {
+    background-size: cover;
+    height: 120px;
+    width: 120px;
+    border-radius: 200px;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .empty {
+    width: 10px;
+  }
+
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .wrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 
 </style>
