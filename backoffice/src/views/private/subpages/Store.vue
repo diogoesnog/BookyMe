@@ -1,13 +1,20 @@
 <template>
+  <v-app>
   <div>
       <h1 class ="storeName .text-lg-h6">{{this.store.name}}</h1>
     <v-container grid-list-lg>
       <Cards></Cards>
     </v-container>
     <v-container grid-list-lg>
-      <Calendar></Calendar>
+      <v-row>
+        <v-col cols="6">
+          <Calendar></Calendar>
+        </v-col>
+      </v-row>
+
     </v-container>
   </div>
+  </v-app>
 </template>
 
 <script>

@@ -1,18 +1,20 @@
 <template>
-  <v-row class="fill-height">
+  <v-row class="fill-height" >
     <v-col>
       <v-sheet height="64">
         <v-toolbar
             flat
         >
+          <!-- Botão Hoje -->
           <v-btn
               outlined
               class="mr-4"
               color="grey darken-2"
               @click="setToday"
           >
-            Today
+            Hoje
           </v-btn>
+          <!-- Setinha esquerda -->
           <v-btn
               fab
               text
@@ -20,10 +22,12 @@
               color="grey darken-2"
               @click="prev"
           >
+
             <v-icon small>
               mdi-chevron-left
             </v-icon>
           </v-btn>
+          <!-- Setinha direita -->
           <v-btn
               fab
               text
@@ -58,16 +62,13 @@
             </template>
             <v-list>
               <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
+                <v-list-item-title>Dia</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
+                <v-list-item-title>Semana</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
+                <v-list-item-title>Mês</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -133,17 +134,15 @@
 </template>
 
 <script>
-
 export default {
   name: "Calendar",
   data: () => ({
     focus: '',
     type: 'month',
     typeToLabel: {
-      month: 'Month',
-      week: 'Week',
-      day: 'Day',
-      '4day': '4 Days',
+      month: 'Mês',
+      week: 'Semana',
+      day: 'Dia',
     },
     selectedEvent: {},
     selectedElement: null,
@@ -222,3 +221,7 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+</style>

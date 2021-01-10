@@ -3,7 +3,6 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import './plugins/Cookies';
 import vuex from './plugins/vuex';
-
 import router from './router'
 import i18n from './plugins/i18n';
 import store from './store/user';
