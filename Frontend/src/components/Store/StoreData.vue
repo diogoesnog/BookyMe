@@ -80,7 +80,8 @@
                 <div class="col-2 numberStars">
                   5
                 </div>
-                <div class="col-10 countStars">
+                <div class="col-10 countStarsBase">
+                  <div class="countStarsFill" v-bind:style='{ width: `${getWidthStars(85)}` }'/>
                 </div>
               </div>
               <!-- 4 Stars -->
@@ -88,7 +89,8 @@
                 <div class="col-2 numberStars">
                   4
                 </div>
-                <div class="col-10 countStars">
+                <div class="col-10 countStarsBase">
+                  <div class="countStarsFill" v-bind:style='{ width: `${getWidthStars(80)}` }'/>
                 </div>
               </div>
               <!-- 3 Stars -->
@@ -96,7 +98,8 @@
                 <div class="col-2 numberStars">
                   3
                 </div>
-                <div class="col-10 countStars">
+                <div class="col-10 countStarsBase">
+                  <div class="countStarsFill" v-bind:style='{ width: `${getWidthStars(45)}` }'/>
                 </div>
               </div>
               <!-- 2 Stars -->
@@ -104,7 +107,8 @@
                 <div class="col-2 numberStars">
                   2
                 </div>
-                <div class="col-10 countStars">
+                <div class="col-10 countStarsBase">
+                  <div class="countStarsFill" v-bind:style='{ width: `${getWidthStars(20)}` }'/>
                 </div>
               </div>
               <!-- 1 Star -->
@@ -112,7 +116,8 @@
                 <div class="col-2 numberStars">
                   1
                 </div>
-                <div class="col-10 countStars">
+                <div class="col-10 countStarsBase">
+                  <div class="countStarsFill" v-bind:style='{ width: `${getWidthStars(0)}` }'/>
                 </div>
               </div>
             </div>
@@ -156,6 +161,9 @@ export default {
     getCutName: function(string) {
       if(string.substring(0,15) == string) return string;
       else return string.substring(0, 15) + "...";
+    },
+    getWidthStars: function(string) {
+      return string + "%";
     }
   }
 }
@@ -281,9 +289,16 @@ export default {
     font-size: 18px; 
   }
 
-  .countStars {
+  .countStarsBase {
+    background: white;
+    border-radius: 100px;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .countStarsFill {
     background: linear-gradient(#13c1e0, #2897e3);
     border-radius: 100px;
+    height: 100%;
   }
 
   .wrapper {
