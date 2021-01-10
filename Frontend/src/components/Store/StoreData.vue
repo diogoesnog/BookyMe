@@ -36,12 +36,23 @@
         </div>
       </div>
     </div>
+    <!-- Div Restante -->
+    <div class="divBottom">
+      <span class="titles">Fotos</span>
+
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "StoreData",
+
+    data () {
+    return {
+      slide: 1
+    }
+  },
 
   props: {
     _id: String,
@@ -53,11 +64,20 @@ export default {
     rating: Number,
     photos: Array,
     schedule: Array,
-    urlMainPhoto: String
+    urlMainPhoto: String,
+    urlPhotos: Array
   },
 
   methods: {
     getImage() {
+      // Iterar o Array das Photos
+      var allUrl = [];
+      var i;
+      for (i = 0; i < this.photos.length; i++) {
+        allUrl[i] = `http://localhost:5100${this.photos[i].url}`;
+      }
+      this.urlPhotos = allUrl;
+      console.log(this.urlPhotos);
       return this.urlMainPhoto = `http://localhost:5100${this.photos[0].url}`;
     },
     roundRating: function(rating) {
@@ -94,6 +114,12 @@ export default {
     background-image: linear-gradient(#1ba0d4, #1b9fd4ab, #168ab80e);
   }
 
+  .divBottom {
+    position: absolute;
+    top: 38%;
+    padding-left: 35px;
+  }
+
   .infoName {
     color: white;
     text-align: center;
@@ -103,8 +129,8 @@ export default {
   .infoExtra {
     color: #434343;
     background-color: white;
-    height: 35%;
-    width: 73%;
+    height: 30%;
+    width: 75%;
     border-radius: 100px;
     position: absolute;
     left: 50%;
@@ -136,6 +162,12 @@ export default {
     -ms-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+  }
+
+  .titles {
+    color: #434343;
+    font-weight: 700; 
+    font-size: 30px;
   }
 
 </style>
