@@ -108,9 +108,10 @@ export default {
 .ratingTotal2 {
   color: #434343;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   padding-top: 10px;
+  margin: -3px;
 }
 
 .allRatings {
