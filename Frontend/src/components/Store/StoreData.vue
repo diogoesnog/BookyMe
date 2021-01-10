@@ -125,7 +125,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -243,13 +243,13 @@ export default {
 
   .titles {
     color: #434343;
-    font-weight: 700; 
+    font-weight: 700;
     font-size: 30px;
   }
 
   .text {
     color: #434343;
-    font-weight: 300; 
+    font-weight: 300;
     font-size: 18px;
     text-align: justify;
     width: 93%;
@@ -280,13 +280,13 @@ export default {
   }
 
   .allRatings {
-    
+
   }
 
   .numberStars {
     color: #434343;
     font-weight: 300;
-    font-size: 18px; 
+    font-size: 18px;
   }
 
   .countStarsBase {
