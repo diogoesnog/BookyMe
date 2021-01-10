@@ -85,7 +85,7 @@ app.get('/popular', checkAuth, (req, res) => {
 app.post('/:storeId', checkAuth, async (req, res) => {
     let city;
     try {
-        city = (await Store.getStore(req.params.storeId)).data.data.category;
+        city = (await Store.getStore(req.params.storeId)).data.data.address.city;
         console.log(city);
     } catch (err) {
         const response = Response.INTERNAL_ERROR(err, "Error Getting Store's City");
@@ -97,7 +97,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
         serviceDate: new Date(req.body.serviceDate).toISOString(),
         userId: req.user.id,
         storeId: req.params.storeId,
-        city: "Lisboa"
+        city: city
     };
 
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
