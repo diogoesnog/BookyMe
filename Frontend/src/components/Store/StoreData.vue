@@ -75,6 +75,46 @@
             </div>
             <!-- Rating Distributions -->
             <div class="col-7 allRatings">
+              <!-- 5 Stars -->
+              <div class="row">
+                <div class="col-4 numberStars">
+                  5 Estrelas
+                </div>
+                <div class="col-8 countStars">
+                </div>
+              </div>
+              <!-- 4 Stars -->
+              <div class="row">
+                <div class="col-4 numberStars">
+                  4 Estrelas
+                </div>
+                <div class="col-8 countStars">
+                </div>
+              </div>
+              <!-- 3 Stars -->
+              <div class="row">
+                <div class="col-4 numberStars">
+                  3 Estrelas
+                </div>
+                <div class="col-8 countStars">
+                </div>
+              </div>
+              <!-- 2 Stars -->
+              <div class="row">
+                <div class="col-4 numberStars">
+                  2 Estrelas
+                </div>
+                <div class="col-8 countStars">
+                </div>
+              </div>
+              <!-- 1 Star -->
+              <div class="row">
+                <div class="col-4 numberStars">
+                  1 Estrela
+                </div>
+                <div class="col-8 countStars">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -233,6 +273,17 @@ export default {
 
   .allRatings {
     
+  }
+
+  .numberStars {
+    color: #434343;
+    font-weight: 300;
+    font-size: 16px; 
+  }
+
+  .countStars {
+    background: linear-gradient(#13c1e0, #2897e3);
+    border-radius: 100px;
   }
 
   .wrapper {
