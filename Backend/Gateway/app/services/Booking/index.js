@@ -53,7 +53,7 @@ module.exports.deleteReservation = (token, id) => {
     request.appendHeader("Authorization", token);
     request.acceptJson();
 
-    return request.delete();
+    return request.patch();
 }
 
 // TODO: irá ser alterado
@@ -65,4 +65,37 @@ module.exports.changeReservation = (token, body, id) => {
     request.acceptJson();
 
     return request.put(body);
+}
+
+module.exports.canceled = (token, params) => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/canceled`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.setParams(params);
+    request.acceptJson();
+
+    return request.get();
+}
+
+module.exports.concluded = (token, params) => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/concluded`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.setParams(params);
+    request.acceptJson();
+
+    return request.get();
+}
+
+module.exports.current = (token, params) => {
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/current`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.setParams(params);
+    request.acceptJson();
+
+    return request.get();
 }
