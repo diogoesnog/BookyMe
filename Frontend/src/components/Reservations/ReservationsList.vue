@@ -5,7 +5,16 @@
     </div>
     <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
       <div class="widgetReservation">
-        
+        <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
+        <div class="row">
+          <!-- Photo -->
+          <div class="col-4">
+          </div>
+          <div class="col-8">
+              <span class="titleStore">
+              </span>
+          </div>
+        </div>
         {{reservation.storeId}}
       </div>
     </div>
@@ -68,6 +77,16 @@ export default {
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
     border-radius: 28px;
+  }
+
+  .titleStore {
+    text-overflow: ellipsis; 
+    font-size: 20px; 
+    font-weight: 350; 
+    display: inline-block; 
+    width: 200px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
   }
 
 </style>
