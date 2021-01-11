@@ -1,23 +1,12 @@
 <template>
   <div style="padding-top: 25px; margin: 15px;">
-    <div class="oval">
-      <p style="font-weight: 300; font-size: 18px; line-height:50%;" class="text-white"> Felgueiras </p>
+    <div class="cityDiv" v-bind:style='{ width:`${getWidthNameStore()}`}'>
+      {{this._id}}
     </div>
-    <br>
-    <div class="information shadow">
-      <div class="row">
-        <div class="col-4">
-          <q-img
-            src="https://cdn.quasar.dev/img/parallax2.jpg"
-            style="width: 100%; height:100%"
-          />
-        </div>
-        <div class="col-8" style="margin-top:35px; padding:10px">
-          <p style="font-weight: 670; font-size: 22px; line-height:0%;"> Ginásio Go Fitness </p>
-          <p style="font-weight: 300; font-size: 18px; line-height:50%;"> Sessão CrossFit </p>
-          <p style="font-weight: 670; font-size: 22px; line-height:0%; margin-top:50px"> 13 Nov - 17:00 </p>
-          <q-icon roudned class="fas fa-ellipsis-v" style="font-size: 1.5em; margin-left:180px" />
-        </div>
+    <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
+      <div class="widgetReservation">
+        
+        {{reservation.storeId}}
       </div>
     </div>
   </div>
@@ -30,39 +19,55 @@ export default {
 
   props: {
     _id: String,
-    bookingDate: Date,
-    serviceDate: Date,
-    userId: String,
-    storeId: String
+    booking: Array
   },
 
   data() {
     return {
+    }
+  },
+
+  methods: {
+    getWidthNameStore() {
+      if(this._id.length > 0 & this._id.length <= 3) return "15%";
+      else if(this._id.length >= 4 & this._id.length <= 6) return "30%";
+      else if(this._id.length >= 7 & this._id.length <= 9) return "35%";
+      else if(this._id.length >= 10 & this._id.length <= 12) return "45%";
+      else if(this._id.length >= 13 & this._id.length <= 15) return "55%";
+      else if(this._id.length >= 16 & this._id.length <= 18) return "65%";
+      else if(this._id.length >= 19 & this._id.length <= 21) return "75%";
+      else return "80%"    
     }
   }
 }
 </script>
 
 <style scoped>
-.oval {
-  height: 50px;
-  width: 120px;
-  background: linear-gradient(#13c1e0, #2897e3);
-  margin-left: 15px;
-  border-radius: 28px;
-}
 
-.information {
-  height: 160px;
-  width: 330px;
-  background-color:white;
-  margin-left: 5px;
-  border-radius: 28px;
-}
+  .cityDiv {
+    background: linear-gradient(#13c1e0, #2897e3);
+    color: white;
+    height: 40px;
+    border-radius: 100px;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.shadow {
-  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 28px;
-  border-radius: 28px;
-}
+  .widgetReservation {
+    height: 120px;
+    background-color: white;
+    margin-top: 25px;
+    border-radius: 40px;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+    border-radius: 28px;
+  }
+
 </style>
