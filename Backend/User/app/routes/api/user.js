@@ -120,10 +120,7 @@ router.post('/authentication', async (req, res) => {
  */
 router.put('/account',checkAuth, async (req, res) => {
     let response;
-    let userAuth = {
-        id: req.decodedUser.id,
-        password: req.body.password
-    };
+    let userId = req.decodedUser.id;
 
     let newInfo = {
         name: req.body.name,
@@ -134,26 +131,16 @@ router.put('/account',checkAuth, async (req, res) => {
         zipCode: req.body.zipCode
     }
     try{
-        let user = await Users.findById(userAuth.id);
-        let result = await bcrypt.compare(userAuth.password, user.password);
-
-        if (!result){
-            response = Response.UNAUTHORIZED(undefined, 'Invalid credentials');
-            res.status(response.status).jsonp(response);
-        }
-        else {
-            Users.updateInfo(newInfo, userAuth.id).
-                then(dataTemp => {
-                    let data = dataTemp.toObject();
-                    delete data.password;
-                    response = Response.ACCEPTED(data);
-                    res.status(response.status).jsonp(response);
-                }).
-                catch(err => {
-                    response = Response.INTERNAL_ERROR(err);
-                    res.status(response.status).jsonp(response);
-                });
-        }
+        Users.updateInfo(newInfo, userId)
+            .then(dataTemp => {
+                let data = dataTemp.toObject();
+                delete data.password;
+                response = Response.ACCEPTED(data);
+                res.status(response.status).jsonp(response);
+            }).catch(err => {
+                response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            });
     } catch (err) {
         response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
@@ -226,7 +213,7 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
             res.status(response.status).json(response);
         }
     });
-    let imagePath = `/public/photos/${userId}/${req.file.originalname}`;
+    let imagePath = `/public/${userId}/${req.file.originalname}`;
 
     Users.updatePhoto(userId, imagePath)
         .then(dataTemp => {

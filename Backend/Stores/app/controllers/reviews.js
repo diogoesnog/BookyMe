@@ -9,10 +9,28 @@ module.exports.getReviews = (id) => {
 
 
 module.exports.getRatings = (id) => {
-    return Review
-                .aggregate([{$match: {storeID: mongoose.Types.ObjectId(id)}},{$group: {_id: "$rating", count: {$sum: 1} }}])
-                .exec()
+    return Review.aggregate([
+        { $match: {storeID: mongoose.Types.ObjectId(id)} },
+        { $group: {
+            _id: "$rating",
+            count: {
+                $sum: 1
+            },
+            rating: {
+                $first: "$rating"
+            }
+        }}
+    ]).exec()
 }
+
+/*module.exports.getRatings = (id) => {
+    return Review.aggregate([
+        { $match: { storeID: mongoose.Types.ObjectId(id) } },
+        { $group: { _id: id , average: {
+            $sum: { $sum: "$ratings"}
+        } } }
+    ]);
+}*/
 
 module.exports.insertReview = async (review) => {
     

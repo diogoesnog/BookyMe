@@ -23,8 +23,7 @@
   "city": "Braga",
   "zipCode": "4700-123",
   "email": "admin@bookyme.com",
-  "password": "$2a$10$PdnRtvXIUx8gy8jA1uzpAe2XaqHYouaCeYJ6TaWQH8N6u0OjD/9JG",
-  "__v": 0
+  "password": "$2a$10$PdnRtvXIUx8gy8jA1uzpAe2XaqHYouaCeYJ6TaWQH8N6u0OjD/9JG"
 },{
   "_id": {
     "$oid": "5ff4a58a09404a2ade1fbd4b"
@@ -36,7 +35,7 @@
     "5ff4a9597df75e2ace11b046",
     "5ff4a80f7df75e2ace11b03e"
   ],
-  "avatar": "/public/photos/5ff4a58a09404a2ade1fbd4b/e8b1d729-b40d-4b4e-95ae-3a3d03735b6f.jpg",
+  "avatar": "/public/5ff4a58a09404a2ade1fbd4b/e8b1d729-b40d-4b4e-95ae-3a3d03735b6f.jpg",
   "reviews": [],
   "bookings": [],
   "type": "User",
@@ -48,6 +47,5 @@
   "zipCode": "4700-123",
   "email": "user@bookyme.com",
   "password": "$2a$10$QoDd9xdgoISOFIfTBefWXuJ6rk9DW8C5mjXmSvxJkbJhtmH/NAtE.",
-  "__v": 0,
   "hasAvatar": true
 }]
