@@ -238,7 +238,7 @@ app.get('/current', checkAuth, (req, res) => {
     if (sameDay(date_now, new Date(date_ini))) { // Same Day
         date_ini = new Date(date_ini).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now > new Date(date_ini)) { // Past
-        const response = Response.OK("{}");
+        const response = Response.OK([]);
         res.status(response.status).jsonp(response);
         return;
     }
@@ -271,7 +271,7 @@ app.get('/concluded', checkAuth, (req, res) => {
     if (sameDay(date_now, new Date(date_ini))) { // Same Day
         date_fin = new Date(date_fin).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now < new Date(date_ini)) { // Past
-        const response = Response.OK("{}");
+        const response = Response.OK([]);
         res.status(response.status).jsonp(response);
         return;
     }
