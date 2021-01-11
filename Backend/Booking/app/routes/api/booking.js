@@ -8,6 +8,7 @@ const { isOpen } = require('../../utils/isOpen');
 const { sameDay } = require('../../utils/sameDay')
 const Response = require('rapid-status');
 const Store = require('../../services/Stores/stores');
+const Catalog = require('../../services/Stores/catalog');
 
 /**
  * Get list of reservations
@@ -84,12 +85,39 @@ app.get('/popular', checkAuth, (req, res) => {
  * {serviceDate}: Date
  */
 app.post('/:storeId', checkAuth, async (req, res) => {
-    let city;
+    let city, storeName, photoPath, catalogData, hasCatalog = false;
+    const serviceId = req.body.serviceId;
+    let catalog;
+
     try {
         city = (await Store.getStore(req.params.storeId)).data.data.address.city;
+        storeName = (await Store.getStore(req.params.storeId)).data.data.name;
     } catch (err) {
-        const response = Response.INTERNAL_ERROR(err, "Error Getting Store's City");
+        const response = Response.INTERNAL_ERROR(err, "Error getting info about the store");
         res.status(response.status).jsonp(response);
+    }
+    try { // optional
+        photoPath = (await Store.getStore(req.params.storeId)).data.data.photos.shift().url;
+    } catch {}
+
+    try {
+        catalogData = (await Catalog.getByStore(req.params.storeId)).data.data;
+        console.log(catalogData);
+        if (catalogData.length > 0) {
+            if (serviceId !== null) {
+                for (item in catalogData)
+                    if (serviceId === catalogData[item]._id)
+                        catalog = {
+                            _id: serviceId,
+                            product: catalogData[item].product,
+                            price: catalogData[item].price,
+                            abstract: catalogData[item].abstract
+                        }
+            }
+            hasCatalog = true;
+        }
+    } catch {
+        hasCatalog = false;
     }
 
     const booking = {
@@ -97,13 +125,22 @@ app.post('/:storeId', checkAuth, async (req, res) => {
         serviceDate: new Date(req.body.serviceDate).toISOString(),
         userId: req.user.id,
         storeId: req.params.storeId,
-        city: city
+        city: city,
+        storeName: storeName,
+        mainStorePhotoURL: photoPath,
+        hasCatalog: hasCatalog,
+        service: catalog
     };
+
+    // Remove undefined values from booking
+    Object.keys(booking).forEach(function (key) {
+        if(booking[key] === undefined) delete booking[key];
+    });
 
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
         const response = Response.BAD_REQUEST("The date is from the past!");
         res.status(response.status).jsonp(response);
-        return
+        return;
     }
 
     let schedule;
@@ -119,7 +156,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     if (schedule == null) {
         const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
         res.status(response.status).jsonp(response);
-        return
+        return;
     }
 
     const serviceOpen = isOpen(new Date(booking.serviceDate), schedule);

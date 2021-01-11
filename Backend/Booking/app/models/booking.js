@@ -1,5 +1,23 @@
 const mongoose = require('mongoose');
 
+const catalog = new mongoose.Schema({
+    _id: {
+        type: mongoose.ObjectId,
+        required: true,
+        auto: false
+    },
+    product: {
+        type: String
+    },
+    price: {
+        type: Number
+    },
+    abstract: {
+        type: String
+    },
+
+});
+
 const bookingSchema = new mongoose.Schema({
     _id: {
         type: mongoose.ObjectId,
@@ -27,6 +45,21 @@ const bookingSchema = new mongoose.Schema({
     storeId: {
         type: String,
         required: true
+    },
+    storeName: {
+        type: String,
+        required: true
+    },
+    mainStorePhotoURL: {
+        type: String
+    },
+    hasCatalog: {
+        type: Boolean,
+        required: true
+    },
+    service: {
+        type: catalog,
+        required: false
     },
     canceled: {
         type: Boolean,
