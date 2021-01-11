@@ -2,9 +2,9 @@
   <div class="col-12" >
     <p class="titles" style="padding-top: 20px; padding-left: 30px">{{$t('storePage.utilInfo')}}</p>
     <div>
-      <l-map style="height: 200px; margin-bottom: 35px; position: relative" :zoom="zoom" :center="center">
+      <l-map style="height: 200px; margin-bottom: 35px; position: relative" zoom="14" :center="[this.latitude, this.longitude]">
         <l-tile-layer :url="urlOM"></l-tile-layer>
-        <l-marker :lat-lng="markerLatLng"/>
+        <l-marker :lat-lng="[this.latitude, this.longitude]"/>
       </l-map>
       <div class="infoAddress">
         <span style="font-weight: 670; font-size: 14px; display: inline-block; vertical-align: middle;">
@@ -14,7 +14,7 @@
           {{ this.address.zipcode }}, {{ this.address.city }}
         </span>
       </div>
-      <div class="infoPhone">
+      <div>
       </div>
     </div>
   </div>
@@ -50,12 +50,13 @@ export default {
     return {
       //urlMapBox: 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
       urlOM: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 15,
+      zoom: 16,
       // TODO: Resolver isto ser dinâmico consoante o ID GET
-      center: [41.4290545, -8.4784188],
-      markerLatLng: [41.4290545, -8.4784188]
+      center: [41.3988155, -8.5167904],
+      markerLatLng: [41.3988155, -8.5167904]
   };
   },
+
   methods: {
     zoomUpdated (zoom) {
       this.zoom = zoom;
