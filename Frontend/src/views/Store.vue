@@ -64,7 +64,6 @@ export default {
   },
 
   methods: {
-
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
 

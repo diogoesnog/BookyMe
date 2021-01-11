@@ -98,6 +98,16 @@ class UserService {
     return request.get()
   }
 
+  getReviewsStore(id){ 
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.get()
+  } 
+
   getProfileData() {
 
     let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)

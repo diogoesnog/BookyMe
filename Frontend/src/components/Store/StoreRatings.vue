@@ -67,15 +67,25 @@
 </template>
 
 <script>
+
+import Service from '../../services/user.service'
+
 export default {
   name: "StoreRatings",
 
   data() {
-
+    return {
+      storeID: this.$route.params.id
+    }
   },
   
   props: {
-    rating: Number
+    rating: Number,
+    reviews: Array
+  },
+
+  mounted() {
+    this.fetchStoreReviews();
   },
 
   methods: {
@@ -84,7 +94,19 @@ export default {
     },
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
-    }
+    }, 
+    fetchStoreReviews() {
+      Service.getReviewsStore(this.storeID)
+        .then(response => {
+          let data = response.data["data"];
+          this.reviews = data;
+          console.log(this.reviews);
+        }).catch(err => console.log(err)
+
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },  
   }
 }
 </script>
