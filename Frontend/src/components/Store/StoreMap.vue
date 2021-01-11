@@ -16,7 +16,7 @@
       </div>
       <div class="infoPhone">
         <span style="font-weight: 700; font-size: 18px; display: inline-block; vertical-align: middle;">
-          234 434 434
+          {{ getPhoneSpaces() }}
         </span>
       </div>
       <div>
@@ -36,7 +36,7 @@ export default {
     latitude: Number,
     longitude: Number,
     address: Object,
-    phone: String
+    phone: Number
   },
   components: {
     LMap,
@@ -69,6 +69,9 @@ export default {
     },
     centerUpdated (center) {
       this.center = center;
+    },
+    getPhoneSpaces() {
+      return this.phone.toString().substring(0,3) + " " + this.phone.toString().substring(3,6) + " " + this.phone.toString().substring(6,9);
     }
   }
 }
