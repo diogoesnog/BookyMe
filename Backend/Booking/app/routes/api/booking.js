@@ -5,6 +5,7 @@ const checkAuth = require('../../middlewares/checkAuth');
 const isAdmin = require('../../middlewares/isAdmin');
 const getStoreId = require('../../middlewares/getStoreId');
 const { isOpen } = require('../../utils/isOpen');
+const { sameDay } = require('../../utils/sameDay')
 const Response = require('rapid-status');
 const Store = require('../../services/Stores/stores');
 
@@ -86,7 +87,6 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     let city;
     try {
         city = (await Store.getStore(req.params.storeId)).data.data.address.city;
-        console.log(city);
     } catch (err) {
         const response = Response.INTERNAL_ERROR(err, "Error Getting Store's City");
         res.status(response.status).jsonp(response);
@@ -103,6 +103,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     if (new Date(Date.now()) > new Date(booking.serviceDate)) {
         const response = Response.BAD_REQUEST("The date is from the past!");
         res.status(response.status).jsonp(response);
+        return
     }
 
     let schedule;
@@ -118,6 +119,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     if (schedule == null) {
         const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
         res.status(response.status).jsonp(response);
+        return
     }
 
     const serviceOpen = isOpen(new Date(booking.serviceDate), schedule);
@@ -130,7 +132,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
             .catch(err => {
                 const response = Response.INTERNAL_ERROR(err);
                 res.status(response.status).jsonp(response);
-        });
+            });
     } else {
         const response = Response.BAD_REQUEST("The service is closed");
         res.status(response.status).jsonp(response);
@@ -138,10 +140,10 @@ app.post('/:storeId', checkAuth, async (req, res) => {
 });
 
 /**
- * Delete a reservation by id
+ * Cancel a reservation by id
  * URL param: id
  */
-app.delete('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
+app.patch('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
     try {
         const ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
 
@@ -199,6 +201,7 @@ app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
         if (new Date(Date.now()) > new Date(serviceDate)) {
             const response = Response.BAD_REQUEST("Invalid Date");
             res.status(response.status).jsonp(response);
+            return;
         } else {
             const serviceOpen = isOpen(new Date(serviceDate), schedule);
 
@@ -222,6 +225,96 @@ app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
         const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to reschedule this reservation");
         res.status(response.status).jsonp(response);
     }
+});
+
+app.get('/current', checkAuth, (req, res) => {
+    const date = req.query.date
+    const storeID = req.query.storeId
+
+    let date_ini = new Date(date).setHours(0,0, 0);
+    let date_fin = new Date(date_ini).setHours(23,59, 59);
+    const date_now = new Date(Date.now());
+
+    if (sameDay(date_now, new Date(date_ini))) { // Same Day
+        date_ini = new Date(date_ini).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
+    } else if (date_now > new Date(date_ini)) { // Past
+        const response = Response.OK([]);
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    if (date_ini == "Invalid Date") {
+        const response = Response.BAD_REQUEST("Invalid Date");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    Booking.count(storeID, date_ini, date_fin, false)
+        .then(data => {
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+app.get('/concluded', checkAuth, (req, res) => {
+    const date = req.query.date
+    const storeID = req.query.storeId
+
+    let date_ini = new Date(date).setHours(0,0, 0);
+    let date_fin = new Date(date_ini).setHours(23,59, 59);
+    const date_now = new Date(Date.now());
+
+    if (sameDay(date_now, new Date(date_ini))) { // Same Day
+        date_fin = new Date(date_fin).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
+    } else if (date_now < new Date(date_ini)) { // Past
+        const response = Response.OK([]);
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    if (date_ini == "Invalid Date") {
+        const response = Response.BAD_REQUEST("Invalid Date");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    Booking.count(storeID, date_ini, date_fin, false)
+        .then(data => {
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+app.get('/canceled', checkAuth, (req, res) => {
+    const date = req.query.date
+    const storeID = req.query.storeId
+
+    const date_ini = new Date(date).setHours(0,0, 0);
+    const date_fin = new Date(date_ini).setHours(23,59, 59);
+
+    if (date_ini == "Invalid Date") {
+        const response = Response.BAD_REQUEST("Invalid Date");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    Booking.count(storeID, date_ini, date_fin, true)
+        .then(data => {
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
 });
 
 module.exports = app;

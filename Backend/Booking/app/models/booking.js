@@ -27,6 +27,11 @@ const bookingSchema = new mongoose.Schema({
     storeId: {
         type: String,
         required: true
+    },
+    canceled: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 
