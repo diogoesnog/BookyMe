@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12" style="padding-left: 30px">
+  <div class="col-12" style="padding-left: 30px; padding-top: 15px;">
     <p class="titles">{{$t('storePage.photos')}}</p>
     <div class="wrapper">
       <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
