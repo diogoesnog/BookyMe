@@ -8,7 +8,6 @@ const { isOpen } = require('../../utils/isOpen');
 const { sameDay } = require('../../utils/sameDay')
 const Response = require('rapid-status');
 const Store = require('../../services/Stores/stores');
-const Catalog = require('../../services/Stores/catalog');
 
 /**
  * Get list of reservations
