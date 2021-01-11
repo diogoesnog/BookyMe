@@ -29,7 +29,7 @@ const bookingSchema = new mongoose.Schema({
         required: true
     },
     canceled: {
-        type: String,
+        type: Boolean,
         required: true,
         default: false
     }

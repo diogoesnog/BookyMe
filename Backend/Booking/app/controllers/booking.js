@@ -113,7 +113,7 @@ module.exports.count = (storeId, date_i, date_f, canceled) => {
                         }
                     },
                     {
-                        canceled: canceled.toString()
+                        canceled: canceled
                     }
                 ]
             }
