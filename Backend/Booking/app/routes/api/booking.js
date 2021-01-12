@@ -62,6 +62,38 @@ app.get('/user', checkAuth, (req, res) => {
         });
 });
 
+app.get('/user/current', checkAuth, (req, res) => {
+    const date_now = new Date(Date.now());
+
+    Booking.getBookingsByUserCurrent(req.user.id, date_now)
+        .then(data => {
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
+/**
+ * Get all the reservations of the authenticated user
+ * URL param: /user
+ */
+app.get('/user/concluded', checkAuth, (req, res) => {
+    const date_now = new Date(Date.now());
+
+    Booking.getBookingsByUserConcluded(req.user.id, date_now)
+        .then(data => {
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        });
+});
+
 /**
  * Get Number of reservations for each store
  * URL: /popular
