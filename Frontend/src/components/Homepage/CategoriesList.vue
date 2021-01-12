@@ -1,6 +1,15 @@
 <template>
-  <div class="col-12" style="padding-left: 30px; padding-top: 18px;">
-    <p class="titles">{{$t('homePage.categories')}}</p>
+  <div class="col-12" style="color: #434343; padding-left: 30px; padding-top: 18px;">
+    <div class="row">
+      <div class="col-9">
+        <p class="titles">{{$t('homePage.categories')}}</p>
+      </div>
+      <div class="col-3" style="display: flex; justify-content: center; align-items: center;">
+        <router-link v-bind:to="'categories/'">  
+          <p>{{$t('homePage.seeAll')}}</p>
+        </router-link>
+      </div>
+    </div>
     <div class="wrapper">
       <div v-for="(category, index) in categories" :key="index" v-bind="category">
         <div class="item">
@@ -51,7 +60,7 @@ export default {
         })
     },
     getImage(category) {
-      return "../../../icons/categories/" + category + ".svg";
+      return "../../../icons/categories/" + category + "Gradient" + ".svg";
     },
   }
 }
@@ -107,6 +116,26 @@ export default {
   .wrapper {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+  }
+
+  a:link {
+    color: #434343;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #434343;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #434343;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: #434343;
+    text-decoration: none;
   }
 
 </style>
