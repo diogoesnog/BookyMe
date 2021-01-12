@@ -52,7 +52,7 @@ router.post('/:id', (req, res) => {
 });
 
 
-router.delete('/:id', (req, res) => {
+router.patch('/:id', (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
     Booking.deleteReservation(token, req.params.id)
@@ -65,6 +65,33 @@ router.put('/:id', (req, res) => {
     let body = JSON.stringify(req.body);
 
     Booking.changeReservation(token, body, req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/current', checkAuth, (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
+
+    Booking.current(token, query)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/concluded', checkAuth, (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
+
+    Booking.concluded(token, query)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/canceled', checkAuth, (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
+
+    Booking.canceled(token, query)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
