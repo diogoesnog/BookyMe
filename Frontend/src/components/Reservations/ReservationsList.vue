@@ -8,12 +8,18 @@
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
           <!-- Photo -->
-          <div class="col-4">
-            <!-- <img :src="getImage(reservation.mainStorePhotoURL)"/> -->
+          <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
           </div>
-          <div class="col-8">
-              <span class="titleStore">
-              </span>
+          <div class="col-6" style="padding: 10px;">
+            <span class="titleStore">
+              {{ reservation.storeName }}
+            </span>
+            <span class="titleService">
+              {{ reservation.storeName }}
+            </span>
+            <span class="hourDate">
+              {{ getHourDate(reservation.serviceDate) }}
+            </span>
           </div>
         </div>
         </div>
@@ -50,11 +56,37 @@ export default {
     getImage(url) {
       return this.urlMainPhoto = "http://localhost:5100" + url;
     },
+    getHourDate(string) {
+      var splits = string.split('T', 2);
+
+      // Date
+      var date = splits[0];
+      var dateSplit = date.split('-', 3);
+
+      var year = dateSplit[0] % 100;
+      var day = dateSplit[2];
+      var month = dateSplit[1];
+
+      // Hour
+      var hour = splits[1];
+      var hourSplit = hour.split(':00.000Z', 2)[0];
+      
+      return day + "/" + month + "/" + year + " - " + hourSplit;
+    }
   }
 }
 </script>
 
 <style scoped>
+
+  .divPhoto {
+    width: 35%;
+    height: 120px;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    background-size: cover;
+    background-position: center top;
+  }
 
   .cityDiv {
     background: linear-gradient(#13c1e0, #2897e3);
@@ -85,7 +117,27 @@ export default {
   .titleStore {
     text-overflow: ellipsis; 
     font-size: 20px; 
+    font-weight: 600; 
+    display: inline-block; 
+    width: 200px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
+  .titleService {
+    text-overflow: ellipsis; 
+    font-size: 16px; 
     font-weight: 350; 
+    display: inline-block; 
+    width: 200px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
+  .hourDate {
+    text-overflow: ellipsis; 
+    font-size: 20px; 
+    font-weight: 600; 
     display: inline-block; 
     width: 200px; 
     white-space: nowrap; 
