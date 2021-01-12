@@ -99,3 +99,25 @@ module.exports.current = (token, params) => {
 
     return request.get();
 }
+
+module.exports.getUserReservationsCurrent = (token) => {
+
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/user/current`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}
+
+module.exports.getUserReservationsConcluded = (token) => {
+
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/user/concluded`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}
