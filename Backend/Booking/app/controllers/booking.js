@@ -22,7 +22,7 @@ module.exports.getBookingsByStore = (id) => {
 module.exports.getBookingsByUser = (id) => {
     return Booking.aggregate([
         {
-            $match: { $and: [ { "userId": id }, { "canceled": "false" } ] }
+            $match: { $and: [ { "userId": id }, { "canceled": false } ] }
         },
         {
             $project : {
@@ -38,7 +38,7 @@ module.exports.getBookingsByUser = (id) => {
 module.exports.getPopularStoreList = () => {
     return Booking.aggregate([
         {
-            $match: {  "canceled": "false" }
+            $match: {  "canceled": false }
         },
         {
             '$group': {
