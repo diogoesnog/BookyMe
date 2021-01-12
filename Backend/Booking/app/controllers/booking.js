@@ -35,6 +35,52 @@ module.exports.getBookingsByUser = (id) => {
     ])
 };
 
+module.exports.getBookingsByUserCurrent = (id, date) => {
+    return Booking.aggregate([
+        {
+            $match: {
+                $and: [
+                    { "userId": id },
+                    { "canceled": false },
+                    { serviceDate: {$gte: date} }
+                ]
+            }
+        },
+        { $sort : { serviceDate : 1 } },
+        {
+            $project : {
+                canceled: 0
+            }
+        },
+        {
+            $group : { _id : "$city", booking: { $push: "$$ROOT" } }
+        }
+    ])
+};
+
+module.exports.getBookingsByUserConcluded = (id, date) => {
+    return Booking.aggregate([
+        {
+            $match: {
+                $and: [
+                    { "userId": id },
+                    { "canceled": false },
+                    { serviceDate: {$lt: date} }
+                ]
+            }
+        },
+        { $sort : { serviceDate : -1 } },
+        {
+            $project : {
+                canceled: 0
+            }
+        },
+        {
+            $group : { _id : "$city", booking: { $push: "$$ROOT" } }
+        }
+    ])
+};
+
 module.exports.getPopularStoreList = () => {
     return Booking.aggregate([
         {
