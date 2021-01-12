@@ -84,6 +84,8 @@ export default {
   bookingsPage: {
     title: "Reservations",
     description: "List of Recent and Old Bookings",
+    type1: "Recents",
+    type2: "Completed",
 
     newBooking: {
       title: "New Booking",

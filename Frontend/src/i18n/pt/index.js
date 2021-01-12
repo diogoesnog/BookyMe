@@ -84,6 +84,8 @@
   bookingsPage: {
     title: "Reservas",
     description: "Lista de Reservas Recentes e Anteriores",
+    type1: "Recentes",
+    type2: "Conluídas",
 
     newBooking: {
       title: "Nova Reserva",

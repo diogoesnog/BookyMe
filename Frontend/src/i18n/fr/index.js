@@ -78,6 +78,8 @@ export default {
   bookingsPage: {
     title: "Reservations",
     description: "Liste de Reservations Récentes et plus Anciennes",
+    type1: "Récent",
+    type2: "Terminé",
 
     newBooking: {
       title: "Nouveau Réservation",

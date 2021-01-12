@@ -15,7 +15,7 @@
               </span>
           </div>
         </div>
-        {{reservation.storeId}}
+        asas
       </div>
     </div>
   </div>

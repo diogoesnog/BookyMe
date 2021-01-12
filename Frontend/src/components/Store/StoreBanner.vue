@@ -75,7 +75,7 @@ export default {
       else return string.substring(0, 15) + "...";
     },
     getReservations() {
-      Service.getBookingUser()
+      Service.getBookingUserCurrent()
         .then(response => {
           let data = response.data["data"];
           this.reservationsUser = data;

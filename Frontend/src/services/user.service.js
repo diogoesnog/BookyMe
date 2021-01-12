@@ -54,9 +54,21 @@ class UserService {
     return request.get()
   }
 
-  getBookingUser(){
+  getBookingUserCurrent(){
 
-    let request = new Request(`${process.env.API_ENDPOINT}/booking/user`)
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/user/current`)
+    
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.get()
+
+  }
+
+  getBookingUserConcluded(){
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/user/concluded`)
     
     request.isJson()
     request.appendHeader("Authorization", authHeader())
