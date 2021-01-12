@@ -4,7 +4,9 @@
     <div class="wrapper">
       <div v-for="(category, index) in categories" :key="index" v-bind="category">
         <div class="item">
-          <img class="imgCategory" :src="getImage(category.title)"/>
+          <router-link v-bind:to="'stores/' + category.title">
+            <img class="imgCategory" :src="getImage(category.title)"/>
+          </router-link>
           <p class="titleCategory">{{category.title}}</p>
         </div>
       </div>
@@ -81,7 +83,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(100, auto);
     grid-gap: 0 20px;
-    height: 120px;
+    height: 150px;
   }
 
   .item {
