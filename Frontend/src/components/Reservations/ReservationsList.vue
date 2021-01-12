@@ -9,14 +9,14 @@
         <div class="row">
           <!-- Photo -->
           <div class="col-4">
+            <!-- <img :src="getImage(reservation.mainStorePhotoURL)"/> -->
           </div>
           <div class="col-8">
               <span class="titleStore">
               </span>
           </div>
         </div>
-        asas
-      </div>
+        </div>
     </div>
   </div>
 </template>
@@ -46,7 +46,10 @@ export default {
       else if(this._id.length >= 16 & this._id.length <= 18) return "65%";
       else if(this._id.length >= 19 & this._id.length <= 21) return "75%";
       else return "80%"    
-    }
+    },
+    getImage(url) {
+      return this.urlMainPhoto = "http://localhost:5100" + url;
+    },
   }
 }
 </script>
