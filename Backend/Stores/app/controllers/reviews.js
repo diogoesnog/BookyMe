@@ -35,18 +35,18 @@ module.exports.getRatings = (id) => {
 module.exports.insertReview = async (review) => {
     
     
-    reviews = await Review.find({storeID: review.storeID})    
-    tamanho = reviews.length
-    sum = 0
+    let reviews = await Review.find({storeID: review.storeID});
+    let tamanho = reviews.length;
+    let sum = 0;
     if(tamanho > 0){
         i = 0
         while(i<tamanho){
             sum += reviews[i].rating
             i++
         }
-        soma = Number(sum) + Number(review.rating)
-        tamanhoTotal = tamanho + 1
-        newStoreRating = (soma / tamanhoTotal)
+        let soma = Number(sum) + Number(review.rating);
+        let tamanhoTotal = tamanho + 1;
+        let newStoreRating = (soma / tamanhoTotal)
         Store.updateOne({_id: review.storeID},{$set: {rating: newStoreRating}}).exec()
     }
     else {
