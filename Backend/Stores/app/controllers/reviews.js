@@ -1,10 +1,10 @@
 const Review = require('../models/review');
 const Store = require ('../models/store')
 const mongoose = require('mongoose');
-
+const Service = require('../services/users');
 
 module.exports.getReviews = (id) => {
-    return Review.find({storeID: id});
+    return Review.find({storeID: id}).lean();
 }
 
 
@@ -22,15 +22,6 @@ module.exports.getRatings = (id) => {
         }}
     ]).exec()
 }
-
-/*module.exports.getRatings = (id) => {
-    return Review.aggregate([
-        { $match: { storeID: mongoose.Types.ObjectId(id) } },
-        { $group: { _id: id , average: {
-            $sum: { $sum: "$ratings"}
-        } } }
-    ]);
-}*/
 
 module.exports.insertReview = async (review) => {
     
@@ -63,3 +54,26 @@ module.exports.removeStoreReviews = (id) => {
 module.exports.removeReview = (id) => {
     return Review.deleteOne({_id: id})
 }
+
+module.exports.mergeByUserId = async (reviews) => {
+    let id = reviews.map(function(review){ return review.userId; });
+    console.log(id);
+    try {
+        let response = await Service.getUsersById(id);
+        let users = response.data[ "data" ]
+
+
+        return mergeById(reviews, users);
+    } catch(err) {
+        return [];
+    }
+}
+
+const mergeById = (reviews, users) => {
+    return users.map(user => ({
+        ...reviews.find((review) => (user._id === review.userId) && reviews),
+        user: {
+            ...user
+        }
+    }));
+};
