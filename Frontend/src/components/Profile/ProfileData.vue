@@ -57,7 +57,7 @@
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
           <q-form  class="q-gutter-md">
-              <q-input borderless v-model="profile.name" style="height: 30px;" type="text" :disable ="!editavel">
+              <q-input borderless v-model="profile.name"  style="height: 30px;" type="text" :disable ="!editavel">
                 <template v-slot:prepend>
                     <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
                 </template>
@@ -130,8 +130,10 @@
         
         
         <div style="margin-left: 10px; margin-top:7px">
+         
+         
          <q-form  class="q-gutter-md">
-              <q-input borderless v-model="password" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
+              <q-input borderless v-model="newPassword" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
                 
                 <template v-slot:prepend>
                     <q-icon name="fas fa-lock" color="grey-5" />
@@ -172,6 +174,9 @@
 import Service from '../../services/auth.service'
 import User from '../../models/User';
 
+
+
+
 export default {
   name: "ProfileData",
   props: {
@@ -189,20 +194,19 @@ export default {
 
   data () {
     return {
-      texto: '',
       isPwd: true,
       editavel: false,
       editavel2: false,
       esconde:false,
       atualizados: [],
       editUser: new User(),
-      password: '***************',
+      componentKey: 0,
+      newPassword: '***************',
       oldPassword:'***************'
     }
   },
 
   methods: {
-    //TODO: método que edita a info e a pass 
     handleSubmit(e) {
         e.preventDefault();
 
@@ -218,12 +222,14 @@ export default {
       this.editavel = true;
       this.esconde = true;
       
+      
     },
 
      bottomEdit2(){
       this.editavel2 = true;
       this.esconde2 = true;
-      
+      this.newPassword = '';
+      this.oldPassword = '';
     },
     
     bottomSave(e){
@@ -241,7 +247,7 @@ export default {
       console.group("UserUpdatePassword");
       let data ={
         oldPassword: this.oldPassword,
-        newPassword:this.password
+        newPassword:this.newPassword
         }
       this.$emit('changeUserPassword', data);
       this.editavel2 = false;
@@ -252,12 +258,16 @@ export default {
     bottomCancel(){
       this.editavel = false;
       this.esconde = false;
+      this.componentKey += 1;
+      
     },    
 
 
     bottomCancel2(){
       this.editavel2 = false;
       this.esconde2 = false;
+      this.newPassword= '***************';
+      this.oldPassword='***************';
     }    
   }
 }
