@@ -102,8 +102,8 @@ export default {
       serviceType: "Type de Service",
       dateAndTime: "Date et l'Heure",
 
-      changeBooking: "Changer Réservation",
-      cancelBooking: "Annuler Résevation"
+      changeBooking: "Changer",
+      cancelBooking: "Annuler"
     }
   },
 

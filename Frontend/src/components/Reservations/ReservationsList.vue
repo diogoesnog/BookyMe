@@ -30,14 +30,33 @@
 
           <!-- Pop Up Alterar Reserva -->
           <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
-            <q-card style="color: #434343 !important; width: 100%; border-radius: 25px; text-align: center">
-              <q-card-section>
-                <span style="font-size: 1.5rem; font-weight: 600;">{{ reservation.storeName }}</span>
-                <p style="font-size: 1.25rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
+            <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
+              <q-card-section style="padding: 25px; width: 100%;">
+                <span class="titleStorePopup">{{ reservation.storeName }}</span>
+                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
               </q-card-section>
-
-              <q-card-actions align="right" class="bg-white text-teal">
-                <q-btn flat label="OK" v-close-popup />
+              <q-card-actions style="margin-left: 20px; margin-right: 20px;" align="center" class="bg-white text-teal">
+                <div class="row" style="width: 100%;">
+                  <div class="col-12" style="color: #434343; font-size: 20px; font-weight: 600; text-align: left; padding: 10px">
+                    <span>{{$t('bookingsPage.editPopup.dateAndTime')}}</span>
+                  </div>
+                  <div class="col-6" style="padding-right: 10px;">
+                    <q-select behavior="menu" rounded outlined v-model="model" :options="options"/>
+                  </div>
+                  <div class="col-6" style="padding-left: 10px;">
+                    <q-select behavior="menu" rounded outlined v-model="model" :options="options"/>
+                  </div>
+                </div>
+              </q-card-actions>
+              <q-card-actions style="margin: 20px;" align="center" class="bg-white text-teal">
+                <div class="row" style="width: 100%;">
+                  <div class="col-6" style="padding-right: 10px;">
+                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.editPopup.changeBooking')" v-close-popup />
+                  </div>
+                  <div class="col-6" style="padding-left: 10px;">
+                    <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
+                  </div>
+                </div>
               </q-card-actions>
             </q-card>
           </q-dialog>
@@ -60,7 +79,11 @@ export default {
 
   data() {
     return {
-      persistent: false
+      persistent: false,
+      model: null,
+      options: [
+        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+      ]
     }
   },
 
@@ -146,6 +169,16 @@ export default {
     overflow: hidden !important;
   }
 
+  .titleStorePopup {
+    text-overflow: ellipsis; 
+    font-size: 26px; 
+    font-weight: 600; 
+    display: inline-block; 
+    width: 270px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
   .titleService {
     text-overflow: ellipsis; 
     font-size: 16px; 
@@ -164,6 +197,47 @@ export default {
     width: 160px; 
     white-space: nowrap; 
     overflow: hidden !important;
+  }
+
+  .q-btn1 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    outline: 0;
+    border: 0;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-decoration: none;
+    color: white !important;
+    background: linear-gradient(#13c1e0, #2897e3) !important;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .q-btn2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    outline: 0;
+    border: 0;
+    vertical-align: middle;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-decoration: none;
+    color: white !important;
+    background: linear-gradient(#e9695c, #e03459) !important;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    width: 100%;
+    height: auto;
   }
 
 </style>

@@ -108,8 +108,8 @@ export default {
       serviceType: "Type of Service",
       dateAndTime: "Date and Time",
 
-      changeBooking: "Change Reservation",
-      cancelBooking: "Cancel Reservation"
+      changeBooking: "Change",
+      cancelBooking: "Cancel"
     }
   },
 

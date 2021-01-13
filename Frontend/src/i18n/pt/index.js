@@ -108,8 +108,8 @@
       serviceType: "Tipo de Serviço",
       dateAndTime: "Data e Hora",
 
-      changeBooking: "Alterar Reserva",
-      cancelBooking: "Cancelar Reserva"
+      changeBooking: "Alterar",
+      cancelBooking: "Cancelar"
     }
   },
 
