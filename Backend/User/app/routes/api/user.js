@@ -222,7 +222,7 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
             response = Response.CREATED(data);
             res.status(response.status).json(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(data);
+            response = Response.INTERNAL_ERROR(err);
             res.status(response.status).json(err);
         });
 });
@@ -233,11 +233,25 @@ router.post('/avatar', checkAuth, upload.single('avatar'), (req,res) => {
  *  {header.Authorization}: TOKEN
  */
 router.get('/validation', checkAuth, (req, res) => {
-
     let response = Response.OK(req.decodedUser, "Authorized");
-
     res.status(response.status).jsonp(response);
+});
 
+/**
+ * Get Several Users by Array of Ids
+ */
+router.post('/profiles', (req, res) => {
+    let id = req.body.users;
+    let response;
+    console.log(id);
+    Users.getUsersByIdArray(id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).json(err);
+        });
 });
 
 
