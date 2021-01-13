@@ -1,42 +1,41 @@
 <template>
-  <div >
-    <div class="centerDiv" >
-      <!-- <div class="row">
-        <div class="col-4">
-          <q-select
-            class="selectLanguage"
-            rounded
-            outlined
-            v-model="lang"
-            :options="langOptions"
-            :label="$t('settingsPage.language')">
-          </q-select>
-        </div>
-      </div>-->
-
+  <div>
+    <StoreBanner v-bind="storeData"/>
+    <div class="divBottom">
+      <div class="row">
+        <StorePhotos v-bind="storeData"/>
+        <StoreDescription v-bind="storeData"/>
+        <StoreMap v-bind="storeData"/>
+        <StoreCatalog v-bind="storeData"/>
+        <StoreRatings v-bind="storeData"/>
+      </div>
     </div>
-    <div>
-      <StoreData v-bind="storeData"/>
-    </div>
-    <div>
-      <Toolbar/>
-    </div>
+    <Toolbar/>
   </div>
-
 </template>
 
 <script>
 
-import Toolbar from '../components/Root/Toolbar';
-import StoreData from '../components/Store/StoreData';
+import Toolbar from 'components/Root/Toolbar';
 import Service from '../services/user.service'
+import StoreBanner from 'components/Store/StoreBanner';
+import StoreRatings from "components/Store/StoreRatings";
+import StorePhotos from "components/Store/StorePhotos";
+import StoreMap from "components/Store/StoreMap";
+import StoreCatalog from "components/Store/StoreCatalog";
+import StoreDescription from "components/Store/StoreDescription";
 
 
 export default {
 
   name: "Store",
   components: {
-    StoreData,
+    StoreBanner,
+    StorePhotos,
+    StoreDescription,
+    StoreMap,
+    StoreCatalog,
+    StoreRatings,
     Toolbar
   },
 
@@ -68,7 +67,6 @@ export default {
   },
 
   methods: {
-
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
 
@@ -83,7 +81,7 @@ export default {
       ).finally(() => {
         this.$q.loading.hide();
       })
-    }
+    },
   }
 
 }
@@ -93,9 +91,10 @@ export default {
 
 <style scoped>
 
-.centerDiv {
-  padding: 5px;
-  margin-top: 5px;
+.divBottom {
+  position: relative;
+  padding-top: 315px;
+  padding-left: 0px;
 }
 
 </style>

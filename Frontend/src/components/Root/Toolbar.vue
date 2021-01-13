@@ -17,8 +17,8 @@
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
                 <q-avatar class="shadow" size="lg">
-                  <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3;" :src="getImage()">
-                  <img v-else style="border: 3px solid #434343;" :src="getImage()">
+                  <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3; object-fit: cover;" :src="getImage()">
+                  <img v-else style="border: 3px solid #434343; object-fit: cover;" :src="getImage()">
                 </q-avatar>
               </q-route-tab>
           </q-tabs>

@@ -243,7 +243,7 @@ router.get('/validation', checkAuth, (req, res) => {
 router.post('/profiles', (req, res) => {
     let id = req.body.users;
     let response;
-
+    console.log(id);
     Users.getUsersByIdArray(id)
         .then(data => {
             response = Response.OK(data);

@@ -1,15 +1,911 @@
 [{
   "_id": {
-    "$oid": "5ff4eccd0ea3ec084c4fd75c"
+    "$oid": "5fff211c79e62af97bf3afb5"
   },
   "storeID": {
     "$oid": "5ff4a6e77df75e2ace11b036"
   },
-  "userId": "5ff4a53709404a2ade1fbd4a",
-  "comment": "A sangria estava óptima! Mas o gelado frito era melhor... 😋😋",
-  "rating": 4.5,
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Bommm😋",
+  "rating": 3,
   "date": {
-    "$date": "2021-01-05T22:48:45.858Z"
+    "$date": "2021-01-13T16:34:36.677Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afb6"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Provei o rodízio e gostei muito! Boa relação qualidade/ preço! O atendimento é muito simpático, sempre disponíveis e atenciosos!",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:36.743Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afb7"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Boa variedade e qualidade de sushi e sashimi, funcionárias simpáticas",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:36.773Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afb8"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Ambiente agradável e comida reconfortante!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:36.784Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afb9"
+  },
+  "storeID": {
+    "$oid": "5ff4a6e77df75e2ace11b036"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Espaço bonito. Demorou a chegar a comida. Funcionários simpáticos e prestäveis. ",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:36.797Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afba"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Uma coisa que tenho de dizer acerca desta clinica é que nunca desilude! Os funcionários são muito profissionais.",
+  "rating": 1,
+  "date": {
+    "$date": "2021-01-13T16:34:36.811Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afbb"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Horrível! Odiei! Pelo amor de santo deus, a dentista quase que me prefurava o cerebro! Não aconselho!",
+  "rating": 0,
+  "date": {
+    "$date": "2021-01-13T16:34:36.832Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afbc"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Paguei um balurdio para me taparem um buraco no dente! O médico não pos anastesia eu sofri muito. Estou com as gengivas em sague e com comichon! Horrível",
+  "rating": 2,
+  "date": {
+    "$date": "2021-01-13T16:34:36.848Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afbd"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Adorei o serviço! Recomendo a dentista Mariana Lino",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:36.867Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afbe"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Recomendo esta clínica. Para além de ser bastante acessível!",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:36.882Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afbf"
+  },
+  "storeID": {
+    "$oid": "5ff4a7887df75e2ace11b03c"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Melhor Restaurante de Sushi de Braga! O sushi é dívino e o serviço ainda melhor. Os funcionários são muito simpaticos",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:36.897Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afc0"
+  },
+  "storeID": {
+    "$oid": "5ff4a7887df75e2ace11b03c"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Amei a experiência! é para voltar repetir",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:36.912Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afc1"
+  },
+  "storeID": {
+    "$oid": "5ff4a7887df75e2ace11b03c"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Adorei a sangria de frutos vermelhos e os takoyakis! Surprendem sempre com uma entrada ao gosto do chefe! Aconselho!",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:36.929Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afc2"
+  },
+  "storeID": {
+    "$oid": "5ff4a7887df75e2ace11b03c"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "O Donburi Vegetariano é delicioso! Adoramos",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:36.944Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afc3"
+  },
+  "storeID": {
+    "$oid": "5ff4a7887df75e2ace11b03c"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Melhor TORI KARAAGE de braga!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:36.968Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211c79e62af97bf3afc4"
+  },
+  "storeID": {
+    "$oid": "5ff4a80f7df75e2ace11b03e"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Melhor Francesinha de Braga",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:36.992Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afc5"
+  },
+  "storeID": {
+    "$oid": "5ff4a80f7df75e2ace11b03e"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Não gostei nada do serviço! Tivemos de esperar 2h até termos mesa e os funcionários estavam sempre distraidos!",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.017Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afc6"
+  },
+  "storeID": {
+    "$oid": "5ff4a80f7df75e2ace11b03e"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Bom restaurante para reuniur os amigos! Comida impecável e sempre acompanho por uma boa cerveja!",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.035Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afc7"
+  },
+  "storeID": {
+    "$oid": "5ff4a80f7df75e2ace11b03e"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": " Fui à Taberna Belga II e comi a melhor francesinha até hoje. Boas cervejas internacionais. Preços justos. Serviço simpático e eficiente. Pontos negativos: 1 saí com a roupa a cheirar a fritos; 2. as mesas estavam muito juntas umas das outras, não respeitando a distância de 1,5m entre elas (as costas da minha cadeira tocavam na cadeira da mesa atrás de mim).",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.051Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afc8"
+  },
+  "storeID": {
+    "$oid": "5ff4a80f7df75e2ace11b03e"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Sem dúvida a melhor francesinha do país. Desde o molho à qualidade dos ingredientes utilizados e ao profissionalismo dos empregados. Recomendo vivamente.",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.067Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afc9"
+  },
+  "storeID": {
+    "$oid": "5ff4a8dd7df75e2ace11b044"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Excelente! Sabia que queria cortar, mas não exatamente como. Obrigada André pela ajuda e conselho! Ficou espetacular!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.100Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afca"
+  },
+  "storeID": {
+    "$oid": "5ff4a8dd7df75e2ace11b044"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Excelente! Sabia que queria cortar, mas não exatamente como. Obrigada André pela ajuda e conselho! Ficou espetacular!",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.114Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afcb"
+  },
+  "storeID": {
+    "$oid": "5ff4a8dd7df75e2ace11b044"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "O André é um excelente profissional. Fiquei satisfeita com o corte e o atendimento recebido.",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.134Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afcc"
+  },
+  "storeID": {
+    "$oid": "5ff4a8dd7df75e2ace11b044"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Les prix qui varient selon les origines, c'est pas très honnête quand même",
+  "rating": 1,
+  "date": {
+    "$date": "2021-01-13T16:34:37.158Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afcd"
+  },
+  "storeID": {
+    "$oid": "5ff4a8dd7df75e2ace11b044"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "A melhor experiência de corte e atendimento que já tive! O atendimento é especializado, dirigido às necessidades únicas de cada cabelo. Tenho cabelo encaracolado e senti-me ouvida e cuidada. Obrigada André!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.173Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afce"
+  },
+  "storeID": {
+    "$oid": "5ff4a9647df75e2ace11b048"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Já fiquei neste espaço 2 vezes, a trabalho e a lazer. O sítio é incrível, acolhedor,  no coração de inigualável espaço natural do Norte de Portugal, com uns chalets de montanha fenomenais, limpos, acolhedores, bem decorados e com vista de tirar a respiração. Mas o meu destaque vai mesmo para o staff. Desde a Receção, ao pessoal do restaurante, ao pessoal de Housekeeping, aos monitores, ao Diretor de Marketing, fui tratada sempre como se fosse da casa, com toda a cordialidade, simpatia e calor que só as gentes do Norte sabem oferecer! Os meus sinceros parabéns. Certamente haveremos de trabalhar juntos mais vezes no futuro. Recomendo vivamente!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.215Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afcf"
+  },
+  "storeID": {
+    "$oid": "5ff4a9647df75e2ace11b048"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Pessoal top, muito divertido, restaurante espetacular.",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.229Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd0"
+  },
+  "storeID": {
+    "$oid": "5ff4a9647df75e2ace11b048"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Local atrativo, para quem gosta da natureza e aventura. Quando à gastronomia é fantástica Parabéns.",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.243Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd1"
+  },
+  "storeID": {
+    "$oid": "5ff4a9647df75e2ace11b048"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Acolhimento maravilhoso, adrenalina à medida de cada um, um lugar para todas as famílias e amigos 👍",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.261Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd2"
+  },
+  "storeID": {
+    "$oid": "5ff4a9647df75e2ace11b048"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Local fantástico para uns dias de atividades na natureza. Staff muito simpático e atencioso. O Restaurante Panorâmico tem uma ementa de ótima  qualidade e todo o pessoal é excelente! Tudo espetacular para crianças!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.277Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd3"
+  },
+  "storeID": {
+    "$oid": "5ff4a8aa7df75e2ace11b040"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "A Boutique tem um serviço 5* e os funcionários também. Já a vossa linha de atendimento é das piores que já tive a opoetunidade de contatar. Foi nesta loja que me ajidaram.",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.291Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd4"
+  },
+  "storeID": {
+    "$oid": "5ff4a8aa7df75e2ace11b040"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Finalmente fui atendida por uma funcionária, super simpática, educada e excelente profissional. A Cássia Alves foi de facto extraordinária. Saí de lá com muito mais caixas de café que o previsto porque esta funcionária além de esclarecedora teve tempo para me apresentar sugestões e preocupar-se em me atender da melhor forma possível. Sinceramente não estava habituada a ser tratada tão bem nesta loja na qual sou cliente há bastante tempo. Parabéns pela escolha da funcionária.",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.304Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd5"
+  },
+  "storeID": {
+    "$oid": "5ff4a8aa7df75e2ace11b040"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "local muito especializado e com todos os cuidados necessários. pessoal bem formado e com vontade de ajudar fazendo algumas sugestões para tentar vender mais umas caixinhas de café, mas que só pode fazer aquilo que as promoções ditam é sempre preferível, para quem pode, encomendar online. 2",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.318Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd6"
+  },
+  "storeID": {
+    "$oid": "5ff4a8aa7df75e2ace11b040"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Detestei o atendimento, funcionária rude sem educação, toda mal disposta pelo simples facto de eu ter pedido uma informação.Deviam ter umas aulas de como atender bem o cliente.",
+  "rating": 1,
+  "date": {
+    "$date": "2021-01-13T16:34:37.338Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd7"
+  },
+  "storeID": {
+    "$oid": "5ff4a8aa7df75e2ace11b040"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Simpatia de todo o staff",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.357Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd8"
+  },
+  "storeID": {
+    "$oid": "5ff4a8bd7df75e2ace11b042"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Fiz depilação laser e saí de lá com duas queimaduras. O preço é chamativo, mas não recomendo.",
+  "rating": 1,
+  "date": {
+    "$date": "2021-01-13T16:34:37.375Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afd9"
+  },
+  "storeID": {
+    "$oid": "5ff4a8bd7df75e2ace11b042"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Gostei da experiência e disponibilidade das meninas",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.388Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afda"
+  },
+  "storeID": {
+    "$oid": "5ff4a8bd7df75e2ace11b042"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Gosto muito do atendimento. Preço de depilação laser muito acessível em relação aos outros locais. Não troco!",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.412Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afdb"
+  },
+  "storeID": {
+    "$oid": "5ff4a8bd7df75e2ace11b042"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Um exelente trabalho e muito simpaticos",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.428Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afdc"
+  },
+  "storeID": {
+    "$oid": "5ff4a8bd7df75e2ace11b042"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Melhor escolha que eu fiz!",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.441Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afdd"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Atendimento muito simpático. \nEnorme variedade de marcas para a compra de guitarras. Explicação do funcionário muito boa ou excelente, com enorme conhecimento. Recomendo.",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.455Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afde"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Excelente loja para adquirir instrumentos e acessórios, com excelentes preços e muita variedade! De realçar a simpatia do atendimento!",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.468Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afdf"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Recomendo plenamente a todos os amantes de instrumentos musicais. Diversificado, excelente atendimento, variedade de preços e experiência!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.481Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe0"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Simpatia no atendimento. Muito material e de boa qualidade",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.496Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe1"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Atendimento muito simpático e sempre com bons aconselhamentos.",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.514Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe2"
+  },
+  "storeID": {
+    "$oid": "5ff4a9c57df75e2ace11b053"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Adorei muito o atendimento desta clínica, pois minha filhota foi tratada com muito carinho e a veterinária foi muito atenciosa me tirando todas as dúvidas que eu tinha",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.528Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe3"
+  },
+  "storeID": {
+    "$oid": "5ff4a9c57df75e2ace11b053"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Atendimento prestativo. Acompanhamento telefônico nos primeiros dias após consulta/tratamento",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.545Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe4"
+  },
+  "storeID": {
+    "$oid": "5ff4a9c57df75e2ace11b053"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Local muito agradável,  ótimo atendimento, minha gata é muito bem tratada, recomendo demais essa clinica veterinaria",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.577Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe5"
+  },
+  "storeID": {
+    "$oid": "5ff4a9c57df75e2ace11b053"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Profissionalismo, simpatia e espirito de equipa!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.592Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe6"
+  },
+  "storeID": {
+    "$oid": "5ff4a9c57df75e2ace11b053"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Muito competentes, profissionais...",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.606Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe7"
+  },
+  "storeID": {
+    "$oid": "5ff4aa347df75e2ace11b069"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Sem qualquer medidas de precaução. Leis e capacidade 50% não existe. Tudo ao garrote. Funcionários é difícil identificar",
+  "rating": 1,
+  "date": {
+    "$date": "2021-01-13T16:34:37.626Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe8"
+  },
+  "storeID": {
+    "$oid": "5ff4aa347df75e2ace11b069"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Local óptimo para convívio social entre amigos,  porém o staff um pouco arrogante. Cocktail sem álcool, muito saboroso. 👍👍👍",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.643Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afe9"
+  },
+  "storeID": {
+    "$oid": "5ff4aa347df75e2ace11b069"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Serviço péssimo.  Atendimento arrogante. Estive no domingo aí ao qual tentaram impingir uma narguille de 20€, prefereindo eu a de 11€ reclamei que não estava boa e resposta foi pedisse a mais cara. Para alem de estar cheio de mais que a lotaçao permitida por lei. A não voltar.",
+  "rating": 0,
+  "date": {
+    "$date": "2021-01-13T16:34:37.659Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afea"
+  },
+  "storeID": {
+    "$oid": "5ff4aa347df75e2ace11b069"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Bom atendimento local agradável e acolhedor excelentes profissionais",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.679Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afeb"
+  },
+  "storeID": {
+    "$oid": "5ff4aa347df75e2ace11b069"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Mau ambiente, demasiado fumo. Sendo a casa que é, devia ter melhor extracção de fumo. Não gostei da comida.",
+  "rating": 1,
+  "date": {
+    "$date": "2021-01-13T16:34:37.698Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afec"
+  },
+  "storeID": {
+    "$oid": "5ff4aa487df75e2ace11b06b"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Recepção com um senhor bem simpático, acervo do primeiro andar outro senhor bem simpático a atender e sanar as dúvidas. Acervo disponível com rapidez. Instalações limpas. Eu recomendo",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.713Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afed"
+  },
+  "storeID": {
+    "$oid": "5ff4aa487df75e2ace11b06b"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Situada no centro da cidade. Edificio moderno, funcional, acolhedor e confortável . Ha atividades variadas, mas enfoque principal nos livros (muitos e bons). Ambiente muito favorável para estudar e investigar. colaboradores são muito simpaticos e disponíveis.  Podem ler-se jornais semanários  e diários. Pequeno jardim no interior. Bar disponivel. Biblioteca juvenil.  Há  estacionamento (não  gratuito) na proximidade",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.727Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afee"
+  },
+  "storeID": {
+    "$oid": "5ff4aa487df75e2ace11b06b"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Braga tem tudo de uma grande cidade.",
+  "rating": 3,
+  "date": {
+    "$date": "2021-01-13T16:34:37.739Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3afef"
+  },
+  "storeID": {
+    "$oid": "5ff4aa487df75e2ace11b06b"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Lugar ideal para estudar ler livros e pesquisas na NET também dá para impressão de documentos",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.754Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3aff0"
+  },
+  "storeID": {
+    "$oid": "5ff4aa487df75e2ace11b06b"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Biblioteca realmente comprometida com os valores mentais, intelectuais e espirituais do ser humano. Instituição de referência literária de ampla abrangência e qualidade.",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.767Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3aff1"
+  },
+  "storeID": {
+    "$oid": "5ff4aa8f7df75e2ace11b06d"
+  },
+  "userId": "5ffb887cd5f76b866e422eb6",
+  "comment": "Atendimento ágil e rápido para aqueles que tem precisam de rapidez na inspeção. Recomendo!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.781Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3aff2"
+  },
+  "storeID": {
+    "$oid": "5ff4aa8f7df75e2ace11b06d"
+  },
+  "userId": "5ffb88aad5f76b866e422eb7",
+  "comment": "Sempre me atenderam cinco estrelas",
+  "rating": 5,
+  "date": {
+    "$date": "2021-01-13T16:34:37.794Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3aff3"
+  },
+  "storeID": {
+    "$oid": "5ff4aa8f7df75e2ace11b06d"
+  },
+  "userId": "5ffb88b9d5f76b866e422eb8",
+  "comment": "Um centro de inspeção, onde encontro bons profissionais. Voltarei.",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.807Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3aff4"
+  },
+  "storeID": {
+    "$oid": "5ff4aa8f7df75e2ace11b06d"
+  },
+  "userId": "5ffb88cad5f76b866e422eb9",
+  "comment": "Sr. Fernando é um funcionário muito amável, brincou e teve muita paciência com minha filha! Menino Nuno também teve muita boa vontade em me ajudar! Muito obrigada a equipa!",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.822Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fff211d79e62af97bf3aff5"
+  },
+  "storeID": {
+    "$oid": "5ff4aa8f7df75e2ace11b06d"
+  },
+  "userId": "5ffb88dcd5f76b866e422eba",
+  "comment": "Ambiente limpo e organizado. Funcionários atenciosos e simpáticos. Indico! :)",
+  "rating": 4,
+  "date": {
+    "$date": "2021-01-13T16:34:37.849Z"
   },
   "__v": 0
 }]
