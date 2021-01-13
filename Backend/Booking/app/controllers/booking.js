@@ -119,7 +119,6 @@ module.exports.getUserFromID = (bookingID) => {
 
 module.exports.reschedule = (id, bookingDate, serviceDate, service) => {
     if (service) {
-        console.log("YES");
         return Booking.findByIdAndUpdate(id, {
             serviceDate: serviceDate,
             bookingDate: bookingDate,
