@@ -124,7 +124,7 @@ export default {
     width: 130px;
     border-radius: 100px;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;

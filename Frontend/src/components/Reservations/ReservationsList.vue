@@ -21,6 +21,9 @@
               {{ getHourDate(reservation.serviceDate) }}
             </span>
           </div>
+          <div class="col-1">
+            <img src="../../assets/Icons/More.svg"/>
+          </div>
         </div>
         </div>
     </div>
@@ -119,7 +122,7 @@ export default {
     font-size: 20px; 
     font-weight: 600; 
     display: inline-block; 
-    width: 200px; 
+    width: 160px; 
     white-space: nowrap; 
     overflow: hidden !important;
   }
@@ -129,7 +132,7 @@ export default {
     font-size: 16px; 
     font-weight: 350; 
     display: inline-block; 
-    width: 200px; 
+    width: 160px; 
     white-space: nowrap; 
     overflow: hidden !important;
   }
@@ -139,7 +142,7 @@ export default {
     font-size: 20px; 
     font-weight: 600; 
     display: inline-block; 
-    width: 200px; 
+    width: 160px; 
     white-space: nowrap; 
     overflow: hidden !important;
   }
