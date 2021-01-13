@@ -50,13 +50,13 @@
            <q-btn @click="bottomSave" label="Save" color="primary" :invisible= "!esconde"/>
         </div>
         <div >
-          <q-btn @click="bottomCancel" label="Cancel" color="primary" :invisible= "!esconde"/>
+          <q-btn @click="bottomCancel" label="Cancel" color="primary" />
         </div>
       
         <!-- Nome -->
         <div style="margin-left: 10px; margin-top: 15px;" >
           <q-form  class="q-gutter-md">
-              <q-input borderless v-model="editUser.name" style="height: 30px;" type="text" :disable ="!editavel">
+              <q-input borderless v-model="profile.name" style="height: 30px;" type="text" :disable ="!editavel">
                 <template v-slot:prepend>
                     <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
                 </template>
@@ -66,7 +66,7 @@
         <!-- Nome de Utilizador -->
         <div style="margin-left: 10px;">
           <q-form  class="q-gutter-md">
-          <q-input borderless v-model="editUser.username" style="height: 30px;" :disable ="!editavel">
+          <q-input borderless v-model="profile.username" style="height: 30px;" :disable ="!editavel">
             <template v-slot:prepend>
               <span style="font-size: 28px; font-weight:350">#</span>
             </template>
@@ -75,7 +75,7 @@
         </div>
         <!-- Email -->
         <div style="margin-left: 10px;">
-          <q-input borderless v-model="editUser.email" style="height: 30px;" :disable ="!editavel" >
+          <q-input borderless v-model="profile.email" style="height: 30px;" :disable ="!editavel" >
             <template v-slot:prepend>
               <span style="font-size: 20px; font-weight:350">@</span>
             </template>
@@ -87,13 +87,13 @@
             <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; "/>
           </div>
           <div class="col-11" style="padding-left: 15px">
-            <q-input borderless v-model="editUser.address" style="height: 30px;" :disable ="!editavel"/>
+            <q-input borderless v-model="profile.address" style="height: 30px;" :disable ="!editavel"/>
             <div class = "row" style="margin-top: -10px;">
               <div class= "col-3">
-                <q-input borderless v-model="editUser.zipCode" style="height: 30px;" :disable ="!editavel"/> 
+                <q-input borderless v-model="profile.zipCode" style="height: 30px;" :disable ="!editavel"/> 
               </div>
               <div class= "col-9">
-                <q-input borderless v-model="editUser.city" style="height: 30px;" :disable ="!editavel"/>
+                <q-input borderless v-model="profile.city" style="height: 30px;" :disable ="!editavel"/>
               </div>  
             </div>
           </div>
@@ -129,9 +129,9 @@ import Service from '../../services/auth.service'
 import User from '../../models/User';
 
 export default {
-
   name: "ProfileData",
   props: {
+    profile: Object,
     _id: String,
     name: String,
     username: String,
@@ -152,20 +152,6 @@ export default {
       editUser: new User(),
     }
   },
-
- /*  mounted() {
-    console.log("LoginForm Mounted");
- 
-    this.editUser = new User(this.name, this.username, this.email, this.address, this.city, this.zipCode);
-                         
-
-  }, */
-
-  created(){
-     this.editUser = new User();
-  },
-
-
 
   methods: {
     //TODO: método que edita a info e a pass 
@@ -189,7 +175,12 @@ export default {
     bottomSave(e){
       e.preventDefault();
       console.group("UserUpdateInformation");
-      Service.updateAccount(this.user)
+
+      this.$emit('changeUserProfile', this.profile);
+      this.editavel = false;
+      this.esconde = false;
+      
+      /*Service.updateAccount(this.user)
         .then(response => {
           let data = response.data;
          
@@ -208,7 +199,7 @@ export default {
         })
       console.groupEnd();
       this.editavel = false;
-      this.esconde = false;
+      this.esconde = false;*/
     },
 
     bottomCancel(){
