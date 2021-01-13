@@ -30,13 +30,10 @@
 
           <!-- Pop Up Alterar Reserva -->
           <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
-            <q-card class="bg-teal text-white" style="width: 300px">
+            <q-card style="color: #434343 !important; width: 100%; border-radius: 25px; text-align: center">
               <q-card-section>
-                <div class="text-h6">Persistent</div>
-              </q-card-section>
-
-              <q-card-section class="q-pt-none">
-                Click/Tap on the backdrop.
+                <span style="font-size: 1.5rem; font-weight: 600;">{{ reservation.storeName }}</span>
+                <p style="font-size: 1.25rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
               </q-card-section>
 
               <q-card-actions align="right" class="bg-white text-teal">
