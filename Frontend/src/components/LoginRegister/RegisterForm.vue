@@ -7,7 +7,7 @@
       <div style="position: relative; top: -35px; width: 80%; margin: auto;">
         <p v-html="$t('registerPage.description')"></p>
       </div>
-    </div>  
+    </div>
     <q-form style="position: relative; top: -60px;">
 
       <div class="row" style="padding: 5px">
@@ -26,7 +26,7 @@
               <q-icon name="fas fa-hashtag" color="grey-5" style="font-size: 20px"/>
             </template>
           </q-input>
-        </div>     
+        </div>
 
         <!-- Segunda Linha Tabela (Email) -->
         <div class="col-12" style="padding: 10px">
@@ -64,14 +64,20 @@
 
         <!-- Quinta Linha Tabela (Password e Confirmar Password) -->
         <div class="col-6" style="padding: 10px">
-          <q-input class="shadow" rounded outlined :label="$t('registerPage.password')" v-model="user.password" type="password" color="#2897e3">
-            <template v-slot:prepend>
-              <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
+          <q-input class="shadow" rounded outlined :label="$t('registerPage.password')"
+                   v-model="firstPassword"
+                   :type="isPwd ? 'password' : 'text'"
+                   color="#2897e3" :rules="Required">
+            <template v-slot:append>
+              <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
             </template>
           </q-input>
         </div>
+
         <div class="col-6" style="padding: 10px">
-          <q-input class="shadow" rounded outlined :label="$t('registerPage.confirmPassword')" v-model="user.password" type="confirmpassword" color="#2897e3">
+          <q-input class="shadow" rounded outlined :label="$t('registerPage.confirmPassword')"
+                   type="password" color="#2897e3" v-model="user.password"
+                   :rules="ConfirmPassword">
             <template v-slot:prepend>
               <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px"/>
             </template>
@@ -84,9 +90,7 @@
             {{ $t('registerPage.registerAccount') }}
           </q-btn>
         </div>
-      
       </div>
-
     </q-form>
   </div>
 </template>
@@ -98,7 +102,9 @@ export default {
   name: "Register",
   data() {
     return {
-      user: new User()
+      isPwd: true,
+      user: new User(),
+      firstPassword: null
     }
   },
   methods: {
@@ -111,27 +117,40 @@ export default {
           console.log("Sucess");
           this.$q.notify({
             type: 'positive',
-            message: `Regist Successful. New user created with id ${data.data._id}`
+            message: `Register Successful.`
           });
         })
         .catch(err => {
           console.log(`Error ${err}`);
           this.$q.notify({
             type: 'negative',
-            message: 'Failed to Regist'
+            message: 'Failed to Register'
           });
         })
       console.groupEnd();
+    }
+  },
+
+  
+
+  computed: {
+    ConfirmPassword() {
+      return [
+        v => !!v || this.$t('registerPage.required'),
+        v => v === this.firstPassword || this.$t('registerPage.passwordFail')
+      ]
+    },
+    Required() {
+      return [v => !!v || this.$t('registerPage.required')]
     }
   }
 }
 </script>
 
-<style scoped> 
+<style scoped>
 
   .shadow {
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 28px;
     border-radius: 28px;
   }
 

@@ -153,6 +153,25 @@ class Request {
     }
 
     /**
+     * Get Domain Hostname of the Request without Subdomain and Query String
+     * @returns {string}
+     * @private
+     */
+    _getDomain() {
+        return this.url.match(/^https?:\/\/[^#?\/]+/)[0];
+    }
+
+    /**
+     * Get Binding Port
+     * @param url
+     * @returns {*}
+     * @private
+     */
+    _getBindingPort(url) {
+        return url.replace(/\D/g, "");
+    }
+
+    /**
      * Add a single header to Request
      * @param id
      * @param value
@@ -195,7 +214,11 @@ class Request {
                         let resObj = {
                             status: response.status,
                             headers: response.headers,
-                            data: json
+                            data: {
+                                ...json,
+                                baseNetwork: `${this._getDomain()}`,
+                                base: `http://localhost:${this._getBindingPort(this._getDomain())}`
+                            }
                         };
 
                         if(response.ok) {

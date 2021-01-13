@@ -16,37 +16,38 @@ const routes = [
   {
     path: '/home',
     name: "Home",
+    component: () => import('../views/private/Home'),
     meta: {
       requiresAuth: true,
       requiresStores: true
     }
   },
-  /*{
-    path: '/home',
-    name: "Dashboard",
-    meta: {
-      requiresAuth: true
-    },
-    get component() {
-      let user = getUser();
-      if( user ) {
-        // console.log("User Stores = ", user.stores.length);
-        if(user.stores.length > 0) {
-          return import('../views/private/Home');
-        } else {
-          return import ('../views/private/RegisterStore');
-        }
+  {
+    path: '/store/:id',
+    name: "Store",
+    component: () => import('../views/private/EmptyRouter'),
+    children: [
+      {
+        name: "StoreDash",
+        path: "/store/dashboard/:id",
+        component: () => import('../views/private/subpages/Store'),
+      },
+      {
+        name: "EditStore",
+        path: "/edit",
+        component: () => import('../views/private/subpages/EditStore')
       }
-      this.$router.push("Login");
-      return false;
+    ],
+    meta: {
+      requiresStores: true,
+      requiresAuth: true
     }
-  },*/
+  },
   {
     path: '/register/store',
     name: "RegisterStore",
     component: () => import('../views/private/RegisterStore'),
     meta: {
-      // TODO: Change to true
       requiresAuth: true
     }
   }
@@ -60,36 +61,34 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log("Going to ", to);
-  // window.$cookies.set('test', 'value');
-  let user = getUser(),
-      cookie = getCookie();
-  if(to.matched.some(record => record.meta.requiresAuth) &&
-      cookie == null && user == null) {
-
-    if(getCookie()) {
-      console.log("Unauthorized");
+  let cookie = getCookie();
+  console.log("Cookie", cookie);
+  // Route Requires Auth
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(cookie != null) {
+      if(to.matched.some(record => record.meta.requiresStores)) {
+        let hasStores = getStores() > 0;
+        console.log("Has Stores: ", hasStores);
+        if(hasStores) {
+          next();
+        } else {
+          next('/register/store');
+        }
+      } else {
+        next();
+      }
+    } else {
       next('/');
     }
   } else {
-
-    if( to.name === "Home" ) {
-        let stores = user.stores;
-
-        if( stores.length === 0 ) {
-          console.log("No Stores");
-          next('/register/store');
-        } else {
-          next();
-        }
-    } else {
-      next();
-    }
+    next();
   }
+
 });
 
 
-function getUser() {
-  return JSON.parse(localStorage.getItem("user"));
+function getStores() {
+  return JSON.parse(localStorage.getItem("stores"));
 }
 
 function getCookie() {

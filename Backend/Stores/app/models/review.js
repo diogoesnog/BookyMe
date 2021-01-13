@@ -25,6 +25,10 @@ const reviewSchema = new mongoose.Schema({
     rating: {
         type: Number,
         required: true
+        /*validate: {
+            validator: Number.isInteger,
+            message: "Stars should be expressed in integer values"
+        }*/
     }
 })
 

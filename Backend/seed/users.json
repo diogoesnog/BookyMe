@@ -1,34 +1,231 @@
 [{
   "_id": {
-    "$oid": "5fc6b3294b1974397a8a41d7"
+    "$oid": "5ff4a53709404a2ade1fbd4a"
   },
   "favorites": [],
-  "avatar": "User.jpg",
+  "avatar": "/public/default.png",
   "reviews": [],
   "bookings": [],
   "type": "User",
-  "stores": [],
-  "name": "Regular User",
-  "username": "userbookyme",
-  "email": "user@bookyme.com",
-  "password": "$2a$10$2R1sjaIa3LzV37.bsnbfJOOgZ52t0AZykCDXebHhe7096OCWLpS/S"
-},{
-  "_id": {
-    "$oid": "5fc6b3364b1974397a8a41d8"
-  },
-  "favorites": [
-    "5fcbe818acd2bb2326ca7a1a",
-    "5fd653de6c110bb40443a624",
-    "5fd654a86c110bb40443a637"
+  "stores": [
+    "5ff4a6e77df75e2ace11b036",
+    "5ff4a74e7df75e2ace11b038",
+    "5ff4a7887df75e2ace11b03c",
+    "5ff4a80f7df75e2ace11b03e",
+    "5ff4a9597df75e2ace11b046",
+    "5ff4a9647df75e2ace11b048",
+    "5ff4aa347df75e2ace11b069",
+    "5ff4aa8f7df75e2ace11b06d"
   ],
-  "avatar": "User.jpg",
-  "reviews": [],
-  "bookings": [],
-  "type": "User",
-  "stores": [],
   "name": "Administrator",
   "username": "adminbookyme",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
   "email": "admin@bookyme.com",
-  "password": "$2a$10$l1cL6wPxamWUiwBXmK91qexBkpSyB4/HWZfOVH92OxQwh6hTxWF6u",
-  "address": "Random Address"
+  "password": "$2a$10$PdnRtvXIUx8gy8jA1uzpAe2XaqHYouaCeYJ6TaWQH8N6u0OjD/9JG"
+},{
+  "_id": {
+    "$oid": "5ff4a58a09404a2ade1fbd4b"
+  },
+  "favorites": [
+    "5ff4a6e77df75e2ace11b036",
+    "5ff4aa347df75e2ace11b069",
+    "5ff4a9c57df75e2ace11b053",
+    "5ff4a9597df75e2ace11b046",
+    "5ff4a80f7df75e2ace11b03e"
+  ],
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "User",
+  "username": "userbookyme",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "user@bookyme.com",
+  "password": "$2a$10$QoDd9xdgoISOFIfTBefWXuJ6rk9DW8C5mjXmSvxJkbJhtmH/NAtE.",
+  "hasAvatar": true
+},{
+  "_id": {
+    "$oid": "5ffb887cd5f76b866e422eb6"
+  },
+  "favorites": [],
+  "hasAvatar": false,
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "André Ramalho",
+  "username": "andreramalho",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "andreramalho@bookyme.com",
+  "password": "$2a$10$ry3zq9By0/5eXY.xpEvJQ.ZIIOd1kaRoRhSShBXm66maFQx96CqnO"
+},{
+  "_id": {
+    "$oid": "5ffb88aad5f76b866e422eb7"
+  },
+  "favorites": [],
+  "hasAvatar": false,
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Bruna Vieira",
+  "username": "brunavieira",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "brunavieira@bookyme.com",
+  "password": "$2a$10$OepcK6NWQPf079ZMxLjV9OtvpGmnTiCgdIyfPiD/pu7iuP8fvKbNK"
+},{
+  "_id": {
+    "$oid": "5ffb88b9d5f76b866e422eb8"
+  },
+  "favorites": [],
+  "hasAvatar": false,
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Bruno Silva",
+  "username": "brunosilva",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "brunosilva@bookyme.com",
+  "password": "$2a$10$SRYTEt6rxPRJGcO.S8qmBuSPhzDjcwgrYngD7ypRP4vmsb5feRHE6"
+},{
+  "_id": {
+    "$oid": "5ffb88cad5f76b866e422eb9"
+  },
+  "favorites": [],
+  "hasAvatar": true,
+  "avatar": "/public/5ffb88cad5f76b866e422eb9/bcc4f4f1-16a3-43da-84f0-16cea284d402.jpg",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Diogo Araújo",
+  "username": "diogoaraujo",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "diogoaraujo@bookyme.com",
+  "password": "$2a$10$ngPVVyhn2xyUzdteYVp6weemEVhbv2JmWgdEgob3HYYmD5op5XNdW"
+},{
+  "_id": {
+    "$oid": "5ffb88dcd5f76b866e422eba"
+  },
+  "favorites": [],
+  "hasAvatar": false,
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Maria Inês Vieira",
+  "username": "mariainesvieira",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "mariainesvieira@bookyme.com",
+  "password": "$2a$10$TDBN1ZDpl9M.p1/h5jlTkOAUAxUnHb1lIp5StDDQPGgmdJLTmQvV2"
+},{
+  "_id": {
+    "$oid": "5ffb88f0d5f76b866e422ebb"
+  },
+  "favorites": [],
+  "hasAvatar": true,
+  "avatar": "/public/5ffb88f0d5f76b866e422ebb/60d48134-956e-41b9-a5d1-b3216c184d77.jpg",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Mariana Lino",
+  "username": "marianalino",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "marianalino@bookyme.com",
+  "password": "$2a$10$Yniw7W3wXGEavdJ0fEu8pePWE9ilEvRHYuWO/PQr0V5ltbxj9LNIG"
+},{
+  "_id": {
+    "$oid": "5ffb88fcd5f76b866e422ebd"
+  },
+  "favorites": [],
+  "hasAvatar": true,
+  "avatar": "/public/5ffb88fcd5f76b866e422ebd/fd505942-7774-4ba5-83f2-cd2bdef63c69.jpg",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "miguelsolans",
+  "username": "miguelsolans",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "miguelsolans@bookyme.com",
+  "password": "$2a$10$tLnn90ZBouQEDowLSsnbBeJAq1rA2kLUN4t9kTdvUSnJtdymvp2BC"
+},{
+  "_id": {
+    "$oid": "5ffb890ad5f76b866e422ebe"
+  },
+  "favorites": [],
+  "hasAvatar": false,
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Tiago Pereira",
+  "username": "tiagopereira",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "tiagopereira@bookyme.com",
+  "password": "$2a$10$OdMa2mJz8Rbte/7CHkDshe/nBllQVOqCT2V1gKlnqOo1bMpYGHYpe"
+},{
+  "_id": {
+    "$oid": "5ffb891ad5f76b866e422ebf"
+  },
+  "favorites": [],
+  "hasAvatar": false,
+  "avatar": "/public/default.png",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Tifany Silva",
+  "username": "tifanysilva",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "tifanysilva@bookyme.com",
+  "password": "$2a$10$vnyMgGdCljqWpYPYZ38Iru0N80R9aOxSUoxomexIh/MsFNfqYXkXm"
+},{
+  "_id": {
+    "$oid": "5ffb897ad5f76b866e422ec0"
+  },
+  "favorites": [],
+  "hasAvatar": true,
+  "avatar": "/public/5ffb897ad5f76b866e422ec0/3cbad65d-8c61-4ed1-965a-d879d7ca5646.jpg",
+  "reviews": [],
+  "bookings": [],
+  "type": "User",
+  "stores": [],
+  "name": "Diogo Nogueira",
+  "username": "diogonogueira",
+  "address": "Braga",
+  "city": "Braga",
+  "zipCode": "4700-123",
+  "email": "diogonogueira@bookyme.com",
+  "password": "$2a$10$xJJewC7HhwyX6fzku34JFOor7iAv0wqhDesvg0XrHIl4pKqpEyx9W"
 }]

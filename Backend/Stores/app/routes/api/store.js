@@ -12,14 +12,6 @@ const checkAuth = require('../../middlewares/checkAuth');
  * Get Stores
  */
 
-
-app.get('/popular',  (req, res) => {
-
-    // Node fetch to booking for the most reserved stores
-
-});
-
-
 app.get('/calendar', (req,res) => {
 
     Stores.getCalendar()
@@ -182,7 +174,7 @@ app.post('/', (req, res) => {
 
     const store = {
         name: req.body.name,
-        verified: true,
+        verified: false,
         category: req.body.category,
         description: req.body.description,
         address: address

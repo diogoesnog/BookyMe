@@ -40,9 +40,13 @@ const userSchema = new mongoose.Schema({
     favorites: {
         type: [String],
     },
+    hasAvatar: {
+        type: Boolean,
+        default: false
+    },
     avatar: {
         type: String,
-        default: "User.jpg"
+        default: "/public/default.png"
     },
     reviews: {
         type: [String],

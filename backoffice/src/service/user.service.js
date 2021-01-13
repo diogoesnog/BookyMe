@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from "@/service/auth-header";
 
 class Services {
     // TODO: Login
@@ -13,13 +14,39 @@ class Services {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store);
     }
 
+    currentUser() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/user/validation`, {
+            headers: authHeader()
+        });
+    }
+
 
     // TODO: Add Store Description
     updateDescription(id, description) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores/${id}`);
 
-        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/description`, {
             description: description
+        });
+    }
+    updatePhone(id, phone) {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/phone`, {
+            phone: phone
+        });
+    }
+    updateAddress(id, address) {
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/address`, address);
+    }
+
+    getStores() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/admin`, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreById(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores?_id=${id}`, {
+            headers: authHeader()
         });
     }
 

@@ -34,7 +34,7 @@ export default {
 
   // Homepage
   homePage: {
-    greeting: "Salut, {name}!",
+    greeting: "Salut",
     morePopular: "Plus Populaire",
 
     categories: "Catégories",
@@ -64,9 +64,12 @@ export default {
   profilePage: {
     personalDetails: "Détails Personnels",
     editData: "Modifier Information",
-    security: "Segurança",
+    security: "Sécurité",
     changePassword: "Changer Mot de Passe",
-    signout: "Se Déconnecter"
+    signout: "Se Déconnecter",
+    cancel: "Annuler",
+    save: "Enregistrer",
+    passwordTest: "Mots de Passe Différents"
   },
 
   // Reservations
@@ -75,6 +78,9 @@ export default {
   bookingsPage: {
     title: "Reservations",
     description: "Liste de Reservations Récentes et plus Anciennes",
+    type1: "Récent",
+    type2: "Terminé",
+    catalog: "Réserve Commune",
 
     newBooking: {
       title: "Nouveau Réservation",
@@ -96,8 +102,8 @@ export default {
       serviceType: "Type de Service",
       dateAndTime: "Date et l'Heure",
 
-      changeBooking: "Changer Réservation",
-      cancelBooking: "Annuler Résevation"
+      changeBooking: "Changer",
+      cancelBooking: "Annuler"
     }
   },
 

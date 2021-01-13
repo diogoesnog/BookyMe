@@ -1,35 +1,5 @@
 {
-  "name": "bookyme",
-  "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "BookyMe",
   "author": "BreakingCode",
-  "private": true,
-  "scripts": {
-    "dev-browser": "quasar dev",
-    "dev-ios": "quasar dev -m ios",
-    "dev-android": "quasar dev -m android",
-    "lint": "eslint --ext .js,.vue ./",
-    "test": "echo \"No test specified\" && exit 0"
-  },
-  "dependencies": {
-    "@quasar/extras": "^1.0.0",
-    "axios": "^0.21.0",
-    "core-js": "^3.6.5",
-    "quasar": "^1.0.0",
-    "vue-cookies": "^1.7.4",
-    "vue-i18n": "^8.22.2"
-  },
-  "devDependencies": {
-    "@quasar/app": "^2.1.8",
-    "@quasar/quasar-app-extension-dotenv": "^1.0.5",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-loader": "^3.0.3",
-    "eslint-plugin-vue": "^6.1.2",
-    "strip-ansi": "^3.0.1"
-  },
   "browserslist": [
     "last 10 Chrome versions",
     "last 10 Firefox versions",
@@ -41,9 +11,41 @@
     "last 10 iOS versions",
     "last 5 Opera versions"
   ],
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "leaflet": "^1.7.1",
+    "quasar": "^1.0.0",
+    "vue-cookies": "^1.7.4",
+    "vue-i18n": "^8.22.2",
+    "vue2-leaflet": "^2.6.0"
+  },
+  "description": "A Quasar Framework app",
+  "devDependencies": {
+    "@quasar/app": "^2.1.8",
+    "@quasar/quasar-app-extension-dotenv": "^1.0.5",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-vue": "^6.1.2",
+    "strip-ansi": "^3.0.1"
+  },
   "engines": {
     "node": ">= 10.18.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  }
+  },
+  "name": "bookyme",
+  "private": true,
+  "productName": "BookyMe",
+  "scripts": {
+    "dev-browser": "quasar dev",
+    "dev-ios": "quasar dev -m ios",
+    "dev-android": "quasar dev -m android",
+    "lint": "eslint --ext .js,.vue ./",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "version": "0.0.1"
 }

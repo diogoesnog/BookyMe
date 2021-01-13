@@ -22,7 +22,7 @@
             </template>
           </q-input>
           <br/>
-          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.password')" v-model="user.password" type="password" color="#2897e3">
+          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.password')" v-model="user.password" :type="isPwd ? 'password' : 'text'" color="#2897e3">
             <template v-slot:prepend>
               <q-icon name="fas fa-lock" color="grey-5"/>
             </template>
@@ -46,7 +46,9 @@ export default {
   name: "Login",
   data() {
     return {
-      user: new User()
+      user: new User(),
+      password: '',
+      isPwd: true
     }
   },
   mounted() {
@@ -64,7 +66,7 @@ export default {
             message: 'Login Successful'
           });
 
-          this.$router.push({ name: 'Categories' })
+          this.$router.push({ name: 'Home' })
 
         }).catch(err => {
           console.log("Login Error");

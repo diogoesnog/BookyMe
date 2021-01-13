@@ -16,7 +16,7 @@ module.exports.updateInfo = (user,id) => {
 }
 
 module.exports.updatePhoto = (id, url) => {
-    return User.findByIdAndUpdate(id, {avatar: url}, {new: true});
+    return User.findByIdAndUpdate(id,{avatar: url, hasAvatar: true}, {new: true});
 }
 
 module.exports.updatePassword = (id, password) => {
@@ -72,6 +72,11 @@ module.exports.deleteAll = () => {
     return User.deleteMany();
 }
 
-module.exports.getUsers = () => {
-    return User.find();
+module.exports.getUsersByIdArray = (array) => {
+    return User.find({ _id: { $in: array } }, {
+        _id: 1,
+        name: 1,
+        avatar: 1,
+        username: 1
+    } );
 }

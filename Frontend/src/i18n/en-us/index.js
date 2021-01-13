@@ -25,7 +25,8 @@ export default {
     postalCode: "Zip Code",
     password: "Password",
     confirmPassword: "Confirm Password",
-
+    passwordFail: "The passwords don't match",
+    required: "This is mandatory",
     registerAccount: "Sign-Up",
 
     alreadyHasAccount: "Already have an account?",
@@ -35,7 +36,7 @@ export default {
 
   // Homepage
   homePage: {
-    greeting: "Hello, {name}!",
+    greeting: "Hello",
     morePopular: "More Popular",
 
     categories: "Categories",
@@ -56,6 +57,10 @@ export default {
     results: "No Results | 1 Result | {count} Results"
   },
 
+  storesPage: {
+    error: "Failed to find services of the category chosen."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notifications"
@@ -67,7 +72,10 @@ export default {
     editData: "Edit Data",
     security: "Security",
     changePassword: "Change Password",
-    signout: "Sign-Out"
+    signout: "Sign-Out",
+    cancel: "Cancel",
+    save: "Save",
+    passwordTest: "Different Passwords"
   },
 
   // Reservations
@@ -76,6 +84,9 @@ export default {
   bookingsPage: {
     title: "Reservations",
     description: "List of Recent and Old Bookings",
+    type1: "Recents",
+    type2: "Completed",
+    catalog: "Common Reservation",
 
     newBooking: {
       title: "New Booking",
@@ -97,8 +108,8 @@ export default {
       serviceType: "Type of Service",
       dateAndTime: "Date and Time",
 
-      changeBooking: "Change Reservation",
-      cancelBooking: "Cancel Reservation"
+      changeBooking: "Change",
+      cancelBooking: "Cancel"
     }
   },
 
@@ -119,11 +130,11 @@ export default {
     description: "Description",
     readMore: "Read More",
 
-    utilInfo: "Information's",
+    utilInfo: "Useful Info",
     servicesCatalog: "Catalog of Services",
     seeAll: "See All",
 
-    ratings: "Evaluations",
+    ratings: "Ratings",
     seeAllRatings: "See All",
     stars: "0 Stars | 1 Star | {count} Stars",
     basedOn: "Based on 1 Evaluation | Based on {count} Evaluations"

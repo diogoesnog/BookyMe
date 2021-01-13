@@ -1,7 +1,7 @@
  export default {
   // Login
   loginPage: {
-    title: "Bem Vindo!",
+    title: "Bem-Vindo!",
     description: "Inicie Sessão para ver todas as suas Reservas",
 
     username: "Username/E-mail",
@@ -26,7 +26,8 @@
     postalCode: "Cód. Postal",
     password: "Password",
     confirmPassword: "Confirmar Password",
-
+    passwordFail: "Palavras-passe diferentes",
+    required: "Password é obrigatória",
     registerAccount: "Criar Conta",
 
     alreadyHasAccount: "Já possui uma conta?",
@@ -35,7 +36,7 @@
 
   // Homepage
   homePage: {
-    greeting: "Olá, {name}!",
+    greeting: "Olá",
     morePopular: "Mais Populares",
 
     categories: "Categorias",
@@ -56,6 +57,10 @@
     results: "Sem Resultados | 1 Resultado | {count} Resultados"
   },
 
+  storesPage: {
+    error: "Não foi possível encontrar estabelecimentos da categoria escolhida."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notificações"
@@ -67,7 +72,10 @@
     editData: "Editar Dados",
     security: "Segurança",
     changePassword: "Alterar Password",
-    signout: "Terminar Sessão"
+    signout: "Terminar Sessão",
+    cancel: "Cancelar",
+    save: "Salvar",
+    passwordTest: "Passwords Diferentes"
   },
 
   // Reservations
@@ -76,6 +84,9 @@
   bookingsPage: {
     title: "Reservas",
     description: "Lista de Reservas Recentes e Anteriores",
+    type1: "Recentes",
+    type2: "Conluídas",
+    catalog: "Reserva Comum",
 
     newBooking: {
       title: "Nova Reserva",
@@ -97,8 +108,8 @@
       serviceType: "Tipo de Serviço",
       dateAndTime: "Data e Hora",
 
-      changeBooking: "Alterar Reserva",
-      cancelBooking: "Cancelar Reserva"
+      changeBooking: "Alterar",
+      cancelBooking: "Cancelar"
     }
   },
 
