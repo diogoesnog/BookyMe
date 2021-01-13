@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: ""
+        default: "/public/default.png"
     },
     reviews: {
         type: [String],
