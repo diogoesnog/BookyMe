@@ -5,7 +5,7 @@
         <p class="titles">{{$t('homePage.categories')}}</p>
       </div>
       <div class="col-3" style="display: flex; justify-content: center; align-items: center;">
-        <router-link v-bind:to="'categories/'">  
+        <router-link v-bind:to="'categories'">  
           <p>{{$t('homePage.seeAll')}}</p>
         </router-link>
       </div>

@@ -1,18 +1,31 @@
 <template>
- <div>
   <div>
-    <CategoriesList/>
-  </div>
-  <div>
-     <Toolbar/>
-  </div>
- </div> 
+       <div>
+        <Popular/>
+      </div>
+      
+      
+      <div class= "divBottom">
+        <CategoriesList/>
+        
+      </div>
+      
+      <div>
+        <Toolbar/>
+      </div>
+      
+      
+      
+     
+  </div> 
+
 </template>
 
 <script>
 
 import CategoriesList from '../components/Homepage/CategoriesList';
 import Toolbar from '../components/Root/Toolbar';
+import Popular from '../components/Homepage/Popular';
 
 export default {
   name: "Homepage",
@@ -23,6 +36,7 @@ export default {
   },
 
   components: {
+    Popular,
     CategoriesList,
     Toolbar
   },
@@ -35,5 +49,32 @@ export default {
 </script>
 
 <style scoped>
+
+.divTop1{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background-size: cover;
+    background-position: center top;
+    background-image: url('../assets/Other/ProfileFrame.svg');
+  }
+
+  .divTop2{
+    position: fixed;
+    left: 0;
+    top: 30px;
+    width: 100%;
+    color: white;
+  }
+
+  .divBottom {
+    z-index: 1000;
+    position: fixed;
+    top: 300px;
+    width: 100%;
+    
+  }
 
 </style>
