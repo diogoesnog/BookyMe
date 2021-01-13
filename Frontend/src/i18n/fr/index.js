@@ -80,6 +80,7 @@ export default {
     description: "Liste de Reservations Récentes et plus Anciennes",
     type1: "Récent",
     type2: "Terminé",
+    catalog: "Réserve Commune",
 
     newBooking: {
       title: "Nouveau Réservation",

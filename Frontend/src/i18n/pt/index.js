@@ -86,6 +86,7 @@
     description: "Lista de Reservas Recentes e Anteriores",
     type1: "Recentes",
     type2: "Conluídas",
+    catalog: "Reserva Comum",
 
     newBooking: {
       title: "Nova Reserva",

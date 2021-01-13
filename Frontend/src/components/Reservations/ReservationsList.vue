@@ -14,15 +14,18 @@
             <span class="titleStore">
               {{ reservation.storeName }}
             </span>
-            <span class="titleService">
-              {{ reservation.storeName }}
+            <span v-if="reservation.hasCatalog == true" class="titleService">
+              {{ reservation.service.product }}
+            </span>
+            <span v-else class="titleService">
+              {{$t('bookingsPage.catalog')}}
             </span>
             <span class="hourDate">
               {{ getHourDate(reservation.serviceDate) }}
             </span>
           </div>
-          <div class="col-1">
-            <img src="../../assets/Icons/More.svg"/>
+          <div class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <img style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
         </div>
         </div>
@@ -83,10 +86,10 @@ export default {
 <style scoped>
 
   .divPhoto {
-    width: 35%;
+    width: 30%;
     height: 120px;
-    border-bottom-left-radius: 40px;
-    border-top-left-radius: 40px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
     background-size: cover;
     background-position: center top;
   }
@@ -107,7 +110,7 @@ export default {
     height: 120px;
     background-color: white;
     margin-top: 25px;
-    border-radius: 40px;
+    border-radius: 30px;
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
   }
 
@@ -122,7 +125,7 @@ export default {
     font-size: 20px; 
     font-weight: 600; 
     display: inline-block; 
-    width: 160px; 
+    width: 170px; 
     white-space: nowrap; 
     overflow: hidden !important;
   }
@@ -132,7 +135,7 @@ export default {
     font-size: 16px; 
     font-weight: 350; 
     display: inline-block; 
-    width: 160px; 
+    width: 170px; 
     white-space: nowrap; 
     overflow: hidden !important;
   }

@@ -86,6 +86,7 @@ export default {
     description: "List of Recent and Old Bookings",
     type1: "Recents",
     type2: "Completed",
+    catalog: "Common Reservation",
 
     newBooking: {
       title: "New Booking",
