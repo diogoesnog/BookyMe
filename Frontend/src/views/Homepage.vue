@@ -69,9 +69,8 @@ export default {
   .categoriesDiv {
     z-index: 1000;
     position: fixed;
-    top: 300px;
-    width: 100%;
-    
+    top: 400px;
+    width: 100%; 
   }
 
 </style>

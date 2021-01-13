@@ -14,16 +14,19 @@
               </q-avatar>
             </div>
           </div>
-          <div style="font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
-            {{ $t('homePage.morePopular') }} 
+        </div>
+      </div> 
+      <div style="color: white; position: fixed; top: 140px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
+        {{ $t('homePage.morePopular') }} 
+      </div>
+      <div class="wrapper">
+        <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
+          <div>
+            <img :src="store.avatar"/>
           </div>
-          <div class="wrapper">
-            <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
-              {{ store.name }}
-            </div>
-            <div class="empty"></div>
-          </div>
-        </div> 
+          {{ store.name }}
+        </div>
+      <div class="empty"></div>
     </div>
 </div> 
 
@@ -52,8 +55,12 @@ export default {
   },
 
   methods: {
-    getImage(url) {
+    getImage() {
       return this.base + this.profile.avatar;
+    },
+    getImageWidget(url) {
+      console.log(url);
+      return this.base + url;
     },
   }
 }
@@ -91,9 +98,11 @@ export default {
   }
 
   .wrapper {
+    margin-left: 30px;
     position: absolute;
     overflow-x: scroll;
     overflow-y: hidden;
+    top: 190px;
     display: grid;
     grid-template-columns: repeat(600, auto);
     grid-gap: 0 30px;
@@ -101,9 +110,9 @@ export default {
 
   .item {
     background-size: cover;
-    height: 120px;
-    width: 120px;
-    border-radius: 200px;
+    height: 200px;
+    width: 230px;
+    border-radius: 40px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
 
