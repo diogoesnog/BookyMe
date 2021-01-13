@@ -159,7 +159,7 @@ router.patch('/password', checkAuth, async (req, res) => {
 
     let userAuth = {
         id: req.decodedUser.id,
-        password: req.body.password,
+        password: req.body.oldPassword,
         newPassword: req.body.newPassword
     };
 
