@@ -134,7 +134,6 @@ app.post('/:storeId', checkAuth, async (req, res) => {
 
     try {
         catalogData = (await Catalog.getByStore(req.params.storeId)).data.data;
-        console.log(catalogData);
         if (catalogData.length > 0) {
             if (serviceId !== null) {
                 for (item in catalogData)
@@ -245,7 +244,8 @@ app.patch('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
 app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
     const bookingDate = new Date(Date.now()).toISOString();
     const serviceDate = new Date(req.body.serviceDate).toISOString();
-    let schedule, ReservationUserId;
+    const serviceId = req.body.serviceId;
+    let schedule, ReservationUserId, catalog;
 
     let weekService = new Date(serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
     weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
@@ -265,6 +265,23 @@ app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
         res.status(response.status).jsonp(response);
     }
 
+    if (serviceId !== null) {
+        try {
+            const storeId = (await Booking.getStoreFromID(req.params.id)).storeId;
+            const catalogData = (await Catalog.getByStore(storeId)).data.data;
+            if (catalogData.length > 0) {
+                for (item in catalogData)
+                    if (serviceId === catalogData[item]._id)
+                        catalog = {
+                            _id: serviceId,
+                            product: catalogData[item].product,
+                            price: catalogData[item].price,
+                            abstract: catalogData[item].abstract
+                        }
+            }
+        } catch {}
+    }
+
     if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
 
         if (new Date(Date.now()) > new Date(serviceDate)) {
@@ -275,7 +292,7 @@ app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
             const serviceOpen = isOpen(new Date(serviceDate), schedule);
 
             if (serviceOpen) {
-                Booking.reschedule(req.params.id, bookingDate, serviceDate)
+                Booking.reschedule(req.params.id, bookingDate, serviceDate, catalog)
                     .then(data => {
                         const response = Response.OK(data);
                         res.status(response.status).jsonp(response);
