@@ -16,7 +16,7 @@
 
     </div>
     <div>
-      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile"/>
+      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile" :password="password" @changeUserPassword="changeUserPassword"/>
     </div>  
     <div>
       <Toolbar/>
@@ -45,6 +45,7 @@ export default {
     return {
       profileData: {}, 
       base: '',
+      password: '',
       lang: this.$i18n.locale,
         langOptions: [
           { value: 'en-us', label: this.$t('languages.english')},
@@ -91,6 +92,17 @@ export default {
         .then(response => {
             console.log(response);
             this.profileData = response.data[ "data" ];
+        }).catch(err => {
+            console.error("Error!");
+        });
+    },
+
+
+    changeUserPassword(data) {
+      Service.updatePassword(data)
+        .then(response => {
+            console.log(response);
+            this.password = response.data[ "data" ];
         }).catch(err => {
             console.error("Error!");
         });

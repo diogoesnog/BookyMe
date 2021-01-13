@@ -2,6 +2,7 @@
   <!-- Div Principal -->
   <div class="text-center" style="color: #434343">
     <!-- Div Cima -->
+     <!-- TO DO: BOTAO DE EDITAR FOTOGRAFIA A FUNCIONAR -->
     <div class="divTop1">
       <div class="divTop2">
         <div style="position: relative; display: flex; justify-content: center">
@@ -18,11 +19,11 @@
           <div style="position: absolute; top: 175px">
             <p>
               <span style="font-weight: 600; font-size: 30px;">
-                {{ this.name }}
+                {{ profile.name }}
               </span>
               <br/>
               <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
-                {{ this.username }}
+                {{ profile.username }}
               </span>
             </p>
           </div>
@@ -41,7 +42,7 @@
       <!-- Primeira Box - Dados Pessoais -->
       <div class="roundedDiv shadow" style="padding:12px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; ">
          <!-- Botões -->
-        <div style="text-align: right; padding-left: 235px; position: absolute;">
+        <div style="text-align: right; padding-left: 245px; position: absolute;">
           <q-btn flat size="md" class="" @click="bottomEdit" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" :hidden= "!esconde"  >
             {{ $t('profilePage.editData') }}
           </q-btn>
@@ -99,6 +100,12 @@
           </div>
         </div>
       </div>
+
+
+
+
+      <!-- PARTE DA SEGURANÇA -->
+      
       <!-- Box Vermelha - Segurança -->
       <div class="col-10 roundedDivRedBottom shadow">
           <p style="font-weight: 500; font-size:130%;  margin: 20px;" class="font-weight-bold button">
@@ -106,11 +113,38 @@
           </p>
       </div>
       <!-- Segunda Box - password -->
-      <div class="roundedDiv shadow" style="display: flex; align-items: center; border-radius: 20px; margin-top: 40px;">
-        <p style="font-weight: 600; font-size: 15px; text-align: left; margin: 20px;">
-          <q-icon name="fas fa-lock" color="grey-5" style="font-size: 20px; margin-right: 5px;"/>
-            *************
-        </p>
+      <div class="roundedDiv shadow" style="padding:20px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; margin-top:50px;">
+        
+        <!-- BOTÃO CHANGE PASSWORD -->
+        <div style="text-align: right; padding-left: 175px; position: absolute;">
+          <q-btn flat size="md" class="" @click="bottomEdit2" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" :hidden= "!esconde"  >
+            {{ $t('profilePage.changePassword') }}
+          </q-btn>
+        </div>
+        <div>
+           <q-btn @click="bottomSavePassword" label="Save" color="primary" :invisible= "!esconde"/>
+        </div>
+        <div >
+          <q-btn @click="bottomCancel2" label="Cancel" color="primary" />
+        </div>
+        
+        
+        <div style="margin-left: 10px; margin-top:7px">
+         <q-form  class="q-gutter-md">
+              <q-input borderless v-model="this.password" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
+                
+                <template v-slot:prepend>
+                    <q-icon name="fas fa-lock" color="grey-5" />
+                </template>
+
+
+              <template v-slot:append>
+                    <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
+              </template>
+              </q-input>
+             
+          </q-form>
+        </div>
       </div>
       <!-- Botão Logout -->
       <q-btn class="gradientBlue" rounded @click="handleLogout" style="width: 200px; height: 35px; margin: 40px; bottom:10px;">
@@ -146,10 +180,13 @@ export default {
   data () {
     return {
       texto: '',
+      isPwd: true,
       editavel: false,
+      editavel2: false,
       esconde:false,
       atualizados: [],
       editUser: new User(),
+      password: '***************'
     }
   },
 
@@ -171,6 +208,12 @@ export default {
       this.esconde = true;
       
     },
+
+     bottomEdit2(){
+      this.editavel2 = true;
+      this.esconde2 = true;
+      
+    },
     
     bottomSave(e){
       e.preventDefault();
@@ -180,31 +223,27 @@ export default {
       this.editavel = false;
       this.esconde = false;
       
-      /*Service.updateAccount(this.user)
-        .then(response => {
-          let data = response.data;
-         
-          console.log("Sucess");
-          this.$q.notify({
-            type: 'positive',
-            message: `Update Successful.`
-          });
-        })
-        .catch(err => {
-          console.log(`Error ${err}`);
-          this.$q.notify({
-            type: 'negative',
-            message: 'Failed to Update'
-          });
-        })
-      console.groupEnd();
-      this.editavel = false;
-      this.esconde = false;*/
+    },
+
+    bottomSavePassword(e){
+      e.preventDefault();
+      console.group("UserUpdatePassword");
+
+      this.$emit('changeUserPassword', this.password);
+      this.editavel2 = false;
+      this.esconde2 = false;
+      
     },
 
     bottomCancel(){
       this.editavel = false;
       this.esconde = false;
+    },    
+
+
+    bottomCancel2(){
+      this.editavel2 = false;
+      this.esconde2 = false;
     }    
   }
 }
