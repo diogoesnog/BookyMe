@@ -1,51 +1,56 @@
 <template>
   <div>
-       <div>
-        <Popular/>
-      </div>
-      
-      
-      <div class= "divBottom">
-        <CategoriesList/>
-        
-      </div>
-      
-      <div>
-        <Toolbar/>
-      </div>
-      
-      <div>
-        <ProfileData :profile="profileData"/>
-      </div> 
-      
-     
-  </div> 
-
+    <Popular v-bind="profileData"/>
+    <div class= "categoriesDiv">
+      <CategoriesList/>
+    </div>
+    <Toolbar/>
+  </div>
 </template>
 
 <script>
 
+import Service from '../services/user.service';
 import CategoriesList from '../components/Homepage/CategoriesList';
-import Toolbar from '../components/Root/Toolbar';
 import Popular from '../components/Homepage/Popular';
-import ProfileData from '../components/Profile/ProfileData';
+import Toolbar from '../components/Root/Toolbar';
 
 export default {
   name: "Homepage",
 
   data() {
     return {
+      profileData: {}
     }
   },
 
   components: {
     Popular,
     CategoriesList,
-    ProfileData,
     Toolbar
   },
 
+  mounted() {
+    console.log("Mounted: View has been rendered");
+    this.fetchProfileData();
+  },
+
   methods: {
+    fetchProfileData() {
+      this.$q.loading.show({ delay: 400});
+      Service.getProfileData()
+        .then(response => {
+          let data = response.data["data"];
+          this.base=response.data["base"];
+          this.profileData=data;
+          console.log("TEste");
+          console.log(this.profileData);
+        }).catch(err => {
+
+        }).finally(() => {
+          this.$q.loading.hide();
+        })   
+    },
   }
 }
 
@@ -54,26 +59,7 @@ export default {
 
 <style scoped>
 
-.divTop1{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70%;
-    background-size: cover;
-    background-position: center top;
-    background-image: url('../assets/Other/ProfileFrame.svg');
-  }
-
-  .divTop2{
-    position: fixed;
-    left: 0;
-    top: 30px;
-    width: 100%;
-    color: white;
-  }
-
-  .divBottom {
+  .categoriesDiv {
     z-index: 1000;
     position: fixed;
     top: 300px;

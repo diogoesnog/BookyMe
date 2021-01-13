@@ -1,42 +1,26 @@
 <template>
   <div class="text-center" style="color: #434343">
-
     <div class="divTop1">
          <div class="divTop2">
-            <div class="col-10">
-              <q-input rounded filled label='Search'>
-                <template v-slot:append>
-                  <q-avatar size='xl' icon="search" />
-                </template>
-              </q-input>
-           </div>
-           <div style="position: absolute; top:100px;">
-            <p>
+           <div class="row">
+            <div class="col-9">
               <span style="font-weight: 600; font-size: 30px;">
-                {{ $t('homePage.greeting') }}
+                {{ $t('homePage.greeting') }}, {{this.name}}
               </span>
-              <br/>
-            </p>
+            </div>
+            <div class="col-3">
+            </div>
           </div>
         </div> 
-          
-        
-    </div> 
-    
-    
-    <div class="divBottom">
-            
-     </div> 
-  </div> 
+    </div>
+</div> 
 
 </template>
 
 <script>
 
-
 import Service from '../../services/auth.service'
 import User from '../../models/User';
-
 
 export default {
   name: "Popular",
@@ -61,12 +45,12 @@ export default {
 
 <style scoped>
 
-.divTop1{
+  .divTop1{
     position: fixed;
-    top: 0;
+    top: -25px;
     left: 0;
     width: 100%;
-    height: 70%;
+    height: 50%;
     background-size: cover;
     background-position: center top;
     background-image: url('../../assets/Other/ProfileFrame.svg');

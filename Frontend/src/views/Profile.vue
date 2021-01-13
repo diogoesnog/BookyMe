@@ -13,10 +13,9 @@
           </q-select>
         </div>
       </div>-->
-
     </div>
     <div>
-      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" />
+      <ProfileData :base="base" :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" />
     </div>  
     <div>
       <Toolbar/>
@@ -71,7 +70,6 @@ export default {
 
     fetchProfileData() {
       this.$q.loading.show({ delay: 400});
-
       Service.getProfileData()
         .then(response => {
           let data = response.data["data"];
@@ -83,11 +81,8 @@ export default {
 
         }).finally(() => {
           this.$q.loading.hide();
-        })
-
-        
+        })   
     },
-
     changeUserProfile(data) {
       Service.updateAccount(data)
         .then(response => {
@@ -97,8 +92,6 @@ export default {
             console.error("Error!");
         });
     },
-
-
     changeUserPassword(data) {
       Service.updatePassword(data)
         .then(response => {
@@ -111,7 +104,6 @@ export default {
   }
 
 }
-
 
 </script>
 
