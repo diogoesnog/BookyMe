@@ -19,8 +19,10 @@ class UserService {
     let request = new Request(`${process.env.API_ENDPOINT}/users/account`)
 
     request.acceptJson()
+    request.appendHeader("Authorization", authHeader());
     request.isJson()
-    return request.post(body)
+
+    return request.put(body)
   }
   
   updatePassword(user) {
@@ -29,8 +31,9 @@ class UserService {
     let request = new Request(`${process.env.API_ENDPOINT}/users/password`)
 
     request.acceptJson()
+    request.appendHeader("Authorization", authHeader());
     request.isJson()
-    return request.post(body)
+    return request.patch(body)
   }
 
 

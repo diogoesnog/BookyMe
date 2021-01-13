@@ -1,7 +1,7 @@
  export default {
   // Login
   loginPage: {
-    title: "Bem Vindo!",
+    title: "Bem-Vindo!",
     description: "Inicie Sessão para ver todas as suas Reservas",
 
     username: "Username/E-mail",
