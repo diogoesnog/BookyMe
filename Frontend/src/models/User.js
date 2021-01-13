@@ -17,4 +17,13 @@ export default class User {
   setId(id) {
     this._id = id;
   }
+
+  withObject(user) {
+    this.name = user.name;
+    this.username = user.username;
+    this.email = user.email;
+    this.address = user.address;
+    this.city = user.city;
+    this.zipCode = user.zipCode;
+  }
 }

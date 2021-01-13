@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12" style="padding-left: 30px">
+  <div class="col-12" style="padding-left: 30px; padding-top: 18px;">
     <p class="titles">{{$t('storePage.photos')}}</p>
     <div class="wrapper">
       <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
@@ -8,7 +8,6 @@
       <div class="empty"></div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -29,39 +28,39 @@ export default {
 
 <style scoped>
 
-.titles {
-  color: #434343;
-  font-weight: 700;
-  font-size: 30px;
-}
+  .titles {
+    color: #434343;
+    font-weight: 700;
+    font-size: 30px;
+  }
 
-.wrapper {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  display: grid;
-  grid-template-columns: repeat(6, auto);
-  grid-gap: 0 30px;
-}
+  .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 0 30px;
+  }
 
-.item {
-  background-size: cover;
-  height: 120px;
-  width: 120px;
-  border-radius: 200px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
+  .item {
+    background-size: cover;
+    height: 120px;
+    width: 120px;
+    border-radius: 200px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
 
-.empty {
-  width: 10px;
-}
+  .empty {
+    width: 10px;
+  }
 
-.wrapper::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
-}
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 
-.wrapper {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
+  .wrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
 </style>

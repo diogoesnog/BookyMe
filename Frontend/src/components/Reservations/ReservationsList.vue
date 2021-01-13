@@ -1,24 +1,68 @@
 <template>
   <div style="padding-top: 25px; margin: 15px;">
-    <div class="oval">
-      <p style="font-weight: 300; font-size: 18px; line-height:50%;" class="text-white"> Felgueiras </p>
+    <div class="cityDiv" v-bind:style='{ width:`${getWidthNameStore()}`}'>
+      {{this._id}}
     </div>
-    <br>
-    <div class="information shadow">
-      <div class="row">
-        <div class="col-4">
-          <q-img
-            src="https://cdn.quasar.dev/img/parallax2.jpg"
-            style="width: 100%; height:100%"
-          />
+    <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
+      <div class="widgetReservation">
+        <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
+        <div class="row">
+          <!-- Photo -->
+          <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
+          </div>
+          <div class="col-6" style="padding: 10px;">
+            <span class="titleStore">
+              {{ reservation.storeName }}
+            </span>
+            <span v-if="reservation.hasCatalog == true" class="titleService">
+              {{ reservation.service.product }}
+            </span>
+            <span v-else class="titleService">
+              {{$t('bookingsPage.catalog')}}
+            </span>
+            <span class="hourDate">
+              {{ getHourDate(reservation.serviceDate) }}
+            </span>
+          </div>
+          <div class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <img @click="persistent = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+          </div>
+
+          <!-- Pop Up Alterar Reserva -->
+          <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
+            <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
+              <q-card-section style="padding: 25px; width: 100%;">
+                <span class="titleStorePopup">{{ reservation.storeName }}</span>
+                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
+              </q-card-section>
+              <q-card-actions style="margin-left: 20px; margin-right: 20px;" align="center" class="bg-white text-teal">
+                <div class="row" style="width: 100%;">
+                  <div class="col-12" style="color: #434343; font-size: 20px; font-weight: 600; text-align: left; padding: 10px">
+                    <span>{{$t('bookingsPage.editPopup.dateAndTime')}}</span>
+                  </div>
+                  <div class="col-6" style="padding-right: 10px;">
+                    <q-select behavior="menu" rounded outlined v-model="model" :options="options"/>
+                  </div>
+                  <div class="col-6" style="padding-left: 10px;">
+                    <q-select behavior="menu" rounded outlined v-model="model" :options="options"/>
+                  </div>
+                </div>
+              </q-card-actions>
+              <q-card-actions style="margin: 20px;" align="center" class="bg-white text-teal">
+                <div class="row" style="width: 100%;">
+                  <div class="col-6" style="padding-right: 10px;">
+                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.editPopup.changeBooking')" v-close-popup />
+                  </div>
+                  <div class="col-6" style="padding-left: 10px;">
+                    <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
+                  </div>
+                </div>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+
         </div>
-        <div class="col-8" style="margin-top:35px; padding:10px">
-          <p style="font-weight: 670; font-size: 22px; line-height:0%;"> Ginásio Go Fitness </p>
-          <p style="font-weight: 300; font-size: 18px; line-height:50%;"> Sessão CrossFit </p>
-          <p style="font-weight: 670; font-size: 22px; line-height:0%; margin-top:50px"> 13 Nov - 17:00 </p>
-          <q-icon roudned class="fas fa-ellipsis-v" style="font-size: 1.5em; margin-left:180px" />
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -30,39 +74,170 @@ export default {
 
   props: {
     _id: String,
-    bookingDate: Date,
-    serviceDate: Date,
-    userId: String,
-    storeId: String
+    booking: Array
   },
 
   data() {
     return {
+      persistent: false,
+      model: null,
+      options: [
+        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+      ]
+    }
+  },
+
+  methods: {
+    getWidthNameStore() {
+      if(this._id.length > 0 & this._id.length <= 3) return "15%";
+      else if(this._id.length >= 4 & this._id.length <= 6) return "30%";
+      else if(this._id.length >= 7 & this._id.length <= 9) return "35%";
+      else if(this._id.length >= 10 & this._id.length <= 12) return "45%";
+      else if(this._id.length >= 13 & this._id.length <= 15) return "55%";
+      else if(this._id.length >= 16 & this._id.length <= 18) return "65%";
+      else if(this._id.length >= 19 & this._id.length <= 21) return "75%";
+      else return "80%"    
+    },
+    getImage(url) {
+      return this.urlMainPhoto = "http://localhost:5100" + url;
+    },
+    getHourDate(string) {
+      var splits = string.split('T', 2);
+
+      // Date
+      var date = splits[0];
+      var dateSplit = date.split('-', 3);
+
+      var year = dateSplit[0] % 100;
+      var day = dateSplit[2];
+      var month = dateSplit[1];
+
+      // Hour
+      var hour = splits[1];
+      var hourSplit = hour.split(':00.000Z', 2)[0];
+      
+      return day + "/" + month + "/" + year + " - " + hourSplit;
     }
   }
 }
 </script>
 
 <style scoped>
-.oval {
-  height: 50px;
-  width: 120px;
-  background: linear-gradient(#13c1e0, #2897e3);
-  margin-left: 15px;
-  border-radius: 28px;
-}
 
-.information {
-  height: 160px;
-  width: 330px;
-  background-color:white;
-  margin-left: 5px;
-  border-radius: 28px;
-}
+  .divPhoto {
+    width: 30%;
+    height: 120px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    background-size: cover;
+    background-position: center top;
+  }
 
-.shadow {
-  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 28px;
-  border-radius: 28px;
-}
+  .cityDiv {
+    background: linear-gradient(#13c1e0, #2897e3);
+    color: white;
+    height: 40px;
+    border-radius: 100px;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .widgetReservation {
+    height: 120px;
+    background-color: white;
+    margin-top: 25px;
+    border-radius: 30px;
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+    border-radius: 28px;
+  }
+
+  .titleStore {
+    text-overflow: ellipsis; 
+    font-size: 20px; 
+    font-weight: 600; 
+    display: inline-block; 
+    width: 170px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
+  .titleStorePopup {
+    text-overflow: ellipsis; 
+    font-size: 26px; 
+    font-weight: 600; 
+    display: inline-block; 
+    width: 270px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
+  .titleService {
+    text-overflow: ellipsis; 
+    font-size: 16px; 
+    font-weight: 350; 
+    display: inline-block; 
+    width: 170px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
+  .hourDate {
+    text-overflow: ellipsis; 
+    font-size: 20px; 
+    font-weight: 600; 
+    display: inline-block; 
+    width: 160px; 
+    white-space: nowrap; 
+    overflow: hidden !important;
+  }
+
+  .q-btn1 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    outline: 0;
+    border: 0;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-decoration: none;
+    color: white !important;
+    background: linear-gradient(#13c1e0, #2897e3) !important;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .q-btn2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    outline: 0;
+    border: 0;
+    vertical-align: middle;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1.5em;
+    text-decoration: none;
+    color: white !important;
+    background: linear-gradient(#e9695c, #e03459) !important;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    width: 100%;
+    height: auto;
+  }
+
 </style>

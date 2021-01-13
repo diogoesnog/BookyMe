@@ -1,0 +1,114 @@
+<template>
+  <div class="col-12" style="padding-left: 30px; padding-top: 18px;">
+    <p class="titles">{{$t('storePage.servicesCatalog')}}</p>
+    <div class="wrapper">
+      <div v-for="(service, index) in catalog" :key="index" v-bind="service" class="item">
+        <div class="row">
+          <div class="col-6 service">
+            {{ service.product }}
+          </div>
+          <div class="col-6 price">
+            {{ service.price }}€
+          </div>
+        </div>
+      </div>
+      <div class="empty"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import Service from '../../services/user.service'
+
+export default {
+  name: "StoreCatalog",
+
+  data() {
+    return {
+      storeID: this.$route.params.id,
+      catalog: Array
+    }
+  },
+
+  mounted() {
+    this.getCatalog();
+  },
+
+  methods: {
+    getCatalog() {
+      console.log("OI");
+      Service.getCatalog(this.storeID)
+        .then(response => {
+          let data = response.data["data"];
+          this.catalog = data;
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    }    
+  }
+    
+}
+</script>
+
+<style scoped>
+
+  .titles {
+    color: #434343;
+    font-weight: 700;
+    font-size: 30px;
+  }
+
+  .service {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px; 
+    font-weight: 300;
+  }
+
+  .price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px; 
+    font-weight: 700;
+  }
+
+  .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-columns: repeat(200, auto);
+    grid-gap: 0 30px;
+  }
+
+  .item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    height: 110px;
+    width: 201px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .empty {
+    width: 10px;
+  }
+
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .wrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+</style>
