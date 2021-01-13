@@ -8,7 +8,7 @@
         <div style="position: relative; display: flex; justify-content: center">
           <div style="position: absolute">
             <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-              <img :src="`${base}${avatar}`">
+              <img style="object-fit: cover;" :src="`${base}${avatar}`">
             </q-avatar>
           </div>
           <div style="position: absolute; top: 125px">
