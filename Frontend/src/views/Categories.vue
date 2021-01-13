@@ -19,7 +19,7 @@
           </div>
           <div class="col-2" style="text-align: right;">
             <q-avatar class="shadow gradientOne">
-              <router-link v-bind:to="'stores/' + category.title">
+              <router-link v-bind:to="'../stores/' + category.title">
                 <img style="height: 30px" :src="nameIcon(category.title)"/>
               </router-link>
           </q-avatar>
