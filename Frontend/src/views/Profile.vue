@@ -16,7 +16,7 @@
 
     </div>
     <div>
-      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile" :password="password" @changeUserPassword="changeUserPassword"/>
+      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword"/>
     </div>  
     <div>
       <Toolbar/>
@@ -45,7 +45,6 @@ export default {
     return {
       profileData: {}, 
       base: '',
-      password: '',
       lang: this.$i18n.locale,
         langOptions: [
           { value: 'en-us', label: this.$t('languages.english')},

@@ -131,7 +131,7 @@
         
         <div style="margin-left: 10px; margin-top:7px">
          <q-form  class="q-gutter-md">
-              <q-input borderless v-model="this.password" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
+              <q-input borderless v-model="password" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
                 
                 <template v-slot:prepend>
                     <q-icon name="fas fa-lock" color="grey-5" />
@@ -142,7 +142,17 @@
                     <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
               </template>
               </q-input>
-             
+              <q-input borderless v-model="oldPassword" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
+                
+                <template v-slot:prepend>
+                    <q-icon name="fas fa-lock" color="grey-5" />
+                </template>
+
+
+              <template v-slot:append>
+                    <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
+              </template>
+              </q-input>
           </q-form>
         </div>
       </div>
@@ -186,7 +196,8 @@ export default {
       esconde:false,
       atualizados: [],
       editUser: new User(),
-      password: '***************'
+      password: '***************',
+      oldPassword:'***************'
     }
   },
 
@@ -228,8 +239,11 @@ export default {
     bottomSavePassword(e){
       e.preventDefault();
       console.group("UserUpdatePassword");
-
-      this.$emit('changeUserPassword', this.password);
+      let data ={
+        oldPassword: this.oldPassword,
+        newPassword:this.password
+        }
+      this.$emit('changeUserPassword', data);
       this.editavel2 = false;
       this.esconde2 = false;
       
