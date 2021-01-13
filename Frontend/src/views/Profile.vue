@@ -16,7 +16,7 @@
 
     </div>
     <div>
-      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword"/>
+      <ProfileData :base="base"  :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" />
     </div>  
     <div>
       <Toolbar/>
@@ -84,6 +84,8 @@ export default {
         }).finally(() => {
           this.$q.loading.hide();
         })
+
+        
     },
 
     changeUserProfile(data) {
