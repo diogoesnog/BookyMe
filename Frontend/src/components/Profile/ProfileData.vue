@@ -55,7 +55,7 @@
         </div>
       
         <!-- Nome -->
-        <div style="margin-left: 10px; margin-top: 15px;" >
+        <div style="margin-left: 10px; margin-top: 15px;">
           <q-form  class="q-gutter-md">
               <q-input borderless v-model="profile.name"  style="height: 30px;" type="text" :disable ="!editavel">
                 <template v-slot:prepend>

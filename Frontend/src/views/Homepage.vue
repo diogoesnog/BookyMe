@@ -14,7 +14,9 @@
         <Toolbar/>
       </div>
       
-      
+      <div>
+        <ProfileData :profile="profileData"/>
+      </div> 
       
      
   </div> 
@@ -26,6 +28,7 @@
 import CategoriesList from '../components/Homepage/CategoriesList';
 import Toolbar from '../components/Root/Toolbar';
 import Popular from '../components/Homepage/Popular';
+import ProfileData from '../components/Profile/ProfileData';
 
 export default {
   name: "Homepage",
@@ -38,6 +41,7 @@ export default {
   components: {
     Popular,
     CategoriesList,
+    ProfileData,
     Toolbar
   },
 

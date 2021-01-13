@@ -36,7 +36,7 @@
 
   // Homepage
   homePage: {
-    greeting: "Olá, {name}!",
+    greeting: "Olá",
     morePopular: "Mais Populares",
 
     categories: "Categorias",

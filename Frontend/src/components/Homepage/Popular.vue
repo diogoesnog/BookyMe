@@ -3,8 +3,27 @@
 
     <div class="divTop1">
          <div class="divTop2">
-         </div> 
+            <div class="col-10">
+              <q-input rounded filled label='Search'>
+                <template v-slot:append>
+                  <q-avatar size='xl' icon="search" />
+                </template>
+              </q-input>
+           </div>
+           <div style="position: absolute; top:100px;">
+            <p>
+              <span style="font-weight: 600; font-size: 30px;">
+                {{ $t('homePage.greeting') }}
+              </span>
+              <br/>
+            </p>
+          </div>
+        </div> 
+          
+        
     </div> 
+    
+    
     <div class="divBottom">
             
      </div> 
@@ -15,11 +34,15 @@
 <script>
 
 
+import Service from '../../services/auth.service'
+import User from '../../models/User';
 
 
 export default {
   name: "Popular",
-
+  props: {
+    name: String,
+  }, 
   data() {
     return {
     }

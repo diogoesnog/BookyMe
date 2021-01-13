@@ -34,7 +34,7 @@ export default {
 
   // Homepage
   homePage: {
-    greeting: "Salut, {name}!",
+    greeting: "Salut",
     morePopular: "Plus Populaire",
 
     categories: "Catégories",
