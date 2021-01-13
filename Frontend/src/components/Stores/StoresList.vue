@@ -5,7 +5,7 @@
       :src="getImage()"
       class="roundBorder shadow"
     >
-      <div class="cardBackground absolute-bottom text-center" style="height:70px">
+      <div class="cardBackground absolute-bottom text-center" @click="redirect()" style="height:70px">
         <div class="row" style="margin-top: -2px;">
           <div class="col-9" style="text-align: left; margin-top: -5px; display: inline-grid; line-height: 25px;">
             <span style="font-weight: 670; display: inline-block; width: 220px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 22px;">
@@ -53,13 +53,15 @@ export default {
     getImage() {
       let numberPhotos = this.photos.length;
       if(numberPhotos > 0) {
-        let i = Math.floor(Math.random() * (numberPhotos + 1));
         return `http://localhost:5100${this.photos[0].url}`
       }
       return "";
     },
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
+    },
+    redirect() {
+      this.$router.push({name: 'Store', params:{id:this._id}})
     }
   }
 }
@@ -77,12 +79,6 @@ export default {
 
 .cardBackground {
   background-color: rgba(40,151,227, 0.9);
-}
-
-.clearIcon {
-  font-size: 0.85em!important;
-  margin: 15px;
-  background-color: white;
 }
 
 .roundBorder {

@@ -15,9 +15,11 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "leaflet": "^1.7.1",
     "quasar": "^1.0.0",
     "vue-cookies": "^1.7.4",
-    "vue-i18n": "^8.22.2"
+    "vue-i18n": "^8.22.2",
+    "vue2-leaflet": "^2.6.0"
   },
   "description": "A Quasar Framework app",
   "devDependencies": {

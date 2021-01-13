@@ -4,17 +4,21 @@
         <q-footer reveal>
           <q-tabs style="padding: 5px;" align="justify" class="bg-white shadow-2 qTab" indicator-color="transparent" active-color="blue">
               <q-route-tab to="/home" exact>
-                <q-icon name="fas fa-home" style="font-size: 25px"/>
+                <img v-if="checkPage('/home') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/HomeHover.svg">
+                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Home.svg">
               </q-route-tab>
               <q-route-tab to="/reservations" exact>
-                <q-icon name="fas fa-bookmark" style="font-size: 23px"/>
+                <img v-if="checkPage('/reservations') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/BookHover.svg">
+                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Book.svg">
               </q-route-tab>
               <q-route-tab to="/favorites" exact>
-                <q-icon name="fas fa-heart" style="font-size: 23px"/>
+                <img v-if="checkPage('/favorites') == 1" style="height: 30px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
+                <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
-                <q-avatar class="shadow" size="md">
-                  <img :src="getImage()">
+                <q-avatar class="shadow" size="lg">
+                  <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3; object-fit: cover;" :src="getImage()">
+                  <img v-else style="border: 3px solid #434343; object-fit: cover;" :src="getImage()">
                 </q-avatar>
               </q-route-tab>
           </q-tabs>
@@ -42,13 +46,12 @@ export default {
 
   mounted() {
     this.fetchProfileData();
-
+    this.checkPageProfile();
+    this.checkPage();
   },
 
   methods: {
-
     fetchProfileData() {
-      //this.$q.loading.show({ delay: 400});
       UserService.getProfileData()
         .then(response => {
           let data = response.data["data"];
@@ -62,8 +65,17 @@ export default {
     },
     getImage() {
       return `${this.base}${this.avatar}`
+    },
+    checkPage: function(string) {
+      var currentLocation = window.location.pathname;
+      if(currentLocation == string) return 1;
+      else return 0;
+    },
+    checkPageProfile() {
+      var currentLocation = window.location.pathname;
+      if(currentLocation == '/users/login') return 1;
+      else return 0;
     }
-
   }
 }
 
@@ -80,7 +92,7 @@ export default {
   }
 
   .text-blue {
-    color: #e03459 !important;
+    color: #2897e3 !important;
   }
 
 </style>

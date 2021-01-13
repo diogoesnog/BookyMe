@@ -1,29 +1,35 @@
 <template>
-  <div>
-    <br>
-    <div style="color: #434343">
-      <div class="row">
-        <div class="col-6">
-          <q-btn padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
-        </div>
+  <div style="color: #434343;" class="centerDiv">
+    <div class="row" style="margin: 20px; padding-top:10px;">
+      <div class="col-10" style="">
+        <p>
+          <span style="font-weight: 670; font-size: 45px;">
+            {{$t('bookingsPage.title')}}
+          </span>
+          <br/>
+          <span style="font-weight: 300; font-size: 20px;">
+            {{$t('bookingsPage.description')}}
+          </span>
+        </p>
       </div>
-      <div class="row">
-        <div class="col">
-          <p style="font-weight: 670; font-size: 45px; margin-top:10px; margin-bottom:0px; padding:15px">{{$t('bookingsPage.title')}}</p>
-        </div>
-        <div class="col" style="margin-right:5px">
-          <q-btn
-            round
-            class="filterAvatar"
-            size="md" 
-            icon="fas fa-filter"
-            style="margin-left:110px; margin-top:30px"
-          />
-        </div>
+      <div class="col-2" style="padding-left: 15px; display: flex; align-items: center; justify-content: center;">
+        <q-btn
+          round
+          class="filterAvatar"
+          size="md" 
+          icon="fas fa-filter"
+        />
       </div>
-      <h6 style="padding:15px; margin-top:0px; margin-bottom:0px">{{$t('bookingsPage.description')}}</h6>
     </div>
-      <ReservationsList/>
+      <div class="title">
+        {{$t('bookingsPage.type1')}}
+      </div>
+      <ReservationsList v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+      <br/>
+      <div class="title">
+        {{$t('bookingsPage.type2')}}
+      </div>
+      <ReservationsList v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
     <div>
      <Toolbar/>
     </div>
@@ -42,43 +48,43 @@ export default {
 
    data() {
     return {
-      reservations: Array
+      reservationsCurrent: Array,
+      reservationsConcluded: Array
     }
   },
 
   components: {
-    Toolbar,
-    ReservationsList
+    ReservationsList,
+    Toolbar
   },
-
- 
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    //this.fetchFavorites();
+    this.getReservationsCurrent();
+    this.getReservationsConcluded();
   },
+
   methods: {
-    
-    // TODO: criar uma função de remoção de um favorito do teu favorites na função data()
-    // tip, este método vai passar para o componente como uma espécie de prop.
-    //favoriteRemoved(id) {
-     // this.favorites = this.favorites.filter((item) => item !== id);
-    //},
-
-    /*fetchReservations() {
-      console.log("Fetch Reservations");
-      Service.getFavorites()
+    getReservationsCurrent() {
+      Service.getBookingUserCurrent()
         .then(response => {
-          console.log("Got Response");
           let data = response.data["data"];
-
-          this.favorites = data;
-
+          this.reservationsCurrent = data;
           console.log(data);
         }).catch(err => {
-            console.log(err)
+          console.log(err)
         })
-    }*/
+    },
+    getReservationsConcluded() {
+      Service.getBookingUserConcluded()
+        .then(response => {
+          let data = response.data["data"];
+          this.reservationsConcluded = data;
+          console.log(data);
+        }).catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 
@@ -86,12 +92,15 @@ export default {
 
 <style scoped>
 
-  .gradientOne {
-    margin-left: 10px;
-    margin-top: 0px;
-    position: relative;
-    background: linear-gradient(#e9695c, #e03459);
+  .filterAvatar {
+    font-size: 1em!important;
     color: white;
+    background-color: #434343;
+  }
+  
+  .centerDiv {
+    padding: 15px;
+    margin-top: 10px;
   }
 
   .shadow {
@@ -108,4 +117,17 @@ export default {
     padding-left: 20px;
   }
 
+  .title {
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+    height: 40px;
+    width: 130px;
+    border-radius: 100px;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
 </style>
