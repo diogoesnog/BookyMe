@@ -30,8 +30,6 @@ import Service from '../services/user.service';
 import Toolbar from '../components/Root/Toolbar';
 import ProfileData from '../components/Profile/ProfileData';
 
-
-
 export default {
 
   name: "Profile",

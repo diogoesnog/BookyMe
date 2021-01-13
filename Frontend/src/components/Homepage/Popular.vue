@@ -4,11 +4,14 @@
          <div class="divTop2">
            <div class="row">
             <div class="col-9">
-              <span style="font-weight: 600; font-size: 30px;">
-                {{ $t('homePage.greeting') }}, {{this.name}}
+              <span style="font-weight: 600; font-size: 35px;">
+                {{ $t('homePage.greeting') }}, {{profile.name}}
               </span>
             </div>
             <div class="col-3">
+              <q-avatar class="shadow gradientOne">
+                <img style="object-fit: cover;" :src="getImage()">
+              </q-avatar>
             </div>
           </div>
         </div> 
@@ -24,19 +27,24 @@ import User from '../../models/User';
 
 export default {
   name: "Popular",
+
   props: {
-    name: String,
+    profile: Object,
+    base: String
   }, 
+
   data() {
     return {
     }
   },
 
   components: {
-    
   },
 
   methods: {
+    getImage(url) {
+      return this.base + this.profile.avatar;
+    },
   }
 }
 

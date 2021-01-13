@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popular v-bind="profileData"/>
+    <Popular :base="base" :profile="profileData" />
     <div class= "categoriesDiv">
       <CategoriesList/>
     </div>
@@ -20,7 +20,8 @@ export default {
 
   data() {
     return {
-      profileData: {}
+      profileData: {},
+      base: ''
     }
   },
 
@@ -43,7 +44,6 @@ export default {
           let data = response.data["data"];
           this.base=response.data["base"];
           this.profileData=data;
-          console.log("TEste");
           console.log(this.profileData);
         }).catch(err => {
 
