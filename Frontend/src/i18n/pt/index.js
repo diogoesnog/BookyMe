@@ -1,7 +1,7 @@
  export default {
   // Login
   loginPage: {
-    title: "Bem Vindo!",
+    title: "Bem-Vindo!",
     description: "Inicie Sessão para ver todas as suas Reservas",
 
     username: "Username/E-mail",
@@ -36,7 +36,7 @@
 
   // Homepage
   homePage: {
-    greeting: "Olá, {name}!",
+    greeting: "Olá",
     morePopular: "Mais Populares",
 
     categories: "Categorias",
@@ -84,6 +84,9 @@
   bookingsPage: {
     title: "Reservas",
     description: "Lista de Reservas Recentes e Anteriores",
+    type1: "Recentes",
+    type2: "Conluídas",
+    catalog: "Reserva Comum",
 
     newBooking: {
       title: "Nova Reserva",
@@ -105,8 +108,8 @@
       serviceType: "Tipo de Serviço",
       dateAndTime: "Data e Hora",
 
-      changeBooking: "Alterar Reserva",
-      cancelBooking: "Cancelar Reserva"
+      changeBooking: "Alterar",
+      cancelBooking: "Cancelar"
     }
   },
 
