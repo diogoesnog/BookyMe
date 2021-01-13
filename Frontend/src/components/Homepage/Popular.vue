@@ -1,18 +1,21 @@
 <template>
   <div class="text-center" style="color: #434343">
     <div class="divTop1">
-         <div class="divTop2">
-           <div class="row">
-            <div class="col-9">
+        <div class="divTop2">
+          <div class="row" style="padding: 30px">
+            <div class="col-9" style="text-align: left">
               <span style="font-weight: 600; font-size: 35px;">
                 {{ $t('homePage.greeting') }}, {{profile.name}}
               </span>
             </div>
-            <div class="col-3">
+            <div class="col-3" style="text-align: right">
               <q-avatar class="shadow gradientOne">
                 <img style="object-fit: cover;" :src="getImage()">
               </q-avatar>
             </div>
+          </div>
+          <div style="font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
+            {{ $t('homePage.morePopular') }} 
           </div>
         </div> 
     </div>
@@ -30,6 +33,7 @@ export default {
 
   props: {
     profile: Object,
+    stores: Object,
     base: String
   }, 
 

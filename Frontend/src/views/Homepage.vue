@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Popular :base="base" :profile="profileData" />
+    <Popular :base="base" :stores ="storesData" :profile="profileData" />
     <div class= "categoriesDiv">
       <CategoriesList/>
     </div>
@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       profileData: {},
+      storesData: {},
       base: ''
     }
   },
@@ -34,23 +35,29 @@ export default {
   mounted() {
     console.log("Mounted: View has been rendered");
     this.fetchProfileData();
+    this.fetchStoresList();
   },
 
   methods: {
     fetchProfileData() {
-      this.$q.loading.show({ delay: 400});
       Service.getProfileData()
         .then(response => {
-          let data = response.data["data"];
-          this.base=response.data["base"];
-          this.profileData=data;
-          console.log(this.profileData);
+          this.base = response.data["base"];
+          this.profileData = response.data["data"];;
         }).catch(err => {
-
         }).finally(() => {
           this.$q.loading.hide();
         })   
     },
+    fetchStoresList() {
+      Service.getStoresData()
+        .then(response => {
+          this.storesData = response.data["data"];;
+        }).catch(err => {
+        }).finally(() => {
+          this.$q.loading.hide();
+        })  
+    }
   }
 }
 
