@@ -6,6 +6,7 @@
         <StorePhotos v-bind="storeData"/>
         <StoreDescription v-bind="storeData"/>
         <StoreMap v-bind="storeData"/>
+        <StoreCatalog v-bind="storeData"/>
         <StoreRatings v-bind="storeData"/>
       </div>
     </div>
@@ -21,6 +22,7 @@ import StoreBanner from 'components/Store/StoreBanner';
 import StoreRatings from "components/Store/StoreRatings";
 import StorePhotos from "components/Store/StorePhotos";
 import StoreMap from "components/Store/StoreMap";
+import StoreCatalog from "components/Store/StoreCatalog";
 import StoreDescription from "components/Store/StoreDescription";
 
 
@@ -32,6 +34,7 @@ export default {
     StorePhotos,
     StoreDescription,
     StoreMap,
+    StoreCatalog,
     StoreRatings,
     Toolbar
   },

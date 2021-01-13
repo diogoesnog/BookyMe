@@ -36,6 +36,14 @@ class UserService {
     return request.patch(body)
   }
 
+  getCatalog(id) {
+    let request = new Request(`${process.env.API_ENDPOINT}/catalog/store/${id}`);
+
+    request.isJson()
+    request.acceptJson()
+
+    return request.get()
+  }
 
   getCategories() {
     let request = new Request(`${process.env.API_ENDPOINT}/stores/categories`)

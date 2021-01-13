@@ -24,7 +24,7 @@
             <div class="divRating shadow">
               <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
                   <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
-                    {{roundRating(this.rating)}}<span style="font-weight: 200; font-size: 19px;">/5</span>
+                    {{ roundRating(this.rating) }}<span style="font-weight: 200; font-size: 19px;">/5</span>
                   </span>
                 <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
               </p>

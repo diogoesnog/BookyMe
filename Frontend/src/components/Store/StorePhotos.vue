@@ -8,7 +8,6 @@
       <div class="empty"></div>
     </div>
   </div>
-
 </template>
 
 <script>

@@ -148,11 +148,11 @@ export default {
 
 <style scoped>
 
-.titles {
-  color: #434343;
-  font-weight: 700;
-  font-size: 30px;
-}
+  .titles {
+    color: #434343;
+    font-weight: 700;
+    font-size: 30px;
+  }
 
 .ratingTotal1 {
   background: linear-gradient(#e9695c, #e03459);
