@@ -117,12 +117,23 @@ module.exports.getUserFromID = (bookingID) => {
     return Booking.findOne({_id: bookingID}, 'userId')
 };
 
-module.exports.reschedule = (id, bookingDate, serviceDate) => {
-    return Booking.findByIdAndUpdate(id, {
-        serviceDate: serviceDate,
-        bookingDate: bookingDate,
-        wasRescheduled: true
-    });
+module.exports.reschedule = (id, bookingDate, serviceDate, service) => {
+    if (service) {
+        console.log("YES");
+        return Booking.findByIdAndUpdate(id, {
+            serviceDate: serviceDate,
+            bookingDate: bookingDate,
+            service: service,
+            wasRescheduled: true
+        });
+    }
+    else {
+        return Booking.findByIdAndUpdate(id, {
+            serviceDate: serviceDate,
+            bookingDate: bookingDate,
+            wasRescheduled: true
+        });
+    }
 };
 
 module.exports.count = (storeId, date_i, date_f, canceled) => {
