@@ -17,6 +17,12 @@
           <div style="font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
             {{ $t('homePage.morePopular') }} 
           </div>
+          <div class="wrapper">
+            <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
+              {{ store.name }}
+            </div>
+            <div class="empty"></div>
+          </div>
         </div> 
     </div>
 </div> 
@@ -82,6 +88,36 @@ export default {
     bottom: 35px;
     width: 100%;
     padding: 30px;
+  }
+
+  .wrapper {
+    position: absolute;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-template-columns: repeat(600, auto);
+    grid-gap: 0 30px;
+  }
+
+  .item {
+    background-size: cover;
+    height: 120px;
+    width: 120px;
+    border-radius: 200px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .empty {
+    width: 10px;
+  }
+
+  .wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .wrapper {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 
 </style>
