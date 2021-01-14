@@ -51,7 +51,7 @@
            <q-btn @click="bottomSave" label="Save" color="primary" :invisible= "!esconde"/>
         </div>
         <div >
-          <q-btn @click="bottomCancel" label="Cancel" color="primary" />
+          <q-btn @click="bottomCancel" cancel= "true" label="Cancel" color="primary" />
         </div>
       
         <!-- Nome -->
@@ -191,9 +191,6 @@ export default {
       editavel: false,
       editavel2: false,
       esconde:false,
-      atualizados: [],
-      editUser: new User(),
-      componentKey: 0,
       newPassword: '***************',
       oldPassword:'***************'
     }
@@ -251,7 +248,7 @@ export default {
     bottomCancel(){
       this.editavel = false;
       this.esconde = false;
-      this.componentKey += 1;
+      window.location.reload();
       
     },    
 
