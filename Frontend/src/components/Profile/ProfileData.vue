@@ -43,15 +43,15 @@
       <div class="roundedDiv shadow" style="padding:12px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; ">
          <!-- Botões -->
         <div style="text-align: right; padding-left: 245px; position: absolute;">
-          <q-btn flat size="md" class="" @click="bottomEdit" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" :hidden= "!esconde"  >
+          <q-btn flat size="md" class="" @click="bottomEdit" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" v-show= "!esconde"   >
             {{ $t('profilePage.editData') }}
           </q-btn>
         </div>
         <div>
-           <q-btn @click="bottomSave" label="Save" color="primary" :invisible= "!esconde"/>
+           <q-btn @click="bottomSave" label="Save" color="primary" v-show= "esconde" />
         </div>
         <div >
-          <q-btn @click="bottomCancel" cancel= "true" label="Cancel" color="primary" />
+          <q-btn @click="bottomCancel" label="Cancel" color="primary" v-show= "esconde" />
         </div>
       
         <!-- Nome -->
@@ -109,19 +109,19 @@
           </p>
       </div>
       <!-- Segunda Box - password -->
-      <div class="roundedDiv shadow" style="padding:20px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; margin-top:50px;">
+      <div class="roundedDiv shadow" style="padding:30px; display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; margin-top:50px;">
         
         <!-- BOTÃO CHANGE PASSWORD -->
-        <div style="text-align: right; padding-left: 175px; position: absolute;">
-          <q-btn flat size="md" class="" @click="bottomEdit2" style="text-transform: capitalize; font-size: 15px; font-weight: 350;" :hidden= "!esconde"  >
+        <div style="text-align: right; padding-left: 175px; position: absolute;" v-show= "!esconde2" >
+          <q-btn flat size="md" class="" @click="bottomEdit2" style="text-transform: capitalize; font-size: 15px; font-weight: 350;"   >
             {{ $t('profilePage.changePassword') }}
           </q-btn>
         </div>
         <div>
-           <q-btn @click="bottomSavePassword" label="Save" color="primary" :invisible= "!esconde"/>
+           <q-btn @click="bottomSavePassword" label="Save" color="primary" v-show= "esconde2" />
         </div>
         <div >
-          <q-btn @click="bottomCancel2" label="Cancel" color="primary" />
+          <q-btn @click="bottomCancel2" label="Cancel" color="primary" v-show= "esconde2" />
         </div>
         
         
@@ -129,28 +129,31 @@
          
          
          <q-form  class="q-gutter-md">
-              <q-input borderless v-model="newPassword" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
-                
-                <template v-slot:prepend>
-                    <q-icon name="fas fa-lock" color="grey-5" />
-                </template>
+           <div class="row" style="padding: 5px">
+                <div class="col-6" style="padding: 10px">
+                  <q-input borderless v-model="newPassword" :label= "$t('profilePage.newPassword')" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
+                    
+                   <!--  <template v-slot:prepend>
+                        <q-icon name="fas fa-lock" color="grey-5" />
+                    </template> -->
+                    <template v-slot:append>
+                          <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
+                    </template>
 
+                  </q-input>
 
-              <template v-slot:append>
-                    <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
-              </template>
-              </q-input>
-              <q-input borderless v-model="oldPassword" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
-                
-                <template v-slot:prepend>
-                    <q-icon name="fas fa-lock" color="grey-5" />
-                </template>
+                </div>
+                <div class="col-6" style="padding: 10px">
+                      <q-input borderless v-model="oldPassword" :label= "$t('profilePage.oldPassword')" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable ="!editavel2">
+                        
+                        
+                        <template v-slot:append>
+                              <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
+                        </template>
 
-
-              <template v-slot:append>
-                    <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
-              </template>
-              </q-input>
+                      </q-input>
+                  </div>
+            </div>
           </q-form>
         </div>
       </div>
@@ -191,6 +194,7 @@ export default {
       editavel: false,
       editavel2: false,
       esconde:false,
+      esconde2:false,
       newPassword: '***************',
       oldPassword:'***************'
     }

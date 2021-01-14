@@ -75,7 +75,9 @@ export default {
     signout: "Sign-Out",
     cancel: "Cancel",
     save: "Save",
-    passwordTest: "Different Passwords"
+    passwordTest: "Different Passwords",
+    oldPassword: "Old Password",
+    newPassword: "New Password"
   },
 
   // Reservations

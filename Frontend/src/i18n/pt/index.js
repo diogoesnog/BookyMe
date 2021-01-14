@@ -75,7 +75,9 @@
     signout: "Terminar Sessão",
     cancel: "Cancelar",
     save: "Salvar",
-    passwordTest: "Passwords Diferentes"
+    passwordTest: "Passwords Diferentes",
+    oldPassword: "Password Anterior",
+    newPassword: "Nova Password"
   },
 
   // Reservations
