@@ -43,7 +43,17 @@
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">Store Settings</router-link>
+            <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">General Info</router-link>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Store Photos -->
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon></v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Photos Info</router-link>
           </v-list-item-content>
         </v-list-item>
 

@@ -5,7 +5,7 @@
         <Navbar/>
       </v-col>
       <v-col cols="10">
-        <router-view/>
+        <router-view class="margins"/>
       </v-col>
     </v-row>
 
@@ -22,5 +22,7 @@ export default {
 </script>
 
 <style scoped>
-
+.margins {
+  padding: 30px;
+}
 </style>

@@ -1,18 +1,23 @@
 <template>
   <div>
-    Edit Store information
+    <v-tabs>
+      <v-tab>General</v-tab>
+      <v-tab>Scheduling</v-tab>
+    </v-tabs>
+
+    <h1>Edit Store information</h1>
     <v-form>
       <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
 
       <v-text-field label="Place" v-model="address.place"></v-text-field>
-      <v-text-field label="Zip Code" v-model="address.zipCode"></v-text-field>
+      <v-text-field label="Zip Code" v-model="address.zipcode"></v-text-field>
       <v-text-field label="City" v-model="address.city"></v-text-field>
       <v-text-field label="Country" v-model="address.country"></v-text-field>
 
       <v-textarea phone="Description" outlined v-model="store.description" type="text"></v-textarea>
 
       <!-- TODO: Update Coordinates -->
-      <v-btn @click="saveData"></v-btn>
+      <v-btn block color="primary" @click="saveData">Save</v-btn>
     </v-form>
   </div>
 </template>
