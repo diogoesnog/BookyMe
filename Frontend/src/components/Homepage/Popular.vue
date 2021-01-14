@@ -24,10 +24,27 @@
           <div class="row">
             <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
             </div>
-            <div class="col-12">
+          <div class="row" style="padding: 15px">
+            <div class="col-7" style="text-align: left; margin-top: -5px; display: inline-grid;">
+              <span style="font-weight: 670; display: inline-block; width: 125px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
+                {{ store.name }}
+              </span>
+              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 14px;">
+                {{ store.address.city }}
+              </span>
+            </div>
+            <div class="col-5" style="padding-left: 10px; width: 80px;">
+              <div class="divRating shadow">
+                <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
+                  <span style="font-weight: 670; font-size: 16px; display: inline-block; vertical-align: middle;">
+                    {{roundRating(store.rating)}}<span style="font-weight: 200; font-size: 16px;">/5</span>
+                  </span>
+                  <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
+                </p>
+              </div>
             </div>
           </div>
-          {{ store.name }}
+          </div>
         </div>
       <div class="empty"></div>
     </div>
@@ -61,9 +78,14 @@ export default {
     getImage() {
       return this.base + this.profile.avatar;
     },
+
     getImageWidget(url) {
       console.log(url);
       return "http://localhost:5100" + url;
+    },
+
+    roundRating: function(rating) {
+      return Math.round(rating*10)/10;
     },
   }
 }
@@ -72,6 +94,19 @@ export default {
 </script>
 
 <style scoped>
+
+  .divRating {
+    text-align: center;
+    height: 30px;
+    border-radius: 20px;
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
+
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 28px;
+  }
 
   .divPhoto {
     width: 100%;
@@ -110,7 +145,7 @@ export default {
   }
 
   .wrapper {
-    margin-left: 30px;
+    margin-left: 20px;
     position: absolute;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -121,10 +156,11 @@ export default {
   }
 
   .item {
+    margin: 5px;
     background-size: cover;
     height: 200px;
     width: 230px;
-    border-radius: 40px;
+    border-radius: 30px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   }
 

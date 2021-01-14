@@ -12,7 +12,7 @@ class UserService {
     request.isJson()
     return request.post(body)
   }
-  
+
   updateAccount(user) {
     let body = JSON.stringify(user);
 
@@ -24,7 +24,7 @@ class UserService {
 
     return request.put(body)
   }
-  
+
   updatePassword(user) {
     let body = JSON.stringify(user);
 
@@ -68,7 +68,7 @@ class UserService {
   getBookingUserCurrent(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/current`)
-    
+
     request.isJson()
     request.appendHeader("Authorization", authHeader())
     request.acceptJson()
@@ -80,7 +80,7 @@ class UserService {
   getBookingUserConcluded(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/concluded`)
-    
+
     request.isJson()
     request.appendHeader("Authorization", authHeader())
     request.acceptJson()
@@ -131,7 +131,19 @@ class UserService {
     return request.get()
   }
 
-  getReviewsStore(id){ 
+  getStoreBySearch(keyword, category) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("search", keyword)
+    request.appendParam("category", category)
+
+    return request.get()
+  }
+
+  getReviewsStore(id){
     let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
 
     request.isJson()
@@ -139,7 +151,7 @@ class UserService {
     request.appendHeader("Authorization", authHeader())
 
     return request.get()
-  } 
+  }
 
   getProfileData() {
 
@@ -152,6 +164,22 @@ class UserService {
 
 
     return request.get()
+  }
+
+  makeBooking(booking, storeID) {
+
+    let body = JSON.stringify(booking)
+    console.log(body)
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${storeID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.post(booking)
+
   }
 
 }

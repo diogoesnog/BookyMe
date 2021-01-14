@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn class="botao" rounded label="Faça a sua marcação!" @click="card = true" color="botao" icon="event_available"/>
+    <q-btn class="botao" rounded label="Faça a sua marcação!" @click="card = true" color="vermelho" icon="event_available"/>
 
     <q-dialog v-model="card">
       <q-card class="my-card">
@@ -9,14 +9,15 @@
         <q-card-section>
           <q-btn
             fab
-            color="primary"
+            color="vermelho"
             icon="event_available"
             class="absolute"
+            @click="makeBooking()"
             style="top: 0; right: 12px; transform: translateY(-50%);"
           />
 
           <div class="row no-wrap items-center">
-            <div class="col text-h6 ellipsis">
+            <div class="col text-h6 ellipsis" style="margin-top: 10px; color: #434343; font-weight: 700; font-size: 20px;">
               {{ this.name }}
             </div>
           </div>
@@ -24,8 +25,8 @@
 
         <q-card-section class="q-pt-none">
           <q-form>
-              <q-input rounded type="date" hint="Data da marcação" />
-              <q-input rounded type="time" hint="Hora da Marcação" />
+              <q-input v-model="date" rounded type="date" hint="Data da marcação" />
+              <q-input v-model="hour" rounded type="time" hint="Hora da Marcação" />
           </q-form>
         </q-card-section>
       </q-card>
@@ -34,6 +35,10 @@
 </template>
 
 <script>
+
+import Booking from '../../models/Booking';
+import Service from '../../services/user.service';
+
 export default {
 name: "StoreBooking",
   props: {
@@ -41,14 +46,38 @@ name: "StoreBooking",
   },
   data() {
     return {
-      card: Boolean
-
+      storeID: this.$route.params.id,
+      card: Boolean,
+      date: String,
+      hour: String,
+      booking: new Booking()
     }
   },
   mounted() {
     this.card = false;
   },
   methods: {
+    makeBooking() {
+      let booking = new Booking(this.date, this.hour)
+
+      Service.makeBooking(booking, this.storeID)
+        .then(response => {
+          console.log("Booking Successful");
+          this.$q.notify({
+            type: 'positive',
+            message: `Booking Successful.`
+          });
+        })
+        .catch(err => {
+          console.log(`Error ${err}`);
+          this.$q.notify({
+            type: 'negative',
+            message: 'Failed to Book.'
+          });
+        })
+      console.groupEnd();
+
+    }
   }
 }
 </script>
@@ -61,11 +90,13 @@ name: "StoreBooking",
   margin-top: 50px;
 }
 
-.text-botao {
+.text-vermelho {
   color: white;
 }
-.bg-botao {
+.bg-vermelho {
   background: linear-gradient(#e9695c, #e03459);
 }
+
+
 
 </style>
