@@ -52,8 +52,8 @@ export default {
 
     saveData() {
       this.updateDescription();
-      this.updateAddress();
-      this.updatePhoneNumber();
+      // this.updateAddress();
+      // this.updatePhoneNumber();
     },
 
     updateAddress() {
@@ -75,13 +75,7 @@ export default {
           });
     },
     updateDescription() {
-      Services.updateDescription(this.id, this.store.description)
-          .then( response => {
-            console.log(response);
-          })
-          .catch( err => {
-            console.log(err);
-      });
+      this.$emit('updateDescription', this.store.description);
     }
   }
 }

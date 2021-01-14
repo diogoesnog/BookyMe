@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import Service from '../../../service/user.service';
 export default {
   name: "Photos",
   props: {
@@ -34,18 +33,13 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      // store: Object,
-      // address: Object,
     }
   },
 
   methods: {
     uploadPhoto(e) {
       e.preventDefault();
-
-      Service.uploadPhoto(this.id, this.file)
-        .then(response => console.log(response.data))
-        .catch(err => console.log(err));
+      this.$emit('uploadImage', this.file);
     }
   }
 }
