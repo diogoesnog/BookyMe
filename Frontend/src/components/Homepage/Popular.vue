@@ -74,9 +74,9 @@ export default {
 <style scoped>
 
   .divPhoto {
-    width: 30%;
-    height: 120px;
-    border-bottom-left-radius: 30px;
+    width: 100%;
+    height: 130px;
+    border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     background-size: cover;
     background-position: center top;
