@@ -1,6 +1,7 @@
 <template>
   <div>
     <StoreBanner v-bind="storeData"/>
+
     <div class="divBottom">
       <div class="row">
         <StorePhotos v-bind="storeData"/>
@@ -8,9 +9,11 @@
         <StoreMap v-bind="storeData"/>
         <StoreCatalog v-bind="storeData"/>
         <StoreRatings v-bind="storeData"/>
+        <StoreBooking v-bind="storeData"/>
       </div>
     </div>
     <Toolbar/>
+
   </div>
 </template>
 
@@ -24,6 +27,7 @@ import StorePhotos from "components/Store/StorePhotos";
 import StoreMap from "components/Store/StoreMap";
 import StoreCatalog from "components/Store/StoreCatalog";
 import StoreDescription from "components/Store/StoreDescription";
+import StoreBooking from "components/Store/StoreBooking";
 
 
 export default {
@@ -36,6 +40,7 @@ export default {
     StoreMap,
     StoreCatalog,
     StoreRatings,
+    StoreBooking,
     Toolbar
   },
 
@@ -94,7 +99,7 @@ export default {
 .divBottom {
   position: relative;
   padding-top: 315px;
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 </style>

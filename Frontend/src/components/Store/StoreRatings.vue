@@ -86,7 +86,7 @@ export default {
   },
   
   props: {
-    rating: Number,
+    rating: String,
     reviews: Array
   },
 
@@ -121,8 +121,6 @@ export default {
             if(Math.round(this.reviews[i].rating) == 2) two++;
             if(Math.round(this.reviews[i].rating) == 1) one++;
           }
-
-          console.log("TESTE" + five);
 
           this.fiveStars = Math.round((five/length) * 100) + "%";
           this.fourStars = Math.round((four/length) * 100) + "%";
