@@ -154,11 +154,12 @@ class UserService {
     return request.get()
   }
 
-  makeBooking(booking) {
+  makeBooking(booking, storeID) {
 
     let body = JSON.stringify(booking)
+    console.log(body)
 
-    let request = new Request(`${process.env.API_ENDPOINT}/booking/${booking.serviceID}`)
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${storeID}`)
 
     request.isJson()
     request.acceptJson()

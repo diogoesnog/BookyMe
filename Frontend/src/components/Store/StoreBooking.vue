@@ -12,6 +12,7 @@
             color="vermelho"
             icon="event_available"
             class="absolute"
+            @click="makeBooking()"
             style="top: 0; right: 12px; transform: translateY(-50%);"
           />
 
@@ -24,8 +25,8 @@
 
         <q-card-section class="q-pt-none">
           <q-form>
-              <q-input v-model="booking.serviceDate" rounded type="date" hint="Data da marcação" />
-              <q-input rounded type="time" hint="Hora da Marcação" />
+              <q-input v-model="date" rounded type="date" hint="Data da marcação" />
+              <q-input v-model="hour" rounded type="time" hint="Hora da Marcação" />
           </q-form>
         </q-card-section>
       </q-card>
@@ -45,9 +46,11 @@ name: "StoreBooking",
   },
   data() {
     return {
+      storeID: this.$route.params.id,
       card: Boolean,
+      date: String,
+      hour: String,
       booking: new Booking()
-
     }
   },
   mounted() {
@@ -55,7 +58,9 @@ name: "StoreBooking",
   },
   methods: {
     makeBooking() {
-      Service.makeBooking(this.booking)
+      let booking = new Booking(this.date, this.hour)
+
+      Service.makeBooking(booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");
           this.$q.notify({
