@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-card class="mx-auto">
-      <v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
+      <v-img height="300" width="500" :src="getRandomPhoto()"></v-img>
       <v-card-title>
-        {{ this.name }}
+        {{ this.name}}
       </v-card-title>
       <v-card-text>
         <v-row
@@ -28,7 +28,7 @@
           {{  this.category }}
         </div>
 
-        <div>{{ this.description }}</div>
+        <div class="break-text">{{ this.description }}</div>
       </v-card-text>
       <v-card-actions>
         <v-btn color="teal accent-4" text @click="open">
@@ -47,23 +47,37 @@ export default {
     name: String,
     category: String,
     description: String,
-    rating: Number
-    /*logo: String*/
+    rating: Number,
+    base: String,
+    photos: Array
   },
   methods: {
     open() {
-      // :to="{ name: 'process', params: { id: process._id } }"
       this.$router.push({
         name: "Store",
         params: {
           id: this._id
         }
       })
+    },
+
+    getRandomPhoto() {
+      let numberOfPhotos = this.photos.length;
+      if(numberOfPhotos > 0) {
+        let index = Math.floor(Math.random() * numberOfPhotos);
+        return `${this.base}${this.photos[index].url}`;
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-
+.break-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 </style>

@@ -91,7 +91,7 @@ module.exports.editPicture = (id, pic) => {
 }
 
 module.exports.addPhoto = (id, photo) => {
-    return Store.updateOne({_id: id},{$push: {photos: photo}})
+    return Store.findOneAndUpdate({_id: id}, {$push: {photos: photo}} , {new: true});
 }
 
 module.exports.setCoordinates = (lat, long, id) => {

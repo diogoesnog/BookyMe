@@ -100,10 +100,6 @@
           </div>
         </div>
       </div>
-
-
-
-
       <!-- PARTE DA SEGURANÇA -->
       
       <!-- Box Vermelha - Segurança -->
@@ -173,9 +169,6 @@
 
 import Service from '../../services/auth.service'
 import User from '../../models/User';
-
-
-
 
 export default {
   name: "ProfileData",
