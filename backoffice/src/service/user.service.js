@@ -20,14 +20,33 @@ class Services {
         });
     }
 
+    uploadPhoto(id, file) {
 
+        let fileForm = new FormData();
+        fileForm.append('file', file, file.name);
+
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/photo`, fileForm, {
+            headers: {
+                ...authHeader(),
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
     // TODO: Add Store Description
     updateDescription(id, description) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores/${id}`);
 
-        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/description`, {
             description: description
         });
+    }
+    updatePhone(id, phone) {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/phone`, {
+            phone: phone
+        });
+    }
+    updateAddress(id, address) {
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/address`, address);
     }
 
     getStores() {
