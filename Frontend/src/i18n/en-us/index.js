@@ -36,7 +36,7 @@ export default {
 
   // Homepage
   homePage: {
-    greeting: "Hello, {name}!",
+    greeting: "Hello",
     morePopular: "More Popular",
 
     categories: "Categories",
@@ -84,6 +84,9 @@ export default {
   bookingsPage: {
     title: "Reservations",
     description: "List of Recent and Old Bookings",
+    type1: "Recents",
+    type2: "Completed",
+    catalog: "Common Reservation",
 
     newBooking: {
       title: "New Booking",
@@ -105,8 +108,8 @@ export default {
       serviceType: "Type of Service",
       dateAndTime: "Date and Time",
 
-      changeBooking: "Change Reservation",
-      cancelBooking: "Cancel Reservation"
+      changeBooking: "Change",
+      cancelBooking: "Cancel"
     }
   },
 

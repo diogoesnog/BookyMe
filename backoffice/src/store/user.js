@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import User from '../models/user';
 
+
 export default new Vuex.Store({
     state: {
         user: new User()

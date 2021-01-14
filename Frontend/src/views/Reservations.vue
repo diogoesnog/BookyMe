@@ -21,7 +21,15 @@
         />
       </div>
     </div>
-      <ReservationsList v-for="(reservation, index) in reservations" :key="index" v-bind="reservation"/>
+      <div class="title">
+        {{$t('bookingsPage.type1')}}
+      </div>
+      <ReservationsList v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+      <br/>
+      <div class="title">
+        {{$t('bookingsPage.type2')}}
+      </div>
+      <ReservationsList v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
     <div>
      <Toolbar/>
     </div>
@@ -40,7 +48,8 @@ export default {
 
    data() {
     return {
-      reservations: Array
+      reservationsCurrent: Array,
+      reservationsConcluded: Array
     }
   },
 
@@ -51,17 +60,26 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.getReservations();
+    this.getReservationsCurrent();
+    this.getReservationsConcluded();
   },
 
   methods: {
-
-    getReservations() {
-      Service.getBookingUser()
+    getReservationsCurrent() {
+      Service.getBookingUserCurrent()
         .then(response => {
           let data = response.data["data"];
-          this.reservations = data;
-          console.log("IO");
+          this.reservationsCurrent = data;
+          console.log(data);
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+    getReservationsConcluded() {
+      Service.getBookingUserConcluded()
+        .then(response => {
+          let data = response.data["data"];
+          this.reservationsConcluded = data;
           console.log(data);
         }).catch(err => {
           console.log(err)
@@ -85,11 +103,6 @@ export default {
     margin-top: 10px;
   }
 
-  .gradientOne {
-    background: linear-gradient(#e9695c, #e03459);
-    color: white;
-  }
-
   .shadow {
     box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
@@ -104,4 +117,17 @@ export default {
     padding-left: 20px;
   }
 
+  .title {
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+    height: 40px;
+    width: 130px;
+    border-radius: 100px;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
 </style>

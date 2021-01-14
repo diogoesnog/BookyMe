@@ -23,18 +23,30 @@ app.get('/:storeID/ratings',  (req, res) => {
 });
 
 
-app.get('/store/:storeID',  (req, res) => {
-
-    
+app.get('/store/:storeID',  async (req, res) => {
     let response;
-    Reviews.getReviews(req.params.storeID)
-        .then(data => {
+    try {
+        let reviews = await Reviews.getReviews(req.params.storeID);
+
+
+        let mergedReviews = await Reviews.mergeByUserId(reviews);
+
+        response = Response.OK( mergedReviews.length > 0 ? mergedReviews : reviews )
+
+        res.status((response.status)).jsonp(response);
+
+    } catch (err) {
+        response = Response.INTERNAL_ERROR(err, 'Could not fetch store reviews');
+        res.status(response.status).jsonp(response);
+    }
+
+
+        /*.then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not fetch store reviews');
-            res.status(response.status).jsonp(response);
-    });
+
+    });*/
 
 
 });
