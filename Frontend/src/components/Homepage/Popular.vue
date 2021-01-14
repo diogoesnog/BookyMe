@@ -21,8 +21,11 @@
       </div>
       <div class="wrapper">
         <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
-          <div>
-            <img :src="store.avatar"/>
+          <div class="row">
+            <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
+            </div>
+            <div class="col-12">
+            </div>
           </div>
           {{ store.name }}
         </div>
@@ -60,7 +63,7 @@ export default {
     },
     getImageWidget(url) {
       console.log(url);
-      return this.base + url;
+      return "http://localhost:5100" + url;
     },
   }
 }
@@ -69,6 +72,15 @@ export default {
 </script>
 
 <style scoped>
+
+  .divPhoto {
+    width: 30%;
+    height: 120px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    background-size: cover;
+    background-position: center top;
+  }
 
   .divTop1{
     position: fixed;
