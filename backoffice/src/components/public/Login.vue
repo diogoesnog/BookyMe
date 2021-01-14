@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Bem vindo ao BookyMe</h1>
-    <div class="">
+    <h1>Autenticação</h1>
+    <div>
       <v-form>
         <v-text-field label="Username" type="text" v-model="user.email">
         </v-text-field>
@@ -9,7 +9,7 @@
         <v-text-field label="Password" type="password" v-model="user.password">
         </v-text-field>
 
-        <v-btn @click="handleSubmit">Login</v-btn>
+        <v-btn block color="primary" @click="handleSubmit">Login</v-btn>
       </v-form>
     </div>
   </div>

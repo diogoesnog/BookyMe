@@ -1,19 +1,37 @@
 <template>
+  <v-app>
   <div>
-    General Store Information
+      <h1 class ="storeName .text-lg-h6">{{this.store.name}}</h1>
+    <v-container grid-list-lg>
+      <Cards></Cards>
+    </v-container>
+    <v-container grid-list-lg>
+      <v-row>
+        <v-col cols="6">
+          <Calendar></Calendar>
+        </v-col>
+      </v-row>
+
+    </v-container>
   </div>
+  </v-app>
 </template>
 
 <script>
 import Service from "../../../service/user.service"
+import Cards from "../../../components/Dashboard/Cards"
+import Calendar from "@/components/Dashboard/Calendar";
+
 export default {
-  name: "Store",
+  name: "StoreDash",
   components:  {
+    Cards,
+    Calendar
   },
   data() {
     return {
       id: this.$route.params.id,
-      store: Object
+      store: Object,
     }
   },
   mounted() {
@@ -37,5 +55,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .storeName{
+    padding: 15px;
+    font-family: "Roboto", sans-serif;
+  }
 </style>
