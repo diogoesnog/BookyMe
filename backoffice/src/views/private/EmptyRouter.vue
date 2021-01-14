@@ -5,7 +5,8 @@
         <Navbar/>
       </v-col>
       <v-col cols="10">
-        <router-view class="margins"/>
+        <p>{{this.id}}</p>
+        <router-view v-bind="info" :base="base" class="margins"/>
       </v-col>
     </v-row>
 
@@ -14,10 +15,38 @@
 
 <script>
 import Navbar from "@/components/common/Navbar";
+import Service from "@/service/user.service";
 export default {
   name: "EmptyRouter",
   components: { Navbar },
+  data() {
+    return {
+      id: this.$route.params.id,
+      info: {
+        store: Object,
+        catalog: Object
+      },
+      base: String
+    }
+  },
+  mounted() {
+    this.getStore();
+  },
+  methods: {
+    getStore() {
+      Service.getStoreById(this.id)
+          .then(response => {
+            // TODO: choose a better endpoint
+            this.info.store = response.data[ "data" ][0];
+            this.base = response.data.base;
 
+            // console.log(this.info.store);
+          }).catch(err => {
+              window.alert("Error!");
+              console.log(err);
+          })
+    }
+  }
 }
 </script>
 
