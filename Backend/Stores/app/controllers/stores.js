@@ -45,7 +45,8 @@ module.exports.getResults = (query,term) => {
         query["$or"] = [
             { name: { '$regex': term, '$options': 'i' } },
             { description: { '$regex': term, '$options': 'i' } },
-            { category: { '$regex': term, '$options': 'i' } }
+            { category: { '$regex': term, '$options': 'i' } },
+            { "address.city": { '$regex': term, '$options': 'i' } }
         ]
     }
     return Store.find(query)
