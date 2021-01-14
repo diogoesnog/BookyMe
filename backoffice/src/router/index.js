@@ -36,6 +36,11 @@ const routes = [
         name: "EditStore",
         path: "/edit",
         component: () => import('../views/private/subpages/EditStore')
+      },
+      {
+        name: "PhotoStore",
+        path: '/photos',
+        component: () => import('../views/private/subpages/Photos')
       }
     ],
     meta: {

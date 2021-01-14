@@ -5,7 +5,7 @@
       width="256px"
       height="100%"
   >
-    <v-navigation-drawer dark permanent>
+    <v-navigation-drawer dark permanent fixed>
       <v-list>
         <!-- Home Link -->
         <v-list-item link>
