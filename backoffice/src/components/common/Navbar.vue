@@ -1,10 +1,11 @@
 <template>
+  <v-app>
   <v-card
-      class="mx-auto"
-      width="256"
+      tile
+      width="256px"
       height="100%"
   >
-    <v-navigation-drawer dark permanent>
+    <v-navigation-drawer dark permanent fixed>
       <v-list>
         <!-- Home Link -->
         <v-list-item link>
@@ -12,7 +13,7 @@
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'HomeStore', params: {id: $route.params.id}}">Home</router-link>
+            <router-link :to="{name: 'StoreDash', params: {id: this.$route.params.id}}">Home</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -42,7 +43,17 @@
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'EditStore', params: {id: $route.params.id}}">Store Settings</router-link>
+            <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">General Info</router-link>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Store Photos -->
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon></v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Photos Info</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -59,20 +70,29 @@
       <div class="split"></div>
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block>
+          <v-btn @click="logout" block>
             Logout
           </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
   </v-card>
+  </v-app>
 </template>
 
 <script>
+import AuthService from '../../service/auth.service';
 export default {
   name: "Navbar",
+  data() {
+    return {
+      id: this.$route.params.id,
+    }
+  },
   methods: {
-
+    logout() {
+      AuthService.logout();
+    }
   }
 }
 </script>
