@@ -53,7 +53,7 @@ class UserService {
 
     return request.get()
   }
-
+  
   getFavorites() {
 
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
@@ -212,6 +212,19 @@ class UserService {
     request.acceptJson();
 
     return request.patch();
+  }
+
+  uploadAvatar() {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/avatar`);
+
+    //request.isJson();
+    request.isMultipart();
+    request.appendHeader("Authorization", authHeader());
+
+    return request.post();
+    //request.acceptJson();
+
+    
   }
 }
 

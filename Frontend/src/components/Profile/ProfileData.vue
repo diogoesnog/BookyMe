@@ -13,7 +13,8 @@
               </q-avatar>
             </div>
             <div style="position: absolute; top: 125px">
-              <q-btn style=";" size="md" class="gradientRed" round >
+              <q-input ref="myFileInput" style="display:none" v-model="file" type="file" label="Standard" ></q-input>
+              <q-btn style=";" size="md" class="gradientRed" round  @click="getFile" >
                 <q-icon name="fas fa-camera" color="white"/>
               </q-btn>
             </div>
@@ -31,8 +32,7 @@
           </div>
         </div>      
       </div>
-    </div>
-    <!-- Div Mudar Língua -->
+      <!-- Div Mudar Língua -->
     <div class="changeLanguageDiv">
       <q-select class="selectLanguage" rounded outlined behavior="menu" v-model="lang"
         :options="langOptions"
@@ -40,6 +40,8 @@
       </q-select>
     </div>
     <!-- Div Baixo -->
+    </div>
+    
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
       <div class="roundedDivRedTop shadow">
@@ -203,6 +205,7 @@ export default {
 
   data () {
     return {
+      file: Object,
       isPwd: true,
       editavel: false,
       editavel2: false,
@@ -228,6 +231,10 @@ export default {
   },
 
   methods: {
+    getFile () {
+      this.$refs.myFileInput.$el.click()
+    },
+
     handleSubmit(e) {
         e.preventDefault();
 
@@ -311,6 +318,8 @@ export default {
     background-size: cover;
     background-position: center top;
     background-image: url('../../assets/Other/ProfileFrame.svg');
+    position: absolute;
+    z-index: 9999;
   }
 
   .divTop2{
