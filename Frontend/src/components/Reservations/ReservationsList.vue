@@ -27,7 +27,6 @@
           <div class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
             <img @click="persistent = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
-
           <!-- Pop Up Alterar Reserva -->
           <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
             <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
@@ -60,7 +59,6 @@
               </q-card-actions>
             </q-card>
           </q-dialog>
-
         </div>
         </div>
     </div>
