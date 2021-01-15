@@ -1,7 +1,25 @@
 <template>
   <div>
     <h1 style="font-weight: 670; font-size: 45px;"> {{$t('notificationsPage.title')}}</h1>
-    <Notification v-for="(notification, index) in notifications" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead"></Notification>
+
+    <q-tabs v-model="tab" narrow-indicator dense align="justify">
+      <q-tab class="text-purple" name="unread" icon="mail" label="Unread" />
+      <q-tab class="text-orange" name="read" icon="alarm" label="Read" />
+    </q-tabs>
+    <q-tab-panels v-model="tab" animated>
+      <q-tab-panel name="unread">
+        <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+      </q-tab-panel>
+
+      <q-tab-panel name="read">
+        <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
+      </q-tab-panel>
+
+      <q-tab-panel name="movies">
+        <div class="text-h6">Movies</div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </q-tab-panel>
+    </q-tab-panels>
     <Toolbar/>
   </div>
 </template>
@@ -20,28 +38,35 @@ export default {
   data() {
     return {
       // notifications: Array
-      notifications: [
-        {
-          _id: "1234",
-          sentBy: "teste",
-          title: "Título",
-          message: "Message"
-        }
-      ]
+      read: Array,
+      unread: Array,
+      tab: "unread"
     }
   },
 
   mounted() {
     this.getNotifications();
+    this.getUnreadNotifications();
   },
   methods: {
     getNotifications() {
-      Service.getNotifications()
+      Service.getNotifications(false)
         .then(response => {
-          this.notifications = response.data["data"];
+          this.unread = response.data["data"];
         }).catch(err => {
           console.error(err);
         });
+    },
+
+    getUnreadNotifications() {
+      Service.getNotifications(true)
+        .then(response => {
+          this.read = response.data["data"];
+
+        }).catch(err => {
+          console.error(err);
+
+        })
     },
 
     markAsRead(id) {
@@ -49,7 +74,7 @@ export default {
         .then(response => {
           console.log(response);
           // this.notifications.splice(this.notifications.findIndex(item => item._id === "cStatus"), 1)
-          this.notifications = this.notifications.filter(item => item._id !== id);
+          this.unread = this.unread.filter(item => item._id !== id);
 
         }).catch(err => {
           console.error(err);

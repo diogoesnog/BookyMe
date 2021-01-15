@@ -6,7 +6,7 @@
           <p>{{ title }}</p>
           <p>{{ message }}</p>
         </div>
-        <div class="col-2">
+        <div class="col-2" v-if="canBeMarked">
           <q-btn @click="markAsRead">
             X
           </q-btn>
@@ -23,7 +23,8 @@ export default {
     _id: String,
     sentBy: String,
     title: String,
-    message: String
+    message: String,
+    canBeMarked: Boolean
   },
 
   methods: {
