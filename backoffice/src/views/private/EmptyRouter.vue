@@ -13,7 +13,6 @@
                      @uploadImage="uploadImage"/>
       </v-col>
     </v-row>
-
   </div>
 </template>
 

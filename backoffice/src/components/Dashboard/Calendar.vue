@@ -133,7 +133,7 @@
 </template>
 <script>
 
-
+import Service from "../../service/user.service"
 
 export default {
   name: "Calendar",
@@ -158,7 +158,7 @@ export default {
   }),
   mounted () {
     this.$refs.calendar.checkChange(),
-        console.log(`StoreID = ${this.idStore}`)
+    this.getReservations()
   },
   methods: {
     viewDay ({ date }) {
@@ -224,6 +224,17 @@ export default {
     rnd (a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a
     },
+    getReservations (){
+      Service.getReservations(this.idStore)
+          .then(response => {
+            this.bookings = response.data["data"][0];
+            console.log("Bookings",this.bookings)
+          })
+          .catch (err => {
+            window.alert("Error!");
+            console.log("OMG",err);
+          })
+    }
   },
 }
 </script>

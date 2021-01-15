@@ -1,5 +1,4 @@
 <template>
-  <div>
       <v-row>
       <v-col cols="3">
         <v-card
@@ -43,8 +42,6 @@
         </v-card>
       </v-col>
     </v-row>
-
-  </div>
 </template>
 
 <script>

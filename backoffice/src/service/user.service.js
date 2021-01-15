@@ -62,7 +62,9 @@ class Services {
     }
 
     getReservations(id){
-        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking?:id=${id}`);
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}`, {
+            headers: authHeader()
+        });
     }
 
     getReservation_2(){

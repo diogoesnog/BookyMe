@@ -4,7 +4,7 @@
     <v-container grid-list-lg>
       <Cards></Cards>
     </v-container>
-    <v-container grid-list-lg>
+    <v-container grid-list-lg data-app>
       <Calendar :idStore=id></Calendar>
     </v-container>
   </div>

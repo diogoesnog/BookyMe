@@ -28,7 +28,7 @@ const routes = [
     component: () => import('../views/private/EmptyRouter'),
     children: [
       {
-        name: "HomeStore",
+        name: "StoreDash",
         path: "",
         component: () => import('../views/private/subpages/Store'),
       },
