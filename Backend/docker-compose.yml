@@ -80,7 +80,11 @@ services:
     depends_on:
       - mongo-booking
 
-  # Databases
+
+
+
+  # MongoDB Databases
+  # And JSON seaders
   # User Service
   mongo-users:
     container_name: mongo-users
