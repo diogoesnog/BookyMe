@@ -15,6 +15,10 @@
                 <img v-if="checkPage('/favorites') == 1" style="height: 30px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
                 <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
               </q-route-tab>
+            <q-route-tab to="/favorites" exact>
+              <img v-if="checkPage('/notifications') == 1" style="height: 30px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
+              <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
+            </q-route-tab>
               <q-route-tab to="/users/login" exact>
                 <q-avatar class="shadow" size="lg">
                   <img v-if="checkPage('/users/login') == 1" style="border: 3px solid #2897e3; object-fit: cover;" :src="getImage()">
@@ -33,7 +37,7 @@ import UserService from '../../services/user.service.js';
 
 export default {
 
-  name: "Profile",
+  name: "Toolbar",
 
   data() {
 
@@ -67,14 +71,14 @@ export default {
       return `${this.base}${this.avatar}`
     },
     checkPage: function(string) {
-      var currentLocation = window.location.pathname;
-      if(currentLocation == string) return 1;
-      else return 0;
+      let currentLocation = window.location.pathname;
+      return currentLocation === string ? 1 : 0;
+
     },
     checkPageProfile() {
-      var currentLocation = window.location.pathname;
-      if(currentLocation == '/users/login') return 1;
-      else return 0;
+      let currentLocation = window.location.pathname;
+
+      return currentLocation === '/users/login' ? 1 : 0;
     }
   }
 }

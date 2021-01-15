@@ -182,6 +182,16 @@ class UserService {
 
   }
 
+
+  getNotifications() {
+    let request = new Request(`${process.env.API_ENDPOINT}/notification`);
+
+    request.isJson();
+    request.appendHeader("Authorization", authHeader());
+    request.acceptJson();
+
+    return request.get();
+  }
 }
 
 export default new UserService();
