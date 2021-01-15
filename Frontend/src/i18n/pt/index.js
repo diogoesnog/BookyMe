@@ -139,7 +139,10 @@
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",
     stars: "0 Estrelas | 1 Estrela | {count} Estrelas",
-    basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações"
+    basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
+    book: "Reserve já!",
+    date: "Escolha a sua data",
+    dateSub: "Escolha a sua data para a marcação de serviço."
   },
 
   // Search Results

@@ -12,7 +12,6 @@
             color="vermelho"
             icon="event_available"
             class="absolute"
-            @click="makeBooking()"
             style="top: 0; right: 12px; transform: translateY(-50%);"
           />
 
@@ -24,17 +23,31 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none">
-          <q-form>
-            <q-date
-              title="Data da marcação"
-              mask="YYYY-MM-DD"
-              subtitle="Por favor escolha a data desejada"
+          <q-date
+              title="{{$t(storePage.date)}}"
+              today-btn
+              mask="YYYY-MM-DDTHH:mm"
+              subtitle="{{$t(storePage.dateSub)}}"
               color="red"
               v-model="date" />
-
-            <q-input v-model="hour" rounded type="time" hint="Hora da Marcação" />
-          </q-form>
         </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-time
+            v-model="date"
+            format24h
+            mask="YYYY-MM-DDTHH:mm"
+            color="red" />
+        </q-card-section>
+
+        <q-separator/>
+
+        <q-card-actions>
+            <q-btn icon="event" @click="makeBooking" style="margin-left: 100px" rounded color="vermelho">
+              {{$t('storePage.book')}}
+            </q-btn>
+        </q-card-actions>
+
       </q-card>
     </q-dialog>
   </div>
@@ -54,16 +67,17 @@ name: "StoreBooking",
     return {
       storeID: this.$route.params.id,
       card: Boolean,
-      date: Date,
+      date: String,
       booking: new Booking()
     }
   },
-  mounted() {
+  beforeMount() {
+    this.date = new Date("2021/01/15").toLocaleString();
     this.card = false;
   },
   methods: {
     makeBooking() {
-      let booking = new Booking(this.date, this.hour)
+      let booking = new Booking(this.date)
 
       Service.makeBooking(booking, this.storeID)
         .then(response => {
@@ -82,7 +96,13 @@ name: "StoreBooking",
         })
       console.groupEnd();
 
-    }
+    },
+
+    // TODO: Fazer só reservas no futuro.
+    /*rangeDate(date) {
+      let nowDate = new Date();
+      return date >= nowDate.getFullYear() + '/' + nowDate.getMonth() + '/' + nowDate.getDay()
+    }*/
   }
 }
 </script>

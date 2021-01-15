@@ -139,7 +139,10 @@ export default {
     ratings: "Ratings",
     seeAllRatings: "See All",
     stars: "0 Stars | 1 Star | {count} Stars",
-    basedOn: "Based on 1 Evaluation | Based on {count} Evaluations"
+    basedOn: "Based on 1 Evaluation | Based on {count} ratings",
+    book: "Book now!",
+    date: "Choose your date",
+    dateSub: "Choose your date and time for the service appointment"
   },
 
   // Search Results
