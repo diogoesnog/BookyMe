@@ -2,7 +2,7 @@
   <div>
       <h1 class ="storeName .text-lg-h6">{{this.store.name}}</h1>
     <v-container grid-list-lg>
-      <Cards></Cards>
+      <Cards :idStore=id></Cards>
     </v-container>
     <v-container grid-list-lg data-app>
       <Calendar :idStore=id></Calendar>

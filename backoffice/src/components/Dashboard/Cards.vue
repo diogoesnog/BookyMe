@@ -48,6 +48,9 @@
 
   export default {
     name: "Cards",
+    props:{
+      idStore: String
+    },
   }
 </script>
 
