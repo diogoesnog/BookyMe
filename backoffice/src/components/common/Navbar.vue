@@ -1,8 +1,9 @@
 <template>
   <v-card
       class="mx-auto"
-      width="256"
+      width="100"
       height="100%"
+      tile
   >
     <v-navigation-drawer dark permanent fixed>
       <v-list>
