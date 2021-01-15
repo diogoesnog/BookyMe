@@ -192,6 +192,16 @@ class UserService {
 
     return request.get();
   }
+
+  markAsRead(id) {
+    let request = new Request(`${process.env.API_ENDPOINT}/notification/${id}`);
+
+    request.isJson();
+    request.appendHeader("Authorization", authHeader());
+    request.acceptJson();
+
+    return request.patch();
+  }
 }
 
 export default new UserService();
