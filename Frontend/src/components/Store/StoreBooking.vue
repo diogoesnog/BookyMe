@@ -25,8 +25,10 @@
 
         <q-card-section class="q-pt-none">
           <q-form>
-              <q-input v-model="date" rounded type="date" hint="Data da marcação" />
-              <q-input v-model="hour" rounded type="time" hint="Hora da Marcação" />
+            <q-date title="Data da marcação" subtitle="Por favor escolha a data desejada" v-model="date" />
+
+            <q-input v-model="date" rounded type="date" hint="Data da marcação" />
+            <q-input v-model="hour" rounded type="time" hint="Hora da Marcação" />
           </q-form>
         </q-card-section>
       </q-card>
