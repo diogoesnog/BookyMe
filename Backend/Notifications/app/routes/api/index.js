@@ -6,7 +6,7 @@ const Notifications = require('../../controllers/notifications');
 
 router.get('/', checkAuth, (req, res, next) => {
     let userId = req.user.id;
-    let read = req.query.read ? req.query.read : false;
+    let read = req.query.read === "true" ? true : false;
 
     Notifications.getUserNotifcations(userId, read)
         .then(data => {
