@@ -3,27 +3,34 @@
     <v-tabs>
       <v-tab>General</v-tab>
       <v-tab>Scheduling</v-tab>
+
+      <v-tab-item>
+        <h1 style="padding: 15px">Edit Store information</h1>
+        <v-form>
+          <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
+
+          <v-text-field label="Place" v-model="store.address.place"></v-text-field>
+          <v-text-field label="Zip Code" v-model="store.address.zipcode"></v-text-field>
+          <v-text-field label="City" v-model="store.address.city"></v-text-field>
+          <v-text-field label="Country" v-model="store.address.country"></v-text-field>
+
+          <v-textarea phone="Description" outlined v-model="store.description" type="text"></v-textarea>
+
+          <!-- TODO: Update Coordinates -->
+          <v-btn block color="primary" @click="saveData">Save</v-btn>
+        </v-form>
+      </v-tab-item>
+
+      <v-tab-item>
+        <h1 style="padding: 15px">Edit Schedule</h1>
+      </v-tab-item>
     </v-tabs>
 
-    <h1>Edit Store information</h1>
-    <v-form>
-      <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
 
-      <v-text-field label="Place" v-model="store.address.place"></v-text-field>
-      <v-text-field label="Zip Code" v-model="store.address.zipcode"></v-text-field>
-      <v-text-field label="City" v-model="store.address.city"></v-text-field>
-      <v-text-field label="Country" v-model="store.address.country"></v-text-field>
-
-      <v-textarea phone="Description" outlined v-model="store.description" type="text"></v-textarea>
-
-      <!-- TODO: Update Coordinates -->
-      <v-btn block color="primary" @click="saveData">Save</v-btn>
-    </v-form>
   </div>
 </template>
 
 <script>
-import Services from '../../../service/user.service';
 export default {
   name: "EditStore",
   props: {
@@ -52,27 +59,15 @@ export default {
 
     saveData() {
       this.updateDescription();
-      // this.updateAddress();
-      // this.updatePhoneNumber();
+      this.updateAddress();
+      this.updatePhoneNumber();
     },
 
     updateAddress() {
-      Services.updateAddress(this.id, this.address)
-          .then( response => {
-            console.log(response);
-          })
-          .catch( err => {
-            console.log(err);
-          });
+      this.$emit('updateAddress', this.store.address);
     },
     updatePhoneNumber() {
-      Services.updatePhone(this.id, this.store.phone)
-          .then( response => {
-            console.log(response);
-          })
-          .catch( err => {
-            console.log(err);
-          });
+      this.$emit('updatePhoneNumber', this.store.phone);
     },
     updateDescription() {
       this.$emit('updateDescription', this.store.description);

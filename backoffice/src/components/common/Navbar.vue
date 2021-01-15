@@ -101,4 +101,7 @@ export default {
 .split {
   margin-top: 100%;
 }
+a {
+  text-decoration: none;
+}
 </style>

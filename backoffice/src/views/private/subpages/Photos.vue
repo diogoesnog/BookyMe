@@ -2,7 +2,7 @@
   <v-container>
     <v-file-input v-model="file" prepend-icon="mdi-camera" outlined show-size accept="image/png, image/jpeg, image/jpg" label="New Photo"></v-file-input>
 
-    <v-btn block @click="uploadPhoto">Upload</v-btn>
+    <v-btn color="primary" outlined block @click="uploadPhoto">Upload</v-btn>
     <v-row>
       <v-col v-for="photo in store.photos" :key="photo._id" cols="4">
 
@@ -15,7 +15,7 @@
             </v-row>
           </template>
         </v-img>
-        <v-btn block outlined>Delete</v-btn>
+        <v-btn color="error" block outlined>Delete</v-btn>
       </v-col>
     </v-row>
 
