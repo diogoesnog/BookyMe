@@ -101,7 +101,8 @@ module.exports.setCoordinates = (lat, long, id) => {
 }
 
 module.exports.removeStorePhoto = (id, pId) => {
-    return Store.updateOne({_id: id},{$pull: {photos: {'_id': pId}}})
+    return Store.findOneAndUpdate({_id: id},{
+        $pull: {photos: {'_id': pId}}}, { new: true} )
 }
 
 
