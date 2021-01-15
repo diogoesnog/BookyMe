@@ -5,7 +5,7 @@ module.exports = async (req, res, next) => {
     const token = req.headers.authorization || req.headers.Authorization;
 
 
-    let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
+    let request = new Request(`${process.env.AUTH_SERVICE}/user/validation`);
 
     request.setHeaders({
         authorization: token
