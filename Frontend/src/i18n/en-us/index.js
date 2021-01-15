@@ -142,7 +142,7 @@ export default {
     basedOn: "Based on 1 Evaluation | Based on {count} ratings",
     book: "Book now!",
     date: "Choose your date",
-    dateSub: "Choose your date and time for the service appointment"
+    dateSub: "Set your booking date"
   },
 
   // Search Results

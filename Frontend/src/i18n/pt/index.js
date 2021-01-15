@@ -142,7 +142,7 @@
     basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
     book: "Reserve já!",
     date: "Escolha a sua data",
-    dateSub: "Escolha a sua data para a marcação de serviço."
+    dateSub: "A sua data para a marcação"
   },
 
   // Search Results

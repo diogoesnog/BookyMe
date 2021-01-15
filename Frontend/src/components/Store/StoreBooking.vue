@@ -24,10 +24,10 @@
 
         <q-card-section class="q-pt-none">
           <q-date
-              title="{{$t(storePage.date)}}"
+              :title="$t('storePage.date')"
               today-btn
               mask="YYYY-MM-DDTHH:mm"
-              subtitle="{{$t(storePage.dateSub)}}"
+              :subtitle="$t('storePage.dateSub')"
               color="red"
               v-model="date" />
         </q-card-section>
