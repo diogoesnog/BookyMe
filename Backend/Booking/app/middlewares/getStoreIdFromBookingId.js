@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
         req.storeId = (await Booking.getStoreFromID(req.params.id)).storeId;
         next();
     } catch (err) {
-        const response = Response.INTERNAL_ERROR(null, "Can't find storeID for that reservation. Does the reservation exist?");
+        const response = Response.INTERNAL_ERROR(err, "Can't find storeID for that reservation. Does the reservation exist?");
         res.status(response.status).jsonp(response);
     }
 }
