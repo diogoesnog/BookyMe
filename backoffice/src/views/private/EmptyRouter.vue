@@ -53,15 +53,27 @@ export default {
     },
 
     updateAddress(data) {
-      console.log(data);
+      Services.updateAddress(this.id, data)
+          .then( response => {
+            console.log(response);
+          })
+          .catch( err => {
+            console.log(err);
+          });
     },
     updatePhoneNumber(data) {
-      console.log(data);
+      Services.updatePhone(this.id, data)
+          .then( response => {
+            console.log(response);
+          })
+          .catch( err => {
+            console.log(err);
+          });
     },
     updateDescription(data) {
       Services.updateDescription(this.id, data)
           .then( response => {
-            this.store.description = this.response.data[ "data" ];
+            // this.store.description = this.response.data[ "data" ];
             console.log(response);
           })
           .catch( err => {
