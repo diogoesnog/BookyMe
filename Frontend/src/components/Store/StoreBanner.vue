@@ -13,7 +13,7 @@
         <div class="col-5" style="margin-left: auto; margin-left: auto; display: flex; justify-content: flex-end;">
           <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
           <div style="width:10px; height:auto; display:inline-block;"/>
-          <q-btn padding="6px 6px" class="button shadow" round icon="favorite"/>
+          <q-btn @click="addFavorite" padding="6px 6px" class="button shadow" round icon="favorite"/>
         </div>
       </div>
       <div class="infoName">
@@ -79,6 +79,9 @@ export default {
   },
 
   methods: {
+    addFavorite() {
+      this.$emit("addFavorite", this._id);
+    },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
     },

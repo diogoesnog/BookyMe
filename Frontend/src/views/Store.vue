@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StoreBanner v-bind="storeData"/>
+    <StoreBanner v-bind="storeData" @addFavorite="addFavorite"/>
     <div class="divBottom">
       <div class="row">
         <StorePhotos v-bind="storeData"/>
@@ -81,6 +81,15 @@ export default {
         this.$q.loading.hide();
       })
     },
+    addFavorite(id) {
+      Service.addFavorite(id)
+        .then(response => {
+          console.log(response);
+          console.log("Adding Favorite");
+        }).catch(err => {
+          console.log(err);
+        })
+    }
   }
 
 }

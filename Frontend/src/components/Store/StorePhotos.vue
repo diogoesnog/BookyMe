@@ -3,19 +3,41 @@
     <p class="titles">{{$t('storePage.photos')}}</p>
     <div class="wrapper">
       <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
-        <div class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
+        <div @click="persistent = true" class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
       </div>
       <div class="empty"></div>
     </div>
+    <!--
+    <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
+      <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
+        <q-card-section class="row items-center q-pb-none">
+          <div class="text-h6">Close icon</div>
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-popup />
+        </q-card-section>
+
+        <q-card-section>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    -->
   </div>
 </template>
 
 <script>
 export default {
+
   name: "StorePhotos",
 
   props: {
     photos: Array
+  },
+
+  data() {
+    return {
+      persistent: false
+    }
   },
 
   methods: {

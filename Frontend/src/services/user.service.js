@@ -193,7 +193,6 @@ class UserService {
 
   }
 
-
   getNotifications(read) {
     let request = new Request(`${process.env.API_ENDPOINT}/notification`);
 
