@@ -12,8 +12,16 @@ const createError = require('http-errors');
 const logger = require('morgan');
 // CORS Middleware
 const cors = require('cors');
-// Swagger API Documentation
-const swaggerUI = require('swagger-ui-express');
+// MongoDB Connection
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_CONNECTION, {
+    useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
+    .then(() => {
+        console.log("Connection to MongoDB successfully established")
+    })
+    .catch(() => {
+        throw new Error("Could not establish connection to MongoDB");
+    });
 
 // Dev or Production
 const env = process.argv[2];
@@ -42,8 +50,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Documentation
-app.use('/v1/api/documentation', swaggerUI.serve, swaggerUI.setup(require('./swagger'), { explorer: true } ));
 // Register Different Versions of API Routes
 app.use('/v1/api', require('./routes'));
 
