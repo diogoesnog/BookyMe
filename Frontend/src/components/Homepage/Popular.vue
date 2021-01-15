@@ -1,25 +1,25 @@
 <template>
   <div class="text-center" style="color: #434343">
     <div class="divTop1">
-        <div class="divTop2">
-          <div class="row" style="padding: 30px">
-            <div class="col-9" style="text-align: left">
-              <span style="font-weight: 600; font-size: 35px;">
-                {{ $t('homePage.greeting') }}, {{profile.name}}
-              </span>
-            </div>
-            <div class="col-3" style="text-align: right">
-              <q-avatar class="shadow gradientOne">
-                <img style="object-fit: cover;" :src="getImage()">
-              </q-avatar>
-            </div>
-          </div>
-        </div>
-      </div> 
-      <div style="color: white; position: fixed; top: 140px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
-        {{ $t('homePage.morePopular') }} 
+    </div>
+    <div class="divTop2">
+    </div>
+    <div class="row divInfoUser">
+      <div class="col-9" style="text-align: left">
+        <span style="font-weight: 600; font-size: 35px;">
+          {{ $t('homePage.greeting') }}, {{profile.name}}
+        </span>
       </div>
-      <div class="wrapper">
+      <div class="col-3" style="text-align: right">
+        <q-avatar class="shadow gradientOne">
+          <img style="object-fit: cover;" :src="getImage()">
+        </q-avatar>
+      </div>
+    </div> 
+    <div style="color: white; position: absolute; top: 140px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
+      {{ $t('homePage.morePopular') }} 
+    </div>
+    <div class="wrapper">
         <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
           <div class="row">
             <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
@@ -58,6 +58,7 @@ import Service from '../../services/auth.service'
 import User from '../../models/User';
 
 export default {
+  
   name: "Popular",
 
   props: {
@@ -90,10 +91,13 @@ export default {
   }
 }
 
-
 </script>
 
 <style scoped>
+
+  .divInfoUser {
+    position: absolute;
+  }
 
   .divRating {
     text-align: center;
@@ -118,7 +122,7 @@ export default {
   }
 
   .divTop1{
-    position: fixed;
+    position: absolute;
     top: -25px;
     left: 0;
     width: 100%;
@@ -129,21 +133,13 @@ export default {
   }
 
   .divTop2{
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 30px;
     width: 100%;
     color: white;
   }
-
-  .divBottom {
-    z-index: 1000;
-    position: fixed;
-    bottom: 35px;
-    width: 100%;
-    padding: 30px;
-  }
-
+  
   .wrapper {
     margin-left: 20px;
     position: absolute;
