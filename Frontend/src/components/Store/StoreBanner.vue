@@ -10,10 +10,10 @@
           <!-- Corrigir o To do Botão -->
           <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
         </div>
-        <div class="col-5" style="margin-left: auto; margin-left: auto; display: flex; justify-content: flex-end;">
+        <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
           <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
           <div style="width:10px; height:auto; display:inline-block;"/>
-          <q-btn @click="addFavorite" padding="6px 6px" class="button shadow" round icon="favorite"/>
+          <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" round icon="favorite"/>
         </div>
       </div>
       <div class="infoName">
@@ -54,13 +54,15 @@
 <script>
 
 import Service from '../../services/user.service';
+import Favorite from "src/models/Favorite";
 
 export default {
   name: "StoreBanner",
 
   data() {
     return {
-      reservationsUser: Array,
+      styleFav: String,
+      reservationsUser: Array
     }
   },
 
@@ -73,14 +75,46 @@ export default {
     photos: Array,
   },
 
+  beforeMount() {
+    this.styleFav = "buttonFavFalse"
+  },
+
   mounted() {
     console.log("Mounted: View has been rendered");
+    //this.styleFav = this.isFavorite();
+    console.log(this.styleFav);
     this.getReservations();
   },
 
   methods: {
+    isFavorite() {
+      Service.getFavorites()
+        .then(response => {
+          let favorites = response.data['data'];
+
+          // TODO: A verificação do favorito deve ser em query no backend.
+          for(let fav in favorites) {
+            if(fav._id === this._id)  {
+              console.log("Encontrado");
+              this.styleFav = "buttonFavTrue";
+            }
+          }
+          console.log(favorites);
+        }).catch(err => {
+        console.log(err);
+      })
+    },
+
     addFavorite() {
-      this.$emit("addFavorite", this._id);
+      let favorite = new Favorite(this._id);
+      Service.addFavorite(favorite)
+        .then(response => {
+          this.styleFav = "buttonFavTrue";
+          console.log(response);
+          console.log("Adding Favorite");
+        }).catch(err => {
+        console.log(err);
+      })
     },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
@@ -95,8 +129,7 @@ export default {
     getReservations() {
       Service.getBookingUserCurrent()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsUser = data;
+          this.reservationsUser = response.data["data"];
           console.log(this.reservationsUser);
         }).catch(err => {
           console.log(err)
@@ -132,7 +165,7 @@ export default {
     height: 32%;
     background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
   }
-  
+
   .infoName {
     position: relative;
     bottom: -5px;
@@ -175,6 +208,16 @@ export default {
   .button {
     background-color: white;
     color: #1b9fd4;
+  }
+
+  .buttonFavFalse {
+    background-color: white;
+    color: #1b9fd4;
+  }
+
+  .buttonFavTrue {
+    background-color: white;
+    color: #e9695c;
   }
 
 </style>

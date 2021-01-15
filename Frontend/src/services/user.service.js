@@ -65,6 +65,22 @@ class UserService {
     return request.get()
   }
 
+  /*checkFavorite(id) {
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    let data = request.get()
+    // TODO: procurar ID
+    // let array = data[data]
+    // console.log(array)
+
+    return "5ff4a80f7df75e2ace11b03e";
+  }*/
+
   getBookingUserCurrent(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/current`)
@@ -99,15 +115,17 @@ class UserService {
     return request.delete()
   }
 
-  addFavorite(id) {
+  addFavorite(favorite) {
+    let body = JSON.stringify(favorite)
+    console.log(body)
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
 
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
-    request.appendParam("favorite", id)
+    // request.appendParam("favorite", id)
 
-    return request.post()
+    return request.post(body)
   }
 
   getStoresByCategory(category) {
