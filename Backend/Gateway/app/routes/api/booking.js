@@ -99,7 +99,7 @@ router.get('/canceled', checkAuth, (req, res) => {
 router.get('/user/current', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
-    Booking.getUserReservationsCurrent(token, req.params.id)
+    Booking.getUserReservationsCurrent(token)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
@@ -107,7 +107,15 @@ router.get('/user/current', checkAuth, (req, res) => {
 router.get('/user/concluded', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
-    Booking.getUserReservationsConcluded(token, req.params.id)
+    Booking.getUserReservationsConcluded(token)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/slot/:id', checkAuth, (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+
+    Booking.getSlots(token, req.params.id)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
