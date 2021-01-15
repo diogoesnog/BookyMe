@@ -6,29 +6,44 @@
      <!-- TO DO: BOTAO DE EDITAR FOTOGRAFIA A FUNCIONAR -->
     <div class="divTop1">
       <div class="divTop2">
-        <div style="position: relative; display: flex; justify-content: center">
-          <div style="position: absolute">
-            <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-              <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
-            </q-avatar>
-          </div>
-          <div style="position: absolute; top: 125px">
-            <q-btn style=";" size="md" class="gradientRed" round >
-              <q-icon name="fas fa-camera" color="white"/>
-            </q-btn>
-          </div>
-          <div style="position: absolute; top: 175px">
-            <p>
-              <span style="font-weight: 600; font-size: 30px;">
-                {{ profile.name }}
-              </span>
-              <br/>
-              <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
-                {{ profile.username }}
-              </span>
-            </p>
+        <div class="centerDiv" >
+            <div class="row">
+              
+           
+            <div class="col-9" style="padding-left:100px">
+              <div style="position: relative; display: flex; justify-content: center">
+                <div style="position: absolute">
+                  <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
+                    <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
+                  </q-avatar>
+                </div>
+                <div style="position: absolute; top: 125px">
+                  <q-btn style=";" size="md" class="gradientRed" round >
+                    <q-icon name="fas fa-camera" color="white"/>
+                  </q-btn>
+                </div>
+                <div style="position: absolute; top: 175px">
+                  <p>
+                    <span style="font-weight: 600; font-size: 30px;">
+                      {{ profile.name }}
+                    </span>
+                    <br/>
+                    <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
+                      {{ profile.username }}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-3" style="padding-right:16px">
+                <q-select class="selectLanguage" rounded outlined behavior="menu" v-model="lang"
+                  :options="langOptions"
+                  :label="$t('settingsPage.language')" >
+                </q-select>
+            </div>
           </div>
         </div>
+        
       </div>
     </div>
 
@@ -82,10 +97,10 @@
                     <div class="col-11" style="padding-left: 15px">
                       <q-input borderless v-model="profile.address" style="height: 30px;" :disable ="!editavel"/>
                       <div class = "row" style="margin-top: -10px;">
-                        <div class= "col-3">
+                        <div class= "col-4">
                           <q-input borderless v-model="profile.zipCode" style="height: 30px;" :disable ="!editavel"/> 
                         </div>
-                        <div class= "col-9">
+                        <div class= "col-8">
                           <q-input borderless v-model="profile.city" style="height: 30px;" :disable ="!editavel"/>
                         </div>  
                       </div>
@@ -219,8 +234,22 @@ export default {
       esconde:false,
       esconde2:false,
       newPassword: '***************',
-      oldPassword:'***************'
+      oldPassword:'***************',
+       lang: this.$i18n.locale,
+        langOptions: [
+          { value: 'en-us', label: this.$t('languages.english')},
+          { value: 'pt', label: this.$t('languages.portuguese')},
+          { value: 'fr', label: this.$t('languages.french')}
+      ]
     }
+  },
+
+  watch: {
+      lang(lang) {
+        console.log("Language Change", lang);
+        this.$i18n.locale = lang.value;
+      }
+
   },
 
   methods: {
