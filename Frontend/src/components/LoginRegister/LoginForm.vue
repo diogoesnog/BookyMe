@@ -4,6 +4,9 @@
     <!-- Div Cima -->
     <div class="divTop">
       <img src="../../assets/Other/MelhorLogoDoMundo.png" style="width: 50%; height: auto;"/>
+      <p>Assine a Petição para Alterar o Logo</p>
+      <p>Nomes: </p>
+      <q-input></q-input>
       <div style="position: relative; bottom: 50px;">
         <h4 style="font-weight: 950; font-size: 40px;">{{$t('loginPage.title')}}</h4>
         <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
