@@ -1,3 +1,4 @@
+<!-- TO DO: BOTAO DE EDITAR FOTOGRAFIA A FUNCIONAR -->
 <template>
   <!-- Div Principal -->
   <div class="text-center" style="color: #434343">
@@ -8,7 +9,7 @@
         <div style="position: relative; display: flex; justify-content: center">
           <div style="position: absolute">
             <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-              <img style="object-fit: cover;" :src="`${base}${avatar}`">
+              <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
             </q-avatar>
           </div>
           <div style="position: absolute; top: 125px">
@@ -113,13 +114,6 @@
         </div>
     </div>
       
-      
-      
-      
-      
-      
-      
-      
       <!-- PARTE DA SEGURANÇA -->
       
       <!-- Box Vermelha - Segurança -->
@@ -185,8 +179,6 @@
           </div>
         </div>
       </div>
-
-
 
       <!-- Botão Logout -->
       <q-btn class="gradientBlue" rounded @click="handleLogout" style="width: 200px; height: 35px; margin: 40px; bottom:10px;">
