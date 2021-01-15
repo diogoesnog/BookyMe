@@ -61,6 +61,14 @@ class Services {
         });
     }
 
+    getReservations(id){
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking?:id=${id}`);
+    }
+
+    getReservation_2(){
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/user/current`);
+    }
+
     // TODO: Add Opening Hours
 
 

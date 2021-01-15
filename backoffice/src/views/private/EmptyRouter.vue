@@ -5,7 +5,7 @@
         <Navbar/>
       </v-col>
       <v-col cols="10">
-        <p>{{this.id}}</p>
+        <!--<p>{{this.id}}</p>-->
         <router-view v-bind="info" :base="base" class="margins"
                      @updateAddress="updateAddress"
                      @updatePhoneNumber="updatePhoneNumber"

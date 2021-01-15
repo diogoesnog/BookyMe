@@ -131,19 +131,23 @@
     </v-col>
   </v-row>
 </template>
-
 <script>
+
+
 
 export default {
   name: "Calendar",
+  props : {
+    idStore: String
+  },
   data: () => ({
+    bookings :[],
     focus: '',
     type: 'month',
     typeToLabel: {
       month: 'Month',
       week: 'Week',
       day: 'Day',
-      '4day': '4 Days',
     },
     selectedEvent: {},
     selectedElement: null,
@@ -153,7 +157,8 @@ export default {
     names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
   }),
   mounted () {
-    this.$refs.calendar.checkChange()
+    this.$refs.calendar.checkChange(),
+        console.log(`StoreID = ${this.idStore}`)
   },
   methods: {
     viewDay ({ date }) {

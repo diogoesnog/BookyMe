@@ -5,7 +5,7 @@
       <Cards></Cards>
     </v-container>
     <v-container grid-list-lg>
-      <Calendar></Calendar>
+      <Calendar :idStore=id></Calendar>
     </v-container>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
   },
 
   methods: {
-    getStore() {
+   getStore() {
       Service.getStoreById(this.id)
         .then(response => {
           // TODO: choose a better endpoint

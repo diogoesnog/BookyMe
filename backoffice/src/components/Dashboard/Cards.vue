@@ -1,6 +1,5 @@
 <template>
   <div>
-
       <v-row>
       <v-col cols="3">
         <v-card
