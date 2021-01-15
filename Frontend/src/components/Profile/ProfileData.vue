@@ -32,13 +32,13 @@
         </div>      
       </div>
     </div>
-            <!-- Div Mudar Língua -->
-            <div class="changeLanguageDiv">
-              <q-select class="selectLanguage" rounded outlined behavior="menu" v-model="lang"
-                :options="langOptions"
-                :label="$t('settingsPage.language')" >
-              </q-select>
-            </div>
+    <!-- Div Mudar Língua -->
+    <div class="changeLanguageDiv">
+      <q-select class="selectLanguage" rounded outlined behavior="menu" v-model="lang"
+        :options="langOptions"
+        :label="$t('settingsPage.language')" >
+      </q-select>
+    </div>
     <!-- Div Baixo -->
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
@@ -357,7 +357,7 @@ export default {
 
   .roundedDivRedTop {
     background: linear-gradient(#e9695c, #e03459);
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -371,7 +371,7 @@ export default {
 
   .roundedDivRedBottom {
     background: linear-gradient(#e9695c, #e03459);
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;

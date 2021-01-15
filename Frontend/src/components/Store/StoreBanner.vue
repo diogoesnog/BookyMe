@@ -24,7 +24,7 @@
             <div class="divRating shadow">
               <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
                   <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
-                    {{ roundRating(this.rating) }}<span style="font-weight: 200; font-size: 19px;">/5</span>
+                    {{ roundRating() }}<span style="font-weight: 200; font-size: 19px;">/5</span>
                   </span>
                 <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
               </p>
@@ -67,8 +67,8 @@ export default {
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
     },
-    roundRating: function(rating) {
-      return Math.round(rating*10)/10;
+    roundRating() {
+      return Math.round(this.rating*10)/10;
     },
     getCutName: function(string) {
       if(string.substring(0,15) === string) return string;
