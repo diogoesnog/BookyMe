@@ -7,7 +7,9 @@
           <p>{{ message }}</p>
         </div>
         <div class="col-2">
-          X
+          <q-btn @click="markAsRead">
+            X
+          </q-btn>
         </div>
       </div>
     </div>
@@ -22,6 +24,12 @@ export default {
     sentBy: String,
     title: String,
     message: String
+  },
+
+  methods: {
+    markAsRead() {
+      this.$emit('markAsRead', this._id)
+    }
   }
 }
 </script>

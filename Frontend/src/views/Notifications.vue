@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 style="font-weight: 670; font-size: 45px;"> {{$t('notificationsPage.title')}}</h1>
-    <Notification v-for="(notification, index) in notifications" :key="index" v-bind="notification"></Notification>
+    <Notification v-for="(notification, index) in notifications" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead"></Notification>
     <Toolbar/>
   </div>
 </template>
@@ -42,6 +42,18 @@ export default {
         }).catch(err => {
           console.error(err);
         });
+    },
+
+    markAsRead(id) {
+      Service.markAsRead(id)
+        .then(response => {
+          console.log(response);
+          // this.notifications.splice(this.notifications.findIndex(item => item._id === "cStatus"), 1)
+          this.notifications = this.notifications.filter(item => item._id !== id);
+
+        }).catch(err => {
+          console.error(err);
+      })
     }
   }
 }

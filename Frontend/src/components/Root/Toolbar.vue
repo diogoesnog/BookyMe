@@ -15,7 +15,7 @@
                 <img v-if="checkPage('/favorites') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
                 <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Favorites.svg">
               </q-route-tab>
-              <q-route-tab to="/favorites" exact>
+              <q-route-tab to="/notifications" exact>
                 <img v-if="checkPage('/notifications') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/NotificationsHover.svg">
                 <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Notifications.svg">
               </q-route-tab>
