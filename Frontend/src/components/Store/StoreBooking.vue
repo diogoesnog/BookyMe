@@ -25,9 +25,13 @@
 
         <q-card-section class="q-pt-none">
           <q-form>
-            <q-date title="Data da marcação" subtitle="Por favor escolha a data desejada" v-model="date" />
+            <q-date
+              title="Data da marcação"
+              mask="YYYY-MM-DD"
+              subtitle="Por favor escolha a data desejada"
+              color="red"
+              v-model="date" />
 
-            <q-input v-model="date" rounded type="date" hint="Data da marcação" />
             <q-input v-model="hour" rounded type="time" hint="Hora da Marcação" />
           </q-form>
         </q-card-section>
@@ -50,8 +54,7 @@ name: "StoreBooking",
     return {
       storeID: this.$route.params.id,
       card: Boolean,
-      date: String,
-      hour: String,
+      date: Date,
       booking: new Booking()
     }
   },
