@@ -2,7 +2,7 @@
 FROM node:lts-alpine
 
 # App Directory
-WORKDIR /backend/userservice
+WORKDIR /backend/notificationservice
 
 # Install App dependencies
 COPY package*.json ./
@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Run App
-CMD [ "npm", "start" ]
+CMD [ "npm", "test" ]

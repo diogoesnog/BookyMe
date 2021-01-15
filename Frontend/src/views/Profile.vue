@@ -13,10 +13,9 @@
           </q-select>
         </div>
       </div>-->
-
     </div>
     <div>
-      <ProfileData v-bind="profileData" :base="base"  />
+      <ProfileData :base="base" :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" />
     </div>  
     <div>
       <Toolbar/>
@@ -30,8 +29,6 @@
 import Service from '../services/user.service';
 import Toolbar from '../components/Root/Toolbar';
 import ProfileData from '../components/Profile/ProfileData';
-
-
 
 export default {
 
@@ -71,7 +68,6 @@ export default {
 
     fetchProfileData() {
       this.$q.loading.show({ delay: 400});
-
       Service.getProfileData()
         .then(response => {
           let data = response.data["data"];
@@ -83,12 +79,29 @@ export default {
 
         }).finally(() => {
           this.$q.loading.hide();
-        })
+        })   
+    },
+    changeUserProfile(data) {
+      Service.updateAccount(data)
+        .then(response => {
+            console.log(response);
+            this.profileData = response.data[ "data" ];
+        }).catch(err => {
+            console.error("Error!");
+        });
+    },
+    changeUserPassword(data) {
+      Service.updatePassword(data)
+        .then(response => {
+            console.log(response);
+            this.password = response.data[ "data" ];
+        }).catch(err => {
+            console.error("Error!");
+        });
     }
   }
 
 }
-
 
 </script>
 

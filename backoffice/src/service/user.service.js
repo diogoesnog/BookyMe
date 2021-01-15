@@ -20,7 +20,18 @@ class Services {
         });
     }
 
+    uploadPhoto(id, file) {
 
+        let fileForm = new FormData();
+        fileForm.append('file', file, file.name);
+
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/photo`, fileForm, {
+            headers: {
+                ...authHeader(),
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
     // TODO: Add Store Description
     updateDescription(id, description) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores/${id}`);

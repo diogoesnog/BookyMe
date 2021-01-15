@@ -72,6 +72,11 @@ module.exports.deleteAll = () => {
     return User.deleteMany();
 }
 
-module.exports.getUsers = () => {
-    return User.find();
+module.exports.getUsersByIdArray = (array) => {
+    return User.find({ _id: { $in: array } }, {
+        _id: 1,
+        name: 1,
+        avatar: 1,
+        username: 1
+    } );
 }

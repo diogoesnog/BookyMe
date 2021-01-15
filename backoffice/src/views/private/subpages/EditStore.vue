@@ -1,18 +1,23 @@
 <template>
   <div>
-    Edit Store information
+    <v-tabs>
+      <v-tab>General</v-tab>
+      <v-tab>Scheduling</v-tab>
+    </v-tabs>
+
+    <h1>Edit Store information</h1>
     <v-form>
       <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
 
-      <v-text-field label="Place" v-model="address.place"></v-text-field>
-      <v-text-field label="Zip Code" v-model="address.zipCode"></v-text-field>
-      <v-text-field label="City" v-model="address.city"></v-text-field>
-      <v-text-field label="Country" v-model="address.country"></v-text-field>
+      <v-text-field label="Place" v-model="store.address.place"></v-text-field>
+      <v-text-field label="Zip Code" v-model="store.address.zipcode"></v-text-field>
+      <v-text-field label="City" v-model="store.address.city"></v-text-field>
+      <v-text-field label="Country" v-model="store.address.country"></v-text-field>
 
       <v-textarea phone="Description" outlined v-model="store.description" type="text"></v-textarea>
 
       <!-- TODO: Update Coordinates -->
-      <v-btn @click="saveData"></v-btn>
+      <v-btn block color="primary" @click="saveData">Save</v-btn>
     </v-form>
   </div>
 </template>
@@ -21,33 +26,34 @@
 import Services from '../../../service/user.service';
 export default {
   name: "EditStore",
-
+  props: {
+    store: Object
+  },
   data() {
     return {
-      id: this.$route.params.id,
-      store: Object,
-      address: Object,
+      id: this.$route.params.id
+      // store: Object,
     }
   },
 
   mounted() {
-    this.fetchStore();
+    // this.fetchStore();
   },
 
   methods: {
-    fetchStore() {
+    /*fetchStore() {
       Services.getStoreById(this.id)
         .then(response => {
           this.store = response.data["data"][0];
           this.address = this.store.address;
         })
-        .catch(err => console.log(err.data));
-    },
+        .catch(err => console.log(err.data));*/
+    // },
 
     saveData() {
       this.updateDescription();
-      this.updateAddress();
-      this.updatePhoneNumber();
+      // this.updateAddress();
+      // this.updatePhoneNumber();
     },
 
     updateAddress() {
@@ -69,13 +75,7 @@ export default {
           });
     },
     updateDescription() {
-      Services.updateDescription(this.id, this.store.description)
-          .then( response => {
-            console.log(response);
-          })
-          .catch( err => {
-            console.log(err);
-      });
+      this.$emit('updateDescription', this.store.description);
     }
   }
 }
