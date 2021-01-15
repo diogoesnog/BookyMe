@@ -28,8 +28,8 @@ const routes = [
     component: () => import('../views/private/EmptyRouter'),
     children: [
       {
-        name: "StoreDash",
-        path: "/store/dashboard/:id",
+        name: "HomeStore",
+        path: "",
         component: () => import('../views/private/subpages/Store'),
       },
       {

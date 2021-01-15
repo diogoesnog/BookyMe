@@ -1,8 +1,7 @@
 <template>
-  <v-app>
   <v-card
-      tile
-      width="256px"
+      class="mx-auto"
+      width="256"
       height="100%"
   >
     <v-navigation-drawer dark permanent>
@@ -13,7 +12,7 @@
             <v-icon></v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'StoreDash', params: {id: this.$route.params.id}}">Home</router-link>
+            <router-link :to="{name: 'HomeStore', params: {id: this.$route.params.id}}">Home</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -67,7 +66,6 @@
       </template>
     </v-navigation-drawer>
   </v-card>
-  </v-app>
 </template>
 
 <script>
