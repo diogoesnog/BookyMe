@@ -24,12 +24,22 @@
       <div class="title">
         {{$t('bookingsPage.type1')}}
       </div>
-      <ReservationsList v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+      <div v-if="this.reservationsCurrent.length == 0" class="subTitle">
+        {{$t('bookingsPage.emptyType1')}}
+      </div>
+      <div v-else>
+        <ReservationsList v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+      </div>
       <br/>
       <div class="title">
         {{$t('bookingsPage.type2')}}
       </div>
-      <ReservationsList v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+      <div v-if="this.reservationsConcluded.length == 0" class="subTitle">
+        {{$t('bookingsPage.emptyType2')}}
+      </div>
+      <div v-else>
+        <ReservationsList v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+      </div>
     <div>
      <Toolbar/>
     </div>
@@ -130,4 +140,14 @@ export default {
     align-items: center;
     margin: 15px;
   }
+
+  .subTitle {
+    color: #434343;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: left;
+    margin: 20px;
+  }
+
 </style>
