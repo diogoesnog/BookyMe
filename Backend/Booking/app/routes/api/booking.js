@@ -31,8 +31,11 @@ app.get('/', checkAuth, (req, res) => {
  * URL param: /store/${id}
  */
 app.get('/store/:id', isAdmin, (req, res) => {
+    const state = req.query.state;
+    const canceled = req.query.canceled || false;
+
     if (req.user.isAdmin === true) {
-        Booking.getBookingsByStore(req.params.id)
+        Booking.getBookingsByStore(req.params.id, state, canceled)
             .then(data => {
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);
@@ -308,17 +311,17 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
 });
 
 app.get('/current', checkAuth, (req, res) => {
-    const date = req.query.date
-    const storeID = req.query.storeId
+    const date_now = new Date(Date.now());
+    const date = req.query.date || date_now;
+    const storeID = req.query.storeId;
 
     let date_ini = new Date(date).setHours(0,0, 0);
     let date_fin = new Date(date_ini).setHours(23,59, 59);
-    const date_now = new Date(Date.now());
 
     if (sameDay(date_now, new Date(date_ini))) { // Same Day
         date_ini = new Date(date_ini).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now > new Date(date_ini)) { // Past
-        const response = Response.OK([]);
+        const response = Response.OK([{"count": 0}]);
         res.status(response.status).jsonp(response);
         return;
     }
@@ -331,7 +334,10 @@ app.get('/current', checkAuth, (req, res) => {
 
     Booking.count(storeID, date_ini, date_fin, false)
         .then(data => {
-            const response = Response.OK(data);
+            if (data.length === 0) {
+                data = [{"count": 0}]
+            }
+            const response = Response.OK(data[0]);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
@@ -341,17 +347,17 @@ app.get('/current', checkAuth, (req, res) => {
 });
 
 app.get('/concluded', checkAuth, (req, res) => {
-    const date = req.query.date
-    const storeID = req.query.storeId
+    const date_now = new Date(Date.now());
+    const date = req.query.date || date_now;
+    const storeID = req.query.storeId;
 
     let date_ini = new Date(date).setHours(0,0, 0);
     let date_fin = new Date(date_ini).setHours(23,59, 59);
-    const date_now = new Date(Date.now());
 
     if (sameDay(date_now, new Date(date_ini))) { // Same Day
         date_fin = new Date(date_fin).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now < new Date(date_ini)) { // Past
-        const response = Response.OK([]);
+        const response = Response.OK([{"count": 0}]);
         res.status(response.status).jsonp(response);
         return;
     }
@@ -364,7 +370,10 @@ app.get('/concluded', checkAuth, (req, res) => {
 
     Booking.count(storeID, date_ini, date_fin, false)
         .then(data => {
-            const response = Response.OK(data);
+            if (data.length === 0) {
+                data = [{"count": 0}]
+            }
+            const response = Response.OK(data[0]);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
@@ -374,8 +383,9 @@ app.get('/concluded', checkAuth, (req, res) => {
 });
 
 app.get('/canceled', checkAuth, (req, res) => {
-    const date = req.query.date
-    const storeID = req.query.storeId
+    const date_now = new Date(Date.now());
+    const date = req.query.date || date_now;
+    const storeID = req.query.storeId;
 
     const date_ini = new Date(date).setHours(0,0, 0);
     const date_fin = new Date(date_ini).setHours(23,59, 59);
@@ -388,7 +398,10 @@ app.get('/canceled', checkAuth, (req, res) => {
 
     Booking.count(storeID, date_ini, date_fin, true)
         .then(data => {
-            const response = Response.OK(data);
+            if (data.length === 0) {
+                data = [{"count": 0}]
+            }
+            const response = Response.OK(data[0]);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {

@@ -1,9 +1,14 @@
 <template>
   <div class="col-12" style="padding-left: 30px; padding-top: 18px;">
     <p class="titles">{{$t('storePage.photos')}}</p>
-    <div class="wrapper">
+    <div class="wrapper" v-bind:style="getStyles()">
       <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
-        <div @click="persistent = true; indexPhoto = index" class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
+        <div 
+          @click="persistent = true; 
+          indexPhoto = index" 
+          v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'
+          class="item"
+        />
       </div>
       <div class="empty"></div>
     </div>
@@ -39,6 +44,12 @@ export default {
   methods: {
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
+    },
+    getStyles() {
+      let numberPhotos = this.photos.length;
+      return {
+      'grid-template-columns': `repeat(${numberPhotos+1}, auto)`
+      }
     }
   }
 }
@@ -71,8 +82,10 @@ export default {
     overflow-x: scroll;
     overflow-y: hidden;
     display: grid;
-    grid-template-columns: repeat(6, auto);
     grid-gap: 0 30px;
+    padding: 10px;
+    margin-left: -10px;
+    margin-top: -5px;
   }
 
   .item {
@@ -80,7 +93,7 @@ export default {
     height: 120px;
     width: 120px;
     border-radius: 200px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.20);
   }
 
   .empty {

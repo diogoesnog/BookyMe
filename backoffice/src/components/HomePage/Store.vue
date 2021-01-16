@@ -1,23 +1,22 @@
 <template>
   <div>
     <v-card class="mx-auto" height="580">
-      <v-img height="300" width="500" :src="getRandomPhoto()"></v-img>
+
+      <v-img v-if="verified" height="300" width="500" :src="getRandomPhoto()"></v-img>
+      <v-img v-else height="300" width="500" :src="getRandomPhoto()" class="disabled-image"></v-img>
+
       <v-card-title>
         {{ this.name}}
       </v-card-title>
       <v-card-text>
-        <v-row
-            align="center"
-            class="mx-0"
-        >
+        <v-row align="center" class="mx-0">
           <v-rating
               :value="this.rating"
               color="amber"
               dense
               half-increments
               readonly
-              size="14"
-          ></v-rating>
+              size="14"/>
 
           <div class="grey--text ml-4">
             {{ this.rating}} / 5
@@ -51,7 +50,8 @@ export default {
     description: String,
     rating: Number,
     base: String,
-    photos: Array
+    photos: Array,
+    verified: Boolean
   },
   methods: {
     open() {
@@ -81,5 +81,10 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+.disabled-image {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
 </style>
