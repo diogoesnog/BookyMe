@@ -17,8 +17,9 @@ const Booking = require('../../services/Booking');
 router.get('/store/:id', checkAuth, (req, res) => {
     // let body = JSON.stringify(req.body);
     let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
 
-    Booking.getStoreReservations(token, req.params.id)
+    Booking.getStoreReservations(token, req.params.id, query)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
