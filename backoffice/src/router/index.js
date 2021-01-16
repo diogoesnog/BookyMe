@@ -25,44 +25,27 @@ const routes = [
   {
     path: '/store/:id',
     name: "Store",
-    component: () => import('../views/private/subpages/Store')
+    component: () => import('../views/private/subpages/Store'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/store/:id/edit',
     name: "EditStore",
-    component: () => import('../views/private/EditStore')
+    component: () => import('../views/private/EditStore'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: "PhotoStore",
     path: '/store/:id/photos',
-    component: () => import('../views/private/Photos')
-  },
-  /*{
-    path: '/store/:id',
-    name: "Store",
-    component: () => import('../views/private/EmptyRouter'),
-    children: [
-      {
-        name: "StoreDash",
-        path: "/store/dashboard/:id",
-        component: () => import('../views/private/subpages/Store'),
-      },
-      {
-        name: "EditStore",
-        path: "/edit",
-        component: () => import('../views/private/subpages/EditStore')
-      },
-      {
-        name: "PhotoStore",
-        path: '/photos',
-        component: () => import('../views/private/subpages/Photos')
-      }
-    ],
+    component: () => import('../views/private/Photos'),
     meta: {
-      requiresStores: true,
       requiresAuth: true
     }
-  },*/
+  },
   {
     path: '/register/store',
     name: "RegisterStore",
@@ -101,7 +84,11 @@ router.beforeEach((to, from, next) => {
       next('/');
     }
   } else {
-    next();
+    if(cookie !== null) {
+      next('/home')
+    } else {
+      next();
+    }
   }
 
 });
