@@ -1,12 +1,10 @@
 <template>
   <div>
-    <StoreBanner v-bind="storeData"/>
+    <!--      TODO: Fazer o script para ir buscar as informações da reserva e da loja respetiva -->
+    <ReservationBanner />
     <div class="divBottom">
-<!--      TODO: Colocar aqui o componente da parte da reserva. -->
-      <StoreMap v-bind="storeData"/>
-      <StoreCatalog v-bind="storeData"/>
-      <StoreRatings v-bind="storeData"/>
-      <StoreBooking v-bind="storeData"/>
+      <ReservationInfo/>
+      <StoreMap />
     </div>
     <Toolbar/>
   </div>
@@ -15,22 +13,19 @@
 <script>
 
 import Toolbar from 'components/Root/Toolbar';
-import Service from '../services/user.service'
-import StoreBanner from 'components/Store/StoreBanner';
-import StoreRatings from "components/Store/StoreRatings";
+import Service from '../services/user.service';
+import ReservationBanner from "components/Reservation/ReservationBanner";
 import StoreMap from "components/Store/StoreMap";
-import StoreCatalog from "components/Store/StoreCatalog";
-import StoreBooking from "components/Store/StoreBooking";
+import ReservationInfo from "components/Reservation/ReservationInfo";
+
 
 export default {
 
   name: "Reservation",
   components: {
-    StoreBanner,
+    ReservationInfo,
+    ReservationBanner,
     StoreMap,
-    StoreCatalog,
-    StoreRatings,
-    StoreBooking,
     Toolbar
   },
 
