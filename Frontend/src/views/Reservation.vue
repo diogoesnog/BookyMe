@@ -31,7 +31,8 @@ export default {
 
   data() {
     return {
-      storeID: this.$route.params.id,
+      bookingID: this.$route.params.id,
+      storeID: String,
       storeData: Object,
       lang: this.$i18n.locale,
       langOptions: [
@@ -52,10 +53,30 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
+    this.fetchBookingData();
     this.fetchStoreData();
   },
 
   methods: {
+
+    fetchBookingData() {
+      this.$q.loading.show({ delay: 400});
+
+      Service.getBookingInfo(this.bookingID)
+        .then(response => {
+          console.group("Booking Information:")
+          let data = response.data["data"];
+          this.bookingData = data[0].booking[0];
+          console.log("Informação do booking:")
+          console.log(this.bookingData);
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+
+    },
+
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
       Service.getStoreData(this.storeID)
