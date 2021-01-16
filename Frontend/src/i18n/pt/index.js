@@ -75,7 +75,9 @@
     signout: "Terminar Sessão",
     cancel: "Cancelar",
     save: "Salvar",
-    passwordTest: "Passwords Diferentes"
+    passwordTest: "Passwords Diferentes",
+    oldPassword: "Password Anterior",
+    newPassword: "Nova Password"
   },
 
   // Reservations
@@ -137,7 +139,10 @@
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",
     stars: "0 Estrelas | 1 Estrela | {count} Estrelas",
-    basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações"
+    basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
+    book: "Reserve já!",
+    date: "Escolha a sua data",
+    dateSub: "A sua data para a marcação"
   },
 
   // Search Results
