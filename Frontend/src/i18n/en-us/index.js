@@ -89,6 +89,8 @@ export default {
     type1: "Recents",
     type2: "Completed",
     catalog: "Common Reservation",
+    emptyType1: "No Recent Reservations",
+    emptyType2: "No Reservations Completed",
 
     newBooking: {
       title: "New Booking",

@@ -83,6 +83,8 @@ export default {
     type1: "Récent",
     type2: "Terminé",
     catalog: "Réserve Commune",
+    emptyType1: "Aucune Réservation Récente",
+    emptyType2: "Aucune Réservation Effectuée",
 
     newBooking: {
       title: "Nouveau Réservation",

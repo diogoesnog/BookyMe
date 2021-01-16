@@ -89,6 +89,8 @@
     type1: "Recentes",
     type2: "Conluídas",
     catalog: "Reserva Comum",
+    emptyType1: "Sem Reservas Recentes",
+    emptyType2: "Sem Reservas Concluídas",
 
     newBooking: {
       title: "Nova Reserva",
