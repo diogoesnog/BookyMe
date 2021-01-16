@@ -5,9 +5,6 @@
 </template>
 
 <script>
-
-import Service from '../services/user.service';
-// TODO: Não se está a utilizar a lista como componente.
 export default {
 
   name: "Settings",
@@ -16,7 +13,7 @@ export default {
   data() {
     return {
         language: String,
-        languageOptions: ["pt", "fr", "en-US"] 
+        languageOptions: ["pt", "fr", "en-US"]
     }
   },
 

@@ -69,7 +69,9 @@ export default {
     signout: "Se Déconnecter",
     cancel: "Annuler",
     save: "Enregistrer",
-    passwordTest: "Mots de Passe Différents"
+    passwordTest: "Mots de Passe Différents",
+    oldPassword: "Ancien Mot de Passe",
+    newPassword: "Nouveau Mot de Passe"
   },
 
   // Reservations
