@@ -65,7 +65,7 @@ export default {
     },
 
     getCategories() {
-      Services.getCaregories()
+      Services.getCategories()
           .then(response => {
             this.categories = response.data["data"];
           })

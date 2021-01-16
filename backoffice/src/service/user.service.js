@@ -70,13 +70,12 @@ class Services {
         });
     }
 
-    getCaregories() {
+    getCategories() {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/categories`, {
             headers: authHeader()
         });
     }
 
-    // TODO: Add Opening Hours
     updateSchedule(id, schedule) {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/schedule`, schedule, {
             headers: authHeader()
@@ -85,6 +84,12 @@ class Services {
 
     getStoreSlots(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    addSlot(id, slot) {
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, slot, {
             headers: authHeader()
         });
     }
