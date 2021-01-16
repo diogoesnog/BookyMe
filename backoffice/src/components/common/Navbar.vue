@@ -33,7 +33,7 @@
             <v-icon>mdi-ufo</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-              <router-link :to="{name: 'Catalog', params: {id: this.$route.params.id}}">Catalog</router-link>
+              <router-link :to="{name: 'CatalogList', params: {id: this.$route.params.id}}">Catalog</router-link>
           </v-list-item-content>
         </v-list-item>
 

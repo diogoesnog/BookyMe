@@ -1,4 +1,12 @@
 <template>
+<div>
+  <v-row no-gutters>
+      <v-col cols="2">
+        <Navbar/>
+      </v-col>
+    <v-col cols="10">
+    <h1 class="text-center">Catalog</h1>
+    <br>
     <v-card>
          
         <v-card-title>
@@ -21,11 +29,6 @@
         :key="refresh"
         >
         <template v-slot:item.action="{ item }" >
-            <v-btn
-              @click="deleteCatalog(item)"
-            >
-            Edit
-            </v-btn>
              <v-btn
               @click="deleteCatalog(item)"
             >
@@ -37,13 +40,19 @@
 
        
     </v-card>
+    </v-col>
+  </v-row>
+</div>
 </template>
 
 <script>
 import Services from '../../service/user.service';
 
 export default {
-  name: "Catalog",
+  name: "CatalogList",
+  components: {
+    Navbar: () => import('../../components/common/Navbar')
+  },
    data() {
     return {
       id: this.$route.params.id,
@@ -83,7 +92,7 @@ export default {
         });
     },
     registerCatalog(){
-        this.$router.push('/store/catalog/register')
+        this.$router.push('/catalog/register/' + this.id)
     }
     ,
     deleteCatalog(item){

@@ -23,7 +23,7 @@ router.get('/store/:id', (req, res) => {
 
 // TODO: is store admin
 router.post('/store/:id', validator([
-    "product", "price", "abstract"
+    'product', 'price', 'abstract'
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
     Catalog.addCatalog(req.params.id, body)

@@ -88,10 +88,10 @@ class Services {
         });
     }
 
-    addCatalogItem(id){
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`, {
-            headers: authHeader()
-        });
+    addCatalogItem(id,item){
+        console.log('Id que vai como parametro: ' + id)
+
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item);
     }
     // TODO: Upload Images
 }

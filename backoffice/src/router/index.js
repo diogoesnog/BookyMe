@@ -55,15 +55,15 @@ const routes = [
     }
   },
   {
-    path: '/store/catalog',
-    name: "Catalog",
-    component: () => import('../views/private/Catalog'),
+    path: '/store/catalog/:id',
+    name: "CatalogList",
+    component: () => import('../views/private/CatalogList'),
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: '/store/catalog/register',
+    path: '/catalog/register/:id',
     name: "AddCatalogItem",
     component: () => import('../views/private/AddItemCatalog'),
     meta: {

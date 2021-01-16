@@ -2,11 +2,11 @@
   <div>
     <v-form>
 
-      <v-text-field label="Product" type="text" v-model="catalog.name"></v-text-field>
+      <v-text-field label="Product" type="text" v-model="catalog.product"></v-text-field>
 
-      <v-text-field label="Price" type="text" v-model="catalog.description"></v-text-field>
+      <v-text-field label="Price (€)" v-model="catalog.price"></v-text-field>
 
-      <v-text-field label="Type" type="text" v-model="catalog.place"></v-text-field>
+      <v-text-field label="Type" type="text" v-model="catalog.abstract"></v-text-field>
 
       <v-btn block color="primary" @click="handleSubmit">Register</v-btn>
     </v-form>
@@ -18,10 +18,11 @@
 import Catalog from '../../models/Store/catalog'
 import Services from '../../service/user.service'
 export default {
-  name: "General",
+  name: "Catalog",
 
   data() {
     return {
+      id: this.$route.params.id,
       catalog: new Catalog()
     }
   },
@@ -29,10 +30,10 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
+      
 
-      Services.addCatalogItem(this.catalog)
+      Services.addCatalogItem(this.id, this.catalog)
         .then(response => {
-          // this.store = new Store(...response.data);
           let newCatalog = response.data[ "data" ];
           console.log("New Catalog", newCatalog);
           this.$emit("catalogCreated", newCatalog);
@@ -42,6 +43,7 @@ export default {
           // TODO: emit error
         }).finally( () => {
           console.log("Finished");
+          this.$router.go(-1)
         });
 
     }
