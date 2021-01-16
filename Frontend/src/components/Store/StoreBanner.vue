@@ -218,7 +218,8 @@ export default {
 
   .buttonFavTrue {
     background-color: white;
-    color: #e9695c;
+    color: #e74165;
+    opacity: 1 !important;
   }
 
 </style>
