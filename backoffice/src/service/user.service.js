@@ -33,6 +33,13 @@ class Services {
         });
     }
 
+    deletePhoto(id, file) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/photos/${file}`, {
+            headers: authHeader()
+
+        })
+    }
+
     updateDescription(id, description) {
         return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
             description: description
