@@ -1,6 +1,21 @@
 <template>
-  <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
+  <div>
+    <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
+    </div>
     <div class="divTop2">
+    </div>
+    <div style="padding-top: 20px;">
+      <div class="row" style="margin: 20px;">
+        <div class="col-5" style="display: flex; align-items: center;">
+          <!-- Corrigir o To do Botão -->
+          <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
+        </div>
+        <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
+          <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
+          <div style="width:10px; height:auto; display:inline-block;"/>
+          <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" round icon="favorite"/>
+        </div>
+      </div>
       <div class="infoName">
           <span style="font-weight: 670; font-size: 40px;">
             {{ getCutName(this.name) }}
@@ -24,7 +39,7 @@
             <div class="divRating shadow">
               <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
                   <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
-                    {{ roundRating(this.rating) }}<span style="font-weight: 200; font-size: 19px;">/5</span>
+                    {{ roundRating() }}<span style="font-weight: 200; font-size: 19px;">/5</span>
                   </span>
                 <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
               </p>
@@ -39,13 +54,15 @@
 <script>
 
 import Service from '../../services/user.service';
+import Favorite from "src/models/Favorite";
 
 export default {
   name: "StoreBanner",
 
   data() {
     return {
-      reservationsUser: Array,
+      styleFav: String,
+      reservationsUser: Array
     }
   },
 
@@ -58,17 +75,52 @@ export default {
     photos: Array,
   },
 
+  beforeMount() {
+    this.styleFav = "buttonFavFalse"
+  },
+
   mounted() {
     console.log("Mounted: View has been rendered");
+    //this.styleFav = this.isFavorite();
+    console.log(this.styleFav);
     this.getReservations();
   },
 
   methods: {
+    isFavorite() {
+      Service.getFavorites()
+        .then(response => {
+          let favorites = response.data['data'];
+
+          // TODO: A verificação do favorito deve ser em query no backend.
+          for(let fav in favorites) {
+            if(fav._id === this._id)  {
+              console.log("Encontrado");
+              this.styleFav = "buttonFavTrue";
+            }
+          }
+          console.log(favorites);
+        }).catch(err => {
+        console.log(err);
+      })
+    },
+
+    addFavorite() {
+      let favorite = new Favorite(this._id);
+      Service.addFavorite(favorite)
+        .then(response => {
+          this.styleFav = "buttonFavTrue";
+          console.log(response);
+          console.log("Adding Favorite");
+        }).catch(err => {
+        console.log(err);
+      })
+    },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
     },
-    roundRating: function(rating) {
-      return Math.round(rating*10)/10;
+    roundRating() {
+      return Math.round(this.rating*10)/10;
     },
     getCutName: function(string) {
       if(string.substring(0,15) === string) return string;
@@ -77,8 +129,7 @@ export default {
     getReservations() {
       Service.getBookingUserCurrent()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsUser = data;
+          this.reservationsUser = response.data["data"];
           console.log(this.reservationsUser);
         }).catch(err => {
           console.log(err)
@@ -100,69 +151,73 @@ export default {
 
 <style scoped>
 
-.divTop1{
-  position: absolute;
-  width: 100%;
-  height: 30%;
-  top: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-size: cover;
-  background-position: center top;
-}
+  .divTop1{
+    position: absolute;
+    width: 100%;
+    height: 32%;
+    background-size: cover;
+    background-position: center top;
+  }
 
-.divTop2{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
-}
+  .divTop2{
+    position: absolute;
+    width: 100%;
+    height: 32%;
+    background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
+  }
 
-.infoName {
-  color: white;
-  text-align: center;
-  padding-top: 80px;
-}
+  .infoName {
+    position: relative;
+    bottom: -5px;
+    color: white;
+    text-align: center;
+  }
 
-.infoExtra {
-  color: #434343;
-  background-color: white;
-  height: 30%;
-  width: 75%;
-  border-radius: 100px;
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  transform: translate(-50%,-50%);
-}
+  .infoExtra {
+    position: absolute;
+    left: 50%;
+    top: 32%;
+  }
 
-.divRating {
-  text-align: center;
-  height: 35px;
-  border-radius: 20px;
-  background: linear-gradient(#e9695c, #e03459);
-  color: white;
-}
+  .divRating {
+    text-align: center;
+    height: 35px;
+    border-radius: 20px;
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
 
-.shadow {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 28px;
-}
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 28px;
+  }
 
-.rowStyle {
-  flex-wrap: nowrap !important;
-  padding: 23px;
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
+  .rowStyle {
+    position: absolute;
+    background-color: white;
+    border-radius: 100px;
+    width: 295px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    flex-wrap: nowrap !important;
+    padding: 25px;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+  }
+
+  .button {
+    background-color: white;
+    color: #1b9fd4;
+  }
+
+  .buttonFavFalse {
+    background-color: white;
+    color: #1b9fd4;
+  }
+
+  .buttonFavTrue {
+    background-color: white;
+    color: #e9695c;
+  }
 
 </style>

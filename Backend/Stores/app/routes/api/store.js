@@ -7,6 +7,7 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const fetch = require('node-fetch');
 const checkAuth = require('../../middlewares/checkAuth');
+const Service = require('../../services/users');
 
 /**
  * Get Stores
@@ -162,32 +163,52 @@ app.get('/:id',  (req, res) => {
  * description: String,
  * address: String
  */
-app.post('/', (req, res) => {
+app.post('/', checkAuth, async (req, res) => {
     let response;
 
-    const address = {
-        place: req.body.place,
-        zipcode: req.body.zipcode,
-        city: req.body.city,
-        country: req.body.country
+    try {
+        let token = req.headers.authorization
+        /*const address = {
+            place: req.body.place,
+            zipcode: req.body.zipcode,
+            city: req.body.city,
+            country: req.body.country
+        }*/
+
+        const store = {
+            name: req.body.name,
+            verified: false,
+            category: req.body.category,
+            description: req.body.description,
+            address: {
+                place: req.body.place,
+                zipcode: req.body.zipcode,
+                city: req.body.city,
+                country: req.body.country
+            }
+        };
+
+        let storeData = await Stores.create(store);
+
+        await Service.addStore(token, storeData._id);
+
+        response = Response.CREATED(storeData);
+        res.status(response.status).jsonp(response);
+    } catch(e) {
+        response = Response.INTERNAL_ERROR(e, 'Could not create your store!');
+        res.status(response.status).jsonp(response);
+
     }
 
-    const store = {
-        name: req.body.name,
-        verified: false,
-        category: req.body.category,
-        description: req.body.description,
-        address: address
-    };
-
-    Stores.create(store)
+    /*Stores.create(store)
         .then(data => {
+
             response = Response.CREATED(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
             response = Response.INTERNAL_ERROR(err, 'Could not create your store!');
             res.status(response.status).jsonp(response);
-        });
+        });*/
 });
 
 

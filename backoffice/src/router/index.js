@@ -25,6 +25,21 @@ const routes = [
   {
     path: '/store/:id',
     name: "Store",
+    component: () => import('../views/private/subpages/Store')
+  },
+  {
+    path: '/store/:id/edit',
+    name: "EditStore",
+    component: () => import('../views/private/EditStore')
+  },
+  {
+    name: "PhotoStore",
+    path: '/store/:id/photos',
+    component: () => import('../views/private/Photos')
+  },
+  /*{
+    path: '/store/:id',
+    name: "Store",
     component: () => import('../views/private/EmptyRouter'),
     children: [
       {
@@ -47,7 +62,7 @@ const routes = [
       requiresStores: true,
       requiresAuth: true
     }
-  },
+  },*/
   {
     path: '/register/store',
     name: "RegisterStore",

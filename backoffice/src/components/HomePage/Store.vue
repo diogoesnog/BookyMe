@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto">
+    <v-card class="mx-auto" height="580">
       <v-img height="300" width="500" :src="getRandomPhoto()"></v-img>
       <v-card-title>
         {{ this.name}}
@@ -31,9 +31,11 @@
         <div class="break-text">{{ this.description }}</div>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="teal accent-4" text @click="open">
-          Open
-        </v-btn>
+        <v-row justify="center">
+          <v-btn color="teal accent-4" text @click="open">
+            Open
+          </v-btn>
+        </v-row>
       </v-card-actions>
     </v-card>
   </div>
