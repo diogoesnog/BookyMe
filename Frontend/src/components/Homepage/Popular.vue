@@ -4,11 +4,17 @@
     </div>
     <div class="divTop2">
       <!-- Barra Pesquisa -->
-      <q-input rounded outlined label='Search'>
-        <template v-slot:append>
-          <q-avatar size='xl' icon="search"/>
-        </template>
-      </q-input>
+      <div class="row" style="margin: 25px">
+        <div class="col-9">
+          <q-input class="searchBar" rounded dense outlined label='Search'>
+          </q-input>
+        </div>
+        <div class="col-1"/>
+        <div class="col-2" style="display: flex; justify-content: flex-end;">
+          <q-avatar class="iconSearch" size="xl" text-color="white" icon="search">
+          </q-avatar>
+        </div>
+      </div>
       <!-- Info User -->
       <div class="row divInfoUser">
         <div class="col-10" style="text-align: left">
@@ -18,13 +24,13 @@
         </div>
         <div class="col-2 avatarCol">
           <q-avatar class="avatar">
-            <img style="object-fit: cover;" :src="getImage()">
+            <img style="object-fit: cover; margin: 5px; transform: scale(1.3);" :src="getImage()">
           </q-avatar>
         </div>
       </div>
     </div>
     <!-- More Popular Slider -->
-    <div style="color: white; position: absolute; top: 175px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 35px"> 
+    <div style="color: white; position: absolute; top: 190px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 25px"> 
       {{ $t('homePage.morePopular') }} 
     </div>
     <div class="wrapper">
@@ -103,9 +109,30 @@ export default {
 </script>
 
 <style scoped>
+  
+  .iconSearch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#e9695c, #e03459);
+    border-radius: 100px;
+    height: 45px;
+    width: 45px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
 
+  .searchBar {
+    color: white;
+    background-color: white;
+    border-radius: 53px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
   .divInfoUser {
-    padding: 35px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    color: white;
     color: white;
   }
 
@@ -134,7 +161,6 @@ export default {
 
   .divTop1{
     position: absolute;
-    top: -25px;
     left: 0;
     width: 100%;
     height: 50%;
@@ -157,7 +183,7 @@ export default {
 
   .wrapper {
     margin-left: 20px;
-    margin-top: -30px;
+    margin-top: -25px;
     position: sticky;
     overflow-x: scroll;
     overflow-y: hidden;
