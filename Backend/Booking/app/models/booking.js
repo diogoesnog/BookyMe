@@ -15,7 +15,6 @@ const catalog = new mongoose.Schema({
     abstract: {
         type: String
     },
-
 });
 
 const bookingSchema = new mongoose.Schema({
@@ -52,6 +51,10 @@ const bookingSchema = new mongoose.Schema({
     },
     mainStorePhotoURL: {
         type: String
+    },
+    slotId: {
+        type: String,
+        required: true
     },
     hasCatalog: {
         type: Boolean,

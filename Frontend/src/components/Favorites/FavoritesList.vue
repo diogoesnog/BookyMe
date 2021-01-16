@@ -47,7 +47,6 @@ export default {
 
   data() {
     return {
-      favorites: Array
     }
   },
 
@@ -61,13 +60,7 @@ export default {
     },
 
     deleteFavorite() {
-      Service.deleteFavorite(this._id)
-        .then(response => {
-          let data = response.data[ "data" ];
-          // TODO: emitir um evento para o parent (a tua view) com o ID do favorito eliminado
-          console.log(data);
-        })
-        .catch(err => console.log(err));
+      this.$emit("deleteFavorite", this._id);
     },
 
     roundRating: function(rating) {

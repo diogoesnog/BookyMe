@@ -75,7 +75,9 @@ export default {
     signout: "Sign-Out",
     cancel: "Cancel",
     save: "Save",
-    passwordTest: "Different Passwords"
+    passwordTest: "Different Passwords",
+    oldPassword: "Old Password",
+    newPassword: "New Password"
   },
 
   // Reservations
@@ -137,7 +139,10 @@ export default {
     ratings: "Ratings",
     seeAllRatings: "See All",
     stars: "0 Stars | 1 Star | {count} Stars",
-    basedOn: "Based on 1 Evaluation | Based on {count} Evaluations"
+    basedOn: "Based on 1 Evaluation | Based on {count} ratings",
+    book: "Book now!",
+    date: "Choose your date",
+    dateSub: "Set your booking date"
   },
 
   // Search Results

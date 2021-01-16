@@ -56,10 +56,7 @@ export default {
     return {
       //urlMapBox: 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw',
       urlOM: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 15,
-      // TODO: Resolver isto ser dinâmico consoante o ID GET
-      center: [41.3988155, -8.5167904],
-      markerLatLng: [41.3988155, -8.5167904]
+      zoom: 15
   };
   },
 

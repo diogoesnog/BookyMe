@@ -16,16 +16,16 @@
         <q-btn
           round
           class="filterAvatar"
-          size="md" 
+          size="md"
           icon="fas fa-filter"
         />
       </div>
     </div>
-    <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite"/>
+    <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite" @deleteFavorite="deleteFavorite"/>
     <div>
      <Toolbar/>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -53,15 +53,21 @@ export default {
     console.log("Mounted: View has been rendered");
     this.fetchFavorites();
   },
-  
+
   methods: {
     filterButtonTaped() {
       window.alert("Filter Pressed");
     },
-    // TODO: criar uma função de remoção de um favorito do teu favorites na função data()
-    // tip, este método vai passar para o componente como uma espécie de prop.
-    favoriteRemoved(id) {
-      this.favorites = this.favorites.filter((item) => item !== id);
+    deleteFavorite(id) {
+      Service.deleteFavorite(id)
+        .then(response => {
+          console.log(response);
+          console.log("Removing Favorite");
+          this.favorites = this.favorites.filter(f => f._id !== id);
+
+        }).catch(err => {
+          console.log(err);
+        })
     },
 
     fetchFavorites() {
