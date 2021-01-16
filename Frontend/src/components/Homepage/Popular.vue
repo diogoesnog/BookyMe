@@ -3,20 +3,34 @@
     <div class="divTop1">
     </div>
     <div class="divTop2">
+      <!-- Barra Pesquisa -->
+      <div class="row" style="margin: 25px">
+        <div class="col-9">
+          <q-input class="searchBar" rounded dense outlined label='Search'>
+          </q-input>
+        </div>
+        <div class="col-1"/>
+        <div class="col-2" style="display: flex; justify-content: flex-end;">
+          <q-avatar class="iconSearch" size="xl" text-color="white" icon="search">
+          </q-avatar>
+        </div>
+      </div>
+      <!-- Info User -->
+      <div class="row divInfoUser">
+        <div class="col-10" style="text-align: left">
+          <span style="font-weight: 600; font-size: 35px; line-height: 40px;">
+            {{ $t('homePage.greeting') }}, {{ getFirstName(profile.name) }}
+          </span>
+        </div>
+        <div class="col-2 avatarCol">
+          <q-avatar class="avatar">
+            <img style="object-fit: cover; margin: 5px; transform: scale(1.3);" :src="getImage()">
+          </q-avatar>
+        </div>
+      </div>
     </div>
-    <div class="row divInfoUser">
-      <div class="col-9" style="text-align: left">
-        <span style="font-weight: 600; font-size: 35px;">
-          {{ $t('homePage.greeting') }}, {{profile.name}}
-        </span>
-      </div>
-      <div class="col-3" style="text-align: right">
-        <q-avatar class="shadow gradientOne">
-          <img style="object-fit: cover;" :src="getImage()">
-        </q-avatar>
-      </div>
-    </div> 
-    <div style="color: white; position: absolute; top: 140px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 30px"> 
+    <!-- More Popular Slider -->
+    <div style="color: white; position: absolute; top: 190px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 25px"> 
       {{ $t('homePage.morePopular') }} 
     </div>
     <div class="wrapper">
@@ -79,24 +93,47 @@ export default {
     getImage() {
       return this.base + this.profile.avatar;
     },
-
     getImageWidget(url) {
       console.log(url);
       return "http://localhost:5100" + url;
     },
-
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
     },
+    getFirstName: function(name) {
+      return name.split(" ")[0];
+    }
   }
 }
 
 </script>
 
 <style scoped>
+  
+  .iconSearch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(#e9695c, #e03459);
+    border-radius: 100px;
+    height: 45px;
+    width: 45px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
 
+  .searchBar {
+    color: white;
+    background-color: white;
+    border-radius: 53px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
   .divInfoUser {
-    position: absolute;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    color: white;
+    color: white;
   }
 
   .divRating {
@@ -107,9 +144,10 @@ export default {
     color: white;
   }
 
-  .shadow {
+  .avatar {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 28px;
+    border-radius: 100px;
+    font-size: 60px;
   }
 
   .divPhoto {
@@ -123,7 +161,6 @@ export default {
 
   .divTop1{
     position: absolute;
-    top: -25px;
     left: 0;
     width: 100%;
     height: 50%;
@@ -133,16 +170,21 @@ export default {
   }
 
   .divTop2{
-    position: absolute;
-    left: 0;
-    top: 30px;
-    width: 100%;
-    color: white;
+    padding-top: 25px;
+    height: 250px;
+    position: relative;
   }
-  
+
+  .avatarCol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .wrapper {
     margin-left: 20px;
-    position: absolute;
+    margin-top: -25px;
+    position: sticky;
     overflow-x: scroll;
     overflow-y: hidden;
     top: 190px;
