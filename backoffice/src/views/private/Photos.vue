@@ -20,7 +20,7 @@
                     </v-row>
                   </template>
                 </v-img>
-                <v-btn color="error" block outlined>Delete</v-btn>
+                <v-btn color="error" block outlined @click="deletePhoto(photo._id)">Delete</v-btn>
               </v-col>
             </v-row>
           </div>
@@ -64,6 +64,14 @@ export default {
     uploadPhoto(e) {
       e.preventDefault();
       Service.uploadPhoto(this.id, this.file)
+          .then(response => {
+            this.store.photos = response.data[ "data" ].data.photos;
+          })
+          .catch(err => console.log(err));
+    },
+
+    deletePhoto(file) {
+      Service.deletePhoto(this.id, file)
           .then(response => {
             this.store.photos = response.data[ "data" ].data.photos;
           })

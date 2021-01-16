@@ -1,61 +1,44 @@
 <template>
   <div>
-    <v-form>
-      <v-row>
-        <v-col cols="10">
-          <v-text-field>
-          </v-text-field>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col
-            cols="11"
-            sm="5"
-        >
-        </v-col>
-        <v-col cols="2">
-          <v-checkbox
-              v-model="addMonday"
-              label="Monday"
-              color="primary"
-              value="primary"
-              hide-details
-          ></v-checkbox>
-        </v-col>
-      </v-row>
+    <h3>{{ this.workday.day }}</h3>
 
-    </v-form>
+    <v-row>
+
+
+      <v-col cols="11" sm="5">
+        <v-menu ref="open" v-model="openingMenu" :close-on-content-click="false" :nudge-right="40" :return-value.sync="workday.openingHour" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field v-model="workday.openingHour" label="Hora de Abertura" prepend-icon="mdi-clock-time-four-outline" readonly v-bind="attrs" v-on="on"></v-text-field>
+          </template>
+          <v-time-picker v-if="openingMenu" v-model="workday.openingHour" format="24hr" full-width @click:minute="$refs.open.save(workday.openingHour)"></v-time-picker>
+        </v-menu>
+      </v-col>
+
+      <v-col cols="11" sm="5">
+        <v-menu ref="close" v-model="closeMenu" :close-on-content-click="false" :nudge-right="40" :return-value.sync="workday.closingHour" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field v-model="workday.closingHour" label="Hora de Fecho" prepend-icon="mdi-clock-time-four-outline" readonly v-bind="attrs" v-on="on"></v-text-field>
+          </template>
+          <v-time-picker v-if="closeMenu" v-model="workday.closingHour" format="24hr" full-width @click:minute="$refs.close.save(workday.closingHour)"></v-time-picker>
+        </v-menu>
+      </v-col>
+
+    </v-row>
   </div>
 </template>
 
 <script>
-import Schedule from '../../models/Store/schedule';
-// import Services from '../../service/user.service';
 export default {
   name: "OpeningHours",
 
+  props: {
+    workday: Object
+  },
+
   data() {
     return {
-      monday: new Schedule("Segunda-feira"),
-      addMonday: false,
-      mondayMenu: false,
-
-      tuesday: new Schedule("Terça-feira"),
-      addTuesday: false,
-
-      wednesday: new Schedule("Quarta-feira"),
-      addWednesday: false,
-
-      thursday: new Schedule("Quinta-feira"),
-      addThursday: false,
-
-      friday: new Schedule("Sexta-feira"),
-      addFriday: false,
-
-      saturday: new Schedule("Sábado"),
-      addSaturday: false,
-
-      sunday: new Schedule("Domingo"),
-      addSunday: false
+      openingMenu: false,
+      closeMenu: false
     }
   },
 
@@ -63,7 +46,6 @@ export default {
     handleSubmit(e) {
       e.preventDefault();
       // TODO: find a good way to handle this
-
     }
   }
 }
