@@ -72,15 +72,15 @@ module.exports.insertSchedule = (id, s) => {
 }
 
 module.exports.editDescription = (id, des) => {
-    return Store.updateOne({_id: id},{$set: {description: des}})
+    return Store.findOneAndUpdate({_id: id},{$set: {description: des}}, { new: true })
 }
 
 module.exports.editPhone = (phone, id) => {
-    return Store.updateOne({_id: id},{$set: {phone: phone}})
+    return Store.findOneAndUpdate({_id: id},{$set: {phone: phone}}, { new: true } )
 }
 
 module.exports.editLogo = (id, l) => {
-    return Store.updateOne({_id: id},{$set: {logo: l}})
+    return Store.findOneAndUpdate({_id: id},{$set: {logo: l}}, { new: true })
 }
 
 module.exports.removeStore = async (id) => {
@@ -89,7 +89,7 @@ module.exports.removeStore = async (id) => {
     return Store.remove({_id: id})
 }
 module.exports.editPicture = (id, pic) => {
-    return Store.updateOne({_id: id},{$set: {picture: pic}})
+    return Store.findOneAndUpdate({_id: id},{$set: {picture: pic}}, { new: true } )
 }
 
 module.exports.addPhoto = (id, photo) => {
@@ -97,12 +97,11 @@ module.exports.addPhoto = (id, photo) => {
 }
 
 module.exports.setCoordinates = (lat, long, id) => {
-    return Store.updateOne({_id: id},{$set: {latitude: lat, longitude: long}})
+    return Store.findOneAndUpdate({_id: id},{$set: {latitude: lat, longitude: long}}, { new: true } )
 }
 
 module.exports.removeStorePhoto = (id, pId) => {
-    return Store.findOneAndUpdate({_id: id},{
-        $pull: {photos: {'_id': pId}}}, { new: true} )
+    return Store.findOneAndUpdate({_id: id},{$pull: {photos: {'_id': pId}}}, { new: true } )
 }
 
 
