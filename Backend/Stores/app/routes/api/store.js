@@ -167,7 +167,7 @@ app.post('/', checkAuth, async (req, res) => {
     let response;
 
     try {
-        let token = req.headers.authorization
+        let token = req.headers.authorization || req.headers.Authorization;
         /*const address = {
             place: req.body.place,
             zipcode: req.body.zipcode,

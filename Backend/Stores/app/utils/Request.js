@@ -203,8 +203,6 @@ class Request {
             fetch(url, {
                 method: method,
                 headers: {
-                    // "Content-Type": self.contentType,
-                    // "Accept": self.accept,
                     ...self.headers
                 },
                 body: self.body
