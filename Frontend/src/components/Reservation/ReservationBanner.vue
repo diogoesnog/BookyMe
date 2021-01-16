@@ -50,8 +50,6 @@
 
 <script>
 
-import Service from '../../services/user.service';
-
 export default {
   name: "ReservationBanner",
 
