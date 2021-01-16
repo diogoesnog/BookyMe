@@ -42,6 +42,16 @@ export default class Request {
     this.headers["Accept"] = "application/xml";
   }
 
+  sendFile(file) {
+    let data = new FormData();
+    data.append("file", file);
+
+    console.log(data);
+    this.body = data;
+
+    return this._request("POST");
+  }
+
   /**
    * Perform GET Request
    * @returns {Promise<unknown>}

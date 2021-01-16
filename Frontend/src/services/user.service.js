@@ -214,17 +214,16 @@ class UserService {
     return request.patch();
   }
 
-  uploadAvatar() {
+  uploadAvatar(file) {
     let request = new Request(`${process.env.API_ENDPOINT}/users/avatar`);
 
-    //request.isJson();
+    // request.isJson();
     request.isMultipart();
     request.appendHeader("Authorization", authHeader());
 
-    return request.post();
-    //request.acceptJson();
 
-    
+    return request.sendFile(file);
+
   }
 }
 

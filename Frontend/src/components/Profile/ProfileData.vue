@@ -13,7 +13,7 @@
               </q-avatar>
             </div>
             <div style="position: absolute; top: 125px">
-              <q-input ref="myFileInput" style="display:none" v-model="file" type="file" label="Standard" ></q-input>
+              <q-input ref="myFileInput" style="display:none" v-model="file" type="file" label="Standard"></q-input>
               <q-btn style=";" size="md" class="gradientRed" round  @click="getFile" >
                 <q-icon name="fas fa-camera" color="white"/>
               </q-btn>
@@ -186,6 +186,7 @@
 <script>
 
 import Service from '../../services/auth.service'
+import UserService from '../../services/user.service'
 import User from '../../models/User';
 
 export default {
@@ -227,12 +228,18 @@ export default {
         console.log("Language Change", lang);
         this.$i18n.locale = lang.value;
       }
-
   },
 
   methods: {
     getFile () {
       this.$refs.myFileInput.$el.click()
+    },
+    // TODO: arranjar forma de quando o utilizador escolhe a imagem de chamar esta função
+    // não te preocupes com os erros que vem da API !!! vais receber um erro 500
+    changeAvatar() {
+      UserService.uploadAvatar(this.file)
+        .then(response => console.log(response))
+        .catch(err => console.log(err));
     },
 
     handleSubmit(e) {
@@ -250,7 +257,7 @@ export default {
       this.editavel = true;
       this.esconde = true;
       
-      
+      this.changeAvatar();
     },
 
      bottomEdit2(){
@@ -336,6 +343,8 @@ export default {
     bottom: 35px;
     width: 100%;
     padding: 30px;
+    position: absolute;
+    z-index: 9999;
   }
 
   .button {
