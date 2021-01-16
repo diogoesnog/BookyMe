@@ -68,6 +68,12 @@ class Services {
         });
     }
 
+    getCaregories() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/categories`, {
+            headers: authHeader()
+        });
+    }
+
     // TODO: Add Opening Hours
 
 

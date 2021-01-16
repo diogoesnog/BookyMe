@@ -3,7 +3,7 @@
     <div class="center-content text-center">
       <img src="../../assets/Logo.png" class="logo-header"/>
       <div class="content-margins">
-        <StoreForm v-if="storeRegistered" @storeCreated="storeCreated"/>
+        <StoreForm v-if="!storeRegistered" @storeCreated="storeCreated"/>
         <Schedule v-else/>
       </div>
 
@@ -34,7 +34,7 @@ export default {
       this.store = store;
       this.storeRegistered = true;
       this.progress = 50;
-    }
+    },
   }
 }
 </script>
