@@ -6,13 +6,13 @@
       <div class="divTop2">
         <div class="row" style="margin: 20px;">
           <div class="col-5" style="display: flex; align-items: center;">
-            <!-- Corrigir o To do Botão -->
+            <!-- TODO: Corrigir o To do Botão -->
             <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
           </div>
           <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
             <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
             <div style="width:10px; height:auto; display:inline-block;"/>
-            <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" round icon="favorite"/>
+            <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" :disable="disableFav" round icon="favorite"/>
           </div>
         </div>
         <div class="infoName">
@@ -63,6 +63,7 @@ export default {
     return {
       storeID: this.$route.params.id,
       styleFav: String,
+      disableFav: Boolean,
       reservationsUser: Array
     }
   },
@@ -91,8 +92,14 @@ export default {
           console.log("Array de favs:");
           console.log(favorites);
           console.log("ID a comparar: " + id)
-          let isFav = favorites.indexOf(id)
-          isFav >= 0 ? this.styleFav = "buttonFavTrue" : this.styleFav = "buttonFavFalse"
+          let isFav = favorites.indexOf(id) > -1
+          if (isFav) {
+            this.styleFav = "buttonFavTrue";
+            this.disableFav = true;
+          } else {
+            this.styleFav = "buttonFavFalse";
+            this.disableFav = false;
+          }
           console.log("É favorito? " + isFav);
           console.groupEnd();
         }).catch(err => {
