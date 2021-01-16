@@ -10,13 +10,34 @@ module.exports.getBookings = (query, projection) => {
     return Booking.find(query, projection);
 };
 
-module.exports.getBookingsByStore = (id) => {
-    return Booking.find({
-        $and: [
-            {storeId: id},
-            {canceled: false}
-        ]
-    })
+module.exports.getBookingsByStore = (id, state, canceled) => {
+    console.log(canceled);
+    const date = new Date(Date.now());
+
+    if (state === 'current') {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled},
+                {serviceDate: {$gte: date}}
+            ]
+        });
+    } else if (state === 'concluded') {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled},
+                {serviceDate: {$lt: date}}
+            ]
+        });
+    } else {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled}
+            ]
+        });
+    }
 };
 
 module.exports.getBookingsByUser = (id) => {

@@ -53,7 +53,7 @@ class UserService {
 
     return request.get()
   }
-  
+
   getFavorites() {
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
 
@@ -127,8 +127,8 @@ class UserService {
     return request.post(body)
   }
 
-  isFavorite(favorite) {
-    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
+  isFavorite() {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
 
     request.isJson()
     request.appendHeader("Authorization", authHeader())

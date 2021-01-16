@@ -6,8 +6,7 @@
       <div class="center-content text-center">
         <div class="horizontal-stack">
           <Store v-for="(store, index) in stores" :key="index" v-bind="store" :base="base" class="store-container"></Store>
-          <EmptyCard class="store-container"></EmptyCard>
-
+          <!--<EmptyCard class="store-container"></EmptyCard>-->
         </div>
       </div>
     </v-container>
@@ -16,12 +15,10 @@
 <script>
 import Service from '../../service/user.service';
 import Store from '../../components/HomePage/Store';
-import EmptyCard from "@/components/HomePage/EmptyCard";
 export default {
   name: "Home",
   components: {
-    Store,
-    EmptyCard
+    Store
   },
   data() {
     return {
@@ -56,7 +53,6 @@ export default {
 .horizontal-stack {
   display: flex;
   overflow-x: auto;
-  height:700px;
 }
 .store-container {
   padding: 15px;

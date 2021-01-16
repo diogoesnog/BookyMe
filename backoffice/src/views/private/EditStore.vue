@@ -12,8 +12,9 @@
           <v-tab-item>
             <h1 style="padding: 15px">Edit Store information</h1>
             <v-form>
-              <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
+              <v-text-field label="Name" v-model="store.name"></v-text-field>
 
+              <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
               <v-text-field label="Place" v-model="store.address.place"></v-text-field>
               <v-text-field label="Zip Code" v-model="store.address.zipcode"></v-text-field>
               <v-text-field label="City" v-model="store.address.city"></v-text-field>
@@ -45,7 +46,8 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      store: Object
+      store: Object,
+      categories: Array
     }
   },
 
@@ -60,6 +62,14 @@ export default {
           this.store = response.data["data"][0];
         })
         .catch(err => console.log(err.data));
+    },
+
+    getCategories() {
+      Services.getCaregories()
+          .then(response => {
+            this.categories = response.data["data"];
+          })
+          .catch(err => console.log(err.data));
     },
 
     saveData() {

@@ -7,12 +7,9 @@
         <div class="row" style="margin: 20px;">
           <div class="col-5" style="display: flex; align-items: center;">
             <!-- TODO: Corrigir o To do Botão -->
-            <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
+            <q-btn to="../reservations" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
           </div>
           <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
-            <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
-            <div style="width:10px; height:auto; display:inline-block;"/>
-            <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" :disable="disableFav" round icon="favorite"/>
           </div>
         </div>
         <div class="infoName">
@@ -21,7 +18,7 @@
             </span>
           <br/>
           <span style="font-weight: 300; font-size: 20px;">
-            {{ $tc('storePage.reservations', getNumberReservations, { count: this.numberReservations }) }}
+            {{ $t('bookingPage.confirmBooking')}}
           </span>
         </div>
         <div class="infoExtra">
@@ -54,17 +51,13 @@
 <script>
 
 import Service from '../../services/user.service';
-import Favorite from "src/models/Favorite";
 
 export default {
-  name: "StoreBanner",
+  name: "ReservationBanner",
 
   data() {
     return {
-      storeID: this.$route.params.id,
-      styleFav: String,
-      disableFav: Boolean,
-      reservationsUser: Array
+      storeID: this.$route.params.id
     }
   },
 
@@ -78,46 +71,9 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.isFavorite(this.storeID);
-    this.getReservations();
   },
 
   methods: {
-    isFavorite(id) {
-      Service.isFavorite()
-        .then(response => {
-          console.group("Verificação de favorito");
-          let data = response.data["data"];
-          let favorites = data.favorites;
-          console.log("Array de favs:");
-          console.log(favorites);
-          console.log("ID a comparar: " + id)
-          let isFav = favorites.indexOf(id) > -1
-          if (isFav) {
-            this.styleFav = "buttonFavTrue";
-            this.disableFav = true;
-          } else {
-            this.styleFav = "buttonFavFalse";
-            this.disableFav = false;
-          }
-          console.log("É favorito? " + isFav);
-          console.groupEnd();
-        }).catch(err => {
-        console.log(err);
-      })
-    },
-
-    addFavorite() {
-      let favorite = new Favorite(this.storeID);
-      Service.addFavorite(favorite)
-        .then(response => {
-          this.styleFav = "buttonFavTrue";
-          console.log(response);
-          console.log("Adding Favorite");
-        }).catch(err => {
-        console.log(err);
-      })
-    },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
     },
@@ -127,24 +83,6 @@ export default {
     getCutName: function(string) {
       if(string.substring(0,15) === string) return string;
       else return string.substring(0, 15) + "...";
-    },
-    getReservations() {
-      Service.getBookingUserCurrent()
-        .then(response => {
-          this.reservationsUser = response.data["data"];
-          console.log(this.reservationsUser);
-        }).catch(err => {
-          console.log(err)
-        }).finally(() => {
-        })
-    },
-    getNumberReservations() {
-      var numberReservations = 0;
-      var i;
-      for (i = 0; i < this.reservationsUser.length; i++) {
-        if(this.reservationsUser[i].storeId === this.storeID) numberReservations = (i+1);
-      }
-      return numberReservations;
     }
   }
 }

@@ -117,6 +117,13 @@ export default {
     }
   },
 
+  // Booking page
+  // Confirm the booking made before
+  bookingPage: {
+    bookingDetails: "Booking Details",
+    confirmBooking: "Booking Confirmation"
+  },
+
   // View Reservation / Confirm Booking
   confirmBooking: {
     title: "Confirm Reservation",

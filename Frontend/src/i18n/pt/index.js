@@ -117,6 +117,13 @@
     }
   },
 
+   // Booking page
+   // Confirm the booking made before
+   bookingPage: {
+     bookingDetails: "Detalhes da marcação",
+     confirmBooking: "Confirmação da marcação"
+   },
+
   // View Reservation / Confirm Booking
   confirmBooking: {
     title: "Confirmação de Reserva",

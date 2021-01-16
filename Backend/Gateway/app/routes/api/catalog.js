@@ -38,4 +38,11 @@ router.delete('/store/:id', (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 
 });
+
+router.delete('/store/catalog/:id', (req, res) => {
+    Catalog.deleteCatalogItem(req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+
+});
 module.exports = router;
