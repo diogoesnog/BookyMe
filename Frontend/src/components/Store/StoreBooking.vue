@@ -3,6 +3,7 @@
     <q-btn class="botao" rounded label="Faça a sua marcação!" @click="card = true" color="vermelho" icon="event_available"/>
 
     <q-dialog v-model="card">
+<!--      TODO: Fazer a parte de seleção de serviço -->
       <q-card class="my-card">
         <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
 

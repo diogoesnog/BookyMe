@@ -71,6 +71,7 @@ export default {
   methods: {
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
+
       Service.getStoreData(this.storeID)
         .then(response => {
           let data = response.data["data"];
@@ -80,15 +81,6 @@ export default {
       ).finally(() => {
         this.$q.loading.hide();
       })
-    },
-    addFavorite(id) {
-      Service.addFavorite(id)
-        .then(response => {
-          console.log(response);
-          console.log("Adding Favorite");
-        }).catch(err => {
-          console.log(err);
-        })
     }
   }
 
