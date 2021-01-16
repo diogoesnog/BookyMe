@@ -2,13 +2,12 @@
   <div>
     <StoreBanner v-bind="storeData"/>
     <div class="divBottom">
-      <div class="row">
-        <StorePhotos v-bind="storeData"/>
-        <StoreDescription v-bind="storeData"/>
-        <StoreMap v-bind="storeData"/>
-        <StoreCatalog v-bind="storeData"/>
-        <StoreRatings v-bind="storeData"/>
-      </div>
+      <StorePhotos v-bind="storeData"/>
+      <StoreDescription v-bind="storeData"/>
+      <StoreMap v-bind="storeData"/>
+      <StoreCatalog v-bind="storeData"/>
+      <StoreRatings v-bind="storeData"/>
+      <StoreBooking v-bind="storeData"/>
     </div>
     <Toolbar/>
   </div>
@@ -24,7 +23,7 @@ import StorePhotos from "components/Store/StorePhotos";
 import StoreMap from "components/Store/StoreMap";
 import StoreCatalog from "components/Store/StoreCatalog";
 import StoreDescription from "components/Store/StoreDescription";
-
+import StoreBooking from "components/Store/StoreBooking";
 
 export default {
 
@@ -36,6 +35,7 @@ export default {
     StoreMap,
     StoreCatalog,
     StoreRatings,
+    StoreBooking,
     Toolbar
   },
 
@@ -43,7 +43,6 @@ export default {
     return {
       storeID: this.$route.params.id,
       storeData: Object,
-
       lang: this.$i18n.locale,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
@@ -69,32 +68,28 @@ export default {
   methods: {
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
-
-      // TODO: Fazer para o estabelecimento a ligação
       Service.getStoreData(this.storeID)
         .then(response => {
           let data = response.data["data"];
-          this.storeData=data[0];
+          this.storeData = data[0];
           console.log(this.storeData);
         }).catch(err => console.log(err)
-
       ).finally(() => {
         this.$q.loading.hide();
       })
-    },
+    }
   }
 
 }
-
 
 </script>
 
 <style scoped>
 
-.divBottom {
-  position: relative;
-  padding-top: 315px;
-  padding-left: 0px;
-}
+  .divBottom {
+    position: relative;
+    padding-top: 80px;
+    padding-left: 0;
+  }
 
 </style>

@@ -11,7 +11,9 @@ class Services {
     registerStore(store) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores`);
 
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store, {
+            headers: authHeader()
+        });
     }
 
     currentUser() {
@@ -32,21 +34,28 @@ class Services {
             }
         });
     }
-    // TODO: Add Store Description
-    updateDescription(id, description) {
-        // let request = new Request(`${process.env.API_ENDPOINT}/stores/${id}`);
 
-        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/description`, {
+    deletePhoto(id, file) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/photos/${file}`, {
+            headers: authHeader()
+
+        })
+    }
+
+    updateDescription(id, description) {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/description`, {
             description: description
+        }, {
+            headers: authHeader()
         });
     }
     updatePhone(id, phone) {
-        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/phone`, {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/phone`, {
             phone: phone
         });
     }
     updateAddress(id, address) {
-        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/store/${id}/address`, address);
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
     }
 
     getStores() {
@@ -61,8 +70,24 @@ class Services {
         });
     }
 
-    // TODO: Add Opening Hours
+    getCaregories() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/categories`, {
+            headers: authHeader()
+        });
+    }
 
+    // TODO: Add Opening Hours
+    updateSchedule(id, schedule) {
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/schedule`, schedule, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreSlots(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, {
+            headers: authHeader()
+        });
+    }
 
     // TODO: Add Catalog
 

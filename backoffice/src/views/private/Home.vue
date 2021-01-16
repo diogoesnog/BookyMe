@@ -1,10 +1,12 @@
 <template>
     <v-container fluid style="height: 100vh;" class="home">
-      <img src="../../assets/Logo.png" alt="BookyMe Logo" height="150px">
+      <v-row justify="center">
+        <img src="../../assets/Logo.png" alt="BookyMe Logo" height="150px">
+      </v-row>
       <div class="center-content text-center">
-        <!--<h2 class="text-center">Choose The Store</h2>-->
         <div class="horizontal-stack">
           <Store v-for="(store, index) in stores" :key="index" v-bind="store" :base="base" class="store-container"></Store>
+          <!--<EmptyCard class="store-container"></EmptyCard>-->
         </div>
       </div>
     </v-container>
@@ -13,7 +15,6 @@
 <script>
 import Service from '../../service/user.service';
 import Store from '../../components/HomePage/Store';
-
 export default {
   name: "Home",
   components: {
@@ -52,7 +53,6 @@ export default {
 .horizontal-stack {
   display: flex;
   overflow-x: auto;
-  height:700px;
 }
 .store-container {
   padding: 15px;

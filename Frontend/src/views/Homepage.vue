@@ -1,9 +1,7 @@
 <template>
   <div>
     <Popular :base="base" :stores ="storesData" :profile="profileData" />
-    <div class= "categoriesDiv">
-      <CategoriesList/>
-    </div>
+    <CategoriesList/>
     <Toolbar/>
   </div>
 </template>
@@ -65,12 +63,5 @@ export default {
 </script>
 
 <style scoped>
-
-  .categoriesDiv {
-    z-index: 1000;
-    position: fixed;
-    top: 400px;
-    width: 100%; 
-  }
 
 </style>

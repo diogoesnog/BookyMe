@@ -12,7 +12,7 @@ class UserService {
     request.isJson()
     return request.post(body)
   }
-  
+
   updateAccount(user) {
     let body = JSON.stringify(user);
 
@@ -24,7 +24,7 @@ class UserService {
 
     return request.put(body)
   }
-  
+
   updatePassword(user) {
     let body = JSON.stringify(user);
 
@@ -55,7 +55,6 @@ class UserService {
   }
 
   getFavorites() {
-
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
 
     request.isJson()
@@ -65,10 +64,26 @@ class UserService {
     return request.get()
   }
 
+  /*checkFavorite(id) {
+
+    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    let data = request.get()
+    // TODO: procurar ID
+    // let array = data[data]
+    // console.log(array)
+
+    return "5ff4a80f7df75e2ace11b03e";
+  }*/
+
   getBookingUserCurrent(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/current`)
-    
+
     request.isJson()
     request.appendHeader("Authorization", authHeader())
     request.acceptJson()
@@ -80,7 +95,7 @@ class UserService {
   getBookingUserConcluded(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/concluded`)
-    
+
     request.isJson()
     request.appendHeader("Authorization", authHeader())
     request.acceptJson()
@@ -97,6 +112,29 @@ class UserService {
     request.acceptJson()
 
     return request.delete()
+  }
+
+  addFavorite(favorite) {
+    let body = JSON.stringify(favorite)
+    console.log(body)
+    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    // request.appendParam("favorite", id)
+
+    return request.post(body)
+  }
+
+  isFavorite() {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.get()
   }
 
   getStoresByCategory(category) {
@@ -131,7 +169,19 @@ class UserService {
     return request.get()
   }
 
-  getReviewsStore(id){ 
+  getStoreBySearch(keyword, category) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("search", keyword)
+    request.appendParam("category", category)
+
+    return request.get()
+  }
+
+  getReviewsStore(id){
     let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
 
     request.isJson()
@@ -139,7 +189,7 @@ class UserService {
     request.appendHeader("Authorization", authHeader())
 
     return request.get()
-  } 
+  }
 
   getProfileData() {
 
@@ -154,6 +204,53 @@ class UserService {
     return request.get()
   }
 
+  makeBooking(booking, storeID) {
+
+    let body = JSON.stringify(booking)
+    console.log(body)
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${storeID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.post(booking)
+
+  }
+
+  getNotifications(read) {
+    let request = new Request(`${process.env.API_ENDPOINT}/notification`);
+
+    request.isJson();
+    request.appendHeader("Authorization", authHeader());
+    request.acceptJson();
+    request.appendParam("read", read);
+
+    return request.get();
+  }
+
+  markAsRead(id) {
+    let request = new Request(`${process.env.API_ENDPOINT}/notification/${id}`);
+
+    request.isJson();
+    request.appendHeader("Authorization", authHeader());
+    request.acceptJson();
+
+    return request.patch();
+  }
+
+  uploadAvatar(file) {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/avatar`);
+
+    // request.isJson();
+    request.isMultipart();
+    request.appendHeader("Authorization", authHeader());
+
+    return request.sendFile(file);
+
+  }
 }
 
 export default new UserService();

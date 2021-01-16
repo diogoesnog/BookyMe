@@ -12,7 +12,8 @@ export default new Vuetify({
                 accent: '#13c1e0',
                 error: '#e03459',
                 success: '#97E328',
-                anchor: '#434343'
+                anchor: '#13c1e0'
+                // anchor: '#434343'
             },
         },
     },
