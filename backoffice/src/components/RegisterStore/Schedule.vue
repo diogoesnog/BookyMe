@@ -1,6 +1,29 @@
 <template>
   <div>
+    <v-form>
+      <v-row>
+        <v-col cols="10">
+          <v-text-field>
+          </v-text-field>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col
+            cols="11"
+            sm="5"
+        >
+        </v-col>
+        <v-col cols="2">
+          <v-checkbox
+              v-model="addMonday"
+              label="Monday"
+              color="primary"
+              value="primary"
+              hide-details
+          ></v-checkbox>
+        </v-col>
+      </v-row>
 
+    </v-form>
   </div>
 </template>
 
@@ -12,25 +35,26 @@ export default {
 
   data() {
     return {
-      monday: new Schedule(),
+      monday: new Schedule("Segunda-feira"),
       addMonday: false,
+      mondayMenu: false,
 
-      tuesday: new Schedule(),
+      tuesday: new Schedule("Terça-feira"),
       addTuesday: false,
 
-      wednesday: new Schedule(),
+      wednesday: new Schedule("Quarta-feira"),
       addWednesday: false,
 
-      thursday: new Schedule(),
+      thursday: new Schedule("Quinta-feira"),
       addThursday: false,
 
-      friday: new Schedule(),
+      friday: new Schedule("Sexta-feira"),
       addFriday: false,
 
-      saturday: new Schedule(),
+      saturday: new Schedule("Sábado"),
       addSaturday: false,
 
-      sunday: new Schedule(),
+      sunday: new Schedule("Domingo"),
       addSunday: false
     }
   },
