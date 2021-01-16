@@ -11,7 +11,7 @@
           <v-tab>Slots</v-tab>
           <v-tab>Bookings</v-tab>
         </v-tabs>
-        <Slots :slots="slots"></Slots>
+        <Slots v-bind:slots="slots" @newSlot="newSlot"></Slots>
       </v-col>
     </v-row>
   </div>
@@ -40,10 +40,18 @@ export default {
   methods: {
     getStoreSlots() {
       Service.getStoreSlots(this.id)
-          .then(response => {
-            this.slots = response.data["data"];
-          })
+          .then(response => this.slots = response.data["data"])
           .catch(err => console.log(err.data));
+    },
+
+    newSlot(data) {
+      window.alert("Adding Slot");
+
+      Service.addSlot(this.id, data)
+        .then(response => {
+          console.log(response);
+          this.slots.push(response.data["data"]);
+        }).catch(err => console.log(err));
     }
   }
 }
