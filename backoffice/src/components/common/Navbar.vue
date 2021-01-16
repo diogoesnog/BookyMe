@@ -84,9 +84,7 @@
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-content @click="logout">
-            <router-link>
               Logout
-            </router-link>
           </v-list-item-content>
         </v-list-item>
         </v-list>
