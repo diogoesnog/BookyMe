@@ -10,7 +10,7 @@
         <!-- Home Link -->
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon></v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <router-link :to="{name: 'StoreDash', params: {id: this.$route.params.id}}">Home</router-link>
@@ -20,7 +20,7 @@
         <!-- Bookings Link -->
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon></v-icon>
+            <v-icon>mdi-calendar-clock</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             Bookings
@@ -30,7 +30,7 @@
         <!-- Catalog Link -->
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon></v-icon>
+            <v-icon>mdi-ufo</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             Catalog
@@ -40,7 +40,7 @@
         <!-- Store Settings Link -->
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon></v-icon>
+            <v-icon>mdi-book-information-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">General Info</router-link>
@@ -50,7 +50,7 @@
         <!-- Store Photos -->
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon></v-icon>
+            <v-icon>mdi-camera</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Photos Info</router-link>
@@ -60,7 +60,7 @@
         <!-- Account Settings Link -->
         <v-list-item link>
           <v-list-item-icon>
-            <v-icon></v-icon>
+            <v-icon>mdi-account-cog</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             Account Settings
@@ -70,7 +70,20 @@
       <div class="split"></div>
       <template v-slot:append>
         <div class="pa-2">
+          <v-btn block to="/home">
+            <v-icon>
+              mdi-keyboard-return
+            </v-icon>
+            Back
+          </v-btn>
+        </div>
+        <div class="pa-2">
+
+
           <v-btn @click="logout" block>
+            <v-icon>
+              mdi-logout
+            </v-icon>
             Logout
           </v-btn>
         </div>

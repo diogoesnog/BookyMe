@@ -18,9 +18,12 @@ module.exports.insertCatalog = (store, catalog) => {
     return request.post(catalog);
 }
 
-module.exports.create = (store) => {
+module.exports.create = (token, store) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
+
     request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
 
     return request.post(store);
 }

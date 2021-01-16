@@ -13,6 +13,19 @@ const Service = require('../../services/users');
  * Get Stores
  */
 
+app.get('/popular', (req,res) => {
+
+    Stores.getBestStores(req.query.category)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch working days...');
+            res.status(response.status).jsonp(response);
+    });
+
+})
+
 app.get('/calendar', (req,res) => {
 
     Stores.getCalendar()
@@ -167,7 +180,7 @@ app.post('/', checkAuth, async (req, res) => {
     let response;
 
     try {
-        let token = req.headers.authorization
+        let token = req.headers.authorization || req.headers.Authorization;
         /*const address = {
             place: req.body.place,
             zipcode: req.body.zipcode,

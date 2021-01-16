@@ -6,10 +6,8 @@ module.exports = async (req, res, next) => {
 
 
     let request = new Request(`${process.env.USER_SERVICE_ENDPOINT}/user/validation`);
-
-    request.setHeaders({
-        authorization: token
-    });
+    request.acceptJson();
+    request.appendHeader("authorization", token);
 
     try {
         let response = await request.get();

@@ -14,6 +14,14 @@ module.exports.getStore = (id) => {
     return Store.findOne({_id: id});
 }
 
+module.exports.getBestStores = (cat) => {
+    if(cat != undefined){
+        return Store.find({category: cat}).sort({rating: -1}).limit(10);
+    }
+    else return Store.find().sort({rating: -1}).limit(10);
+}
+
+
 module.exports.getCategoryRatings = (cat) => {
     return Store.find({category: cat}).sort({rating: -1}).exec();
 }
