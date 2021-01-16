@@ -5,7 +5,7 @@
       width="256px"
       height="100%"
   >
-    <v-navigation-drawer dark permanent fixed>
+    <v-navigation-drawer dark permanent expand-on-hover>
       <v-list>
         <!-- Home Link -->
         <v-list-item link>
@@ -23,7 +23,7 @@
             <v-icon>mdi-calendar-clock</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            Bookings
+            <router-link :to="{name: 'Booking', params: {id: this.$route.params.id}}">Bookings</router-link>
           </v-list-item-content>
         </v-list-item>
 
