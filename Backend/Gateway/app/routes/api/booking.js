@@ -27,8 +27,9 @@ router.get('/store/:id', checkAuth, (req, res) => {
 
 router.get('/user', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
 
-    Booking.getUserReservations(token, req.params.id)
+    Booking.getUserReservations(token, query)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
