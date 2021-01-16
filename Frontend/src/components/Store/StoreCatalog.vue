@@ -37,7 +37,6 @@ export default {
 
   methods: {
     getCatalog() {
-      console.log("OI");
       Service.getCatalog(this.storeID)
         .then(response => {
           let data = response.data["data"];

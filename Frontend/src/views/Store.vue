@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StoreBanner v-bind="storeData" @addFavorite="addFavorite"/>
+    <StoreBanner v-bind="storeData"/>
     <div class="divBottom">
       <StorePhotos v-bind="storeData"/>
       <StoreDescription v-bind="storeData"/>
@@ -43,7 +43,6 @@ export default {
     return {
       storeID: this.$route.params.id,
       storeData: Object,
-
       lang: this.$i18n.locale,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
@@ -69,11 +68,11 @@ export default {
   methods: {
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
-
       Service.getStoreData(this.storeID)
         .then(response => {
           let data = response.data["data"];
-          this.storeData=data[0];
+          this.storeData = data[0];
+          console.log("TESTE");
           console.log(this.storeData);
         }).catch(err => console.log(err)
       ).finally(() => {

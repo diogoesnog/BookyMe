@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       storeID: this.$route.params.id,
+      reviews: Array,
       fiveStars: "",
       fourStars: "",
       threeStars: "",
@@ -86,8 +87,8 @@ export default {
   },
   
   props: {
+    _id: String,
     rating: Number,
-    reviews: Array
   },
 
   mounted() {
