@@ -7,7 +7,6 @@
         <div class="horizontal-stack">
           <Store v-for="(store, index) in stores" :key="index" v-bind="store" :base="base" class="store-container"></Store>
           <EmptyCard class="store-container"></EmptyCard>
-
         </div>
       </div>
     </v-container>
