@@ -28,7 +28,7 @@
         {{$t('bookingsPage.emptyType1')}}
       </div>
       <div v-else>
-        <ReservationsList v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+        <ReservationsList :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
       </div>
       <br/>
       <div class="title">
@@ -38,7 +38,7 @@
         {{$t('bookingsPage.emptyType2')}}
       </div>
       <div v-else>
-        <ReservationsList v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+        <ReservationsList :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
       </div>
     <div>
      <Toolbar/>
@@ -59,7 +59,8 @@ export default {
    data() {
     return {
       reservationsCurrent: Array,
-      reservationsConcluded: Array
+      reservationsConcluded: Array,
+      base: String
     }
   },
 
@@ -78,9 +79,8 @@ export default {
     getReservationsCurrent() {
       Service.getBookingUserCurrent()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsCurrent = data;
-          console.log(data);
+          this.base = response.data["base"];
+          this.reservationsCurrent = response.data["data"];;
         }).catch(err => {
           console.log(err)
         })
