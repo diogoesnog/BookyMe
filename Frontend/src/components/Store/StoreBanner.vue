@@ -21,7 +21,7 @@
             </span>
           <br/>
           <span style="font-weight: 300; font-size: 20px;">
-            {{ getNumberReservations() }}
+            {{ $tc('storePage.reservations', getNumberReservations, { count: this.numberReservations }) }}
           </span>
         </div>
         <div class="infoExtra">
@@ -81,25 +81,16 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    //this.styleFav = this.isFavorite();
-    console.log(this.styleFav);
+    this.isFavorite();
     this.getReservations();
   },
 
   methods: {
     isFavorite() {
-      Service.getFavorites()
+      Service.isFavorite(this._id)
         .then(response => {
-          let favorites = response.data['data'];
-
-          // TODO: A verificação do favorito deve ser em query no backend.
-          for(let fav in favorites) {
-            if(fav._id === this._id)  {
-              console.log("Encontrado");
-              this.styleFav = "buttonFavTrue";
-            }
-          }
-          console.log(favorites);
+          console.log("Resposta");
+          console.log(response);
         }).catch(err => {
         console.log(err);
       })
@@ -137,13 +128,12 @@ export default {
         })
     },
     getNumberReservations() {
-      var numberReservations = "0 ";
+      var numberReservations = 0;
       var i;
       for (i = 0; i < this.reservationsUser.length; i++) {
         if(this.reservationsUser[i].storeId == this._id) numberReservations = (i+1);
       }
-      if(numberReservations == 1) return "1 Reserva"
-      else return numberReservations + "Reservas";
+      return numberReservations;
     }
   }
 }

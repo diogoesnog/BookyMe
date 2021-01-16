@@ -66,10 +66,10 @@ export default {
 
   .subTitle {
     color: #434343;
-    font-size: 20px;
     font-weight: 300;
-    display: flex;
-    justify-content: left;
+    font-size: 18px;
+    text-align: justify;
+    width: 93%;
   }
 
   .service {
