@@ -70,6 +70,16 @@
       <div class="split"></div>
       <template v-slot:append>
         <div class="pa-2">
+          <v-btn block to="/home">
+            <v-icon>
+              mdi-keyboard-return
+            </v-icon>
+            Back
+          </v-btn>
+        </div>
+        <div class="pa-2">
+
+
           <v-btn @click="logout" block>
             <v-icon>
               mdi-logout

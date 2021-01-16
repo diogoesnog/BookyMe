@@ -1,7 +1,7 @@
 export default class Schedule {
-    constructor(day, openingHour, closingHour) {
+    constructor(day) {
         this.day = day;
-        this.openingHour = openingHour;
-        this.closingHour = closingHour;
+        this.openingHour = null;
+        this.closingHour = null;
     }
 }
