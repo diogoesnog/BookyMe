@@ -121,3 +121,14 @@ module.exports.getUserReservationsConcluded = (token) => {
 
     return request.get();
 }
+
+module.exports.getSlots = (token, id) => {
+
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/slot/${id}`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}

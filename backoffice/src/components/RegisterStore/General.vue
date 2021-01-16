@@ -1,12 +1,19 @@
 <template>
   <div>
     <v-form>
-      <v-text-field label="Name" type="text" v-model="store.name"></v-text-field>
-      <v-text-field label="Category" type="text" v-model="store.category"></v-text-field>
-      <v-text-field label="Descrição" type="text" v-model="store.description"></v-text-field>
-      <v-text-field label="Endereço" type="text" v-model="store.address"></v-text-field>
 
-      <v-btn @click="handleSubmit">Register</v-btn>
+      <v-text-field label="Name" type="text" v-model="store.name"></v-text-field>
+      <!--<v-text-field label="Category" type="text" v-model="store.category"></v-text-field>-->
+      <v-select v-model="store.category" :items="categories" label="Categoria"></v-select>
+
+      <v-text-field label="Descrição" type="text" v-model="store.description"></v-text-field>
+
+      <v-text-field label="Place" type="text" v-model="store.place"></v-text-field>
+      <v-text-field label="Zip-Code" type="text" v-model="store.zipcode"></v-text-field>
+      <v-text-field label="City" type="text" v-model="store.city"></v-text-field>
+      <v-text-field label="Country" type="text" v-model="store.country"></v-text-field>
+
+      <v-btn block color="primary" @click="handleSubmit">Register</v-btn>
     </v-form>
   </div>
 </template>
@@ -19,7 +26,8 @@ export default {
 
   data() {
     return {
-      store: new Store()
+      store: new Store(),
+      categories: ["Restaurante"]
     }
   },
 
