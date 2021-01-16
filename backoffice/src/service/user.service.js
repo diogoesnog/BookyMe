@@ -83,6 +83,12 @@ class Services {
         });
     }
 
+    getStoreSlots(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+
     // TODO: Add Catalog
 
 
