@@ -2,14 +2,12 @@
   <div>
     <StoreBanner v-bind="storeData" @addFavorite="addFavorite"/>
     <div class="divBottom">
-      <div class="row">
-        <StorePhotos v-bind="storeData"/>
-        <StoreDescription v-bind="storeData"/>
-        <StoreMap v-bind="storeData"/>
-        <StoreCatalog v-bind="storeData"/>
-        <StoreRatings v-bind="storeData"/>
-        <StoreBooking v-bind="storeData"/>
-      </div>
+      <StorePhotos v-bind="storeData"/>
+      <StoreDescription v-bind="storeData"/>
+      <StoreMap v-bind="storeData"/>
+      <StoreCatalog v-bind="storeData"/>
+      <StoreRatings v-bind="storeData"/>
+      <StoreBooking v-bind="storeData"/>
     </div>
     <Toolbar/>
   </div>
@@ -92,7 +90,7 @@ export default {
 
   .divBottom {
     position: relative;
-    padding-top: 140px;
+    padding-top: 80px;
     padding-left: 0;
   }
 

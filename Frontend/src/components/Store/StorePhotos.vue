@@ -3,25 +3,20 @@
     <p class="titles">{{$t('storePage.photos')}}</p>
     <div class="wrapper">
       <div v-for="(photoUrl, index) in photos" :key="index" v-bind="photoUrl" class="item">
-        <div @click="persistent = true" class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
+        <div @click="persistent = true; indexPhoto = index" class="item" v-bind:style='{ backgroundImage: `url("${getImage(index)}")` }'/>
       </div>
       <div class="empty"></div>
     </div>
-    <!--
-    <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
-      <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
-        <q-card-section class="row items-center q-pb-none">
-          <div class="text-h6">Close icon</div>
-          <q-space />
-          <q-btn icon="close" flat round dense v-close-popup />
-        </q-card-section>
-
-        <q-card-section>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.
+    <q-dialog 
+      v-model="persistent"
+      persistent
+      >
+      <q-card class="cardStyle" v-bind:style='{ backgroundImage: `url("${getImage(this.indexPhoto)}")` }'>
+        <q-card-section style="float: right" class="row items-center">
+          <q-btn icon="cancel" class="iconClose" flat round dense v-close-popup />
         </q-card-section>
       </q-card>
     </q-dialog>
-    -->
   </div>
 </template>
 
@@ -36,7 +31,8 @@ export default {
 
   data() {
     return {
-      persistent: false
+      persistent: false,
+      indexPhoto: 0
     }
   },
 
@@ -49,6 +45,21 @@ export default {
 </script>
 
 <style scoped>
+  
+  .iconClose {
+    font-size: 25px;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  }
+
+  .cardStyle {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40%;
+    border-radius: 40px;
+  }
 
   .titles {
     color: #434343;

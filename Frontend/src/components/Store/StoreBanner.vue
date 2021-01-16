@@ -2,47 +2,47 @@
   <div>
     <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
     </div>
-    <div class="divTop2">
-    </div>
-    <div style="padding-top: 20px;">
-      <div class="row" style="margin: 20px;">
-        <div class="col-5" style="display: flex; align-items: center;">
-          <!-- Corrigir o To do Botão -->
-          <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
-        </div>
-        <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
-          <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
-          <div style="width:10px; height:auto; display:inline-block;"/>
-          <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" round icon="favorite"/>
-        </div>
-      </div>
-      <div class="infoName">
-          <span style="font-weight: 670; font-size: 40px;">
-            {{ getCutName(this.name) }}
-          </span>
-        <br/>
-        <span style="font-weight: 300; font-size: 20px;">
-          {{ getNumberReservations() }}
-        </span>
-      </div>
-      <div class="infoExtra">
-        <div class="row rowStyle">
-          <div class="col-8" style="text-align: left; margin-top: -8px; display: inline-grid; line-height: 25px;">
-              <span style="text-overflow: ellipsis; font-size: 20px; font-weight: 350; display: inline-block; width: 200px; white-space: nowrap; overflow: hidden !important;">
-                {{ this.category }}
-              </span>
-            <span style="font-size: 19px; font-weight: 650; display: inline-block; width:160px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis;">
-                {{ this.address.city }}
-              </span>
+    <div>
+      <div class="divTop2">
+        <div class="row" style="margin: 20px;">
+          <div class="col-5" style="display: flex; align-items: center;">
+            <!-- Corrigir o To do Botão -->
+            <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
           </div>
-          <div class="col-4">
-            <div class="divRating shadow">
-              <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
-                  <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
-                    {{ roundRating() }}<span style="font-weight: 200; font-size: 19px;">/5</span>
-                  </span>
-                <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
-              </p>
+          <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
+            <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
+            <div style="width:10px; height:auto; display:inline-block;"/>
+            <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" round icon="favorite"/>
+          </div>
+        </div>
+        <div class="infoName">
+            <span style="font-weight: 670; font-size: 40px;">
+              {{ getCutName(this.name) }}
+            </span>
+          <br/>
+          <span style="font-weight: 300; font-size: 20px;">
+            {{ getNumberReservations() }}
+          </span>
+        </div>
+        <div class="infoExtra">
+          <div class="row rowStyle">
+            <div class="col-8" style="text-align: left; margin-top: -8px; display: inline-grid; line-height: 25px;">
+                <span style="text-overflow: ellipsis; font-size: 20px; font-weight: 350; display: inline-block; width: 200px; white-space: nowrap; overflow: hidden !important;">
+                  {{ this.category }}
+                </span>
+              <span style="font-size: 19px; font-weight: 650; display: inline-block; width:160px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis;">
+                  {{ this.address.city }}
+                </span>
+            </div>
+            <div class="col-4">
+              <div class="divRating shadow">
+                <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
+                    <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
+                      {{ roundRating() }}<span style="font-weight: 200; font-size: 19px;">/5</span>
+                    </span>
+                  <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -154,21 +154,21 @@ export default {
   .divTop1{
     position: absolute;
     width: 100%;
-    height: 32%;
+    padding: 125px;
     background-size: cover;
     background-position: center top;
   }
 
   .divTop2{
-    position: absolute;
-    width: 100%;
-    height: 32%;
+    padding-top: 25px;
+    height: 250px;
+    position: relative;
     background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
   }
 
   .infoName {
     position: relative;
-    bottom: -5px;
+    bottom: 15px;
     color: white;
     text-align: center;
   }
@@ -176,7 +176,7 @@ export default {
   .infoExtra {
     position: absolute;
     left: 50%;
-    top: 32%;
+    padding-top: 15%;
   }
 
   .divRating {
