@@ -55,15 +55,31 @@ app.get('/store/:id', isAdmin, (req, res) => {
  * URL param: /user
  */
 app.get('/user', checkAuth, (req, res) => {
-    Booking.getBookingsByUser(req.user.id)
-        .then(data => {
-            const response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        })
-        .catch(err => {
-            const response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        });
+    const userId = req.user.id;
+    const bookId = req.query.bookId;
+
+    if (!bookId) {
+        Booking.getBookingsByUser(userId)
+            .then(data => {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            });
+    }
+    else {
+        Booking.getBookingByUserBookId(userId, bookId)
+            .then(data => {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            });
+    }
 });
 
 app.get('/user/current', checkAuth, (req, res) => {

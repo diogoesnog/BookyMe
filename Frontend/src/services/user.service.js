@@ -53,9 +53,8 @@ class UserService {
 
     return request.get()
   }
-  
-  getFavorites() {
 
+  getFavorites() {
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
 
     request.isJson()
@@ -126,6 +125,16 @@ class UserService {
     // request.appendParam("favorite", id)
 
     return request.post(body)
+  }
+
+  isFavorite() {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.get()
   }
 
   getStoresByCategory(category) {
@@ -238,7 +247,6 @@ class UserService {
     // request.isJson();
     request.isMultipart();
     request.appendHeader("Authorization", authHeader());
-
 
     return request.sendFile(file);
 
