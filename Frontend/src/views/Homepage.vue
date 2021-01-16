@@ -2,7 +2,6 @@
   <div>
     <Popular :base="base" :stores ="storesData" :profile="profileData" />
     <div class= "categoriesDiv">
-      <CategoriesList/>
     </div>
     <Toolbar/>
   </div>
@@ -11,7 +10,7 @@
 <script>
 
 import Service from '../services/user.service';
-import CategoriesList from '../components/Homepage/CategoriesList';
+//import CategoriesList from '../components/Homepage/CategoriesList';
 import Popular from '../components/Homepage/Popular';
 import Toolbar from '../components/Root/Toolbar';
 
@@ -28,7 +27,7 @@ export default {
 
   components: {
     Popular,
-    CategoriesList,
+    //CategoriesList,
     Toolbar
   },
 
@@ -67,9 +66,8 @@ export default {
 <style scoped>
 
   .categoriesDiv {
-    z-index: 1000;
-    position: absolute;
-    top: 400px;
+    position: relative;
+    top: 300px;
     width: 100%; 
   }
 
