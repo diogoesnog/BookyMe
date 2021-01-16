@@ -47,8 +47,8 @@ app.use('/public', express.static(publicPath) );
 
 // Configure CORS middleware
 const corsOptions = {
-    origin: process.env.FRONTEND_SERVER,
-    credentials: true
+    credentials: true,
+    exposedHeaders: 'Authorization'
 };
 
 app.use(cors(corsOptions));

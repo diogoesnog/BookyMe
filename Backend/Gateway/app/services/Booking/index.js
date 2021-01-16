@@ -2,11 +2,12 @@ const Request = require('../../utils/Request');
 
 
 // Needs to be admin
-module.exports.getStoreReservations = (token, store) => {
+module.exports.getStoreReservations = (token, store, params) => {
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/store/${store}`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
+    request.setParams(params);
     request.acceptJson();
 
     return request.get();

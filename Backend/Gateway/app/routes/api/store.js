@@ -60,12 +60,13 @@ router.get('/admin', checkAuth, (req, res) => {
 });
 
 
-router.post('/', validator([
+router.post('/', checkAuth, validator([
     "name", "category", "description", "place", "zipcode", "city", "country"
 ]),(req, res) => {
     let body = JSON.stringify(req.body);
+    let token = req.headers.authorization || req.headers.Authorization;
 
-    Store.create(body)
+    Store.create(token, body)
         .then(response => {
             console.log("201");
             res.status(response.status).jsonp(response.data);
