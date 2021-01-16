@@ -1,7 +1,7 @@
 <template>
   <div class="col-12" style="padding-left: 30px; padding-top: 18px;">
     <p class="titles">{{$t('storePage.servicesCatalog')}}</p>
-    <div class="wrapper">
+    <div v-if="this.catalog.length !=0" class="wrapper">
       <div v-for="(service, index) in catalog" :key="index" v-bind="service" class="item">
         <div class="row">
           <div class="col-6 service">
@@ -13,6 +13,9 @@
         </div>
       </div>
       <div class="empty"></div>
+    </div>
+    <div class="subTitle" v-else>
+      {{$t('storePage.noCatalog')}}
     </div>
   </div>
 </template>
@@ -41,6 +44,8 @@ export default {
         .then(response => {
           let data = response.data["data"];
           this.catalog = data;
+          console.log("CATALOGO");
+          console.log(this.catalog);
         }).catch(err => console.log(err)
       ).finally(() => {
         this.$q.loading.hide();
@@ -57,6 +62,14 @@ export default {
     color: #434343;
     font-weight: 700;
     font-size: 30px;
+  }
+
+  .subTitle {
+    color: #434343;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: left;
   }
 
   .service {

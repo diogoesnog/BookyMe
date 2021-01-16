@@ -131,6 +131,7 @@ export default {
     utilInfo: "Informations",
     servicesCatalog: "Catalogue de Services",
     seeAll: "Voir Tout",
+    noCatalog: "Le Marchand n'a aucun Catalogue de Services associé d'aucune sorte.",
 
     ratings: "Évaluations",
     seeAllRatings: "Voir Tous",

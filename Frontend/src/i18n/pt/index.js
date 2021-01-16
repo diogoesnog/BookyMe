@@ -137,6 +137,7 @@
     utilInfo: "Informações Úteis",
     servicesCatalog: "Catálogo de Serviços",
     seeAll: "Ver Todos",
+    noCatalog: "O Estabelecimento não tem associado qualquer tipo de Catálogo de Serviços.",
 
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",

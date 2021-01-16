@@ -137,6 +137,7 @@ export default {
     utilInfo: "Useful Info",
     servicesCatalog: "Catalog of Services",
     seeAll: "See All",
+    noCatalog: "The Establishment has not joined any Catalog of Services.",
 
     ratings: "Ratings",
     seeAllRatings: "See All",

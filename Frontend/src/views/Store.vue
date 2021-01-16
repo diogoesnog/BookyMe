@@ -72,7 +72,6 @@ export default {
         .then(response => {
           let data = response.data["data"];
           this.storeData = data[0];
-          console.log("TESTE");
           console.log(this.storeData);
         }).catch(err => console.log(err)
       ).finally(() => {
