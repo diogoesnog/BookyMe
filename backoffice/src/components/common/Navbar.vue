@@ -1,11 +1,8 @@
 <template>
   <v-app>
-  <v-card
-      tile
-      width="256px"
-      height="100%"
-  >
-    <v-navigation-drawer dark permanent fixed>
+  <v-card tile height="100%" class="overflow-hidden"
+          style="position: relative;">
+    <v-navigation-drawer dark permanent expand-on-hover absolute>
       <v-list>
         <!-- Home Link -->
         <v-list-item link>
@@ -23,7 +20,7 @@
             <v-icon>mdi-calendar-clock</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            Bookings
+            <router-link :to="{name: 'Booking', params: {id: this.$route.params.id}}">Bookings</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -67,27 +64,32 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+
       <div class="split"></div>
-      <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block to="/home">
-            <v-icon>
-              mdi-keyboard-return
-            </v-icon>
-            Back
-          </v-btn>
-        </div>
-        <div class="pa-2">
 
 
-          <v-btn @click="logout" block>
-            <v-icon>
-              mdi-logout
-            </v-icon>
-            Logout
-          </v-btn>
-        </div>
-      </template>
+      <v-list>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-keyboard-return</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Seletor de Loja</router-link>
+            </v-list-item-content>
+          </v-list-item>
+
+        <v-list-item>
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content @click="logout">
+            <router-link>
+              Logout
+            </router-link>
+          </v-list-item-content>
+        </v-list-item>
+        </v-list>
     </v-navigation-drawer>
   </v-card>
   </v-app>
