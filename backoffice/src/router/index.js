@@ -53,6 +53,22 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/store/catalog',
+    name: "Catalog",
+    component: () => import('../views/private/Catalog'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/store/catalog/register',
+    name: "AddCatalogItem",
+    component: () => import('../views/private/AddItemCatalog'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ];
 

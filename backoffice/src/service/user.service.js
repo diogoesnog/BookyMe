@@ -68,12 +68,31 @@ class Services {
         });
     }
 
+    
+
     // TODO: Add Opening Hours
 
 
     // TODO: Add Catalog
 
 
+    getStoreCatalog(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    deleteCatalogItem(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/item/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    addCatalogItem(id){
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`, {
+            headers: authHeader()
+        });
+    }
     // TODO: Upload Images
 }
 
