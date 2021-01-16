@@ -61,13 +61,13 @@ export default {
 
   data() {
     return {
+      storeID: this.$route.params.id,
       styleFav: String,
       reservationsUser: Array
     }
   },
 
   props: {
-    _id: String,
     name: String,
     category: String,
     address: Object,
@@ -75,29 +75,33 @@ export default {
     photos: Array,
   },
 
-  beforeMount() {
-    this.styleFav = "buttonFavFalse"
-  },
-
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.isFavorite();
+    this.isFavorite(this.storeID);
     this.getReservations();
   },
 
   methods: {
-    isFavorite() {
-      Service.isFavorite(this._id)
+    isFavorite(id) {
+      Service.isFavorite()
         .then(response => {
-          console.log("Resposta");
-          console.log(response);
+          console.group("Verificação de favorito");
+          let data = response.data["data"];
+          let favorites = data.favorites;
+          console.log("Array de favs:");
+          console.log(favorites);
+          console.log("ID a comparar: " + id)
+          let isFav = favorites.indexOf(id)
+          isFav >= 0 ? this.styleFav = "buttonFavTrue" : this.styleFav = "buttonFavFalse"
+          console.log("É favorito? " + isFav);
+          console.groupEnd();
         }).catch(err => {
         console.log(err);
       })
     },
 
     addFavorite() {
-      let favorite = new Favorite(this._id);
+      let favorite = new Favorite(this.storeID);
       Service.addFavorite(favorite)
         .then(response => {
           this.styleFav = "buttonFavTrue";
@@ -131,7 +135,7 @@ export default {
       var numberReservations = 0;
       var i;
       for (i = 0; i < this.reservationsUser.length; i++) {
-        if(this.reservationsUser[i].storeId == this._id) numberReservations = (i+1);
+        if(this.reservationsUser[i].storeId === this.storeID) numberReservations = (i+1);
       }
       return numberReservations;
     }
