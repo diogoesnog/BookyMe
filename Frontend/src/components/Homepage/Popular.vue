@@ -50,7 +50,7 @@
             <div class="col-5" style="padding-left: 10px; width: 80px;">
               <div class="divRating shadow">
                 <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
-                  <span style="font-weight: 670; font-size: 16px; display: inline-block; vertical-align: middle;">
+                  <span style="font-weight: 670; font-size: 16px; display: inline-block;">
                     {{roundRating(store.rating)}}<span style="font-weight: 200; font-size: 16px;">/5</span>
                   </span>
                   <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
