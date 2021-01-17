@@ -24,7 +24,7 @@
         </div>
         <div class="col-2 avatarCol">
           <q-avatar class="avatar">
-            <img style="object-fit: cover; margin: 5px; transform: scale(1.3);" :src="getImage()">
+            <img style="object-fit: cover;" :src="getImage()">
           </q-avatar>
         </div>
       </div>

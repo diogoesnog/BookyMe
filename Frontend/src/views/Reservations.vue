@@ -109,7 +109,7 @@ export default {
   
   .centerDiv {
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 40px;
   }
 
   .shadow {
