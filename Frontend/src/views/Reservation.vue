@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!--      TODO: Fazer o script para ir buscar as informações da reserva e da loja respetiva -->
     <ReservationBanner v-bind="storeData"/>
     <div class="divBottom">
       <ReservationInfo v-bind="bookingData"/>
@@ -78,7 +77,6 @@ export default {
       ).finally(() => {
         this.$q.loading.hide();
       })
-
     },
 
     fetchStoreData() {
@@ -94,7 +92,6 @@ export default {
       })
     }
   }
-
 }
 
 </script>

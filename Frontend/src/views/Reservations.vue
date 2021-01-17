@@ -28,7 +28,7 @@
         {{$t('bookingsPage.emptyType1')}}
       </div>
       <div v-else>
-        <ReservationsList :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+        <ReservationsList :typeReservation="currentReservation" :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
       </div>
       <br/>
       <div class="title">
@@ -38,7 +38,7 @@
         {{$t('bookingsPage.emptyType2')}}
       </div>
       <div v-else>
-        <ReservationsList :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+        <ReservationsList :typeReservation="concludedReservation" :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
       </div>
     <div>
      <Toolbar/>
@@ -60,7 +60,9 @@ export default {
     return {
       reservationsCurrent: Array,
       reservationsConcluded: Array,
-      base: String
+      base: String,
+      currentReservation: "current",
+      concludedReservation: "concluded"
     }
   },
 
@@ -80,7 +82,8 @@ export default {
       Service.getBookingUserCurrent()
         .then(response => {
           this.base = response.data["base"];
-          this.reservationsCurrent = response.data["data"];;
+          this.reservationsCurrent = response.data["data"];
+          console.log(this.reservationsCurrent);
         }).catch(err => {
           console.log(err)
         })
@@ -88,9 +91,7 @@ export default {
     getReservationsConcluded() {
       Service.getBookingUserConcluded()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsConcluded = data;
-          console.log(data);
+          this.reservationsConcluded = response.data["data"];
         }).catch(err => {
           console.log(err)
         })
@@ -110,7 +111,7 @@ export default {
   
   .centerDiv {
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 40px;
   }
 
   .shadow {
