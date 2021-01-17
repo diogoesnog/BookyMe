@@ -1,0 +1,15 @@
+<template>
+
+</template>
+
+<script>
+export default {
+name: "Notifications"
+}
+</script>
+
+<style scoped>
+.margin {
+  padding: 15px;
+}
+</style>
