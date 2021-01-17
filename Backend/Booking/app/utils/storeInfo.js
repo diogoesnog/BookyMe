@@ -9,7 +9,7 @@ module.exports.storeInfo = async (storeId, serviceId) => {
     let storeName = (await Store.getStore(storeId)).data.data.name;
 
     try { //photoPath is optional
-        let photoPath = (await Store.getStore(storeId)).data.data.photos.shift().url;
+        photoPath = (await Store.getStore(storeId)).data.data.photos.shift().url;
     }
     catch {}
 

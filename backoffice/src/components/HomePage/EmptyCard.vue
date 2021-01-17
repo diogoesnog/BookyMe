@@ -3,7 +3,7 @@
     <v-img height="300" width="500"></v-img>
 
     <v-card-title>
-      New Store
+      Nova Loja
     </v-card-title>
     <v-card-text>
      Plus Sign
