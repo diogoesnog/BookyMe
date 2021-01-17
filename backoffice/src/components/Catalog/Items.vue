@@ -9,7 +9,6 @@
         <v-icon small @click="deleteCatalog(item)">
           mdi-delete
         </v-icon>
-        <!--<v-btn @click="deleteCatalog(item)">Delete</v-btn>-->
       </template>
     </v-data-table >
 
