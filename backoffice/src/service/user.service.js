@@ -103,7 +103,7 @@ class Services {
     }
 
     deleteCatalogItem(id) {
-        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/item/${id}`, {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/${id}`, {
             headers: authHeader()
         });
     }
