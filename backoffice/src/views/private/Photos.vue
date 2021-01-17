@@ -6,7 +6,7 @@
         </v-col>
 
         <v-col cols="10">
-          <h1>Add Photos</h1>
+          <h1>Adicionar Fotos</h1>
           <div style="padding: 15px">
             <v-file-input v-model="file" prepend-icon="mdi-camera" outlined show-size accept="image/png, image/jpeg, image/jpg" label="New Photo"></v-file-input>
             <v-btn color="primary" outlined block @click="uploadPhoto">Upload</v-btn>
@@ -20,7 +20,7 @@
                     </v-row>
                   </template>
                 </v-img>
-                <v-btn color="error" block outlined @click="deletePhoto(photo._id)">Delete</v-btn>
+                <v-btn color="error" block outlined @click="deletePhoto(photo._id)">Eliminar</v-btn>
               </v-col>
             </v-row>
           </div>

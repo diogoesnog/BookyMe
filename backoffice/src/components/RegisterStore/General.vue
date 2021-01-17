@@ -4,11 +4,11 @@
 
       <v-text-field label="Name" type="text" v-model="store.name"></v-text-field>
       <v-select v-model="store.category" :items="categories" item-text="title" label="Category"></v-select>
-      <v-text-field label="Description" type="text" v-model="store.description"></v-text-field>
-      <v-text-field label="Place" type="text" v-model="store.place"></v-text-field>
-      <v-text-field label="Zip-Code" type="text" v-model="store.zipcode"></v-text-field>
-      <v-text-field label="City" type="text" v-model="store.city"></v-text-field>
-      <v-text-field label="Country" type="text" v-model="store.country"></v-text-field>
+      <v-text-field label="Descrição" type="text" v-model="store.description"></v-text-field>
+      <v-text-field label="Morada" type="text" v-model="store.place"></v-text-field>
+      <v-text-field label="Código Postal" type="text" v-model="store.zipcode"></v-text-field>
+      <v-text-field label="Cidade" type="text" v-model="store.city"></v-text-field>
+      <v-text-field label="País" type="text" v-model="store.country"></v-text-field>
 
       <v-btn block color="primary" @click="handleSubmit">Register</v-btn>
     </v-form>
