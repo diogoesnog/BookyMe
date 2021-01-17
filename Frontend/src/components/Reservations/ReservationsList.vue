@@ -180,6 +180,8 @@ export default {
       Service.addReview(this.textComment, this.rating, id)
         .then(response => {
           this.persistentReview = false;
+          this.rating = 4;
+          this.textComment = "";
         }).catch(err => {
           console.log(err);
         })
