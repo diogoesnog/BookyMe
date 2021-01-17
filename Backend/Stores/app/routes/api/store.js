@@ -79,6 +79,19 @@ app.get('/schedule', (req,res) => {
     });
 })
 
+app.get('/scheduleList/:storeID', (req,res) => {
+
+
+    Stores.getScheduleList(req.params.storeID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch schedule list');
+            res.status(response.status).jsonp(response);
+    });
+})
+
 app.get('/categories/results',  (req, res) => {
 
     Stores.getCategoriesResults()
@@ -400,7 +413,7 @@ app.delete('/:id/schedule/:scheduleID',  (req, res) => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
         }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not delete the requested photo');
+            response = Response.INTERNAL_ERROR(err, 'Could not delete the requested schedule');
             res.status(response.status).jsonp(response);
     });
 
