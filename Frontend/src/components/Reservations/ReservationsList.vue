@@ -30,8 +30,15 @@
           </div>
           <!-- Review -->
           <div :id="checkUserReview(reservation.storeId)" v-else class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <img v-if="checkArrayUsers()" style="height: 25px" src="icons/Star.svg"/>
-            <img v-else @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
+            <div v-if="checkArrayUsers()" style="text-align: center;">
+              <span style="text-align: -webkit-center; font-size: 20px; font-weight: 600; color: #e03459;">
+                {{ userRating }}<span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
+              </span>
+              <img style="height: 25px" src="icons/Star.svg"/>
+            </div>
+            <div v-else>
+              <img @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
+            </div>
           </div>
           <!-- Pop Up Alterar Reserva -->
           <q-dialog v-model="persistentChange" persistent transition-show="scale" transition-hide="scale">
@@ -133,8 +140,8 @@ export default {
       ],
       rating: 4,
       textComment: '',
-      userIds: Array,
-      hasReview: false
+      hasReview: false,
+      userRating: 0
     }
   },
   methods: {
@@ -195,9 +202,20 @@ export default {
     checkUserReview: function(idStore) {
       Service.getReviewsStore(idStore)
         .then(response => {
+          let ID = this.idUser;
           let data = response.data["data"];
-          this.userIds = data.map(obj => obj.userId);
-          this.hasReview = this.userIds.includes(this.idUser);
+          let userIds = data.map(obj => obj.userId);
+          this.hasReview = userIds.includes(ID);
+          
+          let outputArray = Object.keys(data).map((key)=>(
+            { UserId: data[key]['userId'], Rating: data[key]['rating'] }
+          ))
+         
+          var arrayUser = outputArray.filter(function(obj, index){
+            return obj.UserId===ID;
+          })
+
+         this.userRating = arrayUser[0]['Rating'];
         })
         .catch(err => {
           console.log(err);
