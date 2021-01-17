@@ -67,14 +67,32 @@
           <!-- Pop Up Alterar Reserva -->
           <q-dialog v-model="persistentReview" persistent transition-show="scale" transition-hide="scale">
             <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
-              <q-card-section style="padding: 25px; width: 100%;">
+              <q-card-section style="padding-top: 25px; width: 100%;">
                 <span class="titleStorePopup">{{ reservation.storeName }}</span>
-                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
+                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.ratePopup.title')}}</p>
               </q-card-section>
-              <q-card-actions style="margin: 20px;" align="center" class="bg-white text-teal">
+              <q-card-section style="top: -20px">
+                <q-rating
+                  v-model="ratingModel"
+                  size="2.5em"
+                  icon="img:icons/Star.svg"
+                />
+              </q-card-section>
+              <q-card-section style="top: -20px">
+                <span class="subtitle">{{$t('bookingsPage.ratePopup.comment')}}</span>
+                <div class="q-pa-md" style="margin-left: 20px; margin-right: 20px; margin-top: 10px;">
+                  <q-input
+                    v-model="textComment"
+                    clearable
+                    filled
+                    autogrow
+                  />
+                </div>
+              </q-card-section>
+              <q-card-actions style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" align="center" class="bg-white text-teal">
                 <div class="row" style="width: 100%;">
                   <div class="col-6" style="padding-right: 10px;">
-                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.editPopup.changeBooking')" v-close-popup />
+                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.ratePopup.submit')" v-close-popup />
                   </div>
                   <div class="col-6" style="padding-left: 10px;">
                     <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
@@ -108,7 +126,9 @@ export default {
       model: null,
       options: [
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-      ]
+      ],
+      ratingModel: 5,
+      textComment: ''
     }
   },
 
@@ -223,6 +243,11 @@ export default {
     width: 170px; 
     white-space: nowrap; 
     overflow: hidden !important;
+  }
+
+  .subtitle {
+    font-size: 18px; 
+    font-weight: 600; 
   }
 
   .hourDate {
