@@ -393,6 +393,20 @@ app.delete('/:id',  (req, res) => {
 
 });
 
+app.delete('/:id/schedule/:scheduleID',  (req, res) => {
+    
+    Stores.removeStoreSchedule(req.params.id, req.params.scheduleID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not delete the requested photo');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
 app.delete('/:id/photos/:photoID',  (req, res) => {
     
     Stores.removeStorePhoto(req.params.id, req.params.photoID)

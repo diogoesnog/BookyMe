@@ -112,6 +112,10 @@ module.exports.removeStorePhoto = (id, pId) => {
     return Store.findOneAndUpdate({_id: id},{$pull: {photos: {'_id': pId}}}, { new: true } )
 }
 
+module.exports.removeStoreSchedule = (id, sId) => {
+    return Store.findOneAndUpdate({_id: id},{$pull: {schedule: {'_id': sId}}}, { new: true } )
+}
+
 
 module.exports.create = (store) => {
     const newStore = new Store(store);
