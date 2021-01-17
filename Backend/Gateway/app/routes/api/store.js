@@ -24,6 +24,12 @@ router.get('/favorites/:id', (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+router.get('/scheduleList/:id', (req, res) => {
+    Store.getScheduleList(req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
 router.get('/categories', (req, res) => {
     Store.getCategories()
         .then(response => res.status(response.status).jsonp(response.data))
@@ -37,6 +43,8 @@ router.get('/favorites', checkAuth, (req, res) => {
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
+
+
 
 
 router.get('/', checkAuth, (req, res) => {
@@ -187,6 +195,13 @@ router.delete('/:id', (req, res) => {
 router.delete('/:id/photos/:photo', (req, res) => {
 
     Store.deletePhoto(req.params.id, req.params.photo)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.delete('/:id/schedule/:schedule', (req, res) => {
+
+    Store.deleteSchedule(req.params.id, req.params.schedule)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
