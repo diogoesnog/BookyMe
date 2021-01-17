@@ -6,7 +6,7 @@
         <StoreForm v-if="!storeRegistered" @storeCreated="storeCreated"/>
         <div v-else>
           <Schedule v-for="(workday, index) in workdays" :key="index" :workday="workday"></Schedule>
-          <v-btn block color="primary" @click="createSchedule">Add Schedule</v-btn>
+          <v-btn block color="primary" @click="createSchedule">Adicionar Horário</v-btn>
         </div>
       </div>
 

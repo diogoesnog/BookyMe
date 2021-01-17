@@ -12,7 +12,7 @@ module.exports.getByStore = (store) => {
 
 module.exports.addCatalog = (store, body) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/catalogs/${store}`);
-
+    console.log(JSON.stringify(body))
     request.isJson();
 
     return request.post(body);
