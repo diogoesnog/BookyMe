@@ -4,42 +4,35 @@
       <v-col cols="2">
         <Navbar/>
       </v-col>
-    <v-col cols="10">
-    <h1 class="text-center">Catalog</h1>
-    <br>
-    <v-card>
-         
-        <v-card-title>
-            
-            <v-text-field
-                v-model="search"
-                label="Search"
-                single-line
-                hide-details
-            ></v-text-field>
-            <v-btn depressed @click="registerCatalog">
-                New item
-            </v-btn>
-        </v-card-title>
-        <v-data-table
-        :headers="headers"
-        :items="catalogs"
-        class="elevation-1"
-        :search="search"
-        :key="refresh"
-        >
-        <template v-slot:item.action="{ item }" >
-             <v-btn
-              @click="deleteCatalog(item)"
-            >
-            Delete
-            </v-btn>
-        </template>
+      <v-col cols="10">
+        <!--<h1 class="text-center">Catalog</h1>-->
+        <h1>Catálogo</h1>
+        <br>
+        <v-card>
+          <v-btn block outlined color="primary" @click="dialog = !dialog">
+          Adicionar ao Catálogo
+        </v-btn>
+          <v-dialog v-model="dialog" persistent max-width="600px">
+          <v-card>
+            <v-card-title>
+              <span class="headline">Adicionar ao Catálogo</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <NewCatalog v-bind:catalog="catalog" :submitButton="false"/>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="save">Guardar</v-btn>
+              <v-btn color="blue darken-1" text @click="cancel">Fechar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
 
-        </v-data-table>
+          <Items v-bind:catalogs="catalogs" @deleteCatalog="deleteCatalog"/>
 
-       
-    </v-card>
+        </v-card>
     </v-col>
   </v-row>
 </div>
@@ -47,31 +40,21 @@
 
 <script>
 import Services from '../../service/user.service';
+import Catalog from '../../models/Store/catalog';
 
 export default {
   name: "CatalogList",
   components: {
-    Navbar: () => import('../../components/common/Navbar')
+    Navbar: () => import('../../components/common/Navbar'),
+    Items: () => import('../../components/Catalog/Items'),
+    NewCatalog: () => import('../../components/RegisterStore/Catalog')
   },
    data() {
     return {
       id: this.$route.params.id,
-      catalogs: [],
-      search: '',
-      refresh: 0,
-      props: {
-        _id: String,
-        product: String,
-        price: String,
-        abstract: String
-      },
-      headers:[
-          {text: 'Product', align: 'left', value: 'product'},
-          {text: 'Price (€)', align: 'left',  value: 'price'},
-          {text: 'Abstract', align: 'left',  value: 'abstract'},
-          {text: 'Action', align: 'center',  value: 'action'},
-
-        ],
+      catalogs: Array,
+      catalog: new Catalog(),
+      dialog: false
     }
   },
   mounted(){
@@ -91,21 +74,28 @@ export default {
           console.log(err.data);
         });
     },
-    registerCatalog(){
-        this.$router.push('/catalog/register/' + this.id)
-    }
-    ,
+
+    save() {
+      Services.addCatalogItem(this.id, this.catalog)
+          .then(response => this.catalogs.push(response.data[ "data" ]))
+          .catch(err => console.error(err));
+
+      this.cancel();
+    },
+    cancel() {
+      this.dialog = false;
+      this.catalog = new Catalog();
+    },
+
     deleteCatalog(item){
         Services.deleteCatalogItem(item._id)
-        .then(response => {
-          console.log('Successfully deleted catalog ' + response.status);
-          const index = this.catalogs.indexOf(item)
-          if (index > -1) {
-            this.catalogs.splice(index, 1);
-          }
-        }).catch(err => {
-          console.log(err.data);
-        });
+          .then(response => {
+            console.log('Successfully deleted catalog ' + response);
+            /*const index = this.catalogs.indexOf(item)
+            if (index > -1) {
+              this.catalogs.splice(index, 1);
+            }*/
+          }).catch(err => console.log(err.data));
     }
   }
 }

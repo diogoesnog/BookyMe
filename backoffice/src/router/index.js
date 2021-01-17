@@ -63,13 +63,13 @@ const routes = [
     }
   },
   {
-    path: '/store/catalog/:id',
+    path: '/store/:id/catalog/',
     name: "CatalogList",
     component: () => import('../views/private/CatalogList'),
     meta: {
       requiresAuth: true
     }
-  },
+  } /*,
   {
     path: '/catalog/register/:id',
     name: "AddCatalogItem",
@@ -77,7 +77,7 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  }*/
 ];
 
 const router = new VueRouter({
