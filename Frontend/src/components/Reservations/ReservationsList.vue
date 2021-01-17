@@ -73,7 +73,7 @@
               </q-card-section>
               <q-card-section style="top: -20px">
                 <q-rating
-                  v-model="ratingModel"
+                  v-model="rating"
                   size="2.5em"
                   icon="img:icons/Star.svg"
                 />
@@ -92,7 +92,7 @@
               <q-card-actions style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" align="center" class="bg-white text-teal">
                 <div class="row" style="width: 100%;">
                   <div class="col-6" style="padding-right: 10px;">
-                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.ratePopup.submit')" v-close-popup />
+                    <q-btn @click="addReview(reservation.storeId)" class="q-btn1" rounded :label="$t('bookingsPage.ratePopup.submit')" v-close-popup />
                   </div>
                   <div class="col-6" style="padding-left: 10px;">
                     <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
@@ -108,6 +108,8 @@
 </template>
 
 <script>
+
+import Service from '../../services/user.service';
 
 export default {
   name: "ReservationsList",
@@ -127,7 +129,7 @@ export default {
       options: [
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
       ],
-      ratingModel: 5,
+      rating: 4,
       textComment: ''
     }
   },
@@ -173,6 +175,14 @@ export default {
     getTypeReservation() {
       if (this.typeReservation == "current") return 0;
       else return 1;
+    },
+    addReview: function(id) {
+      console.log(id);
+      Service.addReview(this.textComment, this.rating, id)
+        .then(response => {
+        }).catch(err => {
+          console.log(err);
+        })
     }
   }
 }

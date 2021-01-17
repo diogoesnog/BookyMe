@@ -111,6 +111,25 @@ class UserService {
     return request.post(body)
   }
 
+  addReview(comment, rating, id) {
+
+    let bodyText = {
+      comment: comment,
+      rating: rating
+    }
+
+    let body = JSON.stringify(bodyText)
+
+    console.log(body);
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`);
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.post(body)
+  }
+
   isFavorite() {
     let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
 
