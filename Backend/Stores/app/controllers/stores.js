@@ -108,6 +108,10 @@ module.exports.editDescription = (id, des) => {
     return Store.findOneAndUpdate({_id: id},{$set: {description: des}}, { new: true })
 }
 
+module.exports.editAddress = (add,id) => {
+    return Store.findOneAndUpdate({_id: id},{$set: {address: add}},{new: true})
+}
+
 module.exports.editPhone = (phone, id) => {
     return Store.findOneAndUpdate({_id: id},{$set: {phone: phone}}, { new: true } )
 }
