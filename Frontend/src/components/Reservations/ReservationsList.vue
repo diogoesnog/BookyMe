@@ -4,7 +4,7 @@
       {{this._id}}
     </div>
     <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
-      <div class="widgetReservation">
+      <div class="widgetReservation" @click="redirect(reservation._id)">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
           <!-- Photo -->
@@ -120,6 +120,9 @@ export default {
     hasCatalog: function(string) {
       if (string == "true") return 0;
       else return 1;
+    },
+    redirect: function(id) {
+      this.$router.push({name: 'Reservation', params:{id:id}})
     }
   }
 }

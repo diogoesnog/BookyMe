@@ -81,7 +81,6 @@ export default {
         .then(response => {
           this.base = response.data["base"];
           this.reservationsCurrent = response.data["data"];
-          console.log("FDS");
           console.log(this.reservationsCurrent);
         }).catch(err => {
           console.log(err)
