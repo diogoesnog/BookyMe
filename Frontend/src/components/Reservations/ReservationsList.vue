@@ -64,7 +64,7 @@
               </q-card-actions>
             </q-card>
           </q-dialog>
-          <!-- Pop Up Alterar Reserva -->
+          <!-- Pop Up Review -->
           <q-dialog v-model="persistentReview" persistent transition-show="scale" transition-hide="scale">
             <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
               <q-card-section style="padding-top: 25px; width: 100%;">
@@ -118,7 +118,7 @@ export default {
     _id: String,
     booking: Array,
     base: String,
-    typeReservation: String
+    typeReservation: String,
   },
 
   data() {
@@ -133,7 +133,7 @@ export default {
       textComment: ''
     }
   },
-
+  
   methods: {
     getWidthNameStore() {
       if(this._id.length > 0 & this._id.length <= 3) return "15%";
@@ -177,9 +177,9 @@ export default {
       else return 1;
     },
     addReview: function(id) {
-      console.log(id);
       Service.addReview(this.textComment, this.rating, id)
         .then(response => {
+          this.persistentReview = false;
         }).catch(err => {
           console.log(err);
         })

@@ -62,7 +62,7 @@ export default {
       reservationsConcluded: Array,
       base: String,
       currentReservation: "current",
-      concludedReservation: "concluded"
+      concludedReservation: "concluded",
     }
   },
 
@@ -83,7 +83,6 @@ export default {
         .then(response => {
           this.base = response.data["base"];
           this.reservationsCurrent = response.data["data"];
-          console.log(this.reservationsCurrent);
         }).catch(err => {
           console.log(err)
         })
@@ -95,7 +94,7 @@ export default {
         }).catch(err => {
           console.log(err)
         })
-    }
+    },
   }
 }
 
