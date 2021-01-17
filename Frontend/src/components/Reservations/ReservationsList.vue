@@ -10,7 +10,7 @@
           <!-- Photo -->
           <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
           </div>
-          <div class="col-6" style="padding: 10px;"  @click="redirect(reservation._id)">
+          <div class="col-6" style="padding: 10px;" @click="redirect(reservation._id)">
             <span class="titleStore">
               {{ reservation.storeName }}
             </span>
@@ -29,8 +29,9 @@
             <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
-          <div v-else class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <img @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
+          <div :id="checkUserReview(reservation.storeId)" v-else class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <img v-if="checkArrayUsers()" style="height: 25px" src="icons/Star.svg"/>
+            <img v-else @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
           </div>
           <!-- Pop Up Alterar Reserva -->
           <q-dialog v-model="persistentChange" persistent transition-show="scale" transition-hide="scale">
@@ -119,6 +120,7 @@ export default {
     booking: Array,
     base: String,
     typeReservation: String,
+    idUser: String
   },
 
   data() {
@@ -130,10 +132,11 @@ export default {
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
       ],
       rating: 4,
-      textComment: ''
+      textComment: '',
+      userIds: Array,
+      hasReview: false
     }
   },
-  
   methods: {
     getWidthNameStore() {
       if(this._id.length > 0 & this._id.length <= 3) return "15%";
@@ -183,6 +186,20 @@ export default {
           this.rating = 4;
           this.textComment = "";
         }).catch(err => {
+          console.log(err);
+        })
+    },
+    checkArrayUsers() {
+      return this.hasReview;
+    },
+    checkUserReview: function(idStore) {
+      Service.getReviewsStore(idStore)
+        .then(response => {
+          let data = response.data["data"];
+          this.userIds = data.map(obj => obj.userId);
+          this.hasReview = this.userIds.includes(this.idUser);
+        })
+        .catch(err => {
           console.log(err);
         })
     }

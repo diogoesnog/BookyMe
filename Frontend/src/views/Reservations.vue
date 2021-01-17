@@ -28,7 +28,7 @@
         {{$t('bookingsPage.emptyType1')}}
       </div>
       <div v-else>
-        <ReservationsList :typeReservation="currentReservation" :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+        <ReservationsList :idUser="idUser" :typeReservation="currentReservation" :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
       </div>
       <br/>
       <div class="title">
@@ -38,7 +38,7 @@
         {{$t('bookingsPage.emptyType2')}}
       </div>
       <div v-else>
-        <ReservationsList :typeReservation="concludedReservation" :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+        <ReservationsList :idUser="idUser" :typeReservation="concludedReservation" :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
       </div>
     <div>
      <Toolbar/>
@@ -63,6 +63,7 @@ export default {
       base: String,
       currentReservation: "current",
       concludedReservation: "concluded",
+      idUser: String
     }
   },
 
@@ -75,6 +76,7 @@ export default {
     console.log("Mounted: View has been rendered");
     this.getReservationsCurrent();
     this.getReservationsConcluded();
+    this.getIdUser();
   },
 
   methods: {
@@ -95,6 +97,14 @@ export default {
           console.log(err)
         })
     },
+    getIdUser(){
+      Service.getProfileData()
+        .then(response => {
+          this.idUser = response.data["data"]["id"];
+        }).catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 
