@@ -18,7 +18,7 @@
       <!-- Info User -->
       <div class="row divInfoUser">
         <div class="col-10" style="text-align: left">
-          <span style="font-weight: 600; font-size: 35px; line-height: 40px;">
+          <span style="font-weight: 600; font-size: 33px; line-height: 40px;">
             {{ $t('homePage.greeting') }}, {{ getFirstName(profile.name) }}
           </span>
         </div>
@@ -78,7 +78,8 @@ export default {
   props: {
     profile: Object,
     stores: Object,
-    base: String
+    basePopular: String,
+    baseProfile: String
   }, 
 
   data() {
@@ -91,11 +92,11 @@ export default {
 
   methods: {
     getImage() {
-      return this.base + this.profile.avatar;
+      return this.baseProfile + this.profile.avatar;
     },
     getImageWidget(url) {
       console.log(url);
-      return "http://localhost:5100" + url;
+      return this.basePopular + url;
     },
     roundRating: function(rating) {
       return Math.round(rating*10)/10;

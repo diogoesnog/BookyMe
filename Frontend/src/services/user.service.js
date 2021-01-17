@@ -153,6 +153,16 @@ class UserService {
     return request.get()
   }
 
+  getStoresDataPopular() {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores/popular`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.get()
+  }
+
   getStoreBySearch(keyword, category) {
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
