@@ -2,7 +2,6 @@
   <div>
     <h3>{{ this.day }}</h3>
     <v-row>
-
       <v-col cols="10" sm="4">
         <v-menu ref="open" v-model="openingMenu" :close-on-content-click="false" :nudge-right="40" :return-value.sync="openingHour" transition="scale-transition" offset-y max-width="290px" min-width="290px">
           <template v-slot:activator="{ on, attrs }">
@@ -22,7 +21,9 @@
       </v-col>
 
       <v-col cols="10" sm="4">
-        x
+        <v-btn icon color="red" @click="deleteSchedule">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </div>
@@ -42,6 +43,12 @@ export default {
     return {
       closeMenu: false,
       openingMenu: false
+    }
+  },
+
+  methods: {
+    deleteSchedule() {
+      this.$emit('deleteSchedule', this._id);
     }
   }
 }

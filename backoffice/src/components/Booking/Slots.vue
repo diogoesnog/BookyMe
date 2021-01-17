@@ -27,6 +27,12 @@
 
 
     <v-data-table :headers="headers" :items="slots" :items-per-page="15">
+
+      <template v-slot:item.action="{ item }" >
+        <v-icon small @click="deleteSlot(item)">
+          mdi-delete
+        </v-icon>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -55,6 +61,10 @@ export default {
         text: "Data",
         sortable: true,
         value: "date"
+      }, {
+        text: 'Ação',
+        align: 'center',
+        value: 'action'
       }]
     }
   },
@@ -73,6 +83,12 @@ export default {
       this.$emit('newSlot', this.slot.override());
       this.slot = new Slot();
       this.dialog = false;
+    },
+
+    deleteSlot(item) {
+      console.log("Child Requested Slot Removal");
+      console.log(item);
+      this.$emit('deleteSlot', item);
     }
   }
 }

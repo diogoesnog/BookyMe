@@ -63,7 +63,11 @@ class Services {
             headers: authHeader()
         });
     }
-
+    getStoreSchedule(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/scheduleList/${id}`, {
+            headers: authHeader()
+        });
+    }
     getStoreById(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores?_id=${id}`, {
             headers: authHeader()
@@ -93,6 +97,24 @@ class Services {
         });
     }
 
+    deleteSlot(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/slot/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    deleteSchedule(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreServices(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+
     // TODO: Add Catalog
 
 
@@ -103,7 +125,7 @@ class Services {
     }
 
     deleteCatalogItem(id) {
-        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/item/${id}`, {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/${id}`, {
             headers: authHeader()
         });
     }
