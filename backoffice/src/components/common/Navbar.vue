@@ -20,7 +20,7 @@
             <v-icon>mdi-calendar-clock</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'Booking', params: {id: this.$route.params.id}}">Bookings</router-link>
+            <router-link :to="{name: 'Booking', params: {id: this.$route.params.id}}">Reservas</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -30,7 +30,7 @@
             <v-icon>mdi-ufo</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            Catalog
+              <router-link :to="{name: 'CatalogList', params: {id: this.$route.params.id}}">Catálogo</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -40,7 +40,7 @@
             <v-icon>mdi-book-information-variant</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">General Info</router-link>
+            <router-link :to="{name: 'EditStore', params: {id: this.$route.params.id}}">Informações Gerais</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -50,7 +50,7 @@
             <v-icon>mdi-camera</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Photos Info</router-link>
+            <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Fotografias</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -60,7 +60,7 @@
             <v-icon>mdi-account-cog</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            Account Settings
+            Definições de Conta
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -75,7 +75,7 @@
               <v-icon>mdi-keyboard-return</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Seletor de Loja</router-link>
+              <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Selector de Loja</router-link>
             </v-list-item-content>
           </v-list-item>
 
@@ -84,9 +84,7 @@
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-content @click="logout">
-            <router-link>
               Logout
-            </router-link>
           </v-list-item-content>
         </v-list-item>
         </v-list>

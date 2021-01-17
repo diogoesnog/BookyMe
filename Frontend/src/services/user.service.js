@@ -220,6 +220,18 @@ class UserService {
 
   }
 
+  getBookingInfo(bookingID) {
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/user`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("bookId", bookingID)
+
+    return request.get()
+  }
+
   getNotifications(read) {
     let request = new Request(`${process.env.API_ENDPOINT}/notification`);
 

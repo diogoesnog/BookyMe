@@ -1,12 +1,20 @@
 <template>
   <div class="col-12">
     <p class="titles" style="padding-top: 35px; padding-left: 30px">{{$t('bookingPage.bookingDetails')}}</p>
+    {{serviceDate}}
+
   </div>
 </template>
 
 <script>
 export default {
-name: "ReservationInfo"
+name: "ReservationInfo",
+  props: {
+    slotId: String,
+    serviceDate: String,
+
+
+  }
 }
 </script>
 
