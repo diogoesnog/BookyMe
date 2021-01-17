@@ -4,13 +4,13 @@
       {{this._id}}
     </div>
     <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
-      <div class="widgetReservation" @click="redirect(reservation._id)">
+      <div class="widgetReservation">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
           <!-- Photo -->
           <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
           </div>
-          <div class="col-6" style="padding: 10px;">
+          <div class="col-6" style="padding: 10px;"  @click="redirect(reservation._id)">
             <span class="titleStore">
               {{ reservation.storeName }}
             </span>
@@ -24,11 +24,16 @@
               {{ getHourDate(reservation.serviceDate) }}
             </span>
           </div>
-          <div class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <img @click="persistent = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+          <!-- 3 Dots -->
+          <div v-if="getTypeReservation() == 0" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+          </div>
+          <!-- Review -->
+          <div v-else class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <img @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
           </div>
           <!-- Pop Up Alterar Reserva -->
-          <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
+          <q-dialog v-model="persistentChange" persistent transition-show="scale" transition-hide="scale">
             <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
               <q-card-section style="padding: 25px; width: 100%;">
                 <span class="titleStorePopup">{{ reservation.storeName }}</span>
@@ -59,6 +64,25 @@
               </q-card-actions>
             </q-card>
           </q-dialog>
+          <!-- Pop Up Alterar Reserva -->
+          <q-dialog v-model="persistentReview" persistent transition-show="scale" transition-hide="scale">
+            <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
+              <q-card-section style="padding: 25px; width: 100%;">
+                <span class="titleStorePopup">{{ reservation.storeName }}</span>
+                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
+              </q-card-section>
+              <q-card-actions style="margin: 20px;" align="center" class="bg-white text-teal">
+                <div class="row" style="width: 100%;">
+                  <div class="col-6" style="padding-right: 10px;">
+                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.editPopup.changeBooking')" v-close-popup />
+                  </div>
+                  <div class="col-6" style="padding-left: 10px;">
+                    <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
+                  </div>
+                </div>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
         </div>
     </div>
@@ -73,12 +97,14 @@ export default {
   props: {
     _id: String,
     booking: Array,
-    base: String
+    base: String,
+    typeReservation: String
   },
 
   data() {
     return {
-      persistent: false,
+      persistentChange: false,
+      persistentReview: false,
       model: null,
       options: [
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
@@ -123,6 +149,10 @@ export default {
     },
     redirect: function(id) {
       this.$router.push({name: 'Reservation', params:{id:id}})
+    },
+    getTypeReservation() {
+      if (this.typeReservation == "current") return 0;
+      else return 1;
     }
   }
 }

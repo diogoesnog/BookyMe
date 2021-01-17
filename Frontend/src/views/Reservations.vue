@@ -28,7 +28,7 @@
         {{$t('bookingsPage.emptyType1')}}
       </div>
       <div v-else>
-        <ReservationsList :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+        <ReservationsList :typeReservation="currentReservation" :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
       </div>
       <br/>
       <div class="title">
@@ -38,7 +38,7 @@
         {{$t('bookingsPage.emptyType2')}}
       </div>
       <div v-else>
-        <ReservationsList :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+        <ReservationsList :typeReservation="concludedReservation" :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
       </div>
     <div>
      <Toolbar/>
@@ -60,7 +60,9 @@ export default {
     return {
       reservationsCurrent: Array,
       reservationsConcluded: Array,
-      base: String
+      base: String,
+      currentReservation: "current",
+      concludedReservation: "concluded"
     }
   },
 
