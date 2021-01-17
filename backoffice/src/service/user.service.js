@@ -99,6 +99,12 @@ class Services {
         });
     }
 
+    deleteSchedule(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/${id}`, {
+            headers: authHeader()
+        });
+    }
+
     getStoreServices(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}`, {
             headers: authHeader()

@@ -22,7 +22,9 @@
       </v-col>
 
       <v-col cols="10" sm="4">
-        x
+        <v-btn icon color="red" @click="deleteSchedule">
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </div>
@@ -42,6 +44,12 @@ export default {
     return {
       closeMenu: false,
       openingMenu: false
+    }
+  },
+
+  methods: {
+    deleteSchedule() {
+      this.$emit('deleteSchedule', this._id);
     }
   }
 }

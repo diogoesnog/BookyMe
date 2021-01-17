@@ -18,7 +18,7 @@
           <v-tab-item>
             <h1 style="padding: 15px">Editar Horário</h1>
 
-            <Schedule v-for="(schedule, index) in store.schedule" :key="index" v-bind="schedule"/>
+            <Schedule v-for="(schedule, index) in store.schedule" :key="index" v-bind="schedule" @deleteSchedule="deleteSchedule"/>
 
             
           </v-tab-item>
@@ -47,7 +47,8 @@ export default {
 
   mounted() {
     this.getStore();
-    this.getCategories
+    this.getCategories();
+    // TODO: getSchedule
   },
 
   methods: {
@@ -79,6 +80,15 @@ export default {
           .catch( err => console.log(err));
     },
 
+    // Schedule Actions
+    deleteSchedule(id) {
+      Services.deleteSchedule(id)
+        .then(response => {
+          console.log(response);
+          this.getStore();
+        })
+        .catch(err => console.log(err));
+    }
   }
 }
 </script>
