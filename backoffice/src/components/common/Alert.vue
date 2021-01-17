@@ -1,5 +1,5 @@
 <template>
-  <v-alert dense :type="alert.type">
+  <v-alert dense :type="alert.type" v-if="alert.status">
     <div class="title">
       {{ alert.title }}
     </div>

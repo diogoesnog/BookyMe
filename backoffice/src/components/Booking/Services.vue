@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       search: '',
-      dialog: true,
+      dialog: false,
       headers: [{
         text: 'Utilizador',
         align: 'start',

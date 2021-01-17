@@ -49,7 +49,6 @@ import Services from '../../service/user.service';
 import ScheduleModel from "@/models/Store/schedule";
 import Service from "@/service/user.service";
 
-
 export default {
   name: "EditStore",
   components: {
@@ -66,7 +65,7 @@ export default {
       schedules: Array,
       schedulesMissing: [],
       addScheduleModal: false,
-      scheduleKey: 0
+      scheduleKey: 0,
     }
   },
 
@@ -100,12 +99,16 @@ export default {
     updateAddress(data) {
       Services.updateAddress(this.id, data)
           .then( response => this.store.phone = response.data[ "data" ].address)
-          .catch( err => console.log(err));
+          .catch( err => {
+            console.log(err)
+          });
     },
     updatePhone(data) {
       Services.updatePhone(this.id, data)
           .then( response =>  this.store.phone = response.data[ "data" ].phone)
-          .catch( err => console.log(err));
+          .catch( err => {
+            console.log(err)
+          });
     },
     updateDescription(data) {
       Services.updateDescription(this.id, data)
@@ -137,13 +140,9 @@ export default {
 
     findMissingSchedules() {
       this.schedulesMissing = [];
-      let newsomething = new ScheduleModel();
-      console.log(newsomething);
       let days = this.schedules.map( d => d.day );
       let keys = [ "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo" ];
       let missing = keys.filter(k => !days.includes(k));
-      console.log(" ======== Missing =========");
-
       for(let i of missing) {
         this.schedulesMissing.push(new ScheduleModel(i));
       }
