@@ -11,9 +11,8 @@ export default {
 name: "ReservationInfo",
   props: {
     slotId: String,
-    serviceDate: String,
-
-
+    serviceId: String,
+    serviceDate: String
   }
 }
 </script>

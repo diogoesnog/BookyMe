@@ -64,22 +64,6 @@ class UserService {
     return request.get()
   }
 
-  /*checkFavorite(id) {
-
-    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
-
-    request.isJson()
-    request.appendHeader("Authorization", authHeader())
-    request.acceptJson()
-
-    let data = request.get()
-    // TODO: procurar ID
-    // let array = data[data]
-    // console.log(array)
-
-    return "5ff4a80f7df75e2ace11b03e";
-  }*/
-
   getBookingUserCurrent(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/current`)
