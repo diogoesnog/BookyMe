@@ -72,7 +72,8 @@ export default {
 
   props: {
     _id: String,
-    booking: Array
+    booking: Array,
+    base: String
   },
 
   data() {
@@ -97,7 +98,7 @@ export default {
       else return "80%"    
     },
     getImage(url) {
-      return this.urlMainPhoto = "http://localhost:5100" + url;
+      return this.urlMainPhoto = this.base + url;
     },
     getHourDate(string) {
       var splits = string.split('T', 2);

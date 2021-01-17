@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       storeID: this.$route.params.id,
-      storeData: Object,
+      storeData: {},
       lang: this.$i18n.locale,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
