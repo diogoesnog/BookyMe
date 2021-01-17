@@ -1,7 +1,6 @@
 <template>
   <div class="col-12">
     <p class="titles" style="padding-top: 35px; padding-left: 30px">{{$t('bookingPage.bookingDetails')}}</p>
-
     <div class="row" :key="key">
       <div class="col-10 infoDiv shadow" v-if="service" style="margin-left: 25px; margin-right: 25px; margin-bottom: 20px">
         <q-icon name="book" left/>

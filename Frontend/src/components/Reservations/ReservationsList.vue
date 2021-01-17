@@ -14,7 +14,7 @@
             <span class="titleStore">
               {{ reservation.storeName }}
             </span>
-            <span v-if="reservation.hasCatalog == true" class="titleService">
+            <span v-if="hasCatalog(reservation.hasCatalog) == 0" class="titleService">
               {{ reservation.service.product }}
             </span>
             <span v-else class="titleService">
@@ -98,7 +98,7 @@ export default {
       else return "80%"    
     },
     getImage(url) {
-      return this.urlMainPhoto = this.base + url;
+      return this.urlMainPhoto = "http://localhost:5100" + url;
     },
     getHourDate(string) {
       var splits = string.split('T', 2);
@@ -116,6 +116,10 @@ export default {
       var hourSplit = hour.split(':00.000Z', 2)[0];
       
       return day + "/" + month + "/" + year + " - " + hourSplit;
+    },
+    hasCatalog: function(string) {
+      if (string == "true") return 0;
+      else return 1;
     }
   }
 }

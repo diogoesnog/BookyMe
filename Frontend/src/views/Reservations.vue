@@ -90,9 +90,7 @@ export default {
     getReservationsConcluded() {
       Service.getBookingUserConcluded()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsConcluded = data;
-          console.log(data);
+          this.reservationsConcluded = response.data["data"];
         }).catch(err => {
           console.log(err)
         })
