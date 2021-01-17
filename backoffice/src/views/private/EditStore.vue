@@ -6,17 +6,17 @@
       </v-col>
       <v-col cols="10">
         <v-tabs>
-          <v-tab>General</v-tab>
-          <v-tab>Scheduling</v-tab>
+          <v-tab>Geral</v-tab>
+          <v-tab>Horário</v-tab>
 
           <v-tab-item>
-            <h1 style="padding: 15px">Edit Store information</h1>
+            <h1 style="padding: 15px">Editar Informações Gerais</h1>
 
             <General v-bind:store="store" @updateDescription="updateDescription" @updateAddress="updateAddress" @updatePhone="updatePhone"/>
           </v-tab-item>
 
           <v-tab-item>
-            <h1 style="padding: 15px">Edit Schedule</h1>
+            <h1 style="padding: 15px">Editar Horário</h1>
 
             <Schedule v-for="(schedule, index) in store.schedule" :key="index" v-bind="schedule"/>
 

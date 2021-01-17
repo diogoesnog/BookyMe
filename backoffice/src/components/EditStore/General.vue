@@ -1,15 +1,15 @@
 <template>
   <div>
     <v-form>
-      <v-text-field label="Name" v-model="store.name"></v-text-field>
-      <v-text-field label="Phone Number" v-model="store.phone"></v-text-field>
+      <v-text-field label="Nome" v-model="store.name"></v-text-field>
+      <v-text-field label="Contacto Telefónico" v-model="store.phone"></v-text-field>
 
-      <v-text-field label="Place" v-model="store.address.place"></v-text-field>
-      <v-text-field label="Zip Code" v-model="store.address.zipcode"></v-text-field>
-      <v-text-field label="City" v-model="store.address.city"></v-text-field>
-      <v-text-field label="Country" v-model="store.address.country"></v-text-field>
+      <v-text-field label="Morada" v-model="store.address.place"></v-text-field>
+      <v-text-field label="Código Postal" v-model="store.address.zipcode"></v-text-field>
+      <v-text-field label="Cidade" v-model="store.address.city"></v-text-field>
+      <v-text-field label="País" v-model="store.address.country"></v-text-field>
 
-      <v-textarea phone="Description" outlined v-model="store.description" type="text"></v-textarea>
+      <v-textarea label="Descrição" outlined v-model="store.description" type="text"></v-textarea>
 
       <!-- TODO: Update Coordinates -->
       <v-btn block color="primary" @click="saveData">Save</v-btn>
