@@ -13,12 +13,13 @@ module.exports.getStoreReservations = (token, store, params) => {
     return request.get();
 }
 
-module.exports.getUserReservations = (token) => {
+module.exports.getUserReservations = (token, params) => {
 
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/user`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
+    request.setParams(params);
     request.acceptJson();
 
     return request.get();

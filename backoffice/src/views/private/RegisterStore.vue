@@ -3,8 +3,11 @@
     <div class="center-content text-center">
       <img src="../../assets/Logo.png" class="logo-header"/>
       <div class="content-margins">
-        <StoreForm v-if="storeRegistered" @storeCreated="storeCreated"/>
-        <Schedule v-else/>
+        <StoreForm v-if="!storeRegistered" @storeCreated="storeCreated"/>
+        <div v-else>
+          <Schedule v-for="(workday, index) in workdays" :key="index" :workday="workday"></Schedule>
+          <v-btn block color="primary" @click="createSchedule">Add Schedule</v-btn>
+        </div>
       </div>
 
       <div class="content-margins" style="margin-bottom: 0;">
@@ -16,6 +19,9 @@
 <script>
 import StoreForm from '../../components/RegisterStore/General';
 import Schedule from '../../components/RegisterStore/Schedule';
+import ScheduleModal from '../../models/Store/schedule';
+import Service from '../../service/user.service';
+
 export default {
   name: "RegisterStore",
   components: {
@@ -25,15 +31,39 @@ export default {
     return {
       storeRegistered: false,
       store: Object,
-      progress: 0
+      progress: 0,
+
+      // Workdays
+      workdays: [
+        new ScheduleModal("Segunda-feira"),
+        new ScheduleModal("Terça-feira"),
+        new ScheduleModal("Quarta-feira"),
+        new ScheduleModal("Quinta-feira"),
+        new ScheduleModal("Sexta-feira"),
+        new ScheduleModal("Sábado"),
+        new ScheduleModal("Domingo")
+      ]
     }
   },
-
+  mounted() { },
   methods: {
     storeCreated(store) {
       this.store = store;
       this.storeRegistered = true;
       this.progress = 50;
+    },
+
+    createSchedule() {
+      this.workdays.forEach(workday => {
+        if(workday.openingHour && workday.closingHour) {
+          Service.updateSchedule(this.store["_id"], workday)
+            .then(result => {
+              console.log(result);
+            }).catch(err => {
+              console.log(err)
+          })
+        }
+      });
     }
   }
 }

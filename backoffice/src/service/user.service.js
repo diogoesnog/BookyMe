@@ -11,7 +11,9 @@ class Services {
     registerStore(store) {
         // let request = new Request(`${process.env.API_ENDPOINT}/stores`);
 
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store, {
+            headers: authHeader()
+        });
     }
 
     currentUser() {
@@ -68,10 +70,28 @@ class Services {
         });
     }
 
-    
+    getCategories() {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/categories`, {
+            headers: authHeader()
+        });
+    }
 
-    // TODO: Add Opening Hours
+    updateSchedule(id, schedule) {
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/schedule`, schedule, {
+            headers: authHeader()
+        });
+    }
 
+    getStoreSlots(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+    addSlot(id, slot) {
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, slot, {
+            headers: authHeader()
+        });
+    }
 
     // TODO: Add Catalog
 

@@ -23,7 +23,7 @@ router.get('/store/:id', (req, res) => {
 
 // TODO: is store admin
 router.post('/store/:id', validator([
-    'product', 'price', 'abstract'
+    "product", "price", "abstract"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
     Catalog.addCatalog(req.params.id, body)
@@ -39,7 +39,7 @@ router.delete('/store/:id', (req, res) => {
 
 });
 
-router.delete('/store/item/:id', (req, res) => {
+router.delete('/store/catalog/:id', (req, res) => {
     Catalog.deleteCatalogItem(req.params.id)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));

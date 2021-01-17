@@ -1,13 +1,10 @@
 <template>
   <div>
-    <StoreBanner v-bind="storeData"/>
+    <!--      TODO: Fazer o script para ir buscar as informações da reserva e da loja respetiva -->
+    <ReservationBanner v-bind="storeData"/>
     <div class="divBottom">
-      <StorePhotos v-bind="storeData"/>
-      <StoreDescription v-bind="storeData"/>
-      <StoreMap v-bind="storeData"/>
-      <StoreCatalog v-bind="storeData"/>
-      <StoreRatings v-bind="storeData"/>
-      <StoreBooking v-bind="storeData"/>
+      <ReservationInfo v-bind="bookingData"/>
+      <StoreMap />
     </div>
     <Toolbar/>
   </div>
@@ -16,32 +13,26 @@
 <script>
 
 import Toolbar from 'components/Root/Toolbar';
-import Service from '../services/user.service'
-import StoreBanner from 'components/Store/StoreBanner';
-import StoreRatings from "components/Store/StoreRatings";
-import StorePhotos from "components/Store/StorePhotos";
+import Service from '../services/user.service';
+import ReservationBanner from "components/Reservation/ReservationBanner";
 import StoreMap from "components/Store/StoreMap";
-import StoreCatalog from "components/Store/StoreCatalog";
-import StoreDescription from "components/Store/StoreDescription";
-import StoreBooking from "components/Store/StoreBooking";
+import ReservationInfo from "components/Reservation/ReservationInfo";
+
 
 export default {
 
-  name: "Store",
+  name: "Reservation",
   components: {
-    StoreBanner,
-    StorePhotos,
-    StoreDescription,
+    ReservationInfo,
+    ReservationBanner,
     StoreMap,
-    StoreCatalog,
-    StoreRatings,
-    StoreBooking,
     Toolbar
   },
 
   data() {
     return {
-      storeID: this.$route.params.id,
+      bookingID: this.$route.params.id,
+      bookingData: {},
       storeData: {},
       lang: this.$i18n.locale,
       langOptions: [
@@ -62,10 +53,34 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.fetchStoreData();
+    this.fetchBookingData();
   },
 
   methods: {
+
+    fetchBookingData() {
+      this.$q.loading.show({ delay: 400});
+
+      Service.getBookingInfo(this.bookingID)
+        .then(response => {
+
+          console.group("Booking Information:")
+          let data = response.data["data"];
+          this.bookingData = data[0].booking[0];
+          this.storeID = this.bookingData["storeId"];
+          console.log("Informação do booking:")
+          console.log(this.bookingData);
+          console.log("ID da Store associada: " + this.storeID);
+          console.groupEnd()
+
+          this.fetchStoreData();
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+
+    },
+
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
       Service.getStoreData(this.storeID)

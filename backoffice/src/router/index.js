@@ -39,6 +39,14 @@ const routes = [
     }
   },
   {
+    path: '/store/:id/booking',
+    name: "Booking",
+    component: () => import('../views/private/Booking'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     name: "PhotoStore",
     path: '/store/:id/photos',
     component: () => import('../views/private/Photos'),
