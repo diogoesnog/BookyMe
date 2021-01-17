@@ -54,7 +54,6 @@ export default {
     },
 
     createSchedule() {
-
       this.workdays.forEach(workday => {
         if(workday.openingHour && workday.closingHour) {
           Service.updateSchedule(this.store["_id"], workday)
