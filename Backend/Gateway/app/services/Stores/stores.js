@@ -114,6 +114,14 @@ module.exports.getPopular = () => {
     return request.get();
 }
 
+module.exports.getScheduleList = (id) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/scheduleList/${id}`);
+
+    request.isJson();
+
+    return request.get();
+}
+
 // TODO: move to user endpoint services
 module.exports.userFavorites = (user) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${user}`);
