@@ -4,7 +4,7 @@
     <ReservationBanner v-bind="storeData"/>
     <div class="divBottom">
       <ReservationInfo v-bind="bookingData"/>
-      <StoreMap />
+      <StoreMap v-bind="storeData"/>
     </div>
     <Toolbar/>
   </div>
