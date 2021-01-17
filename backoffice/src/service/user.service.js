@@ -63,7 +63,11 @@ class Services {
             headers: authHeader()
         });
     }
-
+    getStoreSchedule(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/scheduleList/${id}`, {
+            headers: authHeader()
+        });
+    }
     getStoreById(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores?_id=${id}`, {
             headers: authHeader()

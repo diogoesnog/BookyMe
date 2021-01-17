@@ -2,7 +2,6 @@
   <div>
     <h3>{{ this.day }}</h3>
     <v-row>
-
       <v-col cols="10" sm="4">
         <v-menu ref="open" v-model="openingMenu" :close-on-content-click="false" :nudge-right="40" :return-value.sync="openingHour" transition="scale-transition" offset-y max-width="290px" min-width="290px">
           <template v-slot:activator="{ on, attrs }">
