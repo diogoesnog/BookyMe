@@ -61,7 +61,7 @@ module.exports.updateDescription = (store, description) => {
     request.isJson();
     request.acceptJson();
 
-    return request.put(description);
+    return request.patch(description);
 }
 
 module.exports.updateAddress = (store, address) => {
@@ -70,14 +70,14 @@ module.exports.updateAddress = (store, address) => {
     request.isJson();
     request.acceptJson();
 
-    return request.post(address);
+    return request.patch(address);
 }
 
 module.exports.updatePhone = (store, phone) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/phone`);
     request.isJson();
     request.acceptJson();
-    return request.put(phone);
+    return request.patch(phone);
 }
 
 module.exports.addCoordinates = (store, coordinates) => {
