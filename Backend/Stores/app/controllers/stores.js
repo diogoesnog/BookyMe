@@ -10,6 +10,31 @@ module.exports.getSchedule = (storeId, day) => {
     return Store.findOne({_id: storeId},{ schedule: {$elemMatch: {day: day}}})
 }
 
+module.exports.getScheduleList = async (storeId) => {
+
+    let mongoResult = await Store.findOne({_id: storeId},{ schedule: 1})
+    let data = mongoResult.schedule
+    const sorter = {
+        "Segunda-feira": 1,
+        "Terça-feira": 2,
+        "Quarta-feira": 3,
+        "Quinta-feira": 4,
+        "Sexta-feira": 5,
+        "Sábado": 6,
+        "Domingo": 7
+      }
+      
+      const order = { "Segunda-feira": 1, "Terça-feira": 2, "Quarta-feira": 3, "Quinta-feira": 4, "Sexta-feira": 5, "Sábado": 6, "Domingo": 7 };
+      
+      
+      data.sort(function (a, b) {
+          return order[a.day] - order[b.day];
+      });
+
+      console.log(data)
+    return data      
+}
+
 module.exports.getStore = (id) => {
     return Store.findOne({_id: id});
 }
@@ -110,6 +135,10 @@ module.exports.setCoordinates = (lat, long, id) => {
 
 module.exports.removeStorePhoto = (id, pId) => {
     return Store.findOneAndUpdate({_id: id},{$pull: {photos: {'_id': pId}}}, { new: true } )
+}
+
+module.exports.removeStoreSchedule = (id, sId) => {
+    return Store.findOneAndUpdate({_id: id},{$pull: {schedule: {'_id': sId}}}, { new: true } )
 }
 
 
