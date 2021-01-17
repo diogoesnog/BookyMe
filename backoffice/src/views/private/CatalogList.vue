@@ -58,8 +58,8 @@ export default {
     }
   },
   mounted(){
-      console.log('Loading store catalog...')
-      this.fetchCatalogs()
+      console.log('Loading store catalog...');
+      this.fetchCatalogs();
   },
   methods: {
 
@@ -88,13 +88,14 @@ export default {
     },
 
     deleteCatalog(item){
+      console.log("Deleting", item._id);
         Services.deleteCatalogItem(item._id)
           .then(response => {
-            console.log('Successfully deleted catalog ' + response);
-            /*const index = this.catalogs.indexOf(item)
-            if (index > -1) {
-              this.catalogs.splice(index, 1);
-            }*/
+            let data = response.data[ "data" ]
+            console.log(data);
+            if(data.deletedCount === 1) {
+              this.fetchCatalogs();
+            }
           }).catch(err => console.log(err.data));
     }
   }

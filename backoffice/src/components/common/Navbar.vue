@@ -75,7 +75,7 @@
               <v-icon>mdi-keyboard-return</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Selector de Loja</router-link>
+              <router-link :to="{name: 'Home', params: {id: this.$route.params.id}}">Selector de Loja</router-link>
             </v-list-item-content>
           </v-list-item>
 
@@ -84,7 +84,7 @@
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-content @click="logout">
-              Logout
+            <a href="#" @click="logout">Logout</a>
           </v-list-item-content>
         </v-list-item>
         </v-list>
@@ -105,6 +105,7 @@ export default {
   methods: {
     logout() {
       AuthService.logout();
+      this.$router.push('/');
     }
   }
 }

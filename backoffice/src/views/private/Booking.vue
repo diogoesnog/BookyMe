@@ -14,11 +14,12 @@
 
           <v-tab-item>
             <h2>Slots</h2>
-            <Slots v-bind:slots="slots" @newSlot="newSlot"></Slots>
+            <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
           </v-tab-item>
 
           <v-tab-item>
             <h2>Reservas</h2>
+            <Services v-bind:bookings="bookings"/>
           </v-tab-item>
           <v-tab-item>
             <h2>Notificações Enviadas</h2>
@@ -36,17 +37,20 @@ export default {
   name: "Booking",
 
   components: {
-    Navbar: () => import('../../components/common/Navbar'),
-    Slots: () => import("@/components/Booking/Slots")
+    Navbar: () => import('@/components/common/Navbar'),
+    Slots: () => import("@/components/Booking/Slots"),
+    Services: () => import("@/components/Booking/Services")
   },
   data() {
     return {
       id: this.$route.params.id,
       slots: [],
+      bookings: Array
     }
   },
   mounted() {
     this.getStoreSlots();
+    this.getStoreServices();
   },
 
   methods: {
@@ -55,7 +59,11 @@ export default {
           .then(response => this.slots = response.data["data"])
           .catch(err => console.log(err.data));
     },
-
+    getStoreServices() {
+      Service.getStoreServices(this.id)
+          .then(response => this.bookings = response.data["data"])
+          .catch(err => console.log(err.data));
+    },
     newSlot(data) {
       window.alert("Adding Slot");
 
@@ -64,6 +72,15 @@ export default {
           console.log(response);
           this.slots.push(response.data["data"]);
         }).catch(err => console.log(err));
+    },
+    deleteSlot(data) {
+
+      Service.deleteSlot(data._id)
+          .then( ()  => this.getStoreSlots())
+          .catch(err => {
+            window.alert("Não foi possível remover o slot selecionado!");
+            console.log(err)
+        });
     }
   }
 }

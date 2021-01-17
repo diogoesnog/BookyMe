@@ -99,9 +99,23 @@ module.exports.deletePhoto = (store, photo) => {
     return request.delete();
 }
 
+module.exports.deleteSchedule = (store, schedule) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photos/${schedule}`);
+
+    return request.delete();
+}
+
 
 module.exports.getPopular = () => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/popular`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+module.exports.getScheduleList = (id) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/scheduleList/${id}`);
 
     request.isJson();
 

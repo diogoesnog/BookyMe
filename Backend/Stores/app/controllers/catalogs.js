@@ -10,7 +10,7 @@ module.exports.removeStoreCatalogs = (id) => {
 
 
 module.exports.removeCatalog = (id) => {
-    return Catalog.deleteOne({_id: id})
+    return Catalog.deleteOne({_id: id}, { new: true } )
 }
 
 module.exports.insertCatalog = (catalog) => {
