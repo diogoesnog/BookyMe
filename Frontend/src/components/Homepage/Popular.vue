@@ -34,16 +34,16 @@
       {{ $t('homePage.morePopular') }} 
     </div>
     <div class="wrapper">
-        <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
+        <div @click="redirect(store._id)" v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
           <div class="row">
             <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
             </div>
           <div class="row" style="padding: 15px">
             <div class="col-7" style="text-align: left; margin-top: -5px; display: inline-grid;">
-              <span style="font-weight: 670; display: inline-block; width: 125px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
+              <span style="font-weight: 670; display: inline-block; width: 120px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 17px;">
                 {{ store.name }}
               </span>
-              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 14px;">
+              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
                 {{ store.address.city }}
               </span>
             </div>
@@ -103,6 +103,9 @@ export default {
     },
     getFirstName: function(name) {
       return name.split(" ")[0];
+    },
+    redirect: function(id) {
+      this.$router.push({name: 'Store', params:{id:id}})
     }
   }
 }

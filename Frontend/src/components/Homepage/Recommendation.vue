@@ -2,16 +2,16 @@
   <div style="color: #434343; padding-top: 15px; padding-left: 25px; padding-bottom: 100px;">
     <p class="titles">{{$t('homePage.recommended')}}</p>
     <div class="wrapper">
-        <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
+        <div @click="redirect(store._id)" v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
           <div class="row">
             <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
             </div>
           <div class="row" style="padding: 15px">
             <div class="col-7" style="text-align: left; margin-top: -5px; display: inline-grid;">
-              <span style="font-weight: 670; display: inline-block; width: 125px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
+              <span style="font-weight: 670; display: inline-block; width: 120px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 17px;">
                 {{ store.name }}
               </span>
-              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 14px;">
+              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
                 {{ store.address.city }}
               </span>
             </div>
@@ -50,11 +50,22 @@ export default {
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
     },
+    redirect: function(id) {
+      this.$router.push({name: 'Store', params:{id:id}})
+    }
   }
 }
 </script>
 
 <style scoped>
+
+  .divRating {
+    text-align: center;
+    height: 30px;
+    border-radius: 20px;
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
 
   .divPhoto {
     width: 100%;
@@ -72,8 +83,8 @@ export default {
   }
 
   .wrapper {
-    margin-left: 20px;
-    margin-top: -25px;
+    margin-left: 0px;
+    margin-top: -5px;
     position: sticky;
     overflow-x: scroll;
     overflow-y: hidden;
