@@ -127,7 +127,6 @@ router.post('/:id/picture', upload.single('file'), async (req, res) => {
 
 });
 
-// TODO: test this endpoint
 router.post('/:id/schedule', validator([
     "day", "openingHour", "closingHour"
 ]), (req, res) => {
@@ -140,7 +139,6 @@ router.post('/:id/schedule', validator([
 });
 
 
-// TODO: test this endpoint
 router.patch('/:id/description', validator([
     "description"
 ]), (req, res) => {
@@ -151,9 +149,8 @@ router.patch('/:id/description', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: test this endpoint
-router.patch('/:id/address', validator([
-    "address"
+router.put('/:id/address', validator([
+    "place", "zipcode", "city", "country"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
 
@@ -162,7 +159,6 @@ router.patch('/:id/address', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: test this endpoint
 router.patch('/:id/phone', validator([
     "phone"
 ]), (req, res) => {
@@ -191,7 +187,6 @@ router.delete('/:id', (req, res) => {
 });
 
 
-// TODO: test this endpoint
 router.delete('/:id/photos/:photo', (req, res) => {
 
     Store.deletePhoto(req.params.id, req.params.photo)
