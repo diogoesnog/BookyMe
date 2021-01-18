@@ -17,6 +17,10 @@ const slotSchema = new mongoose.Schema({
     capacity: {
         type: Number,
         required: true
+    },
+    is_full: {
+        type: Boolean,
+        default: false
     }
 })
 

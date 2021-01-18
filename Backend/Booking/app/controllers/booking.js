@@ -252,3 +252,7 @@ module.exports.getSlotCurrentCapacity = (slotId) => {
 module.exports.getSlots = (slotId) => {
     return Booking.find({slotId: slotId, canceled: false});
 };
+
+module.exports.getSlotIdFromBookingId = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, slotId: 1});
+};

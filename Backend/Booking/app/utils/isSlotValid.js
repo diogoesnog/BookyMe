@@ -6,14 +6,15 @@ module.exports.isSlotFree = async (slotId) => {
         let currentCapacity = (await Booking.getSlotCurrentCapacity(slotId)).shift();
         const MaxCapacity = (await Slot.getSlotCapacity(slotId)).capacity;
 
-        if (currentCapacity) {
-            currentCapacity = currentCapacity.currentCapacity;
-            if (currentCapacity >= MaxCapacity) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
+        if (!currentCapacity) currentCapacity = 0;
+        else currentCapacity = currentCapacity.currentCapacity;
+
+        if (currentCapacity+1 === MaxCapacity)
+            return 2;
+        else if (currentCapacity >= MaxCapacity)
+            return 1;
+        else
+            return 0;
     } catch {
         return -1;
     }
@@ -48,5 +49,7 @@ module.exports.isSlotValid = async (slotId, storeId) => {
             return 0;
         case 1:     // Is full
             return 1;
+        case 2:     // Will be full
+            return 2;
     }
 }
