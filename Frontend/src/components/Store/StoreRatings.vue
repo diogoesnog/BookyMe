@@ -1,12 +1,12 @@
 <template>
   <div class="col-12">
-    <p class="titles" style="padding-top: 15px; padding-left: 30px">{{$t('storePage.ratings')}}</p>
+    <p class="titles" style="padding-top: 30px; padding-left: 30px">{{$t('storePage.ratings')}}</p>
     <div class="row" style="margin: 15px; padding-top: 10px; padding-right: 20px;">
       <!-- Rating Total -->
       <div class="col-5" style="padding-right: 15px;">
         <div class="row">
           <div class="col-12 ratingTotal1">
-            {{ roundRating(this.rating) }}
+            {{ roundRating() }}
           </div>
           <div class="col-12 ratingTotal2">
             <span style="font-weight: 700">Total</span><br/>{{ this.reviews.length }}
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       storeID: this.$route.params.id,
+      reviews: Array,
       fiveStars: "",
       fourStars: "",
       threeStars: "",
@@ -86,8 +87,8 @@ export default {
   },
   
   props: {
-    rating: String,
-    reviews: Array
+    _id: String,
+    rating: Number,
   },
 
   mounted() {
@@ -95,8 +96,8 @@ export default {
   },
 
   methods: {
-    roundRating: function(rating) {
-      return Math.round(rating*10)/10;
+    roundRating() {
+      return Math.round(this.rating*10)/10;
     }, 
     fetchStoreReviews() {
       Service.getReviewsStore(this.storeID)

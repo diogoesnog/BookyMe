@@ -52,6 +52,19 @@ services:
     depends_on:
       - mongo-stores
       
+  notificationservice:
+    container_name: notification-service
+    restart: always
+    env_file:
+      - ./Environment/NotificationService.env
+    build: ./Notifications
+    ports: 
+      - "5300:5300"
+    networks:
+      - bookyme-network
+    depends_on:
+      - mongo-notification
+
   bookingservice:
     container_name: booking-service
     restart: always
@@ -67,7 +80,11 @@ services:
     depends_on:
       - mongo-booking
 
-  # Databases
+
+
+
+  # MongoDB Databases
+  # And JSON seaders
   # User Service
   mongo-users:
     container_name: mongo-users
@@ -106,6 +123,18 @@ services:
       - bookyme-network
     ports:
       - "3222:3222"
+
+  mongo-notification:
+    container_name: mongo-notification
+    restart: on-failure
+    image: mongo 
+    command: mongod --port 3223
+    volumes:
+      - data-volume:/data-db
+    networks:
+      - bookyme-network
+    ports:
+      - "3223:3223"
 
   # Mongo Seeders
   users-seed:

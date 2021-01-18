@@ -1,14 +1,15 @@
 const express = require('express');
 const app = express.Router();
 const Booking = require('../../controllers/booking');
+const Slot = require('../../controllers/slot');
 const checkAuth = require('../../middlewares/checkAuth');
 const isAdmin = require('../../middlewares/isAdmin');
-const getStoreId = require('../../middlewares/getStoreId');
-const { isOpen } = require('../../utils/isOpen');
+const getStoreIdFromBookingId = require('../../middlewares/getStoreIdFromBookingId');
+const getStoreIdFromSlotId = require('../../middlewares/getStoreIdFromSlotId');
 const { sameDay } = require('../../utils/sameDay')
 const Response = require('rapid-status');
-const Store = require('../../services/Stores/stores');
-const Catalog = require('../../services/Stores/catalog');
+const {isSlotValid} = require("../../utils/isSlotValid");
+const {storeInfo} = require("../../utils/storeInfo");
 
 /**
  * Get list of reservations
@@ -30,8 +31,11 @@ app.get('/', checkAuth, (req, res) => {
  * URL param: /store/${id}
  */
 app.get('/store/:id', isAdmin, (req, res) => {
+    const state = req.query.state;
+    const canceled = req.query.canceled || false;
+
     if (req.user.isAdmin === true) {
-        Booking.getBookingsByStore(req.params.id)
+        Booking.getBookingsByStore(req.params.id, state, canceled)
             .then(data => {
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);
@@ -51,15 +55,31 @@ app.get('/store/:id', isAdmin, (req, res) => {
  * URL param: /user
  */
 app.get('/user', checkAuth, (req, res) => {
-    Booking.getBookingsByUser(req.user.id)
-        .then(data => {
-            const response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        })
-        .catch(err => {
-            const response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        });
+    const userId = req.user.id;
+    const bookId = req.query.bookId;
+
+    if (!bookId) {
+        Booking.getBookingsByUser(userId)
+            .then(data => {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            });
+    }
+    else {
+        Booking.getBookingByUserBookId(userId, bookId)
+            .then(data => {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            });
+    }
 });
 
 app.get('/user/current', checkAuth, (req, res) => {
@@ -117,48 +137,75 @@ app.get('/popular', checkAuth, (req, res) => {
  * {serviceDate}: Date
  */
 app.post('/:storeId', checkAuth, async (req, res) => {
-    let city, storeName, photoPath, catalogData, hasCatalog = false;
     const serviceId = req.body.serviceId;
-    let catalog;
+    const slotId = req.body.slotId;
+    const storeId = req.params.storeId;
+    const userId = req.user.id;
 
-    try {
-        city = (await Store.getStore(req.params.storeId)).data.data.address.city;
-        storeName = (await Store.getStore(req.params.storeId)).data.data.name;
-    } catch (err) {
-        const response = Response.INTERNAL_ERROR(err, "Error getting info about the store");
-        res.status(response.status).jsonp(response);
+    let city, storeName, photoPath, hasCatalog, catalog;
+    let willBeFull = false;
+
+    // Check if slot belongs to the store and if it is full
+    let response;
+    switch (await isSlotValid(slotId, storeId)) {
+        case 0:
+            break;
+        case 2:
+            willBeFull = true;
+            break;
+        case 1:
+            response = Response.BAD_REQUEST("Selected Slot is Full!");
+            res.status(response.status).jsonp(response);
+            return;
+        case -1:
+            response = Response.BAD_REQUEST("Slot doesn't belong to the store");
+            res.status(response.status).jsonp(response);
+            return;
+        case -2:
+            response = Response.BAD_REQUEST("Please enter a valid slot");
+            res.status(response.status).jsonp(response);
+            return;
+        case -3:
+            response = Response.INTERNAL_ERROR( "Error getting the capacity of the slot. Does the slot exist?");
+            res.status(response.status).jsonp(response);
+            break
     }
-    try { // optional
-        photoPath = (await Store.getStore(req.params.storeId)).data.data.photos.shift().url;
-    } catch {}
 
+    // Get store info
     try {
-        catalogData = (await Catalog.getByStore(req.params.storeId)).data.data;
-        if (catalogData.length > 0) {
-            if (serviceId !== null) {
-                for (item in catalogData)
-                    if (serviceId === catalogData[item]._id)
-                        catalog = {
-                            _id: serviceId,
-                            product: catalogData[item].product,
-                            price: catalogData[item].price,
-                            abstract: catalogData[item].abstract
-                        }
-            }
-            hasCatalog = true;
-        }
+        [city, storeName, photoPath, hasCatalog, catalog] = await storeInfo(storeId, serviceId);
     } catch {
-        hasCatalog = false;
+        const response = Response.INTERNAL_ERROR("Error getting info about the store");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    // Get serviceDate
+    let serviceDate;
+    try {
+        serviceDate = (await Slot.getServiceDate(slotId)).date;
+    } catch (err) {
+        const response = Response.INTERNAL_ERROR(err);
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    // Check if serviceDate is in the past
+    if (new Date(Date.now()) > new Date(serviceDate)) {
+        const response = Response.BAD_REQUEST("The date is from the past!");
+        res.status(response.status).jsonp(response);
+        return;
     }
 
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
-        serviceDate: new Date(req.body.serviceDate).toISOString(),
-        userId: req.user.id,
-        storeId: req.params.storeId,
+        serviceDate: new Date(serviceDate).toISOString(),
+        userId: userId,
+        storeId: storeId,
         city: city,
         storeName: storeName,
         mainStorePhotoURL: photoPath,
+        slotId: slotId,
         hasCatalog: hasCatalog,
         service: catalog
     };
@@ -168,41 +215,16 @@ app.post('/:storeId', checkAuth, async (req, res) => {
         if(booking[key] === undefined) delete booking[key];
     });
 
-    if (new Date(Date.now()) > new Date(booking.serviceDate)) {
-        const response = Response.BAD_REQUEST("The date is from the past!");
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
-    let schedule;
-    let weekService = new Date(booking.serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
-    weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
+    // Create Booking
     try {
-        schedule = (await Store.getSchedule(booking.storeId, weekService)).data.data.schedule["0"];
-    } catch (err) {
+        const data = await Booking.createBooking(booking);
+        if (willBeFull)
+            await Slot.slotIsFull(slotId);
+        const response = Response.OK(data);
+        res.status(response.status).jsonp(response);
+    }
+    catch (err) {
         const response = Response.INTERNAL_ERROR(err);
-        res.status(response.status).jsonp(response);
-    }
-
-    if (schedule == null) {
-        const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
-    const serviceOpen = isOpen(new Date(booking.serviceDate), schedule);
-    if (serviceOpen) {
-        Booking.createBooking(booking)
-            .then(data => {
-                const response = Response.OK(data);
-                res.status(response.status).jsonp(response);
-            })
-            .catch(err => {
-                const response = Response.INTERNAL_ERROR(err);
-                res.status(response.status).jsonp(response);
-            });
-    } else {
-        const response = Response.BAD_REQUEST("The service is closed");
         res.status(response.status).jsonp(response);
     }
 });
@@ -211,26 +233,31 @@ app.post('/:storeId', checkAuth, async (req, res) => {
  * Cancel a reservation by id
  * URL param: id
  */
-app.patch('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
+app.patch('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) => {
+    const bookingId = req.params.id;
+
     try {
         const ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
 
         if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
-            Booking.cancelBookings(req.params.id)
-                .then(data => {
-                    const response = Response.OK(data);
-                    res.status(response.status).jsonp(response);
-                })
-                .catch(err => {
-                    const response = Response.INTERNAL_ERROR(err);
-                    res.status(response.status).jsonp(response);
-                });
+
+            try {
+                const data = await Booking.cancelBookings(bookingId);
+                const old_slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
+                await Slot.slotIsNotFull(old_slotId);
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            } catch (err) {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            }
+
         } else {
             const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to delete this reservation");
             res.status(response.status).jsonp(response);
         }
-    } catch {
-        const response = Response.INTERNAL_ERROR("Can't find userID. Does the reservation exist?");
+    } catch (err) {
+        const response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
     }
 });
@@ -241,22 +268,80 @@ app.patch('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
  * body {array} with the following object
  * {serviceDate}: Date
  */
-app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
+app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) => {
+    const bookingId = req.params.id;
     const bookingDate = new Date(Date.now()).toISOString();
-    const serviceDate = new Date(req.body.serviceDate).toISOString();
     const serviceId = req.body.serviceId;
-    let schedule, ReservationUserId, catalog;
+    const slotId = req.body.slotId;
+    const storeId = req.storeId;
 
-    let weekService = new Date(serviceDate).toLocaleTimeString('pt-pt', {weekday: 'long'}).split(',')[0];
-    weekService = weekService.charAt(0).toUpperCase() + weekService.slice(1); // Capitalize the First Letter
+    let catalog;
+    let old_slotId;
+    let willBeFull = false;
 
     try {
-        schedule = (await Store.getSchedule(req.storeId, weekService)).data.data.schedule["0"];
-    } catch {
-        const response = Response.INTERNAL_ERROR("There is no store schedule for that day");
+        old_slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
+    }
+    catch (err) {
+        response = Response.INTERNAL_ERROR( err);
         res.status(response.status).jsonp(response);
     }
 
+    // Check if slot belongs to the store and if it is full
+    let response;
+    if (old_slotId !== slotId) {
+        switch (await isSlotValid(slotId, storeId)) {
+            case 0:
+                break;
+            case 2:
+                willBeFull = true;
+                break;
+            case 1:
+                response = Response.BAD_REQUEST("Selected Slot is Full!");
+                res.status(response.status).jsonp(response);
+                return;
+            case -1:
+                response = Response.BAD_REQUEST("Slot doesn't belong to the store");
+                res.status(response.status).jsonp(response);
+                return;
+            case -2:
+                response = Response.BAD_REQUEST("Please enter a valid slot");
+                res.status(response.status).jsonp(response);
+                return;
+            case -3:
+                response = Response.INTERNAL_ERROR("Error getting the capacity of the slot. Does the slot exist?");
+                res.status(response.status).jsonp(response);
+                break
+        }
+    }
+
+    // Get store info
+    try {
+        [_, _, _, _, catalog] = await storeInfo(storeId, serviceId);
+    } catch {
+        const response = Response.INTERNAL_ERROR("Error getting info about the store");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    // Get serviceDate
+    let serviceDate;
+    try {
+        serviceDate = (await Slot.getServiceDate(slotId)).date;
+    } catch (err) {
+        const response = Response.INTERNAL_ERROR(err);
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    // Check if serviceDate is in the past
+    if (new Date(Date.now()) > new Date(serviceDate)) {
+        const response = Response.BAD_REQUEST("The date is from the past!");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
+    let ReservationUserId;
     try {
         ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
     }
@@ -265,48 +350,21 @@ app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
         res.status(response.status).jsonp(response);
     }
 
-    if (serviceId !== null) {
-        try {
-            const storeId = (await Booking.getStoreFromID(req.params.id)).storeId;
-            const catalogData = (await Catalog.getByStore(storeId)).data.data;
-            if (catalogData.length > 0) {
-                for (item in catalogData)
-                    if (serviceId === catalogData[item]._id)
-                        catalog = {
-                            _id: serviceId,
-                            product: catalogData[item].product,
-                            price: catalogData[item].price,
-                            abstract: catalogData[item].abstract
-                        }
-            }
-        } catch {}
-    }
-
     if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
-
-        if (new Date(Date.now()) > new Date(serviceDate)) {
-            const response = Response.BAD_REQUEST("Invalid Date");
-            res.status(response.status).jsonp(response);
-            return;
-        } else {
-            const serviceOpen = isOpen(new Date(serviceDate), schedule);
-
-            if (serviceOpen) {
-                Booking.reschedule(req.params.id, bookingDate, serviceDate, catalog)
-                    .then(data => {
-                        const response = Response.OK(data);
-                        res.status(response.status).jsonp(response);
-                    })
-                    .catch(err => {
-                        const response = Response.INTERNAL_ERROR(err);
-                        res.status(response.status).jsonp(response);
-                    });
-            } else {
-                const response = Response.BAD_REQUEST("The service is closed");
-                res.status(response.status).jsonp(response);
+        try {
+            console.log(old_slotId);
+            const data = await Booking.reschedule(bookingId, bookingDate, serviceDate, slotId, catalog);
+            if (old_slotId !== slotId) {
+                await Slot.slotIsNotFull(old_slotId);
+                if (willBeFull)
+                    await Slot.slotIsFull(slotId);
             }
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        } catch (err) {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
         }
-
     } else {
         const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to reschedule this reservation");
         res.status(response.status).jsonp(response);
@@ -314,30 +372,27 @@ app.put('/:id', checkAuth, getStoreId, isAdmin, async (req, res) => {
 });
 
 app.get('/current', checkAuth, (req, res) => {
-    const date = req.query.date
-    const storeID = req.query.storeId
+    const date_now = new Date(Date.now());
+    const date = req.query.date || date_now;
+    const storeID = req.query.storeId;
 
     let date_ini = new Date(date).setHours(0,0, 0);
     let date_fin = new Date(date_ini).setHours(23,59, 59);
-    const date_now = new Date(Date.now());
 
     if (sameDay(date_now, new Date(date_ini))) { // Same Day
         date_ini = new Date(date_ini).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now > new Date(date_ini)) { // Past
-        const response = Response.OK([]);
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
-    if (date_ini == "Invalid Date") {
-        const response = Response.BAD_REQUEST("Invalid Date");
+        const response = Response.OK([{"count": 0}]);
         res.status(response.status).jsonp(response);
         return;
     }
 
     Booking.count(storeID, date_ini, date_fin, false)
         .then(data => {
-            const response = Response.OK(data);
+            if (data.length === 0) {
+                data = [{"count": 0}]
+            }
+            const response = Response.OK(data[0]);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
@@ -347,30 +402,27 @@ app.get('/current', checkAuth, (req, res) => {
 });
 
 app.get('/concluded', checkAuth, (req, res) => {
-    const date = req.query.date
-    const storeID = req.query.storeId
+    const date_now = new Date(Date.now());
+    const date = req.query.date || date_now;
+    const storeID = req.query.storeId;
 
     let date_ini = new Date(date).setHours(0,0, 0);
     let date_fin = new Date(date_ini).setHours(23,59, 59);
-    const date_now = new Date(Date.now());
 
     if (sameDay(date_now, new Date(date_ini))) { // Same Day
         date_fin = new Date(date_fin).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now < new Date(date_ini)) { // Past
-        const response = Response.OK([]);
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
-    if (date_ini == "Invalid Date") {
-        const response = Response.BAD_REQUEST("Invalid Date");
+        const response = Response.OK([{"count": 0}]);
         res.status(response.status).jsonp(response);
         return;
     }
 
     Booking.count(storeID, date_ini, date_fin, false)
         .then(data => {
-            const response = Response.OK(data);
+            if (data.length === 0) {
+                data = [{"count": 0}]
+            }
+            const response = Response.OK(data[0]);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
@@ -380,27 +432,42 @@ app.get('/concluded', checkAuth, (req, res) => {
 });
 
 app.get('/canceled', checkAuth, (req, res) => {
-    const date = req.query.date
-    const storeID = req.query.storeId
+    const date_now = new Date(Date.now());
+    const date = req.query.date || date_now;
+    const storeID = req.query.storeId;
 
     const date_ini = new Date(date).setHours(0,0, 0);
     const date_fin = new Date(date_ini).setHours(23,59, 59);
 
-    if (date_ini == "Invalid Date") {
-        const response = Response.BAD_REQUEST("Invalid Date");
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
     Booking.count(storeID, date_ini, date_fin, true)
         .then(data => {
-            const response = Response.OK(data);
+            if (data.length === 0) {
+                data = [{"count": 0}]
+            }
+            const response = Response.OK(data[0]);
             res.status(response.status).jsonp(response);
         })
         .catch(err => {
             const response = Response.INTERNAL_ERROR(err);
             res.status(response.status).jsonp(response);
         });
+});
+
+app.get('/slot/:id', getStoreIdFromSlotId, isAdmin, (req, res) => {
+    if (req.user.isAdmin === true) {
+        Booking.getSlots(req.params.id)
+            .then(data=> {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            })
+    } else {
+        const response = Response.UNAUTHORIZED("The user is not an admin of that store");
+        res.status(response.status).jsonp(response);
+    }
 });
 
 module.exports = app;

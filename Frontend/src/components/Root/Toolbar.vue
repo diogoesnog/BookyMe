@@ -4,16 +4,20 @@
         <q-footer reveal>
           <q-tabs style="padding: 5px;" align="justify" class="bg-white shadow-2 qTab" indicator-color="transparent" active-color="blue">
               <q-route-tab to="/home" exact>
-                <img v-if="checkPage('/home') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/HomeHover.svg">
-                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Home.svg">
+                <img v-if="checkPage('/home') == 1" style="height: 25px;" src="../../assets/Icons/Toolbar/HomeHover.svg">
+                <img v-else style="height: 25px;" src="../../assets/Icons/Toolbar/Home.svg">
               </q-route-tab>
               <q-route-tab to="/reservations" exact>
-                <img v-if="checkPage('/reservations') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/BookHover.svg">
-                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Book.svg">
+                <img v-if="checkPage('/reservations') == 1" style="height: 25px;" src="../../assets/Icons/Toolbar/BookHover.svg">
+                <img v-else style="height: 25px;" src="../../assets/Icons/Toolbar/Book.svg">
               </q-route-tab>
               <q-route-tab to="/favorites" exact>
-                <img v-if="checkPage('/favorites') == 1" style="height: 30px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
-                <img v-else style="height: 30px;" src="../../assets/Icons/Toolbar/Favorites.svg">
+                <img v-if="checkPage('/favorites') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/FavoritesHover.svg">
+                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Favorites.svg">
+              </q-route-tab>
+              <q-route-tab to="/notifications" exact>
+                <img v-if="checkPage('/notifications') == 1" style="height: 27px;" src="../../assets/Icons/Toolbar/NotificationsHover.svg">
+                <img v-else style="height: 27px;" src="../../assets/Icons/Toolbar/Notifications.svg">
               </q-route-tab>
               <q-route-tab to="/users/login" exact>
                 <q-avatar class="shadow" size="lg">
@@ -33,7 +37,7 @@ import UserService from '../../services/user.service.js';
 
 export default {
 
-  name: "Profile",
+  name: "Toolbar",
 
   data() {
 
@@ -67,14 +71,14 @@ export default {
       return `${this.base}${this.avatar}`
     },
     checkPage: function(string) {
-      var currentLocation = window.location.pathname;
-      if(currentLocation == string) return 1;
-      else return 0;
+      let currentLocation = window.location.pathname;
+      return currentLocation === string ? 1 : 0;
+
     },
     checkPageProfile() {
-      var currentLocation = window.location.pathname;
-      if(currentLocation == '/users/login') return 1;
-      else return 0;
+      let currentLocation = window.location.pathname;
+
+      return currentLocation === '/users/login' ? 1 : 0;
     }
   }
 }

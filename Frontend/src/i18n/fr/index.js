@@ -69,7 +69,9 @@ export default {
     signout: "Se Déconnecter",
     cancel: "Annuler",
     save: "Enregistrer",
-    passwordTest: "Mots de Passe Différents"
+    passwordTest: "Mots de Passe Différents",
+    oldPassword: "Ancien Mot de Passe",
+    newPassword: "Nouveau Mot de Passe"
   },
 
   // Reservations
@@ -81,6 +83,8 @@ export default {
     type1: "Récent",
     type2: "Terminé",
     catalog: "Réserve Commune",
+    emptyType1: "Aucune Réservation Récente",
+    emptyType2: "Aucune Réservation Effectuée",
 
     newBooking: {
       title: "Nouveau Réservation",
@@ -94,7 +98,7 @@ export default {
     ratePopup: {
       title: "Évaluer la Réservation",
       comment: "Commentaire",
-      submit: "Soumettre Évaluation"
+      submit: "Soumettre"
     },
 
     editPopup: {
@@ -127,6 +131,7 @@ export default {
     utilInfo: "Informations",
     servicesCatalog: "Catalogue de Services",
     seeAll: "Voir Tout",
+    noCatalog: "Le Marchand n'a aucun Catalogue de Services associé d'aucune sorte.",
 
     ratings: "Évaluations",
     seeAllRatings: "Voir Tous",

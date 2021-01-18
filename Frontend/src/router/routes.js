@@ -41,6 +41,14 @@ const routes = [
     }
   },
   {
+    name: "Reservation",
+    path: '/reservations/:id',
+    component: () => import('../views/Reservation'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     name: "Stores",
     path: '/stores/:category',
     component: () => import('../views/Stores'),
@@ -71,15 +79,15 @@ const routes = [
     meta: {
       requiresAuth: true
     },
-
+  },
+  {
+    name: "Notifications",
+    path: '/notifications',
+    component: () => import('../views/Notifications'),
+    meta: {
+      requiresAuth: true
+    }
   }
-
-  // Always leave this as last one,
-  // but you can also remove it
-  //{
-    //path: '*',
-    //component: () => import('pages/Error404.vue')
-  //}
 ];
 
 export default routes;

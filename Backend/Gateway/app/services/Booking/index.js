@@ -2,22 +2,24 @@ const Request = require('../../utils/Request');
 
 
 // Needs to be admin
-module.exports.getStoreReservations = (token, store) => {
+module.exports.getStoreReservations = (token, store, params) => {
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/store/${store}`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
+    request.setParams(params);
     request.acceptJson();
 
     return request.get();
 }
 
-module.exports.getUserReservations = (token) => {
+module.exports.getUserReservations = (token, params) => {
 
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/user`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
+    request.setParams(params);
     request.acceptJson();
 
     return request.get();
@@ -114,6 +116,17 @@ module.exports.getUserReservationsCurrent = (token) => {
 module.exports.getUserReservationsConcluded = (token) => {
 
     let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/user/concluded`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}
+
+module.exports.getSlots = (token, id) => {
+
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/slot/${id}`);
 
     request.isJson();
     request.appendHeader("Authorization", token);

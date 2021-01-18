@@ -2,10 +2,11 @@
 import cookie from 'vue-cookies';
 
 export default function authHeader() {
-    let user = JSON.parse(localStorage.getItem('user'));
+    //let user = JSON.parse(localStorage.getItem('user'));
     let token = cookie.get('Authorization');
 
-    if(token && user) {
+    //console.log('Localstorage user: ' + user)
+    if(token) {
         return {
             'Authorization': token
         }

@@ -17,8 +17,9 @@ const Booking = require('../../services/Booking');
 router.get('/store/:id', checkAuth, (req, res) => {
     // let body = JSON.stringify(req.body);
     let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
 
-    Booking.getStoreReservations(token, req.params.id)
+    Booking.getStoreReservations(token, req.params.id, query)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
@@ -26,8 +27,9 @@ router.get('/store/:id', checkAuth, (req, res) => {
 
 router.get('/user', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query
 
-    Booking.getUserReservations(token, req.params.id)
+    Booking.getUserReservations(token, query)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
@@ -99,7 +101,7 @@ router.get('/canceled', checkAuth, (req, res) => {
 router.get('/user/current', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
-    Booking.getUserReservationsCurrent(token, req.params.id)
+    Booking.getUserReservationsCurrent(token)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
@@ -107,7 +109,15 @@ router.get('/user/current', checkAuth, (req, res) => {
 router.get('/user/concluded', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
-    Booking.getUserReservationsConcluded(token, req.params.id)
+    Booking.getUserReservationsConcluded(token)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/slot/:id', checkAuth, (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+
+    Booking.getSlots(token, req.params.id)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });

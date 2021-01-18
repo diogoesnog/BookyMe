@@ -1,4 +1,5 @@
 const Booking = require('../models/booking.js');
+const mongoose = require('mongoose');
 
 module.exports.createBooking = (booking) => {
     const newBooking = new Booking(booking);
@@ -10,19 +11,55 @@ module.exports.getBookings = (query, projection) => {
     return Booking.find(query, projection);
 };
 
-module.exports.getBookingsByStore = (id) => {
-    return Booking.find({
-        $and: [
-            {storeId: id},
-            /*{canceled: false}*/
-        ]
-    })
+module.exports.getBookingsByStore = (id, state, canceled) => {
+    const date = new Date(Date.now());
+
+    if (state === 'current') {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled},
+                {serviceDate: {$gte: date}}
+            ]
+        });
+    } else if (state === 'concluded') {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled},
+                {serviceDate: {$lt: date}}
+            ]
+        });
+    } else {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled}
+            ]
+        });
+    }
 };
 
 module.exports.getBookingsByUser = (id) => {
     return Booking.aggregate([
         {
-            $match: { $and: [ { "userId": id }, { "canceled": false } ] }
+            $match: { $and: [ { userId: id }, { canceled: false } ] }
+        },
+        {
+            $project : {
+                canceled: 0
+            }
+        },
+        {
+            $group : { _id : "$city", booking: { $push: "$$ROOT" } }
+        }
+    ])
+};
+
+module.exports.getBookingByUserBookId = (userId, bookId) => {
+    return Booking.aggregate([
+        {
+            $match: { $and: [ { userId: userId }, { _id: mongoose.Types.ObjectId(bookId) } ] }
         },
         {
             $project : {
@@ -95,9 +132,9 @@ module.exports.getPopularStoreList = () => {
             '$sort': {
                 'number_reservations': -1
             }
-        }, {
+        }/*, {
             '$limit': 10
-        }
+        }*/
     ]);
 }
 
@@ -110,17 +147,18 @@ module.exports.dateExists = (date, storeId) => {
 };
 
 module.exports.getStoreFromID = (bookingID) => {
-    return Booking.findOne({_id: bookingID}, 'storeId')
+    return Booking.findOne({_id: bookingID}, {_id: 0, storeId: 1})
 };
 
 module.exports.getUserFromID = (bookingID) => {
     return Booking.findOne({_id: bookingID}, 'userId')
 };
 
-module.exports.reschedule = (id, bookingDate, serviceDate, service) => {
+module.exports.reschedule = (id, bookingDate, serviceDate, slotId, service) => {
     if (service) {
         return Booking.findByIdAndUpdate(id, {
             serviceDate: serviceDate,
+            slotId: slotId,
             bookingDate: bookingDate,
             service: service,
             wasRescheduled: true
@@ -129,6 +167,7 @@ module.exports.reschedule = (id, bookingDate, serviceDate, service) => {
     else {
         return Booking.findByIdAndUpdate(id, {
             serviceDate: serviceDate,
+            slotId: slotId,
             bookingDate: bookingDate,
             wasRescheduled: true
         });
@@ -184,4 +223,36 @@ module.exports.count = (storeId, date_i, date_f, canceled) => {
             $count: "count"
         }
     ]);
+};
+
+module.exports.getSlotCurrentCapacity = (slotId) => {
+    return Booking.aggregate([
+        {
+            $match: {
+                $and: [
+                    { "slotId": slotId },
+                    { "canceled": false },
+                ]
+            }
+        },
+        {
+            $group: {
+                _id: '$slotId',
+                currentCapacity: {$sum: 1}
+            }
+        },
+        {
+            $project: {
+                _id: 0
+            }
+        }
+    ]);
+};
+
+module.exports.getSlots = (slotId) => {
+    return Booking.find({slotId: slotId, canceled: false});
+};
+
+module.exports.getSlotIdFromBookingId = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, slotId: 1});
 };
