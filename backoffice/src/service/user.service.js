@@ -63,22 +63,54 @@ class Services {
             headers: authHeader()
         });
     }
-
+    getStoreSchedule(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/scheduleList/${id}`, {
+            headers: authHeader()
+        });
+    }
     getStoreById(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores?_id=${id}`, {
             headers: authHeader()
         });
     }
 
-    getCaregories() {
+    getCategories() {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/categories`, {
             headers: authHeader()
         });
     }
 
-    // TODO: Add Opening Hours
     updateSchedule(id, schedule) {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/schedule`, schedule, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreSlots(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+    addSlot(id, slot) {
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, slot, {
+            headers: authHeader()
+        });
+    }
+
+    deleteSlot(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/slot/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    deleteSchedule(storeId, scheduleId) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/stores/${storeId}/schedule/${scheduleId}`, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreServices(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}`, {
             headers: authHeader()
         });
     }
@@ -86,6 +118,23 @@ class Services {
     // TODO: Add Catalog
 
 
+    getStoreCatalog(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    deleteCatalogItem(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/${id}`, {
+            headers: authHeader()
+        });
+    }
+
+    addCatalogItem(id,item){
+        console.log('Id que vai como parametro: ' + id)
+
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item);
+    }
     // TODO: Upload Images
 }
 

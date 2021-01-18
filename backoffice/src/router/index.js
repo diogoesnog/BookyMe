@@ -39,6 +39,14 @@ const routes = [
     }
   },
   {
+    path: '/store/:id/booking',
+    name: "Booking",
+    component: () => import('../views/private/Booking'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     name: "PhotoStore",
     path: '/store/:id/photos',
     component: () => import('../views/private/Photos'),
@@ -53,7 +61,23 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    path: '/store/:id/catalog/',
+    name: "CatalogList",
+    component: () => import('../views/private/CatalogList'),
+    meta: {
+      requiresAuth: true
+    }
+  } /*,
+  {
+    path: '/catalog/register/:id',
+    name: "AddCatalogItem",
+    component: () => import('../views/private/AddItemCatalog'),
+    meta: {
+      requiresAuth: true
+    }
+  }*/
 ];
 
 const router = new VueRouter({

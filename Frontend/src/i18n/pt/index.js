@@ -89,6 +89,8 @@
     type1: "Recentes",
     type2: "Conluídas",
     catalog: "Reserva Comum",
+    emptyType1: "Sem Reservas Recentes",
+    emptyType2: "Sem Reservas Concluídas",
 
     newBooking: {
       title: "Nova Reserva",
@@ -102,7 +104,7 @@
     ratePopup: {
       title: "Avaliar Reserva",
       comment: "Comentário",
-      submit: "Submeter Avaliação"
+      submit: "Submeter"
     },
 
     editPopup: {
@@ -114,6 +116,13 @@
       cancelBooking: "Cancelar"
     }
   },
+
+   // Booking page
+   // Confirm the booking made before
+   bookingPage: {
+     bookingDetails: "Detalhes da marcação",
+     confirmBooking: "Confirmação da marcação"
+   },
 
   // View Reservation / Confirm Booking
   confirmBooking: {
@@ -135,6 +144,7 @@
     utilInfo: "Informações Úteis",
     servicesCatalog: "Catálogo de Serviços",
     seeAll: "Ver Todos",
+    noCatalog: "O Estabelecimento não tem associado qualquer tipo de Catálogo de Serviços.",
 
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",

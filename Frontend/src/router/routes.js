@@ -41,6 +41,14 @@ const routes = [
     }
   },
   {
+    name: "Reservation",
+    path: '/reservations/:id',
+    component: () => import('../views/Reservation'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     name: "Stores",
     path: '/stores/:category',
     component: () => import('../views/Stores'),

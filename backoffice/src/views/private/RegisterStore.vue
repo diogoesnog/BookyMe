@@ -6,7 +6,7 @@
         <StoreForm v-if="!storeRegistered" @storeCreated="storeCreated"/>
         <div v-else>
           <Schedule v-for="(workday, index) in workdays" :key="index" :workday="workday"></Schedule>
-          <v-btn block color="primary" @click="createSchedule">Add Schedule</v-btn>
+          <v-btn block color="primary" @click="createSchedule">Adicionar Horário</v-btn>
         </div>
       </div>
 
@@ -54,7 +54,6 @@ export default {
     },
 
     createSchedule() {
-
       this.workdays.forEach(workday => {
         if(workday.openingHour && workday.closingHour) {
           Service.updateSchedule(this.store["_id"], workday)

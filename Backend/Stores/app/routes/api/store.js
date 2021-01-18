@@ -79,6 +79,19 @@ app.get('/schedule', (req,res) => {
     });
 })
 
+app.get('/scheduleList/:storeID', (req,res) => {
+
+
+    Stores.getScheduleList(req.params.storeID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch schedule list');
+            res.status(response.status).jsonp(response);
+    });
+})
+
 app.get('/categories/results',  (req, res) => {
 
     Stores.getCategoriesResults()
@@ -181,12 +194,6 @@ app.post('/', checkAuth, async (req, res) => {
 
     try {
         let token = req.headers.authorization || req.headers.Authorization;
-        /*const address = {
-            place: req.body.place,
-            zipcode: req.body.zipcode,
-            city: req.body.city,
-            country: req.body.country
-        }*/
 
         const store = {
             name: req.body.name,
@@ -212,16 +219,6 @@ app.post('/', checkAuth, async (req, res) => {
         res.status(response.status).jsonp(response);
 
     }
-
-    /*Stores.create(store)
-        .then(data => {
-
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not create your store!');
-            res.status(response.status).jsonp(response);
-        });*/
 });
 
 
@@ -328,7 +325,7 @@ app.post('/:id/schedule', (req, res) => {
 
 
 
-app.put('/:id/description',  (req, res) => {
+app.patch('/:id/description',  (req, res) => {
     
     des = req.body.description
 
@@ -345,11 +342,32 @@ app.put('/:id/description',  (req, res) => {
 });
 
 
-app.put('/:id/phone',  (req, res) => {
+app.patch('/:id/phone',  (req, res) => {
     
     let phone = req.body.phone 
 
     Stores.editPhone(phone, req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested phone');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+app.put('/:id/address',  (req, res) => {
+    
+    let address = {
+        place: req.body.place,
+        zipcode: req.body.zipcode,
+        city: req.body.city,
+        country: req.body.country
+    }
+
+    Stores.editAddress(address, req.params.id)
         .then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
@@ -360,6 +378,7 @@ app.put('/:id/phone',  (req, res) => {
 
 
 });
+
 
 app.put('/:id/coordinates',  (req, res) => {
     
@@ -387,6 +406,20 @@ app.delete('/:id',  (req, res) => {
             res.status(response.status).jsonp(response);
         }).catch(err => {
             response = Response.INTERNAL_ERROR(err, 'Could not delete the requested store');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+app.delete('/:id/schedule/:scheduleID',  (req, res) => {
+    
+    Stores.removeStoreSchedule(req.params.id, req.params.scheduleID)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not delete the requested schedule');
             res.status(response.status).jsonp(response);
     });
 

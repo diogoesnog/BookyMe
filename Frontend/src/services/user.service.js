@@ -53,9 +53,8 @@ class UserService {
 
     return request.get()
   }
-  
-  getFavorites() {
 
+  getFavorites() {
     let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
 
     request.isJson()
@@ -64,22 +63,6 @@ class UserService {
 
     return request.get()
   }
-
-  /*checkFavorite(id) {
-
-    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
-
-    request.isJson()
-    request.appendHeader("Authorization", authHeader())
-    request.acceptJson()
-
-    let data = request.get()
-    // TODO: procurar ID
-    // let array = data[data]
-    // console.log(array)
-
-    return "5ff4a80f7df75e2ace11b03e";
-  }*/
 
   getBookingUserCurrent(){
 
@@ -128,6 +111,35 @@ class UserService {
     return request.post(body)
   }
 
+  addReview(comment, rating, id) {
+
+    let bodyText = {
+      comment: comment,
+      rating: rating
+    }
+
+    let body = JSON.stringify(bodyText)
+
+    console.log(body);
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`);
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.post(body)
+  }
+
+  isFavorite() {
+    let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
+
+    request.isJson()
+    request.appendHeader("Authorization", authHeader())
+    request.acceptJson()
+
+    return request.get()
+  }
+
   getStoresByCategory(category) {
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
@@ -152,6 +164,16 @@ class UserService {
 
   getStoresData() {
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.get()
+  }
+
+  getStoresDataPopular() {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores/popular`)
 
     request.isJson()
     request.acceptJson()
@@ -211,6 +233,18 @@ class UserService {
 
   }
 
+  getBookingInfo(bookingID) {
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/user`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("bookId", bookingID)
+
+    return request.get()
+  }
+
   getNotifications(read) {
     let request = new Request(`${process.env.API_ENDPOINT}/notification`);
 
@@ -238,7 +272,6 @@ class UserService {
     // request.isJson();
     request.isMultipart();
     request.appendHeader("Authorization", authHeader());
-
 
     return request.sendFile(file);
 
