@@ -61,7 +61,7 @@ const bookingSchema = new mongoose.Schema({
         required: true
     },
     service: {
-        type: catalog,
+        type: [catalog],
         required: false
     },
     canceled: {

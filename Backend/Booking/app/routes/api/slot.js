@@ -67,9 +67,10 @@ app.post('/store/:id', isAdmin, async (req, res) => {
 
 app.get('/store/:id', isAdmin, (req, res) => {
     const storeId = req.params.id;
+    const hideFull = req.query.hidefull || "true";
 
     if (req.user.isAdmin === true) {
-        Slot.getStoreSlots(storeId)
+        Slot.getStoreSlots(storeId, hideFull)
             .then(data=> {
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);

@@ -341,7 +341,7 @@ app.post('/:id/schedule', (req, res) => {
 
 
 
-app.put('/:id/description',  (req, res) => {
+app.patch('/:id/description',  (req, res) => {
     
     des = req.body.description
 
@@ -358,11 +358,32 @@ app.put('/:id/description',  (req, res) => {
 });
 
 
-app.put('/:id/phone',  (req, res) => {
+app.patch('/:id/phone',  (req, res) => {
     
     let phone = req.body.phone 
 
     Stores.editPhone(phone, req.params.id)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not edit the requested phone');
+            res.status(response.status).jsonp(response);
+    });
+
+
+});
+
+app.patch('/:id/address',  (req, res) => {
+    
+    let address = {
+        place: req.body.place,
+        zipcode: req.body.zipcode,
+        city: req.body.city,
+        country: req.body.country
+    }
+
+    Stores.editAddress(address, req.params.id)
         .then(data => {
             response = Response.OK(data);
             res.status(response.status).jsonp(response);
@@ -373,6 +394,7 @@ app.put('/:id/phone',  (req, res) => {
 
 
 });
+
 
 app.put('/:id/coordinates',  (req, res) => {
     
