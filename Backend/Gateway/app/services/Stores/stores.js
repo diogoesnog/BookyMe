@@ -70,7 +70,7 @@ module.exports.updateAddress = (store, address) => {
     request.isJson();
     request.acceptJson();
 
-    return request.patch(address);
+    return request.put(address);
 }
 
 module.exports.updatePhone = (store, phone) => {
@@ -100,7 +100,7 @@ module.exports.deletePhoto = (store, photo) => {
 }
 
 module.exports.deleteSchedule = (store, schedule) => {
-    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photos/${schedule}`);
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/schedule/${schedule}`);
 
     return request.delete();
 }

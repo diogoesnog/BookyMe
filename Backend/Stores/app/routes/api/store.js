@@ -194,12 +194,6 @@ app.post('/', checkAuth, async (req, res) => {
 
     try {
         let token = req.headers.authorization || req.headers.Authorization;
-        /*const address = {
-            place: req.body.place,
-            zipcode: req.body.zipcode,
-            city: req.body.city,
-            country: req.body.country
-        }*/
 
         const store = {
             name: req.body.name,
@@ -225,16 +219,6 @@ app.post('/', checkAuth, async (req, res) => {
         res.status(response.status).jsonp(response);
 
     }
-
-    /*Stores.create(store)
-        .then(data => {
-
-            response = Response.CREATED(data);
-            res.status(response.status).jsonp(response);
-        }).catch(err => {
-            response = Response.INTERNAL_ERROR(err, 'Could not create your store!');
-            res.status(response.status).jsonp(response);
-        });*/
 });
 
 
@@ -374,7 +358,7 @@ app.patch('/:id/phone',  (req, res) => {
 
 });
 
-app.patch('/:id/address',  (req, res) => {
+app.put('/:id/address',  (req, res) => {
     
     let address = {
         place: req.body.place,
