@@ -70,7 +70,7 @@ module.exports.updateAddress = (store, address) => {
     request.isJson();
     request.acceptJson();
 
-    return request.patch(address);
+    return request.put(address);
 }
 
 module.exports.updatePhone = (store, phone) => {
