@@ -16,8 +16,9 @@ const Slot = require('../../services/Booking/slot');
 
 router.get('/store/:id', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
+    let query = req.query;
 
-    Slot.getSlotStore(token, req.params.id)
+    Slot.getSlotStore(token, req.params.id, query)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
