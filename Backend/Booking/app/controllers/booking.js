@@ -139,7 +139,7 @@ module.exports.getPopularStoreList = () => {
 }
 
 module.exports.cancelBookings = (id) => {
-    return Booking.update({_id: id}, {canceled: true});
+    return Booking.findOneAndUpdate({_id: id}, {canceled: true}, { new: true} );
 };
 
 module.exports.dateExists = (date, storeId) => {
