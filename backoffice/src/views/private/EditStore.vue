@@ -114,7 +114,8 @@ export default {
 
     // Schedule Actions
     deleteSchedule(id) {
-      Services.deleteSchedule(id)
+      console.log("Deleting Schedule", id);
+      Services.deleteSchedule(this.id, id)
         .then(response => {
           console.log(response);
           this.getStoreSchedule();
