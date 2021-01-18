@@ -104,7 +104,7 @@ export default {
     ratePopup: {
       title: "Evaluate Service",
       comment: "Comment",
-      submit: "Submit Evaluation"
+      submit: "Submit"
     },
 
     editPopup: {

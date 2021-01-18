@@ -103,8 +103,8 @@ class Services {
         });
     }
 
-    deleteSchedule(id) {
-        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/${id}`, {
+    deleteSchedule(storeId, scheduleId) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/stores/${storeId}/schedule/${scheduleId}`, {
             headers: authHeader()
         });
     }

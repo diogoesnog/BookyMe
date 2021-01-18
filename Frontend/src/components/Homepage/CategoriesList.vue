@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12" style="color: #434343; padding-top: 25px; padding-left: 25px; padding-bottom: 100px;">
+  <div class="col-12" style="color: #434343; padding-top: 25px; padding-left: 25px;">
     <div class="row">
       <div class="col-9">
         <p class="titles">{{$t('homePage.categories')}}</p>
