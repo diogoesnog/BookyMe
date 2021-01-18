@@ -100,7 +100,7 @@ module.exports.deletePhoto = (store, photo) => {
 }
 
 module.exports.deleteSchedule = (store, schedule) => {
-    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/photos/${schedule}`);
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/schedule/${schedule}`);
 
     return request.delete();
 }
