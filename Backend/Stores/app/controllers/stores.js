@@ -1,6 +1,7 @@
 const Store = require('../models/store');
-const Plant = require ('../models/plant')
-const Review = require('../models/review')
+const Plant = require ('../models/plant');
+const Review = require('../models/review');
+const Service = require('../services/users');
 
 module.exports.get = (query, projection) => {
     return Store.find(query, projection);
@@ -108,8 +109,14 @@ module.exports.editDescription = (id, des) => {
     return Store.findOneAndUpdate({_id: id},{$set: {description: des}}, { new: true })
 }
 
-module.exports.editAddress = (add,id) => {
-    return Store.findOneAndUpdate({_id: id},{$set: {address: add}},{new: true})
+module.exports.editAddress = async (add, id) => {
+    let coordinates = await getCoordinates(add);
+
+    return Store.findOneAndUpdate({_id: id},{$set: {
+            address: add,
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude
+    }},{new: true})
 }
 
 module.exports.editPhone = (phone, id) => {
@@ -146,11 +153,34 @@ module.exports.removeStoreSchedule = (id, sId) => {
 }
 
 
-module.exports.create = (store) => {
+module.exports.create = async (store) => {
+    let coordinates = await getCoordinates(store.address);
+
+    store["latitude"] = coordinates.latitude;
+    store["longitude"] = coordinates.longitude;
     const newStore = new Store(store);
     return newStore.save();
 }
 
+async function getCoordinates(address) {
+    try {
+        let response = await Service.getCoordinates(address)
+
+        let data = response.data["data"];
+        console.log(response.data);
+
+        if (data.length === 1) {
+            return {
+                latitude: data[0].latitude,
+                longitude: data[0].longitude
+            }
+        }
+        return {latitude: 0, longitude: 0}
+    } catch (e) {
+        console.log(e);
+        return {latitude: 0, longitude: 0}
+    }
+}
 
 /*
  * Find Stores by Array of Values
