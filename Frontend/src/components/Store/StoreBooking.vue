@@ -28,10 +28,14 @@
               transition-hide="scale"
               multiple
               counter
+              emit-value
               hint="Serviços marcados"
-              v-model="services"
-              :options="options"
 
+              v-model="services"
+
+              :options="options"
+              option-value="_id"
+              option-label="product"
             />
           </div>
         </q-carousel-slide>
@@ -117,7 +121,30 @@ name: "StoreBooking",
       date: String,
 
       options: [
-        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
+        {
+          "_id": "5ff4e77cf4cffc04869eb9fd",
+          "storeID": "5ff4a6e77df75e2ace11b036",
+          "product": "Crepe Chinês de Legumes",
+          "price": 2,
+          "abstract": "Entradas",
+          "__v": 0
+        },
+        {
+          "_id": "5ff4e786f4cffc04869eb9fe",
+          "storeID": "5ff4a6e77df75e2ace11b036",
+          "product": "4x Gyosa",
+          "price": 2,
+          "abstract": "Entradas",
+          "__v": 0
+        },
+        {
+          "_id": "5ff4e791f4cffc04869eb9ff",
+          "storeID": "5ff4a6e77df75e2ace11b036",
+          "product": "4x Camarão Crocante",
+          "price": 2,
+          "abstract": "Entradas",
+          "__v": 0
+        }
       ],
       booking: new Booking(),
       services: null
