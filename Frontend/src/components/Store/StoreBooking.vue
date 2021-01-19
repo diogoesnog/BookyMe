@@ -18,7 +18,7 @@
         class="bg-white shadow-1 rounded-borders"
       >
         <q-carousel-slide :name="1" class="column no-wrap flex-center">
-          <div class="text-center">
+          <div v-if="catalog" class="text-center">
             <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
             <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
             <q-select
@@ -38,6 +38,11 @@
               option-value="_id"
               option-label="product"
             />
+          </div>
+          <div v-else>
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="2" class="column no-wrap flex-center">
@@ -68,9 +73,7 @@ name: "StoreBooking",
       storeID: this.$route.params.id,
       cardBook: false,
       slide: 1,
-      date: String,
-
-      catalog: Array,
+      catalog: null,
       booking: new Booking(),
       services: null
     }
@@ -105,7 +108,10 @@ name: "StoreBooking",
       Service.getCatalog(this.storeID)
         .then(response => {
           console.group("Procura de catálogo")
-          this.catalog = response.data["data"];
+          let data = response.data["data"];
+          if (data > 0) {
+            this.catalog = data;
+          }
           console.log("Catálogo:");
           console.log(this.catalog);
           console.groupEnd()
