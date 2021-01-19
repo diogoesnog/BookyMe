@@ -253,10 +253,14 @@ app.patch('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) 
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);
 
-                await Notification.sendNotification(header, { userId: ReservationUserId,
-                    // message: `A sua reserva para o dia ${moment(serviceDate).format('l')} foi cancelada`,
-                    message: "A sua reserva foi cancelada.",
-                    storeId: "id da store"
+                const storeName = (await Booking.getStoreName(bookingId)).storeName;
+                const serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
+                const storeId = (await Booking.getStoreFromID(bookingId)).storeId;
+
+                await Notification.sendNotification(header, {
+                    userId: ReservationUserId,
+                    message: `A sua reserva na loja ${storeName} no dia ${moment(serviceDate).format('l')} foi cancelada`,
+                    storeId: storeId
                 });
 
             } catch (err) {
@@ -364,7 +368,9 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
 
     if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
         try {
-            console.log(old_slotId);
+            const storeName = (await Booking.getStoreName(bookingId)).storeName;
+            const old_serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
+
             const data = await Booking.reschedule(bookingId, bookingDate, serviceDate, slotId, catalog);
             if (old_slotId !== slotId) {
                 await Slot.slotIsNotFull(old_slotId);
@@ -377,8 +383,8 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
             let header = req.headers.authorization || req.headers.Authorization;
 
             await Notification.sendNotification(header, { userId: ReservationUserId,
-                message: `A sua reserva para o dia X foi reagendada para o dia ${moment(serviceDate).format('l')}`,
-                storeId: "id da store"
+                message: `A sua reserva na loja ${storeName} no dia ${moment(old_serviceDate).format('l')} foi reagendada para o dia ${moment(serviceDate).format('l')}`,
+                storeId: storeId
             });
 
         } catch (err) {
