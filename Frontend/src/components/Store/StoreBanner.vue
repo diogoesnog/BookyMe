@@ -1,33 +1,48 @@
 <template>
-  <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
-    <div class="divTop2">
-      <div class="infoName">
-          <span style="font-weight: 670; font-size: 40px;">
-            {{ getCutName(this.name) }}
-          </span>
-        <br/>
-        <span style="font-weight: 300; font-size: 20px;">
-          {{ getNumberReservations() }}
-        </span>
-      </div>
-      <div class="infoExtra">
-        <div class="row rowStyle">
-          <div class="col-8" style="text-align: left; margin-top: -8px; display: inline-grid; line-height: 25px;">
-              <span style="text-overflow: ellipsis; font-size: 20px; font-weight: 350; display: inline-block; width: 200px; white-space: nowrap; overflow: hidden !important;">
-                {{ this.category }}
-              </span>
-            <span style="font-size: 19px; font-weight: 650; display: inline-block; width:160px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis;">
-                {{ this.address.city }}
-              </span>
+  <div>
+    <div class="divTop1" v-bind:style='{ backgroundImage: `url("${getImage(0)}")` }'>
+    </div>
+    <div>
+      <div class="divTop2">
+        <div class="row" style="margin: 20px;">
+          <div class="col-5" style="display: flex; align-items: center;">
+            <!-- TODO: Corrigir o To do Botão -->
+            <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
           </div>
-          <div class="col-4">
-            <div class="divRating shadow">
-              <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
-                  <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
-                    {{ roundRating(this.rating) }}<span style="font-weight: 200; font-size: 19px;">/5</span>
-                  </span>
-                <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
-              </p>
+          <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
+            <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
+            <div style="width:10px; height:auto; display:inline-block;"/>
+            <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" :disable="disableFav" round icon="favorite"/>
+          </div>
+        </div>
+        <div class="infoName">
+            <span style="font-weight: 670; font-size: 40px;">
+              {{ getCutName(this.name) }}
+            </span>
+          <br/>
+          <span style="font-weight: 300; font-size: 20px;">
+            {{ $tc('storePage.reservations', getNumberReservations, { count: this.numberReservations }) }}
+          </span>
+        </div>
+        <div class="infoExtra">
+          <div class="row rowStyle">
+            <div class="col-8" style="text-align: left; margin-top: -8px; display: inline-grid; line-height: 25px;">
+                <span style="text-overflow: ellipsis; font-size: 20px; font-weight: 350; display: inline-block; width: 200px; white-space: nowrap; overflow: hidden !important;">
+                  {{ this.category }}
+                </span>
+              <span style="font-size: 19px; font-weight: 650; display: inline-block; width:160px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis;">
+                  {{ this.address.city }}
+                </span>
+            </div>
+            <div class="col-4">
+              <div class="divRating shadow">
+                <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
+                    <span style="font-weight: 670; font-size: 19px; display: inline-block; vertical-align: middle;">
+                      {{ roundRating() }}<span style="font-weight: 200; font-size: 19px;">/5</span>
+                    </span>
+                  <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -39,18 +54,21 @@
 <script>
 
 import Service from '../../services/user.service';
+import Favorite from "src/models/Favorite";
 
 export default {
   name: "StoreBanner",
 
   data() {
     return {
-      reservationsUser: Array,
+      storeID: this.$route.params.id,
+      styleFav: String,
+      disableFav: Boolean,
+      reservationsUser: Array
     }
   },
 
   props: {
-    _id: String,
     name: String,
     category: String,
     address: Object,
@@ -60,15 +78,51 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
+    this.isFavorite(this.storeID);
     this.getReservations();
   },
 
   methods: {
+    isFavorite(id) {
+      Service.isFavorite()
+        .then(response => {
+          console.group("Verificação de favorito");
+          let data = response.data["data"];
+          let favorites = data.favorites;
+          console.log("Array de favs:");
+          console.log(favorites);
+          console.log("ID a comparar: " + id)
+          let isFav = favorites.indexOf(id) > -1
+          if (isFav) {
+            this.styleFav = "buttonFavTrue";
+            this.disableFav = true;
+          } else {
+            this.styleFav = "buttonFavFalse";
+            this.disableFav = false;
+          }
+          console.log("É favorito? " + isFav);
+          console.groupEnd();
+        }).catch(err => {
+        console.log(err);
+      })
+    },
+
+    addFavorite() {
+      let favorite = new Favorite(this.storeID);
+      Service.addFavorite(favorite)
+        .then(response => {
+          this.styleFav = "buttonFavTrue";
+          console.log(response);
+          console.log("Adding Favorite");
+        }).catch(err => {
+        console.log(err);
+      })
+    },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
     },
-    roundRating: function(rating) {
-      return Math.round(rating*10)/10;
+    roundRating() {
+      return Math.round(this.rating*10)/10;
     },
     getCutName: function(string) {
       if(string.substring(0,15) === string) return string;
@@ -77,8 +131,7 @@ export default {
     getReservations() {
       Service.getBookingUserCurrent()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsUser = data;
+          this.reservationsUser = response.data["data"];
           console.log(this.reservationsUser);
         }).catch(err => {
           console.log(err)
@@ -86,13 +139,12 @@ export default {
         })
     },
     getNumberReservations() {
-      var numberReservations = "0 ";
+      var numberReservations = 0;
       var i;
       for (i = 0; i < this.reservationsUser.length; i++) {
-        if(this.reservationsUser[i].storeId == this._id) numberReservations = (i+1);
+        if(this.reservationsUser[i].storeId === this.storeID) numberReservations = (i+1);
       }
-      if(numberReservations == 1) return "1 Reserva"
-      else return numberReservations + "Reservas";
+      return numberReservations;
     }
   }
 }
@@ -100,69 +152,74 @@ export default {
 
 <style scoped>
 
-.divTop1{
-  position: absolute;
-  width: 100%;
-  height: 30%;
-  top: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-size: cover;
-  background-position: center top;
-}
+  .divTop1{
+    position: absolute;
+    width: 100%;
+    padding: 125px;
+    background-size: cover;
+    background-position: center top;
+  }
 
-.divTop2{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
-}
+  .divTop2{
+    padding-top: 25px;
+    height: 250px;
+    position: relative;
+    background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
+  }
 
-.infoName {
-  color: white;
-  text-align: center;
-  padding-top: 80px;
-}
+  .infoName {
+    position: relative;
+    bottom: 15px;
+    color: white;
+    text-align: center;
+  }
 
-.infoExtra {
-  color: #434343;
-  background-color: white;
-  height: 30%;
-  width: 75%;
-  border-radius: 100px;
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  transform: translate(-50%,-50%);
-}
+  .infoExtra {
+    position: absolute;
+    left: 50%;
+    padding-top: 15%;
+  }
 
-.divRating {
-  text-align: center;
-  height: 35px;
-  border-radius: 20px;
-  background: linear-gradient(#e9695c, #e03459);
-  color: white;
-}
+  .divRating {
+    text-align: center;
+    height: 35px;
+    border-radius: 20px;
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
 
-.shadow {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  border-radius: 28px;
-}
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 28px;
+  }
 
-.rowStyle {
-  flex-wrap: nowrap !important;
-  padding: 23px;
-  position: absolute;
-  top: 53%;
-  left: 50%;
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
+  .rowStyle {
+    position: absolute;
+    background-color: white;
+    border-radius: 100px;
+    width: 295px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    flex-wrap: nowrap !important;
+    padding: 25px;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+  }
+
+  .button {
+    background-color: white;
+    color: #1b9fd4;
+  }
+
+  .buttonFavFalse {
+    background-color: white;
+    color: #1b9fd4;
+  }
+
+  .buttonFavTrue {
+    background-color: white;
+    color: #e74165;
+    opacity: 1 !important;
+  }
 
 </style>

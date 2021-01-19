@@ -131,7 +131,6 @@ export default {
     }
   },
 
-  
 
   computed: {
     ConfirmPassword() {

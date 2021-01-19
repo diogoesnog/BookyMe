@@ -1,4 +1,5 @@
 const Booking = require('../models/booking.js');
+const mongoose = require('mongoose');
 
 module.exports.createBooking = (booking) => {
     const newBooking = new Booking(booking);
@@ -10,19 +11,55 @@ module.exports.getBookings = (query, projection) => {
     return Booking.find(query, projection);
 };
 
-module.exports.getBookingsByStore = (id) => {
-    return Booking.find({
-        $and: [
-            {storeId: id},
-            {canceled: false}
-        ]
-    })
+module.exports.getBookingsByStore = (id, state, canceled) => {
+    const date = new Date(Date.now());
+
+    if (state === 'current') {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled},
+                {serviceDate: {$gte: date}}
+            ]
+        });
+    } else if (state === 'concluded') {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled},
+                {serviceDate: {$lt: date}}
+            ]
+        });
+    } else {
+        return Booking.find({
+            $and: [
+                {storeId: id},
+                {canceled: canceled}
+            ]
+        });
+    }
 };
 
 module.exports.getBookingsByUser = (id) => {
     return Booking.aggregate([
         {
-            $match: { $and: [ { "userId": id }, { "canceled": false } ] }
+            $match: { $and: [ { userId: id }, { canceled: false } ] }
+        },
+        {
+            $project : {
+                canceled: 0
+            }
+        },
+        {
+            $group : { _id : "$city", booking: { $push: "$$ROOT" } }
+        }
+    ])
+};
+
+module.exports.getBookingByUserBookId = (userId, bookId) => {
+    return Booking.aggregate([
+        {
+            $match: { $and: [ { userId: userId }, { _id: mongoose.Types.ObjectId(bookId) } ] }
         },
         {
             $project : {
@@ -214,4 +251,8 @@ module.exports.getSlotCurrentCapacity = (slotId) => {
 
 module.exports.getSlots = (slotId) => {
     return Booking.find({slotId: slotId, canceled: false});
+};
+
+module.exports.getSlotIdFromBookingId = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, slotId: 1});
 };

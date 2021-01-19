@@ -75,7 +75,9 @@ export default {
     signout: "Sign-Out",
     cancel: "Cancel",
     save: "Save",
-    passwordTest: "Different Passwords"
+    passwordTest: "Different Passwords",
+    oldPassword: "Old Password",
+    newPassword: "New Password"
   },
 
   // Reservations
@@ -87,6 +89,8 @@ export default {
     type1: "Recents",
     type2: "Completed",
     catalog: "Common Reservation",
+    emptyType1: "No Recent Reservations",
+    emptyType2: "No Reservations Completed",
 
     newBooking: {
       title: "New Booking",
@@ -100,7 +104,7 @@ export default {
     ratePopup: {
       title: "Evaluate Service",
       comment: "Comment",
-      submit: "Submit Evaluation"
+      submit: "Submit"
     },
 
     editPopup: {
@@ -111,6 +115,13 @@ export default {
       changeBooking: "Change",
       cancelBooking: "Cancel"
     }
+  },
+
+  // Booking page
+  // Confirm the booking made before
+  bookingPage: {
+    bookingDetails: "Booking Details",
+    confirmBooking: "Booking Confirmation"
   },
 
   // View Reservation / Confirm Booking
@@ -133,11 +144,15 @@ export default {
     utilInfo: "Useful Info",
     servicesCatalog: "Catalog of Services",
     seeAll: "See All",
+    noCatalog: "The Establishment has not joined any Catalog of Services.",
 
     ratings: "Ratings",
     seeAllRatings: "See All",
     stars: "0 Stars | 1 Star | {count} Stars",
-    basedOn: "Based on 1 Evaluation | Based on {count} Evaluations"
+    basedOn: "Based on 1 Evaluation | Based on {count} ratings",
+    book: "Book now!",
+    date: "Choose your date",
+    dateSub: "Set your booking date"
   },
 
   // Search Results

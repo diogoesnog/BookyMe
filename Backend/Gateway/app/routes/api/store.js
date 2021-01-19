@@ -24,6 +24,12 @@ router.get('/favorites/:id', (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+router.get('/scheduleList/:id', (req, res) => {
+    Store.getScheduleList(req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
 router.get('/categories', (req, res) => {
     Store.getCategories()
         .then(response => res.status(response.status).jsonp(response.data))
@@ -37,6 +43,8 @@ router.get('/favorites', checkAuth, (req, res) => {
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
+
+
 
 
 router.get('/', checkAuth, (req, res) => {
@@ -60,12 +68,13 @@ router.get('/admin', checkAuth, (req, res) => {
 });
 
 
-router.post('/', validator([
+router.post('/', checkAuth, validator([
     "name", "category", "description", "place", "zipcode", "city", "country"
 ]),(req, res) => {
     let body = JSON.stringify(req.body);
+    let token = req.headers.authorization || req.headers.Authorization;
 
-    Store.create(body)
+    Store.create(token, body)
         .then(response => {
             console.log("201");
             res.status(response.status).jsonp(response.data);
@@ -118,7 +127,6 @@ router.post('/:id/picture', upload.single('file'), async (req, res) => {
 
 });
 
-// TODO: test this endpoint
 router.post('/:id/schedule', validator([
     "day", "openingHour", "closingHour"
 ]), (req, res) => {
@@ -131,7 +139,6 @@ router.post('/:id/schedule', validator([
 });
 
 
-// TODO: test this endpoint
 router.patch('/:id/description', validator([
     "description"
 ]), (req, res) => {
@@ -142,9 +149,8 @@ router.patch('/:id/description', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: test this endpoint
-router.patch('/:id/address', validator([
-    "address"
+router.put('/:id/address', validator([
+    "place", "zipcode", "city", "country"
 ]), (req, res) => {
     let body = JSON.stringify(req.body);
 
@@ -153,7 +159,6 @@ router.patch('/:id/address', validator([
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
-// TODO: test this endpoint
 router.patch('/:id/phone', validator([
     "phone"
 ]), (req, res) => {
@@ -182,10 +187,16 @@ router.delete('/:id', (req, res) => {
 });
 
 
-// TODO: test this endpoint
 router.delete('/:id/photos/:photo', (req, res) => {
 
     Store.deletePhoto(req.params.id, req.params.photo)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.delete('/:id/schedule/:schedule', (req, res) => {
+
+    Store.deleteSchedule(req.params.id, req.params.schedule)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });

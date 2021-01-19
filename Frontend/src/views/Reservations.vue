@@ -24,12 +24,22 @@
       <div class="title">
         {{$t('bookingsPage.type1')}}
       </div>
-      <ReservationsList v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+      <div v-if="this.reservationsCurrent.length == 0" class="subTitle">
+        {{$t('bookingsPage.emptyType1')}}
+      </div>
+      <div v-else>
+        <ReservationsList :idUser="idUser" :typeReservation="currentReservation" :base="base" v-for="(reservation, index) in reservationsCurrent" :key="index" v-bind="reservation"/>
+      </div>
       <br/>
       <div class="title">
         {{$t('bookingsPage.type2')}}
       </div>
-      <ReservationsList v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+      <div v-if="this.reservationsConcluded.length == 0" class="subTitle">
+        {{$t('bookingsPage.emptyType2')}}
+      </div>
+      <div v-else>
+        <ReservationsList :idUser="idUser" :typeReservation="concludedReservation" :base="base" v-for="(reservation, index) in reservationsConcluded" :key="index" v-bind="reservation"/>
+      </div>
     <div>
      <Toolbar/>
     </div>
@@ -49,7 +59,11 @@ export default {
    data() {
     return {
       reservationsCurrent: Array,
-      reservationsConcluded: Array
+      reservationsConcluded: Array,
+      base: String,
+      currentReservation: "current",
+      concludedReservation: "concluded",
+      idUser: String
     }
   },
 
@@ -62,15 +76,15 @@ export default {
     console.log("Mounted: View has been rendered");
     this.getReservationsCurrent();
     this.getReservationsConcluded();
+    this.getIdUser();
   },
 
   methods: {
     getReservationsCurrent() {
       Service.getBookingUserCurrent()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsCurrent = data;
-          console.log(data);
+          this.base = response.data["base"];
+          this.reservationsCurrent = response.data["data"];
         }).catch(err => {
           console.log(err)
         })
@@ -78,9 +92,15 @@ export default {
     getReservationsConcluded() {
       Service.getBookingUserConcluded()
         .then(response => {
-          let data = response.data["data"];
-          this.reservationsConcluded = data;
-          console.log(data);
+          this.reservationsConcluded = response.data["data"];
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+    getIdUser(){
+      Service.getProfileData()
+        .then(response => {
+          this.idUser = response.data["data"]["id"];
         }).catch(err => {
           console.log(err)
         })
@@ -100,7 +120,7 @@ export default {
   
   .centerDiv {
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 40px;
   }
 
   .shadow {
@@ -130,4 +150,14 @@ export default {
     align-items: center;
     margin: 15px;
   }
+
+  .subTitle {
+    color: #434343;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: left;
+    margin: 20px;
+  }
+
 </style>

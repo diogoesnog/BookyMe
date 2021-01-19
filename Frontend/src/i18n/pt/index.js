@@ -75,7 +75,9 @@
     signout: "Terminar Sessão",
     cancel: "Cancelar",
     save: "Salvar",
-    passwordTest: "Passwords Diferentes"
+    passwordTest: "Passwords Diferentes",
+    oldPassword: "Password Anterior",
+    newPassword: "Nova Password"
   },
 
   // Reservations
@@ -87,6 +89,8 @@
     type1: "Recentes",
     type2: "Conluídas",
     catalog: "Reserva Comum",
+    emptyType1: "Sem Reservas Recentes",
+    emptyType2: "Sem Reservas Concluídas",
 
     newBooking: {
       title: "Nova Reserva",
@@ -100,7 +104,7 @@
     ratePopup: {
       title: "Avaliar Reserva",
       comment: "Comentário",
-      submit: "Submeter Avaliação"
+      submit: "Submeter"
     },
 
     editPopup: {
@@ -112,6 +116,13 @@
       cancelBooking: "Cancelar"
     }
   },
+
+   // Booking page
+   // Confirm the booking made before
+   bookingPage: {
+     bookingDetails: "Detalhes da marcação",
+     confirmBooking: "Confirmação da marcação"
+   },
 
   // View Reservation / Confirm Booking
   confirmBooking: {
@@ -133,11 +144,15 @@
     utilInfo: "Informações Úteis",
     servicesCatalog: "Catálogo de Serviços",
     seeAll: "Ver Todos",
+    noCatalog: "O Estabelecimento não tem associado qualquer tipo de Catálogo de Serviços.",
 
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",
     stars: "0 Estrelas | 1 Estrela | {count} Estrelas",
-    basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações"
+    basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
+    book: "Reserve já!",
+    date: "Escolha a sua data",
+    dateSub: "A sua data para a marcação"
   },
 
   // Search Results

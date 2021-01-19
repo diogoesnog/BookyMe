@@ -25,26 +25,32 @@ const routes = [
   {
     path: '/store/:id',
     name: "Store",
-    component: () => import('../views/private/EmptyRouter'),
-    children: [
-      {
-        name: "StoreDash",
-        path: "",
-        component: () => import('../views/private/subpages/Store'),
-      },
-      {
-        name: "EditStore",
-        path: "/edit",
-        component: () => import('../views/private/subpages/EditStore')
-      },
-      {
-        name: "PhotoStore",
-        path: '/photos',
-        component: () => import('../views/private/subpages/Photos')
-      }
-    ],
+    component: () => import('../views/private/subpages/Store'),
     meta: {
-      requiresStores: true,
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/store/:id/edit',
+    name: "EditStore",
+    component: () => import('../views/private/EditStore'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/store/:id/booking',
+    name: "Booking",
+    component: () => import('../views/private/Booking'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    name: "PhotoStore",
+    path: '/store/:id/photos',
+    component: () => import('../views/private/Photos'),
+    meta: {
       requiresAuth: true
     }
   },
@@ -55,7 +61,23 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    path: '/store/:id/catalog/',
+    name: "CatalogList",
+    component: () => import('../views/private/CatalogList'),
+    meta: {
+      requiresAuth: true
+    }
+  } /*,
+  {
+    path: '/catalog/register/:id',
+    name: "AddCatalogItem",
+    component: () => import('../views/private/AddItemCatalog'),
+    meta: {
+      requiresAuth: true
+    }
+  }*/
 ];
 
 const router = new VueRouter({
@@ -86,7 +108,11 @@ router.beforeEach((to, from, next) => {
       next('/');
     }
   } else {
-    next();
+    if(cookie !== null) {
+      next('/home')
+    } else {
+      next();
+    }
   }
 
 });

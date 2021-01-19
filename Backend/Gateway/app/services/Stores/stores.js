@@ -18,9 +18,12 @@ module.exports.insertCatalog = (store, catalog) => {
     return request.post(catalog);
 }
 
-module.exports.create = (store) => {
+module.exports.create = (token, store) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores`);
+
     request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
 
     return request.post(store);
 }
@@ -58,7 +61,7 @@ module.exports.updateDescription = (store, description) => {
     request.isJson();
     request.acceptJson();
 
-    return request.put(description);
+    return request.patch(description);
 }
 
 module.exports.updateAddress = (store, address) => {
@@ -67,14 +70,14 @@ module.exports.updateAddress = (store, address) => {
     request.isJson();
     request.acceptJson();
 
-    return request.post(address);
+    return request.put(address);
 }
 
 module.exports.updatePhone = (store, phone) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/phone`);
     request.isJson();
     request.acceptJson();
-    return request.put(phone);
+    return request.patch(phone);
 }
 
 module.exports.addCoordinates = (store, coordinates) => {
@@ -96,9 +99,23 @@ module.exports.deletePhoto = (store, photo) => {
     return request.delete();
 }
 
+module.exports.deleteSchedule = (store, schedule) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/${store}/schedule/${schedule}`);
+
+    return request.delete();
+}
+
 
 module.exports.getPopular = () => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/popular`);
+
+    request.isJson();
+
+    return request.get();
+}
+
+module.exports.getScheduleList = (id) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/stores/scheduleList/${id}`);
 
     request.isJson();
 

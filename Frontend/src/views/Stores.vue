@@ -4,11 +4,10 @@
       <div class="col-2" style="display: flex; align-items: center;">
         <q-btn to="../categories" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
       </div>
-
       <div class="col-10">
-        <q-input rounded outlined label='Search'>
+        <q-input v-model="userInputSearch" v-on:keyup.enter="onEnter" rounded outlined label='Search'>
           <template v-slot:append>
-            <q-avatar size='xl' icon="search" />
+            <q-avatar size='xl' icon="search"/>
           </template>
         </q-input>
       </div>
@@ -17,7 +16,6 @@
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;">{{this.category}}</p>
 
     <StoresList v-for="(store, index) in stores" :key="index" v-bind="store"/>
-
 
     <div class="q-pt-xl">
       <q-banner v-if="error" rounded class="bg-primary text-white">
@@ -52,7 +50,8 @@ export default {
     return {
       category: this.$route.params.category,
       stores: Array,
-      error: 0
+      error: 0,
+      userInputSearch: ""
     }
   },
 
@@ -62,11 +61,8 @@ export default {
     this.fetchStoresByCat(this.category);
   },
   methods: {
-
     fetchStoresByCat(category){
-
       this.$q.loading.show({ delay: 400});
-
       Service.getStoresByCategory(category)
         .then(response => {
           this.stores = response.data["data"];
@@ -77,8 +73,15 @@ export default {
         }).catch(err => console.log(err))
         .finally(() => {this.$q.loading.hide();
         })
+    },
+    onEnter: function() {
+      Service.getStoreBySearch(this.userInputSearch, this.category)
+        .then(response => {
+          this.stores = response.data["data"];
+        }).catch(err => console.log(err))
+        .finally(() => {this.$q.loading.hide();
+        })
     }
-
   }
 }
 
@@ -88,7 +91,7 @@ export default {
 
 .centerDiv {
   padding: 15px;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 
 .gradientOne {

@@ -1,9 +1,8 @@
 <template>
   <div>
-    <Popular :base="base" :stores ="storesData" :profile="profileData" />
-    <div class= "categoriesDiv">
-      <CategoriesList/>
-    </div>
+    <Popular :baseProfile="baseProfile" :basePopular="basePopular" :stores ="storesDataPopular" :profile="profileData" />
+    <CategoriesList/>
+    <Recommendation :baseRecomendation="baseRecomendation" :stores ="storesData" :profile="profileData" />
     <Toolbar/>
   </div>
 </template>
@@ -13,6 +12,7 @@
 import Service from '../services/user.service';
 import CategoriesList from '../components/Homepage/CategoriesList';
 import Popular from '../components/Homepage/Popular';
+import Recommendation from '../components/Homepage/Recommendation';
 import Toolbar from '../components/Root/Toolbar';
 
 export default {
@@ -22,13 +22,17 @@ export default {
     return {
       profileData: {},
       storesData: {},
-      base: ''
+      storesDataPopular: {},
+      basePopular: '',
+      baseRecomendation: '',
+      baseProfile: ''
     }
   },
 
   components: {
     Popular,
     CategoriesList,
+    Recommendation,
     Toolbar
   },
 
@@ -36,14 +40,15 @@ export default {
     console.log("Mounted: View has been rendered");
     this.fetchProfileData();
     this.fetchStoresList();
+    this.fetchStoresListPopular();
   },
 
   methods: {
     fetchProfileData() {
       Service.getProfileData()
         .then(response => {
-          this.base = response.data["base"];
-          this.profileData = response.data["data"];;
+          this.baseProfile = response.data["base"];
+          this.profileData = response.data["data"];
         }).catch(err => {
         }).finally(() => {
           this.$q.loading.hide();
@@ -52,7 +57,20 @@ export default {
     fetchStoresList() {
       Service.getStoresData()
         .then(response => {
-          this.storesData = response.data["data"];;
+          this.baseRecomendation = response.data["base"];
+          this.storesData = response.data["data"];
+        }).catch(err => {
+        }).finally(() => {
+          this.$q.loading.hide();
+        })  
+    },
+    fetchStoresListPopular() {
+      Service.getStoresDataPopular()
+        .then(response => {
+          this.basePopular = response.data["base"];
+          this.storesDataPopular = response.data["data"];
+          console.log("Get POPULAR");
+          console.log(this.storesDataPopular);
         }).catch(err => {
         }).finally(() => {
           this.$q.loading.hide();
@@ -65,12 +83,5 @@ export default {
 </script>
 
 <style scoped>
-
-  .categoriesDiv {
-    z-index: 1000;
-    position: fixed;
-    top: 400px;
-    width: 100%; 
-  }
 
 </style>
