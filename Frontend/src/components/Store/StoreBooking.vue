@@ -14,26 +14,27 @@
         navigation
         arrows
         padding
-        height="200px"
+        height="400px"
         class="bg-white shadow-1 rounded-borders"
       >
         <q-carousel-slide :name="1" class="column no-wrap flex-center">
-          <div class="q-mt-md text-center">
+          <div class="text-center">
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
             <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
             <q-select
               label="Selecione o(s) seu(s) serviço(s)"
-              style="width: 200px"
+              style="width: 220px"
               outlined
               transition-show="scale"
               transition-hide="scale"
               multiple
               counter
               emit-value
-              hint="Serviços marcados"
+              map-options
+              hint="Serviços selecionados"
 
               v-model="services"
-
-              :options="options"
+              :options="catalog"
               option-value="_id"
               option-label="product"
             />
@@ -49,56 +50,6 @@
         </q-carousel-slide>
       </q-carousel>
     </q-dialog>
-
-    <!--    <q-dialog v-model="card">
-    &lt;!&ndash;      TODO: Fazer a parte de seleção de serviço &ndash;&gt;
-          <q-card class="my-card">
-            <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
-
-            <q-card-section>
-              <q-btn
-                fab
-                color="vermelho"
-                icon="event_available"
-                class="absolute"
-                style="top: 0; right: 12px; transform: translateY(-50%);"
-              />
-
-              <div class="row no-wrap items-center">
-                <div class="col text-h6 ellipsis" style="margin-top: 10px; color: #434343; font-weight: 700; font-size: 20px;">
-                  {{ this.name }}
-                </div>
-              </div>
-            </q-card-section>
-
-            <q-card-section class="q-pt-none">
-              <q-date
-                  :title="$t('storePage.date')"
-                  today-btn
-                  mask="YYYY-MM-DDTHH:mm"
-                  :subtitle="$t('storePage.dateSub')"
-                  color="red"
-                  v-model="date" />
-            </q-card-section>
-
-            <q-card-section class="q-pt-none">
-              <q-time
-                v-model="date"
-                format24h
-                mask="YYYY-MM-DDTHH:mm"
-                color="red" />
-            </q-card-section>
-
-            <q-separator/>
-
-            <q-card-actions>
-                <q-btn icon="event" @click="makeBooking" style="margin-left: 100px" rounded color="vermelho">
-                  {{$t('storePage.book')}}
-                </q-btn>
-            </q-card-actions>
-
-          </q-card>
-        </q-dialog>-->
   </div>
 </template>
 
@@ -117,41 +68,15 @@ name: "StoreBooking",
       storeID: this.$route.params.id,
       cardBook: false,
       slide: 1,
-      lorem: "Teste",
       date: String,
 
-      options: [
-        {
-          "_id": "5ff4e77cf4cffc04869eb9fd",
-          "storeID": "5ff4a6e77df75e2ace11b036",
-          "product": "Crepe Chinês de Legumes",
-          "price": 2,
-          "abstract": "Entradas",
-          "__v": 0
-        },
-        {
-          "_id": "5ff4e786f4cffc04869eb9fe",
-          "storeID": "5ff4a6e77df75e2ace11b036",
-          "product": "4x Gyosa",
-          "price": 2,
-          "abstract": "Entradas",
-          "__v": 0
-        },
-        {
-          "_id": "5ff4e791f4cffc04869eb9ff",
-          "storeID": "5ff4a6e77df75e2ace11b036",
-          "product": "4x Camarão Crocante",
-          "price": 2,
-          "abstract": "Entradas",
-          "__v": 0
-        }
-      ],
+      catalog: Array,
       booking: new Booking(),
       services: null
     }
   },
   beforeMount() {
-
+    this.fetchCatalog()
   },
   methods: {
     makeBooking() {
@@ -176,11 +101,19 @@ name: "StoreBooking",
 
     },
 
-    // TODO: Fazer só reservas no futuro.
-    /*rangeDate(date) {
-      let nowDate = new Date();
-      return date >= nowDate.getFullYear() + '/' + nowDate.getMonth() + '/' + nowDate.getDay()
-    }*/
+    fetchCatalog() {
+      Service.getCatalog(this.storeID)
+        .then(response => {
+          console.group("Procura de catálogo")
+          this.catalog = response.data["data"];
+          console.log("Catálogo:");
+          console.log(this.catalog);
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    }
   }
 }
 </script>
