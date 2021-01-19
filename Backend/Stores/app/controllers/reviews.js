@@ -37,7 +37,7 @@ module.exports.insertReview = async (review) => {
         }
         let soma = Number(sum) + Number(review.rating);
         let tamanhoTotal = tamanho + 1;
-        let newStoreRating = (soma / tamanhoTotal)
+        let newStoreRating = Math.round((soma / tamanhoTotal) * 10) / 10 //rounded up number
         Store.updateOne({_id: review.storeID},{$set: {rating: newStoreRating}}).exec()
     }
     else {
