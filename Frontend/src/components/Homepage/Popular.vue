@@ -95,7 +95,6 @@ export default {
       return this.baseProfile + this.profile.avatar;
     },
     getImageWidget(url) {
-      console.log(url);
       return this.basePopular + url;
     },
     roundRating: function(rating) {
