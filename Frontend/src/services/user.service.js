@@ -245,6 +245,18 @@ class UserService {
     return request.get()
   }
 
+  getFreeSlots(storeID) {
+    let request = new Request(`${process.env.API_ENDPOINT}/slot/store/${storeID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("hide_full", true)
+
+    return request.get()
+  }
+
   getNotifications(read) {
     let request = new Request(`${process.env.API_ENDPOINT}/notification`);
 

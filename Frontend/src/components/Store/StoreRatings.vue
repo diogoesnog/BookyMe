@@ -85,7 +85,7 @@ export default {
       totalRating: 0
     }
   },
-  
+
   props: {
     _id: String,
     rating: Number,
@@ -98,13 +98,11 @@ export default {
   methods: {
     roundRating() {
       return Math.round(this.rating*10)/10;
-    }, 
+    },
     fetchStoreReviews() {
       Service.getReviewsStore(this.storeID)
         .then(response => {
-          let data = response.data["data"];
-          this.reviews = data;
-          console.log(this.reviews);
+          this.reviews = response.data["data"];
 
           // Percorrer Array e Contar Stars
           var i;

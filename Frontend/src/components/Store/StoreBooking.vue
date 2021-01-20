@@ -1,55 +1,78 @@
 <template>
   <div>
-    <q-btn class="botao" rounded label="Faça a sua marcação!" @click="card = true" color="vermelho" icon="event_available"/>
+    <q-btn style="position: sticky; margin-left: 100px; margin-top: 50px;" rounded label="Faça a sua marcação!" @click="cardBook = true" color="vermelho" icon="event_available"/>
 
-    <q-dialog v-model="card">
-<!--      TODO: Fazer a parte de seleção de serviço -->
-      <q-card class="my-card">
-        <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+    <q-dialog v-model="cardBook">
+      <q-carousel
+        transition-prev="slide-right"
+        transition-next="slide-left"
+        animated
+        v-model="slide"
+        control-color="red"
+        navigation
+        arrows
+        control-type="regular"
+        padding
+        height="400px"
+        class="bg-white shadow-1 rounded-borders"
+      >
+        <q-carousel-slide :name="1" class="column no-wrap flex-center">
+          <div v-if="catalog" class="text-center">
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <q-select
+              label="Selecione o(s) seu(s) serviço(s)"
+              style="width: 220px"
+              outlined
+              transition-show="scale"
+              transition-hide="scale"
+              multiple
+              counter
+              emit-value
+              map-options
+              hint="Serviços selecionados"
 
-        <q-card-section>
-          <q-btn
-            fab
-            color="vermelho"
-            icon="event_available"
-            class="absolute"
-            style="top: 0; right: 12px; transform: translateY(-50%);"
-          />
-
-          <div class="row no-wrap items-center">
-            <div class="col text-h6 ellipsis" style="margin-top: 10px; color: #434343; font-weight: 700; font-size: 20px;">
-              {{ this.name }}
-            </div>
+              v-model="services"
+              :options="catalog"
+              option-value="_id"
+              option-label="product"
+            />
           </div>
-        </q-card-section>
+          <div v-else>
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide :name="2" class="column no-wrap flex-center">
+          <div v-if="slots" class="text-center">
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <q-select
+              label="Selecione o seu slot"
+              style="width: 220px"
+              outlined
+              transition-show="scale"
+              transition-hide="scale"
+              emit-value
+              map-options
 
-        <q-card-section class="q-pt-none">
-          <q-date
-              :title="$t('storePage.date')"
-              today-btn
-              mask="YYYY-MM-DDTHH:mm"
-              :subtitle="$t('storePage.dateSub')"
-              color="red"
-              v-model="date" />
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-time
-            v-model="date"
-            format24h
-            mask="YYYY-MM-DDTHH:mm"
-            color="red" />
-        </q-card-section>
-
-        <q-separator/>
-
-        <q-card-actions>
-            <q-btn icon="event" @click="makeBooking" style="margin-left: 100px" rounded color="vermelho">
-              {{$t('storePage.book')}}
-            </q-btn>
-        </q-card-actions>
-
-      </q-card>
+              v-model="slot"
+              :options="slots"
+              option-value="_id"
+              option-label="label"
+            />
+          </div>
+          <div v-else>
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
+          <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">Marque já</q-btn>
+        </q-carousel-slide>
+      </q-carousel>
     </q-dialog>
   </div>
 </template>
@@ -67,19 +90,25 @@ name: "StoreBooking",
   data() {
     return {
       storeID: this.$route.params.id,
-      card: Boolean,
-      date: String,
-      booking: new Booking()
+      cardBook: false,
+      slide: 1,
+      catalog: null,
+      slots: null,
+      booking: new Booking(),
+      services: null,
+      slot: null
     }
   },
-  beforeMount() {
-    this.date = new Date("2021/01/15").toLocaleString();
-    this.card = false;
+
+  mounted() {
+    this.fetchCatalog()
+    this.fetchFreeSlots()
   },
+
   methods: {
     makeBooking() {
-      let booking = new Booking(this.date)
-
+      let booking = new Booking(this.slot, this.services)
+      // TODO: Ainda com o erro do CORS.
       Service.makeBooking(booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");
@@ -99,22 +128,52 @@ name: "StoreBooking",
 
     },
 
-    // TODO: Fazer só reservas no futuro.
-    /*rangeDate(date) {
-      let nowDate = new Date();
-      return date >= nowDate.getFullYear() + '/' + nowDate.getMonth() + '/' + nowDate.getDay()
-    }*/
+    fetchCatalog() {
+      Service.getCatalog(this.storeID)
+        .then(response => {
+          console.group("Procura de catálogo")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.catalog = data;
+          }
+          console.log("Catálogo:");
+          console.log(this.catalog);
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },
+
+    fetchFreeSlots() {
+      Service.getFreeSlots(this.storeID)
+        .then(response => {
+          console.group("Procura dos Slots:")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.slots = data;
+          }
+          console.log("Slots:");
+          console.log(this.slots);
+          console.groupEnd()
+
+          console.group("Parse dos Slots:")
+          for (let i=0; i < this.slots.length; i++) {
+            let date = new Date(this.slots[i]["date"]);
+            this.slots[i]["label"] = date.toLocaleString('pt-pt', {dateStyle: 'short', timeStyle: 'short'});
+            console.log(this.slots[i]["label"]);
+          }
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-
-.botao {
-  position: sticky;
-  margin-left: 100px;
-  margin-top: 50px;
-}
 
 .text-vermelho {
   color: white;
@@ -122,7 +181,5 @@ name: "StoreBooking",
 .bg-vermelho {
   background: linear-gradient(#e9695c, #e03459);
 }
-
-
 
 </style>
