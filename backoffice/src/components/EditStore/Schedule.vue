@@ -7,7 +7,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field v-model="openingHour" label="Hora de Abertura" prepend-icon="mdi-clock-time-four-outline" readonly v-bind="attrs" v-on="on"></v-text-field>
           </template>
-          <v-time-picker v-if="openingMenu" v-model="openingHour" format="24hr" full-width @click:minute="$refs.open.save(openingHour)"></v-time-picker>
+          <v-time-picker readonly v-if="openingMenu" v-model="openingHour" format="24hr" full-width @click:minute="$refs.open.save(openingHour)"></v-time-picker>
         </v-menu>
       </v-col>
 
@@ -16,7 +16,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field v-model="closingHour" label="Hora de Fecho" prepend-icon="mdi-clock-time-four-outline" readonly v-bind="attrs" v-on="on"></v-text-field>
           </template>
-          <v-time-picker v-if="closeMenu" v-model="closingHour" format="24hr" full-width @click:minute="$refs.close.save(closingHour)"></v-time-picker>
+          <v-time-picker readonly v-if="closeMenu" v-model="closingHour" format="24hr" full-width @click:minute="$refs.close.save(closingHour)"></v-time-picker>
         </v-menu>
       </v-col>
 
