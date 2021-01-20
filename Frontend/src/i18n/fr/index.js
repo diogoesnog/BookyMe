@@ -98,7 +98,7 @@ export default {
     ratePopup: {
       title: "Évaluer la Réservation",
       comment: "Commentaire",
-      submit: "Soumettre Évaluation"
+      submit: "Soumettre"
     },
 
     editPopup: {

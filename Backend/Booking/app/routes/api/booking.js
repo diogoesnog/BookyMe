@@ -10,6 +10,9 @@ const { sameDay } = require('../../utils/sameDay')
 const Response = require('rapid-status');
 const {isSlotValid} = require("../../utils/isSlotValid");
 const {storeInfo} = require("../../utils/storeInfo");
+const Notification = require('../../services/notifications');
+const moment = require("moment");
+moment.locale("pt");
 
 /**
  * Get list of reservations
@@ -143,14 +146,18 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     const userId = req.user.id;
 
     let city, storeName, photoPath, hasCatalog, catalog;
+    let willBeFull = false;
 
     // Check if slot belongs to the store and if it is full
     let response;
     switch (await isSlotValid(slotId, storeId)) {
         case 0:
             break;
+        case 2:
+            willBeFull = true;
+            break;
         case 1:
-            response = Response.BAD_REQUEST("Selected Slot if Full!");
+            response = Response.BAD_REQUEST("Selected Slot is Full!");
             res.status(response.status).jsonp(response);
             return;
         case -1:
@@ -186,6 +193,13 @@ app.post('/:storeId', checkAuth, async (req, res) => {
         return;
     }
 
+    // Check if serviceDate is in the past
+    if (new Date(Date.now()) > new Date(serviceDate)) {
+        const response = Response.BAD_REQUEST("The date is from the past!");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
     const booking = {
         bookingDate: new Date(Date.now()).toISOString(),
         serviceDate: new Date(serviceDate).toISOString(),
@@ -205,15 +219,17 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     });
 
     // Create Booking
-    Booking.createBooking(booking)
-        .then(data => {
-            const response = Response.OK(data);
-            res.status(response.status).jsonp(response);
-        })
-        .catch(err => {
-            const response = Response.INTERNAL_ERROR(err);
-            res.status(response.status).jsonp(response);
-        });
+    try {
+        const data = await Booking.createBooking(booking);
+        if (willBeFull)
+            await Slot.slotIsFull(slotId);
+        const response = Response.OK(data);
+        res.status(response.status).jsonp(response);
+    }
+    catch (err) {
+        const response = Response.INTERNAL_ERROR(err);
+        res.status(response.status).jsonp(response);
+    }
 });
 
 /**
@@ -221,25 +237,43 @@ app.post('/:storeId', checkAuth, async (req, res) => {
  * URL param: id
  */
 app.patch('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) => {
+    const bookingId = req.params.id;
+
     try {
         const ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
 
         if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
-            Booking.cancelBookings(req.params.id)
-                .then(data => {
-                    const response = Response.OK(data);
-                    res.status(response.status).jsonp(response);
-                })
-                .catch(err => {
-                    const response = Response.INTERNAL_ERROR(err);
-                    res.status(response.status).jsonp(response);
+
+            try {
+                const data = await Booking.cancelBookings(bookingId);
+                const old_slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
+                await Slot.slotIsNotFull(old_slotId);
+                let header = req.headers.authorization || req.headers.Authorization;
+
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+
+                const storeName = (await Booking.getStoreName(bookingId)).storeName;
+                const serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
+                const storeId = (await Booking.getStoreFromID(bookingId)).storeId;
+
+                await Notification.sendNotification(header, {
+                    userId: ReservationUserId,
+                    message: `A sua reserva na loja ${storeName} no dia ${moment(serviceDate).format('l')} foi cancelada`,
+                    storeId: storeId
                 });
+
+            } catch (err) {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            }
+
         } else {
             const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to delete this reservation");
             res.status(response.status).jsonp(response);
         }
-    } catch {
-        const response = Response.INTERNAL_ERROR("Can't find userID. Does the reservation exist?");
+    } catch (err) {
+        const response = Response.INTERNAL_ERROR(err);
         res.status(response.status).jsonp(response);
     }
 });
@@ -251,35 +285,50 @@ app.patch('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) 
  * {serviceDate}: Date
  */
 app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) => {
-    const bookingID = req.params.id;
+    const bookingId = req.params.id;
     const bookingDate = new Date(Date.now()).toISOString();
     const serviceId = req.body.serviceId;
     const slotId = req.body.slotId;
     const storeId = req.storeId;
 
     let catalog;
+    let old_slotId;
+    let willBeFull = false;
+
+    try {
+        old_slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
+    }
+    catch (err) {
+        response = Response.INTERNAL_ERROR( err);
+        res.status(response.status).jsonp(response);
+    }
 
     // Check if slot belongs to the store and if it is full
     let response;
-    switch (await isSlotValid(slotId, storeId)) {
-        case 0:
-            break;
-        case 1:
-            response = Response.BAD_REQUEST("Selected Slot if Full!");
-            res.status(response.status).jsonp(response);
-            return;
-        case -1:
-            response = Response.BAD_REQUEST("Slot doesn't belong to the store");
-            res.status(response.status).jsonp(response);
-            return;
-        case -2:
-            response = Response.BAD_REQUEST("Please enter a valid slot");
-            res.status(response.status).jsonp(response);
-            return;
-        case -3:
-            response = Response.INTERNAL_ERROR( "Error getting the capacity of the slot. Does the slot exist?");
-            res.status(response.status).jsonp(response);
-            break
+    if (old_slotId !== slotId) {
+        switch (await isSlotValid(slotId, storeId)) {
+            case 0:
+                break;
+            case 2:
+                willBeFull = true;
+                break;
+            case 1:
+                response = Response.BAD_REQUEST("Selected Slot is Full!");
+                res.status(response.status).jsonp(response);
+                return;
+            case -1:
+                response = Response.BAD_REQUEST("Slot doesn't belong to the store");
+                res.status(response.status).jsonp(response);
+                return;
+            case -2:
+                response = Response.BAD_REQUEST("Please enter a valid slot");
+                res.status(response.status).jsonp(response);
+                return;
+            case -3:
+                response = Response.INTERNAL_ERROR("Error getting the capacity of the slot. Does the slot exist?");
+                res.status(response.status).jsonp(response);
+                break
+        }
     }
 
     // Get store info
@@ -301,6 +350,13 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
         return;
     }
 
+    // Check if serviceDate is in the past
+    if (new Date(Date.now()) > new Date(serviceDate)) {
+        const response = Response.BAD_REQUEST("The date is from the past!");
+        res.status(response.status).jsonp(response);
+        return;
+    }
+
     let ReservationUserId;
     try {
         ReservationUserId = (await Booking.getUserFromID(req.params.id)).userId;
@@ -311,15 +367,30 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
     }
 
     if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
-        Booking.reschedule(bookingID, bookingDate, serviceDate, slotId, catalog)
-            .then(data => {
-                const response = Response.OK(data);
-                res.status(response.status).jsonp(response);
-            })
-            .catch(err => {
-                const response = Response.INTERNAL_ERROR(err);
-                res.status(response.status).jsonp(response);
+        try {
+            const storeName = (await Booking.getStoreName(bookingId)).storeName;
+            const old_serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
+
+            const data = await Booking.reschedule(bookingId, bookingDate, serviceDate, slotId, catalog);
+            if (old_slotId !== slotId) {
+                await Slot.slotIsNotFull(old_slotId);
+                if (willBeFull)
+                    await Slot.slotIsFull(slotId);
+            }
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+
+            let header = req.headers.authorization || req.headers.Authorization;
+
+            await Notification.sendNotification(header, { userId: ReservationUserId,
+                message: `A sua reserva na loja ${storeName} no dia ${moment(old_serviceDate).format('l')} foi reagendada para o dia ${moment(serviceDate).format('l')}`,
+                storeId: storeId
             });
+
+        } catch (err) {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        }
     } else {
         const response = Response.UNAUTHORIZED("Logged in user doesn't have permission to reschedule this reservation");
         res.status(response.status).jsonp(response);
@@ -338,12 +409,6 @@ app.get('/current', checkAuth, (req, res) => {
         date_ini = new Date(date_ini).setHours(date_now.getHours(), date_now.getMinutes(), date_now.getSeconds());
     } else if (date_now > new Date(date_ini)) { // Past
         const response = Response.OK([{"count": 0}]);
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
-    if (date_ini == "Invalid Date") {
-        const response = Response.BAD_REQUEST("Invalid Date");
         res.status(response.status).jsonp(response);
         return;
     }
@@ -378,12 +443,6 @@ app.get('/concluded', checkAuth, (req, res) => {
         return;
     }
 
-    if (date_ini == "Invalid Date") {
-        const response = Response.BAD_REQUEST("Invalid Date");
-        res.status(response.status).jsonp(response);
-        return;
-    }
-
     Booking.count(storeID, date_ini, date_fin, false)
         .then(data => {
             if (data.length === 0) {
@@ -405,12 +464,6 @@ app.get('/canceled', checkAuth, (req, res) => {
 
     const date_ini = new Date(date).setHours(0,0, 0);
     const date_fin = new Date(date_ini).setHours(23,59, 59);
-
-    if (date_ini == "Invalid Date") {
-        const response = Response.BAD_REQUEST("Invalid Date");
-        res.status(response.status).jsonp(response);
-        return;
-    }
 
     Booking.count(storeID, date_ini, date_fin, true)
         .then(data => {

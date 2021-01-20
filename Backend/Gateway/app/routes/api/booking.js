@@ -44,7 +44,9 @@ router.get('/popular', checkAuth, (req, res) => {
 });
 
 // Store ID
-router.post('/:id', (req, res) => {
+router.post('/:id', checkAuth, validator([
+    "slotId", "serviceId"
+]), (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
     let body = JSON.stringify(req.body);
 

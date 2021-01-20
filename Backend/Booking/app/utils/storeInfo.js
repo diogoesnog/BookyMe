@@ -2,7 +2,7 @@ const Store = require('../services/Stores/stores');
 const Catalog = require('../services/Stores/catalog');
 
 module.exports.storeInfo = async (storeId, serviceId) => {
-    let catalog, catalogData, photoPath, hasCatalog = false;
+    let catalog = [], catalogData, photoPath, hasCatalog = false;
 
     let city = (await Store.getStore(storeId)).data.data.address.city;
 
@@ -20,16 +20,16 @@ module.exports.storeInfo = async (storeId, serviceId) => {
     catch {}
 
     if (catalogData.length > 0) {
-        if (serviceId !== null) {
+        if (serviceId !== undefined)
             for (let item in catalogData)
-                if (serviceId === catalogData[item]._id)
-                    catalog = {
-                        _id: serviceId,
-                        product: catalogData[item].product,
-                        price: catalogData[item].price,
-                        abstract: catalogData[item].abstract
-                    }
-        }
+                for (let i = 0; i < serviceId.length; i++)
+                    if (serviceId[i] === catalogData[item]._id)
+                        catalog.push({
+                            _id: serviceId[i],
+                            product: catalogData[item].product,
+                            price: catalogData[item].price,
+                            abstract: catalogData[item].abstract
+                        });
         hasCatalog = true;
     }
 
