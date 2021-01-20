@@ -55,7 +55,7 @@ class Services {
         });
     }
     updateAddress(id, address) {
-        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
     }
 
     getStores() {
