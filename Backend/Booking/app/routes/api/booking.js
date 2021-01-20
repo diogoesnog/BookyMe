@@ -10,6 +10,9 @@ const { sameDay } = require('../../utils/sameDay')
 const Response = require('rapid-status');
 const {isSlotValid} = require("../../utils/isSlotValid");
 const {storeInfo} = require("../../utils/storeInfo");
+const Notification = require('../../services/notifications');
+const moment = require("moment");
+moment.locale("pt");
 
 /**
  * Get list of reservations
@@ -245,8 +248,21 @@ app.patch('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) 
                 const data = await Booking.cancelBookings(bookingId);
                 const old_slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
                 await Slot.slotIsNotFull(old_slotId);
+                let header = req.headers.authorization || req.headers.Authorization;
+
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);
+
+                const storeName = (await Booking.getStoreName(bookingId)).storeName;
+                const serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
+                const storeId = (await Booking.getStoreFromID(bookingId)).storeId;
+
+                await Notification.sendNotification(header, {
+                    userId: ReservationUserId,
+                    message: `A sua reserva na loja ${storeName} no dia ${moment(serviceDate).format('l')} foi cancelada`,
+                    storeId: storeId
+                });
+
             } catch (err) {
                 const response = Response.INTERNAL_ERROR(err);
                 res.status(response.status).jsonp(response);
@@ -352,7 +368,9 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
 
     if (ReservationUserId === req.user.id || req.user.isAdmin === true) {
         try {
-            console.log(old_slotId);
+            const storeName = (await Booking.getStoreName(bookingId)).storeName;
+            const old_serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
+
             const data = await Booking.reschedule(bookingId, bookingDate, serviceDate, slotId, catalog);
             if (old_slotId !== slotId) {
                 await Slot.slotIsNotFull(old_slotId);
@@ -361,6 +379,14 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
             }
             const response = Response.OK(data);
             res.status(response.status).jsonp(response);
+
+            let header = req.headers.authorization || req.headers.Authorization;
+
+            await Notification.sendNotification(header, { userId: ReservationUserId,
+                message: `A sua reserva na loja ${storeName} no dia ${moment(old_serviceDate).format('l')} foi reagendada para o dia ${moment(serviceDate).format('l')}`,
+                storeId: storeId
+            });
+
         } catch (err) {
             const response = Response.INTERNAL_ERROR(err);
             res.status(response.status).jsonp(response);

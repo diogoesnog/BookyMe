@@ -42,17 +42,14 @@ export default {
     getCatalog() {
       Service.getCatalog(this.storeID)
         .then(response => {
-          let data = response.data["data"];
-          this.catalog = data;
-          console.log("CATALOGO");
-          console.log(this.catalog);
+          this.catalog = response.data["data"];
         }).catch(err => console.log(err)
       ).finally(() => {
         this.$q.loading.hide();
       })
-    }    
+    }
   }
-    
+
 }
 </script>
 
