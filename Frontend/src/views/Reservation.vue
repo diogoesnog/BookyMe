@@ -1,10 +1,9 @@
 <template>
   <div>
-    <!--      TODO: Fazer o script para ir buscar as informações da reserva e da loja respetiva -->
-    <ReservationBanner />
+    <ReservationBanner v-bind="storeData"/>
     <div class="divBottom">
-      <ReservationInfo/>
-      <StoreMap />
+      <ReservationInfo v-bind="bookingData"/>
+      <StoreMap v-bind="storeData"/>
     </div>
     <Toolbar/>
   </div>
@@ -31,8 +30,9 @@ export default {
 
   data() {
     return {
-      storeID: this.$route.params.id,
-      storeData: Object,
+      bookingID: this.$route.params.id,
+      bookingData: {},
+      storeData: {},
       lang: this.$i18n.locale,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
@@ -52,10 +52,33 @@ export default {
 
   mounted() {
     console.log("Mounted: View has been rendered");
-    this.fetchStoreData();
+    this.fetchBookingData();
   },
 
   methods: {
+
+    fetchBookingData() {
+      this.$q.loading.show({ delay: 400});
+
+      Service.getBookingInfo(this.bookingID)
+        .then(response => {
+
+          console.group("Booking Information:")
+          let data = response.data["data"];
+          this.bookingData = data[0].booking[0];
+          this.storeID = this.bookingData["storeId"];
+          console.log("Informação do booking:")
+          console.log(this.bookingData);
+          console.log("ID da Store associada: " + this.storeID);
+          console.groupEnd()
+
+          this.fetchStoreData();
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },
+
     fetchStoreData() {
       this.$q.loading.show({ delay: 400});
       Service.getStoreData(this.storeID)
@@ -69,7 +92,6 @@ export default {
       })
     }
   }
-
 }
 
 </script>

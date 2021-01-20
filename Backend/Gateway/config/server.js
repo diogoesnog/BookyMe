@@ -37,7 +37,7 @@ app.use(express.static('./app/public'));
 // Configure CORS middleware to expose Authorization header
 const corsOptions = {
     credentials: true,
-    exposedHeaders: 'Authorization',
+    exposedHeaders: 'Authorization'
 };
 
 app.use( cors(corsOptions) );
@@ -48,13 +48,14 @@ app.use( cors(corsOptions) );
 app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     next(createError(404));
-});
+});*/
 
 // error handler
 app.use((err, req, res, next) => {
     console.log("Error Handler");
+
     console.log(err.message);
 
     let response = Response.INTERNAL_ERROR(env === "dev" ? err : null, err.message);

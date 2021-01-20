@@ -21,3 +21,15 @@ module.exports.addStore = (token, storeId) => {
 
     return request.post(JSON.stringify(body));
 }
+
+
+module.exports.getCoordinates = ({place, city, zipcode, country}) => {
+    let query = `${place}, ${city} ${zipcode}, ${country}`;
+    let request = new Request(`http://api.positionstack.com/v1/forward`);
+
+    request.isJson();
+    request.appendParam("access_key", process.env.POSITIONSTACK_TOKEN);
+    request.appendParam("query", query);
+
+    return request.get();
+}

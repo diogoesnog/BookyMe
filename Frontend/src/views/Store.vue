@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       storeID: this.$route.params.id,
-      storeData: Object,
+      storeData: {},
       lang: this.$i18n.locale,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
@@ -72,7 +72,6 @@ export default {
         .then(response => {
           let data = response.data["data"];
           this.storeData = data[0];
-          console.log(this.storeData);
         }).catch(err => console.log(err)
       ).finally(() => {
         this.$q.loading.hide();

@@ -6,7 +6,6 @@
       <div class="divTop2">
         <div class="row" style="margin: 20px;">
           <div class="col-5" style="display: flex; align-items: center;">
-            <!-- TODO: Corrigir o To do Botão -->
             <q-btn to="../reservations" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
           </div>
           <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
@@ -49,8 +48,6 @@
 </template>
 
 <script>
-
-import Service from '../../services/user.service';
 
 export default {
   name: "ReservationBanner",

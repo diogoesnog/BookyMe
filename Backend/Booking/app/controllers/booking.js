@@ -139,7 +139,7 @@ module.exports.getPopularStoreList = () => {
 }
 
 module.exports.cancelBookings = (id) => {
-    return Booking.update({_id: id}, {canceled: true});
+    return Booking.findOneAndUpdate({_id: id}, {canceled: true}, { new: true} );
 };
 
 module.exports.dateExists = (date, storeId) => {
@@ -251,4 +251,16 @@ module.exports.getSlotCurrentCapacity = (slotId) => {
 
 module.exports.getSlots = (slotId) => {
     return Booking.find({slotId: slotId, canceled: false});
+};
+
+module.exports.getSlotIdFromBookingId = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, slotId: 1});
+};
+
+module.exports.getStoreName = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, storeName: 1});
+};
+
+module.exports.getServiceDate = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, serviceDate: 1});
 };

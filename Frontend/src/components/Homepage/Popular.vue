@@ -18,13 +18,13 @@
       <!-- Info User -->
       <div class="row divInfoUser">
         <div class="col-10" style="text-align: left">
-          <span style="font-weight: 600; font-size: 35px; line-height: 40px;">
+          <span style="font-weight: 600; font-size: 33px; line-height: 40px;">
             {{ $t('homePage.greeting') }}, {{ getFirstName(profile.name) }}
           </span>
         </div>
         <div class="col-2 avatarCol">
           <q-avatar class="avatar">
-            <img style="object-fit: cover; margin: 5px; transform: scale(1.3);" :src="getImage()">
+            <img style="object-fit: cover;" :src="getImage()">
           </q-avatar>
         </div>
       </div>
@@ -34,23 +34,23 @@
       {{ $t('homePage.morePopular') }} 
     </div>
     <div class="wrapper">
-        <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
+        <div @click="redirect(store._id)" v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
           <div class="row">
             <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
             </div>
           <div class="row" style="padding: 15px">
             <div class="col-7" style="text-align: left; margin-top: -5px; display: inline-grid;">
-              <span style="font-weight: 670; display: inline-block; width: 125px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
+              <span style="font-weight: 670; display: inline-block; width: 120px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 17px;">
                 {{ store.name }}
               </span>
-              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 14px;">
+              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
                 {{ store.address.city }}
               </span>
             </div>
             <div class="col-5" style="padding-left: 10px; width: 80px;">
               <div class="divRating shadow">
                 <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
-                  <span style="font-weight: 670; font-size: 16px; display: inline-block; vertical-align: middle;">
+                  <span style="font-weight: 670; font-size: 16px; display: inline-block;">
                     {{roundRating(store.rating)}}<span style="font-weight: 200; font-size: 16px;">/5</span>
                   </span>
                   <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
@@ -78,7 +78,8 @@ export default {
   props: {
     profile: Object,
     stores: Object,
-    base: String
+    basePopular: String,
+    baseProfile: String
   }, 
 
   data() {
@@ -91,17 +92,19 @@ export default {
 
   methods: {
     getImage() {
-      return this.base + this.profile.avatar;
+      return this.baseProfile + this.profile.avatar;
     },
     getImageWidget(url) {
-      console.log(url);
-      return "http://localhost:5100" + url;
+      return this.basePopular + url;
     },
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
     },
     getFirstName: function(name) {
       return name.split(" ")[0];
+    },
+    redirect: function(id) {
+      this.$router.push({name: 'Store', params:{id:id}})
     }
   }
 }

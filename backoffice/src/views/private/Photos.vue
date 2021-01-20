@@ -6,23 +6,16 @@
         </v-col>
 
         <v-col cols="10">
-          <h1>Add Photos</h1>
+          <h1>Adicionar Fotos</h1>
           <div style="padding: 15px">
             <v-file-input v-model="file" prepend-icon="mdi-camera" outlined show-size accept="image/png, image/jpeg, image/jpg" label="New Photo"></v-file-input>
             <v-btn color="primary" outlined block @click="uploadPhoto">Upload</v-btn>
-            <v-row>
-              <v-col v-for="photo in store.photos" :key="photo._id" cols="4">
-                <v-img :src="`${base}${photo.url}`" :lazy-src="photo.url" aspect-ratio="1" class="grey lighten-2">
-                  <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                      <v-progress-circular indeterminate color="grey lighten-5">
-                      </v-progress-circular>
-                    </v-row>
-                  </template>
-                </v-img>
-                <v-btn color="error" block outlined @click="deletePhoto(photo._id)">Delete</v-btn>
-              </v-col>
-            </v-row>
+            <div v-if="store.photos.length > 0">
+              <PhotoGrid v-bind:photos="store.photos" :base="base" @deletePhoto="deletePhoto"/>
+            </div>
+            <div v-else>
+              <p>Não Carregou Fotos da Loja <b>{{ this.store.name }}</b></p>
+            </div>
           </div>
 
         </v-col>
@@ -36,7 +29,8 @@ import Service from "@/service/user.service";
 export default {
   name: "Photos",
   components: {
-    Navbar: () => import('../../components/common/Navbar')
+    Navbar: () => import('../../components/common/Navbar'),
+    PhotoGrid: () => import('@/components/PhotoGrid')
   },
 
   data() {
@@ -44,7 +38,8 @@ export default {
       id: this.$route.params.id,
       store: Object,
       base: String,
-      file: null
+      file: null,
+      update: 0
     }
   },
   mounted() {
@@ -64,17 +59,13 @@ export default {
     uploadPhoto(e) {
       e.preventDefault();
       Service.uploadPhoto(this.id, this.file)
-          .then(response => {
-            this.store.photos = response.data[ "data" ].data.photos;
-          })
+          .then(response => this.store.photos = response.data[ "data" ].data.photos)
           .catch(err => console.log(err));
     },
 
     deletePhoto(file) {
       Service.deletePhoto(this.id, file)
-          .then(response => {
-            this.store.photos = response.data[ "data" ].data.photos;
-          })
+          .then(response => this.store.photos = response.data[ "data" ].data.photos)
           .catch(err => console.log(err));
     }
   }

@@ -1,6 +1,7 @@
 const Store = require('../models/store');
-const Plant = require ('../models/plant')
-const Review = require('../models/review')
+const Plant = require ('../models/plant');
+const Review = require('../models/review');
+const Service = require('../services/users');
 
 module.exports.get = (query, projection) => {
     return Store.find(query, projection);
@@ -8,6 +9,31 @@ module.exports.get = (query, projection) => {
 
 module.exports.getSchedule = (storeId, day) => {
     return Store.findOne({_id: storeId},{ schedule: {$elemMatch: {day: day}}})
+}
+
+module.exports.getScheduleList = async (storeId) => {
+
+    let mongoResult = await Store.findOne({_id: storeId},{ schedule: 1})
+    let data = mongoResult.schedule
+    const sorter = {
+        "Segunda-feira": 1,
+        "Terça-feira": 2,
+        "Quarta-feira": 3,
+        "Quinta-feira": 4,
+        "Sexta-feira": 5,
+        "Sábado": 6,
+        "Domingo": 7
+      }
+      
+      const order = { "Segunda-feira": 1, "Terça-feira": 2, "Quarta-feira": 3, "Quinta-feira": 4, "Sexta-feira": 5, "Sábado": 6, "Domingo": 7 };
+      
+      
+      data.sort(function (a, b) {
+          return order[a.day] - order[b.day];
+      });
+
+      console.log(data)
+    return data      
 }
 
 module.exports.getStore = (id) => {
@@ -83,6 +109,16 @@ module.exports.editDescription = (id, des) => {
     return Store.findOneAndUpdate({_id: id},{$set: {description: des}}, { new: true })
 }
 
+module.exports.editAddress = async (add, id) => {
+    let coordinates = await getCoordinates(add);
+
+    return Store.findOneAndUpdate({_id: id},{$set: {
+            address: add,
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude
+    }},{new: true})
+}
+
 module.exports.editPhone = (phone, id) => {
     return Store.findOneAndUpdate({_id: id},{$set: {phone: phone}}, { new: true } )
 }
@@ -112,12 +148,39 @@ module.exports.removeStorePhoto = (id, pId) => {
     return Store.findOneAndUpdate({_id: id},{$pull: {photos: {'_id': pId}}}, { new: true } )
 }
 
+module.exports.removeStoreSchedule = (id, sId) => {
+    return Store.findOneAndUpdate({_id: id},{$pull: {schedule: {'_id': sId}}}, { new: true } )
+}
 
-module.exports.create = (store) => {
+
+module.exports.create = async (store) => {
+    let coordinates = await getCoordinates(store.address);
+
+    store["latitude"] = coordinates.latitude;
+    store["longitude"] = coordinates.longitude;
     const newStore = new Store(store);
     return newStore.save();
 }
 
+async function getCoordinates(address) {
+    try {
+        let response = await Service.getCoordinates(address)
+
+        let data = response.data["data"];
+        console.log(response.data);
+
+        if (data.length === 1) {
+            return {
+                latitude: data[0].latitude,
+                longitude: data[0].longitude
+            }
+        }
+        return {latitude: 0, longitude: 0}
+    } catch (e) {
+        console.log(e);
+        return {latitude: 0, longitude: 0}
+    }
+}
 
 /*
  * Find Stores by Array of Values

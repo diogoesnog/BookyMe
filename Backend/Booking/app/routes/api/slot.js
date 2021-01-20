@@ -2,6 +2,7 @@ const express = require('express');
 const app = express.Router();
 const Slot = require('../../controllers/slot');
 const isAdmin = require('../../middlewares/isAdmin');
+const checkAuth = require('../../middlewares/checkAuth');
 const getStoreId = require('../../middlewares/getStoreIdFromSlotId');
 const Response = require('rapid-status');
 const Booking = require("../../controllers/booking");
@@ -65,23 +66,19 @@ app.post('/store/:id', isAdmin, async (req, res) => {
     }
 });
 
-app.get('/store/:id', isAdmin, (req, res) => {
+app.get('/store/:id', checkAuth, (req, res) => {
     const storeId = req.params.id;
+    const hideFull = req.query.hidefull || "true";
 
-    if (req.user.isAdmin === true) {
-        Slot.getStoreSlots(storeId)
-            .then(data=> {
-                const response = Response.OK(data);
-                res.status(response.status).jsonp(response);
-            })
-            .catch(err => {
-                const response = Response.INTERNAL_ERROR(err);
-                res.status(response.status).jsonp(response);
-            })
-    } else {
-        const response = Response.UNAUTHORIZED("The user is not an admin of that store");
-        res.status(response.status).jsonp(response);
-    }
+    Slot.getStoreSlots(storeId, hideFull)
+        .then(data=> {
+            const response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        })
+        .catch(err => {
+            const response = Response.INTERNAL_ERROR(err);
+            res.status(response.status).jsonp(response);
+        })
 });
 
 app.delete('/:id', getStoreId, isAdmin, async (req, res) => {
