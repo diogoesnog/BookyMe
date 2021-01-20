@@ -46,12 +46,32 @@
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="2" class="column no-wrap flex-center">
-          <div class="q-mt-md text-center">
-            Selecionar o seu slot de marcação.
+          <div v-if="slots" class="text-center">
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <q-select
+              label="Selecione o seu slot"
+              style="width: 220px"
+              outlined
+              transition-show="scale"
+              transition-hide="scale"
+              emit-value
+              map-options
+
+              v-model="slot"
+              :options="slots"
+              option-value="_id"
+              option-label="date"
+            />
+          </div>
+          <div v-else>
+            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center">
-          <q-btn>Marque já</q-btn>
+          <q-btn @click="makeBooking">Marque já</q-btn>
         </q-carousel-slide>
       </q-carousel>
     </q-dialog>
@@ -74,17 +94,22 @@ name: "StoreBooking",
       cardBook: false,
       slide: 1,
       catalog: null,
+      slots: null,
       booking: new Booking(),
-      services: null
+      services: null,
+      slot: null
     }
   },
+
   mounted() {
     this.fetchCatalog()
+    this.fetchFreeSlots()
   },
+
   methods: {
     makeBooking() {
-      let booking = new Booking(this.date)
-
+      let booking = new Booking(this.slot, this.services)
+      // TODO: Ainda com o erro do CORS.
       Service.makeBooking(booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");
@@ -114,6 +139,23 @@ name: "StoreBooking",
           }
           console.log("Catálogo:");
           console.log(this.catalog);
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },
+
+    fetchFreeSlots() {
+      Service.getFreeSlots(this.storeID)
+        .then(response => {
+          console.group("Procura dos Slots:")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.slots = data;
+          }
+          console.log("Slots:");
+          console.log(this.slots);
           console.groupEnd()
         }).catch(err => console.log(err)
       ).finally(() => {
