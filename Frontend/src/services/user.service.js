@@ -220,7 +220,6 @@ class UserService {
   makeBooking(booking, storeID) {
 
     let body = JSON.stringify(booking)
-    console.log(body)
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/${storeID}`)
 
@@ -229,7 +228,7 @@ class UserService {
 
     request.appendHeader("Authorization", authHeader())
 
-    return request.post(booking)
+    return request.post(body)
 
   }
 

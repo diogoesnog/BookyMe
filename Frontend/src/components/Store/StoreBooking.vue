@@ -32,7 +32,7 @@
               map-options
               hint="Serviços selecionados"
 
-              v-model="services"
+              v-model="booking.serviceId"
               :options="catalog"
               option-value="_id"
               option-label="product"
@@ -57,7 +57,7 @@
               emit-value
               map-options
 
-              v-model="slot"
+              v-model="booking.slotId"
               :options="slots"
               option-value="_id"
               option-label="label"
@@ -94,8 +94,6 @@ name: "StoreBooking",
       catalog: null,
       slots: null,
       booking: new Booking(),
-      services: null,
-      slot: null,
       bookingDialog: false
     }
   },
@@ -107,9 +105,8 @@ name: "StoreBooking",
 
   methods: {
     makeBooking() {
-      let booking = new Booking(this.slot, this.services)
       // TODO: Ainda com o erro do CORS.
-      Service.makeBooking(booking, this.storeID)
+      Service.makeBooking(this.booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");
           this.$q.notify({
