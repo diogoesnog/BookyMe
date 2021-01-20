@@ -157,6 +157,14 @@ name: "StoreBooking",
           console.log("Slots:");
           console.log(this.slots);
           console.groupEnd()
+
+          console.group("Parse dos Slots:")
+          for (let i=0; i < this.slots.length; i++) {
+            let date = new Date(this.slots[i]["date"]);
+            this.slots[i]["label"] = date.toLocaleString('pt-pt', {dateStyle: 'short', timeStyle: 'short'});
+            console.log(this.slots[i]);
+          }
+          console.groupEnd()
         }).catch(err => console.log(err)
       ).finally(() => {
         this.$q.loading.hide();
