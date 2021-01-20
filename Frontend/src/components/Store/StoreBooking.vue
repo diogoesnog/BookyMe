@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn class="botao" rounded label="Faça a sua marcação!" @click="cardBook = true" color="vermelho" icon="event_available"/>
+    <q-btn style="position: sticky; margin-left: 100px; margin-top: 50px;" rounded label="Faça a sua marcação!" @click="cardBook = true" color="vermelho" icon="event_available"/>
 
     <q-dialog v-model="cardBook">
       <q-carousel
@@ -8,11 +8,10 @@
         transition-next="slide-left"
         animated
         v-model="slide"
-        control-color="primary"
-        navigation-icon="radio_button_unchecked"
-        navigation-active-icon="radio_button_checked"
+        control-color="red"
         navigation
         arrows
+        control-type="regular"
         padding
         height="400px"
         class="bg-white shadow-1 rounded-borders"
@@ -61,7 +60,7 @@
               v-model="slot"
               :options="slots"
               option-value="_id"
-              option-label="date"
+              option-label="label"
             />
           </div>
           <div v-else>
@@ -70,8 +69,8 @@
             <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
           </div>
         </q-carousel-slide>
-        <q-carousel-slide :name="3" class="column no-wrap flex-center">
-          <q-btn @click="makeBooking">Marque já</q-btn>
+        <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
+          <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">Marque já</q-btn>
         </q-carousel-slide>
       </q-carousel>
     </q-dialog>
@@ -162,7 +161,7 @@ name: "StoreBooking",
           for (let i=0; i < this.slots.length; i++) {
             let date = new Date(this.slots[i]["date"]);
             this.slots[i]["label"] = date.toLocaleString('pt-pt', {dateStyle: 'short', timeStyle: 'short'});
-            console.log(this.slots[i]);
+            console.log(this.slots[i]["label"]);
           }
           console.groupEnd()
         }).catch(err => console.log(err)
@@ -175,12 +174,6 @@ name: "StoreBooking",
 </script>
 
 <style scoped>
-
-.botao {
-  position: sticky;
-  margin-left: 100px;
-  margin-top: 50px;
-}
 
 .text-vermelho {
   color: white;
