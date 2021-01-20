@@ -47,7 +47,7 @@
         </q-carousel-slide>
         <q-carousel-slide :name="2" class="column no-wrap flex-center">
           <div class="q-mt-md text-center">
-            Selecionar o seu slot de marcação
+            Selecionar o seu slot de marcação.
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center">
@@ -78,7 +78,7 @@ name: "StoreBooking",
       services: null
     }
   },
-  beforeMount() {
+  mounted() {
     this.fetchCatalog()
   },
   methods: {
@@ -109,7 +109,7 @@ name: "StoreBooking",
         .then(response => {
           console.group("Procura de catálogo")
           let data = response.data["data"];
-          if (data > 0) {
+          if (data.length > 0) {
             this.catalog = data;
           }
           console.log("Catálogo:");
