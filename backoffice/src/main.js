@@ -3,8 +3,8 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import './plugins/Cookies';
 import vuex from './plugins/vuex';
-
-import router from './router'
+import vueApexCharts from '@/plugins/apexcharts'
+import router from './router';
 import i18n from './plugins/i18n';
 import store from './store/user';
 
@@ -15,6 +15,7 @@ export default new Vue({
   store,
   vuex,
   i18n,
+  vueApexCharts,
   router,
   render: h => h(App)
 }).$mount('#app')

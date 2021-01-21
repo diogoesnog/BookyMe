@@ -32,5 +32,11 @@ class DashboardServices{
             headers: authHeader()
         });
     }
+
+    getSlots(id){
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/slot/store/${id}`, {
+            headers: authHeader()
+        });
+    }
 }
 export default new DashboardServices();

@@ -8,7 +8,7 @@
           <v-card-title>
             <span class="title">Reservas</span>
           </v-card-title>
-          <v-card-text> {{this.current}}</v-card-text>
+          <v-card-text> {{current}}</v-card-text>
         </v-card>
       </v-col>
       <v-col cols="4">
@@ -19,7 +19,7 @@
           <v-card-title>
             <span class="title">Concluídas</span>
           </v-card-title>
-          <v-card-text> {{this.concluded}}</v-card-text>
+          <v-card-text> {{concluded}}</v-card-text>
 
         </v-card>
       </v-col>
@@ -30,7 +30,7 @@
         >
           <v-card-title>
             <span class="title">Cancelamentos</span>
-            <v-card-text> {{this.canceled}}</v-card-text>
+            <v-card-text> {{canceled}}</v-card-text>
           </v-card-title>
         </v-card>
       </v-col>
@@ -38,59 +38,13 @@
 </template>
 
 <script>
-
-import DashboardServices from "../../service/dashboard"
-
   export default {
     name: "Cards",
     props:{
-      idStore: String,
+      current: Number,
+      canceled: Number,
+      concluded: Number
     },
-    data: () => ({
-      current: 0,
-      canceled: 0,
-      concluded: 0
-    }),
-    mounted() {
-      this.getCurrentsReservations(),
-      this.getCanceledReservations(),
-      this.getConcludedReservations()
-    },
-    methods:{
-      getCurrentsReservations(){
-        DashboardServices.getCurrentReservations(this.idStore)
-            .then(response => {
-              this.current = response["data"]["data"]["count"];
-              console.log("Current",this.current)
-            })
-            .catch (err => {
-              window.alert("Error!");
-              console.log("OMG",err);
-            })
-      },
-      getCanceledReservations(){
-        DashboardServices.getCanceledReservations(this.idStore)
-            .then(response => {
-              this.canceled = response["data"]["data"]["count"];
-              console.log("Canceled",this.canceled)
-            })
-            .catch (err => {
-              window.alert("Error!");
-              console.log("OMG",err);
-            })
-      },
-      getConcludedReservations(){
-        DashboardServices.getConcludedReservations()
-          .then(response => {
-            this.concluded = response["data"]["data"]["count"];
-            console.log("Concluded",this.concluded)
-          })
-          .catch (err => {
-            window.alert("Error!");
-            console.log("OMG",err);
-          })
-      }
-    }
   }
 </script>
 
