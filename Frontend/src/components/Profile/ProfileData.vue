@@ -12,10 +12,7 @@
                 <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
               </q-avatar>
             </div>
-            <div style="position: absolute; top: 125px">
-             
-            
-
+            <div style="position: absolute; top: 125px; right:150px; left:220px;">
               <label class="cameraButtom " for="avatar"  >
                       <q-icon size="23px" name="fas fa-camera" color="white"/>
                       
@@ -240,8 +237,6 @@ export default {
 
   methods: {
    
-    // TODO: arranjar forma de quando o utilizador escolhe a imagem de chamar esta função
-    // não te preocupes com os erros que vem da API !!! vais receber um erro 500
     changeAvatar(e) {
       e.preventDefault();
       console.log(e.target.files[0]);
@@ -276,7 +271,6 @@ export default {
       this.editavel = true;
       this.esconde = true;
       
-      this.changeAvatar();
     },
 
      bottomEdit2(){
@@ -342,28 +336,10 @@ export default {
   background: linear-gradient(#e9695c, #e03459);
   padding: 9px 9px;
   border-radius: 50px;
-  border: 40px ;
-  border: 1px solid #999;
+  border: 1px solid #e9695c;
   display: inline-block;
-  
-}
-.cameraButtom::before {
-  
-  
-  background: linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
   outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-}
-.cameraButtom:hover::before {
-  border-color: black;
+  
 }
 
 
