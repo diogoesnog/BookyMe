@@ -74,20 +74,10 @@ class Services {
         });
     }
 
-    getReservations(id){
-        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}`, {
-            headers: authHeader()
-        });
-    }
-
     getCategories() {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/categories`, {
             headers: authHeader()
         });
-    }
-
-    getReservation_2(){
-        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/user/current`);
     }
 
     // TODO: Add Opening Hours
@@ -147,6 +137,8 @@ class Services {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item);
     }
     // TODO: Upload Images
+
+
 }
 
 export default new Services();

@@ -66,9 +66,6 @@
               <v-list-item @click="type = 'month'">
                 <v-list-item-title>Month</v-list-item-title>
               </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
             </v-list>
           </v-menu>
         </v-toolbar>
@@ -81,6 +78,7 @@
             :events="events"
             :event-color="getEventColor"
             :type="type"
+
             @click:event="showEvent"
             @click:more="viewDay"
             @click:date="viewDay"
@@ -133,7 +131,7 @@
 </template>
 <script>
 
-import Service from "../../service/user.service"
+import DashboardServices from "../../service/dashboard"
 
 export default {
   name: "Calendar",
@@ -153,8 +151,7 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     events: [],
-    colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+    colors: ['#2897e3', '#13c1e0', '#e03459', '#434343'],
   }),
   mounted () {
     this.$refs.calendar.checkChange(),
@@ -195,40 +192,91 @@ export default {
 
       nativeEvent.stopPropagation()
     },
-    updateRange ({ start, end }) {
-      const events = []
+    updateRange () {
 
-      const min = new Date(`${start.date}T00:00:00`)
+
+     /* const min = new Date(`${start.date}T00:00:00`)
       const max = new Date(`${end.date}T23:59:59`)
       const days = (max.getTime() - min.getTime()) / 86400000
-      const eventCount = this.rnd(days, days + 20)
+      const eventCount = this.rnd(days, days + 20)*/
 
-      for (let i = 0; i < eventCount; i++) {
+      DashboardServices.getReservations(this.idStore)
+          .then(response => {
+            let events = []
+            let tempBookings = response.data["data"];
+
+            for (let i in tempBookings){
+              const allDay = this.rnd(0, 3) === 0
+              console.log("AllDay", allDay)
+
+              events.push({
+                name: `Booking_${i}`,
+                start: new Date(tempBookings[i]["serviceDate"]),
+                end: new Date(tempBookings[i]["serviceDate"]),
+                color: this.colors[this.rnd(0, this.colors.length - 1)],
+                timed: true
+              })
+            }
+            this.events = events
+            console.log("Events",this.events)
+          })
+          .catch (err => {
+            window.alert("Error!");
+            console.log("OMG",err);
+          })
+
+
+      /*for (let i in this.bookings) {
         const allDay = this.rnd(0, 3) === 0
-        const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-        const second = new Date(first.getTime() + secondTimestamp)
+        console.log("AllDay", allDay)
+        //const firstTimestamp = this.rnd(min.getTime(), max.getTime())
+        //const first = new Date(firstTimestamp - (firstTimestamp % 900000))
+        //console.log("First",first)
+        //const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
+        //const second = new Date(first.getTime() + secondTimestamp)
 
         events.push({
-          name: this.names[this.rnd(0, this.names.length - 1)],
-          start: first,
-          end: second,
+          name: "Booking",
+          start: this.bookings[i],
+          end: this.bookings[i],
           color: this.colors[this.rnd(0, this.colors.length - 1)],
           timed: !allDay,
         })
-      }
+      }*/
 
-      this.events = events
     },
     rnd (a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a
     },
     getReservations (){
-      Service.getReservations(this.idStore)
+      DashboardServices.getReservations(this.idStore)
           .then(response => {
-            this.bookings = response.data["data"][0];
+            let tempBookings = response.data["data"];
+
+            for (let i in tempBookings){
+              this.bookings.push(new Date(tempBookings[i]["serviceDate"]))
+            }
             console.log("Bookings",this.bookings)
+          })
+          .catch (err => {
+            window.alert("Error!");
+            console.log("OMG",err);
+          })
+    },
+    getConcludedCanceled(){
+      DashboardServices.getReservationsConcludedCanceled(this.idStore)
+          .then(response => {
+            let tempBookings = response.data["data"];
+
+            console.log("Concluded/Canceled", tempBookings)
+            /*for (let i in tempBookings){
+              this.bookings.push({
+                name: "Booking",
+                start: new Date(tempBookings[i]["serviceDate"])
+              })
+
+            }
+            console.log("Bookings",this.bookings)*/
           })
           .catch (err => {
             window.alert("Error!");

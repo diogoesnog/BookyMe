@@ -20,7 +20,7 @@ module.exports.storeInfo = async (storeId, serviceId) => {
     catch {}
 
     if (catalogData.length > 0) {
-        if (serviceId !== null)
+        if (serviceId !== undefined)
             for (let item in catalogData)
                 for (let i = 0; i < serviceId.length; i++)
                     if (serviceId[i] === catalogData[item]._id)

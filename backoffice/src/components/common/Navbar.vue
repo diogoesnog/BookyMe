@@ -10,7 +10,7 @@
             <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <router-link :to="{name: 'StoreDash', params: {id: this.$route.params.id}}">Home</router-link>
+            <router-link :to="{name: 'Store', params: {id: this.$route.params.id}}">Dashboard</router-link>
           </v-list-item-content>
         </v-list-item>
 
@@ -90,6 +90,7 @@
         </v-list>
     </v-navigation-drawer>
   </v-card>
+  </v-app>
 </template>
 
 <script>
