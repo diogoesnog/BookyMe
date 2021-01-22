@@ -194,6 +194,18 @@ class UserService {
     return request.get()
   }
 
+  getSearch(keyword) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("search", keyword)
+   
+
+    return request.get()
+  }
+
   getReviewsStore(id){
     let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
 

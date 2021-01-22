@@ -4,7 +4,7 @@
   <div >
     
     <div>
-      <ProfileData :base="base" :profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" />
+      <ProfileData :base="base" v-bind:profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" />
     </div>  
     <div>
       <Toolbar/>
