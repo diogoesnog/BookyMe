@@ -208,10 +208,10 @@ class UserService {
 
   getReviewsStore(id){
     let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
-
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
+    console.log(request);
 
     return request.get()
   }
