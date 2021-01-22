@@ -13,7 +13,7 @@
         <div class="col-2" style="display: flex; justify-content: flex-end;">
          
               <q-btn  class="iconSearch" @click="onEnter" size="xl" text-color="white" > 
-                 <q-icon name="search" size="30px"/>
+                 <q-icon name="search" size="35px"/>
               </q-btn>
             
           
@@ -133,8 +133,8 @@ export default {
     justify-content: center;
     background: linear-gradient(#e9695c, #e03459);
     border-radius: 100px;
-    height: 45px;
-    width: 45px;
+    height: 60px;
+    width: 60px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
