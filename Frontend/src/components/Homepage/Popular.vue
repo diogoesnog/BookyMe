@@ -6,13 +6,18 @@
       <!-- Barra Pesquisa -->
       <div class="row" style="margin: 25px">
         <div class="col-9">
-          <q-input class="searchBar" rounded dense outlined label='Search'>
+          <q-input class="searchBar" v-model="userInputSearch" rounded dense outlined label='Search'>
           </q-input>
         </div>
         <div class="col-1"/>
         <div class="col-2" style="display: flex; justify-content: flex-end;">
-          <q-avatar class="iconSearch" size="xl" text-color="white" icon="search">
-          </q-avatar>
+         
+              <q-btn  class="iconSearch" @click="onEnter" size="xl" text-color="white" > 
+                 <q-icon name="search" size="30px"/>
+              </q-btn>
+            
+          
+          
         </div>
       </div>
       <!-- Info User -->
@@ -68,7 +73,7 @@
 
 <script>
 
-import Service from '../../services/auth.service'
+import Service from '../../services/user.service';
 import User from '../../models/User';
 
 export default {
@@ -84,6 +89,7 @@ export default {
 
   data() {
     return {
+       userInputSearch: ""
     }
   },
 
@@ -105,6 +111,14 @@ export default {
     },
     redirect: function(id) {
       this.$router.push({name: 'Store', params:{id:id}})
+    },
+    onEnter: function() {
+      Service.getSearch(this.userInputSearch)
+        .then(response => {
+          this.stores = response.data["data"];
+        }).catch(err => console.log(err))
+        .finally(() => {this.$q.loading.hide();
+        })
     }
   }
 }
