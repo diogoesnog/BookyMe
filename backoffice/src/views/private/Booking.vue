@@ -1,32 +1,33 @@
 <template>
   <div>
-    <v-row no-gutters>
-      <v-col cols="2">
-        <Navbar/>
-      </v-col>
-      <v-col cols="10">
+    <Navbar/>
 
+    <v-content>
+      <v-container fluid>
+        <v-row class="fill-height">
+          <v-col>
+            <v-tabs>
+              <v-tab>Slots</v-tab>
+              <v-tab>Reservas</v-tab>
+              <v-tab>Notifições</v-tab>
 
-        <v-tabs>
-          <v-tab>Slots</v-tab>
-          <v-tab>Reservas</v-tab>
-          <v-tab>Notifições</v-tab>
+              <v-tab-item>
+                <h2>Slots</h2>
+                <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
+              </v-tab-item>
 
-          <v-tab-item>
-            <h2>Slots</h2>
-            <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
-          </v-tab-item>
-
-          <v-tab-item>
-            <h2>Reservas</h2>
-            <Services v-bind:bookings="bookings"/>
-          </v-tab-item>
-          <v-tab-item>
-            <h2>Notificações Enviadas</h2>
-          </v-tab-item>
-        </v-tabs>
-      </v-col>
-    </v-row>
+              <v-tab-item>
+                <h2>Reservas</h2>
+                <Services v-bind:bookings="bookings"/>
+              </v-tab-item>
+              <v-tab-item>
+                <h2>Notificações Enviadas</h2>
+              </v-tab-item>
+            </v-tabs>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
   </div>
 </template>
 
