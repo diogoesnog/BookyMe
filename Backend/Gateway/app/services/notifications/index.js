@@ -30,3 +30,13 @@ module.exports.markAsRead = (token, id) => {
 
     return request.patch();
 }
+
+module.exports.getStoreNotifications = (token, id) => {
+    let request = new Request(`${process.env.NOTIFICATION_SERVICE_ENDPOINT}/notification/store/${id}`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}
