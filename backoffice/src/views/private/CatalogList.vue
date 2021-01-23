@@ -7,8 +7,6 @@
     <v-container fluid>
       <v-row class="fill-height">
         <v-col>
-
-
           <!-- Content -->
           <h1>Catálogo</h1>
           <br>
@@ -33,10 +31,9 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
-            <Items v-bind:catalogs="catalogs" @deleteCatalog="deleteCatalog"/>
           </v-card>
 
+          <Items v-bind:catalogs="catalogs" @deleteCatalog="deleteCatalog"/>
 
         </v-col>
       </v-row>

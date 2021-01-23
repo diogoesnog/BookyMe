@@ -27,9 +27,11 @@
 
 
     <v-data-table :headers="headers" :items="slots" :items-per-page="15">
-
+      <template v-slot:item.date="{item}">
+        {{ item.date | moment("LLL")}}
+      </template>
       <template v-slot:item.action="{ item }" >
-        <v-icon small @click="deleteSlot(item)">
+        <v-icon small @click="deleteSlot(item)" color="red">
           mdi-delete
         </v-icon>
       </template>
@@ -54,14 +56,18 @@ export default {
         sortable: false,
         value: '_id',
       }, {
-        text: "Capacidade",
-        sortable: true,
-        value: "capacity"
-      }, {
         text: "Data",
         sortable: true,
         value: "date"
       }, {
+        text: "Capacidade Máxima",
+        sortable: true,
+        value: "max_capacity"
+      }, {
+        text: "Lotação",
+        sortable: true,
+        value: "current_capacity"
+      },  {
         text: 'Ação',
         align: 'center',
         value: 'action'
