@@ -17,7 +17,7 @@
                   <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
                 </div>
                 <div v-else style="padding: 50px">
-                  <p>A loja tem slots disponíveis.</p>
+                  <p>A loja não tem slots disponíveis.</p>
                 </div>
               </v-tab-item>
 
