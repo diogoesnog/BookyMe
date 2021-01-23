@@ -96,7 +96,7 @@
             <div class="col-10 titles">
               {{$t('storePage.allRating')}}
             </div>
-            <div class="col-2" style="display: inline-grid; justify-content: center; align-content: center;">
+            <div class="col-2" style="text-align: right;">
               <q-btn icon="close" class="iconClose" size="15px" round dense v-close-popup />
             </div>
           </div>
@@ -241,7 +241,7 @@ export default {
   }
   
   .commentText {
-    font-size: 15px; 
+    font-size: 16px; 
     font-weight: 300; 
   }
   .divRating {
