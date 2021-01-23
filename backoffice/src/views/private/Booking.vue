@@ -13,15 +13,31 @@
 
               <v-tab-item>
                 <h2>Slots</h2>
-                <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
+                <div v-if="slots.length >0">
+                  <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
+                </div>
+                <div v-else style="padding: 50px">
+                  <p>A loja não tem slots disponíveis.</p>
+                </div>
               </v-tab-item>
 
               <v-tab-item>
                 <h2>Reservas</h2>
-                <Services v-bind:bookings="bookings"/>
+                <div v-if="bookings.length >0">
+                  <Services v-bind:bookings="bookings"/>
+                </div>
+                <div v-else style="padding: 50px">
+                  <p>A loja não tem reservas agendadas.</p>
+                </div>
               </v-tab-item>
               <v-tab-item>
                 <h2>Notificações Enviadas</h2>
+                <div v-if="notifications.length >0">
+                  <Notifications v-if="notifications.length > 0"/>
+                </div>
+                <div v-else style="padding: 50px">
+                  <p>Não enviou nenhuma notificação para os clientes.</p>
+                </div>
               </v-tab-item>
             </v-tabs>
           </v-col>
@@ -40,21 +56,29 @@ export default {
   components: {
     Navbar: () => import('@/components/common/Navbar'),
     Slots: () => import("@/components/Booking/Slots"),
-    Services: () => import("@/components/Booking/Services")
+    Services: () => import("@/components/Booking/Services"),
+    Notifications: () => import("@/components/Booking/Notifications")
   },
   data() {
     return {
       id: this.$route.params.id,
       slots: [],
-      bookings: Array
+      bookings: [],
+      notifications: []
     }
   },
   mounted() {
     this.getStoreSlots();
     this.getStoreServices();
+    this.getStoreNotications();
   },
 
   methods: {
+    getStoreNotications() {
+      Service.getNofications(this.id)
+        .then(response => this.notifications = response.data[ "data" ])
+        .catch(err => console.log(err));
+    },
     getStoreSlots() {
       Service.getStoreSlots(this.id)
           .then(response => this.slots = response.data["data"])
