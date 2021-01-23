@@ -105,7 +105,6 @@ name: "StoreBooking",
 
   methods: {
     makeBooking() {
-      // TODO: Ainda com o erro do CORS.
       Service.makeBooking(this.booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");

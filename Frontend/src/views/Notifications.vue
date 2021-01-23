@@ -8,13 +8,14 @@
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
 
     <div class="title">
+<!--      TODO: Meter internacionalização. -->
       Unread
     </div>
-    <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+    <Notification v-for="(notification, index1) in unread" :key="index1" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
     <div class="title">
       Read
     </div>
-     <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
+     <Notification v-for="(notification, index2) in read" :key="index2" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
 
     <Toolbar/>
   </div>
@@ -40,23 +41,28 @@ export default {
 
   mounted() {
     this.getNotifications();
-    this.getUnreadNotifications();
+    this.getReadNotifications();
   },
   methods: {
     getNotifications() {
       Service.getNotifications(false)
         .then(response => {
           this.unread = response.data["data"];
+          console.group("Notificações não lidas:")
+          console.log(this.unread);
+          console.groupEnd();
         }).catch(err => {
           console.error(err);
         });
     },
 
-    getUnreadNotifications() {
+    getReadNotifications() {
       Service.getNotifications(true)
         .then(response => {
           this.read = response.data["data"];
-
+          console.group("Notificações lidas:")
+          console.log(this.read);
+          console.groupEnd();
         }).catch(err => {
           console.error(err);
 

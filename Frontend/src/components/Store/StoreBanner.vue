@@ -6,7 +6,6 @@
       <div class="divTop2">
         <div class="row" style="margin: 20px;">
           <div class="col-5" style="display: flex; align-items: center;">
-            <!-- TODO: Corrigir o To do Botão -->
             <q-btn to="../home" padding="6px 6px" class="button shadow" round icon="fas fa-angle-left"/>
           </div>
           <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
@@ -66,7 +65,7 @@ export default {
       isFav: false,
       disableFav: false,
       reservationsUser: Array,
-      
+
     }
   },
 
@@ -98,21 +97,21 @@ export default {
           if (isFav) {
             this.styleFav = "buttonFavTrue";
             this.isFav = true;
-            
+
           } else {
             this.styleFav = "buttonFavFalse";
             this.isFav = false;
-          
+
           }
           console.log("É favorito? " + isFav);
           console.groupEnd();
         }).catch(err => {
         console.log(err);
 
-       
+
       })
     },
-  
+
     clickHeart(){
       if(this.isFav==false){
         this.addFavorite();
@@ -124,7 +123,7 @@ export default {
         this.isFav=false;
         this.styleFav = "buttonFavFalse";
       }
-      
+
 
       },
 
@@ -143,22 +142,22 @@ export default {
     },
 
     addFavorite() {
-      
+
           let favorite = new Favorite(this.storeID);
-          
+
           Service.addFavorite(favorite)
             .then(response => {
               this.styleFav = "buttonFavTrue";
               console.log(response);
               console.log("Adding Favorite");
               this.isFav=true;
-              
+
             }).catch(err => {
             console.log(err);
-            
+
           })
-     
-     
+
+
     },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
@@ -189,7 +188,7 @@ export default {
       return numberReservations;
     }
   }
-   
+
 }
 </script>
 
