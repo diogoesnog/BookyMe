@@ -12,7 +12,7 @@
         <div class="col-1"/>
         <div class="col-2" style="display: flex; justify-content: flex-end;">
          
-              <q-btn  class="iconSearch" @click="onEnter" size="xl" text-color="white" > 
+              <q-btn  class="iconSearch" :to="'../results/' + this.userInputSearch" size="xl" text-color="white" > 
                  <q-icon name="search" size="35px"/>
               </q-btn>
             
@@ -112,14 +112,6 @@ export default {
     redirect: function(id) {
       this.$router.push({name: 'Store', params:{id:id}})
     },
-    onEnter: function() {
-      Service.getSearch(this.userInputSearch)
-        .then(response => {
-          this.stores = response.data["data"];
-        }).catch(err => console.log(err))
-        .finally(() => {this.$q.loading.hide();
-        })
-    }
   }
 }
 
