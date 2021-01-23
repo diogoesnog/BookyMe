@@ -101,7 +101,7 @@
             </div>
           </div>
         </q-card-section>
-        <q-card-section style="max-height: 50vh;" class="scroll">
+        <q-card-section style="max-height: 60vh;" class="scroll">
           <div v-for="(review, index) in this.reviews" :key="index" v-bind="review" class="row allReviews" style="margin-top: 20px;">
             <div class="col-2">
               <q-avatar class="shadow">
