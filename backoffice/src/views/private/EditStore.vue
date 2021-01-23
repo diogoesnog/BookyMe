@@ -1,9 +1,6 @@
 <template>
   <div>
     <Navbar/>
-
-
-
     <v-content>
       <v-container fluid>
         <v-row class="fill-height">
