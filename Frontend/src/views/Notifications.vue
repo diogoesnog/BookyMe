@@ -6,36 +6,16 @@
       </div>
     </div>
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
-    <div class="col-10 roundedDiv shadow " style="display: flex; align-items: center; height:80px">
-      <div class="col">
-        <div class="row" style="font-weight: 600; font-size: 18px;">
-          Título Notificação
-        </div>
-        <div class="row" style=" font-size: 18px;">
-          Conteúdo 
-        </div>
-      </div>
-    <div class="col">
-        <div class="row" style="font-weight: 600; font-size: 18px;">
-         botão
-        </div>
-      </div>
-      
-    </div>
-    <q-tabs v-model="tab" narrow-indicator dense align="justify">
-      <q-tab class="text-purple" name="unread" icon="mail" label="Unread" />
-      <q-tab class="text-orange" name="read" icon="alarm" label="Read" />
-    </q-tabs>
-    <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="unread">
-        <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
-      </q-tab-panel>
+  
+    <div class="title">
+      Lidas
+    </div> 
+    <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+    <div class="title">
+      Não Lidas
+    </div> 
+     <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
 
-      <q-tab-panel name="read">
-        <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
-      </q-tab-panel>
-
-    </q-tab-panels>
     <Toolbar/>
   </div>
 </template>
@@ -55,14 +35,14 @@ export default {
     return {
       // notifications: Array
       read: Array,
-      unread: Array,
+      unread: [{ _id: "maria", sentBy: "maria", title: "teste", message: "Não consigo colocar as notificações por causa do Backend"}],
       tab: "unread"
     }
   },
 
   mounted() {
-    this.getNotifications();
-    this.getUnreadNotifications();
+    //this.getNotifications();
+    //this.getUnreadNotifications();
   },
   methods: {
     getNotifications() {
@@ -124,4 +104,18 @@ export default {
     align-items: center;
     padding-left: 20px;
   }
+
+  .title {
+  background: linear-gradient(#e9695c, #e03459);
+  color: white;
+  height: 40px;
+  width: 130px;
+  border-radius: 100px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
 </style>
