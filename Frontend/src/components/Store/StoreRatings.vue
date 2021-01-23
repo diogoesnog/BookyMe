@@ -62,6 +62,32 @@
         </div>
       </div>
     </div>
+    <br/>
+    <div style="margin-right: 30px; margin-left: 30px; margin-top: 20px;" class="row allReviews" v-for="(review, index) in this.reviews" :key="index" v-bind="review">
+      <div class="col-2">
+        <q-avatar class="shadow">
+          <img :src="getAvatar(review.user.avatar)">
+        </q-avatar>
+      </div>
+      <div style="width: 10px" class="col-1"/>
+      <div class="col-7">
+        <span style="font-size: 14px; font-weight: 600;">
+          {{review.user.name}}
+        </span>
+        <p class="commentText">
+          {{review.comment}}
+        </p>
+      </div>
+      <div class="col-2 divRating shadow">
+        <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
+            <span style="font-weight: 670; font-size: 16px; display: inline-block; vertical-align: middle;">
+              {{ review.rating }}
+            </span>
+          <i class="fa fa-star" style="font-size:14px; padding-top: 5px;"></i>
+        </p>
+      </div> 
+    </div>
+    
   </div>
 
 </template>
@@ -82,7 +108,8 @@ export default {
       threeStars: "",
       twoStars: "",
       oneStars: "",
-      totalRating: 0
+      totalRating: 0,
+      base: String
     }
   },
 
@@ -103,7 +130,7 @@ export default {
       Service.getReviewsStore(this.storeID)
         .then(response => {
           this.reviews = response.data["data"];
-
+          this.base = response.data["base"];
           // Percorrer Array e Contar Stars
           var i;
           let five = 0 ;
@@ -138,6 +165,9 @@ export default {
       else if(star == 3) return this.threeStars;
       else if(star == 2) return this.twoStars;
       else return this.oneStars;
+    },
+    getAvatar(avatarURL) {
+      return "http://localhost:5200" + avatarURL;
     }
   }
 }
@@ -145,57 +175,81 @@ export default {
 
 <style scoped>
 
+  .commentText {
+    font-size: 14px; 
+    font-weight: 300; 
+  }
+  .divRating {
+    text-align: center;
+    height: 30px;
+    width: 50px;
+    border-radius: 20px;
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
+
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 28px;
+  }
+
   .titles {
     color: #434343;
     font-weight: 700;
     font-size: 30px;
   }
 
-.ratingTotal1 {
-  background: linear-gradient(#e9695c, #e03459);
-  height: 95px;
-  width: 95px;
-  border-radius: 150px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: 800;
-  font-size: 50px;
-  margin: auto;
-}
+  .ratingTotal1 {
+    background: linear-gradient(#e9695c, #e03459);
+    height: 95px;
+    width: 95px;
+    border-radius: 150px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 800;
+    font-size: 50px;
+    margin: auto;
+  }
 
-.ratingTotal2 {
-  color: #434343;
-  font-weight: 300;
-  font-size: 20px;
-  text-align: center;
-  padding-top: 10px;
-  margin: -3px;
-}
+  .ratingTotal2 {
+    color: #434343;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    margin: -3px;
+  }
 
-.allRatings {
+  .allReviews {
+    padding: 10px;
+    background: white;
+    border-radius: 40px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-}
+  .numberStars {
+    color: #434343;
+    font-weight: 300;
+    font-size: 16px;
+  }
 
-.numberStars {
-  color: #434343;
-  font-weight: 300;
-  font-size: 16px;
-}
+  .countStarsBase {
+    background: white;
+    border-radius: 100px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
 
-.countStarsBase {
-  background: white;
-  border-radius: 100px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.countStarsFill {
-  background: linear-gradient(#13c1e0, #2897e3);
-  border-radius: 100px;
-  height: 100%;
-}
+  .countStarsFill {
+    background: linear-gradient(#13c1e0, #2897e3);
+    border-radius: 100px;
+    height: 100%;
+  }
 
 </style>
 
