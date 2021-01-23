@@ -29,10 +29,10 @@
             <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
-          <div :id="checkUserReview(reservation.storeId)" v-else class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+          <div v-else :id="checkUserReview(reservation.storeId)" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
             <div v-if="checkArrayUsers()" style="text-align: center;">
               <span style="text-align: -webkit-center; font-size: 20px; font-weight: 600; color: #e03459;">
-                {{ userRating }}<span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
+                {{ reservation.storeId }}<span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
               </span>
               <img style="height: 25px" src="icons/Star.svg"/>
             </div>
@@ -140,7 +140,7 @@ export default {
       ],
       rating: 4,
       textComment: '',
-      hasReview: false,
+      hasReview: 0,
       userRating: 0
     }
   },
@@ -202,20 +202,17 @@ export default {
     checkUserReview: function(idStore) {
       Service.getReviewsStore(idStore)
         .then(response => {
+          let hasReviewPrev = this.hasReview;//this.hasReview = 0;
+          console.log("TEM" + this.hasReview);
           let ID = this.idUser;
           let data = response.data["data"];
-          let userIds = data.map(obj => obj.userId);
-          this.hasReview = userIds.includes(ID);
-          
-          let outputArray = Object.keys(data).map((key)=>(
-            { UserId: data[key]['userId'], Rating: data[key]['rating'] }
-          ))
-         
-          var arrayUser = outputArray.filter(function(obj, index){
-            return obj.UserId===ID;
-          })
-
-         this.userRating = arrayUser[0]['Rating'];
+          var i;
+          for(i=0; i<data.length; i++) {
+            if(data[i]['userId'] == ID) {
+              this.hasReview = 1;
+              //this.userRating = data[i]['rating'];
+            }
+          }
         })
         .catch(err => {
           console.log(err);

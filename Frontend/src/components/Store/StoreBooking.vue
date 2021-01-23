@@ -1,8 +1,8 @@
 <template>
   <div>
-    <q-btn style="position: sticky; margin-left: 100px; margin-top: 50px;" rounded label="Faça a sua marcação!" @click="cardBook = true" color="vermelho" icon="event_available"/>
+    <q-btn style="position: sticky; margin-left: 100px; margin-top: 50px;" rounded label="Faça a sua marcação!" @click="bookingDialog = true" color="vermelho" icon="event_available"/>
 
-    <q-dialog v-model="cardBook">
+    <q-dialog v-model="bookingDialog">
       <q-carousel
         transition-prev="slide-right"
         transition-next="slide-left"
@@ -32,7 +32,7 @@
               map-options
               hint="Serviços selecionados"
 
-              v-model="services"
+              v-model="booking.serviceId"
               :options="catalog"
               option-value="_id"
               option-label="product"
@@ -57,7 +57,7 @@
               emit-value
               map-options
 
-              v-model="slot"
+              v-model="booking.slotId"
               :options="slots"
               option-value="_id"
               option-label="label"
@@ -66,7 +66,7 @@
           <div v-else>
             <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
             <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
-            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
+            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem slots disponíveis</p>
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
@@ -90,13 +90,11 @@ name: "StoreBooking",
   data() {
     return {
       storeID: this.$route.params.id,
-      cardBook: false,
       slide: 1,
       catalog: null,
       slots: null,
       booking: new Booking(),
-      services: null,
-      slot: null
+      bookingDialog: false
     }
   },
 
@@ -107,9 +105,8 @@ name: "StoreBooking",
 
   methods: {
     makeBooking() {
-      let booking = new Booking(this.slot, this.services)
       // TODO: Ainda com o erro do CORS.
-      Service.makeBooking(booking, this.storeID)
+      Service.makeBooking(this.booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");
           this.$q.notify({

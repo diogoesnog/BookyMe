@@ -20,3 +20,7 @@ module.exports.getUserNotifcations = (userId, read) => {
 module.exports.markRead = (id, user) => {
     return Notification.findOneAndUpdate( { _id: id, userId: user, read: false }, { read: true, readAt: new Date() }, { new: true } );
 }
+
+module.exports.getStoreNotifications = (id) => {
+    return Notification.find( {storeId: id} );
+}

@@ -12,7 +12,7 @@
           <div class="col-5" style="margin-left: auto; display: flex; justify-content: flex-end;">
             <q-btn padding="6px 6px" class="button shadow" round icon="fas fa-plus"/>
             <div style="width:10px; height:auto; display:inline-block;"/>
-            <q-btn @click="addFavorite" padding="6px 6px" :class="styleFav" :disable="disableFav" round icon="favorite"/>
+            <q-btn @click="clickHeart" padding="6px 6px" :class="styleFav" :condition="isFav" round icon="favorite"/>
           </div>
         </div>
         <div class="infoName">
@@ -63,8 +63,10 @@ export default {
     return {
       storeID: this.$route.params.id,
       styleFav: String,
-      disableFav: Boolean,
-      reservationsUser: Array
+      isFav: false,
+      disableFav: false,
+      reservationsUser: Array,
+      
     }
   },
 
@@ -95,28 +97,68 @@ export default {
           let isFav = favorites.indexOf(id) > -1
           if (isFav) {
             this.styleFav = "buttonFavTrue";
-            this.disableFav = true;
+            this.isFav = true;
+            
           } else {
             this.styleFav = "buttonFavFalse";
-            this.disableFav = false;
+            this.isFav = false;
+          
           }
           console.log("É favorito? " + isFav);
           console.groupEnd();
         }).catch(err => {
         console.log(err);
+
+       
       })
+    },
+  
+    clickHeart(){
+      if(this.isFav==false){
+        this.addFavorite();
+        this.isFav=true;
+        this.styleFav = "buttonFavTrue";
+      }
+      else{
+        this.deleteFavorite();
+        this.isFav=false;
+        this.styleFav = "buttonFavFalse";
+      }
+      
+
+      },
+
+    deleteFavorite() {
+      Service.deleteFavorite(this.storeID)
+        .then(response => {
+          console.log(response);
+          let data = response.data["data"];
+          let favorites = data.favorites;
+          console.log("Removing Favorite");
+          favorites = favorites.filter(f => f._id !== this.storeID);
+
+        }).catch(err => {
+          console.log(err);
+        })
     },
 
     addFavorite() {
-      let favorite = new Favorite(this.storeID);
-      Service.addFavorite(favorite)
-        .then(response => {
-          this.styleFav = "buttonFavTrue";
-          console.log(response);
-          console.log("Adding Favorite");
-        }).catch(err => {
-        console.log(err);
-      })
+      
+          let favorite = new Favorite(this.storeID);
+          
+          Service.addFavorite(favorite)
+            .then(response => {
+              this.styleFav = "buttonFavTrue";
+              console.log(response);
+              console.log("Adding Favorite");
+              this.isFav=true;
+              
+            }).catch(err => {
+            console.log(err);
+            
+          })
+     
+     
     },
     getImage(index) {
       return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
@@ -147,6 +189,7 @@ export default {
       return numberReservations;
     }
   }
+   
 }
 </script>
 
