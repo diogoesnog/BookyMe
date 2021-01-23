@@ -43,6 +43,7 @@ export default class Request {
   }
 
   sendFile(file) {
+    this.removeHeader("Content-Type");
     let data = new FormData();
     data.append("file", file);
 
