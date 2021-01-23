@@ -1,25 +1,29 @@
 <template>
   <div>
-    <v-row no-gutters>
-        <v-col cols="2">
-          <Navbar/>
-        </v-col>
+    <Navbar/>
 
-        <v-col cols="10">
-          <h1>Adicionar Fotos</h1>
-          <div style="padding: 15px">
-            <v-file-input v-model="file" prepend-icon="mdi-camera" outlined show-size accept="image/png, image/jpeg, image/jpg" label="New Photo"></v-file-input>
-            <v-btn color="primary" outlined block @click="uploadPhoto">Upload</v-btn>
-            <div v-if="store.photos.length > 0">
-              <PhotoGrid v-bind:photos="store.photos" :base="base" @deletePhoto="deletePhoto"/>
-            </div>
-            <div v-else>
-              <p>Não Carregou Fotos da Loja <b>{{ this.store.name }}</b></p>
-            </div>
-          </div>
+    <v-content>
+      <v-container fluid>
+        <v-row class="fill-height">
+          <v-col>
 
-        </v-col>
-    </v-row>
+            <h1>Adicionar Fotos</h1>
+            <div style="padding: 15px">
+              <v-file-input v-model="file" prepend-icon="mdi-camera" outlined show-size accept="image/png, image/jpeg, image/jpg" label="New Photo"></v-file-input>
+              <v-btn color="primary" outlined block @click="uploadPhoto">Upload</v-btn>
+              <div v-if="store.photos.length > 0">
+                <PhotoGrid v-bind:photos="store.photos" :base="base" @deletePhoto="deletePhoto"/>
+              </div>
+              <div v-else style="padding: 50px">
+                <p>Não Carregou Fotos da Loja <b>{{ this.store.name }}</b></p>
+              </div>
+            </div>
+
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+
   </div>
 </template>
 
@@ -65,7 +69,7 @@ export default {
 
     deletePhoto(file) {
       Service.deletePhoto(this.id, file)
-          .then(response => this.store.photos = response.data[ "data" ].data.photos)
+          .then(response => this.store.photos = response.data[ "data" ].photos)
           .catch(err => console.log(err));
     }
   }
