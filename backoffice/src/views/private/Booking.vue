@@ -9,7 +9,7 @@
             <v-tabs>
               <v-tab>Slots</v-tab>
               <v-tab>Reservas</v-tab>
-              <v-tab>Notifições</v-tab>
+<!--              <v-tab>Notifições</v-tab>-->
 
               <v-tab-item>
                 <h2>Slots</h2>
