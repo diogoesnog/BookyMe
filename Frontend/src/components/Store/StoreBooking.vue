@@ -1,7 +1,6 @@
 <template>
   <div>
     <q-btn style="position: sticky; margin-left: 100px; margin-top: 50px;" rounded label="Faça a sua marcação!" @click="bookingDialog = true" color="vermelho" icon="event_available"/>
-
     <q-dialog v-model="bookingDialog">
       <q-carousel
         transition-prev="slide-right"

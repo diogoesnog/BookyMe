@@ -1,6 +1,13 @@
 <template>
   <div class="col-12">
-    <p class="titles" style="padding-top: 30px; padding-left: 30px">{{$t('storePage.ratings')}}</p>
+    <div class="row" style="padding-top: 40px; padding-left: 30px">
+      <div class="col-9">
+        <p class="titles">{{$t('storePage.ratings')}}</p>
+      </div>
+      <div @click="fixed = true;" class="col-3" style="display: flex; justify-content: center; align-items: center;">
+        {{$t('homePage.seeAll')}}
+      </div>
+    </div>
     <div class="row" style="margin: 15px; padding-top: 10px; padding-right: 20px;">
       <!-- Rating Total -->
       <div class="col-5" style="padding-right: 15px;">
@@ -63,7 +70,7 @@
       </div>
     </div>
     <br/>
-    <div style="margin-right: 30px; margin-left: 30px; margin-top: 20px;" class="row allReviews" v-for="(review, index) in this.reviews" :key="index" v-bind="review">
+    <div style="margin-right: 30px; margin-left: 30px; margin-top: 20px;" class="row allReviews" v-for="(review, index) in this.baseReviews" :key="index" v-bind="review">
       <div class="col-2">
         <q-avatar class="shadow">
           <img :src="getAvatar(review.user.avatar)">
@@ -71,15 +78,53 @@
       </div>
       <div style="width: 10px" class="col-1"/>
       <div class="col-9">
-        <span style="font-size: 14px; font-weight: 600;">
-          {{review.user.name}}
+        <span style="font-size: 15px; font-weight: 600;">
+          {{ review.user.name }}
         </span>
-        <p class="commentText">
-          {{review.comment}}
-        </p>
+        <div @click="showMoreText" v-show="!moreText" class="commentText">
+          {{ getReduceComment(review.comment) }}
+        </div>
+        <div @click="showLessText" v-show="moreText" class="commentText">
+          {{ review.comment }}
+        </div>
       </div>
     </div>
-    
+    <q-dialog v-model="fixed">
+      <q-card class="cardStyle">
+        <q-card-section style="" class="row items-center">
+          <div class="row">
+            <div class="col-10">
+              Todos os Re
+            </div>
+            <div class="col-2">
+              <q-btn icon="cancel" class="iconClose" flat round dense v-close-popup />
+            </div>
+          </div>
+        </q-card-section>
+
+        <q-card-section style="max-height: 50vh;" class="scroll">
+          <div v-for="(review, index) in this.reviews" :key="index" v-bind="review" class="row allReviews" style="margin-top: 20px;">
+            <div class="col-2">
+              <q-avatar class="shadow">
+                <img :src="getAvatar(review.user.avatar)">
+              </q-avatar>
+            </div>
+            <div style="width: 10px" class="col-1"/>
+            <div class="col-9">
+              <span style="font-size: 15px; font-weight: 600;">
+                {{ review.user.name }}
+              </span>
+              <div @click="showMoreText" v-show="!moreText" class="commentText">
+                {{ getReduceComment(review.comment) }}
+              </div>
+              <div @click="showLessText" v-show="moreText" class="commentText">
+                {{ review.comment }}
+              </div>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 
 </template>
@@ -93,8 +138,11 @@ export default {
 
   data() {
     return {
+      fixed: false,  
+      moreText: false,
       storeID: this.$route.params.id,
       reviews: Array,
+      baseReviews: Array,
       fiveStars: "",
       fourStars: "",
       threeStars: "",
@@ -115,6 +163,16 @@ export default {
   },
 
   methods: {
+    getReduceComment(comment) {
+      let commentLess = comment.substring(0, 50); 
+      return commentLess + "...";
+    },
+    showMoreText() {
+      this.moreText = true;
+    },
+    showLessText() {
+      this.moreText = false;
+    },
     roundRating() {
       return Math.round(this.rating*10)/10;
     },
@@ -145,6 +203,9 @@ export default {
           this.threeStars = Math.round((three/length) * 100) + "%";
           this.twoStars = Math.round((two/length) * 100) + "%";
           this.oneStars = Math.round((one/length) * 100) + "%";
+
+          // Get Only 3 Elements Array
+          this.baseReviews = this.reviews.slice(0,3);
         }).catch(err => console.log(err)
 
       ).finally(() => {
@@ -167,6 +228,20 @@ export default {
 
 <style scoped>
 
+  .iconClose {
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  }
+
+  .cardStyle {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    border-radius: 30px;
+  }
+  
   .commentText {
     font-size: 15px; 
     font-weight: 300; 
@@ -241,6 +316,26 @@ export default {
     background: linear-gradient(#13c1e0, #2897e3);
     border-radius: 100px;
     height: 100%;
+  }
+
+  a:link {
+    color: #434343;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #434343;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #434343;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: #434343;
+    text-decoration: none;
   }
 
 </style>
