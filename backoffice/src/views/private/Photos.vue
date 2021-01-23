@@ -69,7 +69,7 @@ export default {
 
     deletePhoto(file) {
       Service.deletePhoto(this.id, file)
-          .then(response => this.store.photos = response.data[ "data" ].data.photos)
+          .then(response => this.store.photos = response.data[ "data" ].photos)
           .catch(err => console.log(err));
     }
   }
