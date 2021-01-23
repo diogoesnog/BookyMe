@@ -30,15 +30,6 @@
                   <p>A loja não tem reservas agendadas.</p>
                 </div>
               </v-tab-item>
-              <v-tab-item>
-                <h2>Notificações Enviadas</h2>
-                <div v-if="notifications.length >0">
-                  <Notifications v-if="notifications.length > 0"/>
-                </div>
-                <div v-else style="padding: 50px">
-                  <p>Não enviou nenhuma notificação para os clientes.</p>
-                </div>
-              </v-tab-item>
             </v-tabs>
           </v-col>
         </v-row>
@@ -57,7 +48,6 @@ export default {
     Navbar: () => import('@/components/common/Navbar'),
     Slots: () => import("@/components/Booking/Slots"),
     Services: () => import("@/components/Booking/Services"),
-    Notifications: () => import("@/components/Booking/Notifications")
   },
   data() {
     return {
