@@ -136,7 +136,20 @@ class Services {
 
     getNofications(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/notification/store/${id}`, {
-            headers: authHeader
+            headers: authHeader()
+        });
+    }
+
+
+    rescheduleBooking(id, data) {
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/booking/${id}`, data, {
+            headers: authHeader()
+        });
+    }
+
+    cancelBooking(id) {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/booking/${id}`, null, {
+            headers: authHeader()
         });
     }
 }

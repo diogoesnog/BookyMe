@@ -24,7 +24,7 @@
               <v-tab-item>
                 <h2>Reservas</h2>
                 <div v-if="bookings.length >0">
-                  <Services v-bind:bookings="bookings"/>
+                  <Services v-bind:bookings="bookings" v-bind:slots="slots" @reschedule="reschedule" @cancel="cancel"/>
                 </div>
                 <div v-else style="padding: 50px">
                   <p>A loja não tem reservas agendadas.</p>
@@ -106,8 +106,22 @@ export default {
             window.alert("Não foi possível remover o slot selecionado!");
             console.log(err)
         });
+    },
+
+    reschedule(data) {
+      let id = data.oldSlotId;
+
+      Service.rescheduleBooking(id, data)
+        .then( () => this.getStoreServices())
+        .catch(err => console.log(err));
+
+    },
+    cancel(id) {
+      Service.cancelBooking(id)
+        .then( () => this.getStoreServices())
+        .catch( err => console.log(err));
     }
-  }
+  },
 }
 </script>
 
