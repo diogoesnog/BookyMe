@@ -168,14 +168,14 @@ export default {
 <style scoped>
 
   .commentText {
-    font-size: 14px; 
+    font-size: 15px; 
     font-weight: 300; 
   }
   .divRating {
     text-align: center;
     height: 30px;
     width: 50px;
-    border-radius: 20px;
+    border-radius: 25px;
     background: linear-gradient(#e9695c, #e03459);
     color: white;
   }

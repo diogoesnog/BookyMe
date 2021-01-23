@@ -11,13 +11,9 @@
         </div>
         <div class="col-1"/>
         <div class="col-2" style="display: flex; justify-content: flex-end;">
-         
-              <q-btn  class="iconSearch" :to="'../results/' + this.userInputSearch" size="xl" text-color="white" > 
-                 <q-icon name="search" size="30px"/>
-              </q-btn>
-            
-          
-          
+          <q-btn  class="iconSearch" :to="'../results/' + this.userInputSearch" size="xl" text-color="white" > 
+              <q-icon name="search" size="30px"/>
+          </q-btn>
         </div>
       </div>
       <!-- Info User -->
