@@ -8,11 +8,11 @@
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
   
     <div class="title">
-      Lidas
+      Read
     </div> 
     <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
     <div class="title">
-      Não Lidas
+      Unread
     </div> 
      <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
 
