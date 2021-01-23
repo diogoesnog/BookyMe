@@ -12,11 +12,14 @@
                 <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
               </q-avatar>
             </div>
-            <div style="position: absolute; top: 125px">
-              <q-input ref="myFileInput" style="display:none" v-model="file" type="file" label="Standard"></q-input>
-              <q-btn style=";" size="md" class="gradientRed" round  @click="getFile" >
-                <q-icon name="fas fa-camera" color="white"/>
-              </q-btn>
+            <div style="position: absolute; top: 125px; right:150px; left:220px;">
+              <label class="cameraButtom " for="avatar"  >
+                      <q-icon size="23px" name="fas fa-camera" color="white"/>
+                      
+              </label>
+              <input id="avatar"  style="visibility:hidden;" type="file" @change="changeAvatar">
+              
+          
             </div>
             <div style="position: absolute; top: 175px">
               <p>
@@ -202,6 +205,7 @@ export default {
     city: String,
     avatar: String,
     base: String
+    
   },
 
   data () {
@@ -212,6 +216,7 @@ export default {
       editavel2: false,
       esconde:false,
       esconde2:false,
+      endpoint: `${process.env.API_ENDPOINT}/users/avatar`,
       newPassword: '***************',
       oldPassword:'***************',
        lang: this.$i18n.locale,
@@ -231,15 +236,24 @@ export default {
   },
 
   methods: {
-    getFile () {
-      this.$refs.myFileInput.$el.click()
-    },
-    // TODO: arranjar forma de quando o utilizador escolhe a imagem de chamar esta função
-    // não te preocupes com os erros que vem da API !!! vais receber um erro 500
-    changeAvatar() {
-      UserService.uploadAvatar(this.file)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
+   
+    changeAvatar(e) {
+      e.preventDefault();
+      console.log(e.target.files[0]);
+      if(e.target.files.length === 1) {
+          let file = e.target.files[0];
+          // event.target.files
+          UserService.uploadAvatar(file)
+            .then(response => {
+              console.log(response);
+              this.profile.avatar = response.data[ "data" ].data.avatar;
+
+              console.log(data);
+            }).catch(err => console.log(err));
+      } else {console.log("Selecione exatamente um ficheiro!")}
+      
+      
+        
     },
 
     handleSubmit(e) {
@@ -257,7 +271,6 @@ export default {
       this.editavel = true;
       this.esconde = true;
       
-      this.changeAvatar();
     },
 
      bottomEdit2(){
@@ -311,6 +324,24 @@ export default {
 
 
 <style scoped>
+
+.cameraButtom::after{
+
+    content:"" !important;
+   
+
+}
+
+.cameraButtom{
+  background: linear-gradient(#e9695c, #e03459);
+  padding: 9px 9px;
+  border-radius: 50px;
+  border: 1px solid #e9695c;
+  display: inline-block;
+  outline: none;
+  
+}
+
 
   .changeLanguageDiv {
     position: absolute;
