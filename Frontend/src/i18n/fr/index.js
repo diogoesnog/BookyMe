@@ -60,6 +60,10 @@ export default {
     title: "Notifications"
   },
 
+  resultsPage: {
+    error: "Impossible de trouver des établissements."
+  },
+
   // Profile Data
   profilePage: {
     personalDetails: "Détails Personnels",

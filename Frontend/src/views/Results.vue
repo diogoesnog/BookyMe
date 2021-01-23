@@ -2,25 +2,28 @@
   <div style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px;">
       <div class="col-2" style="display: flex; align-items: center;">
-        <q-btn to="../categories" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
+        <q-btn to="../home" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
       </div>
-      <div class="col-10">
-        <q-input v-model="userInputSearch" v-on:keyup.enter="onEnter" rounded outlined label='Search'>
-          <template v-slot:append>
-            <q-avatar size='xl' icon="search"/>
-          </template>
-        </q-input>
-      </div>
-    </div>
 
-    <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> Resultados</p>
+    </div>
+    <p>
+        <span style="font-weight: 670; font-size: 45px;  padding-left: 20px;">
+        {{$t('searchResultsPage.title')}}
+        </span>
+        <br/>
+        <span style="font-weight: 300; font-size: 18px;  padding-left: 20px;">
+        A mostrar {{this.stores.length}} resultados para {{this.keyword}}
+        </span>
+    </p>
+    <!--<p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('searchResultsPage.title')}}</p>
+    <p style="font-weight: 300; font-size: 17px; padding-left: 20px;"> A mostrar {{this.stores.length}} resultados para {{this.keyword}} </p> -->
 
     <StoresList v-for="(store, index) in stores" :key="index" v-bind="store"/>
 
     <div class="q-pt-xl">
       <q-banner v-if="error" rounded class="bg-primary text-white">
 
-        {{ $t('storesPage.error') }}
+        {{ $t('resultsPage.error') }}
 
         <template v-slot:action>
           <q-btn push to="../home" color="primary" round icon="home" />

@@ -61,6 +61,10 @@
     error: "Não foi possível encontrar estabelecimentos da categoria escolhida."
   },
 
+  resultsPage: {
+    error: "Não foi possível encontrar estabelecimentos."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notificações"

@@ -61,6 +61,9 @@ export default {
     error: "Failed to find services of the category chosen."
   },
 
+  resultsPage: {
+    error: "Failed to find services."
+  },
   // Notifications
   notificationsPage: {
     title: "Notifications"
@@ -157,7 +160,7 @@ export default {
 
   // Search Results
   searchResultsPage: {
-    title: "Resultados",
+    title: "Results",
     description: 'Showing {count} Results for "{query}"',
   },
 
