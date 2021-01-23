@@ -148,6 +148,7 @@ export default {
 
     ratings: "Ratings",
     seeAllRatings: "See All",
+    allRating: "All Reviews",
     stars: "0 Stars | 1 Star | {count} Stars",
     basedOn: "Based on 1 Evaluation | Based on {count} ratings",
     book: "Book now!",

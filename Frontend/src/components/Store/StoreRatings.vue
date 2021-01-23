@@ -5,7 +5,7 @@
         <p class="titles">{{$t('storePage.ratings')}}</p>
       </div>
       <div @click="fixed = true;" class="col-3" style="display: flex; justify-content: center; align-items: center;">
-        {{$t('homePage.seeAll')}}
+        {{$t('storePage.seeAllRatings')}}
       </div>
     </div>
     <div class="row" style="margin: 15px; padding-top: 10px; padding-right: 20px;">
@@ -91,17 +91,16 @@
     </div>
     <q-dialog v-model="fixed">
       <q-card class="cardStyle">
-        <q-card-section style="" class="row items-center">
-          <div class="row">
-            <div class="col-10">
-              Todos os Re
+        <q-card-section style="" class="items-center">
+          <div class="row" style="margin-right: 20px; margin-left: 20px; margin-bottom: -15px">
+            <div class="col-10 titles">
+              {{$t('storePage.allRating')}}
             </div>
-            <div class="col-2">
-              <q-btn icon="cancel" class="iconClose" flat round dense v-close-popup />
+            <div class="col-2" style="display: inline-grid; justify-content: center; align-content: center;">
+              <q-btn icon="close" class="iconClose" size="15px" round dense v-close-popup />
             </div>
           </div>
         </q-card-section>
-
         <q-card-section style="max-height: 50vh;" class="scroll">
           <div v-for="(review, index) in this.reviews" :key="index" v-bind="review" class="row allReviews" style="margin-top: 20px;">
             <div class="col-2">
@@ -229,9 +228,8 @@ export default {
 <style scoped>
 
   .iconClose {
-    font-size: 20px;
+    background: linear-gradient(#e9695c, #e03459);
     color: white;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
   }
 
   .cardStyle {

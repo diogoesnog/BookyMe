@@ -148,6 +148,7 @@
 
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",
+    allRating: "Todas Avaliações",
     stars: "0 Estrelas | 1 Estrela | {count} Estrelas",
     basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
     book: "Reserve já!",
