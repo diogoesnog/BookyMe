@@ -23,6 +23,14 @@
           <!--https://codepen.io/pen/?&editors=101-->
         </v-card-title>
         <v-card-text>
+          <v-data-table
+              :items-per-page="5"
+              :headers="serviceHeaders"
+              :items="previewItem"
+              item-key="product"
+              sort-by="product"
+              group-by="abstract"
+              show-group-by></v-data-table>
         </v-card-text>
 
         <v-card-actions>
@@ -72,8 +80,21 @@ export default {
     return {
       search: '',
       preview: false,
-      previewItem: Object,
+      previewItem: [],
       dialog: false,
+      serviceHeaders: [{
+        text: "Produto",
+        align: 'start',
+        value: 'product',
+        groupable: false
+      }, {
+        text: "Preço",
+        align: 'center',
+        value: 'price',
+        groupable: false
+      }],
+
+
       headers: [{
         text: 'Utilizador',
         align: 'start',
@@ -111,9 +132,9 @@ export default {
     editService(service) {
       console.log(service);
     },
-    previewService(service) {
+    previewService(item) {
       this.preview = true;
-      this.previewItem = service;
+      this.previewItem = item.service;
     }
   }
 }

@@ -74,11 +74,7 @@ export default {
       }]
     }
   },
-  /*watch: {
-    slots: function (newSlots, oldSlots) {
-      console.log('Prop changed: ', newSlots, ' | was: ', oldSlots)
-    }
-  },*/
+
   methods: {
     cancel() {
       this.slot = new Slot();
