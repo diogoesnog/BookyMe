@@ -6,14 +6,14 @@
       </div>
     </div>
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
-  
-    <div class="title">
-      Read
-    </div> 
-    <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+
     <div class="title">
       Unread
-    </div> 
+    </div>
+    <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+    <div class="title">
+      Read
+    </div>
      <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
 
     <Toolbar/>
@@ -33,16 +33,14 @@ export default {
   },
   data() {
     return {
-      // notifications: Array
       read: Array,
-      unread: [{ _id: "maria", sentBy: "maria", title: "teste", message: "Não consigo colocar as notificações por causa do Backend"}],
-      tab: "unread"
+      unread: Array
     }
   },
 
   mounted() {
-    //this.getNotifications();
-    //this.getUnreadNotifications();
+    this.getNotifications();
+    this.getUnreadNotifications();
   },
   methods: {
     getNotifications() {
