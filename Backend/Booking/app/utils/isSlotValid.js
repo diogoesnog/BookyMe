@@ -4,7 +4,7 @@ const Slot = require('../controllers/slot');
 module.exports.isSlotFree = async (slotId) => {
     try {
         let currentCapacity = (await Booking.getSlotCurrentCapacity(slotId)).shift();
-        const MaxCapacity = (await Slot.getSlotCapacity(slotId)).capacity;
+        const MaxCapacity = (await Slot.getSlotCapacity(slotId)).max_capacity;
 
         if (!currentCapacity) currentCapacity = 0;
         else currentCapacity = currentCapacity.currentCapacity;
