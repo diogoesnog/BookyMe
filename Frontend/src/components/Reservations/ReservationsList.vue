@@ -4,6 +4,7 @@
       {{this._id}}
     </div>
     <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
+      <p> {{reservation }} </p>
       <div class="widgetReservation">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
@@ -29,10 +30,11 @@
             <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
-          <div v-else :id="checkUserReview(reservation.storeId)" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <div v-if="checkArrayUsers()" style="text-align: center;">
+          <div v-else-if="getTypeReservation() == 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <p>{{checkUserReview(reservation.storeId) }}</p>
+            <div v-if="hasReview == true" style="text-align: center;">
               <span style="text-align: -webkit-center; font-size: 20px; font-weight: 600; color: #e03459;">
-                {{ reservation.storeId }}<span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
+                <span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
               </span>
               <img style="height: 25px" src="icons/Star.svg"/>
             </div>
@@ -127,7 +129,7 @@ export default {
     booking: Array,
     base: String,
     typeReservation: String,
-    idUser: String
+    idUser: String,
   },
 
   data() {
@@ -140,8 +142,8 @@ export default {
       ],
       rating: 4,
       textComment: '',
-      hasReview: 0,
-      userRating: 0
+      userRating: 0,
+      hasReview: Boolean,
     }
   },
   methods: {
@@ -196,28 +198,27 @@ export default {
           console.log(err);
         })
     },
-    checkArrayUsers() {
-      return this.hasReview;
-    },
     checkUserReview: function(idStore) {
       Service.getReviewsStore(idStore)
         .then(response => {
-          let hasReviewPrev = this.hasReview;//this.hasReview = 0;
-          console.log("TEM" + this.hasReview);
-          let ID = this.idUser;
+          console.group("Verificação de Review");
           let data = response.data["data"];
-          var i;
-          for(i=0; i<data.length; i++) {
-            if(data[i]['userId'] == ID) {
-              this.hasReview = 1;
-              //this.userRating = data[i]['rating'];
-            }
-          }
+          let userIds = data.map(obj => obj.userId);
+
+          console.log("ID User a Verificar: " + this.idUser);
+          let verifyReview = Boolean;
+          let userHasReview = userIds.indexOf(this.idUser) > -1
+
+          if(userHasReview) verifyReview = true;
+          else verifyReview = false;
+
+          console.log("User Tem Review na Loja " + idStore + "? " + verifyReview);
+          console.groupEnd();
         })
         .catch(err => {
           console.log(err);
         })
-    }
+      }
   }
 }
 </script>
