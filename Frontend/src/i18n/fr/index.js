@@ -139,6 +139,7 @@ export default {
 
     ratings: "Évaluations",
     seeAllRatings: "Voir Tous",
+    allRating: "Tous les Avis",
     stars: "0 Étoiles | 1 Étoile | {count} Étoiles",
     basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações"
   },
