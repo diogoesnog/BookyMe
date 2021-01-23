@@ -70,7 +70,7 @@
         </q-avatar>
       </div>
       <div style="width: 10px" class="col-1"/>
-      <div class="col-7">
+      <div class="col-9">
         <span style="font-size: 14px; font-weight: 600;">
           {{review.user.name}}
         </span>
@@ -78,14 +78,6 @@
           {{review.comment}}
         </p>
       </div>
-      <div class="col-2 divRating shadow">
-        <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
-            <span style="font-weight: 670; font-size: 16px; display: inline-block; vertical-align: middle;">
-              {{ review.rating }}
-            </span>
-          <i class="fa fa-star" style="font-size:14px; padding-top: 5px;"></i>
-        </p>
-      </div> 
     </div>
     
   </div>
