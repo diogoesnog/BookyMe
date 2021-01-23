@@ -48,7 +48,7 @@ app.post('/store/:id', isAdmin, async (req, res) => {
         const booking = {
             storeId: storeId,
             date: date,
-            capacity: capacity
+            max_capacity: capacity
         };
 
         Slot.newSlot(booking)
