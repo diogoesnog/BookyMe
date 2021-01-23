@@ -211,7 +211,6 @@ class UserService {
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
-    console.log(request);
 
     return request.get()
   }
