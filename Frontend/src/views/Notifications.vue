@@ -1,12 +1,27 @@
 <template>
-  <div>
+  <div  style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px;">
       <div class="col-12" style="display: flex; align-items: center;">
         <q-btn to="../home" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
       </div>
     </div>
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
-
+    <div class="col-10 roundedDiv shadow " style="display: flex; align-items: center; height:80px">
+      <div class="col">
+        <div class="row" style="font-weight: 600; font-size: 18px;">
+          Título Notificação
+        </div>
+        <div class="row" style=" font-size: 18px;">
+          Conteúdo 
+        </div>
+      </div>
+    <div class="col">
+        <div class="row" style="font-weight: 600; font-size: 18px;">
+         botão
+        </div>
+      </div>
+      
+    </div>
     <q-tabs v-model="tab" narrow-indicator dense align="justify">
       <q-tab class="text-purple" name="unread" icon="mail" label="Unread" />
       <q-tab class="text-orange" name="read" icon="alarm" label="Read" />
