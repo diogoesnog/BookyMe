@@ -221,6 +221,7 @@ app.post('/:storeId', checkAuth, async (req, res) => {
     // Create Booking
     try {
         const data = await Booking.createBooking(booking);
+        await Slot.incrementCapacity(slotId);
         if (willBeFull)
             await Slot.slotIsFull(slotId);
         const response = Response.OK(data);
@@ -246,12 +247,14 @@ app.patch('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) 
 
             try {
                 const data = await Booking.cancelBookings(bookingId);
-                const old_slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
-                await Slot.slotIsNotFull(old_slotId);
+                const slotId = (await Booking.getSlotIdFromBookingId(bookingId)).slotId;
+                await Slot.slotIsNotFull(slotId);
                 let header = req.headers.authorization || req.headers.Authorization;
 
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);
+
+                await Slot.decrementCapacity(slotId);
 
                 const storeName = (await Booking.getStoreName(bookingId)).storeName;
                 const serviceDate = (await Booking.getServiceDate(bookingId)).serviceDate;
@@ -373,6 +376,9 @@ app.put('/:id', checkAuth, getStoreIdFromBookingId, isAdmin, async (req, res) =>
 
             const data = await Booking.reschedule(bookingId, bookingDate, serviceDate, slotId, catalog);
             if (old_slotId !== slotId) {
+                await Slot.incrementCapacity(slotId);
+                await Slot.decrementCapacity(old_slotId);
+
                 await Slot.slotIsNotFull(old_slotId);
                 if (willBeFull)
                     await Slot.slotIsFull(slotId);
@@ -482,6 +488,23 @@ app.get('/canceled', checkAuth, (req, res) => {
 app.get('/slot/:id', getStoreIdFromSlotId, isAdmin, (req, res) => {
     if (req.user.isAdmin === true) {
         Booking.getSlots(req.params.id)
+            .then(data=> {
+                const response = Response.OK(data);
+                res.status(response.status).jsonp(response);
+            })
+            .catch(err => {
+                const response = Response.INTERNAL_ERROR(err);
+                res.status(response.status).jsonp(response);
+            })
+    } else {
+        const response = Response.UNAUTHORIZED("The user is not an admin of that store");
+        res.status(response.status).jsonp(response);
+    }
+});
+
+app.get('/store/:id/statistics', isAdmin, (req, res) => {
+    if (req.user.isAdmin === true) {
+        Booking.bookingsDay(req.params.id)
             .then(data=> {
                 const response = Response.OK(data);
                 res.status(response.status).jsonp(response);

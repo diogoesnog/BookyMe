@@ -44,6 +44,7 @@ export default {
       storeID: this.$route.params.id,
       storeData: {},
       lang: this.$i18n.locale,
+      bookingDialog: false,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
         { value: 'pt', label: this.$t('languages.portuguese')},

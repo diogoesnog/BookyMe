@@ -134,3 +134,14 @@ module.exports.getSlots = (token, id) => {
 
     return request.get();
 }
+
+module.exports.bookingsDay = (token, id) => {
+
+    let request = new Request(`${process.env.BOOKING_SERVICE_ENDPOINT}/booking/store/${id}/statistics`);
+
+    request.isJson();
+    request.appendHeader("Authorization", token);
+    request.acceptJson();
+
+    return request.get();
+}

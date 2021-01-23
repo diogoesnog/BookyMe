@@ -115,9 +115,6 @@ class Services {
         });
     }
 
-    // TODO: Add Catalog
-
-
     getStoreCatalog(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`, {
             headers: authHeader()
@@ -131,11 +128,17 @@ class Services {
     }
 
     addCatalogItem(id,item){
-        console.log('Id que vai como parametro: ' + id)
 
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item, {
+            headers: authHeader()
+        });
     }
-    // TODO: Upload Images
+
+    getNofications(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/notification/store/${id}`, {
+            headers: authHeader
+        });
+    }
 }
 
 export default new Services();

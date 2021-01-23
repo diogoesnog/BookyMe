@@ -12,9 +12,14 @@ const slotSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
+        unique: true,
         required: true
     },
-    capacity: {
+    current_capacity: {
+        type: Number,
+        default: 0
+    },
+    max_capacity: {
         type: Number,
         required: true
     },
