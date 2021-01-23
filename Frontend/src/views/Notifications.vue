@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1 style="font-weight: 670; font-size: 45px;"> {{$t('notificationsPage.title')}}</h1>
+    <div class="row" style="margin: 20px;">
+      <div class="col-12" style="display: flex; align-items: center;">
+        <q-btn to="../home" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
+      </div>
+    </div>
+    <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
 
     <q-tabs v-model="tab" narrow-indicator dense align="justify">
       <q-tab class="text-purple" name="unread" icon="mail" label="Unread" />
@@ -82,4 +87,26 @@ export default {
 
 <style scoped>
 
+  .centerDiv {
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  .gradientOne {
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
+
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+  }
+
+  .roundedDiv {
+    border-radius: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
 </style>
