@@ -112,7 +112,8 @@ export default {
       time: "Time",
       place: "Place",
       choosePlace: "Choose a Place",
-      makeNew: "Make Booking Now"
+      makeNew: "Make Booking Now",
+      back: "Back Establishment Page"
     },
     ratePopup: {
       title: "Evaluate Service",

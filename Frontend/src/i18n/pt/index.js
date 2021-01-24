@@ -113,7 +113,8 @@
       time: "Hora",
       place: "Lugar Planta",
       choosePlace: "Escolher Lugar",
-      makeNew: "Fazer Reserva Agora"
+      makeNew: "Fazer Reserva Agora",
+      back: "Voltar Página Estabelecimento"
     },
     ratePopup: {
       title: "Avaliar Reserva",

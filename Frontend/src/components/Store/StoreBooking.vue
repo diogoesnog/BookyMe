@@ -87,9 +87,16 @@
             <p style="color: #434343; font-weight: 300; font-size: 18px; margin: 10px">
               {{$t('bookingsPage.newBooking.noSlots')}}
             </p>
+            <div class="row" style="margin: 10px">
+              <div class="col-12">
+                <q-btn rounded style="width: 90%; margin-top: 10px; margin-bottom: 10px; text-align: center; margin-left: auto; display: block; margin-right: auto;" color='azul' dense  v-close-popup>
+                  {{$t('bookingsPage.newBooking.back')}}
+                </q-btn>   
+              </div>
+            </div>
           </div>
         </q-carousel-slide>
-        <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
+        <q-carousel-slide v-if="slots" :name="3" class="column no-wrap flex-center content-center">
           <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
           <div class="photoBackground"/>
           <div class="info">
@@ -159,8 +166,8 @@ name: "StoreBooking",
   },
 
   mounted() {
-    this.fetchCatalog()
-    this.fetchFreeSlots()
+    this.fetchCatalog();
+    this.fetchFreeSlots();
   },
 
   methods: {
