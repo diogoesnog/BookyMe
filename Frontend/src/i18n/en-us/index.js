@@ -98,6 +98,8 @@ export default {
     newBooking: {
       title: "New Booking",
       serviceType: "Type of Service",
+      listService: "List of Services",
+      noServices: "This Establishment does not have a Service Catalog.",
       chooseService: "Select your Service(s)",
       numberServices: "Selected Services",
       dateAndTime: "Date and Time",

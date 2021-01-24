@@ -99,6 +99,8 @@
     newBooking: {
       title: "Nova Reserva",
       serviceType: "Tipo de Serviço",
+      listService: "Lista dos Serviços",
+      noServices: "Este Estabelecimento não dispõe de Catálogo de Serviços.",
       chooseService: "Selecione o(s) seu(s) Serviço(s)",
       numberServices: "Serviços Selecionados",
       dateAndTime: "Data e Hora",

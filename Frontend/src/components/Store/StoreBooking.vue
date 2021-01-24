@@ -16,13 +16,20 @@
         class="cardStyle"
       >
         <q-carousel-slide :name="1" class="column no-wrap flex-center">
-          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/> 
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+          <div class="photoBackground"/>
+          <div class="info">
+            <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+            <p style="font-size: 22px; font-weight: 300;">
+              {{$t('bookingsPage.newBooking.serviceType')}}
+            </p>
+          </div>
           <div v-if="catalog" class="serviceChoice">
-            <p style="color: #434343; font-weight: 700; font-size: 24px;">
-              {{name}}
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseService')}}
             </p>
             <q-select
-              :label="$t('bookingsPage.newBooking.chooseService')"
+              :label="$t('bookingsPage.newBooking.listService')"
               outlined
               rounded
               transition-show="scale"
@@ -38,10 +45,13 @@
               option-label="product"
             />
           </div>
-          <div v-else>
-            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
-            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
-            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem catálogo</p>
+          <div v-else class="serviceChoice">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseService')}}
+            </p>  
+            <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.noServices')}}
+            </p>
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="2" class="column no-wrap flex-center">
@@ -177,6 +187,17 @@ name: "StoreBooking",
 
 <style scoped>
 
+  .info {
+    position: absolute;
+    text-align: center;
+    color: white;
+    top: 40px;
+  }
+  .iconClose {
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  }
+
   .photoMain {
     background-size: cover;
     width: 100%;
@@ -185,10 +206,19 @@ name: "StoreBooking",
     top: 0;
   }
 
-  .serviceChoice {
-    position: relative;
-    top: 25%;
+  .photoBackground {
+    background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
     width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
+
+  .serviceChoice {
+    position: absolute;
+    top: 170px;
+    width: 100%;
+    padding: 20px;
   }
 
   .cardStyle {
