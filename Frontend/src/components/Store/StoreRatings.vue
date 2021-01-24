@@ -78,8 +78,8 @@
       </div>
       <div style="width: 10px" class="col-1"/>
       <div class="col-9">
-        <span style="font-size: 15px; font-weight: 600;">
-          {{ review.user.name }}
+        <span style="font-size: 18px; font-weight: 600;">
+          {{ review.user.name }}<span class="textRating">{{ review.rating }}<span style="font-weight: 300">/5</span><i class="fa fa-star" style="font-size:16px; padding: 2px;"/></span>
         </span>
         <div @click="showMoreText" v-show="!moreText" class="commentText">
           {{ getReduceComment(review.comment) }}
@@ -110,8 +110,8 @@
             </div>
             <div style="width: 10px" class="col-1"/>
             <div class="col-9">
-              <span style="font-size: 15px; font-weight: 600;">
-                {{ review.user.name }}
+              <span style="font-size: 18px; font-weight: 600;">
+                {{ review.user.name }}<span class="textRating">{{ review.rating }}<span style="font-weight: 300">/5</span><i class="fa fa-star" style="font-size:16px; padding: 2px;"/></span>
               </span>
               <div @click="showMoreText" v-show="!moreText" class="commentText">
                 {{ getReduceComment(review.comment) }}
@@ -163,8 +163,9 @@ export default {
 
   methods: {
     getReduceComment(comment) {
-      let commentLess = comment.substring(0, 50); 
-      return commentLess + "...";
+      let commentLess = comment.substring(0, 40);
+      if(comment.length <= 40) return commentLess;
+      else return commentLess + "...";
     },
     showMoreText() {
       this.moreText = true;
@@ -244,13 +245,11 @@ export default {
     font-size: 16px; 
     font-weight: 300; 
   }
-  .divRating {
-    text-align: center;
-    height: 30px;
-    width: 50px;
-    border-radius: 25px;
-    background: linear-gradient(#e9695c, #e03459);
-    color: white;
+
+  .textRating {
+    padding: 10px;
+    font-weight: 600;
+    color: #e03459;
   }
 
   .shadow {
@@ -290,9 +289,10 @@ export default {
 
   .allReviews {
     padding: 10px;
-    background: white;
+    background-color: white !important;
+    color: #434343;
     border-radius: 40px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
