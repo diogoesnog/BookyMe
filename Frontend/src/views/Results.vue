@@ -12,7 +12,7 @@
         </span>
         <br/>
         <span style="font-weight: 300; font-size: 18px;  padding-left: 20px;">
-        A mostrar {{this.stores.length}} resultados para {{this.keyword}}
+       {{ $t('searchResultsPage.description', { count: this.stores.length, query: this.keyword }) }} 
         </span>
     </p>
     <!--<p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('searchResultsPage.title')}}</p>
