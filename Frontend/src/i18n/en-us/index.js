@@ -88,6 +88,8 @@ export default {
   // Add Review Reservation
   bookingsPage: {
     title: "Reservations",
+    dataNew: "Details Booking",
+    dataConf: "Confirm Booking Details",
     description: "List of Recent and Old Bookings",
     type1: "Recents",
     type2: "Completed",

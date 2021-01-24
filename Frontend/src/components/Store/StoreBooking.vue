@@ -10,7 +10,6 @@
         v-model="slide"
         control-color="primary"
         navigation
-        arrows
         padding
         height="400px"
         class="cardStyle"
@@ -25,7 +24,7 @@
             </p>
           </div>
           <div v-if="catalog" class="choiceDiv">
-            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
               {{$t('bookingsPage.newBooking.chooseService')}}
             </p>
             <q-select
@@ -46,10 +45,10 @@
             />
           </div>
           <div v-else class="choiceDiv">
-            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
               {{$t('bookingsPage.newBooking.chooseService')}}
             </p>
-            <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
+            <p style="color: #434343; font-weight: 300; font-size: 18px; margin: 10px">
               {{$t('bookingsPage.newBooking.noServices')}}
             </p>
           </div>
@@ -64,7 +63,7 @@
             </p>
           </div>
           <div v-if="slots" class="choiceDiv">
-            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
               {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
             </p>
             <q-select
@@ -82,21 +81,53 @@
             />
           </div>
           <div v-else class="choiceDiv">
-            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
               {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
             </p>
-            <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
+            <p style="color: #434343; font-weight: 300; font-size: 18px; margin: 10px">
               {{$t('bookingsPage.newBooking.noSlots')}}
             </p>
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
-          <div>
-            Horas: {{parseSlotId()}}
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+          <div class="photoBackground"/>
+          <div class="info">
+            <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+            <p style="font-size: 22px; font-weight: 300;">
+              {{$t('bookingsPage.dataNew')}}
+            </p>
           </div>
-          <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">
-            {{$t('bookingsPage.ratePopup.submit')}}
-          </q-btn>
+          <div class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
+              {{$t('bookingsPage.dataConf')}}
+            </p>
+            <div class="row">
+              <div class="col-6">
+                <span class="dateTime">
+                  {{$t('bookingsPage.newBooking.date')}}: <span style="font-weight: 300">{{parseSlotId(0)}}</span>
+                </span>
+              </div>
+              <div class="col-6">
+                <span class="dateTime">
+                  {{$t('bookingsPage.newBooking.time')}}: <span style="font-weight: 300">{{parseSlotId(1)}}</span>
+                </span>
+              </div>
+            </div>
+            <div class="row" style="margin: 10px">
+              <div class="col-5">
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense  v-close-popup>
+                  {{$t('bookingsPage.editPopup.cancelBooking')}}
+                </q-btn>   
+              </div>
+              <div class="col-2"/>
+              <div class="col-5">
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' @click="makeBooking">
+                  {{$t('bookingsPage.ratePopup.submit')}}
+                </q-btn>
+              </div>
+            </div>
+          </div>
         </q-carousel-slide>
       </q-carousel>
     </q-dialog>
@@ -115,6 +146,7 @@ name: "StoreBooking",
     photos: Array,
     base: String
   },
+  
   data() {
     return {
       storeID: this.$route.params.id,
@@ -198,12 +230,12 @@ name: "StoreBooking",
       })
     },
 
-    parseSlotId() {
+    parseSlotId: function(index){
       let slotId = this.booking.slotId;
       for (let i = 0; i<this.slots.length; i++) {
         let slotObject = this.slots[i];
         if(slotObject["_id"] === slotId) {
-          return slotObject["label"];
+          return slotObject["label"].split(", ")[index];
         }
       }
     },
@@ -226,6 +258,12 @@ name: "StoreBooking",
 
 <style scoped>
 
+  .dateTime {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   .info {
     position: absolute;
     text-align: center;
@@ -236,6 +274,7 @@ name: "StoreBooking",
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .iconClose {
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
@@ -259,7 +298,7 @@ name: "StoreBooking",
 
   .choiceDiv {
     position: absolute;
-    top: 170px;
+    top: 160px;
     width: 100%;
     padding: 20px;
   }
@@ -278,6 +317,14 @@ name: "StoreBooking",
 
   .bg-vermelho {
     background: linear-gradient(#e9695c, #e03459);
+  }
+
+  .text-azul {
+    color: white;
+  }
+
+  .bg-azul {
+    background: linear-gradient(#13c1e0, #2897e3);
   }
 
   .divNewReservation {

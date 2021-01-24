@@ -98,6 +98,8 @@
 
     newBooking: {
       title: "Nova Reserva",
+      dataNew: "Dados Reserva",
+      dataConf: "Confirme os Dados Reserva",
       serviceType: "Tipo de Serviço",
       listService: "Lista dos Serviços",
       noServices: "Este Estabelecimento não dispõe de Catálogo de Serviços.",

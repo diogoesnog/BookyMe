@@ -82,7 +82,9 @@ export default {
   // Edit Reservation
   // Add Review Reservation
   bookingsPage: {
-    title: "Reservations",
+    title: "Réservations",
+    dataNew: "Détails Réservation",
+    dataConf: "Confirmer les Détails de la Réservation",
     description: "Liste de Reservations Récentes et plus Anciennes",
     type1: "Récent",
     type2: "Terminé",
