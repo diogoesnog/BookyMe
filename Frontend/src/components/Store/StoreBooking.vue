@@ -18,8 +18,9 @@
         class="cardStyle"
       >
         <q-carousel-slide :name="1" class="column no-wrap flex-center">
-          <div v-if="catalog" class="text-center">
-            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'>
+          </div>
+          <div v-if="catalog" class="serviceChoice">
             <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
             <q-select
               label="Selecione o(s) seu(s) serviço(s)"
@@ -32,7 +33,6 @@
               emit-value
               map-options
               hint="Serviços selecionados"
-
               v-model="booking.serviceId"
               :options="catalog"
               option-value="_id"
@@ -86,7 +86,9 @@ import Service from '../../services/user.service';
 export default {
 name: "StoreBooking",
   props: {
-    name: String
+    name: String,
+    photos: Array,
+    base: String
   },
   data() {
     return {
@@ -142,6 +144,10 @@ name: "StoreBooking",
       })
     },
 
+    getImage() {
+      return this.urlMainPhoto = this.base + this.photos[0].url;
+    },
+
     fetchFreeSlots() {
       Service.getFreeSlots(this.storeID)
         .then(response => {
@@ -171,6 +177,19 @@ name: "StoreBooking",
 </script>
 
 <style scoped>
+
+  .photoMain {
+    background-size: cover;
+    width: 100%;
+    height: 45%;
+    position: absolute;
+    top: 0;
+  }
+
+  .serviceChoice {
+    position: relative;
+    top: 25%;
+  }
 
   .cardStyle {
     background-size: cover;
