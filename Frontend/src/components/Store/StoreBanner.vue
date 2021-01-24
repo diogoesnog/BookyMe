@@ -113,7 +113,7 @@ export default {
     },
 
     clickHeart(){
-      if(this.isFav==false){
+      if(this.isFav===false){
         this.addFavorite();
         this.isFav=true;
         this.styleFav = "buttonFavTrue";
