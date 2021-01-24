@@ -91,6 +91,9 @@
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
+          <div>
+            {{this.booking}}
+          </div>
           <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">Marque já</q-btn>
         </q-carousel-slide>
       </q-carousel>
@@ -203,6 +206,10 @@ name: "StoreBooking",
     text-align: center;
     color: white;
     top: 40px;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .iconClose {
     color: white;
