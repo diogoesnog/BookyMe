@@ -4,7 +4,6 @@
       {{this._id}}
     </div>
     <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
-      <p> {{reservation }} </p>
       <div class="widgetReservation">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
