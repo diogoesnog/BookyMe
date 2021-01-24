@@ -103,7 +103,8 @@
       date: "Data",
       time: "Hora",
       place: "Lugar Planta",
-      choosePlace: "Escolher Lugar"
+      choosePlace: "Escolher Lugar",
+      makeNew: "Fazer Reserva Agora"
     },
     ratePopup: {
       title: "Avaliar Reserva",

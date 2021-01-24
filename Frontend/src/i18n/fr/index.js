@@ -97,7 +97,8 @@ export default {
       date: "Date",
       time: "L'Heure",
       place: "Place",
-      choosePlace: "Choisir la Pace"
+      choosePlace: "Choisir la Pace",
+      makeNew: "Reserve Maintenant"
     },
     ratePopup: {
       title: "Évaluer la Réservation",

@@ -6,8 +6,8 @@
       <StoreDescription v-bind="storeData"/>
       <StoreMap v-bind="storeData"/>
       <StoreCatalog v-bind="storeData"/>
-      <StoreRatings v-bind="storeData"/>
       <StoreBooking v-bind="storeData"/>
+      <StoreRatings v-bind="storeData"/>
     </div>
     <Toolbar/>
   </div>

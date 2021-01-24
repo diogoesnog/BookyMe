@@ -27,7 +27,7 @@ export default {
   methods: {
     getReduceDescription() {
       let descriptionLess = this.description.substring(0, 150);
-      if(this.description.length <= 100) return descriptionLess;
+      if(this.description.length <= 150) return descriptionLess;
       else return descriptionLess + "...";
     },
     showMoreText() {
