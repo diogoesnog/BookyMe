@@ -98,6 +98,8 @@ export default {
     newBooking: {
       title: "New Booking",
       serviceType: "Type of Service",
+      chooseService: "Select your Service(s)",
+      numberServices: "Selected Services",
       dateAndTime: "Date and Time",
       date: "Date",
       time: "Time",

@@ -99,6 +99,8 @@
     newBooking: {
       title: "Nova Reserva",
       serviceType: "Tipo de Serviço",
+      chooseService: "Selecione o(s) seu(s) Serviço(s)",
+      numberServices: "Serviços Selecionados",
       dateAndTime: "Data e Hora",
       date: "Data",
       time: "Hora",

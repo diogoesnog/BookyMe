@@ -5,34 +5,33 @@
     </div>
     <q-dialog v-model="bookingDialog">
       <q-carousel
-        transition-prev="slide-right"
-        transition-next="slide-left"
+        swipeable
         animated
         v-model="slide"
-        control-color="red"
+        control-color="primary"
         navigation
-        arrows
-        control-type="regular"
+        control-type="navigation"
         padding
         height="400px"
         class="cardStyle"
       >
         <q-carousel-slide :name="1" class="column no-wrap flex-center">
-          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'>
-          </div>
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/> 
           <div v-if="catalog" class="serviceChoice">
-            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+            <p style="color: #434343; font-weight: 700; font-size: 24px;">
+              {{name}}
+            </p>
             <q-select
-              label="Selecione o(s) seu(s) serviço(s)"
-              style="width: 220px"
+              :label="$t('bookingsPage.newBooking.chooseService')"
               outlined
+              rounded
               transition-show="scale"
               transition-hide="scale"
               multiple
               counter
               emit-value
               map-options
-              hint="Serviços selecionados"
+              :hint="$t('bookingsPage.newBooking.numberServices')"
               v-model="booking.serviceId"
               :options="catalog"
               option-value="_id"
@@ -181,7 +180,7 @@ name: "StoreBooking",
   .photoMain {
     background-size: cover;
     width: 100%;
-    height: 45%;
+    height: 40%;
     position: absolute;
     top: 0;
   }
@@ -189,6 +188,7 @@ name: "StoreBooking",
   .serviceChoice {
     position: relative;
     top: 25%;
+    width: 100%;
   }
 
   .cardStyle {
@@ -201,9 +201,6 @@ name: "StoreBooking",
 
   .text-vermelho {
     color: white;
-  }
-  .bg-vermelho {
-    background: linear-gradient(#e9695c, #e03459);
   }
   
   .divNewReservation {

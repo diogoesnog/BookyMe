@@ -93,6 +93,8 @@ export default {
     newBooking: {
       title: "Nouveau Réservation",
       serviceType: "Type de Service",
+      chooseService: "Sélectionnez votre(vos) Service(s)",
+      numberServices: "Services Sélectionnés",
       dateAndTime: "Date et l'Heure",
       date: "Date",
       time: "L'Heure",
