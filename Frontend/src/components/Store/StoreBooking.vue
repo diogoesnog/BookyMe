@@ -24,7 +24,7 @@
               {{$t('bookingsPage.newBooking.serviceType')}}
             </p>
           </div>
-          <div v-if="catalog" class="serviceChoice">
+          <div v-if="catalog" class="choiceDiv">
             <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
               {{$t('bookingsPage.newBooking.chooseService')}}
             </p>
@@ -45,7 +45,7 @@
               option-label="product"
             />
           </div>
-          <div v-else class="serviceChoice">
+          <div v-else class="choiceDiv">
             <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
               {{$t('bookingsPage.newBooking.chooseService')}}
             </p>  
@@ -55,28 +55,39 @@
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="2" class="column no-wrap flex-center">
-          <div v-if="slots" class="text-center">
-            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
-            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+          <div class="photoBackground"/>
+          <div class="info">
+            <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+            <p style="font-size: 22px; font-weight: 300;">
+              {{$t('bookingsPage.newBooking.dateAndTime')}}
+            </p>
+          </div>
+          <div v-if="slots" class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
+            </p>
             <q-select
-              label="Selecione o seu slot"
-              style="width: 220px"
+              :label="$t('bookingsPage.newBooking.listSlots')"
               outlined
+              rounded
               transition-show="scale"
               transition-hide="scale"
               emit-value
               map-options
-
               v-model="booking.slotId"
               :options="slots"
               option-value="_id"
               option-label="label"
             />
           </div>
-          <div v-else>
-            <q-icon name="menu_book" size="50px" style="padding-top: 10px; padding-bottom: 10px"></q-icon>
-            <p style="color: #434343; font-weight: 700; font-size: 15px;">{{name}}</p>
-            <p style="color: #434343; font-weight: 400; font-size: 15px;">Este estabelecimento não tem slots disponíveis</p>
+          <div v-else class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
+            </p>  
+            <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.noSlots')}}
+            </p>
           </div>
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
@@ -214,7 +225,7 @@ name: "StoreBooking",
     top: 0;
   }
 
-  .serviceChoice {
+  .choiceDiv {
     position: absolute;
     top: 170px;
     width: 100%;
