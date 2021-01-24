@@ -10,7 +10,7 @@
         v-model="slide"
         control-color="primary"
         navigation
-        control-type="navigation"
+        arrows
         padding
         height="400px"
         class="cardStyle"
@@ -48,7 +48,7 @@
           <div v-else class="choiceDiv">
             <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
               {{$t('bookingsPage.newBooking.chooseService')}}
-            </p>  
+            </p>
             <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
               {{$t('bookingsPage.newBooking.noServices')}}
             </p>
@@ -84,7 +84,7 @@
           <div v-else class="choiceDiv">
             <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
               {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
-            </p>  
+            </p>
             <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
               {{$t('bookingsPage.newBooking.noSlots')}}
             </p>
@@ -92,7 +92,7 @@
         </q-carousel-slide>
         <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
           <div>
-            {{this.booking}}
+            Horas: {{parseSlotId()}}
           </div>
           <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">
             {{$t('bookingsPage.ratePopup.submit')}}
@@ -119,8 +119,8 @@ name: "StoreBooking",
     return {
       storeID: this.$route.params.id,
       slide: 1,
-      catalog: null,
-      slots: null,
+      catalog: [],
+      slots: [],
       booking: new Booking(),
       bookingDialog: false
     }
@@ -196,6 +196,29 @@ name: "StoreBooking",
       ).finally(() => {
         this.$q.loading.hide();
       })
+    },
+
+    parseSlotId() {
+      let slotId = this.booking.slotId;
+      for (let i = 0; i<this.slots.length; i++) {
+        let slotObject = this.slots[i];
+        if(slotObject["_id"] === slotId) {
+          return slotObject["label"];
+        }
+      }
+    },
+
+    parseServiceId() {
+      let services = this.booking.serviceId;
+      console.group("Parse dos Serviços");
+      console.log(this.catalog);
+      for (let i = 0; i<this.catalog.length; i++) {
+        let catalogObj = this.catalog[i];
+        if(catalogObj["_id"] === services[0]) {
+          return catalogObj["product"];
+        }
+      }
+      console.groupEnd()
     }
   }
 }
@@ -252,7 +275,11 @@ name: "StoreBooking",
   .text-vermelho {
     color: white;
   }
-  
+
+  .bg-vermelho {
+    background: linear-gradient(#e9695c, #e03459);
+  }
+
   .divNewReservation {
     background-image: linear-gradient(#13c1e0, #2897e3);
     border-radius: 100px;
@@ -260,7 +287,7 @@ name: "StoreBooking",
     font-weight: 600;
     margin-top: 40px;
     margin-right: 30px;
-    margin-left: 30px;    
+    margin-left: 30px;
     height: 40px;
     display: flex;
     justify-content: center;
