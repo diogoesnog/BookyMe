@@ -15,7 +15,7 @@
         control-type="regular"
         padding
         height="400px"
-        class="bg-white shadow-1 rounded-borders"
+        class="cardStyle"
       >
         <q-carousel-slide :name="1" class="column no-wrap flex-center">
           <div v-if="catalog" class="text-center">
@@ -171,6 +171,14 @@ name: "StoreBooking",
 </script>
 
 <style scoped>
+
+  .cardStyle {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    border-radius: 30px;
+  }
 
   .text-vermelho {
     color: white;
