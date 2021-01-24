@@ -9,6 +9,16 @@ module.exports.getRatings = (store) => {
     return request.get();
 }
 
+module.exports.getRatingsQuery = (query) => {
+    let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/reviews`);
+
+    request.setParams(query);
+    request.isJson();
+    request.acceptJson();
+
+    return request.get();
+}
+
 
 module.exports.getReviews = (store) => {
     let request = new Request(`${process.env.STORE_SERVICE_ENDPOINT}/reviews/store/${store}`);
