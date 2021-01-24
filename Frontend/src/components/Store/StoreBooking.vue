@@ -94,7 +94,9 @@
           <div>
             {{this.booking}}
           </div>
-          <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">Marque já</q-btn>
+          <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">
+            {{$t('bookingsPage.ratePopup.submit')}}
+          </q-btn>
         </q-carousel-slide>
       </q-carousel>
     </q-dialog>
