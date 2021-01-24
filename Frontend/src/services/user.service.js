@@ -64,22 +64,6 @@ class UserService {
     return request.get()
   }
 
-  /*checkFavorite(id) {
-
-    let request = new Request(`${process.env.API_ENDPOINT}/users/favorite`)
-
-    request.isJson()
-    request.appendHeader("Authorization", authHeader())
-    request.acceptJson()
-
-    let data = request.get()
-    // TODO: procurar ID
-    // let array = data[data]
-    // console.log(array)
-
-    return "5ff4a80f7df75e2ace11b03e";
-  }*/
-
   getBookingUserCurrent(){
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user/current`)
@@ -127,6 +111,25 @@ class UserService {
     return request.post(body)
   }
 
+  addReview(comment, rating, id) {
+
+    let bodyText = {
+      comment: comment,
+      rating: rating
+    }
+
+    let body = JSON.stringify(bodyText)
+
+    console.log(body);
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`);
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.post(body)
+  }
+
   isFavorite() {
     let request = new Request(`${process.env.API_ENDPOINT}/users/validation`)
 
@@ -169,6 +172,16 @@ class UserService {
     return request.get()
   }
 
+  getStoresDataPopular() {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores/popular`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+
+    return request.get()
+  }
+
   getStoreBySearch(keyword, category) {
     let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
@@ -181,12 +194,24 @@ class UserService {
     return request.get()
   }
 
-  getReviewsStore(id){
-    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
+  getSearch(keyword) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
 
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
+    request.appendParam("search", keyword)
+   
+
+    return request.get()
+  }
+
+  getReviewsStore(id){
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    console.log(request);
 
     return request.get()
   }
@@ -207,7 +232,6 @@ class UserService {
   makeBooking(booking, storeID) {
 
     let body = JSON.stringify(booking)
-    console.log(body)
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/${storeID}`)
 
@@ -216,7 +240,7 @@ class UserService {
 
     request.appendHeader("Authorization", authHeader())
 
-    return request.post(booking)
+    return request.post(body)
 
   }
 
@@ -228,6 +252,18 @@ class UserService {
 
     request.appendHeader("Authorization", authHeader())
     request.appendParam("bookId", bookingID)
+
+    return request.get()
+  }
+
+  getFreeSlots(storeID) {
+    let request = new Request(`${process.env.API_ENDPOINT}/slot/store/${storeID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("hide_full", true)
 
     return request.get()
   }

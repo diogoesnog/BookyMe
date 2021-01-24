@@ -1,40 +1,45 @@
 <template>
 <div>
-  <v-row no-gutters>
-      <v-col cols="2">
-        <Navbar/>
-      </v-col>
-      <v-col cols="10">
-        <!--<h1 class="text-center">Catalog</h1>-->
-        <h1>Catálogo</h1>
-        <br>
-        <v-card>
-          <v-btn block outlined color="primary" @click="dialog = !dialog">
-          Adicionar ao Catálogo
-        </v-btn>
-          <v-dialog v-model="dialog" persistent max-width="600px">
+
+  <Navbar/>
+
+  <v-content>
+    <v-container fluid>
+      <v-row class="fill-height">
+        <v-col>
+          <!-- Content -->
+          <h1>Catálogo</h1>
+          <br>
           <v-card>
-            <v-card-title>
-              <span class="headline">Adicionar ao Catálogo</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <NewCatalog v-bind:catalog="catalog" :submitButton="false"/>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="save">Guardar</v-btn>
-              <v-btn color="blue darken-1" text @click="cancel">Fechar</v-btn>
-            </v-card-actions>
+            <v-btn block outlined color="primary" @click="dialog = !dialog">
+              Adicionar ao Catálogo
+            </v-btn>
+            <v-dialog v-model="dialog" persistent max-width="600px">
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Adicionar ao Catálogo</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <NewCatalog v-bind:catalog="catalog" :submitButton="false"/>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="save">Guardar</v-btn>
+                  <v-btn color="blue darken-1" text @click="cancel">Fechar</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-card>
-        </v-dialog>
 
           <Items v-bind:catalogs="catalogs" @deleteCatalog="deleteCatalog"/>
 
-        </v-card>
-    </v-col>
-  </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-content>
+
 </div>
 </template>
 
@@ -58,8 +63,8 @@ export default {
     }
   },
   mounted(){
-      console.log('Loading store catalog...')
-      this.fetchCatalogs()
+      console.log('Loading store catalog...');
+      this.fetchCatalogs();
   },
   methods: {
 
@@ -88,13 +93,14 @@ export default {
     },
 
     deleteCatalog(item){
+      console.log("Deleting", item._id);
         Services.deleteCatalogItem(item._id)
           .then(response => {
-            console.log('Successfully deleted catalog ' + response);
-            /*const index = this.catalogs.indexOf(item)
-            if (index > -1) {
-              this.catalogs.splice(index, 1);
-            }*/
+            let data = response.data[ "data" ]
+            console.log(data);
+            if(data.deletedCount === 1) {
+              this.fetchCatalogs();
+            }
           }).catch(err => console.log(err.data));
     }
   }

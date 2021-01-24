@@ -6,25 +6,30 @@
       <!-- Barra Pesquisa -->
       <div class="row" style="margin: 25px">
         <div class="col-9">
-          <q-input class="searchBar" rounded dense outlined label='Search'>
+          <q-input class="searchBar" v-model="userInputSearch" rounded dense outlined label='Search'>
           </q-input>
         </div>
         <div class="col-1"/>
         <div class="col-2" style="display: flex; justify-content: flex-end;">
-          <q-avatar class="iconSearch" size="xl" text-color="white" icon="search">
-          </q-avatar>
+         
+              <q-btn  class="iconSearch" @click="onEnter" size="xl" text-color="white" > 
+                 <q-icon name="search" size="35px"/>
+              </q-btn>
+            
+          
+          
         </div>
       </div>
       <!-- Info User -->
       <div class="row divInfoUser">
         <div class="col-10" style="text-align: left">
-          <span style="font-weight: 600; font-size: 35px; line-height: 40px;">
+          <span style="font-weight: 600; font-size: 33px; line-height: 40px;">
             {{ $t('homePage.greeting') }}, {{ getFirstName(profile.name) }}
           </span>
         </div>
         <div class="col-2 avatarCol">
           <q-avatar class="avatar">
-            <img style="object-fit: cover; margin: 5px; transform: scale(1.3);" :src="getImage()">
+            <img style="object-fit: cover;" :src="getImage()">
           </q-avatar>
         </div>
       </div>
@@ -34,23 +39,23 @@
       {{ $t('homePage.morePopular') }} 
     </div>
     <div class="wrapper">
-        <div v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
+        <div @click="redirect(store._id)" v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
           <div class="row">
             <div class="col-12 divPhoto" v-bind:style='{ backgroundImage: `url("${getImageWidget(store.photos[0].url)}")` }'>
             </div>
           <div class="row" style="padding: 15px">
             <div class="col-7" style="text-align: left; margin-top: -5px; display: inline-grid;">
-              <span style="font-weight: 670; display: inline-block; width: 125px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
+              <span style="font-weight: 670; display: inline-block; width: 120px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 17px;">
                 {{ store.name }}
               </span>
-              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 14px;">
+              <span style="font-weight: 350; display: inline-block; width: 130px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis; font-size: 16px;">
                 {{ store.address.city }}
               </span>
             </div>
             <div class="col-5" style="padding-left: 10px; width: 80px;">
               <div class="divRating shadow">
                 <p style="position: relative; top: 51%; left: 47%; transform: translate(-50%, -50%); text-indent: 3px;">
-                  <span style="font-weight: 670; font-size: 16px; display: inline-block; vertical-align: middle;">
+                  <span style="font-weight: 670; font-size: 16px; display: inline-block;">
                     {{roundRating(store.rating)}}<span style="font-weight: 200; font-size: 16px;">/5</span>
                   </span>
                   <i class="fa fa-star" style="font-size:15px; padding-top: 5px;"></i>
@@ -68,7 +73,7 @@
 
 <script>
 
-import Service from '../../services/auth.service'
+import Service from '../../services/user.service';
 import User from '../../models/User';
 
 export default {
@@ -78,11 +83,13 @@ export default {
   props: {
     profile: Object,
     stores: Object,
-    base: String
+    basePopular: String,
+    baseProfile: String
   }, 
 
   data() {
     return {
+       userInputSearch: ""
     }
   },
 
@@ -91,17 +98,27 @@ export default {
 
   methods: {
     getImage() {
-      return this.base + this.profile.avatar;
+      return this.baseProfile + this.profile.avatar;
     },
     getImageWidget(url) {
-      console.log(url);
-      return "http://localhost:5100" + url;
+      return this.basePopular + url;
     },
     roundRating: function(rating) {
       return Math.round(rating*10)/10;
     },
     getFirstName: function(name) {
       return name.split(" ")[0];
+    },
+    redirect: function(id) {
+      this.$router.push({name: 'Store', params:{id:id}})
+    },
+    onEnter: function() {
+      Service.getSearch(this.userInputSearch)
+        .then(response => {
+          this.stores = response.data["data"];
+        }).catch(err => console.log(err))
+        .finally(() => {this.$q.loading.hide();
+        })
     }
   }
 }
@@ -116,8 +133,8 @@ export default {
     justify-content: center;
     background: linear-gradient(#e9695c, #e03459);
     border-radius: 100px;
-    height: 45px;
-    width: 45px;
+    height: 60px;
+    width: 60px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 

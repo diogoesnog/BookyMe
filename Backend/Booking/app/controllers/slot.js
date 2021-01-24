@@ -6,12 +6,16 @@ module.exports.newSlot = (slot) => {
     return newSlot.save();
 };
 
-module.exports.getStoreSlots = (storeId) => {
-    return Slot.find({storeId: storeId});
+module.exports.getStoreSlots = (storeId, hideFull) => {
+    if (hideFull === "true") {
+        return Slot.find({$and: [{storeId: storeId}, {is_full: false}]});
+    }
+    else
+        return Slot.find({storeId: storeId});
 };
 
 module.exports.getSlotCapacity = (slotId) => {
-    return Slot.findOne({_id: slotId}, {_id: 0, capacity: 1});
+    return Slot.findOne({_id: slotId}, {_id: 0, max_capacity: 1});
 };
 
 module.exports.getStoreFromSlotID = (slotId) => {
@@ -25,3 +29,20 @@ module.exports.getServiceDate = (slotId) => {
 module.exports.removeSlot = (slotId) => {
     return Slot.deleteOne({_id: slotId});
 };
+
+module.exports.slotIsFull = (slotId) => {
+    return Slot.updateOne({_id: slotId}, {is_full: true});
+};
+
+module.exports.slotIsNotFull = (slotId) => {
+    return Slot.updateOne({_id: slotId}, {is_full: false});
+};
+
+module.exports.incrementCapacity = (slotId) => {
+    return Slot.updateOne({_id: slotId}, {$inc: {current_capacity : 1} });
+}
+
+module.exports.decrementCapacity = (slotId) => {
+    return Slot.updateOne({_id: slotId}, {$inc: {current_capacity : -1} });
+}
+

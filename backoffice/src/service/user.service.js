@@ -55,7 +55,7 @@ class Services {
         });
     }
     updateAddress(id, address) {
-        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
     }
 
     getStores() {
@@ -63,7 +63,11 @@ class Services {
             headers: authHeader()
         });
     }
-
+    getStoreSchedule(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores/scheduleList/${id}`, {
+            headers: authHeader()
+        });
+    }
     getStoreById(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/stores?_id=${id}`, {
             headers: authHeader()
@@ -93,8 +97,23 @@ class Services {
         });
     }
 
-    // TODO: Add Catalog
+    deleteSlot(id) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/slot/${id}`, {
+            headers: authHeader()
+        });
+    }
 
+    deleteSchedule(storeId, scheduleId) {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/stores/${storeId}/schedule/${scheduleId}`, {
+            headers: authHeader()
+        });
+    }
+
+    getStoreServices(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}`, {
+            headers: authHeader()
+        });
+    }
 
     getStoreCatalog(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`, {
@@ -103,17 +122,23 @@ class Services {
     }
 
     deleteCatalogItem(id) {
-        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/item/${id}`, {
+        return axios.delete(`${process.env.VUE_APP_API_ENDPOINT}/catalog/${id}`, {
             headers: authHeader()
         });
     }
 
     addCatalogItem(id,item){
-        console.log('Id que vai como parametro: ' + id)
 
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/catalog/store/${id}`,item, {
+            headers: authHeader()
+        });
     }
-    // TODO: Upload Images
+
+    getNofications(id) {
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/notification/store/${id}`, {
+            headers: authHeader
+        });
+    }
 }
 
 export default new Services();

@@ -1,8 +1,10 @@
 <template>
-  <v-app>
-  <v-card tile height="100%" class="overflow-hidden"
-          style="position: relative;">
-    <v-navigation-drawer dark permanent expand-on-hover absolute>
+  <div>
+
+
+    <!--<v-card tile height="100%" class="overflow-hidden"
+          style="position: relative;">-->
+    <v-navigation-drawer app floating dark permanent expand-on-hover>
       <v-list>
         <!-- Home Link -->
         <v-list-item link>
@@ -75,7 +77,7 @@
               <v-icon>mdi-keyboard-return</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <router-link :to="{name: 'PhotoStore', params: {id: this.$route.params.id}}">Selector de Loja</router-link>
+              <router-link :to="{name: 'Home', params: {id: this.$route.params.id}}">Selector de Loja</router-link>
             </v-list-item-content>
           </v-list-item>
 
@@ -84,13 +86,13 @@
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
           <v-list-item-content @click="logout">
-              Logout
+            <a href="#" @click="logout">Logout</a>
           </v-list-item-content>
         </v-list-item>
         </v-list>
     </v-navigation-drawer>
-  </v-card>
-  </v-app>
+  <!--</v-card>-->
+  </div>
 </template>
 
 <script>
@@ -105,6 +107,7 @@ export default {
   methods: {
     logout() {
       AuthService.logout();
+      this.$router.push('/');
     }
   }
 }

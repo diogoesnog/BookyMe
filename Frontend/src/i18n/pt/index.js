@@ -104,7 +104,7 @@
     ratePopup: {
       title: "Avaliar Reserva",
       comment: "Comentário",
-      submit: "Submeter Avaliação"
+      submit: "Submeter"
     },
 
     editPopup: {

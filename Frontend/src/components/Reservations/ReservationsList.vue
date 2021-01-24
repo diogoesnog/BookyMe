@@ -10,11 +10,11 @@
           <!-- Photo -->
           <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
           </div>
-          <div class="col-6" style="padding: 10px;">
+          <div class="col-6" style="padding: 10px;" @click="redirect(reservation._id)">
             <span class="titleStore">
               {{ reservation.storeName }}
             </span>
-            <span v-if="reservation.hasCatalog == true" class="titleService">
+            <span v-if="hasCatalog(reservation.hasCatalog) == 0" class="titleService">
               {{ reservation.service.product }}
             </span>
             <span v-else class="titleService">
@@ -24,11 +24,24 @@
               {{ getHourDate(reservation.serviceDate) }}
             </span>
           </div>
-          <div class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <img @click="persistent = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+          <!-- 3 Dots -->
+          <div v-if="getTypeReservation() == 0" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+          </div>
+          <!-- Review -->
+          <div v-else :id="checkUserReview(reservation.storeId)" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <div v-if="checkArrayUsers()" style="text-align: center;">
+              <span style="text-align: -webkit-center; font-size: 20px; font-weight: 600; color: #e03459;">
+                {{ reservation.storeId }}<span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
+              </span>
+              <img style="height: 25px" src="icons/Star.svg"/>
+            </div>
+            <div v-else>
+              <img @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
+            </div>
           </div>
           <!-- Pop Up Alterar Reserva -->
-          <q-dialog v-model="persistent" persistent transition-show="scale" transition-hide="scale">
+          <q-dialog v-model="persistentChange" persistent transition-show="scale" transition-hide="scale">
             <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
               <q-card-section style="padding: 25px; width: 100%;">
                 <span class="titleStorePopup">{{ reservation.storeName }}</span>
@@ -59,6 +72,43 @@
               </q-card-actions>
             </q-card>
           </q-dialog>
+          <!-- Pop Up Review -->
+          <q-dialog v-model="persistentReview" persistent transition-show="scale" transition-hide="scale">
+            <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
+              <q-card-section style="padding-top: 25px; width: 100%;">
+                <span class="titleStorePopup">{{ reservation.storeName }}</span>
+                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.ratePopup.title')}}</p>
+              </q-card-section>
+              <q-card-section style="top: -20px">
+                <q-rating
+                  v-model="rating"
+                  size="2.5em"
+                  icon="img:icons/Star.svg"
+                />
+              </q-card-section>
+              <q-card-section style="top: -20px">
+                <span class="subtitle">{{$t('bookingsPage.ratePopup.comment')}}</span>
+                <div class="q-pa-md" style="margin-left: 20px; margin-right: 20px; margin-top: 10px;">
+                  <q-input
+                    v-model="textComment"
+                    clearable
+                    filled
+                    autogrow
+                  />
+                </div>
+              </q-card-section>
+              <q-card-actions style="margin-left: 20px; margin-right: 20px; margin-bottom: 20px;" align="center" class="bg-white text-teal">
+                <div class="row" style="width: 100%;">
+                  <div class="col-6" style="padding-right: 10px;">
+                    <q-btn @click="addReview(reservation.storeId)" class="q-btn1" rounded :label="$t('bookingsPage.ratePopup.submit')" v-close-popup />
+                  </div>
+                  <div class="col-6" style="padding-left: 10px;">
+                    <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
+                  </div>
+                </div>
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
         </div>
         </div>
     </div>
@@ -67,25 +117,33 @@
 
 <script>
 
+import Service from '../../services/user.service';
+
 export default {
   name: "ReservationsList",
 
   props: {
     _id: String,
     booking: Array,
-    base: String
+    base: String,
+    typeReservation: String,
+    idUser: String
   },
 
   data() {
     return {
-      persistent: false,
+      persistentChange: false,
+      persistentReview: false,
       model: null,
       options: [
         'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-      ]
+      ],
+      rating: 4,
+      textComment: '',
+      hasReview: 0,
+      userRating: 0
     }
   },
-
   methods: {
     getWidthNameStore() {
       if(this._id.length > 0 & this._id.length <= 3) return "15%";
@@ -98,7 +156,7 @@ export default {
       else return "80%"    
     },
     getImage(url) {
-      return this.urlMainPhoto = this.base + url;
+      return this.urlMainPhoto = "http://localhost:5100" + url;
     },
     getHourDate(string) {
       var splits = string.split('T', 2);
@@ -116,6 +174,49 @@ export default {
       var hourSplit = hour.split(':00.000Z', 2)[0];
       
       return day + "/" + month + "/" + year + " - " + hourSplit;
+    },
+    hasCatalog: function(string) {
+      if (string == "true") return 0;
+      else return 1;
+    },
+    redirect: function(id) {
+      this.$router.push({name: 'Reservation', params:{id:id}})
+    },
+    getTypeReservation() {
+      if (this.typeReservation == "current") return 0;
+      else return 1;
+    },
+    addReview: function(id) {
+      Service.addReview(this.textComment, this.rating, id)
+        .then(response => {
+          this.persistentReview = false;
+          this.rating = 4;
+          this.textComment = "";
+        }).catch(err => {
+          console.log(err);
+        })
+    },
+    checkArrayUsers() {
+      return this.hasReview;
+    },
+    checkUserReview: function(idStore) {
+      Service.getReviewsStore(idStore)
+        .then(response => {
+          let hasReviewPrev = this.hasReview;//this.hasReview = 0;
+          console.log("TEM" + this.hasReview);
+          let ID = this.idUser;
+          let data = response.data["data"];
+          var i;
+          for(i=0; i<data.length; i++) {
+            if(data[i]['userId'] == ID) {
+              this.hasReview = 1;
+              //this.userRating = data[i]['rating'];
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
 }
@@ -186,6 +287,11 @@ export default {
     width: 170px; 
     white-space: nowrap; 
     overflow: hidden !important;
+  }
+
+  .subtitle {
+    font-size: 18px; 
+    font-weight: 600; 
   }
 
   .hourDate {

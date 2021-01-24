@@ -42,7 +42,7 @@ export default {
     },
 
     updatePhoneNumber() {
-      this.$emit("updatePhoneNumber", this.store.phone)
+      this.$emit("updatePhone", this.store.phone)
     }
   }
 }

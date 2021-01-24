@@ -43,6 +43,15 @@ router.patch('/:id', checkAuth, (req, res) => {
         });
 });
 
-
+router.get('/store/:id', checkAuth, (req, res) => {
+    Notifications.getStoreNotifications(req.params.id)
+        .then(data => {
+            let response = Response.CREATED(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            let response = Response.INTERNAL_ERROR(err, `Could not fetch for store notifications...`);
+            res.status(response.status).jsonp(response);
+        })
+});
 
 module.exports = router;
