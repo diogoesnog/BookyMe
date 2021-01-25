@@ -194,9 +194,20 @@ class UserService {
     return request.get()
   }
 
+  getSearch(keyword) {
+    let request = new Request(`${process.env.API_ENDPOINT}/stores`)
+
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("search", keyword)
+
+
+    return request.get()
+  }
+
   getReviewsStore(id){
     let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
-
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
@@ -220,7 +231,6 @@ class UserService {
   makeBooking(booking, storeID) {
 
     let body = JSON.stringify(booking)
-    console.log(body)
 
     let request = new Request(`${process.env.API_ENDPOINT}/booking/${storeID}`)
 
@@ -229,7 +239,7 @@ class UserService {
 
     request.appendHeader("Authorization", authHeader())
 
-    return request.post(booking)
+    return request.post(body)
 
   }
 
@@ -245,12 +255,25 @@ class UserService {
     return request.get()
   }
 
+  getFreeSlots(storeID) {
+    let request = new Request(`${process.env.API_ENDPOINT}/slot/store/${storeID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("hide_full", true)
+
+    return request.get()
+  }
+
   getNotifications(read) {
     let request = new Request(`${process.env.API_ENDPOINT}/notification`);
 
     request.isJson();
     request.appendHeader("Authorization", authHeader());
     request.acceptJson();
+    // TODO: A flag de momento não está a fazer diferença.
     request.appendParam("read", read);
 
     return request.get();

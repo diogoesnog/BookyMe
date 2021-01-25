@@ -15,7 +15,7 @@ module.exports.getStoreSlots = (storeId, hideFull) => {
 };
 
 module.exports.getSlotCapacity = (slotId) => {
-    return Slot.findOne({_id: slotId}, {_id: 0, capacity: 1});
+    return Slot.findOne({_id: slotId}, {_id: 0, max_capacity: 1});
 };
 
 module.exports.getStoreFromSlotID = (slotId) => {
@@ -37,3 +37,12 @@ module.exports.slotIsFull = (slotId) => {
 module.exports.slotIsNotFull = (slotId) => {
     return Slot.updateOne({_id: slotId}, {is_full: false});
 };
+
+module.exports.incrementCapacity = (slotId) => {
+    return Slot.updateOne({_id: slotId}, {$inc: {current_capacity : 1} });
+}
+
+module.exports.decrementCapacity = (slotId) => {
+    return Slot.updateOne({_id: slotId}, {$inc: {current_capacity : -1} });
+}
+

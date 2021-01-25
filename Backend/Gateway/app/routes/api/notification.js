@@ -43,4 +43,12 @@ router.patch('/:id', checkAuth, (req, res) => {
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
 
+router.get('/store/:id', checkAuth, (req, res) => {
+    let token = req.headers.authorization || req.headers.Authorization;
+
+    Notification.getStoreNotifications(token, req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
 module.exports = router;

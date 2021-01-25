@@ -44,7 +44,6 @@ export default {
 
   methods: {
     getImageWidget(url) {
-      console.log(url);
       return this.baseRecomendation + url;
     },
     roundRating: function(rating) {

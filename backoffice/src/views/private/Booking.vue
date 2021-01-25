@@ -1,32 +1,40 @@
 <template>
   <div>
-    <v-row no-gutters>
-      <v-col cols="2">
-        <Navbar/>
-      </v-col>
-      <v-col cols="10">
+    <Navbar/>
 
+    <v-content>
+      <v-container fluid>
+        <v-row class="fill-height">
+          <v-col>
+            <v-tabs>
+              <v-tab>Slots</v-tab>
+              <v-tab>Reservas</v-tab>
+<!--              <v-tab>Notifições</v-tab>-->
 
-        <v-tabs>
-          <v-tab>Slots</v-tab>
-          <v-tab>Reservas</v-tab>
-          <v-tab>Notifições</v-tab>
+              <v-tab-item>
+                <h2>Slots</h2>
+                <div v-if="slots.length >0">
+                  <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
+                </div>
+                <div v-else style="padding: 50px">
+                  <p>A loja não tem slots disponíveis.</p>
+                </div>
+              </v-tab-item>
 
-          <v-tab-item>
-            <h2>Slots</h2>
-            <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
-          </v-tab-item>
-
-          <v-tab-item>
-            <h2>Reservas</h2>
-            <Services v-bind:bookings="bookings"/>
-          </v-tab-item>
-          <v-tab-item>
-            <h2>Notificações Enviadas</h2>
-          </v-tab-item>
-        </v-tabs>
-      </v-col>
-    </v-row>
+              <v-tab-item>
+                <h2>Reservas</h2>
+                <div v-if="bookings.length >0">
+                  <Services v-bind:bookings="bookings" v-bind:slots="slots" @reschedule="reschedule" @cancel="cancel"/>
+                </div>
+                <div v-else style="padding: 50px">
+                  <p>A loja não tem reservas agendadas.</p>
+                </div>
+              </v-tab-item>
+            </v-tabs>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
   </div>
 </template>
 
@@ -39,21 +47,28 @@ export default {
   components: {
     Navbar: () => import('@/components/common/Navbar'),
     Slots: () => import("@/components/Booking/Slots"),
-    Services: () => import("@/components/Booking/Services")
+    Services: () => import("@/components/Booking/Services"),
   },
   data() {
     return {
       id: this.$route.params.id,
       slots: [],
-      bookings: Array
+      bookings: [],
+      notifications: []
     }
   },
   mounted() {
     this.getStoreSlots();
     this.getStoreServices();
+    this.getStoreNotications();
   },
 
   methods: {
+    getStoreNotications() {
+      Service.getNofications(this.id)
+        .then(response => this.notifications = response.data[ "data" ])
+        .catch(err => console.log(err));
+    },
     getStoreSlots() {
       Service.getStoreSlots(this.id)
           .then(response => this.slots = response.data["data"])
@@ -81,8 +96,22 @@ export default {
             window.alert("Não foi possível remover o slot selecionado!");
             console.log(err)
         });
+    },
+
+    reschedule(data) {
+      let id = data.oldSlotId;
+
+      Service.rescheduleBooking(id, data)
+        .then( () => this.getStoreServices())
+        .catch(err => console.log(err));
+
+    },
+    cancel(id) {
+      Service.cancelBooking(id)
+        .then( () => this.getStoreServices())
+        .catch( err => console.log(err));
     }
-  }
+  },
 }
 </script>
 

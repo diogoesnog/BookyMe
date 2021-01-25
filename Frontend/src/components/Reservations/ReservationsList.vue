@@ -4,6 +4,7 @@
       {{this._id}}
     </div>
     <div v-for="(reservation, index) in this.booking" :key="index" v-bind="reservation">
+      <p> {{reservation }} </p>
       <div class="widgetReservation">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
@@ -29,10 +30,11 @@
             <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
-          <div :id="checkUserReview(reservation.storeId)" v-else class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <div v-if="checkArrayUsers()" style="text-align: center;">
+          <div v-else-if="getTypeReservation() == 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <p>{{checkUserReview(reservation.storeId) }}</p>
+            <div v-if="hasReview == true" style="text-align: center;">
               <span style="text-align: -webkit-center; font-size: 20px; font-weight: 600; color: #e03459;">
-                {{ userRating }}<span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
+                <span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
               </span>
               <img style="height: 25px" src="icons/Star.svg"/>
             </div>
@@ -127,7 +129,7 @@ export default {
     booking: Array,
     base: String,
     typeReservation: String,
-    idUser: String
+    idUser: String,
   },
 
   data() {
@@ -140,8 +142,8 @@ export default {
       ],
       rating: 4,
       textComment: '',
-      hasReview: false,
-      userRating: 0
+      userRating: 0,
+      hasReview: Boolean,
     }
   },
   methods: {
@@ -153,7 +155,7 @@ export default {
       else if(this._id.length >= 13 & this._id.length <= 15) return "55%";
       else if(this._id.length >= 16 & this._id.length <= 18) return "65%";
       else if(this._id.length >= 19 & this._id.length <= 21) return "75%";
-      else return "80%"    
+      else return "80%"
     },
     getImage(url) {
       return this.urlMainPhoto = "http://localhost:5100" + url;
@@ -172,7 +174,7 @@ export default {
       // Hour
       var hour = splits[1];
       var hourSplit = hour.split(':00.000Z', 2)[0];
-      
+
       return day + "/" + month + "/" + year + " - " + hourSplit;
     },
     hasCatalog: function(string) {
@@ -196,31 +198,24 @@ export default {
           console.log(err);
         })
     },
-    checkArrayUsers() {
-      return this.hasReview;
-    },
     checkUserReview: function(idStore) {
       Service.getReviewsStore(idStore)
         .then(response => {
-          let ID = this.idUser;
+          console.group("Verificação de Review");
           let data = response.data["data"];
           let userIds = data.map(obj => obj.userId);
-          this.hasReview = userIds.includes(ID);
-          
-          let outputArray = Object.keys(data).map((key)=>(
-            { UserId: data[key]['userId'], Rating: data[key]['rating'] }
-          ))
-         
-          var arrayUser = outputArray.filter(function(obj, index){
-            return obj.UserId===ID;
-          })
 
-         this.userRating = arrayUser[0]['Rating'];
+          console.log("ID User a Verificar: " + this.idUser);
+          let verifyReview = Boolean;
+          verifyReview = userIds.indexOf(this.idUser) > -1;
+
+          console.log("User Tem Review na Loja " + idStore + "? " + verifyReview);
+          console.groupEnd();
         })
         .catch(err => {
           console.log(err);
         })
-    }
+      }
   }
 }
 </script>
@@ -263,47 +258,47 @@ export default {
   }
 
   .titleStore {
-    text-overflow: ellipsis; 
-    font-size: 20px; 
-    font-weight: 600; 
-    display: inline-block; 
-    width: 170px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    width: 170px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 
   .titleStorePopup {
-    text-overflow: ellipsis; 
-    font-size: 26px; 
-    font-weight: 600; 
-    display: inline-block; 
-    width: 270px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 26px;
+    font-weight: 600;
+    display: inline-block;
+    width: 270px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 
   .titleService {
-    text-overflow: ellipsis; 
-    font-size: 16px; 
-    font-weight: 350; 
-    display: inline-block; 
-    width: 170px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 350;
+    display: inline-block;
+    width: 170px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 
   .subtitle {
-    font-size: 18px; 
-    font-weight: 600; 
+    font-size: 18px;
+    font-weight: 600;
   }
 
   .hourDate {
-    text-overflow: ellipsis; 
-    font-size: 20px; 
-    font-weight: 600; 
-    display: inline-block; 
-    width: 160px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    width: 160px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 

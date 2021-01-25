@@ -139,7 +139,7 @@ module.exports.getPopularStoreList = () => {
 }
 
 module.exports.cancelBookings = (id) => {
-    return Booking.update({_id: id}, {canceled: true});
+    return Booking.findOneAndUpdate({_id: id}, {canceled: true}, { new: true} );
 };
 
 module.exports.dateExists = (date, storeId) => {
@@ -255,4 +255,65 @@ module.exports.getSlots = (slotId) => {
 
 module.exports.getSlotIdFromBookingId = (bookingId) => {
     return Booking.findOne({_id: bookingId}, {_id: 0, slotId: 1});
+};
+
+module.exports.getStoreName = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, storeName: 1});
+};
+
+module.exports.getServiceDate = (bookingId) => {
+    return Booking.findOne({_id: bookingId}, {_id: 0, serviceDate: 1});
+};
+
+module.exports.bookingsDay = (storeId) => {
+    return Booking.aggregate(
+        [
+            // Perform the initial match to filter docs by 'storeId' and 'canceled'
+            {
+                $match:
+                    {
+                        storeId: storeId,
+                        canceled: false
+                    }
+            },
+            // Extract the year, month and day portions of the 'serviceDate'
+            {
+                $project:
+                    {
+                        date: { $concat: [ "asd", " - ", "dsa" ] },
+                        year: { $year: "$serviceDate" },
+                        month: { $month: "$serviceDate" },
+                        day: { $dayOfMonth: "$serviceDate" },
+                        storeId: 1,
+                        serviceDate: 1,
+                        date:{$substr:["$serviceDate", 0, -1 ]}
+                    }
+            },
+            // Convert year, month and day to String
+            {
+                $project:
+                    {
+                        storeId: 1,
+                        serviceDate: 1,
+                        day:{$substr:["$day", 0, -1 ]},
+                        month:{$substr:["$month", 0, -1 ]},
+                        year:{$substr:["$year", 0, -1 ]}
+                    }
+            },
+            // Concat year, month and day into date
+            {
+                $project:
+                    {
+                        storeId: 1,
+                        serviceDate: 1,
+                        date: { $concat: [ "$year", "-", "$month", "-", "$day" ] }
+                    }
+            },
+            {
+                $group:{ _id: '$date', count: {$sum: 1} }
+            },
+            { $sort : { _id : 1 } }
+        ]
+    )
+
 };

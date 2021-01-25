@@ -1,55 +1,104 @@
 <template>
   <div>
-    <q-btn class="botao" rounded label="Faça a sua marcação!" @click="card = true" color="vermelho" icon="event_available"/>
-
-    <q-dialog v-model="card">
-<!--      TODO: Fazer a parte de seleção de serviço -->
-      <q-card class="my-card">
-        <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
-
-        <q-card-section>
-          <q-btn
-            fab
-            color="vermelho"
-            icon="event_available"
-            class="absolute"
-            style="top: 0; right: 12px; transform: translateY(-50%);"
-          />
-
-          <div class="row no-wrap items-center">
-            <div class="col text-h6 ellipsis" style="margin-top: 10px; color: #434343; font-weight: 700; font-size: 20px;">
-              {{ this.name }}
-            </div>
+    <div class="divNewReservation" @click="bookingDialog = true">
+      {{$t('bookingsPage.newBooking.makeNew')}}
+    </div>
+    <q-dialog v-model="bookingDialog">
+      <q-carousel
+        swipeable
+        animated
+        v-model="slide"
+        control-color="primary"
+        navigation
+        control-type="navigation"
+        padding
+        height="400px"
+        class="cardStyle"
+      >
+        <q-carousel-slide :name="1" class="column no-wrap flex-center">
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+          <div class="photoBackground"/>
+          <div class="info">
+            <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+            <p style="font-size: 22px; font-weight: 300;">
+              {{$t('bookingsPage.newBooking.serviceType')}}
+            </p>
           </div>
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-date
-              :title="$t('storePage.date')"
-              today-btn
-              mask="YYYY-MM-DDTHH:mm"
-              :subtitle="$t('storePage.dateSub')"
-              color="red"
-              v-model="date" />
-        </q-card-section>
-
-        <q-card-section class="q-pt-none">
-          <q-time
-            v-model="date"
-            format24h
-            mask="YYYY-MM-DDTHH:mm"
-            color="red" />
-        </q-card-section>
-
-        <q-separator/>
-
-        <q-card-actions>
-            <q-btn icon="event" @click="makeBooking" style="margin-left: 100px" rounded color="vermelho">
-              {{$t('storePage.book')}}
-            </q-btn>
-        </q-card-actions>
-
-      </q-card>
+          <div v-if="catalog" class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseService')}}
+            </p>
+            <q-select
+              :label="$t('bookingsPage.newBooking.listService')"
+              outlined
+              rounded
+              transition-show="scale"
+              transition-hide="scale"
+              multiple
+              counter
+              emit-value
+              map-options
+              :hint="$t('bookingsPage.newBooking.numberServices')"
+              v-model="booking.serviceId"
+              :options="catalog"
+              option-value="_id"
+              option-label="product"
+            />
+          </div>
+          <div v-else class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseService')}}
+            </p>  
+            <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.noServices')}}
+            </p>
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide :name="2" class="column no-wrap flex-center">
+          <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+          <div class="photoBackground"/>
+          <div class="info">
+            <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+            <p style="font-size: 22px; font-weight: 300;">
+              {{$t('bookingsPage.newBooking.dateAndTime')}}
+            </p>
+          </div>
+          <div v-if="slots" class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
+            </p>
+            <q-select
+              :label="$t('bookingsPage.newBooking.listSlots')"
+              outlined
+              rounded
+              transition-show="scale"
+              transition-hide="scale"
+              emit-value
+              map-options
+              v-model="booking.slotId"
+              :options="slots"
+              option-value="_id"
+              option-label="label"
+            />
+          </div>
+          <div v-else class="choiceDiv">
+            <p style="color: #434343; font-weight: 700; font-size: 24px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
+            </p>  
+            <p style="color: #434343; font-weight: 300; font-size: 18px; margin-left: 10px">
+              {{$t('bookingsPage.newBooking.noSlots')}}
+            </p>
+          </div>
+        </q-carousel-slide>
+        <q-carousel-slide :name="3" class="column no-wrap flex-center content-center">
+          <div>
+            {{this.booking}}
+          </div>
+          <q-btn rounded style="position: sticky; margin-top: 40px" color='vermelho' @click="makeBooking">
+            {{$t('bookingsPage.ratePopup.submit')}}
+          </q-btn>
+        </q-carousel-slide>
+      </q-carousel>
     </q-dialog>
   </div>
 </template>
@@ -62,25 +111,29 @@ import Service from '../../services/user.service';
 export default {
 name: "StoreBooking",
   props: {
-    name: String
+    name: String,
+    photos: Array,
+    base: String
   },
   data() {
     return {
       storeID: this.$route.params.id,
-      card: Boolean,
-      date: String,
-      booking: new Booking()
+      slide: 1,
+      catalog: null,
+      slots: null,
+      booking: new Booking(),
+      bookingDialog: false
     }
   },
-  beforeMount() {
-    this.date = new Date("2021/01/15").toLocaleString();
-    this.card = false;
+
+  mounted() {
+    this.fetchCatalog()
+    this.fetchFreeSlots()
   },
+
   methods: {
     makeBooking() {
-      let booking = new Booking(this.date)
-
-      Service.makeBooking(booking, this.storeID)
+      Service.makeBooking(this.booking, this.storeID)
         .then(response => {
           console.log("Booking Successful");
           this.$q.notify({
@@ -99,30 +152,121 @@ name: "StoreBooking",
 
     },
 
-    // TODO: Fazer só reservas no futuro.
-    /*rangeDate(date) {
-      let nowDate = new Date();
-      return date >= nowDate.getFullYear() + '/' + nowDate.getMonth() + '/' + nowDate.getDay()
-    }*/
+    fetchCatalog() {
+      Service.getCatalog(this.storeID)
+        .then(response => {
+          console.group("Procura de catálogo")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.catalog = data;
+          }
+          console.log("Catálogo:");
+          console.log(this.catalog);
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },
+
+    getImage() {
+      return this.urlMainPhoto = this.base + this.photos[0].url;
+    },
+
+    fetchFreeSlots() {
+      Service.getFreeSlots(this.storeID)
+        .then(response => {
+          console.group("Procura dos Slots:")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.slots = data;
+          }
+          console.log("Slots:");
+          console.log(this.slots);
+          console.groupEnd()
+
+          console.group("Parse dos Slots:")
+          for (let i=0; i < this.slots.length; i++) {
+            let date = new Date(this.slots[i]["date"]);
+            this.slots[i]["label"] = date.toLocaleString('pt-pt', {dateStyle: 'short', timeStyle: 'short'});
+            console.log(this.slots[i]["label"]);
+          }
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
 
-.botao {
-  position: sticky;
-  margin-left: 100px;
-  margin-top: 50px;
-}
+  .info {
+    position: absolute;
+    text-align: center;
+    color: white;
+    top: 40px;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .iconClose {
+    color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  }
 
-.text-vermelho {
-  color: white;
-}
-.bg-vermelho {
-  background: linear-gradient(#e9695c, #e03459);
-}
+  .photoMain {
+    background-size: cover;
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
 
+  .photoBackground {
+    background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
 
+  .choiceDiv {
+    position: absolute;
+    top: 170px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .cardStyle {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    border-radius: 30px;
+  }
+
+  .text-vermelho {
+    color: white;
+  }
+  
+  .divNewReservation {
+    background-image: linear-gradient(#13c1e0, #2897e3);
+    border-radius: 100px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-right: 30px;
+    margin-left: 30px;    
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  }
 
 </style>

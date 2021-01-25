@@ -61,6 +61,9 @@ export default {
     error: "Failed to find services of the category chosen."
   },
 
+  resultsPage: {
+    error: "Failed to find services."
+  },
   // Notifications
   notificationsPage: {
     title: "Notifications"
@@ -95,11 +98,19 @@ export default {
     newBooking: {
       title: "New Booking",
       serviceType: "Type of Service",
+      listService: "List of Services",
+      noServices: "This Establishment does not have a Service Catalog.",
+      chooseService: "Select your Service(s)",
+      numberServices: "Selected Services",
       dateAndTime: "Date and Time",
+      chooseDataAndTime: "Select Date and Time",
+      listSlots: "Slots List",
+      noSlots: "This Establishment has no slots available.",
       date: "Date",
       time: "Time",
       place: "Place",
-      choosePlace: "Choose a Place"
+      choosePlace: "Choose a Place",
+      makeNew: "Make Booking Now"
     },
     ratePopup: {
       title: "Evaluate Service",
@@ -148,6 +159,7 @@ export default {
 
     ratings: "Ratings",
     seeAllRatings: "See All",
+    allRating: "All Reviews",
     stars: "0 Stars | 1 Star | {count} Stars",
     basedOn: "Based on 1 Evaluation | Based on {count} ratings",
     book: "Book now!",
@@ -157,7 +169,7 @@ export default {
 
   // Search Results
   searchResultsPage: {
-    title: "Resultados",
+    title: "Results",
     description: 'Showing {count} Results for "{query}"',
   },
 

@@ -44,7 +44,9 @@ router.get('/popular', checkAuth, (req, res) => {
 });
 
 // Store ID
-router.post('/:id', (req, res) => {
+router.post('/:id', checkAuth, validator([
+    "slotId", "serviceId"
+]), (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
     let body = JSON.stringify(req.body);
 
@@ -118,6 +120,14 @@ router.get('/slot/:id', checkAuth, (req, res) => {
     let token = req.headers.Authorization || req.headers.authorization;
 
     Booking.getSlots(token, req.params.id)
+        .then(response => res.status(response.status).jsonp(response.data))
+        .catch(err => res.status(err.status || 500).jsonp(err.data || null));
+});
+
+router.get('/store/:id/statistics', checkAuth, (req, res) => {
+    let token = req.headers.Authorization || req.headers.authorization;
+
+    Booking.bookingsDay(token, req.params.id)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });
