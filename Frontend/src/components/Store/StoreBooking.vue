@@ -91,7 +91,7 @@
               <div class="col-12">
                 <q-btn rounded style="width: 90%; margin-top: 10px; margin-bottom: 10px; text-align: center; margin-left: auto; display: block; margin-right: auto;" color='azul' dense  v-close-popup>
                   {{$t('bookingsPage.newBooking.back')}}
-                </q-btn>   
+                </q-btn>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@
               <div class="col-5">
                 <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense  v-close-popup>
                   {{$t('bookingsPage.editPopup.cancelBooking')}}
-                </q-btn>   
+                </q-btn>
               </div>
               <div class="col-2"/>
               <div class="col-5">
@@ -153,13 +153,13 @@ name: "StoreBooking",
     photos: Array,
     base: String
   },
-  
+
   data() {
     return {
       storeID: this.$route.params.id,
       slide: 1,
-      catalog: [],
-      slots: [],
+      catalog: null,
+      slots: null,
       booking: new Booking(),
       bookingDialog: false
     }
