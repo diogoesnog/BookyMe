@@ -5,13 +5,26 @@
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-title>
+          Editar Reserva
         </v-card-title>
         <v-card-text>
+          <v-text-field :value="editing.bookingDate | moment('LLL')" disabled label="Reservado A"/>
+
+          <v-text-field :value="editing.serviceDate | moment('LLL')" disabled label="Reservado Para"/>
+
+          <v-select
+              :items="slots"
+              v-model="selectedSlot"
+              item-text="date"
+              filled
+              label="Filled style"
+              return-object
+          ></v-select>
         </v-card-text>
         <v-card-actions>
           <v-spacer/>
           <v-btn color="primary" text @click="dismissDialog">Cancelar</v-btn>
-          <v-btn color="primary" text>Alterar</v-btn>
+          <v-btn color="primary" text @click="reschedule">Alterar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -47,7 +60,12 @@
 
     <v-data-table :headers="headers" :items="bookings" :search="search" :items-per-page="10">
       <template v-slot:item.canceled="{ item }">
-        {{ item.canceled ? 'Alterado' : 'Não Alterado' }}
+        <div v-if="item.canceled">
+          <p>Cancelado</p>
+        </div>
+        <div v-else>
+          {{ item.wasRescheduled ? 'Re-agendado' : 'Na Data Original' }}
+        </div>
       </template>
       <template v-slot:item.serviceDate="{ item }">
         {{ item.serviceDate | moment("LLL")}}
@@ -74,10 +92,16 @@
 export default {
   name: "Services",
   props: {
-    bookings: Array
+    bookings: Array,
+    slots: Array
+  },
+  mounted() {
+    this.getStoreSlots();
   },
   data() {
     return {
+      editing: {},
+      selectedSlot: {},
       search: '',
       preview: false,
       previewItem: [],
@@ -93,8 +117,6 @@ export default {
         value: 'price',
         groupable: false
       }],
-
-
       headers: [{
         text: 'Utilizador',
         align: 'start',
@@ -124,17 +146,29 @@ export default {
       this.dialog = false;
       this.preview = false;
       this.previewItem = Object;
+      this.editing = Object;
     },
 
     cancelService(service) {
       console.log(service);
+      this.$emit("cancel", service._id)
     },
     editService(service) {
       console.log(service);
+      this.dialog = true;
+      this.editing = service;
     },
     previewService(item) {
       this.preview = true;
       this.previewItem = item.service;
+    },
+    reschedule() {
+      let reschedule = {
+        oldSlotId: this.editing._id,
+        slotId: this.selectedSlot._id
+      }
+      this.$emit("reschedule", reschedule);
+      this.dismissDialog();
     }
   }
 }
