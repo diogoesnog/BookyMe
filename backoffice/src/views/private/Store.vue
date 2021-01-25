@@ -18,7 +18,9 @@
             <DonutChart
                 :canceled=canceled :concluded=concluded :current=current>
             </DonutChart></v-col>
+
         </v-row>
+        <LineChart :idSore="id"></LineChart>
       </v-col>
     </v-row>
   </div>
@@ -30,7 +32,8 @@ import Cards from "@/components/Dashboard/Cards"
 import Calendar from "@/components/Dashboard/Calendar"
 import Navbar from "@/components/common/Navbar"
 import DashboardServices from "@/service/dashboard"
-import DonutChart from "@/components/Dashboard/DonutChart";
+import DonutChart from "@/components/Dashboard/DonutChart"
+import LineChart from "@/components/Dashboard/LineChart"
 
 export default {
   name: "StoreDash",
@@ -38,7 +41,8 @@ export default {
     Cards,
     Calendar,
     Navbar,
-    DonutChart
+    DonutChart,
+    LineChart
   },
   data() {
     return {
@@ -55,14 +59,13 @@ export default {
     this.getConcludedReservations(),
     this.getCanceledReservations()
   },
-
   methods: {
     getStore() {
       Service.getStoreById(this.id)
         .then(response => {
           // TODO: choose a better endpoint
           this.store = response.data[ "data" ][0];
-          console.log(this.store);
+          //console.log(this.store);
         }).catch(err => {
           window.alert("Error!");
           console.log(err);
@@ -72,7 +75,7 @@ export default {
       DashboardServices.getCurrentReservations(this.id)
           .then(response => {
             this.current = response["data"]["data"]["count"];
-            console.log("Current",this.current)
+            //console.log("Current",this.current)
           })
           .catch (err => {
             window.alert("Error!");
@@ -83,7 +86,7 @@ export default {
       DashboardServices.getCanceledReservations(this.id)
           .then(response => {
             this.canceled = response["data"]["data"]["count"];
-            console.log("Canceled",this.canceled)
+            //console.log("Canceled",this.canceled)
           })
           .catch (err => {
             window.alert("Error!");
@@ -94,7 +97,7 @@ export default {
       DashboardServices.getConcludedReservations(this.id)
           .then(response => {
             this.concluded = response["data"]["data"]["count"];
-            console.log("Concluded",this.concluded)
+            //console.log("Concluded",this.concluded)
           })
           .catch (err => {
             window.alert("Error!");

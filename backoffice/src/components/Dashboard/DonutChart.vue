@@ -1,10 +1,11 @@
 <template>
   <div id="chart">
-    <apexchart type="donut" :options="chartOptions" :series="series" :labels="labels"></apexchart>
+    <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
 <script>
+
 import VueApexCharts from 'vue-apexcharts'
 
 export default {
@@ -19,9 +20,6 @@ export default {
   },
   data: () => ( {
     series: [],
- /*   current2 : this.current,
-    canceled2: this.canceled,
-    concluded2: this.concluded,*/
 
     chartOptions: {
       chart: {
@@ -42,7 +40,6 @@ export default {
     },
   }),
   mounted() {
-    this.populateSeries()
   },
   watch: {
     current: function (val){
@@ -55,17 +52,8 @@ export default {
       this.series.push(val)
     }
   },
-  methods : {
-    populateSeries(){
-      /*let series = []
-
-      series.push(this.concluded)
-      series.push(this.canceled)
-      series.push(this.current)
-      this.series = series*/
-    }
-  }
 }
+
 </script>
 
 <style scoped>

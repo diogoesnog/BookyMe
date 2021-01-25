@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from "@/service/auth-header";
 
 class DashboardServices{
-    // Dashboard
+
     getCurrentReservations(id){
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/current/?storeId=${id}`, {
             headers: authHeader()
@@ -38,5 +38,13 @@ class DashboardServices{
             headers: authHeader()
         });
     }
+
+    getNumberReservations(id){
+        return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/booking/store/${id}/statistics`, {
+            headers: authHeader()
+        })
+    }
+
+
 }
 export default new DashboardServices();
