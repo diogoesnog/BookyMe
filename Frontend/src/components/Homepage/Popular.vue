@@ -11,13 +11,9 @@
         </div>
         <div class="col-1"/>
         <div class="col-2" style="display: flex; justify-content: flex-end;">
-         
-              <q-btn  class="iconSearch" @click="onEnter" size="xl" text-color="white" > 
-                 <q-icon name="search" size="35px"/>
-              </q-btn>
-            
-          
-          
+          <q-btn  class="iconSearch" :to="'../results/' + this.userInputSearch" size="xl" text-color="white" > 
+              <q-icon name="search" size="30px"/>
+          </q-btn>
         </div>
       </div>
       <!-- Info User -->
@@ -112,14 +108,6 @@ export default {
     redirect: function(id) {
       this.$router.push({name: 'Store', params:{id:id}})
     },
-    onEnter: function() {
-      Service.getSearch(this.userInputSearch)
-        .then(response => {
-          this.stores = response.data["data"];
-        }).catch(err => console.log(err))
-        .finally(() => {this.$q.loading.hide();
-        })
-    }
   }
 }
 
@@ -133,8 +121,8 @@ export default {
     justify-content: center;
     background: linear-gradient(#e9695c, #e03459);
     border-radius: 100px;
-    height: 60px;
-    width: 60px;
+    height: 45px;
+    width: 45px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
 

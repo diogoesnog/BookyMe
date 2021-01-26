@@ -2,12 +2,12 @@
   <div>
     <StoreBanner v-bind="storeData"/>
     <div class="divBottom">
-      <StorePhotos v-bind="storeData"/>
+      <StorePhotos :base="base" v-bind="storeData"/>
       <StoreDescription v-bind="storeData"/>
       <StoreMap v-bind="storeData"/>
       <StoreCatalog v-bind="storeData"/>
+      <StoreBooking :base="base" v-bind="storeData"/>
       <StoreRatings v-bind="storeData"/>
-      <StoreBooking v-bind="storeData"/>
     </div>
     <Toolbar/>
   </div>
@@ -43,6 +43,7 @@ export default {
     return {
       storeID: this.$route.params.id,
       storeData: {},
+      base: String,
       lang: this.$i18n.locale,
       bookingDialog: false,
       langOptions: [
@@ -72,6 +73,7 @@ export default {
       Service.getStoreData(this.storeID)
         .then(response => {
           let data = response.data["data"];
+          this.base = response.data["base"];
           this.storeData = data[0];
         }).catch(err => console.log(err)
       ).finally(() => {

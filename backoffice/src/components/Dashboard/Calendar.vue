@@ -1,20 +1,19 @@
 <template>
-  <v-row class="fill-height" >
+  <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar
-            flat
-        >
-          <!-- Botão Hoje -->
+        <!-- Toolbar -->
+        <v-toolbar flat color="white" >
+          <!-- Today button-->
           <v-btn
               outlined
               class="mr-4"
               color="grey darken-2"
               @click="setToday"
           >
-            Hoje
+            Today
           </v-btn>
-          <!-- Setinha esquerda -->
+          <!-- < button -->
           <v-btn
               fab
               text
@@ -22,12 +21,11 @@
               color="grey darken-2"
               @click="prev"
           >
-
             <v-icon small>
               mdi-chevron-left
             </v-icon>
           </v-btn>
-          <!-- Setinha direita -->
+          <!-- > button-->
           <v-btn
               fab
               text
@@ -62,13 +60,13 @@
             </template>
             <v-list>
               <v-list-item @click="type = 'day'">
-                <v-list-item-title>Dia</v-list-item-title>
+                <v-list-item-title>Day</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'week'">
-                <v-list-item-title>Semana</v-list-item-title>
+                <v-list-item-title>Week</v-list-item-title>
               </v-list-item>
               <v-list-item @click="type = 'month'">
-                <v-list-item-title>Mês</v-list-item-title>
+                <v-list-item-title>Month</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -82,6 +80,7 @@
             :events="events"
             :event-color="getEventColor"
             :type="type"
+
             @click:event="showEvent"
             @click:more="viewDay"
             @click:date="viewDay"
@@ -102,17 +101,8 @@
                 :color="selectedEvent.color"
                 dark
             >
-              <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
             </v-toolbar>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
@@ -123,7 +113,7 @@
                   color="secondary"
                   @click="selectedOpen = false"
               >
-                Cancel
+                Close
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -132,27 +122,34 @@
     </v-col>
   </v-row>
 </template>
-
 <script>
+
+import DashboardServices from "../../service/dashboard"
+
 export default {
   name: "Calendar",
+  props : {
+    idStore: String
+  },
   data: () => ({
     focus: '',
     type: 'month',
     typeToLabel: {
-      month: 'Mês',
-      week: 'Semana',
-      day: 'Dia',
+      month: 'Month',
+      week: 'Week',
+      day: 'Day',
     },
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
     events: [],
-    colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-    names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+    colors: ['#2897e3', '#13c1e0', '#e03459', '#434343'],
   }),
   mounted () {
     this.$refs.calendar.checkChange()
+  },
+  created() {
+    this.updateRange()
   },
   methods: {
     viewDay ({ date }) {
@@ -189,31 +186,31 @@ export default {
 
       nativeEvent.stopPropagation()
     },
-    updateRange ({ start, end }) {
-      const events = []
+    updateRange () {
+      DashboardServices.getSlots(this.idStore)
+          .then(response => {
+            let events = []
+            let tempBookings = response.data["data"]
 
-      const min = new Date(`${start.date}T00:00:00`)
-      const max = new Date(`${end.date}T23:59:59`)
-      const days = (max.getTime() - min.getTime()) / 86400000
-      const eventCount = this.rnd(days, days + 20)
+            for (let i in tempBookings){
 
-      for (let i = 0; i < eventCount; i++) {
-        const allDay = this.rnd(0, 3) === 0
-        const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-        const second = new Date(first.getTime() + secondTimestamp)
+              events.push({
+                name: `Slot ${i}`,
+                start: new Date(tempBookings[i]["date"]),
+                end: new Date(tempBookings[i]["date"]),
+                details:`Capacidade total: ${tempBookings[i]["max_capacity"]}\n Ocupação: ${tempBookings[i]["current_capacity"]}`,
+                color: this.colors[this.rnd(0, this.colors.length - 1)],
+                timed: false
+              })
+            }
+            this.events = events
+            console.log("Events",this.events)
+          })
+          .catch (err => {
+            window.alert("Error!");
+            console.log("OMG",err);
+          })
 
-        events.push({
-          name: this.names[this.rnd(0, this.names.length - 1)],
-          start: first,
-          end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay,
-        })
-      }
-
-      this.events = events
     },
     rnd (a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a
@@ -221,7 +218,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-</style>

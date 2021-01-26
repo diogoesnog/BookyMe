@@ -100,6 +100,7 @@ export default {
   }
 
   .item {
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;

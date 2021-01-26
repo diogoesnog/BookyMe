@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@mdi/js": "^5.8.55",
+    "apexcharts": "^3.23.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.0",
     "vue-cookies": "^1.7.4",
     "vue-i18n": "^8.22.2",
     "vue-moment": "^4.1.0",

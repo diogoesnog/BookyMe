@@ -61,6 +61,10 @@
     error: "Não foi possível encontrar estabelecimentos da categoria escolhida."
   },
 
+  resultsPage: {
+    error: "Não foi possível encontrar estabelecimentos."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notificações"
@@ -95,11 +99,19 @@
     newBooking: {
       title: "Nova Reserva",
       serviceType: "Tipo de Serviço",
+      listService: "Lista dos Serviços",
+      noServices: "Este Estabelecimento não dispõe de Catálogo de Serviços.",
+      chooseService: "Selecione o(s) seu(s) Serviço(s)",
+      numberServices: "Serviços Selecionados",
       dateAndTime: "Data e Hora",
+      chooseDataAndTime: "Selecione a Hora e Data",
+      listSlots: "Lista das Vagas",
+      noSlots: "Este Estabelecimento não tem vagas disponíveis.",
       date: "Data",
       time: "Hora",
       place: "Lugar Planta",
-      choosePlace: "Escolher Lugar"
+      choosePlace: "Escolher Lugar",
+      makeNew: "Fazer Reserva Agora"
     },
     ratePopup: {
       title: "Avaliar Reserva",
@@ -148,6 +160,7 @@
 
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",
+    allRating: "Todas Avaliações",
     stars: "0 Estrelas | 1 Estrela | {count} Estrelas",
     basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
     book: "Reserve já!",

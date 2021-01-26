@@ -201,7 +201,7 @@ class UserService {
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
     request.appendParam("search", keyword)
-   
+
 
     return request.get()
   }
@@ -273,6 +273,7 @@ class UserService {
     request.isJson();
     request.appendHeader("Authorization", authHeader());
     request.acceptJson();
+    // TODO: A flag de momento não está a fazer diferença.
     request.appendParam("read", read);
 
     return request.get();

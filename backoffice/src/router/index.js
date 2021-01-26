@@ -25,7 +25,7 @@ const routes = [
   {
     path: '/store/:id',
     name: "Store",
-    component: () => import('../views/private/subpages/Store'),
+    component: () => import('../views/private/Store'),
     meta: {
       requiresAuth: true
     }
