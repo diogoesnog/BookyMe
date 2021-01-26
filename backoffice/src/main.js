@@ -6,7 +6,6 @@ import vuex from './plugins/vuex';
 import vueApexCharts from '@/plugins/apexcharts'
 import router from './router';
 import moment from './plugins/Moment';
-import router from './router'
 import i18n from './plugins/i18n';
 import store from './store/user';
 

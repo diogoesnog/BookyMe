@@ -1,5 +1,4 @@
 <template>
-
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
@@ -104,7 +103,7 @@
             >
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              </v-toolbar>
+            </v-toolbar>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
@@ -122,7 +121,6 @@
       </v-sheet>
     </v-col>
   </v-row>
-
 </template>
 <script>
 
@@ -149,6 +147,9 @@ export default {
   }),
   mounted () {
     this.$refs.calendar.checkChange()
+  },
+  created() {
+    this.updateRange()
   },
   methods: {
     viewDay ({ date }) {
@@ -189,21 +190,21 @@ export default {
       DashboardServices.getSlots(this.idStore)
           .then(response => {
             let events = []
-            let tempBookings = response.data["data"];
+            let tempBookings = response.data["data"]
 
             for (let i in tempBookings){
 
               events.push({
-                name: `Slot_${i}`,
+                name: `Slot ${i}`,
                 start: new Date(tempBookings[i]["date"]),
                 end: new Date(tempBookings[i]["date"]),
-                details: ` Capacidade total: ${tempBookings[i]["capacity"]}`,
+                details:`Capacidade total: ${tempBookings[i]["max_capacity"]}\n Ocupação: ${tempBookings[i]["current_capacity"]}`,
                 color: this.colors[this.rnd(0, this.colors.length - 1)],
-                timed: true
+                timed: false
               })
             }
             this.events = events
-            //console.log("Events",this.events)
+            console.log("Events",this.events)
           })
           .catch (err => {
             window.alert("Error!");

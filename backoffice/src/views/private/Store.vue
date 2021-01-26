@@ -20,7 +20,8 @@
             </DonutChart></v-col>
 
         </v-row>
-        <LineChart :idSore="id"></LineChart>
+
+        <LineChart :idStore=id></LineChart>
       </v-col>
     </v-row>
   </div>
@@ -39,9 +40,9 @@ export default {
   name: "StoreDash",
   components:  {
     Cards,
-    Calendar,
     Navbar,
     DonutChart,
+    Calendar,
     LineChart
   },
   data() {
