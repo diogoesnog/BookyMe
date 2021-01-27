@@ -13,12 +13,6 @@
               <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
             </q-avatar>
           </div>
-          <div style="position: absolute; top: 125px; right:150px; left:220px;">
-            <label class="cameraButtom " for="avatar"  >
-              <q-icon size="23px" name="fas fa-camera" color="white"/>    
-            </label>
-            <input id="avatar" style="visibility:hidden;" type="file" @change="changeAvatar">
-          </div>
           <div style="position: absolute; top: 175px">
             <p>
               <span style="font-weight: 600; font-size: 30px;">
@@ -31,15 +25,21 @@
             </p>
           </div>
         </div>
-      </div>      
+      </div>
+      <div class="photoChange">
+        <label class="cameraButtom " for="avatar"  >
+          <q-icon size="23px" name="fas fa-camera" color="white"/>    
+        </label>
+        <input id="avatar" style="visibility:hidden;" type="file" @change="changeAvatar">
+      </div>  
     </div>
       <!-- Div Mudar Língua -->
-    <div class="changeLanguageDiv">
+<!--     <div class="changeLanguageDiv">
       <q-select class="selectLanguage" rounded outlined behavior="menu" v-model="lang"
         :options="langOptions"
         :label="$t('settingsPage.language')" >
       </q-select>
-    </div>
+    </div> -->
     <!-- Div Baixo -->
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
@@ -50,8 +50,8 @@
       </div>
       <!-- Primeira Box - Dados Pessoais -->
       <div class="roundedDiv shadow" style="display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left; ">
-        <div class="row" style="padding: 5px">
-          <div class="col-10" style="padding: 10px">
+        <div class="row" style="margin: 10px; padding-top: 25px; padding-bottom: 10px;">
+          <div class="col-10">
             <!-- Nome -->
             <div style="margin-left: 10px; margin-top: 15px;">
               <q-form  class="q-gutter-md">
@@ -118,7 +118,6 @@
         </div>
       </div>
     </div>
-      
       <!-- PARTE DA SEGURANÇA -->
       <!-- Box Vermelha - Segurança -->
       <div class="col-10 roundedDivRedBottom shadow">
@@ -127,7 +126,7 @@
           </p>
       </div>
       <!-- Segunda Box - password -->
-      <div class="roundedDiv shadow" style=" display: grid; border-radius: 30px; font-weight: 200; text-align: left; margin-top:50px;">
+      <div class="roundedDiv shadow" style=" display: grid; border-radius: 30px; font-weight: 200; text-align: left; margin-top:20px;">
         <div class="row" style="padding: 5px">
           <div class="col-10" >  
             <div style=" margin-top:7px">
@@ -321,6 +320,10 @@ export default {
 
 <style scoped>
 
+  .photoChange {
+
+  }
+
   .cameraButtom::after{
     content:"" !important;
   }
@@ -360,7 +363,7 @@ export default {
 
   .divBottom {
     position: relative;
-    top: 90px;
+    top: 50px;
     width: 100%;
     padding: 30px;
   }
@@ -382,7 +385,6 @@ export default {
   .gradientBlue {
      background-image: linear-gradient(#13c1e0, #2897e3);
   }
-
 
   .roundedDiv {
     background: white;
