@@ -7,6 +7,7 @@
       <div class="widgetReservation">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
+          <p>{{checkUserReview(reservation.storeId) }}</p>
           <!-- Photo -->
           <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
           </div>
@@ -111,7 +112,7 @@
             </q-card>
           </q-dialog>
         </div>
-        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -145,6 +146,7 @@ export default {
       hasReview: Boolean,
     }
   },
+
   methods: {
     getWidthNameStore() {
       if(this._id.length > 0 & this._id.length <= 3) return "15%";

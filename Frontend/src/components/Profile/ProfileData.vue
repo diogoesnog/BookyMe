@@ -4,37 +4,35 @@
   <div class="text-center" style="color: #434343">
     <!-- Div Cima -->
     <div class="divTop1">
-      <div class="divTop2">
-        <div class="centerDiv">
-          <div style="position: relative; display: flex; justify-content: center">
-            <div style="position: absolute">
-              <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
-                <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
-              </q-avatar>
-            </div>
-            <div style="position: absolute; top: 125px; right:150px; left:220px;">
-              <label class="cameraButtom " for="avatar"  >
-                      <q-icon size="23px" name="fas fa-camera" color="white"/>
-                      
-              </label>
-              <input id="avatar"  style="visibility:hidden;" type="file" @change="changeAvatar">
-              
-          
-            </div>
-            <div style="position: absolute; top: 175px">
-              <p>
-                <span style="font-weight: 600; font-size: 30px;">
-                  {{ profile.name }}
-                </span>
-                <br/>
-                <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
-                  {{ profile.username }}
-                </span>
-              </p>
-            </div>
+    </div>
+    <div class="divTop2">
+      <div class="centerDiv">
+        <div style="position: relative; display: flex; justify-content: center">
+          <div>
+            <q-avatar class="shadow" style="margin-bottom: 10px;" size="150px" font-size="52px" color="teal" text-color="white" >
+              <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
+            </q-avatar>
           </div>
-        </div>      
-      </div>
+          <div style="position: absolute; top: 125px; right:150px; left:220px;">
+            <label class="cameraButtom " for="avatar"  >
+              <q-icon size="23px" name="fas fa-camera" color="white"/>    
+            </label>
+            <input id="avatar" style="visibility:hidden;" type="file" @change="changeAvatar">
+          </div>
+          <div style="position: absolute; top: 175px">
+            <p>
+              <span style="font-weight: 600; font-size: 30px;">
+                {{ profile.name }}
+              </span>
+              <br/>
+              <span style="font-weight: 300; font-size: 20px; line-height: 10px;">
+                {{ profile.username }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>      
+    </div>
       <!-- Div Mudar Língua -->
     <div class="changeLanguageDiv">
       <q-select class="selectLanguage" rounded outlined behavior="menu" v-model="lang"
@@ -43,8 +41,6 @@
       </q-select>
     </div>
     <!-- Div Baixo -->
-    </div>
-    
     <div class="divBottom">
       <!-- Box vermelha - Detalhes Pessoais -->
       <div class="roundedDivRedTop shadow">
@@ -111,12 +107,12 @@
           </div> 
           <div>
             <q-btn  size="sm" class="gradientBlue" round @click="bottomSave" v-show= "esconde" >
-                <q-icon name="fas fa-save" color="white" />
+              <q-icon name="fas fa-save" color="white" />
             </q-btn>
           </div>
           <div >
             <q-btn size="sm" class="gradientBlue" round @click="bottomCancel" v-show= "esconde" style = "margin-top : 5px">
-                <q-icon name="fas fa-times" color="white" />
+              <q-icon name="fas fa-times" color="white" />
             </q-btn>
           </div>
         </div>
@@ -325,30 +321,25 @@ export default {
 
 <style scoped>
 
-.cameraButtom::after{
-
+  .cameraButtom::after{
     content:"" !important;
-   
+  }
 
-}
-
-.cameraButtom{
-  background: linear-gradient(#e9695c, #e03459);
-  padding: 9px 9px;
-  border-radius: 50px;
-  border: 1px solid #e9695c;
-  display: inline-block;
-  outline: none;
-  
-}
-
+  .cameraButtom{
+    background: linear-gradient(#e9695c, #e03459);
+    padding: 9px 9px;
+    border-radius: 50px;
+    border: 1px solid #e9695c;
+    display: inline-block;
+    outline: none;
+  }
 
   .changeLanguageDiv {
     position: absolute;
   }
 
   .divTop1{
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -356,26 +347,22 @@ export default {
     background-size: cover;
     background-position: center top;
     background-image: url('../../assets/Other/ProfileFrame.svg');
-    position: absolute;
-    z-index: 9999;
   }
 
   .divTop2{
-    position: fixed;
+    position: relative;
     left: 0;
     top: 30px;
     width: 100%;
+    height: 250px;
     color: white;
   }
 
   .divBottom {
-    z-index: 1000;
-    position: fixed;
-    bottom: 35px;
+    position: relative;
+    top: 90px;
     width: 100%;
     padding: 30px;
-    position: absolute;
-    z-index: 9999;
   }
 
   .button {
@@ -385,11 +372,11 @@ export default {
   }
 
   .inputWhite {
-      background: white;
+    background: white;
   }
 
   .gradientRed {
-      background-image: linear-gradient(#e9695c, #e03459);
+    background-image: linear-gradient(#e9695c, #e03459);
   }
 
   .gradientBlue {
@@ -406,13 +393,12 @@ export default {
 
   .roundedDivRedTop {
     background: linear-gradient(#e9695c, #e03459);
-    position: fixed;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 100px;
-    margin-top: -5px;
-    -webkit-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, 50%);
     width: 200px;
     height: 35px;
     border-radius: 30px;
@@ -420,14 +406,13 @@ export default {
 
   .roundedDivRedBottom {
     background: linear-gradient(#e9695c, #e03459);
-    position: fixed;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 60px;
-    margin-top: 40px;
-    -webkit-transform: translate(-50%, -50%);
-    width:120px;
+    -webkit-transform: translate(-50%, 100%);
+    width: 120px;
     height: 35px;
     border-radius: 30px;
   }
