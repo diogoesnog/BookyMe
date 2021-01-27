@@ -195,7 +195,7 @@ export default {
         })
     },
     checkUserReview: function(idStore) {
-      Service.getReviewsStore(this.idUser, idStore)
+      Service.getReviewsStoreUser(this.idUser, idStore)
         .then(response => {
           this.hasReview = response.data["data"].length > 0;
         })
