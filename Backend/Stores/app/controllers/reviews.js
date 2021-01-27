@@ -7,6 +7,10 @@ module.exports.getReviews = (id) => {
     return Review.find({storeID: id}).lean();
 }
 
+module.exports.getReviewsQuery = (query) => {
+    return Review.find(query);
+}
+
 
 module.exports.getRatings = (id) => {
     return Review.aggregate([

@@ -23,6 +23,8 @@ app.get('/:storeID/ratings',  (req, res) => {
 });
 
 
+
+
 app.get('/store/:storeID',  async (req, res) => {
     let response;
     try {
@@ -47,6 +49,21 @@ app.get('/store/:storeID',  async (req, res) => {
         }).catch(err => {
 
     });*/
+
+
+});
+
+app.get('/', (req, res) => {
+
+    let response;
+    Reviews.getReviewsQuery(req.query)
+        .then(data => {
+            response = Response.OK(data);
+            res.status(response.status).jsonp(response);
+        }).catch(err => {
+            response = Response.INTERNAL_ERROR(err, 'Could not fetch any review');
+            res.status(response.status).jsonp(response);
+    });
 
 
 });
