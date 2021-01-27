@@ -75,6 +75,7 @@
     personalDetails: "Detalhes Pessoais",
     editData: "Editar Dados",
     security: "Segurança",
+    language: "Idioma",
     changePassword: "Alterar Password",
     signout: "Terminar Sessão",
     cancel: "Cancelar",

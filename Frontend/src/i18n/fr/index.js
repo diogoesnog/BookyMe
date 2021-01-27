@@ -69,6 +69,7 @@ export default {
     personalDetails: "Détails Personnels",
     editData: "Modifier Information",
     security: "Sécurité",
+    language: "Langue",
     changePassword: "Changer Mot de Passe",
     signout: "Se Déconnecter",
     cancel: "Annuler",
