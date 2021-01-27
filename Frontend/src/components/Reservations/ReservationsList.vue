@@ -7,7 +7,6 @@
       <div class="widgetReservation">
         <!-- Photo (Lado Esquerdo) e Info (Lado Direito) -->
         <div class="row">
-          <p>{{checkUserReview(reservation.storeId) }}</p>
           <!-- Photo -->
           <div class="col-5 divPhoto" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'>
           </div>
@@ -30,12 +29,8 @@
             <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
-          <div v-else-if="getTypeReservation() == 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <p>{{checkUserReview(reservation.storeId) }}</p>
-            <div v-if="hasReview == true" style="text-align: center;">
-              <span style="text-align: -webkit-center; font-size: 20px; font-weight: 600; color: #e03459;">
-                <span style="text-align: -webkit-center; font-size: 20px; font-weight: 350; color: #e03459;">/5</span>
-              </span>
+          <div :id="checkUserReview(reservation.storeId)" v-else-if="getTypeReservation() == 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+            <div v-if="hasReview" style="text-align: center;">
               <img style="height: 25px" src="icons/Star.svg"/>
             </div>
             <div v-else>
@@ -200,18 +195,9 @@ export default {
         })
     },
     checkUserReview: function(idStore) {
-      Service.getReviewsStore(idStore)
+      Service.getReviewsStore(this.idUser, idStore)
         .then(response => {
-          console.group("Verificação de Review");
-          let data = response.data["data"];
-          let userIds = data.map(obj => obj.userId);
-
-          console.log("ID User a Verificar: " + this.idUser);
-          let verifyReview = Boolean;
-          verifyReview = userIds.indexOf(this.idUser) > -1;
-
-          console.log("User Tem Review na Loja " + idStore + "? " + verifyReview);
-          console.groupEnd();
+          this.hasReview = response.data["data"].length > 0;
         })
         .catch(err => {
           console.log(err);

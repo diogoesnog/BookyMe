@@ -101,6 +101,7 @@ export default {
       Service.getProfileData()
         .then(response => {
           this.idUser = response.data["data"]["id"];
+          console.log(this.idUser )
         }).catch(err => {
           console.log(err)
         })
