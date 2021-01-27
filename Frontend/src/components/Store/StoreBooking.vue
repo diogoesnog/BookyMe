@@ -89,7 +89,7 @@
             </p>
             <div class="row" style="margin: 10px">
               <div class="col-12">
-                <q-btn rounded style="width: 90%; margin-top: 10px; margin-bottom: 10px; text-align: center; margin-left: auto; display: block; margin-right: auto;" color='azul' dense  v-close-popup>
+                <q-btn rounded style="width: 90%; text-align: center; display: block; margin: 10px auto;" color='azul' dense v-close-popup>
                   {{$t('bookingsPage.newBooking.back')}}
                 </q-btn>
               </div>
@@ -161,7 +161,7 @@ name: "StoreBooking",
       catalog: null,
       slots: null,
       booking: new Booking(),
-      bookingDialog: false
+      bookingDialog: Boolean
     }
   },
 
@@ -282,11 +282,6 @@ name: "StoreBooking",
     text-overflow: ellipsis;
   }
 
-  .iconClose {
-    color: white;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-  }
-
   .photoMain {
     background-size: cover;
     width: 100%;
@@ -316,14 +311,6 @@ name: "StoreBooking",
     background-repeat: no-repeat;
     width: 100%;
     border-radius: 30px;
-  }
-
-  .text-vermelho {
-    color: white;
-  }
-
-  .bg-vermelho {
-    background: linear-gradient(#e9695c, #e03459);
   }
 
   .text-azul {
