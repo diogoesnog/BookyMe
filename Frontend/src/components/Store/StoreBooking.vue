@@ -187,8 +187,6 @@ name: "StoreBooking",
             message: 'Failed to Book.'
           });
         })
-      console.groupEnd();
-
     },
 
     fetchCatalog() {

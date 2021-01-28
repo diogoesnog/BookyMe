@@ -26,7 +26,7 @@
           </div>
           <!-- 3 Dots -->
           <div v-if="getTypeReservation() === 0" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+            <img @click="bookingDialog = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
           <div :id="checkUserReview(reservation.storeId)" v-else-if="getTypeReservation() === 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
@@ -37,38 +37,144 @@
               <img @click="persistentReview = true" style="height: 25px" src="../../assets/Icons/Rating.svg"/>
             </div>
           </div>
+
           <!-- Pop Up Alterar Reserva -->
-          <q-dialog v-model="persistentChange" persistent transition-show="scale" transition-hide="scale">
-            <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
-              <q-card-section style="padding: 25px; width: 100%;">
-                <span class="titleStorePopup">{{ reservation.storeName }}</span>
-                <p style="font-size: 1.2rem; font-weight: 300;">{{$t('bookingsPage.editPopup.title')}}</p>
-              </q-card-section>
-              <q-card-actions style="margin-left: 20px; margin-right: 20px;" align="center" class="bg-white text-teal">
-                <div class="row" style="width: 100%;">
-                  <div class="col-12" style="color: #434343; font-size: 20px; font-weight: 600; text-align: left; padding: 10px">
-                    <span>{{$t('bookingsPage.editPopup.dateAndTime')}}</span>
-                  </div>
-                  <div class="col-6" style="padding-right: 10px;">
-                    <q-select behavior="menu" rounded outlined v-model="model" :options="options"/>
-                  </div>
-                  <div class="col-6" style="padding-left: 10px;">
-                    <q-select behavior="menu" rounded outlined v-model="model" :options="options"/>
+          <q-dialog v-model="bookingDialog">
+            <q-carousel
+              swipeable
+              animated
+              v-model="slide"
+              control-color="primary"
+              navigation
+              padding
+              height="400px"
+              class="cardStyle"
+            >
+              <q-carousel-slide :name="1" class="column no-wrap flex-center">
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+                <div class="photoBackground"/>
+                <div class="info">
+                  <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+                  <p style="font-size: 22px; font-weight: 300;">
+                    {{$t('bookingsPage.newBooking.serviceType')}}
+                  </p>
+                </div>
+                <div v-if="catalog" class="choiceDiv">
+                  <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
+                    {{$t('bookingsPage.newBooking.chooseService')}}
+                  </p>
+                  <q-select
+                    :label="$t('bookingsPage.newBooking.listService')"
+                    outlined
+                    rounded
+                    transition-show="scale"
+                    transition-hide="scale"
+                    multiple
+                    counter
+                    emit-value
+                    map-options
+                    :hint="$t('bookingsPage.newBooking.numberServices')"
+                    v-model="bookingNew.serviceId"
+                    :options="catalog"
+                    option-value="_id"
+                    option-label="product"
+                  />
+                </div>
+                <div v-else class="choiceDiv">
+                  <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
+                    {{$t('bookingsPage.newBooking.chooseService')}}
+                  </p>
+                  <p style="color: #434343; font-weight: 300; font-size: 18px; margin: 10px">
+                    {{$t('bookingsPage.newBooking.noServices')}}
+                  </p>
+                </div>
+              </q-carousel-slide>
+              <q-carousel-slide :name="2" class="column no-wrap flex-center">
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+                <div class="photoBackground"/>
+                <div class="info">
+                  <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+                  <p style="font-size: 22px; font-weight: 300;">
+                    {{$t('bookingsPage.newBooking.dateAndTime')}}
+                  </p>
+                </div>
+                <div v-if="slots" class="choiceDiv">
+                  <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
+                    {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
+                  </p>
+                  <q-select
+                    :label="$t('bookingsPage.newBooking.listSlots')"
+                    outlined
+                    rounded
+                    transition-show="scale"
+                    transition-hide="scale"
+                    emit-value
+                    map-options
+                    v-model="bookingNew.slotId"
+                    :options="slots"
+                    option-value="_id"
+                    option-label="label"
+                  />
+                </div>
+                <div v-else class="choiceDiv">
+                  <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
+                    {{$t('bookingsPage.newBooking.chooseDataAndTime')}}
+                  </p>
+                  <p style="color: #434343; font-weight: 300; font-size: 18px; margin: 10px">
+                    {{$t('bookingsPage.newBooking.noSlots')}}
+                  </p>
+                  <div class="row" style="margin: 10px">
+                    <div class="col-12">
+                      <q-btn rounded style="width: 90%; text-align: center; display: block; margin: 10px auto;" color='azul' dense v-close-popup>
+                        {{$t('bookingsPage.newBooking.back')}}
+                      </q-btn>
+                    </div>
                   </div>
                 </div>
-              </q-card-actions>
-              <q-card-actions style="margin: 20px;" align="center" class="bg-white text-teal">
-                <div class="row" style="width: 100%;">
-                  <div class="col-6" style="padding-right: 10px;">
-                    <q-btn class="q-btn1" rounded :label="$t('bookingsPage.editPopup.changeBooking')" v-close-popup />
+              </q-carousel-slide>
+              <q-carousel-slide v-if="slots" :name="3" class="column no-wrap flex-center content-center">
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+                <div class="photoBackground"/>
+                <div class="info">
+                  <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+                  <p style="font-size: 22px; font-weight: 300;">
+                    {{$t('bookingsPage.dataNew')}}
+                  </p>
+                </div>
+                <div class="choiceDiv">
+                  <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
+                    {{$t('bookingsPage.dataConf')}}
+                  </p>
+                  <div class="row">
+                    <div class="col-6">
+                <span class="dateTime">
+                  {{$t('bookingsPage.newBooking.date')}}: <span style="font-weight: 300">{{parseSlotId(0)}}</span>
+                </span>
+                    </div>
+                    <div class="col-6">
+                <span class="dateTime">
+                  {{$t('bookingsPage.newBooking.time')}}: <span style="font-weight: 300">{{parseSlotId(1)}}</span>
+                </span>
+                    </div>
                   </div>
-                  <div class="col-6" style="padding-left: 10px;">
-                    <q-btn class="q-btn2" rounded :label="$t('bookingsPage.editPopup.cancelBooking')" v-close-popup />
+                  <div class="row" style="margin: 10px">
+                    <div class="col-5">
+                      <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup>
+                        {{$t('bookingsPage.editPopup.cancelBooking')}}
+                      </q-btn>
+                    </div>
+                    <div class="col-2"/>
+                    <div class="col-5">
+                      <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup @click="makeBooking">
+                        {{$t('bookingsPage.ratePopup.submit')}}
+                      </q-btn>
+                    </div>
                   </div>
                 </div>
-              </q-card-actions>
-            </q-card>
+              </q-carousel-slide>
+            </q-carousel>
           </q-dialog>
+
           <!-- Pop Up Review -->
           <q-dialog v-model="persistentReview" persistent transition-show="scale" transition-hide="scale">
             <q-card style="color: #434343 !important; width: 100%; border-radius: 40px; text-align: center">
@@ -115,6 +221,7 @@
 <script>
 
 import Service from '../../services/user.service';
+import Booking from "src/models/Booking";
 
 export default {
   name: "ReservationsList",
@@ -129,17 +236,26 @@ export default {
 
   data() {
     return {
-      persistentChange: false,
       persistentReview: false,
-      model: null,
-      options: [
-        'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-      ],
       rating: 4,
       textComment: '',
       userRating: 0,
       hasReview: Boolean,
+
+      // Cenas do diálogo da reserva
+      slide: 1,
+      catalog: null,
+      slots: null,
+      bookingNew: new Booking(),
+      bookingDialog: false
     }
+  },
+
+  mounted() {
+    // Cenas para o diálogo da reserva
+    // TODO: Provavelmente serem mudadas aqui também por causa do ciclo for.
+    this.fetchCatalog();
+    this.fetchFreeSlots();
   },
 
   methods: {
@@ -202,7 +318,94 @@ export default {
         .catch(err => {
           console.log(err);
         })
+    },
+
+    // Cenas para o diálogo
+    // TODO: Vão ter de ser mudadas por causa do ciclo for e não serem estáticas
+    makeBooking() {
+      Service.makeBooking(this.booking, this.storeID)
+        .then(response => {
+          console.log("Booking Successful");
+          this.$q.notify({
+            type: 'positive',
+            message: `Booking Successful.`
+          });
+        })
+        .catch(err => {
+          console.log(`Error ${err}`);
+          this.$q.notify({
+            type: 'negative',
+            message: 'Failed to Book.'
+          });
+        })
+      console.groupEnd();
+
+    },
+
+    fetchCatalog() {
+      Service.getCatalog(this.storeID)
+        .then(response => {
+          console.group("Procura de catálogo")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.catalog = data;
+          }
+          console.log("Catálogo:");
+          console.log(this.catalog);
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },
+
+    fetchFreeSlots() {
+      Service.getFreeSlots(this.storeID)
+        .then(response => {
+          console.group("Procura dos Slots:")
+          let data = response.data["data"];
+          if (data.length > 0) {
+            this.slots = data;
+          }
+          console.log("Slots:");
+          console.log(this.slots);
+          console.groupEnd()
+
+          console.group("Parse dos Slots:")
+          for (let i=0; i < this.slots.length; i++) {
+            let date = new Date(this.slots[i]["date"]);
+            this.slots[i]["label"] = date.toLocaleString('pt-pt', {dateStyle: 'short', timeStyle: 'short'});
+            console.log(this.slots[i]["label"]);
+          }
+          console.groupEnd()
+        }).catch(err => console.log(err)
+      ).finally(() => {
+        this.$q.loading.hide();
+      })
+    },
+
+    parseSlotId(index) {
+      let slotId = this.booking.slotId;
+      for (let i = 0; i<this.slots.length; i++) {
+        let slotObject = this.slots[i];
+        if(slotObject["_id"] === slotId) {
+          return slotObject["label"].split(", ")[index];
+        }
       }
+    },
+
+    parseServiceId() {
+      let services = this.booking.serviceId;
+      console.group("Parse dos Serviços");
+      console.log(this.catalog);
+      for (let i = 0; i<this.catalog.length; i++) {
+        let catalogObj = this.catalog[i];
+        if(catalogObj["_id"] === services[0]) {
+          return catalogObj["product"];
+        }
+      }
+      console.groupEnd()
+    }
   }
 }
 </script>
@@ -235,12 +438,11 @@ export default {
     background-color: white;
     margin-top: 25px;
     border-radius: 30px;
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   }
 
   .shadow {
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 28px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
   }
 
