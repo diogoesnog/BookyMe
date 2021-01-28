@@ -26,7 +26,7 @@
           </div>
           <!-- 3 Dots -->
           <div v-if="getTypeReservation() === 0" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
-            <img @click="bookingDialog = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
+            <img @click="bookingDialog = true; fetchCatalog(reservation.storeId); fetchFreeSlots(reservation.storeId);" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
           <div :id="checkUserReview(reservation.storeId)" v-else-if="getTypeReservation() === 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
@@ -51,13 +51,14 @@
               class="cardStyle"
             >
               <q-carousel-slide :name="1" class="column no-wrap flex-center">
-                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'/>
                 <div class="photoBackground"/>
                 <div class="info">
-                  <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
-                  <p style="font-size: 22px; font-weight: 300;">
-                    {{$t('bookingsPage.newBooking.serviceType')}}
-                  </p>
+                  <span style="font-size: 30px; font-weight: 700;">{{ reservation.storeName }}</span>
+
+                  <div style="font-size: 22px; font-weight: 300;">
+                    {{$t('bookingsPage.editPopup.serviceType')}}
+                  </div>
                 </div>
                 <div v-if="catalog" class="choiceDiv">
                   <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
@@ -90,12 +91,12 @@
                 </div>
               </q-carousel-slide>
               <q-carousel-slide :name="2" class="column no-wrap flex-center">
-                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'/>
                 <div class="photoBackground"/>
                 <div class="info">
-                  <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+                  <span style="font-size: 30px; font-weight: 700;">{{ reservation.storeName }}</span>
                   <p style="font-size: 22px; font-weight: 300;">
-                    {{$t('bookingsPage.newBooking.dateAndTime')}}
+                    {{$t('bookingsPage.editPopup.dateAndTime')}}
                   </p>
                 </div>
                 <div v-if="slots" class="choiceDiv">
@@ -133,10 +134,10 @@
                 </div>
               </q-carousel-slide>
               <q-carousel-slide v-if="slots" :name="3" class="column no-wrap flex-center content-center">
-                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage()}")` }'/>
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'/>
                 <div class="photoBackground"/>
                 <div class="info">
-                  <span style="font-size: 30px; font-weight: 700;">{{ name }}</span>
+                  <span style="font-size: 30px; font-weight: 700;">{{ reservation.storeName }}</span>
                   <p style="font-size: 22px; font-weight: 300;">
                     {{$t('bookingsPage.dataNew')}}
                   </p>
@@ -159,14 +160,14 @@
                   </div>
                   <div class="row" style="margin: 10px">
                     <div class="col-5">
-                      <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup>
+                      <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' dense v-close-popup>
                         {{$t('bookingsPage.editPopup.cancelBooking')}}
                       </q-btn>
                     </div>
                     <div class="col-2"/>
                     <div class="col-5">
-                      <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup @click="makeBooking">
-                        {{$t('bookingsPage.ratePopup.submit')}}
+                      <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup @click="changeBooking(reservation._id)">
+                        {{$t('bookingsPage.editPopup.changeBooking')}}
                       </q-btn>
                     </div>
                   </div>
@@ -252,10 +253,6 @@ export default {
   },
 
   mounted() {
-    // Cenas para o diálogo da reserva
-    // TODO: Provavelmente serem mudadas aqui também por causa do ciclo for.
-    this.fetchCatalog();
-    this.fetchFreeSlots();
   },
 
   methods: {
@@ -322,28 +319,32 @@ export default {
 
     // Cenas para o diálogo
     // TODO: Vão ter de ser mudadas por causa do ciclo for e não serem estáticas
-    makeBooking() {
-      Service.makeBooking(this.booking, this.storeID)
+    changeBooking(bookingID) {
+      console.group("Change Booking");
+      console.log(bookingID);
+      console.log(this.bookingNew);
+      Service.changeBooking(this.bookingNew, bookingID)
         .then(response => {
-          console.log("Booking Successful");
+          console.log("Re-booking Successful");
+          this.$forceUpdate()
           this.$q.notify({
             type: 'positive',
-            message: `Booking Successful.`
+            message: `Re-booking Successful.`
           });
         })
         .catch(err => {
           console.log(`Error ${err}`);
           this.$q.notify({
             type: 'negative',
-            message: 'Failed to Book.'
+            message: 'Failed to re-book.'
           });
         })
       console.groupEnd();
 
     },
 
-    fetchCatalog() {
-      Service.getCatalog(this.storeID)
+    fetchCatalog(storeID) {
+      Service.getCatalog(storeID)
         .then(response => {
           console.group("Procura de catálogo")
           let data = response.data["data"];
@@ -359,8 +360,8 @@ export default {
       })
     },
 
-    fetchFreeSlots() {
-      Service.getFreeSlots(this.storeID)
+    fetchFreeSlots(storeID) {
+      Service.getFreeSlots(storeID)
         .then(response => {
           console.group("Procura dos Slots:")
           let data = response.data["data"];
@@ -385,26 +386,13 @@ export default {
     },
 
     parseSlotId(index) {
-      let slotId = this.booking.slotId;
+      let slotId = this.bookingNew.slotId;
       for (let i = 0; i<this.slots.length; i++) {
         let slotObject = this.slots[i];
         if(slotObject["_id"] === slotId) {
           return slotObject["label"].split(", ")[index];
         }
       }
-    },
-
-    parseServiceId() {
-      let services = this.booking.serviceId;
-      console.group("Parse dos Serviços");
-      console.log(this.catalog);
-      for (let i = 0; i<this.catalog.length; i++) {
-        let catalogObj = this.catalog[i];
-        if(catalogObj["_id"] === services[0]) {
-          return catalogObj["product"];
-        }
-      }
-      console.groupEnd()
     }
   }
 }
@@ -530,6 +518,71 @@ export default {
     text-align: center;
     width: 100%;
     height: auto;
+  }
+
+  /*  Cenas do diálogo da reserva */
+  .photoMain {
+    background-size: cover;
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
+
+  .photoBackground {
+    background-image: linear-gradient(#1ba0d4, #1b9fd4c2, #168ab80e);
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
+
+  .info {
+    position: absolute;
+    text-align: center;
+    color: white;
+    top: 40px;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .choiceDiv {
+    position: absolute;
+    top: 160px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .dateTime {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .cardStyle {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    border-radius: 30px;
+  }
+
+  .text-azul {
+    color: white;
+  }
+
+  .bg-azul {
+    background: linear-gradient(#13c1e0, #2897e3);
+  }
+
+  .text-vermelho {
+    color: white;
+  }
+
+  .bg-vermelho {
+    background: linear-gradient(#e9695c, #e03459);
   }
 
 </style>
