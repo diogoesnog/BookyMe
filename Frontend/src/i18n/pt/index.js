@@ -49,7 +49,7 @@
   favoritesPage: {
     title: "Favoritos",
     description: "Lista de Estabelecimentos Favoritos",
-    noFavorites: "Sem Favoritos. Começe a Adicionar."
+    noFavorites: "Sem Favoritos. Começe a Adicionar..."
   },
 
   // List Categories

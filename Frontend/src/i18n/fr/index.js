@@ -47,7 +47,7 @@ export default {
   favoritesPage: {
     title: "Favoris",
     description: "Liste de Boutiques en Favoris",
-    noFavorites: "Pas de favoris. Commencez à ajouter."
+    noFavorites: "Pas de favoris. Commencez à ajouter..."
   },
 
   // List Categories

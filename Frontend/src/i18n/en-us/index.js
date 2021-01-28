@@ -49,7 +49,7 @@ export default {
   favoritesPage: {
     title: "Favorites",
     description: "List of Favorite Stores",
-    noFavorites: "No Favorites Yet. Start Adding."
+    noFavorites: "No Favorites Yet. Start Adding..."
   },
 
   // List Categories
