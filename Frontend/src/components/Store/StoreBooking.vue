@@ -123,7 +123,7 @@
             </div>
             <div class="row" style="margin: 10px">
               <div class="col-5">
-                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup>
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' dense v-close-popup>
                   {{$t('bookingsPage.editPopup.cancelBooking')}}
                 </q-btn>
               </div>
@@ -243,19 +243,6 @@ name: "StoreBooking",
           return slotObject["label"].split(", ")[index];
         }
       }
-    },
-
-    parseServiceId() {
-      let services = this.booking.serviceId;
-      console.group("Parse dos Serviços");
-      console.log(this.catalog);
-      for (let i = 0; i<this.catalog.length; i++) {
-        let catalogObj = this.catalog[i];
-        if(catalogObj["_id"] === services[0]) {
-          return catalogObj["product"];
-        }
-      }
-      console.groupEnd()
     }
   }
 }

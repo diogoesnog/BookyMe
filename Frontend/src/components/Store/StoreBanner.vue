@@ -170,13 +170,13 @@
             </div>
             <div class="row" style="margin: 10px">
               <div class="col-5">
-                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense  v-close-popup>
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' dense v-close-popup>
                   {{$t('bookingsPage.editPopup.cancelBooking')}}
                 </q-btn>
               </div>
               <div class="col-2"/>
               <div class="col-5">
-                <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' @click="makeBooking">
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup @click="makeBooking">
                   {{$t('bookingsPage.ratePopup.submit')}}
                 </q-btn>
               </div>
@@ -406,19 +406,6 @@ export default {
           return slotObject["label"].split(", ")[index];
         }
       }
-    },
-
-    parseServiceId() {
-      let services = this.booking.serviceId;
-      console.group("Parse dos Serviços");
-      console.log(this.catalog);
-      for (let i = 0; i<this.catalog.length; i++) {
-        let catalogObj = this.catalog[i];
-        if(catalogObj["_id"] === services[0]) {
-          return catalogObj["product"];
-        }
-      }
-      console.groupEnd()
     }
   }
 
@@ -553,6 +540,14 @@ export default {
 
   .bg-azul {
     background: linear-gradient(#13c1e0, #2897e3);
+  }
+
+  .text-vermelho {
+    color: white;
+  }
+
+  .bg-vermelho {
+    background: linear-gradient(#e9695c, #e03459);
   }
 
 </style>
