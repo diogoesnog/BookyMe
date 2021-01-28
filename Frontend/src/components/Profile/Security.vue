@@ -1,25 +1,25 @@
 <template>
   <div class="security">
     <div class="roundedDivTitle shadow">
-      <p style="font-weight: 500; font-size: 130%; align-items: center; text-align: left; margin: 20px;" class="font-weight-bold button">
+      <p style="font-weight: 600; font-size: 20px; align-items: center; text-align: left; margin: 20px;" class="font-weight-bold button">
         {{ $t('profilePage.security') }}
       </p>
     </div>
-    <div class="roundedDivContent shadow" style="display: grid; border-radius: 30px; font-weight: 200; text-align: left;">
+    <div class="roundedDivContent shadow" style="display: grid; border-radius: 30px; font-weight: 300; font-size: 16px; text-align: left;">
       <div class="row" style="margin: 10px; padding-top: 10px">
         <div class="col-10">  
-          <div style=" margin-top:7px">
-            <q-form class="q-gutter-md">
+          <div style="margin-top:7px">
+            <q-form>
               <div class="row" style="padding: 5px">
-                <div class="col-6" style="padding: 10px">
-                  <q-input borderless v-model="oldPassword" :label="$t('profilePage.oldPassword')" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable="!editable">
+                <div class="col-6" style="padding: 10px; ">
+                  <q-input borderless v-model="oldPassword" :label="$t('profilePage.oldPassword')" style="height: 30px; font-size: 20px" :type="isPwd ? 'password' : 'text'" :disable="!editable">
                     <template v-slot:append>
                       <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
                     </template>
                   </q-input>
                 </div>
                   <div class="col-6" style="padding: 10px">
-                    <q-input borderless v-model="newPassword" :label="$t('profilePage.newPassword')" style="height: 30px;" :type="isPwd ? 'password' : 'text'" :disable="!editable">
+                    <q-input borderless v-model="newPassword" :label="$t('profilePage.newPassword')" style="height: 30px; font-size: 20px" :type="isPwd ? 'password' : 'text'" :disable="!editable">
                       <template v-slot:append>
                         <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
                       </template>

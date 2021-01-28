@@ -1,60 +1,57 @@
 <template>
     <div class="personalDetails">
       <div class="roundedDivTitle shadow">
-        <p style="font-weight: 500; font-size: 130%; align-items: center; text-align: left; margin: 20px;" class="font-weight-bold button">
+        <p style="font-weight: 600; font-size: 20px; align-items: center; text-align: left; margin: 20px;" class="font-weight-bold button">
           {{ $t('profilePage.personalDetails') }}
         </p>
       </div>
-      <div class="roundedDivContent shadow" style="display: grid; border-radius: 30px; font-weight: 280; font-size: 13px; text-align: left;">
-        <div class="row" style="margin: 10px; padding-top: 25px; padding-bottom: 10px;">
+      <div class="roundedDivContent shadow" style="display: grid; border-radius: 30px; font-size: 13px; text-align: left;">
+        <div class="row" style="margin: 25px; padding-top: 10px;">
           <div class="col-10">
             <!-- Nome -->
             <div>
-                <q-form  class="q-gutter-md">
-                  <q-input borderless v-model="profile.name"  style="height: 30px;" type="text" :disable="!editable">
-                    <template v-slot:prepend>
-                      <q-icon name="fas fa-user" color="grey-5" style="font-size: 20px; font-weight:350"/>
-                    </template>
-                  </q-input>
-                </q-form>
+              <q-form>
+                <q-input class="textInput" borderless v-model="profile.name" type="text" :disable="!editable">
+                  <template v-slot:prepend>
+                    <q-icon name="fas fa-user" color="grey-5" style="font-size: 18px; font-weight:350"/>
+                  </template>
+                </q-input>
+              </q-form>
             </div>
             <!-- Nome de Utilizador -->
             <div>
-              <q-form class="q-gutter-md">
-                <q-input borderless v-model="profile.username" style="height: 30px;" :disable="!editable">
+              <q-form>
+                <q-input class="textInput" borderless v-model="profile.username" :disable="!editable">
                   <template v-slot:prepend>
-                    <span style="font-size: 28px; font-weight:350">#</span>
+                    <span style="font-size: 30px; font-weight:350">#</span>
                   </template>
                 </q-input>
               </q-form>
             </div>
             <!-- Email -->
             <div>
-              <q-input borderless v-model="profile.email" style="height: 30px;" :disable="!editable">
+              <q-input class="textInput" borderless v-model="profile.email" :disable="!editable">
                 <template v-slot:prepend>
-                  <span style="font-size: 20px; font-weight:350">@</span>
+                  <span style="font-size: 22px; font-weight:350">@</span>
                 </template>
               </q-input>
             </div>
             <!-- Morada -->
             <div class="row">
-              <div class="col-1" style="display: flex; justify-content: left; align-items: center;">
-                <q-icon name="fas fa-home" color="grey-5" style="font-size: 20px; "/>
-              </div>
-              <div class="col-11">
-                <q-input borderless v-model="profile.address" style="height: 30px;" :disable="!editable"/>
-                <div class="row" style="margin-top: -10px;">
-                  <div class="col-4">
-                    <q-input borderless v-model="profile.zipCode" style="height: 30px;" :disable="!editable"/> 
-                  </div>
-                  <div class="col-8">
-                    <q-input borderless v-model="profile.city" style="height: 30px;" :disable="!editable"/>
-                  </div>  
+              <q-form>
+                <q-input class="textInput" borderless v-model="profile.address" type="text" :disable="!editable">
+                  <template v-slot:prepend>
+                    <q-icon name="place" color="grey-5" style="font-size: 22px; font-weight:350"/>
+                  </template>
+                </q-input>
+                <div class="moreAddress">
+                  <q-input class="textInput" borderless v-model="profile.zipCode" type="text" :disable="!editable"/>
+                  <q-input class="textInput" borderless v-model="profile.city" type="text" :disable="!editable"/>
                 </div>
-              </div>
+              </q-form>
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-2" style="text-align: right;">
             <!-- Botões -->
             <q-btn size="sm" class="gradientBlue" round @click="buttonEdit" v-show="!hide">
               <q-icon name="fas fa-pen" color="white"/>
@@ -113,7 +110,6 @@ export default {
 
   .personalDetails {
     position: relative;
-    padding-top: 50px;
     margin: 25px;
   }
 
@@ -124,8 +120,8 @@ export default {
     justify-content: center;
     align-items: center;
     margin-left: 100px;
-    -webkit-transform: translate(-50%, 50%);
-    width: 200px;
+    -webkit-transform: translate(-45%, 50%);
+    width: 210px;
     height: 35px;
     border-radius: 30px;
     color: white;
@@ -134,7 +130,6 @@ export default {
   .roundedDivContent {
     display: flex;
     align-items: center;
-    padding-left: 10px;
   }
 
   .shadow {
@@ -143,6 +138,17 @@ export default {
 
   .gradientBlue {
      background-image: linear-gradient(#13c1e0, #2897e3);
+  }
+
+  .textInput {
+    height: 40px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+
+  .moreAddress {
+    display: inline-flex;
+    margin-left: 35px;
   }
 
 </style>

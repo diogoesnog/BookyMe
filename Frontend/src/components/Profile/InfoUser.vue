@@ -3,9 +3,9 @@
     <div class="divTop1">
     </div>
     <div class="divTop2">
-      <div class="row" style="position: relative; display: grid; justify-content: center; top: 20px">
-        <div class="col-12">
-          <q-avatar class="shadow" size="140px" font-size="52px" color="teal" text-color="white" >
+      <div class="row gridPhotoInfo">
+        <div class="col-12 photo">
+          <q-avatar class="shadow" size="160px" font-size="55px" color="teal" text-color="white" >
             <img style="object-fit: cover;" :src="`${base}${profile.avatar}`">
           </q-avatar>
         </div>
@@ -20,12 +20,13 @@
         </div>
       </div>  
     </div>
-<!--         <div class="changePhoto">
+    <div class="changePhoto">
       <label class="cameraButtom" for="avatar">
-        <q-icon size="23px" name="fas fa-camera" color="white"/>    
+        <q-icon size="25px" name="fas fa-camera" color="white"/>    
       </label>
       <input id="avatar" style="visibility:hidden;" type="file" @change="changeAvatar">
-    </div> -->        
+    </div>
+    <div class="space"/>     
   </div>
 </template>
 
@@ -65,8 +66,6 @@ export default {
 
   .divTop1{
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 70%;
     background-size: cover;
@@ -77,7 +76,7 @@ export default {
   .divTop2{
     position: relative;
     left: 0;
-    top: 30px;
+    top: 40px;
     width: 100%;
     height: 250px;
     color: white;
@@ -85,22 +84,36 @@ export default {
 
   .cameraButtom{
     background: linear-gradient(#e9695c, #e03459);
-    padding: 9px 9px;
+    padding: 12px 12px;
     border-radius: 50px;
-    border: 1px solid #e9695c;
     display: inline-block;
-    outline: none;
+    align-self: center;
+    justify-self: center;
   }
 
   .changePhoto {
     position: relative;
+    display: grid;
+    align-items: center;
+    top: -100px;
+    left: 55px;
+  }
+
+  .photo {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-left: 100px;
-    -webkit-transform: translate(-50%, 50%);
-    width: 200px;
-    height: 35px;
+  }
+
+  .gridPhotoInfo {
+    position: relative; 
+    display: grid; 
+    justify-content: center; 
+    grid-gap: 20px;
+  }
+
+  .space {
+    position: relative;
+    height: 10px;
   }
 
 </style>
