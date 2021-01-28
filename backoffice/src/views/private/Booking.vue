@@ -2,7 +2,7 @@
   <div>
     <Navbar/>
 
-    <v-content>
+    <v-main>
       <v-container fluid>
         <v-row class="fill-height">
           <v-col>
@@ -13,11 +13,8 @@
 
               <v-tab-item>
                 <h2>Slots</h2>
-                <div v-if="slots.length >0">
+                <div>
                   <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
-                </div>
-                <div v-else style="padding: 50px">
-                  <p>A loja não tem slots disponíveis.</p>
                 </div>
               </v-tab-item>
 
@@ -34,7 +31,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </div>
 </template>
 
