@@ -128,6 +128,7 @@
       title: "Alterar Reserva",
       serviceType: "Alterar Tipo de Serviço",
       dateAndTime: "Alterar Data e Hora",
+      choice: "Deseja cancelar ou alterar?",
 
       changeBooking: "Alterar",
       cancelBooking: "Cancelar"
