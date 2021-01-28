@@ -124,9 +124,9 @@ export default {
     },
 
     editPopup: {
-      title: "Change/Cancel Service",
-      serviceType: "Type of Service",
-      dateAndTime: "Date and Time",
+      title: "Change Reservation",
+      serviceType: "Change Type of Service",
+      dateAndTime: "Reschedule Reservation",
 
       changeBooking: "Change",
       cancelBooking: "Cancel"

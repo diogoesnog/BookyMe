@@ -125,9 +125,9 @@
     },
 
     editPopup: {
-      title: "Alterar/Cancelar Reserva",
-      serviceType: "Tipo de Serviço",
-      dateAndTime: "Data e Hora",
+      title: "Alterar Reserva",
+      serviceType: "Alterar Tipo de Serviço",
+      dateAndTime: "Alterar Data e Hora",
 
       changeBooking: "Alterar",
       cancelBooking: "Cancelar"

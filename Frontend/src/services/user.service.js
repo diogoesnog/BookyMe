@@ -253,6 +253,22 @@ class UserService {
 
   }
 
+  changeBooking(booking, bookingID) {
+
+    let body = JSON.stringify(booking)
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${bookingID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.put(body)
+
+
+  }
+
   getBookingInfo(bookingID) {
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user`)
 
