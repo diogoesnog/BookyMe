@@ -321,6 +321,14 @@ name: "StoreBooking",
     background: linear-gradient(#13c1e0, #2897e3);
   }
 
+  .text-vermelho {
+    color: white;
+  }
+
+  .bg-vermelho {
+    background: linear-gradient(#e9695c, #e03459);
+  }
+
   .divNewReservation {
     background-image: linear-gradient(#13c1e0, #2897e3);
     border-radius: 100px;

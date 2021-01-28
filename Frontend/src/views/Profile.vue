@@ -1,8 +1,9 @@
-
-
 <template>
   <div>
-    <ProfileData :base="base" v-bind:profile="profileData" @changeUserProfile="changeUserProfile"  @changeUserPassword="changeUserPassword" /> 
+    <InfoUser :base="base" v-bind:profile="profileData"/>
+    <PersonalDetails v-bind:profile="profileData" @changeUserProfile="changeUserProfile"/> 
+    <Security v-bind:profile="profileData" @changeUserPassword="changeUserPassword"/>
+    <Language/>
     <Toolbar/>
   </div>
 </template>
@@ -10,14 +11,22 @@
 <script>
 
 import Service from '../services/user.service';
+
+import InfoUser from '../components/Profile/InfoUser';
+import PersonalDetails from '../components/Profile/PersonalDetails';
+import Security from '../components/Profile/Security';
+import Language from '../components/Profile/Language';
+
 import Toolbar from '../components/Root/Toolbar';
-import ProfileData from '../components/Profile/ProfileData';
 
 export default {
 
   name: "Profile",
   components: {
-    ProfileData,
+    InfoUser,
+    PersonalDetails,
+    Security,
+    Language,
     Toolbar
   },
 
@@ -25,11 +34,8 @@ export default {
     return {
       profileData: {}, 
       base: '',
-     
     }
   },
-
-  
 
   mounted() {
     console.log("Mounted: View has been rendered");
@@ -37,7 +43,6 @@ export default {
   },
 
   methods: {
-
     fetchProfileData() {
       this.$q.loading.show({ delay: 400});
       Service.getProfileData()

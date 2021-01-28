@@ -48,7 +48,8 @@
   // Favorites
   favoritesPage: {
     title: "Favoritos",
-    description: "Lista de Estabelecimentos Favoritos"
+    description: "Lista de Estabelecimentos Favoritos",
+    noFavorites: "Sem Favoritos. Começe a Adicionar..."
   },
 
   // List Categories
@@ -75,6 +76,7 @@
     personalDetails: "Detalhes Pessoais",
     editData: "Editar Dados",
     security: "Segurança",
+    language: "Idioma",
     changePassword: "Alterar Password",
     signout: "Terminar Sessão",
     cancel: "Cancelar",

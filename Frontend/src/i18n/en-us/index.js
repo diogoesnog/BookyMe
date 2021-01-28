@@ -48,7 +48,8 @@ export default {
   // Favorites
   favoritesPage: {
     title: "Favorites",
-    description: "List of Favorite Stores"
+    description: "List of Favorite Stores",
+    noFavorites: "No Favorites Yet. Start Adding..."
   },
 
   // List Categories
@@ -74,6 +75,7 @@ export default {
     personalDetails: "Personal Details",
     editData: "Edit Data",
     security: "Security",
+    language: "Language",
     changePassword: "Change Password",
     signout: "Sign-Out",
     cancel: "Cancel",

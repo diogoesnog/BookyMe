@@ -21,10 +21,13 @@
         />
       </div>
     </div>
-    <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite" @deleteFavorite="deleteFavorite"/>
-    <div>
-     <Toolbar/>
+    <div v-if="favorites.length != 0">
+      <FavoritesList v-for="(favorite, index) in favorites" :key="index" v-bind="favorite" @deleteFavorite="deleteFavorite"/>
     </div>
+    <div v-else class="subTitle">
+      {{$t('favoritesPage.noFavorites')}}
+    </div>
+    <Toolbar/>
   </div>
 </template>
 
@@ -119,6 +122,15 @@ export default {
     display: flex;
     align-items: center;
     padding-left: 20px;
+  }
+
+  .subTitle {
+    color: #434343;
+    font-size: 20px;
+    font-weight: 300;
+    display: flex;
+    justify-content: left;
+    margin: 20px;
   }
 
 </style>
