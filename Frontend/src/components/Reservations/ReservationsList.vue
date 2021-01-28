@@ -368,6 +368,7 @@ export default {
             message: 'Failed to re-book.'
           });
         })
+      location.reload();
       console.groupEnd();
 
     },
@@ -390,6 +391,7 @@ export default {
             message: 'Failed to cancel.'
           });
         })
+      location.reload();
       console.groupEnd();
 
     },
