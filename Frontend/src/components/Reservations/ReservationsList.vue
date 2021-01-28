@@ -14,7 +14,7 @@
             <span class="titleStore">
               {{ reservation.storeName }}
             </span>
-            <span v-if="hasCatalog(reservation.hasCatalog) == 0" class="titleService">
+            <span v-if="hasCatalog(reservation.hasCatalog) === 0" class="titleService">
               {{ reservation.service.product }}
             </span>
             <span v-else class="titleService">
@@ -25,11 +25,11 @@
             </span>
           </div>
           <!-- 3 Dots -->
-          <div v-if="getTypeReservation() == 0" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+          <div v-if="getTypeReservation() === 0" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
             <img @click="persistentChange = true" style="height: 25px" src="../../assets/Icons/More.svg"/>
           </div>
           <!-- Review -->
-          <div :id="checkUserReview(reservation.storeId)" v-else-if="getTypeReservation() == 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
+          <div :id="checkUserReview(reservation.storeId)" v-else-if="getTypeReservation() === 1" class="col-1" style="display: flex; justify-content: center; align-items: center; padding-left: 35px;">
             <div v-if="hasReview" style="text-align: center;">
               <img style="height: 25px" src="icons/Star.svg"/>
             </div>
@@ -144,13 +144,13 @@ export default {
 
   methods: {
     getWidthNameStore() {
-      if(this._id.length > 0 & this._id.length <= 3) return "15%";
-      else if(this._id.length >= 4 & this._id.length <= 6) return "30%";
-      else if(this._id.length >= 7 & this._id.length <= 9) return "35%";
-      else if(this._id.length >= 10 & this._id.length <= 12) return "45%";
-      else if(this._id.length >= 13 & this._id.length <= 15) return "55%";
-      else if(this._id.length >= 16 & this._id.length <= 18) return "65%";
-      else if(this._id.length >= 19 & this._id.length <= 21) return "75%";
+      if(this._id.length > 0 && this._id.length <= 3) return "15%";
+      else if(this._id.length >= 4 && this._id.length <= 6) return "30%";
+      else if(this._id.length >= 7 && this._id.length <= 9) return "35%";
+      else if(this._id.length >= 10 && this._id.length <= 12) return "45%";
+      else if(this._id.length >= 13 && this._id.length <= 15) return "55%";
+      else if(this._id.length >= 16 && this._id.length <= 18) return "65%";
+      else if(this._id.length >= 19 && this._id.length <= 21) return "75%";
       else return "80%"
     },
     getImage(url) {
@@ -174,14 +174,14 @@ export default {
       return day + "/" + month + "/" + year + " - " + hourSplit;
     },
     hasCatalog: function(string) {
-      if (string == "true") return 0;
+      if (string === "true") return 0;
       else return 1;
     },
     redirect: function(id) {
       this.$router.push({name: 'Reservation', params:{id:id}})
     },
     getTypeReservation() {
-      if (this.typeReservation == "current") return 0;
+      if (this.typeReservation === "current") return 0;
       else return 1;
     },
     addReview: function(id) {
