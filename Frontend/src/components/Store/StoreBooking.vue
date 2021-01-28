@@ -123,13 +123,13 @@
             </div>
             <div class="row" style="margin: 10px">
               <div class="col-5">
-                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense  v-close-popup>
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup>
                   {{$t('bookingsPage.editPopup.cancelBooking')}}
                 </q-btn>
               </div>
               <div class="col-2"/>
               <div class="col-5">
-                <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' @click="makeBooking">
+                <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense v-close-popup @click="makeBooking">
                   {{$t('bookingsPage.ratePopup.submit')}}
                 </q-btn>
               </div>

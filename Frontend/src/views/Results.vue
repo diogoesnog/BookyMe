@@ -12,7 +12,7 @@
         </span>
         <br/>
         <span style="font-weight: 300; font-size: 18px;  padding-left: 20px;">
-       {{ $t('searchResultsPage.description', { count: this.stores.length, query: this.keyword }) }} 
+       {{ $t('searchResultsPage.description', { count: this.stores.length, query: this.keyword }) }}
         </span>
     </p>
     <!--<p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('searchResultsPage.title')}}</p>
@@ -61,6 +61,9 @@ export default {
   mounted() {
     console.log("Mounted: View has been rendered");
     console.log(this.keyword)
+
+    // TODO: Ver isto
+    if (this.keyword === null) this.keyword="vazio";
     this.fetchStoresBySearch(this.keyword);
   },
   methods: {
