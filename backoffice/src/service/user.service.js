@@ -2,10 +2,6 @@ import axios from 'axios';
 import authHeader from "@/service/auth-header";
 
 class Services {
-    // TODO: Login
-    login(user) {
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/login`, user);
-    }
 
     register(user) {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/register`, user);

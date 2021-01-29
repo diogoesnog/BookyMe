@@ -36,7 +36,7 @@ export default {
 
           console.log(data);
 
-          this.$router.push('/home')
+          this.$router.push({name: "Login"});
 
         }).catch(err => {
           console.error(err);
