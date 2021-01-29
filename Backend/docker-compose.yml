@@ -15,8 +15,6 @@ services:
     build: ./Gateway
     ports: 
       - "5000:5000"
-    volumes:
-      - /backend/gateway
     networks: 
       - bookyme-network
     depends_on: 
@@ -30,8 +28,6 @@ services:
     build: ./User
     ports: 
       - "5200:5200"
-    volumes: 
-      - /backend/user
     networks: 
       - bookyme-network
     depends_on:
@@ -45,8 +41,6 @@ services:
     build: ./Stores
     ports: 
       - "5100:5100"
-    volumes:
-      - /backend/store
     networks:
       - bookyme-network
     depends_on:
@@ -73,8 +67,6 @@ services:
     build: ./Booking
     ports: 
       - "5400:5400"
-    volumes:
-      - /backend/booking
     networks:
       - bookyme-network
     depends_on:
@@ -93,7 +85,7 @@ services:
     command: mongod --port 3220
     volumes:
       - ./seed/Users/init.js:/docker-entrypoint-initdb.d/init.js:ro
-      - data-volume:/data-db
+      - users-db:/data/db
     networks:
       - bookyme-network
     ports:
@@ -106,7 +98,7 @@ services:
     image: mongo
     command: mongod --port 3221
     volumes:
-      - data-volume:/data-db
+      - stores-db:/data/db
     networks:
       - bookyme-network
     ports:
@@ -118,7 +110,7 @@ services:
     image: mongo
     command: mongod --port 3222
     volumes:
-      - data-volume:/data-db
+      - booking-db:/data/db
     networks:
       - bookyme-network
     ports:
@@ -130,7 +122,7 @@ services:
     image: mongo 
     command: mongod --port 3223
     volumes:
-      - data-volume:/data-db
+      - notification-db:/data/db
     networks:
       - bookyme-network
     ports:
@@ -229,4 +221,7 @@ services:
 
 
 volumes:
-  data-volume: 
+  users-db:
+  stores-db:
+  booking-db:
+  notification-db:
