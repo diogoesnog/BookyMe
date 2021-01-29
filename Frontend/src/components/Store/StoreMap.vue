@@ -80,8 +80,8 @@ export default {
     background-color: white;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     position: relative;
-    top: 20px;
-    height: 70px;
+    top: 30px;
+    height: 90px;
     width: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
