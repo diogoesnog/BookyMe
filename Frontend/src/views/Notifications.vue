@@ -2,7 +2,7 @@
   <div  style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px;">
       <div class="col-12" style="display: flex; align-items: center;">
-        <q-btn to="../home" padding="6px 6px" class="gradientOne shadow" round icon="fas fa-angle-left"/>
+        
       </div>
     </div>
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>

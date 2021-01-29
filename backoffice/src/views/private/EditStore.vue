@@ -38,9 +38,6 @@
                 </div>
               </v-tab-item>
             </v-tabs>
-
-
-
           </v-col>
         </v-row>
       </v-container>

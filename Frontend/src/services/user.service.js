@@ -202,15 +202,25 @@ class UserService {
     request.appendHeader("Authorization", authHeader())
     request.appendParam("search", keyword)
 
+    return request.get()
+  }
+
+  getReviewsStore(idStore){
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${idStore}`)
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
 
     return request.get()
   }
 
-  getReviewsStore(id){
-    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
+  getReviewsStoreUser(idUser, idStore){
+    let request = new Request(`${process.env.API_ENDPOINT}/review`)
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
+    request.appendParam("userId", idUser)
+    request.appendParam("storeID", idStore)
 
     return request.get()
   }
@@ -240,6 +250,36 @@ class UserService {
     request.appendHeader("Authorization", authHeader())
 
     return request.post(body)
+
+  }
+
+  changeBooking(booking, bookingID) {
+
+    let body = JSON.stringify(booking)
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${bookingID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.put(body)
+
+
+  }
+
+  cancelBooking(bookingID) {
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${bookingID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.patch()
+
 
   }
 
