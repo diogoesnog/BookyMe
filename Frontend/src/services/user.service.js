@@ -269,6 +269,20 @@ class UserService {
 
   }
 
+  cancelBooking(bookingID) {
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${bookingID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.patch()
+
+
+  }
+
   getBookingInfo(bookingID) {
     let request = new Request(`${process.env.API_ENDPOINT}/booking/user`)
 

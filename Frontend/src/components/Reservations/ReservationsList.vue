@@ -60,6 +60,37 @@
                     {{$t('bookingsPage.editPopup.serviceType')}}
                   </div>
                 </div>
+                <div class="choiceDiv">
+                  <div style="color: #434343; font-weight: 500; font-size: 20px; margin: 10px">
+                    {{$t('bookingsPage.editPopup.choice')}}
+                  </div>
+
+                  <div class="row">
+                    <div class="col-5">
+                      <q-btn rounded style="width: 100%; margin-top: 30px" color='vermelho' dense v-close-popup @click="cancelBooking(reservation._id)">
+                        {{$t('bookingsPage.editPopup.cancelBooking')}}
+                      </q-btn>
+                    </div>
+                    <div class="col-2"/>
+                    <div class="col-5">
+                      <q-btn rounded style="width: 100%; margin-top: 30px" color='azul' dense @click="slide=2">
+                        {{$t('bookingsPage.editPopup.changeBooking')}}
+                      </q-btn>
+                    </div>
+                  </div>
+
+                </div>
+              </q-carousel-slide>
+              <q-carousel-slide :name="2" class="column no-wrap flex-center">
+                <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'/>
+                <div class="photoBackground"/>
+                <div class="info">
+                  <span style="font-size: 30px; font-weight: 700;">{{ reservation.storeName }}</span>
+
+                  <div style="font-size: 22px; font-weight: 300;">
+                    {{$t('bookingsPage.editPopup.serviceType')}}
+                  </div>
+                </div>
                 <div v-if="catalog" class="choiceDiv">
                   <p style="color: #434343; font-weight: 700; font-size: 24px; margin: 10px">
                     {{$t('bookingsPage.newBooking.chooseService')}}
@@ -90,7 +121,7 @@
                   </p>
                 </div>
               </q-carousel-slide>
-              <q-carousel-slide :name="2" class="column no-wrap flex-center">
+              <q-carousel-slide :name="3" class="column no-wrap flex-center">
                 <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'/>
                 <div class="photoBackground"/>
                 <div class="info">
@@ -133,7 +164,7 @@
                   </div>
                 </div>
               </q-carousel-slide>
-              <q-carousel-slide v-if="slots" :name="3" class="column no-wrap flex-center content-center">
+              <q-carousel-slide v-if="slots" :name="4" class="column no-wrap flex-center content-center">
                 <div class="photoMain" v-bind:style='{ backgroundImage: `url("${getImage(reservation.mainStorePhotoURL)}")` }'/>
                 <div class="photoBackground"/>
                 <div class="info">
@@ -318,7 +349,6 @@ export default {
     },
 
     // Cenas para o diálogo
-    // TODO: Vão ter de ser mudadas por causa do ciclo for e não serem estáticas
     changeBooking(bookingID) {
       console.group("Change Booking");
       console.log(bookingID);
@@ -326,7 +356,6 @@ export default {
       Service.changeBooking(this.bookingNew, bookingID)
         .then(response => {
           console.log("Re-booking Successful");
-          this.$forceUpdate()
           this.$q.notify({
             type: 'positive',
             message: `Re-booking Successful.`
@@ -339,9 +368,34 @@ export default {
             message: 'Failed to re-book.'
           });
         })
+      location.reload();
       console.groupEnd();
 
     },
+
+    cancelBooking(bookingID) {
+      console.group("Cancel Booking");
+      console.log(bookingID);
+      Service.cancelBooking(bookingID)
+        .then(response => {
+          console.log("Cancel booking successful");
+          this.$q.notify({
+            type: 'positive',
+            message: `Cancelling Successful.`
+          });
+        })
+        .catch(err => {
+          console.log(`Error ${err}`);
+          this.$q.notify({
+            type: 'negative',
+            message: 'Failed to cancel.'
+          });
+        })
+      location.reload();
+      console.groupEnd();
+
+    },
+
 
     fetchCatalog(storeID) {
       Service.getCatalog(storeID)

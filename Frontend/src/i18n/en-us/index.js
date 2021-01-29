@@ -127,6 +127,7 @@ export default {
       title: "Change Reservation",
       serviceType: "Change Type of Service",
       dateAndTime: "Reschedule Reservation",
+      choice: "Want to cancel or change the booking?",
 
       changeBooking: "Change",
       cancelBooking: "Cancel"
