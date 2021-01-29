@@ -201,17 +201,26 @@ class UserService {
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
     request.appendParam("search", keyword)
-   
 
     return request.get()
   }
 
-  getReviewsStore(id){
-    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${id}`)
+  getReviewsStore(idStore){
+    let request = new Request(`${process.env.API_ENDPOINT}/review/store/${idStore}`)
     request.isJson()
     request.acceptJson()
     request.appendHeader("Authorization", authHeader())
-    console.log(request);
+
+    return request.get()
+  }
+
+  getReviewsStoreUser(idUser, idStore){
+    let request = new Request(`${process.env.API_ENDPOINT}/review`)
+    request.isJson()
+    request.acceptJson()
+    request.appendHeader("Authorization", authHeader())
+    request.appendParam("userId", idUser)
+    request.appendParam("storeID", idStore)
 
     return request.get()
   }
@@ -241,6 +250,36 @@ class UserService {
     request.appendHeader("Authorization", authHeader())
 
     return request.post(body)
+
+  }
+
+  changeBooking(booking, bookingID) {
+
+    let body = JSON.stringify(booking)
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${bookingID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.put(body)
+
+
+  }
+
+  cancelBooking(bookingID) {
+
+    let request = new Request(`${process.env.API_ENDPOINT}/booking/${bookingID}`)
+
+    request.isJson()
+    request.acceptJson()
+
+    request.appendHeader("Authorization", authHeader())
+
+    return request.patch()
+
 
   }
 
@@ -274,6 +313,7 @@ class UserService {
     request.isJson();
     request.appendHeader("Authorization", authHeader());
     request.acceptJson();
+    // TODO: A flag de momento não está a fazer diferença.
     request.appendParam("read", read);
 
     return request.get();

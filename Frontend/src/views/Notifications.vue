@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <h1 style="font-weight: 670; font-size: 45px;"> {{$t('notificationsPage.title')}}</h1>
+  <div  style="color: #434343;" class="centerDiv">
+    <div class="row" style="margin: 20px;">
+      <div class="col-12" style="display: flex; align-items: center;">
+        
+      </div>
+    </div>
+    <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
 
-    <q-tabs v-model="tab" narrow-indicator dense align="justify">
-      <q-tab class="text-purple" name="unread" icon="mail" label="Unread" />
-      <q-tab class="text-orange" name="read" icon="alarm" label="Read" />
-    </q-tabs>
-    <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="unread">
-        <Notification v-for="(notification, index) in unread" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
-      </q-tab-panel>
+    <div class="title">
+<!--      TODO: Meter internacionalização. -->
+      Unread
+    </div>
+    <Notification v-for="(notification, index1) in unread" :key="index1" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+    <div class="title">
+      Read
+    </div>
+     <Notification v-for="(notification, index2) in read" :key="index2" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
 
-      <q-tab-panel name="read">
-        <Notification v-for="(notification, index) in read" :key="index" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
-      </q-tab-panel>
-
-    </q-tab-panels>
     <Toolbar/>
   </div>
 </template>
@@ -33,32 +34,35 @@ export default {
   },
   data() {
     return {
-      // notifications: Array
       read: Array,
-      unread: Array,
-      tab: "unread"
+      unread: Array
     }
   },
 
   mounted() {
     this.getNotifications();
-    this.getUnreadNotifications();
+    this.getReadNotifications();
   },
   methods: {
     getNotifications() {
       Service.getNotifications(false)
         .then(response => {
           this.unread = response.data["data"];
+          console.group("Notificações não lidas:")
+          console.log(this.unread);
+          console.groupEnd();
         }).catch(err => {
           console.error(err);
         });
     },
 
-    getUnreadNotifications() {
+    getReadNotifications() {
       Service.getNotifications(true)
         .then(response => {
           this.read = response.data["data"];
-
+          console.group("Notificações lidas:")
+          console.log(this.read);
+          console.groupEnd();
         }).catch(err => {
           console.error(err);
 
@@ -82,4 +86,40 @@ export default {
 
 <style scoped>
 
+  .centerDiv {
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  .gradientOne {
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
+
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+  }
+
+  .roundedDiv {
+    border-radius: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .title {
+  background: linear-gradient(#e9695c, #e03459);
+  color: white;
+  height: 40px;
+  width: 130px;
+  border-radius: 100px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
 </style>

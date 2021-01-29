@@ -1,6 +1,7 @@
 <template>
   <div class="margin">
-    <v-btn outlined block color="primary" @click="dialog = !dialog">Novo Slot</v-btn>
+
+    <v-btn outlined block color="primary" @click="dialog = true">Novo Slot</v-btn>
 
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card>
@@ -25,8 +26,7 @@
       </v-card>
     </v-dialog>
 
-
-    <v-data-table :headers="headers" :items="slots" :items-per-page="15">
+    <v-data-table v-if="slots.length > 0" :headers="headers" :items="slots" :items-per-page="15">
       <template v-slot:item.date="{item}">
         {{ item.date | moment("LLL")}}
       </template>
@@ -36,6 +36,9 @@
         </v-icon>
       </template>
     </v-data-table>
+    <div v-else style="margin: 25px">
+      <p>A loja não tem slots disponíveis.</p>
+    </div>
   </div>
 </template>
 

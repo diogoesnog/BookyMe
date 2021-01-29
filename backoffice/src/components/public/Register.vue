@@ -36,7 +36,7 @@ export default {
 
           console.log(data);
 
-          // TODO: next to RegisterStore
+          this.$router.push({name: "Login"});
 
         }).catch(err => {
           console.error(err);
