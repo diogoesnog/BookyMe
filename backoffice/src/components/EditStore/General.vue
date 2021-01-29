@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-form>
-      <v-text-field label="Nome" v-model="store.name"></v-text-field>
       <v-text-field label="Contacto Telefónico" v-model="store.phone"></v-text-field>
 
       <v-text-field label="Morada" v-model="store.address.place"></v-text-field>

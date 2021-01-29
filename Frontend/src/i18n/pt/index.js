@@ -48,7 +48,8 @@
   // Favorites
   favoritesPage: {
     title: "Favoritos",
-    description: "Lista de Estabelecimentos Favoritos"
+    description: "Lista de Estabelecimentos Favoritos",
+    noFavorites: "Sem Favoritos. Começe a Adicionar..."
   },
 
   // List Categories
@@ -61,6 +62,10 @@
     error: "Não foi possível encontrar estabelecimentos da categoria escolhida."
   },
 
+  resultsPage: {
+    error: "Não foi possível encontrar estabelecimentos."
+  },
+
   // Notifications
   notificationsPage: {
     title: "Notificações"
@@ -71,6 +76,7 @@
     personalDetails: "Detalhes Pessoais",
     editData: "Editar Dados",
     security: "Segurança",
+    language: "Idioma",
     changePassword: "Alterar Password",
     signout: "Terminar Sessão",
     cancel: "Cancelar",
@@ -94,12 +100,23 @@
 
     newBooking: {
       title: "Nova Reserva",
+      dataNew: "Dados Reserva",
+      dataConf: "Confirme os Dados Reserva",
       serviceType: "Tipo de Serviço",
+      listService: "Lista dos Serviços",
+      noServices: "Este Estabelecimento não dispõe de Catálogo de Serviços.",
+      chooseService: "Selecione o(s) seu(s) Serviço(s)",
+      numberServices: "Serviços Selecionados",
       dateAndTime: "Data e Hora",
+      chooseDataAndTime: "Selecione a Hora e Data",
+      listSlots: "Lista das Vagas",
+      noSlots: "Este Estabelecimento não tem vagas disponíveis.",
       date: "Data",
       time: "Hora",
       place: "Lugar Planta",
-      choosePlace: "Escolher Lugar"
+      choosePlace: "Escolher Lugar",
+      makeNew: "Fazer Reserva Agora",
+      back: "Voltar Página Estabelecimento"
     },
     ratePopup: {
       title: "Avaliar Reserva",
@@ -108,9 +125,10 @@
     },
 
     editPopup: {
-      title: "Alterar/Cancelar Reserva",
-      serviceType: "Tipo de Serviço",
-      dateAndTime: "Data e Hora",
+      title: "Alterar Reserva",
+      serviceType: "Alterar Tipo de Serviço",
+      dateAndTime: "Alterar Data e Hora",
+      choice: "Deseja cancelar ou alterar?",
 
       changeBooking: "Alterar",
       cancelBooking: "Cancelar"
@@ -148,6 +166,7 @@
 
     ratings: "Avaliações",
     seeAllRatings: "Ver Todas",
+    allRating: "Todas Avaliações",
     stars: "0 Estrelas | 1 Estrela | {count} Estrelas",
     basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações",
     book: "Reserve já!",

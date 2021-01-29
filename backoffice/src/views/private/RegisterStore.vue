@@ -59,6 +59,8 @@ export default {
           Service.updateSchedule(this.store["_id"], workday)
             .then(result => {
               console.log(result);
+              this.storeCreated = 100;
+              this.$router.push("/home");
             }).catch(err => {
               console.log(err)
           })
@@ -67,7 +69,7 @@ export default {
     }
   }
 }
-</script>
+</script> 
 
 <style scoped>
 

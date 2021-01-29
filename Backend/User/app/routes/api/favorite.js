@@ -4,6 +4,7 @@ const Users = require('../../controllers/users');
 const Response = require('rapid-status');
 const checkAuth = require('../../middlewares/checkAuth');
 
+
 /**
  * Retrieves all user's favorites
  * {header.Authorization}: TOKEN
@@ -20,6 +21,7 @@ router.get('/', checkAuth, (req, res) => {
         res.status(response.status).jsonp(response);
     });
 });
+
 
 /**
  * Adds new favorite to user's favorites
@@ -81,9 +83,6 @@ router.delete('/many/:id', checkAuth, (req, res) => {
             res.status(response.status).jsonp(response);
         });
 });
-
-
-
 
 
 module.exports = router;

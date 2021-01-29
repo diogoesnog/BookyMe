@@ -48,7 +48,8 @@ export default {
   // Favorites
   favoritesPage: {
     title: "Favorites",
-    description: "List of Favorite Stores"
+    description: "List of Favorite Stores",
+    noFavorites: "No Favorites Yet. Start Adding..."
   },
 
   // List Categories
@@ -61,6 +62,9 @@ export default {
     error: "Failed to find services of the category chosen."
   },
 
+  resultsPage: {
+    error: "Failed to find services."
+  },
   // Notifications
   notificationsPage: {
     title: "Notifications"
@@ -71,6 +75,7 @@ export default {
     personalDetails: "Personal Details",
     editData: "Edit Data",
     security: "Security",
+    language: "Language",
     changePassword: "Change Password",
     signout: "Sign-Out",
     cancel: "Cancel",
@@ -85,6 +90,8 @@ export default {
   // Add Review Reservation
   bookingsPage: {
     title: "Reservations",
+    dataNew: "Details Booking",
+    dataConf: "Confirm Booking Details",
     description: "List of Recent and Old Bookings",
     type1: "Recents",
     type2: "Completed",
@@ -95,11 +102,20 @@ export default {
     newBooking: {
       title: "New Booking",
       serviceType: "Type of Service",
+      listService: "List of Services",
+      noServices: "This Establishment does not have a Service Catalog.",
+      chooseService: "Select your Service(s)",
+      numberServices: "Selected Services",
       dateAndTime: "Date and Time",
+      chooseDataAndTime: "Select Date and Time",
+      listSlots: "Slots List",
+      noSlots: "This Establishment has no slots available.",
       date: "Date",
       time: "Time",
       place: "Place",
-      choosePlace: "Choose a Place"
+      choosePlace: "Choose a Place",
+      makeNew: "Make Booking Now",
+      back: "Back Establishment Page"
     },
     ratePopup: {
       title: "Evaluate Service",
@@ -108,9 +124,10 @@ export default {
     },
 
     editPopup: {
-      title: "Change/Cancel Service",
-      serviceType: "Type of Service",
-      dateAndTime: "Date and Time",
+      title: "Change Reservation",
+      serviceType: "Change Type of Service",
+      dateAndTime: "Reschedule Reservation",
+      choice: "Want to cancel or change the booking?",
 
       changeBooking: "Change",
       cancelBooking: "Cancel"
@@ -148,6 +165,7 @@ export default {
 
     ratings: "Ratings",
     seeAllRatings: "See All",
+    allRating: "All Reviews",
     stars: "0 Stars | 1 Star | {count} Stars",
     basedOn: "Based on 1 Evaluation | Based on {count} ratings",
     book: "Book now!",
@@ -157,7 +175,7 @@ export default {
 
   // Search Results
   searchResultsPage: {
-    title: "Resultados",
+    title: "Results",
     description: 'Showing {count} Results for "{query}"',
   },
 

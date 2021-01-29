@@ -1,9 +1,6 @@
 <template>
   <div>
     <Navbar/>
-
-
-
     <v-content>
       <v-container fluid>
         <v-row class="fill-height">
@@ -41,9 +38,6 @@
                 </div>
               </v-tab-item>
             </v-tabs>
-
-
-
           </v-col>
         </v-row>
       </v-container>

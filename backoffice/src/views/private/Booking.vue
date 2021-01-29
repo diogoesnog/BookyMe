@@ -2,48 +2,36 @@
   <div>
     <Navbar/>
 
-    <v-content>
+    <v-main>
       <v-container fluid>
         <v-row class="fill-height">
           <v-col>
             <v-tabs>
               <v-tab>Slots</v-tab>
               <v-tab>Reservas</v-tab>
-              <v-tab>Notifições</v-tab>
+<!--              <v-tab>Notifições</v-tab>-->
 
               <v-tab-item>
                 <h2>Slots</h2>
-                <div v-if="slots.length >0">
+                <div>
                   <Slots v-bind:slots="slots" @newSlot="newSlot" @deleteSlot="deleteSlot"></Slots>
-                </div>
-                <div v-else style="padding: 50px">
-                  <p>A loja não tem slots disponíveis.</p>
                 </div>
               </v-tab-item>
 
               <v-tab-item>
                 <h2>Reservas</h2>
                 <div v-if="bookings.length >0">
-                  <Services v-bind:bookings="bookings"/>
+                  <Services v-bind:bookings="bookings" v-bind:slots="slots" @reschedule="reschedule" @cancel="cancel"/>
                 </div>
                 <div v-else style="padding: 50px">
                   <p>A loja não tem reservas agendadas.</p>
-                </div>
-              </v-tab-item>
-              <v-tab-item>
-                <h2>Notificações Enviadas</h2>
-                <div v-if="notifications.length >0">
-                  <Notifications v-if="notifications.length > 0"/>
-                </div>
-                <div v-else style="padding: 50px">
-                  <p>Não enviou nenhuma notificação para os clientes.</p>
                 </div>
               </v-tab-item>
             </v-tabs>
           </v-col>
         </v-row>
       </v-container>
-    </v-content>
+    </v-main>
   </div>
 </template>
 
@@ -57,7 +45,6 @@ export default {
     Navbar: () => import('@/components/common/Navbar'),
     Slots: () => import("@/components/Booking/Slots"),
     Services: () => import("@/components/Booking/Services"),
-    Notifications: () => import("@/components/Booking/Notifications")
   },
   data() {
     return {
@@ -106,8 +93,22 @@ export default {
             window.alert("Não foi possível remover o slot selecionado!");
             console.log(err)
         });
+    },
+
+    reschedule(data) {
+      let id = data.oldSlotId;
+
+      Service.rescheduleBooking(id, data)
+        .then( () => this.getStoreServices())
+        .catch(err => console.log(err));
+
+    },
+    cancel(id) {
+      Service.cancelBooking(id)
+        .then( () => this.getStoreServices())
+        .catch( err => console.log(err));
     }
-  }
+  },
 }
 </script>
 

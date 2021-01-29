@@ -2,15 +2,12 @@ import axios from 'axios';
 import authHeader from "@/service/auth-header";
 
 class Services {
-    // TODO: Login
 
     register(user) {
-        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/login`, user);
+        return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/users/register`, user);
     }
 
     registerStore(store) {
-        // let request = new Request(`${process.env.API_ENDPOINT}/stores`);
-
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores`, store, {
             headers: authHeader()
         });
@@ -55,7 +52,7 @@ class Services {
         });
     }
     updateAddress(id, address) {
-        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/address`, address);
     }
 
     getStores() {
@@ -80,6 +77,7 @@ class Services {
         });
     }
 
+    // TODO: Add Opening Hours
     updateSchedule(id, schedule) {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/schedule`, schedule, {
             headers: authHeader()
@@ -136,7 +134,20 @@ class Services {
 
     getNofications(id) {
         return axios.get(`${process.env.VUE_APP_API_ENDPOINT}/notification/store/${id}`, {
-            headers: authHeader
+            headers: authHeader()
+        });
+    }
+
+
+    rescheduleBooking(id, data) {
+        return axios.put(`${process.env.VUE_APP_API_ENDPOINT}/booking/${id}`, data, {
+            headers: authHeader()
+        });
+    }
+
+    cancelBooking(id) {
+        return axios.patch(`${process.env.VUE_APP_API_ENDPOINT}/booking/${id}`, null, {
+            headers: authHeader()
         });
     }
 }
