@@ -197,20 +197,35 @@ services:
     command:
         "mongoimport --host mongo-stores --port 3221 --db BookymeStores --type json --file /data/reviews.json --jsonArray"
         
-  #booking-seed:
-    #image: fvilers/mongo-seed
-    #networks:
-      #- bookyme-network
-    #container_name: booking-seed
-    #environment:
-      #- MONGO_HOST=mongo-booking
-      #- MONGO_PORT=3222
-    #depends_on:
-      #- mongo-booking
-    #volumes:
-      #- ./seed/booking.json:/data/booking.json:ro
-    #command:
-        #"mongoimport --host mongo-booking --port 3222 --db BookymeBooking --type json --file /data/booking.json --jsonArray"
+  booking-seed:
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: booking-seed
+    environment:
+      - MONGO_HOST=mongo-booking
+      - MONGO_PORT=3222
+    depends_on:
+      - mongo-booking
+    volumes:
+      - ./seed/booking.json:/data/booking.json:ro
+    command:
+        "mongoimport --host mongo-booking --port 3222 --db BookymeBooking --type json --file /data/booking.json --jsonArray"
+        
+  slot-seed:
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: slot-seed
+    environment:
+      - MONGO_HOST=mongo-booking
+      - MONGO_PORT=3222
+    depends_on:
+      - mongo-booking
+    volumes:
+      - ./seed/slot.json:/data/slot.json:ro
+    command:
+        "mongoimport --host mongo-booking --port 3222 --db BookymeBooking --type json --file /data/slot.json --jsonArray"
 
 
 volumes:
