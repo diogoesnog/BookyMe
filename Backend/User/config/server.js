@@ -16,7 +16,7 @@ const cors = require('cors');
 // Swagger API Documentation
 const swaggerUI = require('swagger-ui-express');
 // MongoDB
-const mongoose      = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_CONNECTION, {
     useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
