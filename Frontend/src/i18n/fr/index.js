@@ -46,7 +46,8 @@ export default {
   // Favorites
   favoritesPage: {
     title: "Favoris",
-    description: "Liste de Boutiques en Favoris"
+    description: "Liste de Boutiques en Favoris",
+    noFavorites: "Pas de favoris. Commencez à ajouter..."
   },
 
   // List Categories
@@ -69,6 +70,7 @@ export default {
     personalDetails: "Détails Personnels",
     editData: "Modifier Information",
     security: "Sécurité",
+    language: "Langue",
     changePassword: "Changer Mot de Passe",
     signout: "Se Déconnecter",
     cancel: "Annuler",
@@ -82,7 +84,9 @@ export default {
   // Edit Reservation
   // Add Review Reservation
   bookingsPage: {
-    title: "Reservations",
+    title: "Réservations",
+    dataNew: "Détails Réservation",
+    dataConf: "Confirmer les Détails de la Réservation",
     description: "Liste de Reservations Récentes et plus Anciennes",
     type1: "Récent",
     type2: "Terminé",
@@ -105,7 +109,8 @@ export default {
       time: "L'Heure",
       place: "Place",
       choosePlace: "Choisir la Pace",
-      makeNew: "Reserve Maintenant"
+      makeNew: "Reserve Maintenant",
+      back: "Retour à la Page d'établissement"
     },
     ratePopup: {
       title: "Évaluer la Réservation",

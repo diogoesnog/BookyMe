@@ -16,7 +16,7 @@
         <q-btn
           round
           class="filterAvatar"
-          size="md" 
+          size="md"
           icon="fas fa-filter"
         />
       </div>
@@ -24,7 +24,7 @@
       <div class="title">
         {{$t('bookingsPage.type1')}}
       </div>
-      <div v-if="this.reservationsCurrent.length == 0" class="subTitle">
+      <div v-if="this.reservationsCurrent.length === 0" class="subTitle">
         {{$t('bookingsPage.emptyType1')}}
       </div>
       <div v-else>
@@ -34,7 +34,7 @@
       <div class="title">
         {{$t('bookingsPage.type2')}}
       </div>
-      <div v-if="this.reservationsConcluded.length == 0" class="subTitle">
+      <div v-if="this.reservationsConcluded.length === 0" class="subTitle">
         {{$t('bookingsPage.emptyType2')}}
       </div>
       <div v-else>
@@ -43,7 +43,7 @@
     <div>
      <Toolbar/>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -117,15 +117,14 @@ export default {
     color: white;
     background-color: #434343;
   }
-  
+
   .centerDiv {
     padding: 15px;
     margin-top: 40px;
   }
 
   .shadow {
-    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 28px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 28px;
   }
 

@@ -11,7 +11,7 @@
         </div>
         <div class="col-1"/>
         <div class="col-2" style="display: flex; justify-content: flex-end;">
-          <q-btn  class="iconSearch" :to="'../results/' + this.userInputSearch" size="xl" text-color="white" > 
+          <q-btn class="iconSearch" :to="'../results/' + this.userInputSearch" size="xl" text-color="white" >
               <q-icon name="search" size="30px"/>
           </q-btn>
         </div>
@@ -31,8 +31,8 @@
       </div>
     </div>
     <!-- More Popular Slider -->
-    <div style="color: white; position: absolute; top: 190px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 25px"> 
-      {{ $t('homePage.morePopular') }} 
+    <div style="color: white; position: absolute; top: 190px; font-size: 18px; font-weight: 300; text-align: left; padding-left: 25px">
+      {{ $t('homePage.morePopular') }}
     </div>
     <div class="wrapper">
         <div @click="redirect(store._id)" v-for="(store, index) in stores" :key="index" v-bind="store" class="item">
@@ -63,7 +63,7 @@
         </div>
       <div class="empty"></div>
     </div>
-</div> 
+</div>
 
 </template>
 
@@ -73,7 +73,7 @@ import Service from '../../services/user.service';
 import User from '../../models/User';
 
 export default {
-  
+
   name: "Popular",
 
   props: {
@@ -81,7 +81,7 @@ export default {
     stores: Object,
     basePopular: String,
     baseProfile: String
-  }, 
+  },
 
   data() {
     return {
@@ -114,7 +114,7 @@ export default {
 </script>
 
 <style scoped>
-  
+
   .iconSearch {
     display: flex;
     align-items: center;
@@ -132,7 +132,7 @@ export default {
     border-radius: 53px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
-  
+
   .divInfoUser {
     padding-left: 25px;
     padding-right: 25px;

@@ -1,7 +1,7 @@
 <template>
   <div class="col-12" style="padding-left: 30px; padding-top: 18px;">
     <p class="titles">{{$t('storePage.servicesCatalog')}}</p>
-    <div v-if="this.catalog.length !=0" class="wrapper">
+    <div v-if="this.catalog.length !==0" class="wrapper">
       <div v-for="(service, index) in catalog" :key="index" v-bind="service" class="item">
         <div class="row" style="width: 75%;">
           <div class="col-7 service">
@@ -26,7 +26,6 @@ import Service from '../../services/user.service'
 
 export default {
   name: "StoreCatalog",
-
   data() {
     return {
       storeID: this.$route.params.id,

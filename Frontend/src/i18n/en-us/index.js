@@ -48,7 +48,8 @@ export default {
   // Favorites
   favoritesPage: {
     title: "Favorites",
-    description: "List of Favorite Stores"
+    description: "List of Favorite Stores",
+    noFavorites: "No Favorites Yet. Start Adding..."
   },
 
   // List Categories
@@ -74,6 +75,7 @@ export default {
     personalDetails: "Personal Details",
     editData: "Edit Data",
     security: "Security",
+    language: "Language",
     changePassword: "Change Password",
     signout: "Sign-Out",
     cancel: "Cancel",
@@ -88,6 +90,8 @@ export default {
   // Add Review Reservation
   bookingsPage: {
     title: "Reservations",
+    dataNew: "Details Booking",
+    dataConf: "Confirm Booking Details",
     description: "List of Recent and Old Bookings",
     type1: "Recents",
     type2: "Completed",
@@ -110,7 +114,8 @@ export default {
       time: "Time",
       place: "Place",
       choosePlace: "Choose a Place",
-      makeNew: "Make Booking Now"
+      makeNew: "Make Booking Now",
+      back: "Back Establishment Page"
     },
     ratePopup: {
       title: "Evaluate Service",
@@ -119,9 +124,9 @@ export default {
     },
 
     editPopup: {
-      title: "Change/Cancel Service",
-      serviceType: "Type of Service",
-      dateAndTime: "Date and Time",
+      title: "Change Reservation",
+      serviceType: "Change Type of Service",
+      dateAndTime: "Reschedule Reservation",
 
       changeBooking: "Change",
       cancelBooking: "Cancel"
