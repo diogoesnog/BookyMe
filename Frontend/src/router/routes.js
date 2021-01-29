@@ -87,7 +87,16 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    name: "Results",
+    path: '/results/:id',
+    component: () => import('../views/Results'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+
 ];
 
 export default routes;

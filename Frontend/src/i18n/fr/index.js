@@ -60,6 +60,10 @@ export default {
     title: "Notifications"
   },
 
+  resultsPage: {
+    error: "Impossible de trouver des établissements."
+  },
+
   // Profile Data
   profilePage: {
     personalDetails: "Détails Personnels",
@@ -89,11 +93,19 @@ export default {
     newBooking: {
       title: "Nouveau Réservation",
       serviceType: "Type de Service",
+      listService: "Liste des Services",
+      noServices: "Cet Établissement n'a pas de Catalogue de Services.",
+      chooseService: "Sélectionnez votre(vos) Service(s)",
+      numberServices: "Services Sélectionnés",
       dateAndTime: "Date et l'Heure",
+      chooseDataAndTime: "Sélectionnez l'Heure et la Date",
+      listSlots: "Liste des Vacants",
+      noSlots: "Cet Établissement n'a pas de postes Vacants.",
       date: "Date",
       time: "L'Heure",
       place: "Place",
-      choosePlace: "Choisir la Pace"
+      choosePlace: "Choisir la Pace",
+      makeNew: "Reserve Maintenant"
     },
     ratePopup: {
       title: "Évaluer la Réservation",
@@ -135,6 +147,7 @@ export default {
 
     ratings: "Évaluations",
     seeAllRatings: "Voir Tous",
+    allRating: "Tous les Avis",
     stars: "0 Étoiles | 1 Étoile | {count} Étoiles",
     basedOn: "Baseado em 1 Avaliação | Baseado em {count} Avaliações"
   },

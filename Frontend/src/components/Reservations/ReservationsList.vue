@@ -155,7 +155,7 @@ export default {
       else if(this._id.length >= 13 & this._id.length <= 15) return "55%";
       else if(this._id.length >= 16 & this._id.length <= 18) return "65%";
       else if(this._id.length >= 19 & this._id.length <= 21) return "75%";
-      else return "80%"    
+      else return "80%"
     },
     getImage(url) {
       return this.urlMainPhoto = "http://localhost:5100" + url;
@@ -174,7 +174,7 @@ export default {
       // Hour
       var hour = splits[1];
       var hourSplit = hour.split(':00.000Z', 2)[0];
-      
+
       return day + "/" + month + "/" + year + " - " + hourSplit;
     },
     hasCatalog: function(string) {
@@ -207,10 +207,7 @@ export default {
 
           console.log("ID User a Verificar: " + this.idUser);
           let verifyReview = Boolean;
-          let userHasReview = userIds.indexOf(this.idUser) > -1
-
-          if(userHasReview) verifyReview = true;
-          else verifyReview = false;
+          verifyReview = userIds.indexOf(this.idUser) > -1;
 
           console.log("User Tem Review na Loja " + idStore + "? " + verifyReview);
           console.groupEnd();
@@ -261,47 +258,47 @@ export default {
   }
 
   .titleStore {
-    text-overflow: ellipsis; 
-    font-size: 20px; 
-    font-weight: 600; 
-    display: inline-block; 
-    width: 170px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    width: 170px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 
   .titleStorePopup {
-    text-overflow: ellipsis; 
-    font-size: 26px; 
-    font-weight: 600; 
-    display: inline-block; 
-    width: 270px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 26px;
+    font-weight: 600;
+    display: inline-block;
+    width: 270px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 
   .titleService {
-    text-overflow: ellipsis; 
-    font-size: 16px; 
-    font-weight: 350; 
-    display: inline-block; 
-    width: 170px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 350;
+    display: inline-block;
+    width: 170px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 
   .subtitle {
-    font-size: 18px; 
-    font-weight: 600; 
+    font-size: 18px;
+    font-weight: 600;
   }
 
   .hourDate {
-    text-overflow: ellipsis; 
-    font-size: 20px; 
-    font-weight: 600; 
-    display: inline-block; 
-    width: 160px; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    width: 160px;
+    white-space: nowrap;
     overflow: hidden !important;
   }
 

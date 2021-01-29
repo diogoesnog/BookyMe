@@ -31,7 +31,8 @@ export default {
   name: "StorePhotos",
 
   props: {
-    photos: Array
+    photos: Array,
+    base: String
   },
 
   data() {
@@ -43,7 +44,7 @@ export default {
 
   methods: {
     getImage(index) {
-      return this.urlMainPhoto = `http://localhost:5100${this.photos[index].url}`;
+      return this.urlMainPhoto = this.base + this.photos[index].url;
     },
     getStyles() {
       let numberPhotos = this.photos.length;

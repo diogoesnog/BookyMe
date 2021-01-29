@@ -80,6 +80,7 @@ class Services {
         });
     }
 
+    // TODO: Add Opening Hours
     updateSchedule(id, schedule) {
         return axios.post(`${process.env.VUE_APP_API_ENDPOINT}/stores/${id}/schedule`, schedule, {
             headers: authHeader()

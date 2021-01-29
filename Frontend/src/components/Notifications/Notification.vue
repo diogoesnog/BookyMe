@@ -1,10 +1,17 @@
 <template>
   <div>
-    <div class="notification-wrapper">
+    <div class="col-10 roundedDiv shadow " style="display: flex; align-items: center; height:80px">
+      <div class="col">
+        <div class="row" style="font-weight: 600; font-size: 18px;">
+            <p>{{ message }}</p>
+        </div>
+      </div>
+    </div>
+    <!--<div class="notification-wrapper">
       <div class="row">
         <div class="col-10">
           <p>{{ title }}</p>
-          <p>{{ message }}</p>
+          
         </div>
         <div class="col-2" v-if="canBeMarked">
           <q-btn @click="markAsRead">
@@ -12,9 +19,10 @@
           </q-btn>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
+
 
 <script>
 export default {
@@ -42,5 +50,43 @@ export default {
   border-radius: 30px;
   background-color: #fff;
   box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+}
+
+
+  .centerDiv {
+    padding: 15px;
+    margin-top: 40px;
+  }
+
+  .gradientOne {
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+  }
+
+  .shadow {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 28px;
+  }
+
+  .roundedDiv {
+    border-radius: 200px;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .title {
+  background: linear-gradient(#e9695c, #e03459);
+  color: white;
+  height: 40px;
+  width: 130px;
+  border-radius: 100px;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
 }
 </style>
