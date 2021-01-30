@@ -2,7 +2,7 @@
   <div>
     <ReservationBanner v-bind="storeData"/>
     <div class="divBottom">
-      <ReservationInfo v-bind="bookingData"/>
+      <ReservationInfo :services="services" :date="date" :hour="hour"/>
       <StoreMap v-bind="storeData"/>
     </div>
     <Toolbar/>
@@ -31,8 +31,10 @@ export default {
   data() {
     return {
       bookingID: this.$route.params.id,
-      bookingData: {},
       storeData: {},
+      date: String,
+      hour: String,
+      services: "",
       lang: this.$i18n.locale,
       langOptions: [
         { value: 'en-us', label: this.$t('languages.english')},
@@ -65,12 +67,21 @@ export default {
 
           console.group("Booking Information:")
           let data = response.data["data"];
-          this.bookingData = data[0].booking[0];
-          this.storeID = this.bookingData["storeId"];
-          console.log("Informação do booking:")
-          console.log(this.bookingData);
-          console.log("ID da Store associada: " + this.storeID);
-          console.groupEnd()
+
+          let bookingData = data[0].booking[0];
+          this.storeID = bookingData["storeId"];
+
+          let parseDate = new Date(bookingData["serviceDate"]);
+          this.date = parseDate.toLocaleDateString('pt-pt', {year: '2-digit', day: '2-digit', month: '2-digit'})
+          this.hour = parseDate.toLocaleTimeString('pt-pt',{hour: '2-digit', minute: '2-digit'})
+
+          let services = bookingData["service"];
+          for (let i = 0; i < services.length; i++) {
+            let servicoAtual = services[i];
+            let produtoAtual = servicoAtual["product"];
+            this.services = this.services + produtoAtual + ", "
+          }
+          this.services = this.services.substring(0, this.services.length - 2);
 
           this.fetchStoreData();
         }).catch(err => console.log(err)
