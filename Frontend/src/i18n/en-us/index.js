@@ -67,7 +67,9 @@ export default {
   },
   // Notifications
   notificationsPage: {
-    title: "Notifications"
+    title: "Notifications",
+    read: "Read",
+    unread: "Unread"
   },
 
   // Profile Data

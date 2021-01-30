@@ -9,11 +9,11 @@
 
     <div class="title">
 <!--      TODO: Meter internacionalização. -->
-      Unread
+      {{$t('notificationsPage.unread')}}
     </div>
     <Notification v-for="(notification, index1) in unread" :key="index1" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
     <div class="title">
-      Read
+      {{$t('notificationsPage.read')}}
     </div>
      <Notification v-for="(notification, index2) in read" :key="index2" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
 

@@ -58,7 +58,9 @@ export default {
 
   // Notifications
   notificationsPage: {
-    title: "Notifications"
+    title: "Notifications",
+    read: "Lis",
+    unread: "Non lu"
   },
 
   resultsPage: {
