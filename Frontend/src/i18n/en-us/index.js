@@ -1,7 +1,7 @@
 export default {
   // Login
   loginPage: {
-    title: "Welcome!",
+    title: "Welcome to BookyMe!",
     description: "Sign-In to view all your bookings",
 
     username: "Username/E-mail",

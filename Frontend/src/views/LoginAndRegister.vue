@@ -69,7 +69,7 @@
 
   .centerDiv {
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 35px;
   }
 
   .gradientOne {
@@ -81,7 +81,7 @@
   }
 
   .bottomInfoRegister {
-    margin-top: -75px;
+    margin-top: -85px;
     position: relative;
     text-align: center;
   }
@@ -93,7 +93,7 @@
     left: 0;
     text-align: center;
     width: 100%;
-    padding: 35px;
+    padding: 30px;
   }
 
   .selectLanguage {
