@@ -57,14 +57,14 @@
         </v-list-item>
 
         <!-- Account Settings Link -->
-        <v-list-item link>
+        <!--<v-list-item link>
           <v-list-item-icon>
             <v-icon>mdi-account-cog</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             Definições de Conta
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item>-->
       </v-list>
 
 
