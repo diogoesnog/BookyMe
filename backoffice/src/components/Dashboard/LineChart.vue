@@ -67,7 +67,7 @@ export default {
           }
         },
         title: {
-          text: 'Número de Reservas por dia',
+          text: '',
           align: 'left',
           style: {
             fontSize: "16px",
