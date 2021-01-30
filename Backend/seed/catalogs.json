@@ -207,4 +207,147 @@
   "price": 2,
   "abstract": "Sobremesa",
   "__v": 0
+},{
+  "_id": {
+    "$oid": "60159f18bda18fb3d1ef8ba7"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "product": "Branqueamento",
+  "price": 15,
+  "abstract": "Limpeza",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159f29bda18fb3d1ef8ba8"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "product": "Limpeza Geral",
+  "price": 55,
+  "abstract": "Limpeza",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159f3bbda18fb3d1ef8ba9"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "product": "Limpeza Geral e Branqueamento",
+  "price": 65,
+  "abstract": "Limpeza",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159f9cbda18fb3d1ef8baa"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "product": "Damon",
+  "price": 2500,
+  "abstract": "Aparelhos Ortodônticos",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159feabda18fb3d1ef8bab"
+  },
+  "storeID": {
+    "$oid": "5ff4a74e7df75e2ace11b038"
+  },
+  "product": "Aparelho INVISALIGN",
+  "price": 1800,
+  "abstract": "Aparelho Ortodônticos",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a21abda18fb3d1ef8c34"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Violino Yamaha  3/4",
+  "price": 250,
+  "abstract": "Violino",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a23cbda18fb3d1ef8c35"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Violino Yamaha 4/4",
+  "price": 500,
+  "abstract": "Violino",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a267bda18fb3d1ef8c36"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Violino Stradivarius 4/4",
+  "price": 1500,
+  "abstract": "Violino",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a295bda18fb3d1ef8c37"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Viola Cremona SVA-130 ",
+  "price": 259,
+  "abstract": "Viola",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a2bcbda18fb3d1ef8c38"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Baixo Chowny Retrovibe Davie504 EVO",
+  "price": 561,
+  "abstract": "Baixo",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a2eabda18fb3d1ef8c39"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Korg Kronos 88",
+  "price": 3000,
+  "abstract": "Teclados",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a2f5bda18fb3d1ef8c3a"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Aula de Canto",
+  "price": 50,
+  "abstract": "Aulas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a31fbda18fb3d1ef8c3b"
+  },
+  "storeID": {
+    "$oid": "5ff4a9597df75e2ace11b046"
+  },
+  "product": "Microfone Sennheiser XSW 1-825 Dual B-Band Vocal",
+  "price": 499,
+  "abstract": "Microfone",
+  "__v": 0
 }]

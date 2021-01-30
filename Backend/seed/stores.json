@@ -112,7 +112,56 @@
     "city": "Braga",
     "country": "Portugal"
   },
-  "schedule": [],
+  "schedule": [
+    {
+      "_id": {
+        "$oid": "6015a045bda18fb3d1ef8bad"
+      },
+      "day": "Segunda-feira",
+      "openingHour": "09:30",
+      "closingHour": "19:31"
+    },
+    {
+      "_id": {
+        "$oid": "6015a045bda18fb3d1ef8bae"
+      },
+      "day": "Terça-feira",
+      "openingHour": "09:20",
+      "closingHour": "18:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a045bda18fb3d1ef8baf"
+      },
+      "day": "Quarta-feira",
+      "openingHour": "10:30",
+      "closingHour": "20:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a045bda18fb3d1ef8bb0"
+      },
+      "day": "Quinta-feira",
+      "openingHour": "09:45",
+      "closingHour": "20:15"
+    },
+    {
+      "_id": {
+        "$oid": "6015a045bda18fb3d1ef8bb1"
+      },
+      "day": "Sábado",
+      "openingHour": "08:30",
+      "closingHour": "12:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a045bda18fb3d1ef8bb2"
+      },
+      "day": "Sexta-feira",
+      "openingHour": "09:30",
+      "closingHour": "19:30"
+    }
+  ],
   "photos": [
     {
       "_id": {
@@ -370,7 +419,48 @@
     "city": "Vila Nova de Famalicão",
     "country": "Portugal"
   },
-  "schedule": [],
+  "schedule": [
+    {
+      "_id": {
+        "$oid": "6015a1d1bda18fb3d1ef8c2d"
+      },
+      "day": "Segunda-feira",
+      "openingHour": "09:30",
+      "closingHour": "21:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a1d1bda18fb3d1ef8c2e"
+      },
+      "day": "Terça-feira",
+      "openingHour": "09:30",
+      "closingHour": "21:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a1d1bda18fb3d1ef8c2f"
+      },
+      "day": "Quarta-feira",
+      "openingHour": "09:30",
+      "closingHour": "21:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a1d1bda18fb3d1ef8c30"
+      },
+      "day": "Quinta-feira",
+      "openingHour": "09:30",
+      "closingHour": "21:30"
+    },
+    {
+      "_id": {
+        "$oid": "6015a1d1bda18fb3d1ef8c31"
+      },
+      "day": "Sexta-feira",
+      "openingHour": "09:30",
+      "closingHour": "21:30"
+    }
+  ],
   "photos": [
     {
       "_id": {

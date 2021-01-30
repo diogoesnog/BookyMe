@@ -17,8 +17,8 @@ const Notification = require('../../services/notifications');
 
 router.get('/', checkAuth, (req, res, next) => {
     let token = req.headers.authorization || req.headers.Authorization;
-
-    Notification.getInbox(token)
+    let read = req.query.read;
+    Notification.getInbox(token, read)
         .then(response => res.status(response.status).jsonp(response.data))
         .catch(err => res.status(err.status || 500).jsonp(err.data || null));
 });

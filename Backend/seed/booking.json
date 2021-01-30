@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "60159ece8c44e5a1aaa40e40"
+  },
+  "canceled": false,
+  "bookingDate": {
+    "$date": "2021-01-30T18:00:46.439Z"
+  },
+  "serviceDate": {
+    "$date": "2021-03-01T11:00:00Z"
+  },
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "city": "Vila Nova de Famalicão",
+  "storeName": "Mikado",
+  "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
+  "slotId": "60159e708c44e5a1aaa40e3b",
+  "hasCatalog": true,
+  "service": [
+    {
+      "_id": {
+        "$oid": "5ff4e797f4cffc04869eba00"
+      },
+      "product": "Wantan Frango",
+      "price": 2,
+      "abstract": "Entradas"
+    },
+    {
+      "_id": {
+        "$oid": "5ff4e7a5f4cffc04869eba02"
+      },
+      "product": "Ebi Furai",
+      "price": 2,
+      "abstract": "Entradas"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a10e8c44e5a1aaa40e44"
+  },
+  "canceled": false,
+  "bookingDate": {
+    "$date": "2021-01-30T18:10:52.316Z"
+  },
+  "serviceDate": {
+    "$date": "2021-03-04T17:30:00Z"
+  },
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "storeId": "5ff4a74e7df75e2ace11b038",
+  "city": "Braga",
+  "storeName": "Clinibraga - Clínica Dentária",
+  "mainStorePhotoURL": "/public/photos/5ff4a74e7df75e2ace11b038c3051847-746e-457f-975c-0ea7245a1da1.jpg",
+  "slotId": "6015a0b98c44e5a1aaa40e43",
+  "hasCatalog": true,
+  "service": [],
+  "__v": 0,
+  "wasRescheduled": true
+},{
+  "_id": {
+    "$oid": "6015a3728c44e5a1aaa40e47"
+  },
+  "canceled": false,
+  "bookingDate": {
+    "$date": "2021-01-30T18:20:34.485Z"
+  },
+  "serviceDate": {
+    "$date": "2021-02-01T11:00:00Z"
+  },
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "storeId": "5ff4a9597df75e2ace11b046",
+  "city": "Vila Nova de Famalicão",
+  "storeName": "Faminho - Instrumentos Musicais, Lda",
+  "mainStorePhotoURL": "/public/photos/5ff4a9597df75e2ace11b046e4029bf9-b762-48b8-b9db-8ae8d15e6cf1.png",
+  "slotId": "6015a3308c44e5a1aaa40e45",
+  "hasCatalog": true,
+  "service": [
+    {
+      "_id": {
+        "$oid": "6015a2eabda18fb3d1ef8c39"
+      },
+      "product": "Korg Kronos 88",
+      "price": 3000,
+      "abstract": "Teclados"
+    }
+  ],
+  "__v": 0
+}]

@@ -11,12 +11,13 @@ module.exports.notify = (token, body) => {
     return request.post(body);
 }
 
-module.exports.getInbox = (token) => {
+module.exports.getInbox = (token, read) => {
     let request = new Request(`${process.env.NOTIFICATION_SERVICE_ENDPOINT}/notification`);
 
     request.isJson();
     request.appendHeader("Authorization", token);
     request.acceptJson();
+    request.appendParam("read", read)
 
     return request.get();
 }
