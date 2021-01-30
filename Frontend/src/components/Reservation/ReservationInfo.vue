@@ -1,8 +1,8 @@
 <template>
   <div>
     <p class="titles" style="padding-top: 35px; padding-left: 30px">{{$t('bookingPage.bookingDetails')}}</p>
-    <div class="row" style="margin: 20px;">
-      <div class="col-12 infoDivService shadow" v-if="services.length !== 0">
+    <div class="row" style="margin: 20px;" v-if="services.length !== 0">
+      <div class="col-12 infoDivService shadow">
         <q-icon name="book" style="padding-right: 10px"/>
         <div style="font-weight: bold; margin-right: 2px; font-size: 17px; padding-right: 2px">{{$t('confirmBooking.serviceType')}}</div>
         {{services}}
