@@ -2,13 +2,13 @@
   <div class="text-center" style="color: #434343">
     <br>
     <br>
-    <div style="position: relative; top: -30px;">
+    <div style="position: relative; top: -35px;">
       <h4 style="font-weight: 950">{{ $t('registerPage.title') }}</h4>
       <div style="position: relative; top: -35px; width: 80%; margin: auto;">
         <p v-html="$t('registerPage.description')"></p>
       </div>
     </div>
-    <q-form style="position: relative; top: -60px;">
+    <q-form style="position: relative; top: -75px;">
 
       <div class="row" style="padding: 5px">
 

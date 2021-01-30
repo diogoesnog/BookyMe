@@ -1,29 +1,34 @@
 <template>
   <div>
-    <v-row no-gutters>
-      <v-col cols="2">
-        <Navbar/>
-      </v-col>
-      <v-col cols="10">
-        <h1 class ="storeName .text-lg-h6">{{this.store.name}}</h1>
-        <v-container grid-list-lg>
-          <Cards :canceled=canceled :concluded=concluded :current=current></Cards>
-        </v-container>
-        <v-row>
-          <v-col cols="6">
-            <Calendar
-                :idStore=id></Calendar>
+
+    <Navbar/>
+
+    <v-content>
+      <v-container fluid>
+        <v-row class="fill-height">
+          <v-col>
+            <h1 class ="storeName .text-lg-h6">{{this.store.name}}</h1>
+
+              <h3>Quick Overview</h3>
+              <Cards :canceled=canceled :concluded=concluded :current=current></Cards>
+
+            <v-row>
+              <v-col cols="12" md="6">
+                <h3>Agendamentos</h3>
+                <Calendar :idStore="id"/>
+              </v-col>
+              <v-col cols="12" md="6">
+                <h3>Estatísticas</h3>
+                <DonutChart :canceled="canceled" :concluded="concluded" :current="current"/>
+              </v-col>
+            </v-row>
+
+            <h3>Número de Reservas por Dia</h3>
+            <LineChart :idStore=id></LineChart>
           </v-col>
-          <v-col cols="6">
-            <DonutChart
-                :canceled=canceled :concluded=concluded :current=current>
-            </DonutChart></v-col>
-
         </v-row>
-
-        <LineChart :idStore=id></LineChart>
-      </v-col>
-    </v-row>
+      </v-container>
+    </v-content>
   </div>
 </template>
 

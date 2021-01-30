@@ -1,22 +1,22 @@
 <template>
-  <div class="col-12">
+  <div>
     <p class="titles" style="padding-top: 35px; padding-left: 30px">{{$t('bookingPage.bookingDetails')}}</p>
-    <div class="row" :key="key">
-      <div class="col-10 infoDiv shadow" v-if="service" style="margin-left: 25px; margin-right: 25px; margin-bottom: 20px">
-        <q-icon name="book" left/>
-        <div style="font-weight: bold; margin-right: 2px; font-size: 17px; padding-right: 2px">Tipo de Serviço</div>
-        {{service["product"]}}
+    <div class="row" style="margin: 20px;" v-if="services.length !== 0">
+      <div class="col-12 infoDivService shadow">
+        <q-icon name="book" style="padding-right: 10px"/>
+        <div style="font-weight: bold; margin-right: 2px; font-size: 17px; padding-right: 2px">{{$t('confirmBooking.serviceType')}}</div>
+        {{services}}
       </div>
-
-      <div class="col-5 infoDiv shadow" style="margin-left: 25px; margin-right: 20px">
-        <q-icon name="today" left/>
-        <div style="font-weight: bold; margin-right: 2px; font-size: 17px; padding-right: 2px">Data</div>
+    </div>
+    <div class="grid" style="margin: 20px;">
+      <div class="col-6 infoDiv shadow">
+        <q-icon name="today" style="padding-right: 5px"/>
+        <span style="font-weight: bold; font-size: 17px; padding-right: 5px">{{$t('confirmBooking.date')}}</span>
         {{date}}
       </div>
-
-      <div class="col-5 infoDiv shadow">
-        <q-icon name="schedule" left/>
-        <div style="font-weight: bold; margin-right: 2px; font-size: 17px; padding-right: 2px">Hora</div>
+      <div class="col-6 infoDiv shadow">
+        <q-icon name="schedule" style="padding-right: 5px"/>
+        <span style="font-weight: bold; font-size: 17px; padding-right: 5px">{{$t('confirmBooking.time')}}</span>
         {{hour}}
       </div>
     </div>
@@ -28,32 +28,12 @@
 export default {
 name: "ReservationInfo",
 
-  data() {
-    return {
-      key: 0,
-      date: '',
-      hour: ''
-    }
-  },
-
   props: {
-    slotId: String,
-    serviceId: String,
-    serviceDate: String,
-    service: Object
-  },
-
-  mounted() {
-    // TODO: Um possível erro de reatividade e props.
-    console.log(this.$props.serviceDate);
-    let dateTemp = new Date(this.serviceDate);
-    console.log(dateTemp);
-    this.date = dateTemp.toLocaleDateString('pt-pt', {year: '2-digit', day: '2-digit', month: '2-digit'})
-    this.hour = dateTemp.toLocaleTimeString('pt-pt',{hour: '2-digit', minute: '2-digit'})
-  },
-
-  methods: {
+    date: String,
+    hour: String,
+    services: String
   }
+
 }
 </script>
 
@@ -68,8 +48,20 @@ name: "ReservationInfo",
 .infoDiv {
   background: white;
   color: black;
-  height: 30px;
+  height: 35px;
   border-radius: 100px;
+  font-size: 18px;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoDivService {
+  background: white;
+  padding: 10px;
+  color: black;
+  border-radius: 150px;
   font-size: 18px;
   font-weight: 300;
   display: flex;
@@ -79,7 +71,13 @@ name: "ReservationInfo",
 
 .shadow {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-radius: 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  column-gap: 10px;
 }
 
 </style>

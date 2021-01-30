@@ -33,7 +33,7 @@
               <v-tab-item>
                 <h1 style="padding: 15px">Editar Horário</h1>
                 <v-btn block outlined color="primary" v-if="schedulesMissing.length > 0" @click="addScheduleModal = !addScheduleModal">Adicionar</v-btn>
-                <div :key="scheduleKey">
+                <div :key="scheduleKey" style="margin-left:15%; margin-top:50px;">
                   <Schedule v-for="(schedule, index) in schedules" :key="index" v-bind="schedule" @deleteSchedule="deleteSchedule"/>
                 </div>
               </v-tab-item>
