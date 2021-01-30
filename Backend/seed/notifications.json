@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "6015a12c9d44dea2bd14f3bd"
+  },
+  "read": false,
+  "sentBy": "5ff4a53709404a2ade1fbd4a",
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "message": "A sua reserva na loja Clinibraga - Clínica Dentária no dia 1/3/2021 foi reagendada para o dia 4/3/2021",
+  "storeId": "5ff4a74e7df75e2ace11b038"
+}]

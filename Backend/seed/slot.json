@@ -1,112 +1,121 @@
-[
-    {
-        "current_capacity": 2,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035bbc2e5d09001d329888"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-10T12:00:00.000Z",
-        "max_capacity": 10,
-        "__v": 0
-    },
-    {
-        "current_capacity": 1,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035bec2e5d09001d329889"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-10T13:00:00.000Z",
-        "max_capacity": 10,
-        "__v": 0
-    },
-    {
-        "current_capacity": 0,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035c032e5d09001d32988a"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-10T14:00:00.000Z",
-        "max_capacity": 10,
-        "__v": 0
-    },
-    {
-        "current_capacity": 0,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035c072e5d09001d32988b"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-11T20:30:00.000Z",
-        "max_capacity": 15,
-        "__v": 0
-    },
-    {
-        "current_capacity": 0,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035c0b2e5d09001d32988c"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-12T20:00:00.000Z",
-        "max_capacity": 15,
-        "__v": 0
-    },
-    {
-        "current_capacity": 0,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035c252e5d09001d32988d"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-11T13:30:00.000Z",
-        "max_capacity": 10,
-        "__v": 0
-    },
-    {
-        "current_capacity": 4,
-        "is_full": false,
-        "_id": {
-            "$oid": "60035c272e5d09001d32988e"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-12T13:30:00.000Z",
-        "max_capacity": 5,
-        "__v": 0
-    },
-    {
-        "current_capacity": 0,
-        "is_full": false,
-        "_id": {
-            "$oid": "6003609f88334c001dcf26ba"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-12T17:00:00.000Z",
-        "max_capacity": 1,
-        "__v": 0
-    },
-    {
-        "current_capacity": 2,
-        "is_full": true,
-        "_id": {
-            "$oid": "600360c588334c001dcf26bb"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-12T16:30:00.000Z",
-        "max_capacity": 2,
-        "__v": 0
-    },
-    {
-        "current_capacity": 1,
-        "is_full": false,
-        "_id": {
-            "$oid": "60072f6c8e542903090c948b"
-        },
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "date": "2021-02-12T15:00:00.000Z",
-        "max_capacity": 3,
-        "__v": 0
-    }
-]
+[{
+  "_id": {
+    "$oid": "60159e708c44e5a1aaa40e3b"
+  },
+  "current_capacity": 1,
+  "is_full": true,
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "date": {
+    "$date": "2021-03-01T11:00:00Z"
+  },
+  "max_capacity": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159e808c44e5a1aaa40e3c"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "date": {
+    "$date": "2021-03-02T13:30:00Z"
+  },
+  "max_capacity": 5,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159e8f8c44e5a1aaa40e3d"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "date": {
+    "$date": "2021-03-01T20:30:00Z"
+  },
+  "max_capacity": 6,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159e9d8c44e5a1aaa40e3e"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "date": {
+    "$date": "2021-03-03T11:30:00Z"
+  },
+  "max_capacity": 10,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60159eaf8c44e5a1aaa40e3f"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "date": {
+    "$date": "2021-03-05T13:15:00Z"
+  },
+  "max_capacity": 1,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a0798c44e5a1aaa40e41"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a74e7df75e2ace11b038",
+  "date": {
+    "$date": "2021-03-01T10:30:00Z"
+  },
+  "max_capacity": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a08d8c44e5a1aaa40e42"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a74e7df75e2ace11b038",
+  "date": {
+    "$date": "2021-03-01T15:15:00Z"
+  },
+  "max_capacity": 4,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a0b98c44e5a1aaa40e43"
+  },
+  "current_capacity": 1,
+  "is_full": false,
+  "storeId": "5ff4a74e7df75e2ace11b038",
+  "date": {
+    "$date": "2021-03-04T17:30:00Z"
+  },
+  "max_capacity": 7,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a3308c44e5a1aaa40e45"
+  },
+  "current_capacity": 1,
+  "is_full": false,
+  "storeId": "5ff4a9597df75e2ace11b046",
+  "date": {
+    "$date": "2021-02-01T11:00:00Z"
+  },
+  "max_capacity": 3,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a3508c44e5a1aaa40e46"
+  },
+  "current_capacity": 0,
+  "is_full": false,
+  "storeId": "5ff4a9597df75e2ace11b046",
+  "date": {
+    "$date": "2021-02-02T15:45:00Z"
+  },
+  "max_capacity": 3,
+  "__v": 0
+}]

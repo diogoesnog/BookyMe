@@ -1,321 +1,88 @@
-[
+[{
+  "_id": {
+    "$oid": "60159ece8c44e5a1aaa40e40"
+  },
+  "canceled": false,
+  "bookingDate": {
+    "$date": "2021-01-30T18:00:46.439Z"
+  },
+  "serviceDate": {
+    "$date": "2021-03-01T11:00:00Z"
+  },
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "storeId": "5ff4a6e77df75e2ace11b036",
+  "city": "Vila Nova de Famalicão",
+  "storeName": "Mikado",
+  "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
+  "slotId": "60159e708c44e5a1aaa40e3b",
+  "hasCatalog": true,
+  "service": [
     {
-        "_id": {
-            "$oid": "6003671688334c001dcf271c"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-10T12:00:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035bbc2e5d09001d329888",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e77cf4cffc04869eb9fd"
-                },
-                "product": "Crepe Chinês de Legumes",
-                "price": 2,
-                "abstract": "Entradas"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e807f4cffc04869eba08"
-                },
-                "storeID": "5ff4a6e77df75e2ace11b036",
-                "product": "Hot Mikado",
-                "price": 2,
-                "abstract": "Sushi",
-                "__v": 0
-            }
-        ],
-        "__v": 0,
-        "wasRescheduled": true
+      "_id": {
+        "$oid": "5ff4e797f4cffc04869eba00"
+      },
+      "product": "Wantan Frango",
+      "price": 2,
+      "abstract": "Entradas"
     },
     {
-        "_id": {
-            "$oid": "600367ed88334c001dcf271d"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-10T12:00:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035bbc2e5d09001d329888",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e7b8f4cffc04869eba03"
-                },
-                "product": "Japonesinha (Panqueca de legumes com camarão e ovo estrelado)",
-                "price": 2,
-                "abstract": "Entradas"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e822f4cffc04869eba0c"
-                },
-                "product": "Vieira",
-                "price": 2,
-                "abstract": "Sushi"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e83cf4cffc04869eba0e"
-                },
-                "product": "Gelado de Baunilha Frito",
-                "price": 2,
-                "abstract": "Sobremesa"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6003682188334c001dcf271f"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-10T13:00:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035bec2e5d09001d329889",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e82bf4cffc04869eba0d"
-                },
-                "product": "2x Foie Gras",
-                "price": 2,
-                "abstract": "Sushi"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6003683f88334c001dcf2720"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T16:30:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "600360c588334c001dcf26bb",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e807f4cffc04869eba08"
-                },
-                "product": "Hot Mikado",
-                "price": 2,
-                "abstract": "Sushi"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6003686488334c001dcf2721"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T15:00:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60072f6c8e542903090c948b",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e7eaf4cffc04869eba06"
-                },
-                "product": "Tataki Atum",
-                "price": 2,
-                "abstract": "Entradas Frias"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e807f4cffc04869eba08"
-                },
-                "product": "Hot Mikado",
-                "price": 2,
-                "abstract": "Sushi"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6003686d88334c001dcf2722"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T16:30:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "600360c588334c001dcf26bb",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e80df4cffc04869eba09"
-                },
-                "product": "Sake",
-                "price": 2,
-                "abstract": "Sushi"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e844f4cffc04869eba0f"
-                },
-                "product": "Café",
-                "price": 2,
-                "abstract": "Sobremesa"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6003688a88334c001dcf2724"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T13:30:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035c272e5d09001d32988e",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e82bf4cffc04869eba0d"
-                },
-                "product": "2x Foie Gras",
-                "price": 2,
-                "abstract": "Sushi"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e844f4cffc04869eba0f"
-                },
-                "product": "Café",
-                "price": 2,
-                "abstract": "Sobremesa"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "6003689288334c001dcf2726"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T13:30:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035c272e5d09001d32988e",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e82bf4cffc04869eba0d"
-                },
-                "product": "2x Foie Gras",
-                "price": 2,
-                "abstract": "Sushi"
-            },
-            {
-                "_id": {
-                    "$oid": "5ff4e844f4cffc04869eba0f"
-                },
-                "product": "Café",
-                "price": 2,
-                "abstract": "Sobremesa"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "600368a988334c001dcf2728"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T13:30:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035c272e5d09001d32988e",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e80df4cffc04869eba09"
-                },
-                "product": "Sake",
-                "price": 2,
-                "abstract": "Sushi"
-            }
-        ],
-        "__v": 0
-    },
-    {
-        "_id": {
-            "$oid": "600368b088334c001dcf2729"
-        },
-        "canceled": false,
-        "bookingDate": "2021-02-01T00:00:00.000Z",
-        "serviceDate": "2021-02-12T13:30:00.000Z",
-        "userId": "5ff4a58a09404a2ade1fbd4b",
-        "storeId": "5ff4a6e77df75e2ace11b036",
-        "city": "Vila Nova de Famalicão",
-        "storeName": "Mikado",
-        "mainStorePhotoURL": "/public/photos/5ff4a6e77df75e2ace11b0362053adc7-f110-4246-9c0b-2e1337e370d7.jpg",
-        "slotId": "60035c272e5d09001d32988e",
-        "hasCatalog": true,
-        "service": [
-            {
-                "_id": {
-                    "$oid": "5ff4e807f4cffc04869eba08"
-                },
-                "product": "Hot Mikado",
-                "price": 2,
-                "abstract": "Sushi"
-            }
-        ],
-        "__v": 0
+      "_id": {
+        "$oid": "5ff4e7a5f4cffc04869eba02"
+      },
+      "product": "Ebi Furai",
+      "price": 2,
+      "abstract": "Entradas"
     }
-]
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6015a10e8c44e5a1aaa40e44"
+  },
+  "canceled": false,
+  "bookingDate": {
+    "$date": "2021-01-30T18:10:52.316Z"
+  },
+  "serviceDate": {
+    "$date": "2021-03-04T17:30:00Z"
+  },
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "storeId": "5ff4a74e7df75e2ace11b038",
+  "city": "Braga",
+  "storeName": "Clinibraga - Clínica Dentária",
+  "mainStorePhotoURL": "/public/photos/5ff4a74e7df75e2ace11b038c3051847-746e-457f-975c-0ea7245a1da1.jpg",
+  "slotId": "6015a0b98c44e5a1aaa40e43",
+  "hasCatalog": true,
+  "service": [],
+  "__v": 0,
+  "wasRescheduled": true
+},{
+  "_id": {
+    "$oid": "6015a3728c44e5a1aaa40e47"
+  },
+  "canceled": false,
+  "bookingDate": {
+    "$date": "2021-01-30T18:20:34.485Z"
+  },
+  "serviceDate": {
+    "$date": "2021-02-01T11:00:00Z"
+  },
+  "userId": "5ff4a58a09404a2ade1fbd4b",
+  "storeId": "5ff4a9597df75e2ace11b046",
+  "city": "Vila Nova de Famalicão",
+  "storeName": "Faminho - Instrumentos Musicais, Lda",
+  "mainStorePhotoURL": "/public/photos/5ff4a9597df75e2ace11b046e4029bf9-b762-48b8-b9db-8ae8d15e6cf1.png",
+  "slotId": "6015a3308c44e5a1aaa40e45",
+  "hasCatalog": true,
+  "service": [
+    {
+      "_id": {
+        "$oid": "6015a2eabda18fb3d1ef8c39"
+      },
+      "product": "Korg Kronos 88",
+      "price": 3000,
+      "abstract": "Teclados"
+    }
+  ],
+  "__v": 0
+}]
