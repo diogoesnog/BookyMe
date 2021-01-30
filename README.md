@@ -10,7 +10,7 @@ BookyMe is a project designed and developed by a team of 10 ambitious young peop
 
 * [André Ramalho](https://github.com/andretiagogr)
 * [Bruna Cruz](https://github.com/bvc97)
-* [Bruno Silva]()
+* [Bruno Silva](https://github.com/BrunoSilva06)
 * [Diogo Araújo](https://github.com/dichico)
 * [Diogo S. Nogueira](https://github.com/diogoesnog)
 * [Inês Vieira](https://github.com/minesvieira)
