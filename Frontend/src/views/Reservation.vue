@@ -111,7 +111,7 @@ export default {
 
   .divBottom {
     position: relative;
-    padding-top: 80px;
+    padding-top: 65px;
     padding-left: 0;
   }
 
