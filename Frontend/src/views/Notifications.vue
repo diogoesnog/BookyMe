@@ -2,7 +2,7 @@
   <div  style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px;">
       <div class="col-12" style="display: flex; align-items: center;">
-        
+
       </div>
     </div>
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
@@ -75,7 +75,7 @@ export default {
           console.log(response);
           // this.notifications.splice(this.notifications.findIndex(item => item._id === "cStatus"), 1)
           this.unread = this.unread.filter(item => item._id !== id);
-
+          this.getReadNotifications();
         }).catch(err => {
           console.error(err);
       })

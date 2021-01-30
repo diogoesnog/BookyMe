@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-10">
           <p>{{ title }}</p>
-          
+
         </div>
         <div class="col-2" v-if="canBeMarked">
           <q-btn @click="markAsRead">
