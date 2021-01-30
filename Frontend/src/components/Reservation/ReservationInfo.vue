@@ -1,11 +1,11 @@
 <template>
   <div class="col-12">
     <p class="titles" style="padding-top: 35px; padding-left: 30px">{{$t('bookingPage.bookingDetails')}}</p>
-    <div class="row" :key="key">
-      <div class="col-10 infoDiv shadow" v-if="service" style="margin-left: 25px; margin-right: 25px; margin-bottom: 20px">
+    <div class="row">
+      <div class="col-10 infoDiv shadow" v-if="services.length !== 0" style="margin-left: 25px; margin-right: 25px; margin-bottom: 20px">
         <q-icon name="book" left/>
         <div style="font-weight: bold; margin-right: 2px; font-size: 17px; padding-right: 2px">Tipo de Serviço</div>
-        {{service["product"]}}
+        {{services}}
       </div>
 
       <div class="col-5 infoDiv shadow" style="margin-left: 25px; margin-right: 20px">
@@ -28,32 +28,12 @@
 export default {
 name: "ReservationInfo",
 
-  data() {
-    return {
-      key: 0,
-      date: '',
-      hour: ''
-    }
-  },
-
   props: {
-    slotId: String,
-    serviceId: String,
-    serviceDate: String,
-    service: Object
-  },
-
-  mounted() {
-    // TODO: Um possível erro de reatividade e props.
-    console.log(this.$props.serviceDate);
-    let dateTemp = new Date(this.serviceDate);
-    console.log(dateTemp);
-    this.date = dateTemp.toLocaleDateString('pt-pt', {year: '2-digit', day: '2-digit', month: '2-digit'})
-    this.hour = dateTemp.toLocaleTimeString('pt-pt',{hour: '2-digit', minute: '2-digit'})
-  },
-
-  methods: {
+    date: String,
+    hour: String,
+    services: String
   }
+
 }
 </script>
 
