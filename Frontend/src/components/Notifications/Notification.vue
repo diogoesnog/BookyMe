@@ -1,9 +1,14 @@
 <template>
   <div>
-    <div class="col-10 roundedDiv shadow " style="display: flex; align-items: center; height:80px">
+    <div class="col-10 roundedDiv shadow " style="display: flex; align-items: center; height:auto">
       <div class="col">
-        <div class="row" style="font-weight: 600; font-size: 18px;">
+        <div class="row" style="font-weight: 600; font-size: 16px;">
+          <div class="col-10">
             <p>{{ message }}</p>
+          </div>
+          <div class="col-2">
+            <q-btn v-if="canBeMarked" class="checkIcon" round icon="check" @click="markAsRead" style="float: right; margin-top:50px"></q-btn>
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +79,12 @@ export default {
     display: flex;
     align-items: center;
     padding-left: 20px;
+  }
+
+  .checkIcon {
+    font-size: 0.85em!important;
+    margin: 15px;
+    background-color: white;
   }
 
   .title {
