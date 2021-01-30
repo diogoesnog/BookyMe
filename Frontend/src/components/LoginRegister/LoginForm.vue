@@ -2,38 +2,39 @@
   <!-- Div Principal -->
   <div class="text-center" style="color: #434343">
     <!-- Div Cima -->
-    <div class="divTop">
-      <img src="../../assets/Other/Layers.png" style="width: 50%; height: auto;"/>
-      <div style="position: relative; bottom: 50px;">
-        <h4 style="font-weight: 950; font-size: 40px;">{{$t('loginPage.title')}}</h4>
-        <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
-          <p v-html="$t('loginPage.description')"></p>
+    <div class="row">
+      <div class="divTop col-12">
+        <img src="../../assets/Logo/Logo (Only Icon).png" style="width: 70%; height: auto;"/>
+        <div style="position: relative; bottom: 70px;">
+          <h4 style="font-weight: 950; font-size: 40px;">{{$t('loginPage.title')}}</h4>
+          <div style="position: relative; bottom: 50px; width: 80%; margin: auto;">
+            <p v-html="$t('loginPage.description')"></p>
+          </div>
         </div>
       </div>
-    </div>
-    <br/>
-    <!-- Div Baixo -->
-    <div class="divBottom1">
-      <div class="divBottom2">
-        <q-form>
-          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
-            <template v-slot:prepend>
-              <q-icon name="fas fa-hashtag" color="grey-5" />
-            </template>
-          </q-input>
-          <br/>
-          <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.password')" v-model="user.password" :type="isPwd ? 'password' : 'text'" color="#2897e3">
-            <template v-slot:prepend>
-              <q-icon name="fas fa-lock" color="grey-5"/>
-            </template>
-          </q-input>
-          <br/>
-          <q-btn class="gradientRed" rounded @click="handleLogin" style="width: 100%">
-            <p style="font-size:120%;" class="font-weight-bold button">
-              {{ $t('loginPage.login') }}
-            </p>
-          </q-btn>
-        </q-form>
+      <!-- Div Baixo -->
+      <div class="divBottom1 col-12">
+        <div class="divBottom2">
+          <q-form>
+            <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.username')" v-model="user.email" type="text" color="#2897e3">
+              <template v-slot:prepend>
+                <q-icon name="fas fa-hashtag" color="grey-5" />
+              </template>
+            </q-input>
+            <br/>
+            <q-input class="shadow inputWhite" rounded outlined clearable :label="$t('loginPage.password')" v-model="user.password" :type="isPwd ? 'password' : 'text'" color="#2897e3">
+              <template v-slot:prepend>
+                <q-icon name="fas fa-lock" color="grey-5"/>
+              </template>
+            </q-input>
+            <br/>
+            <q-btn class="gradientRed" rounded @click="handleLogin" style="width: 100%">
+              <p style="font-size:120%;" class="font-weight-bold button">
+                {{ $t('loginPage.login') }}
+              </p>
+            </q-btn>
+          </q-form>
+        </div>
       </div>
     </div>
   </div>
@@ -91,34 +92,26 @@ export default {
     border-radius: 28px;
   }
 
-  .divMajor {
-    position: fixed;
-    left: 0px;
-    width: 100%;
-    padding-bottom: 800px;
-    background-image: linear-gradient(#13c1e0, #2897e3);
-  }
-
   .divTop{
-    top: 70px;
+    top: 40px;
     position: relative;
   }
 
   .divBottom1{
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 100px;
-    height: 505px;
+    height: 490px;
     background-size: cover;
     background-position: center top;
     background-image: url('../../assets/Other/LoginFrame.svg');
   }
 
   .divBottom2{
-    position: fixed;
-    bottom: 40px;
+    position: absolute;
+    bottom: 25px;
     left: 0;
     width: 100%;
     padding: 60px;

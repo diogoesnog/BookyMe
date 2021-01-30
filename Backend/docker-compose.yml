@@ -219,6 +219,22 @@ services:
     command:
         "mongoimport --host mongo-booking --port 3222 --db BookymeBooking --type json --file /data/slot.json --jsonArray"
 
+  notifications-seed: 
+    image: fvilers/mongo-seed
+    networks:
+      - bookyme-network
+    container_name: notifications-seed
+    environment:
+      - MONGO_HOST=mongo-notification
+      - MONGO_PORT=3223
+    depends_on:
+      - mongo-notification
+    volumes:
+      - ./seed/notifications.json:/data/notifications.json:ro
+    command:
+        "mongoimport --host mongo-notification --port 3223 --db BookymeNotifications --type json --file /data/notifications.json --jsonArray"
+        
+
 
 volumes:
   users-db:

@@ -1,7 +1,7 @@
 export default {
   // Login
   loginPage: {
-    title: "Bienvenue!",
+    title: "Bienvenue à BookyMe!",
     description: "Connecter pour voir votre Réservations",
 
     username: "Nom d'utilisateur/E-mail",
