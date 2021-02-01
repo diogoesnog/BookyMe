@@ -1374,7 +1374,6 @@ p.uppercase, .p.uppercase,
 }
 .container .wrap:not(.noSpaces), .container .wrap.spaceWrap,
 .container .wrap .spaceWrap {
-  padding: 120px calc(8% + 15px);
 }
 .container .wrap .overflowHidden {
   overflow: hidden;
