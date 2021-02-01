@@ -1441,7 +1441,7 @@ p.uppercase, .p.uppercase,
 }
 
 .fix-8-12 {
-  max-width: 743px !important;
+  max-width: 900px !important;
 }
 
 .fix-9-12 {
@@ -8726,7 +8726,7 @@ p.remind-43 {
 }
 
 .margin-bottom-2 {
-  margin-bottom: 20px !important;
+  margin-bottom: 0px !important;
 }
 
 .margin-bottom-3 {
