@@ -7824,6 +7824,10 @@ p.remind-43 {
   white-space: nowrap;
 }
 
+.wide2 {
+  width: 40% !important;
+}
+
 .wide {
   width: 100% !important;
 }
