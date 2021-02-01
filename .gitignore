@@ -131,3 +131,6 @@ dist
 
 # VS Code personal files
 # .vscode
+
+# Quasar
+.quasar
