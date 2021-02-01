@@ -1,22 +1,19 @@
 <template>
   <div  style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px;">
-      <div class="col-12" style="display: flex; align-items: center;">
-
-      </div>
+      <div class="col-12" style="display: flex; align-items: center;"/>
     </div>
     <p style="font-weight: 670; font-size: 45px; padding-left: 20px; padding-top:5px;"> {{$t('notificationsPage.title')}}</p>
-
-    <div class="title">
-<!--      TODO: Meter internacionalização. -->
-      {{$t('notificationsPage.unread')}}
+    <div class="notifications">
+      <div class="title">
+        {{$t('notificationsPage.unread')}}
+      </div>
+      <Notification v-for="(notification, index1) in unread" :key="index1" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
+      <div class="title">
+        {{$t('notificationsPage.read')}}
+      </div>
+      <Notification v-for="(notification, index2) in read" :key="index2" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
     </div>
-    <Notification v-for="(notification, index1) in unread" :key="index1" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="true"></Notification>
-    <div class="title">
-      {{$t('notificationsPage.read')}}
-    </div>
-     <Notification v-for="(notification, index2) in read" :key="index2" v-bind="notification" style="padding: 15px;" @markAsRead="markAsRead" :canBeMarked="false"></Notification>
-
     <Toolbar/>
   </div>
 </template>
@@ -86,6 +83,10 @@ export default {
 
 <style scoped>
 
+  .notifications {
+    padding-top: 15px;
+  }
+
   .centerDiv {
     padding: 15px;
     margin-top: 40px;
@@ -110,16 +111,16 @@ export default {
   }
 
   .title {
-  background: linear-gradient(#e9695c, #e03459);
-  color: white;
-  height: 40px;
-  width: 130px;
-  border-radius: 100px;
-  font-size: 20px;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15px;
-}
+    background: linear-gradient(#e9695c, #e03459);
+    color: white;
+    height: 40px;
+    width: 130px;
+    border-radius: 100px;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+  }
 </style>
