@@ -1,7 +1,7 @@
 <template>
   <div style="color: #434343;" class="centerDiv">
     <div class="row" style="margin: 20px; padding-top:10px;">
-      <div class="col-10" style="">
+      <div class="col-10">
         <p>
           <span style="font-weight: 670; font-size: 45px;">
             {{$t('favoritesPage.title')}}

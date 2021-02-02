@@ -1,25 +1,15 @@
 <template>
   <div>
-    <div class="col-10 roundedDiv shadow " style="display: flex; align-items: center; height:80px">
-      <div class="col">
-        <div class="row" style="font-weight: 600; font-size: 18px;">
-            <p>{{ message }}</p>
+    <div class="roundedDiv shadow">
+      <div class="row divContent">
+        <div class="col-10" style="display: flex; align-items: center;">
+          {{ message }}
+        </div>
+        <div class="col-2" style="display: flex; align-items: center;">
+          <q-btn v-if="canBeMarked" class="checkIcon" round icon="check" @click="markAsRead"></q-btn>
         </div>
       </div>
     </div>
-    <!--<div class="notification-wrapper">
-      <div class="row">
-        <div class="col-10">
-          <p>{{ title }}</p>
-          
-        </div>
-        <div class="col-2" v-if="canBeMarked">
-          <q-btn @click="markAsRead">
-            X
-          </q-btn>
-        </div>
-      </div>
-    </div>-->
   </div>
 </template>
 
@@ -44,14 +34,23 @@ export default {
 </script>
 
 <style scoped>
-.notification-wrapper {
-  padding: 20px;
-  min-height: 100px;
-  border-radius: 30px;
-  background-color: #fff;
-  box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
-}
 
+  .divContent {
+    margin-left: 25px; 
+    margin-right: 25px; 
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    font-weight: 300; 
+    font-size: 18px;
+  }
+
+  .notification-wrapper {
+    padding: 20px;
+    min-height: 100px;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: rgba(0,0,0,0.8) 0px 0 10px;
+  }
 
   .centerDiv {
     padding: 15px;
@@ -73,7 +72,13 @@ export default {
     background: white;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+  }
+
+  .checkIcon {
+    font-size: 0.80em!important;
+    margin: 15px;
+    color: white;
+    background: linear-gradient(#13c1e0, #2897e3);
   }
 
   .title {

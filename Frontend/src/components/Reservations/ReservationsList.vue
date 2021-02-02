@@ -15,6 +15,7 @@
               {{ reservation.storeName }}
             </span>
             <span v-if="hasCatalog(reservation.hasCatalog) === 0" class="titleService">
+<!--             TODO: Ver isto que agora é um array -->
               {{ reservation.service.product }}
             </span>
             <span v-else class="titleService">

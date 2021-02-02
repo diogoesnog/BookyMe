@@ -68,7 +68,9 @@
 
   // Notifications
   notificationsPage: {
-    title: "Notificações"
+    title: "Notificações",
+    read: "Lidas",
+    unread: "Não Lidas"
   },
 
   // Profile Data
