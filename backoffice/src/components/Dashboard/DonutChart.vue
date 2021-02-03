@@ -36,7 +36,7 @@ export default {
           }
         }
       }],
-      labels: ["Current", "Concluded", "Canceled"]
+      labels: ["Reservas", "Concluídas", "Finalizadas"]
     },
   }),
   mounted() {
